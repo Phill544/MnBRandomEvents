@@ -25,7 +25,8 @@ namespace CryingBuffalo.RandomEvents
 
             Instance = this;
 
-            Settings.Load();
+            Settings.LoadGeneralSettings();
+            Settings.LoadRandomEventSettings();
 
             RandomEventGenerator = new RandomEventGenerator();
             PopulateRandomEventGenerator();
