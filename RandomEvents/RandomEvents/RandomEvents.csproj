@@ -7,7 +7,7 @@
     <ProjectGuid>{8C0F5D91-785D-41A4-A297-873142FFF613}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RandomEvents</RootNamespace>
+    <RootNamespace>CryingBuffalo.RandomEvents</RootNamespace>
     <AssemblyName>RandomEvents</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -165,10 +165,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\BanditAmbush.cs" />
     <Compile Include="Events\BaseEvent.cs" />
     <Compile Include="Events\BetMoney.cs" />
     <Compile Include="Events\BumperCrop.cs" />
     <Compile Include="RandomEventFactory.cs" />
+    <Compile Include="Settings\GeneralSettings.cs" />
     <Compile Include="Settings\RandomEventSettings.cs" />
     <Compile Include="RandomEventTypeEnum.cs" />
     <Compile Include="Settings\Settings.cs" />
