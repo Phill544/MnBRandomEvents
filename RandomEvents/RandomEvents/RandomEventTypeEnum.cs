@@ -10,6 +10,7 @@ namespace CryingBuffalo.RandomEvents
 	{
 		Unknown = 0,
 		BetMoney,
-		BumperCrop
+		BumperCrop,
+		BanditAmbush
 	}
 }

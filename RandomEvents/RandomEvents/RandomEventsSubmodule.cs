@@ -144,6 +144,7 @@ namespace CryingBuffalo.RandomEvents
         {
             RandomEventGenerator.AddEvent(Settings.RandomEvents.BetMoneyData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.BumperCropData);
+            RandomEventGenerator.AddEvent(Settings.RandomEvents.BanditAmbushData);
         }
     }
 }

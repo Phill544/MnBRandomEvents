@@ -18,6 +18,8 @@ namespace CryingBuffalo.RandomEvents
 					return new BetMoney();
 				case RandomEventType.BumperCrop:
 					return new BumperCrop();
+				case RandomEventType.BanditAmbush:
+					return new BanditAmbush();
 				case RandomEventType.Unknown:
 				default:
 					break;
