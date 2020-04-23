@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using TaleWorlds.Core;
 
 namespace CryingBuffalo.RandomEvents
 {
@@ -25,14 +25,17 @@ namespace CryingBuffalo.RandomEvents
 					break;
 			}
 
-			MessageBox.Show($"Unable to create random event of type : {eventType}");
+			InformationManager.DisplayMessage(new InformationMessage($"Unable to create random event of type : {eventType}!", RandomEventsSubmodule.Instance.textColor));
 
 			return null;
 		}
 
 		public static BaseEvent CreateEvent(string eventName)
 		{
-			return CreateEvent((RandomEventType)Enum.Parse(typeof(RandomEventType), eventName, true));
+			RandomEventType newType = RandomEventType.Unknown;
+			Enum.TryParse(eventName, true, out newType);
+
+			return CreateEvent(newType);
 		}
 	}
 }

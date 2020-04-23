@@ -54,22 +54,37 @@ namespace CryingBuffalo.RandomEvents
         }
 
         [CommandLineFunctionality.CommandLineArgumentFunction("run", "randomevent")]
-        public static void RunRandomEvent(List<string> args)
+        public static string RunRandomEvent(List<string> args)
         {
-            BaseEvent evnt = RandomEventFactory.CreateEvent(args[0]);
+            if (args.Count < 1)
+            {
+                return "You must provide the type of event to run";
+            }            
 
             if (RandomEventsSubmodule.Instance.currentEvent != null)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Currently running event: {Instance.currentEvent.RandomEventData.EventType}. To start another first cancel this one.", Instance.textColor));
+                return $"Currently running event: {Instance.currentEvent.RandomEventData.EventType}. To start another first cancel this one.";
+            }
+
+            BaseEvent evnt = RandomEventFactory.CreateEvent(args[0]);
+
+            if (evnt == null)
+            {
+                return $"Unable to start event {args[0]}, did you spell it correctly?";
             }
 
             Instance.ExecuteRandomEvent(evnt);
+            return $"Starting {args[0]}";
         }
 
         [CommandLineFunctionality.CommandLineArgumentFunction("cancelevent", "randomevent")]
-        public static void CancelEvent(List<string> args)
+        public static string CancelEvent(List<string> args)
         {
-            Instance.CancelEvent();
+            if (Instance.CancelEvent())
+            {
+                return "Current random event cancelled!";
+            }
+            return "No random event running.";
         }
 
         private uint hoursPassed = 0;
@@ -126,13 +141,15 @@ namespace CryingBuffalo.RandomEvents
             aEvent.StartEvent();
         }
 
-        private void CancelEvent()
+        private bool CancelEvent()
         {
             if (currentEvent != null)
             {
                 currentEvent.CancelEvent();
                 EventEnded();
+                return true;
             }
+            return false;
         }
 
         private void EventEnded()
