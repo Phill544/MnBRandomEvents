@@ -58,7 +58,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while running \"{nameof(Settings.RandomEvents.BumperCropData.EventType)}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while running \"{Settings.RandomEvents.BumperCropData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 
 			StopEvent();
@@ -72,7 +72,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{nameof(Settings.RandomEvents.BumperCropData.EventType)}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{Settings.RandomEvents.BumperCropData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 

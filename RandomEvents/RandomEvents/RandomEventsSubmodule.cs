@@ -60,7 +60,7 @@ namespace CryingBuffalo.RandomEvents
 
             if (RandomEventsSubmodule.Instance.currentEvent != null)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Currently running event: {nameof(Instance.currentEvent.RandomEventData.EventType)}. To start another first cancel this one.", Instance.textColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Currently running event: {Instance.currentEvent.RandomEventData.EventType}. To start another first cancel this one.", Instance.textColor));
             }
 
             Instance.ExecuteRandomEvent(evnt);

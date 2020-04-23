@@ -25,7 +25,7 @@ namespace CryingBuffalo.RandomEvents
 					break;
 			}
 
-			MessageBox.Show($"Unable to create random event of type : {nameof(eventType)}");
+			MessageBox.Show($"Unable to create random event of type : {eventType}");
 
 			return null;
 		}
