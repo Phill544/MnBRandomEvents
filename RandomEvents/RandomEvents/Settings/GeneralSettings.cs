@@ -14,5 +14,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public bool HideInaccessibleDialogue { get; private set; } = true;
+
+		[JsonProperty]
+		public int HintLevel { get; private set; } = 1;
 	}
 }
