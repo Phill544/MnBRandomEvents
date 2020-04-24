@@ -22,14 +22,14 @@ namespace CryingBuffalo.RandomEvents.Events
 			inquiryElements.Add(new InquiryElement("b", "Decline", null));
 			
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				"All or nothing",
-				$"One of your companions wants to flip a coin. Heads you win, tails they do. The prize is {moneyBetAmount} gold.",
-				inquiryElements,
-				false,
-				true,
-				"Okay",
-				"Ignore this",
-				(elements) =>
+				"All or nothing", // Title
+				$"One of your companions wants to flip a coin. Heads you win, tails they do. The prize is {moneyBetAmount} gold.", // Description
+				inquiryElements, // Options
+				false, // Can close menu without selecting an option. Should always be false.
+				true, // Force a single option to be selected. Should usually be true
+				"Okay", // The text on the button that continues the event
+				null, // The text to display on the "cancel" button, shouldn't ever need it.
+				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
 				{
 					if ((string)elements[0].Identifier == "a")
 					{
@@ -55,7 +55,7 @@ namespace CryingBuffalo.RandomEvents.Events
 						InformationManager.ShowInquiry(new InquiryData("All or nothing", "You walk away.", true, false, "Done", null, null, null), true);
 					}
 				},
-				null);
+				null); // What to do on the "cancel" button, shouldn't ever need it.
 
 			InformationManager.ShowMultiSelectionInquiry(msid, true);
 
