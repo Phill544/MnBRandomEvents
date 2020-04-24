@@ -18,9 +18,9 @@ namespace CryingBuffalo.RandomEvents.Events
 		public override void StartEvent()
 		{
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Gamble", new ImageIdentifier(Banner.CreateRandomClanBanner())));
-			inquiryElements.Add(new InquiryElement("b", "Decline", new ImageIdentifier(Banner.CreateRandomClanBanner())));
-
+			inquiryElements.Add(new InquiryElement("a", "Gamble", null));
+			inquiryElements.Add(new InquiryElement("b", "Decline", null));
+			
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
 				"All or nothing",
 				$"One of your companions wants to flip a coin. Heads you win, tails they do. The prize is {moneyBetAmount} gold.",
