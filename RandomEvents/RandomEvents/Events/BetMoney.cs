@@ -33,21 +33,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				{
 					if ((string)elements[0].Identifier == "a")
 					{
-						float decision = MBRandom.RandomFloatRanged(0.0f, 1.0f);
-
-						string outcomeText;
-
-						if (decision >= 0.5f)
-						{
-							outcomeText = "You win!";
-							Hero.MainHero.ChangeHeroGold(moneyBetAmount);
-						}
-						else
-						{
-							outcomeText = "You lost...";
-							Hero.MainHero.ChangeHeroGold(-moneyBetAmount);
-						}
-
+						string outcomeText = DoBet();
 						InformationManager.ShowInquiry(new InquiryData("All or nothing", outcomeText, true, false, "Done", null, null, null), true);
 					}
 					else
@@ -60,6 +46,26 @@ namespace CryingBuffalo.RandomEvents.Events
 			InformationManager.ShowMultiSelectionInquiry(msid, true);
 
 			StopEvent();
+		}
+
+		private string DoBet()
+		{
+			float decision = MBRandom.RandomFloatRanged(0.0f, 1.0f);
+
+			string outcomeText;
+
+			if (decision >= 0.5f)
+			{
+				outcomeText = "You win!";
+				Hero.MainHero.ChangeHeroGold(moneyBetAmount);
+			}
+			else
+			{
+				outcomeText = "You lost...";
+				Hero.MainHero.ChangeHeroGold(-moneyBetAmount);
+			}
+
+			return outcomeText;
 		}
 
 		public override void StopEvent()
