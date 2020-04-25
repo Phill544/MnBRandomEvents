@@ -45,7 +45,7 @@ namespace CryingBuffalo.RandomEvents
 
             try
             {
-                CampaignEvents.HourlyTickEvent.AddNonSerializedListener(this, ProcessRandomEvent);
+                //CampaignEvents.HourlyTickEvent.AddNonSerializedListener(this, ProcessRandomEvent);
             }
             catch (Exception ex)
             {
