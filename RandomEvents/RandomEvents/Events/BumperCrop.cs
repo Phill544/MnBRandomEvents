@@ -4,16 +4,17 @@ using System.Linq;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	class BumperCrop : BaseEvent
 	{
-		private int cropGainAmount;
+		private float cropGainPercent;
 
 		public BumperCrop()
 		{
-			cropGainAmount = Settings.RandomEvents.BumperCropData.cropGainAmount;
+			cropGainPercent = Settings.RandomEvents.BumperCropData.cropGainPercent;
 		}
 
 		public override void StartEvent()
@@ -40,7 +41,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 				// Grab the winning settlement and add food to it
 				Settlement winningSettlement = eligibleSettlements[index];
-				winningSettlement.Town.FoodStocks += cropGainAmount;
+				
+				winningSettlement.Town.FoodStocks += MathF.Abs(winningSettlement.Town.FoodChange * cropGainPercent);
 
 				// set the name to display
 				bumperSettlement = winningSettlement.Name.ToString();
@@ -95,11 +97,11 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class BumperCropData : RandomEventData
 	{
-		public int cropGainAmount;
+		public float cropGainPercent;
 
-		public BumperCropData(RandomEventType eventType, float chanceWeight, int cropGainAmount) : base(eventType, chanceWeight)
+		public BumperCropData(RandomEventType eventType, float chanceWeight, float cropGainPercent) : base(eventType, chanceWeight)
 		{
-			this.cropGainAmount = cropGainAmount;
+			this.cropGainPercent = cropGainPercent;
 		}
 	}
 }
