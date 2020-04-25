@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.TwoDimension;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	class BetMoney : BaseEvent
 	{
-		private int moneyBetAmount;
+		private float moneyBetPercent;
 
 		public BetMoney()
 		{
-			moneyBetAmount = Settings.RandomEvents.BetMoneyData.moneyBetAmount;
+			moneyBetPercent = Settings.RandomEvents.BetMoneyData.moneyBetPercent;
 		}
 
 		public override void StartEvent()
@@ -20,10 +21,16 @@ namespace CryingBuffalo.RandomEvents.Events
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();
 			inquiryElements.Add(new InquiryElement("a", "Gamble", null));
 			inquiryElements.Add(new InquiryElement("b", "Decline", null));
-			
+
+			int goldToBet = (int)Mathf.Floor(Hero.MainHero.Gold * moneyBetPercent);
+
+			string extraDialogue = "";
+			if (goldToBet > 40000)
+				extraDialogue = " You have no idea how they have that much money. You contemplate stealing it.";
+
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
 				"All or nothing", // Title
-				$"One of your companions wants to flip a coin. Heads you win, tails they do. The prize is {moneyBetAmount} gold.", // Description
+				$"One of your soldiers wants to flip a coin. Heads you win, tails they do. The prize is {goldToBet} gold.{extraDialogue}", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
 				true, // Force a single option to be selected. Should usually be true
@@ -33,7 +40,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				{
 					if ((string)elements[0].Identifier == "a")
 					{
-						string outcomeText = DoBet();
+						string outcomeText = DoBet(goldToBet);
 						InformationManager.ShowInquiry(new InquiryData("All or nothing", outcomeText, true, false, "Done", null, null, null), true);
 					}
 					else
@@ -48,21 +55,22 @@ namespace CryingBuffalo.RandomEvents.Events
 			StopEvent();
 		}
 
-		private string DoBet()
+		private string DoBet(int goldToBet)
 		{
 			float decision = MBRandom.RandomFloatRanged(0.0f, 1.0f);
+					
 
 			string outcomeText;
 
 			if (decision >= 0.5f)
 			{
-				outcomeText = "You win!";
-				Hero.MainHero.ChangeHeroGold(moneyBetAmount);
+				outcomeText = "\"Well, I'm never going to make that money back...\" Your companion says with a heavy sigh as your pocket your 'hard earned' gold.";
+				Hero.MainHero.ChangeHeroGold(goldToBet);
 			}
 			else
 			{
-				outcomeText = "You lost...";
-				Hero.MainHero.ChangeHeroGold(-moneyBetAmount);
+				outcomeText = "\"Better luck next time\" Your companion says smugly.";
+				Hero.MainHero.ChangeHeroGold(-goldToBet);
 			}
 
 			return outcomeText;
@@ -92,11 +100,11 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class BetMoneyData : RandomEventData
 	{
-		public int moneyBetAmount;
+		public float moneyBetPercent;
 
-		public BetMoneyData(RandomEventType eventType, float chanceWeight, int moneyBetAmount) : base(eventType, chanceWeight)
+		public BetMoneyData(RandomEventType eventType, float chanceWeight, float moneyBetPercent) : base(eventType, chanceWeight)
 		{
-			this.moneyBetAmount = moneyBetAmount;
+			this.moneyBetPercent = moneyBetPercent;
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace CryingBuffalo.RandomEvents
 	class RandomEventSettings
 	{
 		[JsonProperty]
-		public BetMoneyData BetMoneyData { get; private set; } = new BetMoneyData(RandomEventType.BetMoney, 1024f, 500);
+		public BetMoneyData BetMoneyData { get; private set; } = new BetMoneyData(RandomEventType.BetMoney, 1024f, 0.15f);
 
 		[JsonProperty]
 		public BumperCropData BumperCropData { get; private set; } = new BumperCropData(RandomEventType.BumperCrop, 1024f, 0.75f);
