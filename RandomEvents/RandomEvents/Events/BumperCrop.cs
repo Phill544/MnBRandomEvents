@@ -36,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					}
 				}
 
-				// Randmly pick one of the eligible settlements
+				// Randomly pick one of the eligible settlements
 				int index = MBRandom.RandomInt(0, eligibleSettlements.Count);
 
 				// Grab the winning settlement and add food to it
