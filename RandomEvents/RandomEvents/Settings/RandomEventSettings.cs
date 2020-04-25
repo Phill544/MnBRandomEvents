@@ -18,5 +18,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public BanditAmbushData BanditAmbushData { get; private set; } = new BanditAmbushData(RandomEventType.BanditAmbush, 1024, 0.05f, 0.15f, 1000, 60);
+
+		[JsonProperty]
+		public GranaryRatsData GranaryRatsData { get; private set; } = new GranaryRatsData(RandomEventType.GranaryRats, 1024, 0.75f);
 	}
 }

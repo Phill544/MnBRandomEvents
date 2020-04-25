@@ -20,6 +20,8 @@ namespace CryingBuffalo.RandomEvents
 					return new BumperCrop();
 				case RandomEventType.BanditAmbush:
 					return new BanditAmbush();
+				case RandomEventType.GranaryRats:
+					return new GranaryRats();
 				case RandomEventType.Unknown:
 				default:
 					break;
