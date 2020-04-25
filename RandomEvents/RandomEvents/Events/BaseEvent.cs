@@ -27,7 +27,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		public abstract void StopEvent();
 
 		/// <summary>
-		/// Called when the event is cancelled early
+		/// Called when the event is canceled early
 		/// </summary>
 		public abstract void CancelEvent();
 
