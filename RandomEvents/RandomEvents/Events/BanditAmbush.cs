@@ -128,6 +128,8 @@ namespace CryingBuffalo.RandomEvents.Events
 			{
 				MobileParty banditParty = PartySetup.CreateBanditParty();
 
+				banditParty.MemberRoster.Clear();
+
 				if (shouldFlee)
 				{
 					banditParty.Aggressiveness = 0.2f;
