@@ -32,12 +32,11 @@ namespace CryingBuffalo.RandomEvents.Helpers
 				{
 					banditCultureObject = closestHideout.Culture;
 				}
-				
-				PartyTemplateObject partyTemplate = new PartyTemplateObject();
-				partyTemplate = banditCultureObject.BanditBossPartyTemplate;
+
+				PartyTemplateObject partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
 				partyTemplate.IncrementNumberOfCreated();
 				banditParty = MBObjectManager.Instance.CreateObject<MobileParty>($"randomevent_{banditCultureObject.StringId}_{partyTemplate.NumberOfCreated}");
-				TextObject partyName = new TextObject("Bandits (Random Event)", null);
+				TextObject partyName = new TextObject($"{banditCultureObject.Name} (Random Event)", null);
 				Clan banditClan = Clan.BanditFactions.FirstOrDefault(clan => clan.StringId == banditCultureObject.StringId);
 				banditParty.InitializeMobileParty(partyName, partyTemplate, MobileParty.MainParty.Position2D, 0.6f, 0.4f);
 
@@ -73,9 +72,9 @@ namespace CryingBuffalo.RandomEvents.Helpers
 			}
 			else
 			{
-				MessageBox.Show($"Adding random culture units currently only supports bandits!");
+				MessageBox.Show($"Adding units of culture '{partyCultureObject.StringId}' not currently supported!");
 			}
-
+			
 			// Split spawn based on number to add
 			int[] spawnNumbers = new int[characterObjectList.Count];
 			int currentSpawned = 0;
@@ -98,9 +97,17 @@ namespace CryingBuffalo.RandomEvents.Helpers
 		{
 			List<CharacterObject> characterObjectList = new List<CharacterObject>();
 
-			characterObjectList.Add(partyCultureObject.BanditBandit);
-			characterObjectList.Add(partyCultureObject.BanditRaider);
-			characterObjectList.Add(partyCultureObject.BanditChief);
+			if (partyCultureObject.StringId == "looters")
+			{
+				// We have to treat looters differently as they only have a single unit type compared to the other bandits.
+				characterObjectList.Add(partyCultureObject.BasicTroop);
+			}
+			else
+			{
+				characterObjectList.Add(partyCultureObject.BanditBandit);
+				characterObjectList.Add(partyCultureObject.BanditRaider);
+				characterObjectList.Add(partyCultureObject.BanditChief);
+			}
 
 			return characterObjectList;
 		}
