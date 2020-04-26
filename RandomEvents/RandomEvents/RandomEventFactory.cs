@@ -26,6 +26,8 @@ namespace CryingBuffalo.RandomEvents
 					return new TargetPractice();
 				case RandomEventType.PrisonerRebellion:
 					return new PrisonerRebellion();
+				case RandomEventType.ChattingCommanders:
+					return new ChattingCommanders();
 				case RandomEventType.Unknown:
 				default:
 					break;

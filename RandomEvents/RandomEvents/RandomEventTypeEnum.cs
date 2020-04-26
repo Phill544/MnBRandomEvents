@@ -14,6 +14,7 @@ namespace CryingBuffalo.RandomEvents
 		GranaryRats,
 		BanditAmbush,
 		TargetPractice,
-		PrisonerRebellion
+		PrisonerRebellion,
+		ChattingCommanders
 	}
 }

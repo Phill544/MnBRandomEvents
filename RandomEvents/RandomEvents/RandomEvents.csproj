@@ -169,6 +169,7 @@
     <Compile Include="Events\BaseEvent.cs" />
     <Compile Include="Events\BetMoney.cs" />
     <Compile Include="Events\BumperCrop.cs" />
+    <Compile Include="Events\ChattingCommanders.cs" />
     <Compile Include="Events\GranaryRats.cs" />
     <Compile Include="Events\PrisonerRebellion.cs" />
     <Compile Include="Events\TargetPractice.cs" />

@@ -164,6 +164,7 @@ namespace CryingBuffalo.RandomEvents
             RandomEventGenerator.AddEvent(Settings.RandomEvents.BanditAmbushData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.GranaryRatsData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.PrisonerRebellionData);
+            RandomEventGenerator.AddEvent(Settings.RandomEvents.ChattingCommandersData);
         }
     }
 }

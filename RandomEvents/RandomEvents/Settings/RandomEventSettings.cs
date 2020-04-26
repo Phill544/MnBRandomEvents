@@ -27,5 +27,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public PrisonerRebellionData PrisonerRebellionData { get; private set; } = new PrisonerRebellionData(RandomEventType.PrisonerRebellion, 1024, 30);
+
+		[JsonProperty]
+		public ChattingCommandersData ChattingCommandersData { get; private set; } = new ChattingCommandersData(RandomEventType.ChattingCommanders, 1024, 30.0f);
 	}
 }
