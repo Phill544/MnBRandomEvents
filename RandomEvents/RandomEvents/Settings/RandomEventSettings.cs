@@ -21,5 +21,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public GranaryRatsData GranaryRatsData { get; private set; } = new GranaryRatsData(RandomEventType.GranaryRats, 1024, 0.75f);
+
+		[JsonProperty]
+		public TargetPracticeData TargetPracticeData { get; private set; } = new TargetPracticeData(RandomEventType.TargetPractice, 1024, 0.5f, 30);
 	}
 }

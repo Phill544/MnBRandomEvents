@@ -12,6 +12,7 @@ namespace CryingBuffalo.RandomEvents
 		BetMoney,
 		BumperCrop,
 		GranaryRats,
-		BanditAmbush
+		BanditAmbush,
+		TargetPractice
 	}
 }

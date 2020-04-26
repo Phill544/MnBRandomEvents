@@ -22,6 +22,8 @@ namespace CryingBuffalo.RandomEvents
 					return new BanditAmbush();
 				case RandomEventType.GranaryRats:
 					return new GranaryRats();
+				case RandomEventType.TargetPractice:
+					return new TargetPractice();
 				case RandomEventType.Unknown:
 				default:
 					break;
