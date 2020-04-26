@@ -14,7 +14,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
 	public static class PartySetup
 	{
 
-		public static MobileParty CreateBanditParty(string cultureObjectID = null)
+		public static MobileParty CreateBanditParty(string cultureObjectID = null, string partyName = null)
 		{
 			MobileParty banditParty = null;
 
@@ -33,12 +33,17 @@ namespace CryingBuffalo.RandomEvents.Helpers
 					banditCultureObject = closestHideout.Culture;
 				}
 
+				if (partyName == null)
+				{
+					partyName = $"{banditCultureObject.Name} (Random Event)";
+				}
+
 				PartyTemplateObject partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
 				partyTemplate.IncrementNumberOfCreated();
 				banditParty = MBObjectManager.Instance.CreateObject<MobileParty>($"randomevent_{banditCultureObject.StringId}_{partyTemplate.NumberOfCreated}");
-				TextObject partyName = new TextObject($"{banditCultureObject.Name} (Random Event)", null);
+				TextObject partyNameTextObject = new TextObject(partyName, null);
 				Clan banditClan = Clan.BanditFactions.FirstOrDefault(clan => clan.StringId == banditCultureObject.StringId);
-				banditParty.InitializeMobileParty(partyName, partyTemplate, MobileParty.MainParty.Position2D, 0.6f, 0.4f);
+				banditParty.InitializeMobileParty(partyNameTextObject, partyTemplate, MobileParty.MainParty.Position2D, 0.2f, 0.1f);
 
 				banditParty.HomeSettlement = closestHideout;
 
