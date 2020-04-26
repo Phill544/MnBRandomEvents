@@ -13,6 +13,7 @@ namespace CryingBuffalo.RandomEvents
 		BumperCrop,
 		GranaryRats,
 		BanditAmbush,
-		TargetPractice
+		TargetPractice,
+		PrisonerRebellion
 	}
 }

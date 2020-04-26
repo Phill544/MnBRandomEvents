@@ -24,5 +24,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public TargetPracticeData TargetPracticeData { get; private set; } = new TargetPracticeData(RandomEventType.TargetPractice, 1024, 0.5f, 30);
+
+		[JsonProperty]
+		public PrisonerRebellionData PrisonerRebellionData { get; private set; } = new PrisonerRebellionData(RandomEventType.PrisonerRebellion, 1024, 30);
 	}
 }

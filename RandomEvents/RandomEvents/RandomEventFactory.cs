@@ -24,6 +24,8 @@ namespace CryingBuffalo.RandomEvents
 					return new GranaryRats();
 				case RandomEventType.TargetPractice:
 					return new TargetPractice();
+				case RandomEventType.PrisonerRebellion:
+					return new PrisonerRebellion();
 				case RandomEventType.Unknown:
 				default:
 					break;
