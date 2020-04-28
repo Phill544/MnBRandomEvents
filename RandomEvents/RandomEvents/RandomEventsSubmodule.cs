@@ -145,6 +145,10 @@ namespace CryingBuffalo.RandomEvents
         /// </summary>
         private void ExecuteRandomEvent(BaseEvent aEvent)
         {
+            if (Hero.MainHero.IsPrisoner || !MobileParty.MainParty.IsActive)
+            {
+                return;
+            }
 
             if (!aEvent.CanExecuteEvent())
             {
