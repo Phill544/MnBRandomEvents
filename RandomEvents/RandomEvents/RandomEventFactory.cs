@@ -28,6 +28,8 @@ namespace CryingBuffalo.RandomEvents
 					return new PrisonerRebellion();
 				case RandomEventType.ChattingCommanders:
 					return new ChattingCommanders();
+				case RandomEventType.GloriousFood:
+					return new GloriousFood();
 				case RandomEventType.Unknown:
 				default:
 					break;

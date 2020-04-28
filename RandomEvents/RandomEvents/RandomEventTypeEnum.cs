@@ -15,6 +15,7 @@ namespace CryingBuffalo.RandomEvents
 		BanditAmbush,
 		TargetPractice,
 		PrisonerRebellion,
-		ChattingCommanders
+		ChattingCommanders,
+		GloriousFood
 	}
 }
