@@ -185,33 +185,3 @@ namespace CryingBuffalo.RandomEvents
         }
     }
 }
-
-/*InformationManager.ShowInquiry(
-    new InquiryData("Time is passing!",
-                    $"Just wanted you to know that {hoursPassed} hours have passed!",
-                    true, 
-                    true,
-                    "Hell yeah!",
-                    "Oh no...",
-                    () => { InformationManager.DisplayMessage(new InformationMessage($"You accepted", Color.FromUint(6750401U))); },
-                    () => { InformationManager.DisplayMessage(new InformationMessage($"You rejected", Color.FromUint(6750401U))); }
-                    ), true);*/
-
-/*List<InquiryElement> inquiryElements = new List<InquiryElement>();
-inquiryElements.Add(new InquiryElement("a", "First option", new ImageIdentifier(Banner.CreateRandomClanBanner()), false, null));
-inquiryElements.Add(new InquiryElement("b", "Second option", new ImageIdentifier(Banner.CreateRandomClanBanner()), true, "Blah blah blah"));
-inquiryElements.Add(new InquiryElement("c", "Third option", new ImageIdentifier(Banner.CreateRandomClanBanner())));
-inquiryElements.Add(new InquiryElement("d", "Forth option", new ImageIdentifier(Banner.CreateRandomClanBanner())));
-
-MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-                                        "Time is passing",
-                                        $"{hoursPassed} have passed since you loaded the game... Now you must choose. \nsdjhv anvidnsfvinu93nrv93nv ione rivnu\n\n\n\n 9p3unv93nu4 v93unv 09u83nv93n804vun 394v nm9-3 8ngm 934gmn0938ng 983ng093ng9 3ng98 n3904gn9pg8n 9384gn \n9038n4g9p 38ng4 \t983n4g9n3g 9p8n3g9p8n3g p983n4g9p8 n3 49g n394g8j349g 8hj",
-                                        inquiryElements,
-                                        true,
-                                        true,
-                                        "Yes?",
-                                        "No?",
-                                        null,
-                                        null);
-
-InformationManager.ShowMultiSelectionInquiry(msid, true);*/
