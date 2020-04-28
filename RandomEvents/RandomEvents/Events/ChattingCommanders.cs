@@ -13,7 +13,7 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private float cohesionIncrease;
 
-		public ChattingCommanders()
+		public ChattingCommanders() : base(Settings.RandomEvents.ChattingCommandersData)
 		{
 			cohesionIncrease = Settings.RandomEvents.ChattingCommandersData.cohesionIncrease;
 		}

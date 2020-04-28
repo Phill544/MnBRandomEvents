@@ -17,7 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private string eventTitle = "Target Practice!";
 
-		public TargetPractice()
+		public TargetPractice() : base(Settings.RandomEvents.TargetPracticeData)
 		{
 			minimumSoldiers = Settings.RandomEvents.TargetPracticeData.minimumSoldiers;
 			percentageDifferenceOfCurrentTroop = Settings.RandomEvents.TargetPracticeData.percentageDifferenceOfCurrentTroop;

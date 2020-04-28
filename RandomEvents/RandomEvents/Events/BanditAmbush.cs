@@ -25,7 +25,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private string eventTitle = "Ambushed by bandits";
 
-		public BanditAmbush()
+		public BanditAmbush() : base(Settings.RandomEvents.BanditAmbushData)
 		{
 			this.moneyMinPercent = Settings.RandomEvents.BanditAmbushData.moneyMinPercent;
 			this.moneyMaxPercent = Settings.RandomEvents.BanditAmbushData.moneyMaxPercent;

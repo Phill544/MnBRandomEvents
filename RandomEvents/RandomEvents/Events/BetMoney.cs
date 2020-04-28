@@ -11,7 +11,7 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private float moneyBetPercent;
 
-		public BetMoney()
+		public BetMoney() : base(Settings.RandomEvents.BetMoneyData)
 		{
 			moneyBetPercent = Settings.RandomEvents.BetMoneyData.moneyBetPercent;
 		}

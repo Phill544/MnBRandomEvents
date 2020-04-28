@@ -37,6 +37,11 @@ namespace CryingBuffalo.RandomEvents.Events
 		/// <returns></returns>
 		public abstract bool CanExecuteEvent();
 
+
+		protected BaseEvent(RandomEventData randomEventData)
+		{
+			RandomEventData = randomEventData;
+		}
 	}
 
 	public class RandomEventData

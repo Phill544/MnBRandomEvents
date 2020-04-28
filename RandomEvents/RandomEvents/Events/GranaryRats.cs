@@ -14,7 +14,7 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private float foodLossPercent;
 
-		public GranaryRats()
+		public GranaryRats() : base(Settings.RandomEvents.GranaryRatsData)
 		{
 			foodLossPercent = Settings.RandomEvents.GranaryRatsData.foodLossPercent;
 		}

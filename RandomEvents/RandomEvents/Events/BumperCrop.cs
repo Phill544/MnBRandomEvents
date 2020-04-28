@@ -12,7 +12,7 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private float cropGainPercent;
 
-		public BumperCrop()
+		public BumperCrop() : base(Settings.RandomEvents.BumperCropData)
 		{
 			cropGainPercent = Settings.RandomEvents.BumperCropData.cropGainPercent;
 		}

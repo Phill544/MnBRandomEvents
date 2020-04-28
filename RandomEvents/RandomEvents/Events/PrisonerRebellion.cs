@@ -14,7 +14,7 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private int minimumPrisoners;
 
-		public PrisonerRebellion()
+		public PrisonerRebellion() : base(Settings.RandomEvents.PrisonerRebellionData)
 		{
 			minimumPrisoners = Settings.RandomEvents.PrisonerRebellionData.minimumPrisoners;
 		}
