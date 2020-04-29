@@ -34,6 +34,8 @@ namespace CryingBuffalo.RandomEvents
 					return new DiseasedCity();
 				case RandomEventType.Momentum:
 					return new Momentum();
+				case RandomEventType.SecretSinger:
+					return new SecretSinger();
 				case RandomEventType.Unknown:
 				default:
 					break;

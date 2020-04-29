@@ -190,6 +190,7 @@ namespace CryingBuffalo.RandomEvents
             //RandomEventGenerator.AddEvent(Settings.RandomEvents.GloriousFoodData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.DiseasedCityData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.MomentumData);
+            RandomEventGenerator.AddEvent(Settings.RandomEvents.SecretSingerData);
         }
     }
 }

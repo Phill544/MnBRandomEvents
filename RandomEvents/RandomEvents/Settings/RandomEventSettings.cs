@@ -39,5 +39,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public MomentumData MomentumData { get; private set; } = new MomentumData(RandomEventType.Momentum, 1024);
+
+		[JsonProperty]
+		public SecretSingerData SecretSingerData { get; private set; } = new SecretSingerData(RandomEventType.SecretSinger, 1024, 10);
 	}
 }

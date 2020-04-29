@@ -18,6 +18,7 @@ namespace CryingBuffalo.RandomEvents
 		ChattingCommanders,
 		GloriousFood,
 		DiseasedCity,
-		Momentum
+		Momentum,
+		SecretSinger
 	}
 }
