@@ -36,5 +36,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public DiseasedCityData DiseasedCityData { get; private set; } = new DiseasedCityData(RandomEventType.DiseasedCity, 1024, 0.5f, 0.75f, 75, 0.2f);
+
+		[JsonProperty]
+		public MomentumData MomentumData { get; private set; } = new MomentumData(RandomEventType.Momentum, 1024);
 	}
 }

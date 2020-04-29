@@ -32,6 +32,8 @@ namespace CryingBuffalo.RandomEvents
 					return new GloriousFood();
 				case RandomEventType.DiseasedCity:
 					return new DiseasedCity();
+				case RandomEventType.Momentum:
+					return new Momentum();
 				case RandomEventType.Unknown:
 				default:
 					break;

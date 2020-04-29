@@ -173,6 +173,7 @@
     <Compile Include="Events\DiseasedCity.cs" />
     <Compile Include="Events\GloriousFood.cs" />
     <Compile Include="Events\GranaryRats.cs" />
+    <Compile Include="Events\Momentum.cs" />
     <Compile Include="Events\PrisonerRebellion.cs" />
     <Compile Include="Events\TargetPractice.cs" />
     <Compile Include="Helpers\PartySetup.cs" />

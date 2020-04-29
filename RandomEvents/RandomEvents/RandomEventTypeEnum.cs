@@ -17,6 +17,7 @@ namespace CryingBuffalo.RandomEvents
 		PrisonerRebellion,
 		ChattingCommanders,
 		GloriousFood,
-		DiseasedCity
+		DiseasedCity,
+		Momentum
 	}
 }
