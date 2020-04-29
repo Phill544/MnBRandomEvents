@@ -42,5 +42,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public SecretSingerData SecretSingerData { get; private set; } = new SecretSingerData(RandomEventType.SecretSinger, 1024, 10);
+
+		[JsonProperty]
+		public BeeKindData BeeKindData { get; private set; } = new BeeKindData(RandomEventType.BeeKind, 1024, 10, 25, 0.3f);
 	}
 }

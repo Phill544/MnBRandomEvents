@@ -36,6 +36,8 @@ namespace CryingBuffalo.RandomEvents
 					return new Momentum();
 				case RandomEventType.SecretSinger:
 					return new SecretSinger();
+				case RandomEventType.BeeKind:
+					return new BeeKind();
 				case RandomEventType.Unknown:
 				default:
 					break;
