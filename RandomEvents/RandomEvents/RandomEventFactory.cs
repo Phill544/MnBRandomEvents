@@ -30,6 +30,8 @@ namespace CryingBuffalo.RandomEvents
 					return new ChattingCommanders();
 				case RandomEventType.GloriousFood:
 					return new GloriousFood();
+				case RandomEventType.DiseasedCity:
+					return new DiseasedCity();
 				case RandomEventType.Unknown:
 				default:
 					break;

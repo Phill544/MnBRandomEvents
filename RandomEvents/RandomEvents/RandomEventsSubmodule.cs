@@ -188,6 +188,7 @@ namespace CryingBuffalo.RandomEvents
             RandomEventGenerator.AddEvent(Settings.RandomEvents.PrisonerRebellionData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.ChattingCommandersData);
             //RandomEventGenerator.AddEvent(Settings.RandomEvents.GloriousFoodData);
+            RandomEventGenerator.AddEvent(Settings.RandomEvents.DiseasedCityData);
         }
     }
 }

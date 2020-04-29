@@ -33,5 +33,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public GloriousFoodData GloriousFoodData { get; private set; } = new GloriousFoodData(RandomEventType.GloriousFood, 1024, 5, 25, 5);
+
+		[JsonProperty]
+		public DiseasedCityData DiseasedCityData { get; private set; } = new DiseasedCityData(RandomEventType.DiseasedCity, 1024, 0.5f, 0.75f, 75, 0.2f);
 	}
 }
