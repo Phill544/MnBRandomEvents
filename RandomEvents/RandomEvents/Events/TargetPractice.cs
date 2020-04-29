@@ -36,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			if (Settings.GeneralSettings.DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {Settings.RandomEvents.TargetPracticeData.EventType}", RandomEventsSubmodule.Instance.textColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.Instance.textColor));
 			}
 
 			float percentOffset = MBRandom.RandomFloatRanged(-percentageDifferenceOfCurrentTroop, percentageDifferenceOfCurrentTroop);
@@ -70,7 +70,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					}
 					else
 					{
-						MessageBox.Show($"Error while selecting option for \"{Settings.RandomEvents.BanditAmbushData.EventType}\"");
+						MessageBox.Show($"Error while selecting option for \"{this.RandomEventData.EventType}\"");
 					}
 
 				},
@@ -89,7 +89,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{Settings.RandomEvents.TargetPracticeData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
