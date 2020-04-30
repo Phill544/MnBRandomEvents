@@ -20,6 +20,7 @@ namespace CryingBuffalo.RandomEvents
 		DiseasedCity,
 		Momentum,
 		SecretSinger,
-		BeeKind
+		BeeKind,
+		FoodFight
 	}
 }

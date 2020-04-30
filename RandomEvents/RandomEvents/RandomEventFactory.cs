@@ -38,6 +38,8 @@ namespace CryingBuffalo.RandomEvents
 					return new SecretSinger();
 				case RandomEventType.BeeKind:
 					return new BeeKind();
+				case RandomEventType.FoodFight:
+					return new FoodFight();
 				case RandomEventType.Unknown:
 				default:
 					break;
