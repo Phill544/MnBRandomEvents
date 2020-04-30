@@ -42,6 +42,8 @@ namespace CryingBuffalo.RandomEvents
 					return new FoodFight();
 				case RandomEventType.PerfectWeather:
 					return new PerfectWeather();
+				case RandomEventType.WanderingLivestock:
+					return new WanderingLivestock();
 				case RandomEventType.Unknown:
 				default:
 					break;

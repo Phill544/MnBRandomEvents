@@ -22,6 +22,7 @@ namespace CryingBuffalo.RandomEvents
 		SecretSinger,
 		BeeKind,
 		FoodFight,
-		PerfectWeather
+		PerfectWeather,
+		WanderingLivestock
 	}
 }

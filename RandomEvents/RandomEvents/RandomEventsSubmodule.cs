@@ -194,6 +194,7 @@ namespace CryingBuffalo.RandomEvents
             RandomEventGenerator.AddEvent(Settings.RandomEvents.BeeKindData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.FoodFightData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.PerfectWeatherData);
+            RandomEventGenerator.AddEvent(Settings.RandomEvents.WanderingLivestockData);
         }
     }
 }

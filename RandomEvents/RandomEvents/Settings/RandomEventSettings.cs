@@ -51,5 +51,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public PerfectWeatherData PerfectWeatherData { get; private set; } = new PerfectWeatherData(RandomEventType.PerfectWeather, 1024, 5);
+
+		[JsonProperty]
+		public WanderingLivestockData WanderingLivestockData { get; private set; } = new WanderingLivestockData(RandomEventType.PerfectWeather, 1024, 5, 10);
 	}
 }
