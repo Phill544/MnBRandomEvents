@@ -48,5 +48,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public FoodFightData FoodFightData { get; private set; } = new FoodFightData(RandomEventType.FoodFight, 1024, 10, 20, 5);
+
+		[JsonProperty]
+		public PerfectWeatherData PerfectWeatherData { get; private set; } = new PerfectWeatherData(RandomEventType.PerfectWeather, 1024, 5);
 	}
 }
