@@ -77,19 +77,19 @@ namespace CryingBuffalo.RandomEvents.Helpers
 			}
 			else
 			{
-				MessageBox.Show($"Adding units of culture '{partyCultureObject.StringId}' not currently supported!");
+				characterObjectList = GetMainCultureCharacters(partyCultureObject);
 			}
 			
 			// Split spawn based on number to add
 			int[] spawnNumbers = new int[characterObjectList.Count];
 			int currentSpawned = 0;
-			for (int i = 0; i < spawnNumbers.Length; i++)
+
+			while (currentSpawned < numberToAdd)
 			{
-				int randomInt = MBRandom.RandomInt(0, numberToAdd - currentSpawned);
-				spawnNumbers[i] = randomInt;
-				currentSpawned += randomInt;
+				int randomInt = MBRandom.RandomInt(0, spawnNumbers.Length);
+				spawnNumbers[randomInt]++;
+				currentSpawned++;
 			}
-			spawnNumbers[0] += numberToAdd - currentSpawned;
 
 			for (int i = 0; i < characterObjectList.Count; i++)
 			{
@@ -115,6 +115,42 @@ namespace CryingBuffalo.RandomEvents.Helpers
 			}
 
 			return characterObjectList;
+		}
+
+		private static List<CharacterObject> GetMainCultureCharacters(CultureObject partyCultureObject)
+		{
+			List<CharacterObject> characterObjectList = new List<CharacterObject>();
+
+			// Add basic troop
+			if (partyCultureObject.BasicTroop != null)
+			{
+				characterObjectList.Add(partyCultureObject.BasicTroop);
+			}
+			else
+			{
+				return characterObjectList;
+			}
+
+			foreach (var upgradeTarget in partyCultureObject.BasicTroop.UpgradeTargets)
+			{
+				CollectFromTroopTree(upgradeTarget, characterObjectList);
+			}
+
+			return characterObjectList;
+		}
+
+		private static void CollectFromTroopTree(CharacterObject co, List<CharacterObject> characterObjectList)
+		{
+			if (co.UpgradeTargets == null || co.UpgradeTargets.Length == 0)
+				return;
+
+			foreach (var upgradeTarget in co.UpgradeTargets)
+			{
+				if(!characterObjectList.Contains(upgradeTarget))
+					characterObjectList.Add(upgradeTarget);
+
+				CollectFromTroopTree(upgradeTarget, characterObjectList);
+			}
 		}
 
 	}
