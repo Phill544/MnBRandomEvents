@@ -23,6 +23,7 @@ namespace CryingBuffalo.RandomEvents
 		BeeKind,
 		FoodFight,
 		PerfectWeather,
-		WanderingLivestock
+		WanderingLivestock,
+		EagerTroops
 	}
 }

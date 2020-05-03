@@ -54,5 +54,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public WanderingLivestockData WanderingLivestockData { get; private set; } = new WanderingLivestockData(RandomEventType.WanderingLivestock, 1024, 5, 10);
+
+		[JsonProperty]
+		public EagerTroopsData EagerTroopsData { get; private set; } = new EagerTroopsData(RandomEventType.EagerTroops, 1024, 5, 35);
 	}
 }

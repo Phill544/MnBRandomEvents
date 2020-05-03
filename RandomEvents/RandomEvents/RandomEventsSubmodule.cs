@@ -195,6 +195,7 @@ namespace CryingBuffalo.RandomEvents
             RandomEventGenerator.AddEvent(Settings.RandomEvents.FoodFightData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.PerfectWeatherData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.WanderingLivestockData);
+            RandomEventGenerator.AddEvent(Settings.RandomEvents.EagerTroopsData);
         }
     }
 }
