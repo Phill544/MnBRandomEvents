@@ -197,6 +197,7 @@ namespace CryingBuffalo.RandomEvents
             RandomEventGenerator.AddEvent(Settings.RandomEvents.WanderingLivestockData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.EagerTroopsData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.SpeedyRecoveryData);
+            RandomEventGenerator.AddEvent(Settings.RandomEvents.FantasticFightersData);
         }
     }
 }

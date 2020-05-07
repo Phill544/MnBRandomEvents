@@ -48,6 +48,8 @@ namespace CryingBuffalo.RandomEvents
 					return new EagerTroops();
 				case RandomEventType.SpeedyRecovery:
 					return new SpeedyRecovery();
+				case RandomEventType.FantasticFighters:
+					return new FantasticFighters();
 				case RandomEventType.Unknown:
 				default:
 					break;

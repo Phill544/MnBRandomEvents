@@ -25,6 +25,7 @@ namespace CryingBuffalo.RandomEvents
 		PerfectWeather,
 		WanderingLivestock,
 		EagerTroops,
-		SpeedyRecovery
+		SpeedyRecovery,
+		FantasticFighters
 	}
 }

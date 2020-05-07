@@ -60,5 +60,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public SpeedyRecoveryData SpeedyRecoveryData { get; private set; } = new SpeedyRecoveryData(RandomEventType.SpeedyRecovery, 1024, 2, 20);
+
+		[JsonProperty]
+		public FantasticFightersData FantasticFightersData { get; private set; } = new FantasticFightersData(RandomEventType.FantasticFighters, 1024, 50);
 	}
 }

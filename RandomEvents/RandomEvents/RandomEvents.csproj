@@ -173,6 +173,7 @@
     <Compile Include="Events\ChattingCommanders.cs" />
     <Compile Include="Events\DiseasedCity.cs" />
     <Compile Include="Events\EagerTroops.cs" />
+    <Compile Include="Events\FantasticFighters.cs" />
     <Compile Include="Events\FoodFight.cs" />
     <Compile Include="Events\GloriousFood.cs" />
     <Compile Include="Events\GranaryRats.cs" />
