@@ -52,6 +52,8 @@ namespace CryingBuffalo.RandomEvents
 					return new FantasticFighters();
 				case RandomEventType.ExoticDrinks:
 					return new ExoticDrinks();
+				case RandomEventType.AheadOfTime:
+					return new AheadOfTime();
 				case RandomEventType.Unknown:
 				default:
 					break;

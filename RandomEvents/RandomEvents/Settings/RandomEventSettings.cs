@@ -66,5 +66,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public ExoticDrinksData ExoticDrinksData { get; private set; } = new ExoticDrinksData(RandomEventType.ExoticDrinks, 1024, 5000);
+
+		[JsonProperty]
+		public AheadOfTimeData AheadOfTimeData { get; private set; } = new AheadOfTimeData(RandomEventType.AheadOfTime, 1024);
 	}
 }

@@ -165,6 +165,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\AheadOfTime.cs" />
     <Compile Include="Events\BanditAmbush.cs" />
     <Compile Include="Events\BaseEvent.cs" />
     <Compile Include="Events\BeeKind.cs" />

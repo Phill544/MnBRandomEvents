@@ -27,6 +27,7 @@ namespace CryingBuffalo.RandomEvents
 		EagerTroops,
 		SpeedyRecovery,
 		FantasticFighters,
-		ExoticDrinks
+		ExoticDrinks,
+		AheadOfTime
 	}
 }
