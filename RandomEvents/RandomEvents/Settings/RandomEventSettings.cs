@@ -63,5 +63,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public FantasticFightersData FantasticFightersData { get; private set; } = new FantasticFightersData(RandomEventType.FantasticFighters, 1024, 50);
+
+		[JsonProperty]
+		public ExoticDrinksData ExoticDrinksData { get; private set; } = new ExoticDrinksData(RandomEventType.ExoticDrinks, 1024, 5000);
 	}
 }

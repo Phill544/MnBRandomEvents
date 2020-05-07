@@ -26,6 +26,7 @@ namespace CryingBuffalo.RandomEvents
 		WanderingLivestock,
 		EagerTroops,
 		SpeedyRecovery,
-		FantasticFighters
+		FantasticFighters,
+		ExoticDrinks
 	}
 }
