@@ -24,6 +24,7 @@ namespace CryingBuffalo.RandomEvents
 		FoodFight,
 		PerfectWeather,
 		WanderingLivestock,
-		EagerTroops
+		EagerTroops,
+		SpeedyRecovery
 	}
 }

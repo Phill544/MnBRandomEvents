@@ -46,6 +46,8 @@ namespace CryingBuffalo.RandomEvents
 					return new WanderingLivestock();
 				case RandomEventType.EagerTroops:
 					return new EagerTroops();
+				case RandomEventType.SpeedyRecovery:
+					return new SpeedyRecovery();
 				case RandomEventType.Unknown:
 				default:
 					break;

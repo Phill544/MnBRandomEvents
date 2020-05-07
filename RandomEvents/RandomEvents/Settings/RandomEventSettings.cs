@@ -57,5 +57,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public EagerTroopsData EagerTroopsData { get; private set; } = new EagerTroopsData(RandomEventType.EagerTroops, 1024, 5, 35);
+
+		[JsonProperty]
+		public SpeedyRecoveryData SpeedyRecoveryData { get; private set; } = new SpeedyRecoveryData(RandomEventType.SpeedyRecovery, 1024, 2, 20);
 	}
 }
