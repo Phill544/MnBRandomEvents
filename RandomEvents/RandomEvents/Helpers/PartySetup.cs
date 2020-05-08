@@ -8,6 +8,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using TaleWorlds.ObjectSystem;
 
 namespace CryingBuffalo.RandomEvents.Helpers
 {
@@ -39,8 +40,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
 				}
 
 				PartyTemplateObject partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
-				partyTemplate.IncrementNumberOfCreated();
-				banditParty = MBObjectManager.Instance.CreateObject<MobileParty>($"randomevent_{banditCultureObject.StringId}_{partyTemplate.NumberOfCreated}");
+				banditParty = MBObjectManager.Instance.CreateObject<MobileParty>($"randomevent_{banditCultureObject.StringId}_{MBRandom.RandomInt(int.MaxValue)}");
 				TextObject partyNameTextObject = new TextObject(partyName, null);
 				Clan banditClan = Clan.BanditFactions.FirstOrDefault(clan => clan.StringId == banditCultureObject.StringId);
 				banditParty.InitializeMobileParty(partyNameTextObject, partyTemplate, MobileParty.MainParty.Position2D, 0.2f, 0.1f);

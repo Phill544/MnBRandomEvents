@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.ObjectSystem;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
