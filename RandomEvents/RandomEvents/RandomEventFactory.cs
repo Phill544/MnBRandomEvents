@@ -61,7 +61,7 @@ namespace CryingBuffalo.RandomEvents
 					break;
 			}
 
-			InformationManager.DisplayMessage(new InformationMessage($"Unable to create random event of type : {eventType}!", RandomEventsSubmodule.Instance.textColor));
+			InformationManager.DisplayMessage(new InformationMessage($"Unable to create random event of type : {eventType}!", RandomEventsSubmodule.textColor));
 
 			return null;
 		}

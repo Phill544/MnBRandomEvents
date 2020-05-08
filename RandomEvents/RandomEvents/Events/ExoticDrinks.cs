@@ -33,7 +33,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			if (Settings.GeneralSettings.DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.Instance.textColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.textColor));
 			}
 
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();

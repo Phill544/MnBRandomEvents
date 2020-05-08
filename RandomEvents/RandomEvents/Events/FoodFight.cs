@@ -33,14 +33,21 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MobileParty.MainParty.ItemRoster.Where((item) => item.EquipmentElement.Item.IsFood).Count() > 0;
+			if ((MobileParty.MainParty.ItemRoster.Where((item) => item.EquipmentElement.Item.IsFood).Count() > 0) && MobileParty.MainParty.MemberRoster.TotalManCount > 1)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		public override void StartEvent()
 		{
 			if (Settings.GeneralSettings.DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.Instance.textColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.textColor));
 			}
 
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();

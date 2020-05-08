@@ -192,6 +192,7 @@
     <Compile Include="Events\WanderingLivestock.cs" />
     <Compile Include="Helpers\PartySetup.cs" />
     <Compile Include="RandomEventFactory.cs" />
+    <Compile Include="RandomEvents.cs" />
     <Compile Include="Settings\GeneralSettings.cs" />
     <Compile Include="Settings\RandomEventSettings.cs" />
     <Compile Include="RandomEventTypeEnum.cs" />
