@@ -73,7 +73,7 @@ namespace CryingBuffalo.RandomEvents
         {
             if (Instance.CancelEvent())
             {
-                return "Current random event cancelled!";
+                return "Current random event canceled!";
             }
             return "No random event running.";
         }
