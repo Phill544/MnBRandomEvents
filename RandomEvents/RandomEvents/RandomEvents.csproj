@@ -187,6 +187,7 @@
     <Compile Include="Events\PrisonerRebellion.cs" />
     <Compile Include="Events\SecretSinger.cs" />
     <Compile Include="Events\SpeedyRecovery.cs" />
+    <Compile Include="Events\SuccessfulDeeds.cs" />
     <Compile Include="Events\TargetPractice.cs" />
     <Compile Include="Events\WanderingLivestock.cs" />
     <Compile Include="Helpers\PartySetup.cs" />

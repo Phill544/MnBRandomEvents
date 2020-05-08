@@ -69,5 +69,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public AheadOfTimeData AheadOfTimeData { get; private set; } = new AheadOfTimeData(RandomEventType.AheadOfTime, 1024);
+
+		[JsonProperty]
+		public SuccessfulDeedsData SuccessfulDeedsData { get; private set; } = new SuccessfulDeedsData(RandomEventType.AheadOfTime, 1024, 50.0f);
 	}
 }

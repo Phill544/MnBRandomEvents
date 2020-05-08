@@ -200,6 +200,7 @@ namespace CryingBuffalo.RandomEvents
             RandomEventGenerator.AddEvent(Settings.RandomEvents.FantasticFightersData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.ExoticDrinksData);
             RandomEventGenerator.AddEvent(Settings.RandomEvents.AheadOfTimeData);
+            RandomEventGenerator.AddEvent(Settings.RandomEvents.SuccessfulDeedsData);
         }
     }
 }
