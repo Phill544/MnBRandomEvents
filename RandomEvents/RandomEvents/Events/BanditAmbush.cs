@@ -39,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return true;
+			return MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
@@ -170,13 +170,19 @@ namespace CryingBuffalo.RandomEvents.Events
 		/// </summary>
 		public int troopScareCount;
 
-		public BanditAmbushData(RandomEventType eventType, float chanceWeight, float moneyMinPercent, float moneyMaxPercent, int lowMoneyThreshold, int troopScareCount) : base(eventType, chanceWeight)
+		public BanditAmbushData(string eventType, float chanceWeight, float moneyMinPercent, float moneyMaxPercent, int lowMoneyThreshold, int troopScareCount) : base(eventType, chanceWeight)
 		{
 			this.moneyMinPercent = moneyMinPercent;
 			this.moneyMaxPercent = moneyMaxPercent;
 			this.lowMoneyThreshold = lowMoneyThreshold;
 			this.troopScareCount = troopScareCount;
 		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new BanditAmbush();
+		}
+
 
 	}
 }

@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.IO;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
@@ -44,23 +46,26 @@ namespace CryingBuffalo.RandomEvents.Events
 		}
 	}
 
-	public class RandomEventData
+	public abstract class RandomEventData
 	{
 		/// <summary>
 		/// ID of the event
 		/// </summary>
 		[JsonIgnore]
-		public RandomEventType EventType = RandomEventType.Unknown;
+		public string EventType = "unknown";
 
 		/// <summary>
 		/// The weighted value that this event will be selected
 		/// </summary>
 		public float ChanceWeight;
 
-		public RandomEventData(RandomEventType eventType, float chanceWeight)
+		public RandomEventData(string eventType, float chanceWeight)
 		{
 			EventType = eventType;
 			ChanceWeight = chanceWeight;
 		}
+
+		public abstract BaseEvent GetBaseEvent();
+
 	}
 }

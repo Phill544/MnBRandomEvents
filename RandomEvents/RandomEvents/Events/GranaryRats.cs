@@ -101,9 +101,14 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		public float foodLossPercent;
 
-		public GranaryRatsData(RandomEventType eventType, float chanceWeight, float foodLossPercent) : base(eventType, chanceWeight)
+		public GranaryRatsData(string eventType, float chanceWeight, float foodLossPercent) : base(eventType, chanceWeight)
 		{
 			this.foodLossPercent = foodLossPercent;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new GranaryRats();
 		}
 	}
 }

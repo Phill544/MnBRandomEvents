@@ -108,10 +108,15 @@ namespace CryingBuffalo.RandomEvents.Events
 		public int minTroopGain;
 		public int maxTroopGain;
 
-		public EagerTroopsData(RandomEventType eventType, float chanceWeight, int minTroopGain, int maxTroopGain) : base(eventType, chanceWeight)
+		public EagerTroopsData(string eventType, float chanceWeight, int minTroopGain, int maxTroopGain) : base(eventType, chanceWeight)
 		{
 			this.minTroopGain = minTroopGain;
 			this.maxTroopGain = maxTroopGain;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new EagerTroops();
 		}
 	}
 }

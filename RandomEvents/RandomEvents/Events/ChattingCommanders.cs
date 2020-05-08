@@ -78,9 +78,14 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		public float cohesionIncrease;
 
-		public ChattingCommandersData(RandomEventType eventType, float chanceWeight, float cohesionIncrease) : base(eventType, chanceWeight)
+		public ChattingCommandersData(string eventType, float chanceWeight, float cohesionIncrease) : base(eventType, chanceWeight)
 		{
 			this.cohesionIncrease = cohesionIncrease;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new ChattingCommanders();
 		}
 	}
 }

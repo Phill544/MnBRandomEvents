@@ -81,11 +81,16 @@ namespace CryingBuffalo.RandomEvents.Events
 		public int reactionDamage;
 		public float reactionChance;
 
-		public BeeKindData(RandomEventType eventType, float chanceWeight, int damage, int reactionDamage, float reactionChance) : base(eventType, chanceWeight)
+		public BeeKindData(string eventType, float chanceWeight, int damage, int reactionDamage, float reactionChance) : base(eventType, chanceWeight)
 		{
 			this.damage = damage;
 			this.reactionDamage = reactionDamage;
 			this.reactionChance = reactionChance;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new BeeKind();
 		}
 	}
 }

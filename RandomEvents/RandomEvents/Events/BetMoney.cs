@@ -102,9 +102,14 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		public float moneyBetPercent;
 
-		public BetMoneyData(RandomEventType eventType, float chanceWeight, float moneyBetPercent) : base(eventType, chanceWeight)
+		public BetMoneyData(string eventType, float chanceWeight, float moneyBetPercent) : base(eventType, chanceWeight)
 		{
 			this.moneyBetPercent = moneyBetPercent;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new BetMoney();
 		}
 	}
 }

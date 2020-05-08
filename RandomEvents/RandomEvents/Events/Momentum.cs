@@ -73,8 +73,13 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class MomentumData : RandomEventData
 	{
-		public MomentumData(RandomEventType eventType, float chanceWeight) : base(eventType, chanceWeight)
+		public MomentumData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new Momentum();
 		}
 	}
 }

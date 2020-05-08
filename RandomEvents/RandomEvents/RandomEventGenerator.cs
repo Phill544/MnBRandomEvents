@@ -25,6 +25,14 @@ namespace CryingBuffalo.RandomEvents
 			weightedEvents.Add(new WeightedEventData { RandomEventData = data, accumulatedWeight = accumulatedWeight });
 		}
 
+		public void AddEvents(IEnumerable<RandomEventData> data)
+		{
+			foreach (var eventData in data)
+			{
+				AddEvent(eventData);
+			}
+		}
+
 		public RandomEventData GetRandom()
 		{
 			float rand = MBRandom.RandomFloatRanged(0.0f, accumulatedWeight);
@@ -37,6 +45,11 @@ namespace CryingBuffalo.RandomEvents
 				}
 			}
 			return null;
+		}
+
+		public RandomEventData GetEvent(string id)
+		{
+			return weightedEvents.FirstOrDefault((x) => x.RandomEventData.EventType.ToLower() == id.ToLower()).RandomEventData;
 		}
 	}
 }

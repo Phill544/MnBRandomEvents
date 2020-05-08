@@ -120,10 +120,15 @@ namespace CryingBuffalo.RandomEvents.Events
 		public int minFood;
 		public int maxFood;
 
-		public WanderingLivestockData(RandomEventType eventType, float chanceWeight, int minFood, int maxFood) : base(eventType, chanceWeight)
+		public WanderingLivestockData(string eventType, float chanceWeight, int minFood, int maxFood) : base(eventType, chanceWeight)
 		{
 			this.minFood = minFood;
 			this.maxFood = maxFood;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new WanderingLivestock();
 		}
 	}
 }

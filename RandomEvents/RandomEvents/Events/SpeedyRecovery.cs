@@ -95,10 +95,15 @@ namespace CryingBuffalo.RandomEvents.Events
 		public int minTroopsToHeal;
 		public int maxTroopsToHeal;
 
-		public SpeedyRecoveryData(RandomEventType eventType, float chanceWeight, int minTroopsToHeal, int maxTroopsToHeal) : base(eventType, chanceWeight)
+		public SpeedyRecoveryData(string eventType, float chanceWeight, int minTroopsToHeal, int maxTroopsToHeal) : base(eventType, chanceWeight)
 		{
 			this.minTroopsToHeal = minTroopsToHeal;
 			this.maxTroopsToHeal = maxTroopsToHeal;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new SpeedyRecovery();
 		}
 	}
 }

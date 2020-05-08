@@ -268,12 +268,17 @@ namespace CryingBuffalo.RandomEvents.Events
 		public float highMedicineChance;
 		public int highMedicineLevel;
 		public float percentLoss;
-		public DiseasedCityData(RandomEventType eventType, float chanceWeight, float baseSuccessChance, float highMedicineChance, int highMedicineLevel, float percentLoss) : base(eventType, chanceWeight)
+		public DiseasedCityData(string eventType, float chanceWeight, float baseSuccessChance, float highMedicineChance, int highMedicineLevel, float percentLoss) : base(eventType, chanceWeight)
 		{
 			this.baseSuccessChance = baseSuccessChance;
 			this.highMedicineChance = highMedicineChance;
 			this.highMedicineLevel = highMedicineLevel;
 			this.percentLoss = percentLoss;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new DiseasedCity();
 		}
 	}
 }

@@ -29,7 +29,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return true;
+			return MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
@@ -133,10 +133,15 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public float percentageDifferenceOfCurrentTroop;
 
-		public TargetPracticeData(RandomEventType eventType, float chanceWeight, float percentageDifferenceOfCurrentTroop, int minimumSoldiers) : base(eventType, chanceWeight)
+		public TargetPracticeData(string eventType, float chanceWeight, float percentageDifferenceOfCurrentTroop, int minimumSoldiers) : base(eventType, chanceWeight)
 		{
 			this.percentageDifferenceOfCurrentTroop = percentageDifferenceOfCurrentTroop;
 			this.minimumSoldiers = minimumSoldiers;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new TargetPractice();
 		}
 	}
 }

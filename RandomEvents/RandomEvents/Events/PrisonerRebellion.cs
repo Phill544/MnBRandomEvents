@@ -25,7 +25,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			if (MobileParty.MainParty.PrisonRoster.TotalHealthyCount > minimumPrisoners)
+			if (MobileParty.MainParty.PrisonRoster.TotalHealthyCount > minimumPrisoners && MobileParty.MainParty.CurrentSettlement == null)
 			{
 				return true;
 			}
@@ -98,9 +98,14 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		public int minimumPrisoners;
 
-		public PrisonerRebellionData(RandomEventType eventType, float chanceWeight, int minimumPrisoners) : base(eventType, chanceWeight)
+		public PrisonerRebellionData(string eventType, float chanceWeight, int minimumPrisoners) : base(eventType, chanceWeight)
 		{
 			this.minimumPrisoners = minimumPrisoners;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new PrisonerRebellion();
 		}
 	}
 }

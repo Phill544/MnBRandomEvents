@@ -99,9 +99,14 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		public float cropGainPercent;
 
-		public BumperCropData(RandomEventType eventType, float chanceWeight, float cropGainPercent) : base(eventType, chanceWeight)
+		public BumperCropData(string eventType, float chanceWeight, float cropGainPercent) : base(eventType, chanceWeight)
 		{
 			this.cropGainPercent = cropGainPercent;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new BumperCrop();
 		}
 	}
 }

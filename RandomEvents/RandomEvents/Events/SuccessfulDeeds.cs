@@ -70,9 +70,14 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		public float influenceGain;
 
-		public SuccessfulDeedsData(RandomEventType eventType, float chanceWeight, float influenceGain) : base(eventType, chanceWeight)
+		public SuccessfulDeedsData(string eventType, float chanceWeight, float influenceGain) : base(eventType, chanceWeight)
 		{
 			this.influenceGain = influenceGain;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new SuccessfulDeeds();
 		}
 	}
 }

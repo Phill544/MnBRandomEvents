@@ -64,9 +64,14 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		public int moraleGain;
 
-		public SecretSingerData(RandomEventType eventType, float chanceWeight, int moraleGain) : base(eventType, chanceWeight)
+		public SecretSingerData(string eventType, float chanceWeight, int moraleGain) : base(eventType, chanceWeight)
 		{
 			this.moraleGain = moraleGain;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new SecretSinger();
 		}
 	}
 }

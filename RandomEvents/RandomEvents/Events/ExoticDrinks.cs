@@ -101,9 +101,14 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		public int price;
 
-		public ExoticDrinksData(RandomEventType eventType, float chanceWeight, int price) : base(eventType, chanceWeight)
+		public ExoticDrinksData(string eventType, float chanceWeight, int price) : base(eventType, chanceWeight)
 		{
 			this.price = price;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new ExoticDrinks();
 		}
 	}
 }

@@ -96,8 +96,13 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class AheadOfTimeData : RandomEventData
 	{
-		public AheadOfTimeData(RandomEventType eventType, float chanceWeight) : base(eventType, chanceWeight)
+		public AheadOfTimeData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new AheadOfTime();
 		}
 	}
 }

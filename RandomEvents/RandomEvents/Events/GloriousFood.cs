@@ -29,11 +29,11 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private MBCampaignEvent hourlyTickEvent = null;
 
-		public GloriousFood() : base(Settings.RandomEvents.GloriousFoodData)
+		public GloriousFood() : base(null/*Settings.RandomEvents.GloriousFoodData*/)
 		{
-			minFoodAmount = Settings.RandomEvents.GloriousFoodData.minFoodAmount;
-			maxFoodAmount = Settings.RandomEvents.GloriousFoodData.maxFoodAmount;
-			forageHours = Settings.RandomEvents.GloriousFoodData.forageHours;
+			//minFoodAmount = Settings.RandomEvents.GloriousFoodData.minFoodAmount;
+			//maxFoodAmount = Settings.RandomEvents.GloriousFoodData.maxFoodAmount;
+			//forageHours = Settings.RandomEvents.GloriousFoodData.forageHours;
 		}
 
 		public override void CancelEvent()
@@ -145,11 +145,16 @@ namespace CryingBuffalo.RandomEvents.Events
 		public int maxFoodAmount;
 		public int forageHours;
 
-		public GloriousFoodData(RandomEventType eventType, float chanceWeight, int minFoodAmount, int maxFoodAmount, int forageHours) : base(eventType, chanceWeight)
+		public GloriousFoodData(string eventType, float chanceWeight, int minFoodAmount, int maxFoodAmount, int forageHours) : base(eventType, chanceWeight)
 		{
 			this.minFoodAmount = minFoodAmount;
 			this.maxFoodAmount = maxFoodAmount;
 			this.forageHours = forageHours;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new GloriousFood();
 		}
 	}
 }

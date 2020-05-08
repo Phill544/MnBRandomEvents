@@ -40,7 +40,7 @@ namespace CryingBuffalo.RandomEvents
                 return $"Currently running event: {Instance.currentEvent.RandomEventData.EventType}. To start another first cancel this one.";
             }
 
-            BaseEvent evnt = RandomEventFactory.CreateEvent(args[0]);
+            BaseEvent evnt = Instance.RandomEventGenerator.GetEvent(args[0])?.GetBaseEvent();
 
             if (evnt == null)
             {
@@ -123,7 +123,7 @@ namespace CryingBuffalo.RandomEvents
         /// <returns></returns>
         private BaseEvent SelectEvent()
         {
-            return RandomEventFactory.CreateEvent(RandomEventGenerator.GetRandom().EventType);
+            return RandomEventGenerator.GetRandom().GetBaseEvent();
         }
 
         /// <summary>
@@ -167,27 +167,7 @@ namespace CryingBuffalo.RandomEvents
 
         private void PopulateRandomEventGenerator()
         {
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.BetMoneyData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.BumperCropData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.BanditAmbushData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.GranaryRatsData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.TargetPracticeData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.PrisonerRebellionData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.ChattingCommandersData);
-            //RandomEventGenerator.AddEvent(Settings.RandomEvents.GloriousFoodData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.DiseasedCityData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.MomentumData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.SecretSingerData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.BeeKindData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.FoodFightData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.PerfectWeatherData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.WanderingLivestockData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.EagerTroopsData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.SpeedyRecoveryData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.FantasticFightersData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.ExoticDrinksData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.AheadOfTimeData);
-            RandomEventGenerator.AddEvent(Settings.RandomEvents.SuccessfulDeedsData);
+            RandomEventGenerator.AddEvents(GetRandomEventData());
         }
 
         private void ResetEventTimer()
@@ -197,5 +177,17 @@ namespace CryingBuffalo.RandomEvents
             lastEventTime = DateTime.Now;
         }
 
+        private List<RandomEventData> GetRandomEventData()
+        {
+            List<RandomEventData> eventData = new List<RandomEventData>();
+            var properties = Settings.RandomEvents.GetType().GetProperties();
+
+            foreach (var propertyInfo in properties)
+            {
+                eventData.Add((RandomEventData)propertyInfo.GetValue(Settings.RandomEvents, null));
+            }
+
+            return eventData;
+        }
     }
 }

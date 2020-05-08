@@ -70,9 +70,14 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		public int renownGain;
 
-		public FantasticFightersData(RandomEventType eventType, float chanceWeight, int renownGain) : base(eventType, chanceWeight)
+		public FantasticFightersData(string eventType, float chanceWeight, int renownGain) : base(eventType, chanceWeight)
 		{
 			this.renownGain = renownGain;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new FantasticFighters();
 		}
 	}
 }

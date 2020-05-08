@@ -143,11 +143,16 @@ namespace CryingBuffalo.RandomEvents.Events
 		public int maxFoodLoss;
 		public int moraleLoss;
 
-		public FoodFightData(RandomEventType eventType, float chanceWeight, int minFoodLoss, int maxFoodLoss, int moraleLoss) : base(eventType, chanceWeight)
+		public FoodFightData(string eventType, float chanceWeight, int minFoodLoss, int maxFoodLoss, int moraleLoss) : base(eventType, chanceWeight)
 		{
 			this.minFoodLoss = minFoodLoss;
 			this.maxFoodLoss = maxFoodLoss;
 			this.moraleLoss = moraleLoss;
+		}
+
+		public override BaseEvent GetBaseEvent()
+		{
+			return new FoodFight();
 		}
 	}
 }
