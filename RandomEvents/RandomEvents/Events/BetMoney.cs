@@ -94,7 +94,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return true;
+			return MobileParty.MainParty.MemberRoster.TotalRegulars > 0;
 		}
 	}
 
