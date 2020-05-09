@@ -52,7 +52,7 @@ Adding events is easy! Below are the steps in order to create your own random ev
 5. Go to RandomEventSettings.cs and add a new entry for your random event class, just copy the previous line and update what you need. Things to note:
 - The string that you provide is what you use to call it in the command line (for example, randomevent.run MyNewEvent)
 - The values that you put in here will be the default values for the event.
-- Once you do this, technically the event is now part of the mod! (Although if you're following this guide then you will still have compile errors which we will deal with now!
+- Once you do this, technically the event is now part of the mod! (Although if you're following this guide then you will still have compile errors which we will deal with now!)
 
 6. Go back to the base event that you created, to get the project buildable, there's a few things we need to do.
 - Implement all of the abstract methods.
@@ -82,5 +82,6 @@ InformationManager.ShowInquiry(
 		),
 	true);
 ```
+(You may need to add some references)
 
 9. From here you should be able to add to your mod as you like, congrats!
