@@ -2,6 +2,7 @@
 
 A mod for Bannerlord that adds random events to the single player campaign. The project itself is very straight-forward. If you would like to contribute, below should include everything you need to get started.
 
+## [Want to create your own random events?](RandomEventCreation.md)
 
 
 ## Brief Overview
