@@ -191,7 +191,7 @@
     <Compile Include="Events\TargetPractice.cs" />
     <Compile Include="Events\WanderingLivestock.cs" />
     <Compile Include="Helpers\PartySetup.cs" />
-    <Compile Include="RandomEvents.cs" />
+    <Compile Include="RandomEventBehavior.cs" />
     <Compile Include="Settings\GeneralSettings.cs" />
     <Compile Include="Settings\RandomEventSettings.cs" />
     <Compile Include="Settings\Settings.cs" />

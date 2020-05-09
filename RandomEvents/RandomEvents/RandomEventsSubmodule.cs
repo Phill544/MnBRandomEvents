@@ -39,7 +39,7 @@ namespace CryingBuffalo.RandomEvents
                 CampaignGameStarter gameInitializer = (CampaignGameStarter)gameStarterObject;
                 try
                 {
-                    gameInitializer.AddBehavior(new RandomEvents());
+                    gameInitializer.AddBehavior(new RandomEventBehavior());
                 }
                 catch (Exception ex)
                 {

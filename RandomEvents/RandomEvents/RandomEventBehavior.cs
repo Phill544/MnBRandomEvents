@@ -10,11 +10,19 @@ using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents
 {
-	class RandomEvents : CampaignBehaviorBase
+	public class RandomEventBehavior : CampaignBehaviorBase
 	{
-        public static RandomEvents Instance { get; private set; }
+        public static RandomEventBehavior Instance { get; private set; }
                
         public RandomEventGenerator RandomEventGenerator = null;
+
+        public RandomEventBehavior()
+        {
+            Instance = this;
+
+            RandomEventGenerator = new RandomEventGenerator();
+            PopulateRandomEventGenerator();
+        }
 
         public override void RegisterEvents()
 		{
@@ -35,7 +43,7 @@ namespace CryingBuffalo.RandomEvents
                 return "You must provide the type of event to run";
             }
 
-            if (RandomEvents.Instance.currentEvent != null)
+            if (RandomEventBehavior.Instance.currentEvent != null)
             {
                 return $"Currently running event: {Instance.currentEvent.RandomEventData.EventType}. To start another first cancel this one.";
             }
@@ -54,7 +62,7 @@ namespace CryingBuffalo.RandomEvents
         [CommandLineFunctionality.CommandLineArgumentFunction("next", "randomevent")]
         public static string RunNextEvent(List<string> args)
         {
-            if (RandomEvents.Instance.currentEvent != null)
+            if (RandomEventBehavior.Instance.currentEvent != null)
             {
                 return $"Currently running event: {Instance.currentEvent.RandomEventData.EventType}. To start another first cancel this one.";
             }
@@ -80,11 +88,6 @@ namespace CryingBuffalo.RandomEvents
 
         private void OnSessionLaunched(CampaignGameStarter cgs)
         {
-            Instance = this;
-
-            RandomEventGenerator = new RandomEventGenerator();
-            PopulateRandomEventGenerator();
-
             ResetEventTimer();
         }
 
