@@ -140,7 +140,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					banditParty.SetMoveEngageParty(MobileParty.MainParty);
 				}
 
-				PartySetup.AddRandomCultureUnits(banditParty, 100);
+				PartySetup.AddRandomCultureUnits(banditParty, 10 + (int)(MobileParty.MainParty.MemberRoster.TotalManCount * 0.75f));
 			}
 			catch (Exception ex)
 			{

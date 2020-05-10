@@ -10,7 +10,7 @@ namespace CryingBuffalo.RandomEvents
 	class GeneralSettings
 	{
 		[JsonIgnore]
-		public bool DebugMode { get; private set; } = true;
+		public bool DebugMode { get; private set; } = false;
 
 		[JsonProperty]
 		public bool HideInaccessibleDialogue { get; private set; } = true;
