@@ -72,5 +72,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public SuccessfulDeedsData SuccessfulDeedsData { get; private set; } = new SuccessfulDeedsData("SuccessfulDeeds", 1024, 50.0f);
+
+		[JsonProperty]
+		public BunchOfPrisonersData BunchOfPrisonersData { get; private set; } = new BunchOfPrisonersData("BunchOfPrisoners", 1024, 5, 35);
 	}
 }
