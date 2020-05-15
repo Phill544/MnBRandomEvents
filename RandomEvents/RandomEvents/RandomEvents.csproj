@@ -174,6 +174,7 @@
     <Compile Include="Events\BeeKind.cs" />
     <Compile Include="Events\BetMoney.cs" />
     <Compile Include="Events\BumperCrop.cs" />
+    <Compile Include="Events\BunchOfPrisoners.cs" />
     <Compile Include="Events\ChattingCommanders.cs" />
     <Compile Include="Events\DiseasedCity.cs" />
     <Compile Include="Events\EagerTroops.cs" />
@@ -189,8 +190,11 @@
     <Compile Include="Events\SpeedyRecovery.cs" />
     <Compile Include="Events\SuccessfulDeeds.cs" />
     <Compile Include="Events\TargetPractice.cs" />
+    <Compile Include="Events\Undercooked.cs" />
     <Compile Include="Events\WanderingLivestock.cs" />
     <Compile Include="Helpers\PartySetup.cs" />
+    <Compile Include="Helpers\PlayerStatus.cs" />
+    <Compile Include="Helpers\RandomSelection.cs" />
     <Compile Include="RandomEventBehavior.cs" />
     <Compile Include="Settings\GeneralSettings.cs" />
     <Compile Include="Settings\RandomEventSettings.cs" />
