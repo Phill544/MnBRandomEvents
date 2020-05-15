@@ -11,7 +11,7 @@ namespace CryingBuffalo.RandomEvents
 
 		public static GeneralSettings GeneralSettings { get; set; }
 
-		public static void LoadRandomEventSettings()
+		public static void LoadRandomEventSettings(bool updateJsonFile = true)
 		{
 			string path = BasePath.Name + "Modules/RandomEvents/ModuleData/RandomEventSettings.json";
 			if (!File.Exists(path))
@@ -20,9 +20,15 @@ namespace CryingBuffalo.RandomEvents
 				File.WriteAllText(path, defaultSettingsText);
 			}
 			Settings.RandomEvents = JsonConvert.DeserializeObject<RandomEventSettings>(File.ReadAllText(path));
+
+			if (updateJsonFile)
+			{
+				string updatedSettingsText = JsonConvert.SerializeObject(RandomEvents, Formatting.Indented);
+				File.WriteAllText(path, updatedSettingsText);
+			}
 		}
 
-		public static void LoadGeneralSettings()
+		public static void LoadGeneralSettings(bool updateJsonFile = true)
 		{
 			string path = BasePath.Name + "Modules/RandomEvents/ModuleData/GeneralSettings.json";
 			if (!File.Exists(path))
@@ -31,6 +37,12 @@ namespace CryingBuffalo.RandomEvents
 				File.WriteAllText(path, defaultSettingsText);
 			}
 			Settings.GeneralSettings = JsonConvert.DeserializeObject<GeneralSettings>(File.ReadAllText(path));
+
+			if (updateJsonFile)
+			{
+				string updatedSettingsText = JsonConvert.SerializeObject(GeneralSettings, Formatting.Indented);
+				File.WriteAllText(path, updatedSettingsText);
+			}
 		}
 	}
 }
