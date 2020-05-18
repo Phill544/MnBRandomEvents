@@ -1,0 +1,26 @@
+ <Module>
+     <Name value="Random Events"/>
+     <Id value="RandomEvents"/>
+     <Version value="v1.1.0"/>
+     <SingleplayerModule value="true"/>
+     <MultiplayerModule value="false"/>
+     <DependedModules>
+         <DependedModule Id="Native"/>
+         <DependedModule Id="SandBoxCore"/>
+         <DependedModule Id="Sandbox"/>
+         <DependedModule Id="CustomBattle"/>
+         <DependedModule Id="StoryMode" />
+     </DependedModules>
+     <SubModules>
+         <SubModule>
+             <Name value="RandomEvents"/>
+             <DLLName value="RandomEvents.dll"/>
+             <SubModuleClassType value="CryingBuffalo.RandomEvents.RandomEventsSubmodule"/>
+             <Tags>
+                 <Tag key="DedicatedServerType" value="none" />
+                 <Tag key="IsNoRenderModeElement" value="false" />
+             </Tags>
+         </SubModule>
+     </SubModules>
+     <Xmls/>
+ </Module>
