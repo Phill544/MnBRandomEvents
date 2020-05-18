@@ -33,7 +33,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				$"One of your soldiers wants to flip a coin. Heads you win, tails they do. The prize is {goldToBet} gold.{extraDialogue}", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
-				true, // Force a single option to be selected. Should usually be true
+				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
 				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
