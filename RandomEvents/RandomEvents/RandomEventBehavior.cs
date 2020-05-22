@@ -32,6 +32,16 @@ namespace CryingBuffalo.RandomEvents
 
 		public override void SyncData(IDataStore dataStore)
 		{
+            SaveSystem.SetFilePath();
+
+            if (dataStore.IsSaving)
+            {
+                SaveSystem.SaveData();
+            }
+            else if (dataStore.IsLoading)
+            {
+                SaveSystem.LoadData();
+            }
 		}
 
 

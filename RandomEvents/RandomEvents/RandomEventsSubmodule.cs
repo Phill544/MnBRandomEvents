@@ -21,6 +21,8 @@ namespace CryingBuffalo.RandomEvents
 
             Settings.LoadGeneralSettings();
             Settings.LoadRandomEventSettings();
+
+            SaveSystem.Init();
         }
 
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
