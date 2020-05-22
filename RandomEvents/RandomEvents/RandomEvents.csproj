@@ -196,6 +196,8 @@
     <Compile Include="Helpers\PlayerStatus.cs" />
     <Compile Include="Helpers\RandomSelection.cs" />
     <Compile Include="RandomEventBehavior.cs" />
+    <Compile Include="SaveData.cs" />
+    <Compile Include="SaveSystem.cs" />
     <Compile Include="Settings\GeneralSettings.cs" />
     <Compile Include="Settings\RandomEventSettings.cs" />
     <Compile Include="Settings\Settings.cs" />
