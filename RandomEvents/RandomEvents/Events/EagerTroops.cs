@@ -17,7 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		private int minTroopGain;
 		private int maxTroopGain;
 
-		private string eventTitle = "Eager Troops!";
+		private string eventTitle = "Des troupes désireuses!";
 
 		public EagerTroops() : base(Settings.RandomEvents.EagerTroopsData)
 		{
@@ -48,12 +48,12 @@ namespace CryingBuffalo.RandomEvents.Events
 			Settlement closestSettlement = settlements.MinBy((s) => { return MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()); });
 
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Accept", null));
-			inquiryElements.Add(new InquiryElement("b", "Decline", null));
+			inquiryElements.Add(new InquiryElement("a", "Accepté", null));
+			inquiryElements.Add(new InquiryElement("b", "Décliné", null));
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
 				eventTitle, // Title
-				$"You come across {numberToAdd} troops that are eager for battle and glory. They want to join your ranks!", // Description
+				$"Vous rencontrez {numberToAdd} guerrier avides de bataille et de gloire. Ils veulent rejoindre vos rangs!", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
 				true, // Force a single option to be selected. Should usually be true
@@ -75,11 +75,11 @@ namespace CryingBuffalo.RandomEvents.Events
 					}
 					else if ((string)elements[0].Identifier == "b")
 					{
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "Disappointed, the soldiers leave.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, "Déçus, les soldats partent.", true, false, "Terminé", null, null, null), true);
 					}
 					else
 					{
-						MessageBox.Show($"Error while selecting option for \"{this.RandomEventData.EventType}\"");
+						MessageBox.Show($"Erreur lors de la sélection de l'option pour \"{this.RandomEventData.EventType}\"");
 					}
 
 				},

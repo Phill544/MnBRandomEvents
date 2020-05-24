@@ -66,11 +66,11 @@ namespace CryingBuffalo.RandomEvents.Events
 				ratSettlement = infestedSettlement.Name.ToString();
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Rats in the granary!",
-									$"You have been informed that {ratSettlement} had an infestation of rats that went unchecked... The rats won't starve this month, but your peasants might.",
+					new InquiryData("Rats dans le grenier!",
+									$"Vous avez été informé que {ratSettlement} a eu une infestation de rats non contrôlée ... Les rats ne mourront pas de faim ce mois-ci, mais vos paysans pourraient.",
 									true,
 									false,
-									"Done",
+									"Terminé",
 									null,
 									null,
 									null
@@ -78,7 +78,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while running \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'exécution \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 
 			StopEvent();
@@ -92,7 +92,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

@@ -48,8 +48,8 @@ namespace CryingBuffalo.RandomEvents.Events
 				bumperSettlement = winningSettlement.Name.ToString();
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Bumper Crop!",
-									$"You have been informed that {bumperSettlement} has had an excellent harvest!",
+					new InquiryData("Une récolte exceptionnelle!",
+									$"Vous avez été informé que votre village {bumperSettlement} a eu une excellente récolte!",
 									true,
 									false,
 									"Done",
@@ -60,7 +60,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while running \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'exécution \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 
 			StopEvent();
@@ -74,7 +74,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 

@@ -19,18 +19,18 @@ namespace CryingBuffalo.RandomEvents.Events
 		public override void StartEvent()
 		{
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Gamble", null));
-			inquiryElements.Add(new InquiryElement("b", "Decline", null));
+			inquiryElements.Add(new InquiryElement("a", "Parier", null));
+			inquiryElements.Add(new InquiryElement("b", "Décliner", null));
 
 			int goldToBet = (int)Mathf.Floor(Hero.MainHero.Gold * moneyBetPercent);
 
 			string extraDialogue = "";
 			if (goldToBet > 40000)
-				extraDialogue = " You have no idea how they have that much money. You contemplate stealing it.";
+				extraDialogue = " Vous ne savez pas comment il à réuni autant d'argent. Vous envisagez de le voler.";
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				"All or nothing", // Title
-				$"One of your soldiers wants to flip a coin. Heads you win, tails they do. The prize is {goldToBet} gold.{extraDialogue}", // Description
+				"Tout ou rien", // Title
+				$"Un de vos soldats veut lancer une pièce. Têtes vous gagnez, Face il gagne. Le prix est {goldToBet} Denar.{extraDialogue}", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
 				true, // Force a single option to be selected. Should usually be true
@@ -41,11 +41,11 @@ namespace CryingBuffalo.RandomEvents.Events
 					if ((string)elements[0].Identifier == "a")
 					{
 						string outcomeText = DoBet(goldToBet);
-						InformationManager.ShowInquiry(new InquiryData("All or nothing", outcomeText, true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData("Tout ou rien", outcomeText, true, false, "Terminé", null, null, null), true);
 					}
 					else
 					{
-						InformationManager.ShowInquiry(new InquiryData("All or nothing", "You walk away.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData("Tout ou rien", "Vous partez.", true, false, "Terminé", null, null, null), true);
 					}
 				},
 				null); // What to do on the "cancel" button, shouldn't ever need it.
@@ -64,12 +64,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			if (decision >= 0.5f)
 			{
-				outcomeText = "\"Well, I'm never going to make that money back...\" Your companion says with a heavy sigh as your pocket your 'hard earned' gold.";
+				outcomeText = "\"Eh bien, je ne vais jamais récupérer cet argent...\" Dit votre compagnon avec un soupir lourd en fixant votre bourse votre avec votre or 'durement gagné'. ";
 				Hero.MainHero.ChangeHeroGold(goldToBet);
 			}
 			else
 			{
-				outcomeText = "\"Better luck next time\" Your companion says smugly.";
+				outcomeText = "\"Plus de chance la prochaine fois\" dit votre compagnon avec suffisance.";
 				Hero.MainHero.ChangeHeroGold(-goldToBet);
 			}
 
@@ -84,7 +84,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 

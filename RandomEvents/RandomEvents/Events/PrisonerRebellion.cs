@@ -44,7 +44,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			try
 			{
-				MobileParty prisonerParty = PartySetup.CreateBanditParty("looters", "Escaped prisoners (Random Event)");
+				MobileParty prisonerParty = PartySetup.CreateBanditParty("looters", "Prisonniers évadés (Random Event)");
 
 				prisonerParty.MemberRoster.Clear();
 				DoPrisonerTransfer(prisonerParty);
@@ -53,11 +53,11 @@ namespace CryingBuffalo.RandomEvents.Events
 				prisonerParty.SetMoveEngageParty(MobileParty.MainParty);
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Prisoner rebellion!",
-									$"While your guards weren't looking the prisoners managed to break free. \"We'd rather die than stay in captivity another day!\"",
+					new InquiryData("Rébellion des prisonniers!",
+									$"Pendant que vos gardes ne regardaient pas, les prisonniers ont réussi à se libérer. \"Nous préférons mourir plutôt que de rester en captivité un autre jour\"",
 									true,
 									false,
-									"To arms!",
+									"Aux armes!",
 									null,
 									null,
 									null
@@ -65,7 +65,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while running \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'exécution \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 
 			StopEvent();
@@ -79,7 +79,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 

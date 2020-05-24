@@ -41,10 +41,10 @@ namespace CryingBuffalo.RandomEvents.Events
 
 				InformationManager.ShowInquiry(
 					new InquiryData("Undercooked",
-						$"Some of your troops fall ill to bad food, although you're unsure of what caused it, you're glad it wasn't you.",
+						$"Certaines de vos troupes tombent malades à cause de la mauvaise nourriture, bien que vous ne soyez pas sûr de la cause, vous êtes content que ce ne soit pas vous.",
 						true,
 						false,
-						"Done",
+						"Terminé",
 						null,
 						null,
 						null
@@ -55,7 +55,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while playing \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de la lecture \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -67,7 +67,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

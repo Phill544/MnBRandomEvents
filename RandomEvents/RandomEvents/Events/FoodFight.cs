@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		private int maxFoodLoss;
 		private int moraleLoss;
 
-		private string eventTitle = "Food Fight!";
+		private string eventTitle = "Bataille de nourriture!";
 
 		public FoodFight() : base(Settings.RandomEvents.FoodFightData)
 		{
@@ -51,12 +51,12 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Break it up.", null, true, "Where do these fools think this food comes from?"));
-			inquiryElements.Add(new InquiryElement("b", "Join in!", null, true, "You were done eating anyway."));
+			inquiryElements.Add(new InquiryElement("a", "Ça suffit.", null, true, "D'où ces imbéciles pensent-ils que cette nourriture vient?"));
+			inquiryElements.Add(new InquiryElement("b", "Participer!", null, true, "Vous aviez fini de manger de tous façon."));
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
 				eventTitle, // Title
-				$"While your party is eating, a large food fight breaks out.", // Description
+				$"Pendant que votre groupe mange, une grande bataille de nourriture éclate.", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
 				true, // Force a single option to be selected. Should usually be true
@@ -68,7 +68,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					{
 						MobileParty.MainParty.RecentEventsMorale -= moraleLoss;
 
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "You command that everyone stops this nonsense. Although the party looks displeased, at least you saved the food.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, "Vous commandez que tout le monde arrête ce non-sens. Bien que la fête semble mécontente, au moins vous avez sauvé la nourriture.", true, false, "Terminé", null, null, null), true);
 					}
 					else if ((string)elements[0].Identifier == "b")
 					{
@@ -81,14 +81,14 @@ namespace CryingBuffalo.RandomEvents.Events
 						bool runOutOfFood = RemoveFood(foodToRemove);
 						if (runOutOfFood)
 						{
-							extraDialogue = " Quickly you realise that there is no food left. If you can't source some more soon there may be trouble.";
+							extraDialogue = " Vous réalisez rapidement qu'il n'y a plus de nourriture. Si vous ne pouvez pas vous en procurer plus bientôt, il risque d'y avoir un problème.";
 						}
 
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, $"You decide to join in on the fun! You even manage to deal out some black eyes. Did you go too far? Probably.{extraDialogue}", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, $"Vous décidez de vous amuser! Vous parvenez même à faire sortir certains yeux au beurre noir. êtes vous allé trop loin ? Probablement.{extraDialogue}", true, false, "terminé", null, null, null), true);
 					}
 					else
 					{
-						MessageBox.Show($"Error while selecting option for \"{this.RandomEventData.EventType}\"");
+						MessageBox.Show($"Error while selecting option forErreur lors de la sélection de l'option pour \"{this.RandomEventData.EventType}\"");
 					}
 
 				},

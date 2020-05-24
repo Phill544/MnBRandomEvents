@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		private int highMedicineLevel;
 		private float percentLoss;
 
-		private string eventTitle = "It’s Airborne!";
+		private string eventTitle = "C'est aéroporté!";
 		public DiseasedCity() : base(Settings.RandomEvents.DiseasedCityData)
 		{
 			baseSuccessChance = Settings.RandomEvents.DiseasedCityData.baseSuccessChance;
@@ -88,7 +88,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while running \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'exécution \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 
 			StopEvent();
@@ -102,7 +102,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -186,10 +186,10 @@ namespace CryingBuffalo.RandomEvents.Events
 
 					InformationManager.ShowInquiry(
 						new InquiryData(eventTitle,
-							$"{plaguedSettlement} has suffered a devastating plague. Although {highestMedicineHero.Name} tried their best to save the population, it wasn't enough...",
+							$"{plaguedSettlement} a subi une peste dévastatrice. Bien que {highestMedicineHero.Name} ait fait de son mieux pour sauver la population, ce n'était pas suffisant ...",
 							true,
 							false,
-							"Done",
+							"Terminé",
 							null,
 							null,
 							null
@@ -210,7 +210,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					// Lack of Hero meant they were left to fend for themselves
 					InformationManager.ShowInquiry(
 						new InquiryData(eventTitle,
-							$"{plaguedSettlement} has suffered a devastating plague. As there wasn't anyone able to provide assistance to the population, the sickness cut through the population without mercy.",
+							$"{plaguedSettlement} a subi une peste dévastatrice. Comme personne n'était en mesure de fournir une assistance à la population, la maladie a fauché la population sans merci..",
 							true,
 							false,
 							"Done",
@@ -233,7 +233,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					// Thanks to hero's efforts lives were saved
 					InformationManager.ShowInquiry(
 						new InquiryData(eventTitle,
-							$"Although the telltale signs of an emerging plague started to appear in {plaguedSettlement}, because of {highestMedicineHero.Name}'s expertise, measures were put in place that saved the settlement from unnecessary death.",
+							$"Bien que les signes révélateurs d'une peste émergente aient commencé à apparaître à {plaguedSettlement}, grâce à de l'expertise de {highestMedicineHero.Name}, des mesures ont été mises en place qui ont sauvé la colonie d'une mort inutile..",
 							true,
 							false,
 							"Done",
@@ -248,7 +248,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					// Although there was no one to help, the population managed to subdue the sickness.
 					InformationManager.ShowInquiry(
 						new InquiryData(eventTitle,
-							$"Although the telltale signs of an emerging plague starting to appear in {plaguedSettlement}, as luck would have it, nothing ever came of it. Those that were ill recovered, and the fears of a deadly pandemic can be laid to rest... For now.",
+							$"Bien que les signes révélateurs d'une peste émergente commencent à apparaître dans {plaguedSettlement}, rien ne s'en est jamais produit. Ceux qui ont été malade ont récupérés, et les craintes d'une pandémie mortelle sont apaisées ... Pour l'instant.",
 							true,
 							false,
 							"Done",

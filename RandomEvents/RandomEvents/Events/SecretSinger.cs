@@ -33,11 +33,11 @@ namespace CryingBuffalo.RandomEvents.Events
 			MobileParty.MainParty.MoraleExplainer.AddLine("Random Event", moraleGain, StatExplainer.OperationType.Custom);
 
 			InformationManager.ShowInquiry(
-				new InquiryData("Secret Singer!",
-					$"You discover one of your party members is an extremely good singer!",
+				new InquiryData("Chanteur secret!",
+					$"Vous découvrez que l'un des membres de votre groupe est un très bon chanteur!",
 					true,
 					false,
-					"Done",
+					"terminé",
 					null,
 					null,
 					null
@@ -55,7 +55,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

@@ -23,7 +23,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		private int lowMoneyThreshold;
 		private int troopScareCount;
 
-		private string eventTitle = "Ambushed by bandits";
+		private string eventTitle = "Pris en embuscade par des bandits";
 
 		public BanditAmbush() : base(Settings.RandomEvents.BanditAmbushData)
 		{
@@ -50,12 +50,12 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Pay gold to have them leave", null, true, "What is gold good for, if not to dissuade people from killing you?"));
-			inquiryElements.Add(new InquiryElement("b", "Attack", null));
+			inquiryElements.Add(new InquiryElement("a", "Leur donnée de l'or pour les faire dispersée", null, true, "À quoi sert l'or, sinon à dissuader les gens de vous tuer?"));
+			inquiryElements.Add(new InquiryElement("b", "Les attaquer", null));
 
 			if (Hero.MainHero.PartyBelongedTo.MemberRoster.Count > troopScareCount)
 			{
-				inquiryElements.Add(new InquiryElement("c", "Intimidate them", null)); 
+				inquiryElements.Add(new InquiryElement("c", "Les intimider", null)); 
 			}
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
@@ -73,21 +73,21 @@ namespace CryingBuffalo.RandomEvents.Events
 						float percentMoneyLost = MBRandom.RandomFloatRanged(moneyMinPercent, moneyMaxPercent);
 						int goldLost = (int)Mathf.Floor(Hero.MainHero.Gold * percentMoneyLost);
 						Hero.MainHero.ChangeHeroGold(-goldLost);
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, $"You give the bandits {goldLost} coins and they quickly flee. At least you and your soldiers live to fight another day.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, $"Vous donnez aux bandits {goldLost} pièces et ils s'enfuient rapidement. Au moins vous et vos soldats vivrez pour combattre un autre jour.", true, false, "Terminé", null, null, null), true);
 					}
 					else if ((string)elements[0].Identifier == "b")
 					{
 						SpawnBandits(false);
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "Seeing you won't back down, the bandits get ready for a fight.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, "Voyant que vous ne reculerez pas, les bandits se préparent pour un combat.", true, false, "Terminé", null, null, null), true);
 					}
 					else if ((string)elements[0].Identifier == "c")
 					{
 						SpawnBandits(true);
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "You laugh as you watch the rest of your party emerge over the crest of the hill. The bandits get ready to flee.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, "Vous riez en regardant le reste de votre groupe émerger de la crête de la colline. Les bandits se préparent à fuir.", true, false, "Terminé", null, null, null), true);
 					}
 					else
 					{
-						MessageBox.Show($"Error while selecting option for \"{this.RandomEventData.EventType}\"");
+						MessageBox.Show($"Erreur lors de la sélection de l'option pour \"{this.RandomEventData.EventType}\"");
 					}
 					
 				},
@@ -114,11 +114,11 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			if (Hero.MainHero.PartyBelongedTo.MemberRoster.Count > troopScareCount)
 			{
-				return "You are traveling with your forward party when you get surrounded by a group of bandits!";
+				return "Vous voyagez avec votre avant-garde quand vous vous retrouvez encerclé par un groupe de bandits!";
 			}
 			else
 			{
-				return "While traveling your party gets surrounded by a group of bandits!";
+				return "Durant votre voyage, votre groupe est encerclé par un groupe de bandits!";
 			}
 		}
 

@@ -15,7 +15,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		private int minFood;
 		private int maxFood;
 
-		private string eventTitle = "Free Range Meat";
+		private string eventTitle = "Ration sur patte";
 
 		public WanderingLivestock() : base(Settings.RandomEvents.WanderingLivestockData)
 		{
@@ -40,12 +40,12 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Take them in", null));
-			inquiryElements.Add(new InquiryElement("b", "Ignore them", null));
+			inquiryElements.Add(new InquiryElement("a", "Accueillez-les", null));
+			inquiryElements.Add(new InquiryElement("b", "Ignore les", null));
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
 				eventTitle, // Title
-				$"You come across some wandering livestock.", // Description
+				$"Vous rencontrez du bétail errant.", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
 				true, // Force a single option to be selected. Should usually be true
@@ -70,7 +70,7 @@ namespace CryingBuffalo.RandomEvents.Events
 							string cowPlural = "";
 							if (cowCount > 1) cowPlural = "s";
 
-							cowText = $", and {cowCount} cow{cowPlural}.";
+							cowText = $", et {cowCount} vache{cowPlural}.";
 						}
 						else
 						{
@@ -83,15 +83,15 @@ namespace CryingBuffalo.RandomEvents.Events
 						MobileParty.MainParty.ItemRoster.AddToCounts(sheep, sheepCount);
 						MobileParty.MainParty.ItemRoster.AddToCounts(cow, cowCount);
 
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, $"Who could say no to such a delicious -- I mean, reasonable proposition? You end up in possession of {sheepCount} sheep{cowText}", true, false, "Yum", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, $"Qui pourrait dire non à une si delicieux occasion ? Vous vous retrouvez en possession de {sheepCount} mouton{cowText}", true, false, "Miam", null, null, null), true);
 					}
 					else if ((string)elements[0].Identifier == "b")
 					{
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "The last thing you need right now is to tend to livestock, so you leave them.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, "La dernière chose dont vous avez besoin en ce moment est de vous occuper du bétail, alors vous les laissez.", true, false, "Terminé", null, null, null), true);
 					}
 					else
 					{
-						MessageBox.Show($"Error while selecting option for \"{this.RandomEventData.EventType}\"");
+						MessageBox.Show($"Erreur lors de la sélection de l'option pour \"{this.RandomEventData.EventType}\"");
 					}
 
 				},
@@ -110,7 +110,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

@@ -57,11 +57,11 @@ namespace CryingBuffalo.RandomEvents.Events
 				}
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Speedy Recovery!",
-						$"You receive word that a group of your troops are feeling better, and are ready for combat.",
+					new InquiryData("Récupération rapide!",
+						$"Vous recevez un message qu'un groupe de vos soldat se sent mieux et est prêt pour le combat.",
 						true,
 						false,
-						"Done",
+						"terminé",
 						null,
 						null,
 						null
@@ -72,7 +72,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while playing \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de la lecture \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -84,7 +84,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

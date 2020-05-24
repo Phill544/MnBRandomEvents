@@ -25,7 +25,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private int currentForageHours;
 
-		private string eventTitle = "Food, Glorious Food";
+		private string eventTitle = "Nourriture, glorieuse nourriture";
 
 		private MBCampaignEvent hourlyTickEvent = null;
 
@@ -56,12 +56,12 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Order the men to gather some food.", null));
-			inquiryElements.Add(new InquiryElement("b", "There's no time.", null));
+			inquiryElements.Add(new InquiryElement("a", "Ordonne aux hommes de ramasser de la nourriture.", null));
+			inquiryElements.Add(new InquiryElement("b", "Il n'y a pas de temps.", null));
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
 				eventTitle, // Title
-				"While traveling you come across a large meadow with grazing deer surrounded by grape vines. If you have some spare time, perhaps you could collect some food.", // Description
+				"En voyageant, vous rencontrez une grande prairie avec des cerfs en pâturage entourés de vignes. Si vous avez du temps libre, vous pourriez peut-être ramasser de la nourriture.", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
 				true, // Force a single option to be selected. Should usually be true
@@ -86,7 +86,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					}
 					else
 					{
-						MessageBox.Show($"Error while selecting option for \"{this.RandomEventData.EventType}\"");
+						MessageBox.Show($"Erreur lors de la sélection de l'option pour \"{this.RandomEventData.EventType}\"");
 					}
 
 				},
@@ -120,15 +120,15 @@ namespace CryingBuffalo.RandomEvents.Events
 			int gatheredMeat = MBRandom.RandomInt(minFoodAmount, maxFoodAmount);
 			int gatheredGrapes = MBRandom.RandomInt(minFoodAmount, maxFoodAmount);
 
-			ItemObject grape = MBObjectManager.Instance.GetObject<ItemObject>("grape");
-			ItemObject meat = MBObjectManager.Instance.GetObject<ItemObject>("meat");
+			ItemObject grape = MBObjectManager.Instance.GetObject<ItemObject>("Raisin");
+			ItemObject meat = MBObjectManager.Instance.GetObject<ItemObject>("Viande");
 
 			MobileParty.MainParty.ItemRoster.AddToCounts(grape, gatheredGrapes);
 			MobileParty.MainParty.ItemRoster.AddToCounts(meat, gatheredMeat);
 
 			Campaign.Current.TimeControlMode = CampaignTimeControlMode.Stop;
 
-			InformationManager.ShowInquiry(new InquiryData(eventTitle, $"Your troop managed to forage {gatheredMeat} slabs of meat and {gatheredGrapes} baskets of grapes!", true, false, "Done", null, null, null), true);
+			InformationManager.ShowInquiry(new InquiryData(eventTitle, $"Vos troupe récolte {gatheredMeat} morceaux de viande et {gatheredGrapes} paniers de raisins!", true, false, "Terminé", null, null, null), true);
 
 			hourlyTickEvent.Unregister(this);
 			hourlyTickEvent = null;

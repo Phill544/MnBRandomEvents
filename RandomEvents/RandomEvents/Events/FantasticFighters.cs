@@ -34,11 +34,11 @@ namespace CryingBuffalo.RandomEvents.Events
 				Hero.MainHero.Clan.Renown += renownGain;
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Fantastic Fighters?",
-						$"A rumor spreads that your clan managed to decisively win a battle when outnumbered 10-1.",
+					new InquiryData("Combattants Fantastiques?",
+						$"Une rumeur se répand que votre clan a réussi à remporter une bataille de manière décisive lorsqu'il a été en infériorité numérique à 10 contre 1.",
 						true,
 						false,
-						"Done",
+						"Terminé",
 						null,
 						null,
 						null
@@ -49,7 +49,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while playing \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de la lecture \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -61,7 +61,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

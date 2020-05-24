@@ -43,11 +43,11 @@ namespace CryingBuffalo.RandomEvents.Events
 				MobileParty.MainParty.Army.Cohesion += cohesionIncrease;
 
 				InformationManager.ShowInquiry(
-					new InquiryData("The Same Page",
-									$"After a good chat with the commanders of your army, there is a noticeable increase cohesion.",
+					new InquiryData("Même longueur d'onde",
+									$"Après une bonne conversation avec les commandants de votre armée, il y a une augmentation notable de la cohésion.",
 									true,
 									false,
-									"Done",
+									"Terminé",
 									null,
 									null,
 									null
@@ -55,7 +55,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while running \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'exécution \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 
 			StopEvent();
@@ -69,7 +69,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

@@ -40,7 +40,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			if (MBRandom.RandomFloatRanged(0.0f,1.0f) <= reactionChance)
 			{
-				extraDialogue = "Your body reacts painfully to the sting. ";
+				extraDialogue = "Votre corps réagit douloureusement à la piqûre. ";
 				damageToInflict = reactionDamage;
 			}
 
@@ -48,10 +48,10 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			InformationManager.ShowInquiry(
 				new InquiryData("Bee Kind",
-					$"As you sit down next to some flowers you get stung by a bee! {extraDialogue}Why is nature so cruel?",
+					$"Lorsque vous vous asseyez à côté de quelques fleurs, vous vous faites piquer par une abeille! {extraDialogue}Pourquoi la nature est-elle si cruelle?",
 					true,
 					false,
-					"Ouch.",
+					"Aie.",
 					null,
 					null,
 					null
@@ -69,7 +69,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt de \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

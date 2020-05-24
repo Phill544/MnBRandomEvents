@@ -34,21 +34,21 @@ namespace CryingBuffalo.RandomEvents.Events
 			{
 				float xpToGive = Settings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Athletics);
 				Hero.MainHero.AddSkillXp(DefaultSkills.Athletics, xpToGive);
-				dialogue = "on foot";
+				dialogue = "à pied";
 			}
 			else
 			{
 				float xpToGive = Settings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Riding);
 				Hero.MainHero.AddSkillXp(DefaultSkills.Riding, xpToGive);
-				dialogue = "riding";
+				dialogue = "à cheval";
 			}
 
 			InformationManager.ShowInquiry(
 				new InquiryData("Momentum",
-					$"After spending so much time {dialogue} you gain a second wind!",
+					$"Après avoir passé tellement de temps {dialogue}, vous gagnez un second souffle!",
 					true,
 					false,
-					"Done",
+					"Terminé",
 					null,
 					null,
 					null
@@ -66,7 +66,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

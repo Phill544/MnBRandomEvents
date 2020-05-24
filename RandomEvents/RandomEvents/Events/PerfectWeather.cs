@@ -33,11 +33,11 @@ namespace CryingBuffalo.RandomEvents.Events
 			MobileParty.MainParty.MoraleExplainer.AddLine("Random Event", moraleGain, StatExplainer.OperationType.Custom);
 
 			InformationManager.ShowInquiry(
-				new InquiryData("Perfect Weather",
-					$"The weather today is so perfect that everyone relaxes and the mood improves!",
+				new InquiryData("Météo parfaite",
+					$"Aujourd'hui, le temps est si parfait que tout le monde se détend et l'humeur s'améliore!",
 					true,
 					false,
-					"Done",
+					"Terminé",
 					null,
 					null,
 					null
@@ -55,7 +55,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

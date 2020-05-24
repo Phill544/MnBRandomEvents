@@ -50,10 +50,10 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			InformationManager.ShowInquiry(
 				new InquiryData("Bunch of Prisoners",
-					$"You receive word that your guards have expertly stopped a force inciting violence at {settlement.Name}, they have been put in cells",
+					$"Vous recevez un message selon lequel vos gardes ont expertement arrêté une force incitant à la violence à {settlement.Name}, ils ont été placés dans des cellules",
 					true,
 					false,
-					"Done",
+					"Terminé",
 					null,
 					null,
 					null
@@ -71,7 +71,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 

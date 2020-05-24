@@ -15,7 +15,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		private int minimumSoldiers;
 		private float percentageDifferenceOfCurrentTroop;
 
-		private string eventTitle = "Target Practice!";
+		private string eventTitle = "Cible d'entrainement!";
 
 		public TargetPractice() : base(Settings.RandomEvents.TargetPracticeData)
 		{
@@ -46,8 +46,8 @@ namespace CryingBuffalo.RandomEvents.Events
 				spawnCount = minimumSoldiers;
 
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Let the soldiers have some fun!", null));
-			inquiryElements.Add(new InquiryElement("b", "Do nothing.", null, true, "Think about the experience you're giving up!"));
+			inquiryElements.Add(new InquiryElement("a", "Laissez les soldats s'amuser!", null));
+			inquiryElements.Add(new InquiryElement("b", "Ne rien faire.", null, true, "Pensez à l'expérience que vous abandonnez!"));
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
 				eventTitle, // Title
@@ -61,16 +61,16 @@ namespace CryingBuffalo.RandomEvents.Events
 				{
 					if ((string)elements[0].Identifier == "a")
 					{
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "The looters look terrified.", true, false, "Good", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, "Les pillards ont l'air terrifiés.", true, false, "Bien", null, null, null), true);
 						SpawnLooters(spawnCount);
 					}
 					else if ((string)elements[0].Identifier == "b")
 					{
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "The looters, seeing that you aren't about to attack, quickly scatter to the wind. Your soldiers grumble.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, "Les pillards, voyant que vous n'êtes pas sur le point d'attaquer, se dispersent rapidement au quatre vents. Vos soldats se plaignent.", true, false, "Done", null, null, null), true);
 					}
 					else
 					{
-						MessageBox.Show($"Error while selecting option for \"{this.RandomEventData.EventType}\"");
+						MessageBox.Show($"Erreur lors de la sélection de l'option pour \"{this.RandomEventData.EventType}\"");
 					}
 
 				},
@@ -89,7 +89,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -98,18 +98,18 @@ namespace CryingBuffalo.RandomEvents.Events
 			string sizeDescription = "";
 			if (spawnCount <= minimumSoldiers)
 			{
-				sizeDescription = "reasonable";
+				sizeDescription = "résonable";
 			}
 			else if (spawnCount < minimumSoldiers * 1.5f)
 			{
-				sizeDescription = "large";
+				sizeDescription = "important";
 			}
 			else
 			{
-				sizeDescription = "huge";
+				sizeDescription = "énorme";
 			}
 
-			string description = $"You stumble upon a {sizeDescription} amount of looters! Your soldiers seem very eager to show you what they've learned";
+			string description = $"Vous tombez sur un nombre {sizeDescription} de pillards! Vos soldats semblent très désireux de vous montrer ce qu'ils ont appris";
 
 			return description;
 		}

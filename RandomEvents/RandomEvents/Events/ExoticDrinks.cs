@@ -13,7 +13,7 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private int price;
 
-		private string eventTitle = "Exotic Drinks";
+		private string eventTitle = "Boissons exotiques";
 
 		public ExoticDrinks() : base(Settings.RandomEvents.ExoticDrinksData)
 		{
@@ -37,12 +37,12 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Buy drink", null, true, "What could go wrong?"));
-			inquiryElements.Add(new InquiryElement("b", "Decline", null, true, "You'd have to be crazy to drink random liquid!"));
+			inquiryElements.Add(new InquiryElement("a", "Acheter une boisson", null, true, "Qu'est-ce qui pourrait mal se passer?"));
+			inquiryElements.Add(new InquiryElement("b", "Décliné", null, true, "Il faudrait être fou pour boire une boisson inconue!"));
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
 				eventTitle, // Title
-				$"You come across a vendor selling exotic drinks for {price}. He won't tell you how, but says that it will make you a better person.", // Description
+				$"Vous rencontrez un vendeur vendant des boissons exotiques pour {price}. Il ne vous dira pas comment, mais dit que cela fera de vous une meilleure personne.", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
 				true, // Force a single option to be selected. Should usually be true
@@ -55,15 +55,15 @@ namespace CryingBuffalo.RandomEvents.Events
 						GiveRandomSkillXP();
 						Hero.MainHero.ChangeHeroGold(-price);
 
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "\"Wise choice.\" The vendor pours you a small cup with a weird, fizzy, yellow liquid in it. As you take a sip, you think to yourself that it smells like piss. Quickly you realise it tastes like it too.\n Hopefully that wasn't a mistake.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, "\"Choix judicieux. \"Le vendeur vous verse une petite tasse contenant un liquide jaune bizarre, pétillant. En prenant une gorgée, vous vous dites que ça sent la pisse. Rapidement, vous vous rendez compte qu'il a le même goût. \n J'espère que ce n'était pas une erreur.", true, false, "Terminé", null, null, null), true);
 					}
 					else if ((string)elements[0].Identifier == "b")
 					{
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "\"Hehehehehe\" the vendor laughs. \"It's your loss.\"", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, "\"Hehehehehe\" le vendeur rit. \"Tant pis pour toi.\"", true, false, "Terminé", null, null, null), true);
 					}
 					else
 					{
-						MessageBox.Show($"Error while selecting option for \"{this.RandomEventData.EventType}\"");
+						MessageBox.Show($"Erreur lors de la sélection de l'option pour \"{this.RandomEventData.EventType}\"");
 					}
 
 				},
@@ -82,7 +82,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 

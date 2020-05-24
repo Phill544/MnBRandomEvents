@@ -62,11 +62,11 @@ namespace CryingBuffalo.RandomEvents.Events
 				settlement.Town.BuildingsInProgress.Dequeue();
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Ahead of Time!",
-						$"You receive word that {settlement} has completed its current project earlier than expected.",
+					new InquiryData("En avance sur les temps!",
+						$"Vous recevez un message indiquant que {settlement} a terminé son projet actuel plus tôt que prévu",
 						true,
 						false,
-						"Done",
+						"Terminé",
 						null,
 						null,
 						null
@@ -77,7 +77,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while playing \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de la lecture \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -89,7 +89,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

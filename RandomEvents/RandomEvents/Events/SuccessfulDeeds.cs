@@ -34,11 +34,11 @@ namespace CryingBuffalo.RandomEvents.Events
 				Hero.MainHero.AddInfluenceWithKingdom(influenceGain);
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Successful Deeds!",
-						$"Some of your deeds have reached other members of the kingdom.",
+					new InquiryData("Actions réussies!",
+						$"Certaines de vos actions ont atteint d'autres membres du royaume.",
 						true,
 						false,
-						"Done",
+						"Terminé",
 						null,
 						null,
 						null
@@ -49,7 +49,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while playing \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de la lecture \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -61,7 +61,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Erreur lors de l'arrêt \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}
