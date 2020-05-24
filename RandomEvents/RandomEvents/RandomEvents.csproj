@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\..\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\RandomEvents\bin\Win64_Shipping_Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -183,6 +183,7 @@
     <Compile Include="Events\FoodFight.cs" />
     <Compile Include="Events\GloriousFood.cs" />
     <Compile Include="Events\GranaryRats.cs" />
+    <Compile Include="Events\LookUp.cs" />
     <Compile Include="Events\Momentum.cs" />
     <Compile Include="Events\PerfectWeather.cs" />
     <Compile Include="Events\PrisonerRebellion.cs" />

@@ -78,5 +78,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public UndercookedData UndercookedData { get; private set; } = new UndercookedData("Undercooked", 1024, 2, 20);
+
+		[JsonProperty]
+		public LookUpData LookUpData { get; private set; } = new LookUpData("LookUp", 1024, 0.25f, 0.1f, 5, 75, 250, 5000);
 	}
 }
