@@ -81,5 +81,8 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public LookUpData LookUpData { get; private set; } = new LookUpData("LookUp", 1024, 0.25f, 0.1f, 5, 75, 250, 5000);
+
+		[JsonProperty]
+		public HotSpringsData HotSpringsData { get; private set; } = new HotSpringsData("HotSprings", 1024, 15);
 	}
 }

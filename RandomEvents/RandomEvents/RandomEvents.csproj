@@ -183,6 +183,7 @@
     <Compile Include="Events\FoodFight.cs" />
     <Compile Include="Events\GloriousFood.cs" />
     <Compile Include="Events\GranaryRats.cs" />
+    <Compile Include="Events\HotSprings.cs" />
     <Compile Include="Events\LookUp.cs" />
     <Compile Include="Events\Momentum.cs" />
     <Compile Include="Events\PerfectWeather.cs" />

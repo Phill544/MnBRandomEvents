@@ -1,7 +1,7 @@
  <Module>
      <Name value="Random Events - Beta e1.4.1"/>
      <Id value="RandomEvents"/>
-     <Version value="v1.2.1"/>
+     <Version value="v1.3.0"/>
      <SingleplayerModule value="true"/>
      <MultiplayerModule value="false"/>
      <DependedModules>
