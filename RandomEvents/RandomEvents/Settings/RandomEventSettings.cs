@@ -17,7 +17,7 @@ namespace CryingBuffalo.RandomEvents
 		public BumperCropData BumperCropData { get; private set; } = new BumperCropData("BumperCrop", 1024f, 0.75f);
 
 		[JsonProperty]
-		public BanditAmbushData BanditAmbushData { get; private set; } = new BanditAmbushData("BanditAmbush", 1024, 0.05f, 0.15f, 1000, 60);
+		public BanditAmbushData BanditAmbushData { get; private set; } = new BanditAmbushData("BanditAmbush", 1024, 0.05f, 0.15f, 1000, 60, 100);
 
 		[JsonProperty]
 		public GranaryRatsData GranaryRatsData { get; private set; } = new GranaryRatsData("GranaryRats", 1024, 0.75f);
@@ -78,5 +78,11 @@ namespace CryingBuffalo.RandomEvents
 
 		[JsonProperty]
 		public UndercookedData UndercookedData { get; private set; } = new UndercookedData("Undercooked", 1024, 2, 20);
+
+		[JsonProperty]
+		public LookUpData LookUpData { get; private set; } = new LookUpData("LookUp", 1024, 0.25f, 0.1f, 5, 75, 250, 5000);
+
+		[JsonProperty]
+		public HotSpringsData HotSpringsData { get; private set; } = new HotSpringsData("HotSprings", 1024, 15);
 	}
 }

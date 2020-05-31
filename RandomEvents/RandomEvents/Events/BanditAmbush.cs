@@ -22,6 +22,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		private float moneyMaxPercent;
 		private int lowMoneyThreshold;
 		private int troopScareCount;
+		private int banditCap;
 
 		private string eventTitle = "Pris en embuscade par des bandits";
 
@@ -31,6 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			this.moneyMaxPercent = Settings.RandomEvents.BanditAmbushData.moneyMaxPercent;
 			this.lowMoneyThreshold = Settings.RandomEvents.BanditAmbushData.lowMoneyThreshold;
 			this.troopScareCount = Settings.RandomEvents.BanditAmbushData.troopScareCount;
+			this.banditCap = Settings.RandomEvents.BanditAmbushData.banditCap;
 		}
 
 		public override void CancelEvent()
@@ -140,7 +142,9 @@ namespace CryingBuffalo.RandomEvents.Events
 					banditParty.SetMoveEngageParty(MobileParty.MainParty);
 				}
 
-				PartySetup.AddRandomCultureUnits(banditParty, 10 + (int)(MobileParty.MainParty.MemberRoster.TotalManCount * 0.75f));
+				int numberToSpawn = Math.Min((int)(MobileParty.MainParty.MemberRoster.TotalManCount * 0.50f), banditCap);
+
+				PartySetup.AddRandomCultureUnits(banditParty, 10 + numberToSpawn);
 			}
 			catch (Exception ex)
 			{
@@ -170,12 +174,18 @@ namespace CryingBuffalo.RandomEvents.Events
 		/// </summary>
 		public int troopScareCount;
 
-		public BanditAmbushData(string eventType, float chanceWeight, float moneyMinPercent, float moneyMaxPercent, int lowMoneyThreshold, int troopScareCount) : base(eventType, chanceWeight)
+		/// <summary>
+		///  The maximum amount of bandits that can spawn
+		/// </summary>
+		public int banditCap;
+
+		public BanditAmbushData(string eventType, float chanceWeight, float moneyMinPercent, float moneyMaxPercent, int lowMoneyThreshold, int troopScareCount, int banditCap) : base(eventType, chanceWeight)
 		{
 			this.moneyMinPercent = moneyMinPercent;
 			this.moneyMaxPercent = moneyMaxPercent;
 			this.lowMoneyThreshold = lowMoneyThreshold;
 			this.troopScareCount = troopScareCount;
+			this.banditCap = banditCap;
 		}
 
 		public override BaseEvent GetBaseEvent()

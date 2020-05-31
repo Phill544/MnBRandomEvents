@@ -14,6 +14,8 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private int minimumPrisoners;
 
+		private bool heroInPrisonerRoster;
+
 		public PrisonerRebellion() : base(Settings.RandomEvents.PrisonerRebellionData)
 		{
 			minimumPrisoners = Settings.RandomEvents.PrisonerRebellionData.minimumPrisoners;
@@ -52,6 +54,12 @@ namespace CryingBuffalo.RandomEvents.Events
 				prisonerParty.Aggressiveness = 10;
 				prisonerParty.SetMoveEngageParty(MobileParty.MainParty);
 
+				string heroDialogue = "";
+				if (heroInPrisonerRoster)
+				{
+					heroDialogue = "\n\nFortunately, you keep the important prisoners separate and they were unable to escape!";
+				}
+
 				InformationManager.ShowInquiry(
 					new InquiryData("Rébellion des prisonniers!",
 									$"Pendant que vos gardes ne regardaient pas, les prisonniers ont réussi à se libérer. \"Nous préférons mourir plutôt que de rester en captivité un autre jour\"",
@@ -85,12 +93,20 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private void DoPrisonerTransfer(MobileParty prisonerParty)
 		{
-			foreach (TroopRosterElement element in MobileParty.MainParty.PrisonRoster)
+			List<TroopRosterElement> rosterAsList = MobileParty.MainParty.PrisonRoster.ToList();
+			for (int i = 0; i < rosterAsList.Count; i++)
 			{
-				prisonerParty.AddElementToMemberRoster(element.Character, element.Number);
+				TroopRosterElement element = rosterAsList[i];
+				if (!element.Character.IsHero)
+				{
+					prisonerParty.AddElementToMemberRoster(element.Character, element.Number);
+					MobileParty.MainParty.PrisonRoster.RemoveTroop(element.Character, element.Number);
+				}
+				else
+				{
+					heroInPrisonerRoster = true;
+				}			
 			}
-
-			MobileParty.MainParty.PrisonRoster.Clear();
 		}
 	}
 
