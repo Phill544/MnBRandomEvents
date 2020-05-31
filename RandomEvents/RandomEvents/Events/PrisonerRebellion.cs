@@ -62,7 +62,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 				InformationManager.ShowInquiry(
 					new InquiryData("Rébellion des prisonniers!",
-									$"Pendant que vos gardes ne regardaient pas, les prisonniers ont réussi à se libérer. \"Nous préférons mourir plutôt que de rester en captivité un autre jour\"",
+									$"Pendant que vos gardes ne regardaient pas, les prisonniers ont réussi à se libérer. \"Nous préférons mourir plutôt que de rester en captivité un autre jour\"{heroDialogue}",
 									true,
 									false,
 									"Aux armes!",
