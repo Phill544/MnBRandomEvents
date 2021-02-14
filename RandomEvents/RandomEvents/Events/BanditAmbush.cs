@@ -9,9 +9,9 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.Core;
 using TaleWorlds.Engine;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
-using TaleWorlds.TwoDimension;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
@@ -55,7 +55,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			inquiryElements.Add(new InquiryElement("a", "Pay gold to have them leave", null, true, "What is gold good for, if not to dissuade people from killing you?"));
 			inquiryElements.Add(new InquiryElement("b", "Attack", null));
 
-			if (Hero.MainHero.PartyBelongedTo.MemberRoster.Count > troopScareCount)
+			if (Hero.MainHero.PartyBelongedTo.MemberRoster.TotalHealthyCount > troopScareCount)
 			{
 				inquiryElements.Add(new InquiryElement("c", "Intimidate them", null)); 
 			}
@@ -65,7 +65,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				CalculateDescription(), // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
-				true, // Force a single option to be selected. Should usually be true
+				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
 				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
@@ -73,7 +73,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					if ((string)elements[0].Identifier == "a")
 					{
 						float percentMoneyLost = MBRandom.RandomFloatRanged(moneyMinPercent, moneyMaxPercent);
-						int goldLost = (int)Mathf.Floor(Hero.MainHero.Gold * percentMoneyLost);
+						int goldLost = (int)MathF.Floor(Hero.MainHero.Gold * percentMoneyLost);
 						Hero.MainHero.ChangeHeroGold(-goldLost);
 						InformationManager.ShowInquiry(new InquiryData(eventTitle, $"You give the bandits {goldLost} coins and they quickly flee. At least you and your soldiers live to fight another day.", true, false, "Done", null, null, null), true);
 					}

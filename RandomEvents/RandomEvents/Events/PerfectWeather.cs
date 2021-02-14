@@ -30,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		public override void StartEvent()
 		{
 			MobileParty.MainParty.RecentEventsMorale += moraleGain;
-			MobileParty.MainParty.MoraleExplainer.AddLine("Random Event", moraleGain, StatExplainer.OperationType.Custom);
+			MobileParty.MainParty.MoraleExplained.Add(moraleGain, new TaleWorlds.Localization.TextObject("Random Event"));
 
 			InformationManager.ShowInquiry(
 				new InquiryData("Perfect Weather",

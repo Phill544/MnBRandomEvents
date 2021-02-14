@@ -59,7 +59,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				$"While your party is eating, a large food fight breaks out.", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
-				true, // Force a single option to be selected. Should usually be true
+				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
 				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.

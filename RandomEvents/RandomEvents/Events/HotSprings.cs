@@ -30,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		public override void StartEvent()
 		{
 			MobileParty.MainParty.RecentEventsMorale += moraleGain;
-			MobileParty.MainParty.MoraleExplainer.AddLine("Random Event", moraleGain, StatExplainer.OperationType.Custom);
+			MobileParty.MainParty.MoraleExplained.Add(moraleGain, new TaleWorlds.Localization.TextObject("Random Event"));
 
 			List<TroopRosterElement> rosterAsList = MobileParty.MainParty.MemberRoster.ToList();
 
@@ -39,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				TroopRosterElement elementCopyAtIndex = PartyBase.MainParty.MemberRoster.GetElementCopyAtIndex(i);
 				if (elementCopyAtIndex.Character.IsHero)
 				{
-					elementCopyAtIndex.Character.HeroObject.Heal(PartyBase.MainParty, 100f, false);
+					elementCopyAtIndex.Character.HeroObject.Heal(PartyBase.MainParty, 100, false);
 				}
 				else
 				{

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using TaleWorlds.TwoDimension;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
@@ -41,7 +41,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.textColor));
 			}
 
-			int realMaxTroopGain = (int)Mathf.Min(MobileParty.MainParty.Party.PartySizeLimit - MobileParty.MainParty.MemberRoster.TotalHealthyCount, maxTroopGain);
+			int realMaxTroopGain = Math.Min(MobileParty.MainParty.Party.PartySizeLimit - MobileParty.MainParty.MemberRoster.TotalHealthyCount, maxTroopGain);
 			int numberToAdd = MBRandom.RandomInt(minTroopGain, realMaxTroopGain);
 
 			List<Settlement> settlements = Settlement.FindAll((s) => { return !s.IsHideout(); }).ToList();
@@ -56,7 +56,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				$"You come across {numberToAdd} troops that are eager for battle and glory. They want to join your ranks!", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
-				true, // Force a single option to be selected. Should usually be true
+				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
 				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.

@@ -168,10 +168,13 @@ namespace CryingBuffalo.RandomEvents.Events
 			{
 				if (highestMedicineHero != null)
 				{
-					// Hero tried their best
+                    // Hero tried their best
 
-					// Kill some of their Garrison
-					plaguedSettlement.Town.GarrisonParty.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.Town.GarrisonParty.MemberRoster.TotalManCount * this.percentLoss), false);
+                    // Kill some of their Garrison
+                    if (plaguedSettlement.Town.GarrisonParty != null)
+                    {
+                        plaguedSettlement.Town.GarrisonParty.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.Town.GarrisonParty.MemberRoster.TotalManCount * this.percentLoss), false); 
+                    }
 
 					// Kill some of their Militia
 					plaguedSettlement.Town.MilitiaParty.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.Town.MilitiaParty.MemberRoster.TotalManCount * this.percentLoss), false);
@@ -198,8 +201,11 @@ namespace CryingBuffalo.RandomEvents.Events
 				}
 				else
 				{
-					// Kill some of their Garrison
-					plaguedSettlement.Town.GarrisonParty.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.Town.GarrisonParty.MemberRoster.TotalManCount * this.percentLoss), false);
+                    // Kill some of their Garrison
+                    if (plaguedSettlement.Town.GarrisonParty != null)
+                    {
+                        plaguedSettlement.Town.GarrisonParty.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.Town.GarrisonParty.MemberRoster.TotalManCount * this.percentLoss), false); 
+                    }
 
 					// Kill some of their Militia
 					plaguedSettlement.Town.MilitiaParty.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.Town.MilitiaParty.MemberRoster.TotalManCount * this.percentLoss), false);

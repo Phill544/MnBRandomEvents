@@ -64,7 +64,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				"While traveling you come across a large meadow with grazing deer surrounded by grape vines. If you have some spare time, perhaps you could collect some food.", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
-				true, // Force a single option to be selected. Should usually be true
+				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
 				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
@@ -77,7 +77,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 						waitPos = MobileParty.MainParty.Position2D;
 
-						hourlyTickEvent = CampaignEvents.CreatePeriodicEvent(1f, 0f);
+						//hourlyTickEvent = CampaignEvents.CreatePeriodicEvent(1f, 0f);
+						hourlyTickEvent = CampaignEvents.CreatePeriodicEvent(CampaignTime.HoursFromNow(1f), CampaignTime.Zero);
 						hourlyTickEvent.AddHandler(new MBCampaignEvent.CampaignEventDelegate(HourlyTick));
 					}
 					else if ((string)elements[0].Identifier == "b")

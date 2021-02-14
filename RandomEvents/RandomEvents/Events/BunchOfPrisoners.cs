@@ -99,7 +99,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			foreach (IFaction faction in Campaign.Current.Factions)
 			{
-				if (Hero.MainHero.Clan.IsAtWarWith(faction))
+				if (Hero.MainHero.Clan.IsAtWarWith(faction) && !faction.IsBanditFaction)
 				{
 					factionsAtWar.Add(faction);
 				}

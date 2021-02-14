@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
-using TaleWorlds.TwoDimension;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
@@ -22,7 +22,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			inquiryElements.Add(new InquiryElement("a", "Gamble", null));
 			inquiryElements.Add(new InquiryElement("b", "Decline", null));
 
-			int goldToBet = (int)Mathf.Floor(Hero.MainHero.Gold * moneyBetPercent);
+			int goldToBet = (int)MathF.Floor(Hero.MainHero.Gold * moneyBetPercent);
 
 			string extraDialogue = "";
 			if (goldToBet > 40000)
@@ -33,7 +33,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				$"One of your soldiers wants to flip a coin. Heads you win, tails they do. The prize is {goldToBet} gold.{extraDialogue}", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
-				true, // Force a single option to be selected. Should usually be true
+				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
 				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
