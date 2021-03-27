@@ -32,8 +32,6 @@ namespace CryingBuffalo.RandomEvents.Events
 			MobileParty.MainParty.RecentEventsMorale += moraleGain;
 			MobileParty.MainParty.MoraleExplained.Add(moraleGain, new TaleWorlds.Localization.TextObject("Random Event"));
 
-			List<TroopRosterElement> rosterAsList = MobileParty.MainParty.MemberRoster.ToList();
-
 			for (int i = 0; i < PartyBase.MainParty.MemberRoster.Count; i++)
 			{
 				TroopRosterElement elementCopyAtIndex = PartyBase.MainParty.MemberRoster.GetElementCopyAtIndex(i);

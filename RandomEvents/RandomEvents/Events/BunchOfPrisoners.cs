@@ -44,7 +44,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			prisoners.MemberRoster.Clear();
 			PartySetup.AddRandomCultureUnits(prisoners, prisonerAmount, GetCultureToSpawn());
 
-			settlement.Party.AddPrisoners(prisoners.MemberRoster.ToFlattenedRoster());
+			settlement.Party.AddPrisoners(prisoners.MemberRoster);
 				
 			prisoners.RemoveParty();
 

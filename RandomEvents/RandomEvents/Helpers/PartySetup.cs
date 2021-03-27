@@ -46,8 +46,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
 				banditParty.InitializeMobileParty(partyTemplate, MobileParty.MainParty.Position2D, 0.2f, 0.1f);
 				banditParty.SetCustomName(partyNameTextObject);
 
-				banditParty.HomeSettlement = closestHideout;
-				banditClan.AddPartyInternal(banditParty.Party);				
+				banditParty.HomeSettlement = closestHideout;		
 			}
 			catch (Exception ex)
 			{

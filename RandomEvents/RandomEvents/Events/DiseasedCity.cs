@@ -177,7 +177,7 @@ namespace CryingBuffalo.RandomEvents.Events
                     }
 
 					// Kill some of their Militia
-					plaguedSettlement.Town.MilitiaParty.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.Town.MilitiaParty.MemberRoster.TotalManCount * this.percentLoss), false);
+					plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.TotalManCount * this.percentLoss), false);
 
 					// Drop some loyalty
 					plaguedSettlement.Town.Loyalty *= 1 - this.percentLoss;
@@ -208,7 +208,7 @@ namespace CryingBuffalo.RandomEvents.Events
                     }
 
 					// Kill some of their Militia
-					plaguedSettlement.Town.MilitiaParty.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.Town.MilitiaParty.MemberRoster.TotalManCount * this.percentLoss), false);
+					plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.TotalManCount * this.percentLoss), false);
 
 					// Drop some loyalty
 					plaguedSettlement.Town.Loyalty *= 1 - this.percentLoss;

@@ -93,7 +93,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private void DoPrisonerTransfer(MobileParty prisonerParty)
 		{
-			List<TroopRosterElement> rosterAsList = MobileParty.MainParty.PrisonRoster.ToList();
+			var rosterAsList = MobileParty.MainParty.PrisonRoster.GetTroopRoster();
 			for (int i = 0; i < rosterAsList.Count; i++)
 			{
 				TroopRosterElement element = rosterAsList[i];
