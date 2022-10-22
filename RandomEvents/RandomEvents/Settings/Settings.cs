@@ -1,15 +1,14 @@
-﻿using CryingBuffalo.RandomEvents;
+﻿using System.IO;
 using Newtonsoft.Json;
-using System.IO;
 using TaleWorlds.Library;
 
-namespace CryingBuffalo.RandomEvents
+namespace CryingBuffalo.RandomEvents.Settings
 {
-	class Settings
+	internal static class Settings
 	{
-		public static RandomEventSettings RandomEvents { get; set; }
+		public static RandomEventSettings RandomEvents { get; private set; }
 
-		public static GeneralSettings GeneralSettings { get; set; }
+		public static GeneralSettings GeneralSettings { get; private set; }
 
 		public static void LoadRandomEventSettings(bool updateJsonFile = true)
 		{
@@ -19,7 +18,7 @@ namespace CryingBuffalo.RandomEvents
 				string defaultSettingsText = JsonConvert.SerializeObject(new RandomEventSettings(), Formatting.Indented);
 				File.WriteAllText(path, defaultSettingsText);
 			}
-			Settings.RandomEvents = JsonConvert.DeserializeObject<RandomEventSettings>(File.ReadAllText(path));
+			RandomEvents = JsonConvert.DeserializeObject<RandomEventSettings>(File.ReadAllText(path));
 
 			if (updateJsonFile)
 			{
@@ -36,7 +35,7 @@ namespace CryingBuffalo.RandomEvents
 				string defaultSettingsText = JsonConvert.SerializeObject(new GeneralSettings(), Formatting.Indented);
 				File.WriteAllText(path, defaultSettingsText);
 			}
-			Settings.GeneralSettings = JsonConvert.DeserializeObject<GeneralSettings>(File.ReadAllText(path));
+			GeneralSettings = JsonConvert.DeserializeObject<GeneralSettings>(File.ReadAllText(path));
 
 			if (updateJsonFile)
 			{

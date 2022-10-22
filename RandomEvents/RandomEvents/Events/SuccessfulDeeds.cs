@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class SuccessfulDeeds : BaseEvent
+	public sealed class SuccessfulDeeds : BaseEvent
 	{
-		private float influenceGain;
+		private readonly float influenceGain;
 
-		public SuccessfulDeeds() : base(Settings.RandomEvents.SuccessfulDeedsData)
+		public SuccessfulDeeds() : base(Settings.Settings.RandomEvents.SuccessfulDeedsData)
 		{
-			this.influenceGain = Settings.RandomEvents.SuccessfulDeedsData.influenceGain;
+			influenceGain = Settings.Settings.RandomEvents.SuccessfulDeedsData.influenceGain;
 		}
 
 		public override void CancelEvent()
@@ -49,26 +45,26 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while playing \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while playing \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}
 
 	public class SuccessfulDeedsData : RandomEventData
 	{
-		public float influenceGain;
+		public readonly float influenceGain;
 
 		public SuccessfulDeedsData(string eventType, float chanceWeight, float influenceGain) : base(eventType, chanceWeight)
 		{

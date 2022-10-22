@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class ChattingCommanders : BaseEvent
+	public sealed class ChattingCommanders : BaseEvent
 	{
-		private float cohesionIncrease;
+		private readonly float cohesionIncrease;
 
-		public ChattingCommanders() : base(Settings.RandomEvents.ChattingCommandersData)
+		public ChattingCommanders() : base(Settings.Settings.RandomEvents.ChattingCommandersData)
 		{
-			cohesionIncrease = Settings.RandomEvents.ChattingCommandersData.cohesionIncrease;
+			cohesionIncrease = Settings.Settings.RandomEvents.ChattingCommandersData.cohesionIncrease;
 		}
 
 		public override void CancelEvent()
@@ -24,18 +22,14 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			if (MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.ArmyOwner == Hero.MainHero && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 1)
-			{
-				return true;
-			}
-			return false;
+			return MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.ArmyOwner == Hero.MainHero && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 1;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.GeneralSettings.DebugMode)
+			if (Settings.Settings.GeneralSettings.DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.textColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
 
 			try
@@ -55,28 +49,28 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while running \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while running \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}
 
 	public class ChattingCommandersData : RandomEventData
 	{
-		public float cohesionIncrease;
+		public readonly float cohesionIncrease;
 
 		public ChattingCommandersData(string eventType, float chanceWeight, float cohesionIncrease) : base(eventType, chanceWeight)
 		{

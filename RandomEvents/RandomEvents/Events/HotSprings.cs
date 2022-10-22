@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.CampaignSystem.Roster;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class HotSprings : BaseEvent
+	public sealed class HotSprings : BaseEvent
 	{
-		private int moraleGain;
+		private readonly int moraleGain;
 
-		public HotSprings() : base(Settings.RandomEvents.HotSpringsData)
+		public HotSprings() : base(Settings.Settings.RandomEvents.HotSpringsData)
 		{
-			this.moraleGain = Settings.RandomEvents.HotSpringsData.moraleGain;
+			moraleGain = Settings.Settings.RandomEvents.HotSpringsData.moraleGain;
 		}
 
 		public override void CancelEvent()
@@ -60,22 +57,22 @@ namespace CryingBuffalo.RandomEvents.Events
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}
 
 	public class HotSpringsData : RandomEventData
 	{
-		public int moraleGain;
+		public readonly int moraleGain;
 
 		public HotSpringsData(string eventType, float chanceWeight, int moraleGain) : base(eventType, chanceWeight)
 		{

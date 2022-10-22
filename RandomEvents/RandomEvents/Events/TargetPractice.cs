@@ -1,26 +1,24 @@
 ﻿using CryingBuffalo.RandomEvents.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class TargetPractice : BaseEvent
+	public sealed class TargetPractice : BaseEvent
 	{
-		private int minimumSoldiers;
-		private float percentageDifferenceOfCurrentTroop;
+		private readonly int minimumSoldiers;
+		private readonly float percentageDifferenceOfCurrentTroop;
 
-		private string eventTitle = "Target Practice!";
+		private const string EventTitle = "Target Practice!";
 
-		public TargetPractice() : base(Settings.RandomEvents.TargetPracticeData)
+		public TargetPractice() : base(Settings.Settings.RandomEvents.TargetPracticeData)
 		{
-			minimumSoldiers = Settings.RandomEvents.TargetPracticeData.minimumSoldiers;
-			percentageDifferenceOfCurrentTroop = Settings.RandomEvents.TargetPracticeData.percentageDifferenceOfCurrentTroop;
+			minimumSoldiers = Settings.Settings.RandomEvents.TargetPracticeData.minimumSoldiers;
+			percentageDifferenceOfCurrentTroop = Settings.Settings.RandomEvents.TargetPracticeData.percentageDifferenceOfCurrentTroop;
 		}
 
 		public override void CancelEvent()
@@ -34,9 +32,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.GeneralSettings.DebugMode)
+			if (Settings.Settings.GeneralSettings.DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.textColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
 
 			float percentOffset = MBRandom.RandomFloatRanged(-percentageDifferenceOfCurrentTroop, percentageDifferenceOfCurrentTroop);
@@ -50,7 +48,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			inquiryElements.Add(new InquiryElement("b", "Do nothing.", null, true, "Think about the experience you're giving up!"));
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				eventTitle, // Title
+				EventTitle, // Title
 				CalculateDescription(spawnCount), // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
@@ -61,35 +59,35 @@ namespace CryingBuffalo.RandomEvents.Events
 				{
 					if ((string)elements[0].Identifier == "a")
 					{
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "The looters look terrified.", true, false, "Good", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(EventTitle, "The looters look terrified.", true, false, "Good", null, null, null), true);
 						SpawnLooters(spawnCount);
 					}
 					else if ((string)elements[0].Identifier == "b")
 					{
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "The looters, seeing that you aren't about to attack, quickly scatter to the wind. Your soldiers grumble.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(EventTitle, "The looters, seeing that you aren't about to attack, quickly scatter to the wind. Your soldiers grumble.", true, false, "Done", null, null, null), true);
 					}
 					else
 					{
-						MessageBox.Show($"Error while selecting option for \"{this.RandomEventData.EventType}\"");
+						MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
 					}
 
 				},
 				null); // What to do on the "cancel" button, shouldn't ever need it.
 
-			InformationManager.ShowMultiSelectionInquiry(msid, true);
+			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -114,7 +112,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			return description;
 		}
 
-		private void SpawnLooters(int spawnCount)
+		private static void SpawnLooters(int spawnCount)
 		{
 			MobileParty looterParty = PartySetup.CreateBanditParty("looters");
 
@@ -129,9 +127,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class TargetPracticeData : RandomEventData
 	{
-		public int minimumSoldiers;
+		public readonly int minimumSoldiers;
 
-		public float percentageDifferenceOfCurrentTroop;
+		public readonly float percentageDifferenceOfCurrentTroop;
 
 		public TargetPracticeData(string eventType, float chanceWeight, float percentageDifferenceOfCurrentTroop, int minimumSoldiers) : base(eventType, chanceWeight)
 		{

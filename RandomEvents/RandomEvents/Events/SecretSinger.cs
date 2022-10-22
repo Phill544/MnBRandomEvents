@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class SecretSinger : BaseEvent
+	public sealed class SecretSinger : BaseEvent
 	{
-		private int moraleGain;
+		private readonly int moraleGain;
 
-		public SecretSinger() : base(Settings.RandomEvents.SecretSingerData)
+		public SecretSinger() : base(Settings.Settings.RandomEvents.SecretSingerData)
 		{
-			moraleGain = Settings.RandomEvents.SecretSingerData.moraleGain;
+			moraleGain = Settings.Settings.RandomEvents.SecretSingerData.moraleGain;
 		}
 
 		public override void CancelEvent()
@@ -47,22 +43,22 @@ namespace CryingBuffalo.RandomEvents.Events
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}
 
 	public class SecretSingerData : RandomEventData
 	{
-		public int moraleGain;
+		public readonly int moraleGain;
 
 		public SecretSingerData(string eventType, float chanceWeight, int moraleGain) : base(eventType, chanceWeight)
 		{

@@ -1,12 +1,7 @@
 ﻿using CryingBuffalo.RandomEvents.Events;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CryingBuffalo.RandomEvents
+namespace CryingBuffalo.RandomEvents.Settings
 {
 	class RandomEventSettings
 	{

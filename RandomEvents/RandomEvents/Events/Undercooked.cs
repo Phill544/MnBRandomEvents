@@ -1,24 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class Undercooked : BaseEvent
+	public sealed class Undercooked : BaseEvent
 	{
-		private int minTroopsToInjure;
-		private int maxTroopsToInjure;
+		private readonly int minTroopsToInjure;
+		private readonly int maxTroopsToInjure;
 
-		public Undercooked() : base(Settings.RandomEvents.UndercookedData)
+		public Undercooked() : base(Settings.Settings.RandomEvents.UndercookedData)
 		{
-			minTroopsToInjure = Settings.RandomEvents.UndercookedData.minTroopsToInjure;
-			maxTroopsToInjure = Settings.RandomEvents.UndercookedData.maxTroopsToInjure;
+			minTroopsToInjure = Settings.Settings.RandomEvents.UndercookedData.minTroopsToInjure;
+			maxTroopsToInjure = Settings.Settings.RandomEvents.UndercookedData.maxTroopsToInjure;
 		}
 
 		public override void CancelEvent()
@@ -55,27 +51,27 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while playing \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while playing \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}
 
 	public class UndercookedData : RandomEventData
 	{
-		public int minTroopsToInjure;
-		public int maxTroopsToInjure;
+		public readonly int minTroopsToInjure;
+		public readonly int maxTroopsToInjure;
 
 		public UndercookedData(string eventType, float chanceWeight, int minTroopsToInjure, int maxTroopsToInjure) : base(eventType, chanceWeight)
 		{

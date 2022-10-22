@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.IO;
-using TaleWorlds.Library;
+﻿using System;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
@@ -11,22 +8,17 @@ namespace CryingBuffalo.RandomEvents.Events
 		/// <summary>
 		/// The data associated with the random event
 		/// </summary>
-		public RandomEventData RandomEventData = null;
+		public readonly RandomEventData randomEventData = null;
 
 		/// <summary>
 		/// The code that's called when the event has been completed
 		/// </summary>
-		public Action OnEventCompleted;
+		public Action onEventCompleted;
 
 		/// <summary>
 		/// Called to initialise the event
 		/// </summary>
 		public abstract void StartEvent();
-
-		/// <summary>
-		/// Called to clean up the event once completed
-		/// </summary>
-		public abstract void StopEvent();
 
 		/// <summary>
 		/// Called when the event is canceled early
@@ -42,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		protected BaseEvent(RandomEventData randomEventData)
 		{
-			RandomEventData = randomEventData;
+			this.randomEventData = randomEventData;
 		}
 	}
 
@@ -51,18 +43,17 @@ namespace CryingBuffalo.RandomEvents.Events
 		/// <summary>
 		/// ID of the event
 		/// </summary>
-		[JsonIgnore]
-		public string EventType = "unknown";
+		public readonly string eventType;
 
 		/// <summary>
 		/// The weighted value that this event will be selected
 		/// </summary>
-		public float ChanceWeight;
+		public readonly float chanceWeight;
 
-		public RandomEventData(string eventType, float chanceWeight)
+		protected RandomEventData(string eventType, float chanceWeight)
 		{
-			EventType = eventType;
-			ChanceWeight = chanceWeight;
+			this.eventType = eventType;
+			this.chanceWeight = chanceWeight;
 		}
 
 		public abstract BaseEvent GetBaseEvent();

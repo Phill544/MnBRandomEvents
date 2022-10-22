@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	public class PerfectWeather : BaseEvent
 	{
-		private int moraleGain;
+		private readonly int moraleGain;
 
-		public PerfectWeather() : base(Settings.RandomEvents.PerfectWeatherData)
+		public PerfectWeather() : base(Settings.Settings.RandomEvents.PerfectWeatherData)
 		{
-			moraleGain = Settings.RandomEvents.PerfectWeatherData.moraleGain;
+			moraleGain = Settings.Settings.RandomEvents.PerfectWeatherData.moraleGain;
 		}
 
 		public override void CancelEvent()
@@ -34,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			InformationManager.ShowInquiry(
 				new InquiryData("Perfect Weather",
-					$"The weather today is so perfect that everyone relaxes and the mood improves!",
+					"The weather today is so perfect that everyone relaxes and the mood improves!",
 					true,
 					false,
 					"Done",
@@ -47,22 +43,22 @@ namespace CryingBuffalo.RandomEvents.Events
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		protected virtual void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}
 
 	public class PerfectWeatherData : RandomEventData
 	{
-		public int moraleGain;
+		public readonly int moraleGain;
 
 		public PerfectWeatherData(string eventType, float chanceWeight, int moraleGain) : base(eventType, chanceWeight)
 		{

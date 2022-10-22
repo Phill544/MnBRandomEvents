@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
-using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
@@ -15,24 +14,16 @@ namespace CryingBuffalo.RandomEvents.Helpers
 	public static class PartySetup
 	{
 
-		public static MobileParty CreateBanditParty(string cultureObjectID = null, string partyName = null)
+		public static MobileParty CreateBanditParty(string cultureObjectId = null, string partyName = null)
 		{
 			MobileParty banditParty = null;
 
 			try
 			{
-				List<Settlement> hideouts = Settlement.FindAll((s) => { return s.IsHideout(); }).ToList();
-				Settlement closestHideout = hideouts.MinBy((s) => { return MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()); });
+				List<Settlement> hideouts = Settlement.FindAll((s) => s.IsHideout).ToList();
+				Settlement closestHideout = hideouts.MinBy((s) => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 
-				CultureObject banditCultureObject = null;
-				if (cultureObjectID != null)
-				{
-					banditCultureObject = MBObjectManager.Instance.GetObject<CultureObject>(cultureObjectID);
-				}
-				else
-				{
-					banditCultureObject = closestHideout.Culture;
-				}
+				var banditCultureObject = cultureObjectId != null ? MBObjectManager.Instance.GetObject<CultureObject>(cultureObjectId) : closestHideout.Culture;
 
 				if (partyName == null)
 				{
@@ -41,12 +32,11 @@ namespace CryingBuffalo.RandomEvents.Helpers
 
 				PartyTemplateObject partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
 				banditParty = MBObjectManager.Instance.CreateObject<MobileParty>($"randomevent_{banditCultureObject.StringId}_{MBRandom.RandomInt(int.MaxValue)}");
-				TextObject partyNameTextObject = new TextObject(partyName, null);
-				Clan banditClan = Clan.BanditFactions.FirstOrDefault(clan => clan.StringId == banditCultureObject.StringId);
-				banditParty.InitializeMobileParty(partyTemplate, MobileParty.MainParty.Position2D, 0.2f, 0.1f);
+				TextObject partyNameTextObject = new TextObject(partyName);
+				banditParty.InitializeMobilePartyAroundPosition(partyTemplate, MobileParty.MainParty.Position2D, 0.2f, 0.1f, 20);
 				banditParty.SetCustomName(partyNameTextObject);
 
-				banditParty.HomeSettlement = closestHideout;		
+				banditParty.SetCustomHomeSettlement(closestHideout);
 			}
 			catch (Exception ex)
 			{
@@ -67,14 +57,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
 
 			// Get possible units to create
 			List<CharacterObject> characterObjectList = null;
-			if (partyCultureObject.IsBandit)
-			{
-				characterObjectList = GetBanditCharacters(partyCultureObject);
-			}
-			else
-			{
-				characterObjectList = GetMainCultureCharacters(partyCultureObject);
-			}
+			characterObjectList = partyCultureObject.IsBandit ? GetBanditCharacters(partyCultureObject) : GetMainCultureCharacters(partyCultureObject);
 			
 			// Split spawn based on number to add
 			int[] spawnNumbers = new int[characterObjectList.Count];
@@ -89,7 +72,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
 
 			for (int i = 0; i < characterObjectList.Count; i++)
 			{
-				CharacterObject characterObject = (CharacterObject)characterObjectList[i];
+				CharacterObject characterObject = characterObjectList[i];
 				party.AddElementToMemberRoster(characterObject, spawnNumbers[i]);
 			}
 		}

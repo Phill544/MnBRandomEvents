@@ -1,38 +1,30 @@
 ﻿using CryingBuffalo.RandomEvents.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
-using TaleWorlds.Engine;
 using TaleWorlds.Library;
-using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class BanditAmbush : BaseEvent
+	public sealed class BanditAmbush : BaseEvent
 	{
 
-		private float moneyMinPercent;
-		private float moneyMaxPercent;
-		private int lowMoneyThreshold;
-		private int troopScareCount;
-		private int banditCap;
+		private readonly float moneyMinPercent;
+		private readonly float moneyMaxPercent;
+		private readonly int troopScareCount;
+		private readonly int banditCap;
 
-		private string eventTitle = "Ambushed by bandits";
+		private const string EventTitle = "Ambushed by bandits";
 
-		public BanditAmbush() : base(Settings.RandomEvents.BanditAmbushData)
+		public BanditAmbush() : base(Settings.Settings.RandomEvents.BanditAmbushData)
 		{
-			this.moneyMinPercent = Settings.RandomEvents.BanditAmbushData.moneyMinPercent;
-			this.moneyMaxPercent = Settings.RandomEvents.BanditAmbushData.moneyMaxPercent;
-			this.lowMoneyThreshold = Settings.RandomEvents.BanditAmbushData.lowMoneyThreshold;
-			this.troopScareCount = Settings.RandomEvents.BanditAmbushData.troopScareCount;
-			this.banditCap = Settings.RandomEvents.BanditAmbushData.banditCap;
+			moneyMinPercent = Settings.Settings.RandomEvents.BanditAmbushData.moneyMinPercent;
+			moneyMaxPercent = Settings.Settings.RandomEvents.BanditAmbushData.moneyMaxPercent;
+			troopScareCount = Settings.Settings.RandomEvents.BanditAmbushData.troopScareCount;
+			banditCap = Settings.Settings.RandomEvents.BanditAmbushData.banditCap;
 		}
 
 		public override void CancelEvent()
@@ -46,9 +38,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.GeneralSettings.DebugMode)
+			if (Settings.Settings.GeneralSettings.DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.textColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
 
 			List<InquiryElement> inquiryElements = new List<InquiryElement>();
@@ -61,7 +53,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				eventTitle, // Title
+				EventTitle, // Title
 				CalculateDescription(), // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
@@ -75,40 +67,40 @@ namespace CryingBuffalo.RandomEvents.Events
 						float percentMoneyLost = MBRandom.RandomFloatRanged(moneyMinPercent, moneyMaxPercent);
 						int goldLost = (int)MathF.Floor(Hero.MainHero.Gold * percentMoneyLost);
 						Hero.MainHero.ChangeHeroGold(-goldLost);
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, $"You give the bandits {goldLost} coins and they quickly flee. At least you and your soldiers live to fight another day.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(EventTitle, $"You give the bandits {goldLost} coins and they quickly flee. At least you and your soldiers live to fight another day.", true, false, "Done", null, null, null), true);
 					}
 					else if ((string)elements[0].Identifier == "b")
 					{
 						SpawnBandits(false);
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "Seeing you won't back down, the bandits get ready for a fight.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(EventTitle, "Seeing you won't back down, the bandits get ready for a fight.", true, false, "Done", null, null, null), true);
 					}
 					else if ((string)elements[0].Identifier == "c")
 					{
 						SpawnBandits(true);
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "You laugh as you watch the rest of your party emerge over the crest of the hill. The bandits get ready to flee.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(EventTitle, "You laugh as you watch the rest of your party emerge over the crest of the hill. The bandits get ready to flee.", true, false, "Done", null, null, null), true);
 					}
 					else
 					{
-						MessageBox.Show($"Error while selecting option for \"{this.RandomEventData.EventType}\"");
+						MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
 					}
 					
 				},
 				null); // What to do on the "cancel" button, shouldn't ever need it.
 
-			InformationManager.ShowMultiSelectionInquiry(msid, true);
+			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		public void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -148,7 +140,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while running \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while running \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

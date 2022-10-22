@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class Momentum : BaseEvent
+	public sealed class Momentum : BaseEvent
 	{
-		public Momentum() : base(Settings.RandomEvents.MomentumData)
+		public Momentum() : base(Settings.Settings.RandomEvents.MomentumData)
 		{
 		}
 
@@ -32,13 +30,13 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			if (isOnFoot)
 			{
-				float xpToGive = Settings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Athletics);
+				float xpToGive = Settings.Settings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Athletics);
 				Hero.MainHero.AddSkillXp(DefaultSkills.Athletics, xpToGive);
 				dialogue = "on foot";
 			}
 			else
 			{
-				float xpToGive = Settings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Riding);
+				float xpToGive = Settings.Settings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Riding);
 				Hero.MainHero.AddSkillXp(DefaultSkills.Riding, xpToGive);
 				dialogue = "riding";
 			}
@@ -58,15 +56,15 @@ namespace CryingBuffalo.RandomEvents.Events
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

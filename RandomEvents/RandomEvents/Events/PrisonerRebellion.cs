@@ -1,24 +1,20 @@
 ﻿using CryingBuffalo.RandomEvents.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class PrisonerRebellion : BaseEvent
+	public sealed class PrisonerRebellion : BaseEvent
 	{
-		private int minimumPrisoners;
+		private readonly int minimumPrisoners;
 
 		private bool heroInPrisonerRoster;
 
-		public PrisonerRebellion() : base(Settings.RandomEvents.PrisonerRebellionData)
+		public PrisonerRebellion() : base(Settings.Settings.RandomEvents.PrisonerRebellionData)
 		{
-			minimumPrisoners = Settings.RandomEvents.PrisonerRebellionData.minimumPrisoners;
+			minimumPrisoners = Settings.Settings.RandomEvents.PrisonerRebellionData.minimumPrisoners;
 		}
 
 		public override void CancelEvent()
@@ -39,9 +35,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.GeneralSettings.DebugMode)
+			if (Settings.Settings.GeneralSettings.DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.textColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
 
 			try
@@ -73,30 +69,29 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while running \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while running \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
 		private void DoPrisonerTransfer(MobileParty prisonerParty)
 		{
 			var rosterAsList = MobileParty.MainParty.PrisonRoster.GetTroopRoster();
-			for (int i = 0; i < rosterAsList.Count; i++)
+			foreach (var element in rosterAsList)
 			{
-				TroopRosterElement element = rosterAsList[i];
 				if (!element.Character.IsHero)
 				{
 					prisonerParty.AddElementToMemberRoster(element.Character, element.Number);
@@ -105,14 +100,14 @@ namespace CryingBuffalo.RandomEvents.Events
 				else
 				{
 					heroInPrisonerRoster = true;
-				}			
+				}
 			}
 		}
 	}
 
 	public class PrisonerRebellionData : RandomEventData
 	{
-		public int minimumPrisoners;
+		public readonly int minimumPrisoners;
 
 		public PrisonerRebellionData(string eventType, float chanceWeight, int minimumPrisoners) : base(eventType, chanceWeight)
 		{

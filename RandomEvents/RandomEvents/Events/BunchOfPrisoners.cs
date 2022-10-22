@@ -6,19 +6,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class BunchOfPrisoners : BaseEvent
+	public sealed class BunchOfPrisoners : BaseEvent
 	{
-		private int minPrisonerGain;
-		private int maxPrisonerGain;
+		private readonly int minPrisonerGain;
+		private readonly int maxPrisonerGain;
 
-		public BunchOfPrisoners() : base(Settings.RandomEvents.BunchOfPrisonersData)
+		public BunchOfPrisoners() : base(Settings.Settings.RandomEvents.BunchOfPrisonersData)
 		{
-			this.minPrisonerGain = Settings.RandomEvents.BunchOfPrisonersData.minPrisonerGain;
-			this.maxPrisonerGain = Settings.RandomEvents.BunchOfPrisonersData.maxPrisonerGain;
+			minPrisonerGain = Settings.Settings.RandomEvents.BunchOfPrisonersData.minPrisonerGain;
+			maxPrisonerGain = Settings.Settings.RandomEvents.BunchOfPrisonersData.maxPrisonerGain;
 		}
 
 		public override void CancelEvent()
@@ -32,15 +35,15 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.GeneralSettings.DebugMode)
+			if (Settings.Settings.GeneralSettings.DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.textColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
 
-			int prisonerAmount = MBRandom.RandomInt(minPrisonerGain, maxPrisonerGain);
-			Settlement settlement = GetRandomSettlement();
+			var prisonerAmount = MBRandom.RandomInt(minPrisonerGain, maxPrisonerGain);
+			var settlement = GetRandomSettlement();
 
-			MobileParty prisoners = PartySetup.CreateBanditParty();
+			var prisoners = PartySetup.CreateBanditParty();
 			prisoners.MemberRoster.Clear();
 			PartySetup.AddRandomCultureUnits(prisoners, prisonerAmount, GetCultureToSpawn());
 
@@ -63,41 +66,33 @@ namespace CryingBuffalo.RandomEvents.Events
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
 		private Settlement GetRandomSettlement()
 		{
-			List<Settlement> eligibleSettlements = new List<Settlement>();
-
-			foreach (Settlement s in Hero.MainHero.Clan.Settlements)
-			{
-				if (s.IsTown || s.IsCastle)
-				{
-					eligibleSettlements.Add(s);
-				}
-			}
+			var eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
 
 			// Randomly pick one of the eligible settlements
-			int index = MBRandom.RandomInt(0, eligibleSettlements.Count);
+			var index = MBRandom.RandomInt(0, eligibleSettlements.Count);
 
 			return eligibleSettlements[index];
 		}
 
 		private CultureObject GetCultureToSpawn()
 		{
-			List<IFaction> factionsAtWar = new List<IFaction>();
+			var factionsAtWar = new List<IFaction>();
 
-			foreach (IFaction faction in Campaign.Current.Factions)
+			foreach (var faction in Campaign.Current.Factions)
 			{
 				if (Hero.MainHero.Clan.IsAtWarWith(faction) && !faction.IsBanditFaction)
 				{
@@ -108,8 +103,8 @@ namespace CryingBuffalo.RandomEvents.Events
 			if (factionsAtWar.Count == 0)
 			{
 				// The player isn't at war with anyone, we'll spawn bandits.
-				List<Settlement> hideouts = Settlement.FindAll((s) => { return s.IsHideout(); }).ToList();
-				Settlement closestHideout = hideouts.MinBy((s) => { return MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()); });
+				var hideouts = Settlement.FindAll((s) => (s).IsHideout).ToList();
+				var closestHideout = hideouts.MinBy((s) => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 				return closestHideout.Culture;
 			}
 			else
@@ -122,8 +117,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class BunchOfPrisonersData : RandomEventData
 	{
-		public int minPrisonerGain;
-		public int maxPrisonerGain;
+		public readonly int minPrisonerGain;
+		public readonly int maxPrisonerGain;
 
 		public BunchOfPrisonersData(string eventType, float chanceWeight, int minPrisonerGain, int maxPrisonerGain) : base(eventType, chanceWeight)
 		{

@@ -1,9 +1,6 @@
 ﻿using CryingBuffalo.RandomEvents.Events;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaleWorlds.Core;
 
 namespace CryingBuffalo.RandomEvents
@@ -19,9 +16,9 @@ namespace CryingBuffalo.RandomEvents
 		private List<WeightedEventData> weightedEvents = new List<WeightedEventData>();
 		private float accumulatedWeight;
 
-		public void AddEvent(RandomEventData data)
+		private void AddEvent(RandomEventData data)
 		{
-			accumulatedWeight += data.ChanceWeight;
+			accumulatedWeight += data.chanceWeight;
 			weightedEvents.Add(new WeightedEventData { RandomEventData = data, accumulatedWeight = accumulatedWeight });
 		}
 
@@ -37,19 +34,12 @@ namespace CryingBuffalo.RandomEvents
 		{
 			float rand = MBRandom.RandomFloatRanged(0.0f, accumulatedWeight);
 
-			foreach (WeightedEventData weightedEvent in weightedEvents)
-			{
-				if (weightedEvent.accumulatedWeight >= rand)
-				{
-					return weightedEvent.RandomEventData;
-				}
-			}
-			return null;
+			return (from weightedEvent in weightedEvents where weightedEvent.accumulatedWeight >= rand select weightedEvent.RandomEventData).FirstOrDefault();
 		}
 
 		public RandomEventData GetEvent(string id)
 		{
-			return weightedEvents.FirstOrDefault((x) => x.RandomEventData.EventType.ToLower() == id.ToLower()).RandomEventData;
+			return weightedEvents.FirstOrDefault((x) => x.RandomEventData.eventType.ToLower() == id.ToLower()).RandomEventData;
 		}
 	}
 }

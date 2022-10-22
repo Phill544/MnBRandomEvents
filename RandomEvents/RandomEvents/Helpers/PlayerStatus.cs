@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 
@@ -10,19 +6,9 @@ namespace CryingBuffalo.RandomEvents.Helpers
 {
 	public static class PlayerStatus
 	{
-		/// <summary>
-		/// Checks whether the player currently owns any settlements.
-		/// </summary>
 		public static bool HasSettlement()
 		{
-			if (Hero.MainHero.Clan.Settlements.Count() > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public static bool HasRangedWeaponEquipped()
@@ -39,7 +25,6 @@ namespace CryingBuffalo.RandomEvents.Helpers
 					return true;
 				}
 			}
-
 			return false;
 		}
 	}
