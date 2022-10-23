@@ -72,7 +72,7 @@ namespace CryingBuffalo.RandomEvents.Events
                         case "d":
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
-                                    "HELP!\n You leap from your bed and bolt out the door. \n Your men around the campfire starts laughing as soon as you tell them about the event.",
+                                    "You wake up fully rested the next morning, the event of the night not on your mind. ",
                                     true, false, "Done", null, null, null), true);
                             break;
                         default:
