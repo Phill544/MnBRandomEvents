@@ -52,7 +52,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 				InformationManager.ShowInquiry(
 					new InquiryData("Speedy Recovery!",
-						$"You receive word that a group of your troops are feeling better, and are ready for combat.",
+						"You receive word that a group of your troops are feeling better, and are ready for combat.",
 						true,
 						false,
 						"Done",

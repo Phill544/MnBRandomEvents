@@ -47,9 +47,11 @@ namespace CryingBuffalo.RandomEvents.Events
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Shake the tree", null));
-			inquiryElements.Add(new InquiryElement("b", "Leave it be", null));
+			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			{
+				new InquiryElement("a", "Shake the tree", null),
+				new InquiryElement("b", "Leave it be", null)
+			};
 
 			if (PlayerStatus.HasRangedWeaponEquipped())
 			{
@@ -64,7 +66,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
 				{
 					switch ((string)elements[0].Identifier)
 					{
@@ -79,10 +81,10 @@ namespace CryingBuffalo.RandomEvents.Events
 						}
 						case "a":
 							// Failure
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, $"Try as you might, you're unable to get dislodge the shiny object.", true, false, "Done", null, null, null), true);
+							InformationManager.ShowInquiry(new InquiryData(EventTitle, "Try as you might, you're unable to get dislodge the shiny object.", true, false, "Done", null, null, null), true);
 							break;
 						case "b":
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, $"You decide to leave the tree alone. Throughout the next few hours you can't help but wonder it was...", true, false, "Done", null, null, null), true);
+							InformationManager.ShowInquiry(new InquiryData(EventTitle, "You decide to leave the tree alone. Throughout the next few hours you can't help but wonder it was...", true, false, "Done", null, null, null), true);
 							break;
 						case "c":
 						{
@@ -91,7 +93,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 							if (skillToUse == null)
 							{
-								InformationManager.ShowInquiry(new InquiryData(EventTitle, $"Something went wrong with selecting your weapon, what have you done?! Aborting event.", true, false, "Sorry", null, null, null), true);
+								InformationManager.ShowInquiry(new InquiryData(EventTitle, "Something went wrong with selecting your weapon, what have you done?! Aborting event.", true, false, "Sorry", null, null, null), true);
 								return;
 							}
 
@@ -171,11 +173,12 @@ namespace CryingBuffalo.RandomEvents.Events
 				{
 					return DefaultSkills.Throwing;
 				}
-				else if (item != null && item.Type == ItemObject.ItemTypeEnum.Bow)
+
+				if (item != null && item.Type == ItemObject.ItemTypeEnum.Bow)
 				{
 					return DefaultSkills.Bow;
 				}
-				else if  (item != null && item.Type == ItemObject.ItemTypeEnum.Crossbow)
+				if  (item != null && item.Type == ItemObject.ItemTypeEnum.Crossbow)
 				{
 					return DefaultSkills.Crossbow;
 				}

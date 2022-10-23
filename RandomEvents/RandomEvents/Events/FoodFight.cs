@@ -40,19 +40,21 @@ namespace CryingBuffalo.RandomEvents.Events
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Break it up.", null, true, "Where do these fools think this food comes from?"));
-			inquiryElements.Add(new InquiryElement("b", "Join in!", null, true, "You were done eating anyway."));
+			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			{
+				new InquiryElement("a", "Break it up.", null, true, "Where do these fools think this food comes from?"),
+				new InquiryElement("b", "Join in!", null, true, "You were done eating anyway.")
+			};
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
 				EventTitle, // Title
-				$"While your party is eating, a large food fight breaks out.", // Description
+				"While your party is eating, a large food fight breaks out.", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
 				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
 				{
 					switch ((string)elements[0].Identifier)
 					{
@@ -108,7 +110,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			while (currentlyRemovedFood < foodToRemove)
 			{
-				List<ItemRosterElement> foodItems = MobileParty.MainParty.ItemRoster.Where((item) => item.EquipmentElement.Item.IsFood).ToList();
+				List<ItemRosterElement> foodItems = MobileParty.MainParty.ItemRoster.Where(item => item.EquipmentElement.Item.IsFood).ToList();
 
 				if (!foodItems.Any())
 				{

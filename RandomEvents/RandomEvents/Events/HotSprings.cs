@@ -34,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				TroopRosterElement elementCopyAtIndex = PartyBase.MainParty.MemberRoster.GetElementCopyAtIndex(i);
 				if (elementCopyAtIndex.Character.IsHero)
 				{
-					elementCopyAtIndex.Character.HeroObject.Heal(PartyBase.MainParty, 100, false);
+					elementCopyAtIndex.Character.HeroObject.Heal(PartyBase.MainParty, 100);
 				}
 				else
 				{
@@ -44,7 +44,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			InformationManager.ShowInquiry(
 				new InquiryData("The Hot Springs",
-					$"You stumble upon some beautiful hot springs. After bathing with your soldiers you feel fantastic!",
+					"You stumble upon some beautiful hot springs. After bathing with your soldiers you feel fantastic!",
 					true,
 					false,
 					"Done",

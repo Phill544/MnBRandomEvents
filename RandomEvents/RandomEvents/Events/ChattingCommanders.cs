@@ -38,7 +38,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 				InformationManager.ShowInquiry(
 					new InquiryData("The Same Page",
-									$"After a good chat with the commanders of your army, there is a noticeable increase cohesion.",
+									"After a good chat with the commanders of your army, there is a noticeable increase cohesion.",
 									true,
 									false,
 									"Done",

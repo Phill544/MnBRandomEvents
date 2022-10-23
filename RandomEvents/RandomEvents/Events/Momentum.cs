@@ -26,7 +26,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			bool isOnFoot = Hero.MainHero.CharacterObject.Equipment.Horse.IsEmpty;
 
-			string dialogue = "";
+			string dialogue;
 
 			if (isOnFoot)
 			{

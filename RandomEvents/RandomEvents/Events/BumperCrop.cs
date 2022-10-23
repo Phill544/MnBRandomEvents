@@ -9,7 +9,7 @@ using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	sealed class BumperCrop : BaseEvent
+	internal sealed class BumperCrop : BaseEvent
 	{
 		private readonly float cropGainPercent;
 
@@ -22,13 +22,8 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			try
 			{
-				// The name of the settlement that receives the food
-				var bumperSettlement = "";
-
 				// The list of settlements that are able to have food added to them
 				var eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
-
-				// Out of the settlements the main hero owns, only the towns or castles have food.
 
 				// Randomly pick one of the eligible settlements
 				var index = MBRandom.RandomInt(0, eligibleSettlements.Count);
@@ -39,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				winningSettlement.Town.FoodStocks += MathF.Abs(winningSettlement.Town.FoodChange * cropGainPercent);
 
 				// set the name to display
-				bumperSettlement = winningSettlement.Name.ToString();
+				var bumperSettlement = winningSettlement.Name.ToString();
 
 				InformationManager.ShowInquiry(
 					new InquiryData("Bumper Crop!",
@@ -78,7 +73,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return Hero.MainHero.Clan.Settlements.Count() > 0;
+			return Hero.MainHero.Clan.Settlements.Any();
 		}
 	}
 

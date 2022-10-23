@@ -43,9 +43,11 @@ namespace CryingBuffalo.RandomEvents.Events
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Pay gold to have them leave", null, true, "What is gold good for, if not to dissuade people from killing you?"));
-			inquiryElements.Add(new InquiryElement("b", "Attack", null));
+			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			{
+				new InquiryElement("a", "Pay gold to have them leave", null, true, "What is gold good for, if not to dissuade people from killing you?"),
+				new InquiryElement("b", "Attack", null)
+			};
 
 			if (Hero.MainHero.PartyBelongedTo.MemberRoster.TotalHealthyCount > troopScareCount)
 			{
@@ -60,30 +62,30 @@ namespace CryingBuffalo.RandomEvents.Events
 				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
 				{
-					if ((string)elements[0].Identifier == "a")
+					switch ((string)elements[0].Identifier)
 					{
-						float percentMoneyLost = MBRandom.RandomFloatRanged(moneyMinPercent, moneyMaxPercent);
-						int goldLost = (int)MathF.Floor(Hero.MainHero.Gold * percentMoneyLost);
-						Hero.MainHero.ChangeHeroGold(-goldLost);
-						InformationManager.ShowInquiry(new InquiryData(EventTitle, $"You give the bandits {goldLost} coins and they quickly flee. At least you and your soldiers live to fight another day.", true, false, "Done", null, null, null), true);
+						case "a":
+						{
+							float percentMoneyLost = MBRandom.RandomFloatRanged(moneyMinPercent, moneyMaxPercent);
+							int goldLost = MathF.Floor(Hero.MainHero.Gold * percentMoneyLost);
+							Hero.MainHero.ChangeHeroGold(-goldLost);
+							InformationManager.ShowInquiry(new InquiryData(EventTitle, $"You give the bandits {goldLost} coins and they quickly flee. At least you and your soldiers live to fight another day.", true, false, "Done", null, null, null), true);
+							break;
+						}
+						case "b":
+							SpawnBandits(false);
+							InformationManager.ShowInquiry(new InquiryData(EventTitle, "Seeing you won't back down, the bandits get ready for a fight.", true, false, "Done", null, null, null), true);
+							break;
+						case "c":
+							SpawnBandits(true);
+							InformationManager.ShowInquiry(new InquiryData(EventTitle, "You laugh as you watch the rest of your party emerge over the crest of the hill. The bandits get ready to flee.", true, false, "Done", null, null, null), true);
+							break;
+						default:
+							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
+							break;
 					}
-					else if ((string)elements[0].Identifier == "b")
-					{
-						SpawnBandits(false);
-						InformationManager.ShowInquiry(new InquiryData(EventTitle, "Seeing you won't back down, the bandits get ready for a fight.", true, false, "Done", null, null, null), true);
-					}
-					else if ((string)elements[0].Identifier == "c")
-					{
-						SpawnBandits(true);
-						InformationManager.ShowInquiry(new InquiryData(EventTitle, "You laugh as you watch the rest of your party emerge over the crest of the hill. The bandits get ready to flee.", true, false, "Done", null, null, null), true);
-					}
-					else
-					{
-						MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
-					}
-					
 				},
 				null); // What to do on the "cancel" button, shouldn't ever need it.
 
@@ -92,7 +94,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			StopEvent();
 		}
 
-		public void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
@@ -106,14 +108,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private string CalculateDescription()
 		{
-			if (Hero.MainHero.PartyBelongedTo.MemberRoster.Count > troopScareCount)
-			{
-				return "You are traveling with your forward party when you get surrounded by a group of bandits!";
-			}
-			else
-			{
-				return "While traveling your party gets surrounded by a group of bandits!";
-			}
+			return Hero.MainHero.PartyBelongedTo.MemberRoster.Count > troopScareCount ? "You are traveling with your forward party when you get surrounded by a group of bandits!" : "While traveling your party gets surrounded by a group of bandits!";
 		}
 
 		private void SpawnBandits(bool shouldFlee)
@@ -150,32 +145,26 @@ namespace CryingBuffalo.RandomEvents.Events
 		/// <summary>
 		/// The min percent the bandits will ask
 		/// </summary>
-		public float moneyMinPercent;
+		public readonly float moneyMinPercent;
 		/// <summary>
 		/// The max percent the bandits will ask
 		/// </summary>
-		public float moneyMaxPercent;
-
-		/// <summary>
-		/// The max amount of goal that the bandits will take pity
-		/// </summary>
-		public int lowMoneyThreshold;
+		public readonly float moneyMaxPercent;
 
 		/// <summary>
 		/// The amount of troops the player needs in order to scare the bandits
 		/// </summary>
-		public int troopScareCount;
+		public readonly int troopScareCount;
 
 		/// <summary>
 		///  The maximum amount of bandits that can spawn
 		/// </summary>
-		public int banditCap;
+		public readonly int banditCap;
 
-		public BanditAmbushData(string eventType, float chanceWeight, float moneyMinPercent, float moneyMaxPercent, int lowMoneyThreshold, int troopScareCount, int banditCap) : base(eventType, chanceWeight)
+		public BanditAmbushData(string eventType, float chanceWeight, float moneyMinPercent, float moneyMaxPercent, int troopScareCount, int banditCap) : base(eventType, chanceWeight)
 		{
 			this.moneyMinPercent = moneyMinPercent;
 			this.moneyMaxPercent = moneyMaxPercent;
-			this.lowMoneyThreshold = lowMoneyThreshold;
 			this.troopScareCount = troopScareCount;
 			this.banditCap = banditCap;
 		}

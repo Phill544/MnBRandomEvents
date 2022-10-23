@@ -37,33 +37,32 @@ namespace CryingBuffalo.RandomEvents.Events
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Take them in", null));
-			inquiryElements.Add(new InquiryElement("b", "Ignore them", null));
+			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			{
+				new InquiryElement("a", "Take them in", null),
+				new InquiryElement("b", "Ignore them", null)
+			};
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
 				EventTitle, // Title
-				$"You come across some wandering livestock.", // Description
+				"You come across some wandering livestock.", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
 				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
 				{
 					switch ((string)elements[0].Identifier)
 					{
 						case "a":
 						{
-							int sheepCount = 0;
-							int cowCount = 0;
-
 							int totalCount = MBRandom.RandomInt(minFood, maxFood);
 
-							sheepCount = MBRandom.RandomInt(1, totalCount);
-							cowCount = totalCount - sheepCount;
+							var sheepCount = MBRandom.RandomInt(1, totalCount);
+							var cowCount = totalCount - sheepCount;
 
-							string cowText = "";
+							string cowText;
 
 							if (cowCount > 0)
 							{

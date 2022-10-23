@@ -24,7 +24,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private const string EventTitle = "Food, Glorious Food";
 
-		private MBCampaignEvent hourlyTickEvent = null;
+		private MBCampaignEvent hourlyTickEvent;
 
 		public GloriousFood(int minFoodAmount, int maxFoodAmount, int forageHours) : base(null)
 		{
@@ -52,9 +52,11 @@ namespace CryingBuffalo.RandomEvents.Events
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Order the men to gather some food.", null));
-			inquiryElements.Add(new InquiryElement("b", "There's no time.", null));
+			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			{
+				new InquiryElement("a", "Order the men to gather some food.", null),
+				new InquiryElement("b", "There's no time.", null)
+			};
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
 				EventTitle, // Title
@@ -64,7 +66,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
 				{
 					switch ((string)elements[0].Identifier)
 					{
@@ -77,7 +79,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 							//hourlyTickEvent = CampaignEvents.CreatePeriodicEvent(1f, 0f);
 							hourlyTickEvent = CampaignPeriodicEventManager.CreatePeriodicEvent(CampaignTime.HoursFromNow(1f), CampaignTime.Zero);
-							hourlyTickEvent.AddHandler(new MBCampaignEvent.CampaignEventDelegate(HourlyTick));
+							hourlyTickEvent.AddHandler(HourlyTick);
 							break;
 						case "b":
 							StopEvent();

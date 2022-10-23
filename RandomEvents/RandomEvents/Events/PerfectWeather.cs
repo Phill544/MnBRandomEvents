@@ -5,7 +5,7 @@ using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class PerfectWeather : BaseEvent
+	public sealed class PerfectWeather : BaseEvent
 	{
 		private readonly int moraleGain;
 
@@ -43,7 +43,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			StopEvent();
 		}
 
-		protected virtual void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{

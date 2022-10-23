@@ -43,9 +43,11 @@ namespace CryingBuffalo.RandomEvents.Events
 			if (spawnCount < minimumSoldiers)
 				spawnCount = minimumSoldiers;
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Let the soldiers have some fun!", null));
-			inquiryElements.Add(new InquiryElement("b", "Do nothing.", null, true, "Think about the experience you're giving up!"));
+			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			{
+				new InquiryElement("a", "Let the soldiers have some fun!", null),
+				new InquiryElement("b", "Do nothing.", null, true, "Think about the experience you're giving up!")
+			};
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
 				EventTitle, // Title
@@ -55,22 +57,21 @@ namespace CryingBuffalo.RandomEvents.Events
 				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
 				{
-					if ((string)elements[0].Identifier == "a")
+					switch ((string)elements[0].Identifier)
 					{
-						InformationManager.ShowInquiry(new InquiryData(EventTitle, "The looters look terrified.", true, false, "Good", null, null, null), true);
-						SpawnLooters(spawnCount);
+						case "a":
+							InformationManager.ShowInquiry(new InquiryData(EventTitle, "The looters look terrified.", true, false, "Good", null, null, null), true);
+							SpawnLooters(spawnCount);
+							break;
+						case "b":
+							InformationManager.ShowInquiry(new InquiryData(EventTitle, "The looters, seeing that you aren't about to attack, quickly scatter to the wind. Your soldiers grumble.", true, false, "Done", null, null, null), true);
+							break;
+						default:
+							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
+							break;
 					}
-					else if ((string)elements[0].Identifier == "b")
-					{
-						InformationManager.ShowInquiry(new InquiryData(EventTitle, "The looters, seeing that you aren't about to attack, quickly scatter to the wind. Your soldiers grumble.", true, false, "Done", null, null, null), true);
-					}
-					else
-					{
-						MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
-					}
-
 				},
 				null); // What to do on the "cancel" button, shouldn't ever need it.
 
@@ -93,7 +94,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private string CalculateDescription(int spawnCount)
 		{
-			string sizeDescription = "";
+			string sizeDescription;
 			if (spawnCount <= minimumSoldiers)
 			{
 				sizeDescription = "reasonable";

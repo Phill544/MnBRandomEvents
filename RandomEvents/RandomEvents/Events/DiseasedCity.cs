@@ -93,22 +93,20 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 		}
 
-		private Settlement GetPlaguedSettlement()
+		private static Settlement GetPlaguedSettlement()
 		{
 			if (MobileParty.MainParty.CurrentSettlement != null)
 			{
 				// If the player is in a settlement, use this one for the event so there's a higher chance a medic will help
 				return MobileParty.MainParty.CurrentSettlement;
 			}
-			else
-			{
-				var eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
 
-				// Randomly pick one of the eligible settlements
-				var index = MBRandom.RandomInt(0, eligibleSettlements.Count);
+			var eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
 
-				return eligibleSettlements[index];
-			}
+			// Randomly pick one of the eligible settlements
+			var index = MBRandom.RandomInt(0, eligibleSettlements.Count);
+
+			return eligibleSettlements[index];
 		}
 
 		private bool PlagueKills(bool useSkill)

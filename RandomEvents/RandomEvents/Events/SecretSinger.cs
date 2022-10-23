@@ -30,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			InformationManager.ShowInquiry(
 				new InquiryData("Secret Singer!",
-					$"You discover one of your party members is an extremely good singer!",
+					"You discover one of your party members is an extremely good singer!",
 					true,
 					false,
 					"Done",

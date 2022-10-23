@@ -37,7 +37,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 				InformationManager.ShowInquiry(
 					new InquiryData("Undercooked",
-						$"Some of your troops fall ill to bad food, although you're unsure of what caused it, you're glad it wasn't you.",
+						"Some of your troops fall ill to bad food, although you're unsure of what caused it, you're glad it wasn't you.",
 						true,
 						false,
 						"Done",

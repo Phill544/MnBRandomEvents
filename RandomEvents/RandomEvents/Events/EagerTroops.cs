@@ -42,12 +42,14 @@ namespace CryingBuffalo.RandomEvents.Events
 			var realMaxTroopGain = Math.Min(MobileParty.MainParty.Party.PartySizeLimit - MobileParty.MainParty.MemberRoster.TotalHealthyCount, maxTroopGain);
 			var numberToAdd = MBRandom.RandomInt(minTroopGain, realMaxTroopGain);
 
-			var settlements = Settlement.FindAll((s) => !s.IsHideout).ToList();
-			var closestSettlement = settlements.MinBy((s) => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+			var settlements = Settlement.FindAll(s => !s.IsHideout).ToList();
+			var closestSettlement = settlements.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 
-			var inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Accept", null));
-			inquiryElements.Add(new InquiryElement("b", "Decline", null));
+			var inquiryElements = new List<InquiryElement>
+			{
+				new InquiryElement("a", "Accept", null),
+				new InquiryElement("b", "Decline", null)
+			};
 
 			var msid = new MultiSelectionInquiryData(
 				EventTitle, // Title
@@ -57,7 +59,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
 				{
 					switch ((string)elements[0].Identifier)
 					{

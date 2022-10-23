@@ -78,7 +78,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 		}
 
-		private Settlement GetRandomSettlement()
+		private static Settlement GetRandomSettlement()
 		{
 			var eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
 
@@ -88,30 +88,20 @@ namespace CryingBuffalo.RandomEvents.Events
 			return eligibleSettlements[index];
 		}
 
-		private CultureObject GetCultureToSpawn()
+		private static CultureObject GetCultureToSpawn()
 		{
-			var factionsAtWar = new List<IFaction>();
-
-			foreach (var faction in Campaign.Current.Factions)
-			{
-				if (Hero.MainHero.Clan.IsAtWarWith(faction) && !faction.IsBanditFaction)
-				{
-					factionsAtWar.Add(faction);
-				}
-			}
+			var factionsAtWar = Campaign.Current.Factions.Where(faction => Hero.MainHero.Clan.IsAtWarWith(faction) && !faction.IsBanditFaction).ToList();
 
 			if (factionsAtWar.Count == 0)
 			{
 				// The player isn't at war with anyone, we'll spawn bandits.
-				var hideouts = Settlement.FindAll((s) => (s).IsHideout).ToList();
-				var closestHideout = hideouts.MinBy((s) => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+				var hideouts = Settlement.FindAll(s => s.IsHideout).ToList();
+				var closestHideout = hideouts.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 				return closestHideout.Culture;
 			}
-			else
-			{
-				// Pick one of the factions to spawn prisoners of
-				return RandomSelection<IFaction>.GetRandomElement(factionsAtWar).Culture;
-			}
+
+			// Pick one of the factions to spawn prisoners of
+			return RandomSelection<IFaction>.GetRandomElement(factionsAtWar).Culture;
 		}
 	}
 

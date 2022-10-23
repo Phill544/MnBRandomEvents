@@ -31,7 +31,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 				InformationManager.ShowInquiry(
 					new InquiryData("Successful Deeds!",
-						$"Some of your deeds have reached other members of the kingdom.",
+						"Some of your deeds have reached other members of the kingdom.",
 						true,
 						false,
 						"Done",

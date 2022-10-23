@@ -31,9 +31,6 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			try
 			{
-				// The name of the settlement that receives the food
-				string ratSettlement = "";
-
 				// The list of settlements that are able to have food added to them
 				List<Settlement> eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
 
@@ -48,7 +45,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				infestedSettlement.Town.FoodStocks -= MathF.Abs(infestedSettlement.Town.FoodChange * foodLossPercent);
 
 				// set the name to display
-				ratSettlement = infestedSettlement.Name.ToString();
+				var ratSettlement = infestedSettlement.Name.ToString();
 
 				InformationManager.ShowInquiry(
 					new InquiryData("Rats in the granary!",
