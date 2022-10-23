@@ -20,11 +20,9 @@ namespace CryingBuffalo.RandomEvents.Settings
 			}
 			RandomEvents = JsonConvert.DeserializeObject<RandomEventSettings>(File.ReadAllText(path));
 
-			if (updateJsonFile)
-			{
-				string updatedSettingsText = JsonConvert.SerializeObject(RandomEvents, Formatting.Indented);
-				File.WriteAllText(path, updatedSettingsText);
-			}
+			if (!updateJsonFile) return;
+			string updatedSettingsText = JsonConvert.SerializeObject(RandomEvents, Formatting.Indented);
+			File.WriteAllText(path, updatedSettingsText);
 		}
 
 		public static void LoadGeneralSettings(bool updateJsonFile = true)

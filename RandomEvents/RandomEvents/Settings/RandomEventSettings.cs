@@ -91,5 +91,9 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public HotSpringsData HotSpringsData { get; private set; } = new HotSpringsData("HotSprings", 1024, 15);
+        
+        [JsonProperty]
+        public SupernaturalEncounterData SupernaturalEncounterData { get; private set; } =
+            new SupernaturalEncounterData("SupernaturalEncounter", 1024);
     }
 }

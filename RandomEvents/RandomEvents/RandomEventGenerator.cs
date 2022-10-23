@@ -10,16 +10,16 @@ namespace CryingBuffalo.RandomEvents
 		private struct WeightedEventData
 		{
 			public float accumulatedWeight;
-			public RandomEventData RandomEventData;
+			public RandomEventData randomEventData;
 		}
 
-		private List<WeightedEventData> weightedEvents = new List<WeightedEventData>();
+		private readonly List<WeightedEventData> weightedEvents = new List<WeightedEventData>();
 		private float accumulatedWeight;
 
 		private void AddEvent(RandomEventData data)
 		{
 			accumulatedWeight += data.chanceWeight;
-			weightedEvents.Add(new WeightedEventData { RandomEventData = data, accumulatedWeight = accumulatedWeight });
+			weightedEvents.Add(new WeightedEventData { randomEventData = data, accumulatedWeight = accumulatedWeight });
 		}
 
 		public void AddEvents(IEnumerable<RandomEventData> data)
@@ -34,12 +34,12 @@ namespace CryingBuffalo.RandomEvents
 		{
 			float rand = MBRandom.RandomFloatRanged(0.0f, accumulatedWeight);
 
-			return (from weightedEvent in weightedEvents where weightedEvent.accumulatedWeight >= rand select weightedEvent.RandomEventData).FirstOrDefault();
+			return (from weightedEvent in weightedEvents where weightedEvent.accumulatedWeight >= rand select weightedEvent.randomEventData).FirstOrDefault();
 		}
 
 		public RandomEventData GetEvent(string id)
 		{
-			return weightedEvents.FirstOrDefault((x) => x.RandomEventData.eventType.ToLower() == id.ToLower()).RandomEventData;
+			return weightedEvents.FirstOrDefault((x) => x.randomEventData.eventType.ToLower() == id.ToLower()).randomEventData;
 		}
 	}
 }

@@ -128,12 +128,9 @@ namespace CryingBuffalo.RandomEvents.Events
                     // Hero tried their best
 
                     // Kill some of their Garrison
-                    if (plaguedSettlement.Town.GarrisonParty != null)
-                    {
-                        plaguedSettlement.Town.GarrisonParty.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.Town.GarrisonParty.MemberRoster.TotalManCount * percentLoss), false); 
-                    }
+                    plaguedSettlement.Town.GarrisonParty?.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.Town.GarrisonParty.MemberRoster.TotalManCount * percentLoss), false);
 
-					// Kill some of their Militia
+                    // Kill some of their Militia
 					plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.TotalManCount * percentLoss), false);
 
 					// Drop some loyalty
