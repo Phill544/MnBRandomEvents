@@ -1,26 +1,20 @@
-﻿using CryingBuffalo.RandomEvents;
-using CryingBuffalo.RandomEvents.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class SpeedyRecovery : BaseEvent
+	public sealed class SpeedyRecovery : BaseEvent
 	{
-		private int minTroopsToHeal;
-		private int maxTroopsToHeal;
+		private readonly int minTroopsToHeal;
+		private readonly int maxTroopsToHeal;
 
-		public SpeedyRecovery() : base(Settings.RandomEvents.SpeedyRecoveryData)
+		public SpeedyRecovery() : base(Settings.Settings.RandomEvents.SpeedyRecoveryData)
 		{
-			this.minTroopsToHeal = Settings.RandomEvents.SpeedyRecoveryData.minTroopsToHeal;
-			this.maxTroopsToHeal = Settings.RandomEvents.SpeedyRecoveryData.maxTroopsToHeal;
+			minTroopsToHeal = Settings.Settings.RandomEvents.SpeedyRecoveryData.minTroopsToHeal;
+			maxTroopsToHeal = Settings.Settings.RandomEvents.SpeedyRecoveryData.maxTroopsToHeal;
 		}
 
 		public override void CancelEvent()
@@ -52,13 +46,13 @@ namespace CryingBuffalo.RandomEvents.Events
 						}
 					}
 
-					MobileParty.MainParty.MemberRoster.AddToCountsAtIndex(randomElement, 0, -1, 0, true);
+					MobileParty.MainParty.MemberRoster.AddToCountsAtIndex(randomElement, 0, -1);
 					totalHealed++;
 				}
 
 				InformationManager.ShowInquiry(
 					new InquiryData("Speedy Recovery!",
-						$"You receive word that a group of your troops are feeling better, and are ready for combat.",
+						"You receive word that a group of your troops are feeling better, and are ready for combat.",
 						true,
 						false,
 						"Done",
@@ -72,19 +66,19 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while playing \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while playing \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}
@@ -92,8 +86,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class SpeedyRecoveryData : RandomEventData
 	{
-		public int minTroopsToHeal;
-		public int maxTroopsToHeal;
+		public readonly int minTroopsToHeal;
+		public readonly int maxTroopsToHeal;
 
 		public SpeedyRecoveryData(string eventType, float chanceWeight, int minTroopsToHeal, int maxTroopsToHeal) : base(eventType, chanceWeight)
 		{

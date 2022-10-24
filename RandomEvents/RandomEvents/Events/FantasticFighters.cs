@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class FantasticFighters : BaseEvent
+	public sealed class FantasticFighters : BaseEvent
 	{
-		private int renownGain;
+		private readonly int renownGain;
 
-		public FantasticFighters() : base(Settings.RandomEvents.FantasticFightersData)
+		public FantasticFighters() : base(Settings.Settings.RandomEvents.FantasticFightersData)
 		{
-			renownGain = Settings.RandomEvents.FantasticFightersData.renownGain;
+			renownGain = Settings.Settings.RandomEvents.FantasticFightersData.renownGain;
 		}
 
 		public override void CancelEvent()
@@ -35,7 +31,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 				InformationManager.ShowInquiry(
 					new InquiryData("Fantastic Fighters?",
-						$"A rumor spreads that your clan managed to decisively win a battle when outnumbered 10-1.",
+						"A rumor spreads that your clan managed to decisively win a battle when outnumbered 10-1.",
 						true,
 						false,
 						"Done",
@@ -49,26 +45,26 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while playing \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while playing \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}
 
 	public class FantasticFightersData : RandomEventData
 	{
-		public int renownGain;
+		public readonly int renownGain;
 
 		public FantasticFightersData(string eventType, float chanceWeight, int renownGain) : base(eventType, chanceWeight)
 		{

@@ -2,25 +2,28 @@
 using System.Collections.Generic;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	class BetMoney : BaseEvent
+	internal sealed class BetMoney : BaseEvent
 	{
-		private float moneyBetPercent;
+		private readonly float moneyBetPercent;
 
-		public BetMoney() : base(Settings.RandomEvents.BetMoneyData)
+		public BetMoney() : base(Settings.Settings.RandomEvents.BetMoneyData)
 		{
-			moneyBetPercent = Settings.RandomEvents.BetMoneyData.moneyBetPercent;
+			moneyBetPercent = Settings.Settings.RandomEvents.BetMoneyData.moneyBetPercent;
 		}
 
 		public override void StartEvent()
 		{
-			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Gamble", null));
-			inquiryElements.Add(new InquiryElement("b", "Decline", null));
+			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			{
+				new InquiryElement("a", "Gamble", null),
+				new InquiryElement("b", "Decline", null)
+			};
 
 			int goldToBet = (int)MathF.Floor(Hero.MainHero.Gold * moneyBetPercent);
 
@@ -36,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
 				{
 					if ((string)elements[0].Identifier == "a")
 					{
@@ -50,14 +53,14 @@ namespace CryingBuffalo.RandomEvents.Events
 				},
 				null); // What to do on the "cancel" button, shouldn't ever need it.
 
-			InformationManager.ShowMultiSelectionInquiry(msid, true);
+			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
 			StopEvent();
 		}
 
-		private string DoBet(int goldToBet)
+		private static string DoBet(int goldToBet)
 		{
-			float decision = MBRandom.RandomFloatRanged(0.0f, 1.0f);
+			var decision = MBRandom.RandomFloatRanged(0.0f, 1.0f);
 					
 
 			string outcomeText;
@@ -76,15 +79,15 @@ namespace CryingBuffalo.RandomEvents.Events
 			return outcomeText;
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -100,7 +103,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class BetMoneyData : RandomEventData
 	{
-		public float moneyBetPercent;
+		public readonly float moneyBetPercent;
 
 		public BetMoneyData(string eventType, float chanceWeight, float moneyBetPercent) : base(eventType, chanceWeight)
 		{

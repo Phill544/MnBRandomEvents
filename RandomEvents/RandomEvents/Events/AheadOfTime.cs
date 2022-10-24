@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class AheadOfTime : BaseEvent
+	public sealed class AheadOfTime : BaseEvent
 	{
 		private List<Settlement> eligibleSettlements;
 
-		public AheadOfTime() : base(Settings.RandomEvents.AheadOfTimeData)
+		public AheadOfTime() : base(Settings.Settings.RandomEvents.AheadOfTimeData)
 		{
 		}
 
@@ -23,30 +23,17 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			if (Hero.MainHero.Clan.Settlements.Count() > 0)
+			if (!Hero.MainHero.Clan.Settlements.Any()) return false;
+			eligibleSettlements = new List<Settlement>();
+
+			// Out of the settlements the main hero owns, only the towns or castles have food.
+			foreach (var s in Hero.MainHero.Clan.Settlements.Where(s => (s.IsTown || s.IsCastle) && s.Town.BuildingsInProgress.Count > 0))
 			{
-				eligibleSettlements = new List<Settlement>();
-
-				// Out of the settlements the main hero owns, only the towns or castles have food.
-				foreach (Settlement s in Hero.MainHero.Clan.Settlements)
-				{
-					if ((s.IsTown || s.IsCastle) && s.Town.BuildingsInProgress.Count > 0)
-					{
-						eligibleSettlements.Add(s);
-					}
-				}
-
-				if (eligibleSettlements.Count > 0)
-				{
-					return true;
-				}
-
-				return false;
+				eligibleSettlements.Add(s);
 			}
-			else
-			{
-				return false;
-			}
+
+			return eligibleSettlements.Count > 0;
+
 		}
 
 		public override void StartEvent()
@@ -54,8 +41,8 @@ namespace CryingBuffalo.RandomEvents.Events
 			try
 			{
 
-				int randomElement = MBRandom.RandomInt(eligibleSettlements.Count);
-				Settlement settlement = eligibleSettlements[randomElement];
+				var randomElement = MBRandom.RandomInt(eligibleSettlements.Count);
+				var settlement = eligibleSettlements[randomElement];
 
 				settlement.Town.CurrentBuilding.BuildingProgress += settlement.Town.CurrentBuilding.GetConstructionCost() - settlement.Town.CurrentBuilding.BuildingProgress;
 				settlement.Town.CurrentBuilding.LevelUp();
@@ -77,19 +64,19 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while playing \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while playing \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}

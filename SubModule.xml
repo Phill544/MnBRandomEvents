@@ -1,26 +1,26 @@
- <Module>
-     <Name value="Random Events"/>
-     <Id value="RandomEvents"/>
-     <Version value="v1.3.2"/>
-     <SingleplayerModule value="true"/>
-     <MultiplayerModule value="false"/>
-     <DependedModules>
-         <DependedModule Id="Native" DependentVersion="e1.5.7"/>
-         <DependedModule Id="SandBoxCore" DependentVersion="e1.5.7"/>
-         <DependedModule Id="Sandbox" DependentVersion="e1.5.7"/>
-         <DependedModule Id="CustomBattle" DependentVersion="e1.5.7"/>
-         <DependedModule Id="StoryMode" DependentVersion="e1.5.7"/>
-     </DependedModules>
-     <SubModules>
-         <SubModule>
-             <Name value="RandomEvents"/>
-             <DLLName value="RandomEvents.dll"/>
-             <SubModuleClassType value="CryingBuffalo.RandomEvents.RandomEventsSubmodule"/>
-             <Tags>
-                 <Tag key="DedicatedServerType" value="none" />
-                 <Tag key="IsNoRenderModeElement" value="false" />
-             </Tags>
-         </SubModule>
-     </SubModules>
-     <Xmls/>
- </Module>
+<Module>
+    <Name value="Random Events"/>
+    <Id value="RandomEvents"/>
+    <Version value="v1.9.0"/>
+    <SingleplayerModule value="true"/>
+    <MultiplayerModule value="false"/>
+    <DependedModules>
+        <DependedModule Id="Native"/>
+        <DependedModule Id="SandBoxCore"/>
+        <DependedModule Id="Sandbox"/>
+        <DependedModule Id="CustomBattle"/>
+        <DependedModule Id="StoryMode"/>
+    </DependedModules>
+    <SubModules>
+        <SubModule>
+            <Name value="RandomEvents"/>
+            <DLLName value="RandomEvents.dll"/>
+            <SubModuleClassType value="CryingBuffalo.RandomEvents.RandomEventsSubmodule"/>
+            <Tags>
+                <Tag key="DedicatedServerType" value="none" />
+                <Tag key="IsNoRenderModeElement" value="false" />
+            </Tags>
+        </SubModule>
+    </SubModules>
+    <Xmls/>
+</Module>

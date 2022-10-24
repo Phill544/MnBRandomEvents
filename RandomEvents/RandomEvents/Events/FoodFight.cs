@@ -1,30 +1,27 @@
-﻿using CryingBuffalo.RandomEvents;
-using CryingBuffalo.RandomEvents.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.ViewModelCollection.Inventory;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class FoodFight : BaseEvent
+	public sealed class FoodFight : BaseEvent
 	{
-		private int minFoodLoss;
-		private int maxFoodLoss;
-		private int moraleLoss;
+		private readonly int minFoodLoss;
+		private readonly int maxFoodLoss;
+		private readonly int moraleLoss;
 
-		private string eventTitle = "Food Fight!";
+		private const string EventTitle = "Food Fight!";
 
-		public FoodFight() : base(Settings.RandomEvents.FoodFightData)
+		public FoodFight() : base(Settings.Settings.RandomEvents.FoodFightData)
 		{
-			minFoodLoss = Settings.RandomEvents.FoodFightData.minFoodLoss;
-			maxFoodLoss = Settings.RandomEvents.FoodFightData.maxFoodLoss;
-			moraleLoss = Settings.RandomEvents.FoodFightData.moraleLoss;
+			minFoodLoss = Settings.Settings.RandomEvents.FoodFightData.minFoodLoss;
+			maxFoodLoss = Settings.Settings.RandomEvents.FoodFightData.maxFoodLoss;
+			moraleLoss = Settings.Settings.RandomEvents.FoodFightData.moraleLoss;
 		}
 
 		public override void CancelEvent()
@@ -33,81 +30,77 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			if ((MobileParty.MainParty.ItemRoster.Where((item) => item.EquipmentElement.Item.IsFood).Count() > 0) && MobileParty.MainParty.MemberRoster.TotalManCount > 1)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return (MobileParty.MainParty.ItemRoster.Any(item => item.EquipmentElement.Item.IsFood)) && MobileParty.MainParty.MemberRoster.TotalManCount > 1;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.GeneralSettings.DebugMode)
+			if (Settings.Settings.GeneralSettings.DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.textColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Break it up.", null, true, "Where do these fools think this food comes from?"));
-			inquiryElements.Add(new InquiryElement("b", "Join in!", null, true, "You were done eating anyway."));
+			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			{
+				new InquiryElement("a", "Break it up.", null, true, "Where do these fools think this food comes from?"),
+				new InquiryElement("b", "Join in!", null, true, "You were done eating anyway.")
+			};
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				eventTitle, // Title
-				$"While your party is eating, a large food fight breaks out.", // Description
+				EventTitle, // Title
+				"While your party is eating, a large food fight breaks out.", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
 				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
 				{
-					if ((string)elements[0].Identifier == "a")
+					switch ((string)elements[0].Identifier)
 					{
-						MobileParty.MainParty.RecentEventsMorale -= moraleLoss;
+						case "a":
+							MobileParty.MainParty.RecentEventsMorale -= moraleLoss;
 
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, "You command that everyone stops this nonsense. Although the party looks displeased, at least you saved the food.", true, false, "Done", null, null, null), true);
-					}
-					else if ((string)elements[0].Identifier == "b")
-					{
-						string extraDialogue = "";
-
-						float xpToGive = Settings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
-						Hero.MainHero.AddSkillXp(DefaultSkills.Throwing, xpToGive);
-
-						int foodToRemove = MBRandom.RandomInt(minFoodLoss, maxFoodLoss);
-						bool runOutOfFood = RemoveFood(foodToRemove);
-						if (runOutOfFood)
+							InformationManager.ShowInquiry(new InquiryData(EventTitle, "You command that everyone stops this nonsense. Although the party looks displeased, at least you saved the food.", true, false, "Done", null, null, null), true);
+							break;
+						case "b":
 						{
-							extraDialogue = " Quickly you realise that there is no food left. If you can't source some more soon there may be trouble.";
+							string extraDialogue = "";
+
+							float xpToGive = Settings.Settings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
+							Hero.MainHero.AddSkillXp(DefaultSkills.Throwing, xpToGive);
+
+							int foodToRemove = MBRandom.RandomInt(minFoodLoss, maxFoodLoss);
+							bool runOutOfFood = RemoveFood(foodToRemove);
+							if (runOutOfFood)
+							{
+								extraDialogue = " Quickly you realise that there is no food left. If you can't source some more soon there may be trouble.";
+							}
+
+							InformationManager.ShowInquiry(new InquiryData(EventTitle, $"You decide to join in on the fun! You even manage to deal out some black eyes. Did you go too far? Probably.{extraDialogue}", true, false, "Done", null, null, null), true);
+							break;
 						}
-
-						InformationManager.ShowInquiry(new InquiryData(eventTitle, $"You decide to join in on the fun! You even manage to deal out some black eyes. Did you go too far? Probably.{extraDialogue}", true, false, "Done", null, null, null), true);
+						default:
+							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
+							break;
 					}
-					else
-					{
-						MessageBox.Show($"Error while selecting option for \"{this.RandomEventData.EventType}\"");
-					}
-
 				},
 				null); // What to do on the "cancel" button, shouldn't ever need it.
 
-			InformationManager.ShowMultiSelectionInquiry(msid, true);
+			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -117,9 +110,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			while (currentlyRemovedFood < foodToRemove)
 			{
-				List<ItemRosterElement> foodItems = MobileParty.MainParty.ItemRoster.Where((item) => item.EquipmentElement.Item.IsFood).ToList();
+				List<ItemRosterElement> foodItems = MobileParty.MainParty.ItemRoster.Where(item => item.EquipmentElement.Item.IsFood).ToList();
 
-				if (foodItems.Count() == 0)
+				if (!foodItems.Any())
 				{
 					return true;
 				}
@@ -139,9 +132,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class FoodFightData : RandomEventData
 	{
-		public int minFoodLoss;
-		public int maxFoodLoss;
-		public int moraleLoss;
+		public readonly int minFoodLoss;
+		public readonly int maxFoodLoss;
+		public readonly int moraleLoss;
 
 		public FoodFightData(string eventType, float chanceWeight, int minFoodLoss, int maxFoodLoss, int moraleLoss) : base(eventType, chanceWeight)
 		{

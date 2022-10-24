@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
-using TaleWorlds.Engine;
 using TaleWorlds.Library;
 using TaleWorlds.ObjectSystem;
 
@@ -17,23 +14,23 @@ namespace CryingBuffalo.RandomEvents.Events
 	/// Also, using that value to stop movement means that the player cannot be interacted with.
 	/// Disabled until it can be reimplemented
 	/// </summary>
-	public class GloriousFood : BaseEvent
+	public sealed class GloriousFood : BaseEvent
 	{
-		private int minFoodAmount;
-		private int maxFoodAmount;
-		private int forageHours;
+		private readonly int minFoodAmount;
+		private readonly int maxFoodAmount;
+		private readonly int forageHours;
 
 		private int currentForageHours;
 
-		private string eventTitle = "Food, Glorious Food";
+		private const string EventTitle = "Food, Glorious Food";
 
-		private MBCampaignEvent hourlyTickEvent = null;
+		private MBCampaignEvent hourlyTickEvent;
 
-		public GloriousFood() : base(null/*Settings.RandomEvents.GloriousFoodData*/)
+		public GloriousFood(int minFoodAmount, int maxFoodAmount, int forageHours) : base(null)
 		{
-			//minFoodAmount = Settings.RandomEvents.GloriousFoodData.minFoodAmount;
-			//maxFoodAmount = Settings.RandomEvents.GloriousFoodData.maxFoodAmount;
-			//forageHours = Settings.RandomEvents.GloriousFoodData.forageHours;
+			this.minFoodAmount = minFoodAmount;
+			this.maxFoodAmount = maxFoodAmount;
+			this.forageHours = forageHours;
 		}
 
 		public override void CancelEvent()
@@ -50,63 +47,64 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.GeneralSettings.DebugMode)
+			if (Settings.Settings.GeneralSettings.DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {this.RandomEventData.EventType}", RandomEventsSubmodule.textColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>();
-			inquiryElements.Add(new InquiryElement("a", "Order the men to gather some food.", null));
-			inquiryElements.Add(new InquiryElement("b", "There's no time.", null));
+			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			{
+				new InquiryElement("a", "Order the men to gather some food.", null),
+				new InquiryElement("b", "There's no time.", null)
+			};
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				eventTitle, // Title
+				EventTitle, // Title
 				"While traveling you come across a large meadow with grazing deer surrounded by grape vines. If you have some spare time, perhaps you could collect some food.", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.
 				1, // Force a single option to be selected. Should usually be true
 				"Okay", // The text on the button that continues the event
 				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				(elements) => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
 				{
-					if ((string)elements[0].Identifier == "a")
+					switch ((string)elements[0].Identifier)
 					{
-						Campaign.Current.TimeControlMode = CampaignTimeControlMode.UnstoppableFastForwardForPartyWaitTime;
+						case "a":
+							Campaign.Current.TimeControlMode = CampaignTimeControlMode.UnstoppableFastForwardForPartyWaitTime;
 
-						MobileParty.MainParty.IsActive = false;
+							MobileParty.MainParty.IsActive = false;
 
-						waitPos = MobileParty.MainParty.Position2D;
+							waitPos = MobileParty.MainParty.Position2D;
 
-						//hourlyTickEvent = CampaignEvents.CreatePeriodicEvent(1f, 0f);
-						hourlyTickEvent = CampaignEvents.CreatePeriodicEvent(CampaignTime.HoursFromNow(1f), CampaignTime.Zero);
-						hourlyTickEvent.AddHandler(new MBCampaignEvent.CampaignEventDelegate(HourlyTick));
+							//hourlyTickEvent = CampaignEvents.CreatePeriodicEvent(1f, 0f);
+							hourlyTickEvent = CampaignPeriodicEventManager.CreatePeriodicEvent(CampaignTime.HoursFromNow(1f), CampaignTime.Zero);
+							hourlyTickEvent.AddHandler(HourlyTick);
+							break;
+						case "b":
+							StopEvent();
+							break;
+						default:
+							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
+							break;
 					}
-					else if ((string)elements[0].Identifier == "b")
-					{
-						StopEvent();
-					}
-					else
-					{
-						MessageBox.Show($"Error while selecting option for \"{this.RandomEventData.EventType}\"");
-					}
-
 				},
 				null); // What to do on the "cancel" button, shouldn't ever need it.
 
-			InformationManager.ShowMultiSelectionInquiry(msid, true);
+			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 		}
 
 		private Vec2 waitPos;
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -129,7 +127,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			Campaign.Current.TimeControlMode = CampaignTimeControlMode.Stop;
 
-			InformationManager.ShowInquiry(new InquiryData(eventTitle, $"Your troop managed to forage {gatheredMeat} slabs of meat and {gatheredGrapes} baskets of grapes!", true, false, "Done", null, null, null), true);
+			InformationManager.ShowInquiry(new InquiryData(EventTitle, $"Your troop managed to forage {gatheredMeat} slabs of meat and {gatheredGrapes} baskets of grapes!", true, false, "Done", null, null, null), true);
 
 			hourlyTickEvent.Unregister(this);
 			hourlyTickEvent = null;
@@ -137,25 +135,6 @@ namespace CryingBuffalo.RandomEvents.Events
 			MobileParty.MainParty.IsActive = true;
 
 			StopEvent();
-		}
-	}
-
-	public class GloriousFoodData : RandomEventData
-	{
-		public int minFoodAmount;
-		public int maxFoodAmount;
-		public int forageHours;
-
-		public GloriousFoodData(string eventType, float chanceWeight, int minFoodAmount, int maxFoodAmount, int forageHours) : base(eventType, chanceWeight)
-		{
-			this.minFoodAmount = minFoodAmount;
-			this.maxFoodAmount = maxFoodAmount;
-			this.forageHours = forageHours;
-		}
-
-		public override BaseEvent GetBaseEvent()
-		{
-			return new GloriousFood();
 		}
 	}
 }

@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class GranaryRats : BaseEvent
+	public sealed class GranaryRats : BaseEvent
 	{
-		private float foodLossPercent;
+		private readonly float foodLossPercent;
 
-		public GranaryRats() : base(Settings.RandomEvents.GranaryRatsData)
+		public GranaryRats() : base(Settings.Settings.RandomEvents.GranaryRatsData)
 		{
-			foodLossPercent = Settings.RandomEvents.GranaryRatsData.foodLossPercent;
+			foodLossPercent = Settings.Settings.RandomEvents.GranaryRatsData.foodLossPercent;
 		}
 
 		public override void CancelEvent()
@@ -25,34 +24,17 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			if (Hero.MainHero.Clan.Settlements.Count() > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()
 		{
 			try
 			{
-				// The name of the settlement that receives the food
-				string ratSettlement = "";
-
 				// The list of settlements that are able to have food added to them
-				List<Settlement> eligibleSettlements = new List<Settlement>();
+				List<Settlement> eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
 
 				// Out of the settlements the main hero owns, only the towns or castles have food.
-				foreach (Settlement s in Hero.MainHero.Clan.Settlements)
-				{
-					if (s.IsTown || s.IsCastle)
-					{
-						eligibleSettlements.Add(s);
-					}
-				}
 
 				// Randomly pick one of the eligible settlements
 				int index = MBRandom.RandomInt(0, eligibleSettlements.Count);
@@ -63,7 +45,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				infestedSettlement.Town.FoodStocks -= MathF.Abs(infestedSettlement.Town.FoodChange * foodLossPercent);
 
 				// set the name to display
-				ratSettlement = infestedSettlement.Name.ToString();
+				var ratSettlement = infestedSettlement.Name.ToString();
 
 				InformationManager.ShowInquiry(
 					new InquiryData("Rats in the granary!",
@@ -78,28 +60,28 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while running \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while running \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}
 
 	public class GranaryRatsData : RandomEventData
 	{
-		public float foodLossPercent;
+		public readonly float foodLossPercent;
 
 		public GranaryRatsData(string eventType, float chanceWeight, float foodLossPercent) : base(eventType, chanceWeight)
 		{

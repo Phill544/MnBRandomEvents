@@ -1,27 +1,22 @@
-﻿using CryingBuffalo.RandomEvents;
-using CryingBuffalo.RandomEvents.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	public class BeeKind : BaseEvent
+	public sealed class BeeKind : BaseEvent
 	{
-		private int damage;
-		private int reactionDamage;
-		private float reactionChance;
+		private readonly int damage;
+		private readonly int reactionDamage;
+		private readonly float reactionChance;
 
-		public BeeKind() : base(Settings.RandomEvents.BeeKindData)
+		public BeeKind() : base(Settings.Settings.RandomEvents.BeeKindData)
 		{
-			this.damage = Settings.RandomEvents.BeeKindData.damage;
-			this.reactionDamage = Settings.RandomEvents.BeeKindData.reactionDamage;
-			this.reactionChance = Settings.RandomEvents.BeeKindData.reactionChance;
+			damage = Settings.Settings.RandomEvents.BeeKindData.damage;
+			reactionDamage = Settings.Settings.RandomEvents.BeeKindData.reactionDamage;
+			reactionChance = Settings.Settings.RandomEvents.BeeKindData.reactionChance;
 		}
 
 		public override void CancelEvent()
@@ -35,8 +30,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			string extraDialogue = "";
-			int damageToInflict = damage;
+			var extraDialogue = "";
+			var damageToInflict = damage;
 
 			if (MBRandom.RandomFloatRanged(0.0f,1.0f) <= reactionChance)
 			{
@@ -61,15 +56,15 @@ namespace CryingBuffalo.RandomEvents.Events
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 	}
@@ -77,9 +72,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class BeeKindData : RandomEventData
 	{
-		public int damage;
-		public int reactionDamage;
-		public float reactionChance;
+		public readonly int damage;
+		public readonly int reactionDamage;
+		public readonly float reactionChance;
 
 		public BeeKindData(string eventType, float chanceWeight, int damage, int reactionDamage, float reactionChance) : base(eventType, chanceWeight)
 		{

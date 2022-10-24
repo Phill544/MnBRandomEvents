@@ -2,9 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
@@ -12,21 +11,21 @@ namespace CryingBuffalo.RandomEvents
 {
 	public class RandomEventBehavior : CampaignBehaviorBase
 	{
-        public static RandomEventBehavior Instance { get; private set; }
-               
-        public RandomEventGenerator RandomEventGenerator = null;
+        private static RandomEventBehavior Instance { get; set; }
+
+        private readonly RandomEventGenerator randomEventGenerator;
 
         public RandomEventBehavior()
         {
             Instance = this;
 
-            RandomEventGenerator = new RandomEventGenerator();
+            randomEventGenerator = new RandomEventGenerator();
             PopulateRandomEventGenerator();
         }
 
         public override void RegisterEvents()
 		{
-            CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(OnSessionLaunched));
+            CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, OnSessionLaunched);
             CampaignEvents.HourlyTickEvent.AddNonSerializedListener(this, ProcessRandomEvent);
         }
 
@@ -43,12 +42,12 @@ namespace CryingBuffalo.RandomEvents
                 return "You must provide the type of event to run";
             }
 
-            if (RandomEventBehavior.Instance.currentEvent != null)
+            if (Instance.currentEvent != null)
             {
-                return $"Currently running event: {Instance.currentEvent.RandomEventData.EventType}. To start another first cancel this one.";
+                return $"Currently running event: {Instance.currentEvent.randomEventData.eventType}. To start another first cancel this one.";
             }
 
-            BaseEvent evnt = Instance.RandomEventGenerator.GetEvent(args[0])?.GetBaseEvent();
+            BaseEvent evnt = Instance.randomEventGenerator.GetEvent(args[0])?.GetBaseEvent();
 
             if (evnt == null)
             {
@@ -57,33 +56,6 @@ namespace CryingBuffalo.RandomEvents
 
             Instance.ExecuteRandomEvent(evnt);
             return $"Starting {args[0]}";
-        }
-
-        [CommandLineFunctionality.CommandLineArgumentFunction("next", "randomevent")]
-        public static string RunNextEvent(List<string> args)
-        {
-            if (RandomEventBehavior.Instance.currentEvent != null)
-            {
-                return $"Currently running event: {Instance.currentEvent.RandomEventData.EventType}. To start another first cancel this one.";
-            }
-
-            // Select which event should be played
-            BaseEvent eventToPlay = Instance.SelectEvent();
-
-            // Start the random event
-            Instance.ExecuteRandomEvent(eventToPlay);
-
-            return $"Starting {eventToPlay.RandomEventData.EventType}";
-        }
-
-        [CommandLineFunctionality.CommandLineArgumentFunction("cancelevent", "randomevent")]
-        public static string CancelEvent(List<string> args)
-        {
-            if (Instance.CancelEvent())
-            {
-                return "Current random event canceled!";
-            }
-            return "No random event running.";
         }
 
         private void OnSessionLaunched(CampaignGameStarter cgs)
@@ -110,14 +82,13 @@ namespace CryingBuffalo.RandomEvents
 
             inGameHoursPassed++;
 
-            if (inGameHoursPassed >= Settings.GeneralSettings.MinimumInGameHours && (DateTime.Now - lastEventTime).Minutes >= minutesForNextEvent)
-            {
-                // Select which event should be played
-                BaseEvent eventToPlay = SelectEvent();
+            if (inGameHoursPassed < Settings.Settings.GeneralSettings.MinimumInGameHours ||
+                (DateTime.Now - lastEventTime).Minutes < minutesForNextEvent) return;
+            // Select which event should be played
+            BaseEvent eventToPlay = SelectEvent();
 
-                // Start the random event
-                ExecuteRandomEvent(eventToPlay);
-            }
+            // Start the random event
+            ExecuteRandomEvent(eventToPlay);
         }
 
         /// <summary>
@@ -126,7 +97,7 @@ namespace CryingBuffalo.RandomEvents
         /// <returns></returns>
         private BaseEvent SelectEvent()
         {
-            return RandomEventGenerator.GetRandom().GetBaseEvent();
+            return randomEventGenerator.GetRandom().GetBaseEvent();
         }
 
         /// <summary>
@@ -146,20 +117,17 @@ namespace CryingBuffalo.RandomEvents
 
             // Stop the processing of random events
             currentEvent = aEvent;
-            aEvent.OnEventCompleted += EventEnded;
+            aEvent.onEventCompleted += EventEnded;
 
             aEvent.StartEvent();
         }
 
         private bool CancelEvent()
         {
-            if (currentEvent != null)
-            {
-                currentEvent.CancelEvent();
-                EventEnded();
-                return true;
-            }
-            return false;
+            if (currentEvent == null) return false;
+            currentEvent.CancelEvent();
+            EventEnded();
+            return true;
         }
 
         private void EventEnded()
@@ -170,27 +138,21 @@ namespace CryingBuffalo.RandomEvents
 
         private void PopulateRandomEventGenerator()
         {
-            RandomEventGenerator.AddEvents(GetRandomEventData());
+            randomEventGenerator.AddEvents(GetRandomEventData());
         }
 
         private void ResetEventTimer()
         {
             inGameHoursPassed = 0;
-            minutesForNextEvent = MBRandom.RandomInt(Settings.GeneralSettings.MinimumRealMinutes, Settings.GeneralSettings.MaximumRealMinutes);
+            minutesForNextEvent = MBRandom.RandomInt(Settings.Settings.GeneralSettings.MinimumRealMinutes, Settings.Settings.GeneralSettings.MaximumRealMinutes);
             lastEventTime = DateTime.Now;
         }
 
-        private List<RandomEventData> GetRandomEventData()
+        private static List<RandomEventData> GetRandomEventData()
         {
-            List<RandomEventData> eventData = new List<RandomEventData>();
-            var properties = Settings.RandomEvents.GetType().GetProperties();
+            var properties = Settings.Settings.RandomEvents.GetType().GetProperties();
 
-            foreach (var propertyInfo in properties)
-            {
-                eventData.Add((RandomEventData)propertyInfo.GetValue(Settings.RandomEvents, null));
-            }
-
-            return eventData;
+            return properties.Select(propertyInfo => (RandomEventData)propertyInfo.GetValue(Settings.Settings.RandomEvents, null)).ToList();
         }
     }
 }

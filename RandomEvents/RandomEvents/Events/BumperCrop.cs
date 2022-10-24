@@ -3,49 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
-	class BumperCrop : BaseEvent
+	internal sealed class BumperCrop : BaseEvent
 	{
-		private float cropGainPercent;
+		private readonly float cropGainPercent;
 
-		public BumperCrop() : base(Settings.RandomEvents.BumperCropData)
+		public BumperCrop() : base(Settings.Settings.RandomEvents.BumperCropData)
 		{
-			cropGainPercent = Settings.RandomEvents.BumperCropData.cropGainPercent;
+			cropGainPercent = Settings.Settings.RandomEvents.BumperCropData.cropGainPercent;
 		}
 
 		public override void StartEvent()
 		{
 			try
 			{
-				// The name of the settlement that receives the food
-				string bumperSettlement = "";
-
 				// The list of settlements that are able to have food added to them
-				List<Settlement> eligibleSettlements = new List<Settlement>();
-
-				// Out of the settlements the main hero owns, only the towns or castles have food.
-				foreach (Settlement s in Hero.MainHero.Clan.Settlements)
-				{
-					if (s.IsTown || s.IsCastle)
-					{
-						eligibleSettlements.Add(s);
-					}
-				}
+				var eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
 
 				// Randomly pick one of the eligible settlements
-				int index = MBRandom.RandomInt(0, eligibleSettlements.Count);
+				var index = MBRandom.RandomInt(0, eligibleSettlements.Count);
 
 				// Grab the winning settlement and add food to it
-				Settlement winningSettlement = eligibleSettlements[index];
+				var winningSettlement = eligibleSettlements[index];
 				
 				winningSettlement.Town.FoodStocks += MathF.Abs(winningSettlement.Town.FoodChange * cropGainPercent);
 
 				// set the name to display
-				bumperSettlement = winningSettlement.Name.ToString();
+				var bumperSettlement = winningSettlement.Name.ToString();
 
 				InformationManager.ShowInquiry(
 					new InquiryData("Bumper Crop!",
@@ -60,21 +49,21 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while running \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while running \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 
 			StopEvent();
 		}
 
-		public override void StopEvent()
+		private void StopEvent()
 		{
 			try
 			{
-				OnEventCompleted.Invoke();
+				onEventCompleted.Invoke();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Error while stopping \"{this.RandomEventData.EventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 
@@ -84,20 +73,13 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			if (Hero.MainHero.Clan.Settlements.Count() > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return Hero.MainHero.Clan.Settlements.Any();
 		}
 	}
 
 	public class BumperCropData : RandomEventData
 	{
-		public float cropGainPercent;
+		public readonly float cropGainPercent;
 
 		public BumperCropData(string eventType, float chanceWeight, float cropGainPercent) : base(eventType, chanceWeight)
 		{
