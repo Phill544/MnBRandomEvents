@@ -34,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				TroopRosterElement elementCopyAtIndex = PartyBase.MainParty.MemberRoster.GetElementCopyAtIndex(i);
 				if (elementCopyAtIndex.Character.IsHero)
 				{
-					elementCopyAtIndex.Character.HeroObject.Heal(PartyBase.MainParty, 100);
+					elementCopyAtIndex.Character.HeroObject.Heal(100);
 				}
 				else
 				{

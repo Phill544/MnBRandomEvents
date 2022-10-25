@@ -9,11 +9,12 @@ using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class RunawaySon : BaseEvent
     {
         private const string EventTitle = "Runaway Son";
+        
         private readonly int minGold;
         private readonly int maxGold;
 
@@ -42,15 +43,13 @@ namespace CryingBuffalo.RandomEvents.Events
 
             var inquiryElements = new List<InquiryElement>
             {
-                new InquiryElement("a", "Take him in and train him", null, true,
-                    "You could use the distraction of having someone to train"),
-                new InquiryElement("b", "Tell him he can tag along", null, true,
-                    "You really don't have time to babysit him"),
+                new InquiryElement("a", "Take him in and train him", null, true, "You could use the distraction of having someone to train"),
+                new InquiryElement("b", "Tell him he can tag along", null, true, "You really don't have time to babysit him"),
                 new InquiryElement("c", "Go away", null, true, "He needs to leave"),
                 new InquiryElement("d", "Kill him", null, true, "It's a cruel world")
             };
 
-            int goldLooted = MBRandom.RandomInt(minGold, maxGold);
+            var goldLooted = MBRandom.RandomInt(minGold, maxGold);
 
             var msid = new MultiSelectionInquiryData(
                 EventTitle,

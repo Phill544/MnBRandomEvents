@@ -160,7 +160,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		/// <summary>
 		/// Gets which skill to use for the event
 		/// </summary>
-		private SkillObject GetSkillObject()
+		private static SkillObject GetSkillObject()
 		{
 			Equipment playerEquipment = Hero.MainHero.BattleEquipment;
 

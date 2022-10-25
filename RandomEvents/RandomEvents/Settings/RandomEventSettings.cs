@@ -1,4 +1,5 @@
 ﻿using CryingBuffalo.RandomEvents.Events;
+using CryingBuffalo.RandomEvents.Events.CCEvents;
 using Newtonsoft.Json;
 
 namespace CryingBuffalo.RandomEvents.Settings
@@ -96,7 +97,10 @@ namespace CryingBuffalo.RandomEvents.Settings
         public SupernaturalEncounterData SupernaturalEncounterData { get; private set; } =
             new SupernaturalEncounterData("SupernaturalEncounter", 1024);
         
-        public RunawaySonData RunawaySonData { get; private set; } =
+        public RunawaySonData RunawaySonData { get; } =
             new RunawaySonData("RunawaySon", 1024, 10, 50);
+        
+        public UnexpectedWeddingData UnexpectedWeddingData { get; } =
+            new UnexpectedWeddingData("UnexpectedWedding", 1024, 10, 100, 10, 50, 200, 15, 50);
     }
 }
