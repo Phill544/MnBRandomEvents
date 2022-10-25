@@ -266,6 +266,7 @@
     <Compile Include="Events\Momentum.cs" />
     <Compile Include="Events\PerfectWeather.cs" />
     <Compile Include="Events\PrisonerRebellion.cs" />
+    <Compile Include="Events\RunawaySon.cs" />
     <Compile Include="Events\SecretSinger.cs" />
     <Compile Include="Events\SpeedyRecovery.cs" />
     <Compile Include="Events\SuccessfulDeeds.cs" />

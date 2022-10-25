@@ -92,16 +92,13 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			var factionsAtWar = Campaign.Current.Factions.Where(faction => Hero.MainHero.Clan.IsAtWarWith(faction) && !faction.IsBanditFaction).ToList();
 
-			if (factionsAtWar.Count == 0)
-			{
-				// The player isn't at war with anyone, we'll spawn bandits.
-				var hideouts = Settlement.FindAll(s => s.IsHideout).ToList();
-				var closestHideout = hideouts.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
-				return closestHideout.Culture;
-			}
+			if (factionsAtWar.Count != 0) return RandomSelection<IFaction>.GetRandomElement(factionsAtWar).Culture;
+			// The player isn't at war with anyone, we'll spawn bandits.
+			var hideouts = Settlement.FindAll(s => s.IsHideout).ToList();
+			var closestHideout = hideouts.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+			return closestHideout.Culture;
 
 			// Pick one of the factions to spawn prisoners of
-			return RandomSelection<IFaction>.GetRandomElement(factionsAtWar).Culture;
 		}
 	}
 

@@ -95,5 +95,8 @@ namespace CryingBuffalo.RandomEvents.Settings
         [JsonProperty]
         public SupernaturalEncounterData SupernaturalEncounterData { get; private set; } =
             new SupernaturalEncounterData("SupernaturalEncounter", 1024);
+        
+        public RunawaySonData RunawaySonData { get; private set; } =
+            new RunawaySonData("RunawaySon", 1024, 10, 50);
     }
 }

@@ -98,7 +98,7 @@ namespace CryingBuffalo.RandomEvents.Events
 							}
 
 							//Check for success
-							float chancePercent = 0;
+							float chancePercent;
 
 							if (Hero.MainHero.GetSkillValue(skillToUse) < minRangeLevel)
 							{
