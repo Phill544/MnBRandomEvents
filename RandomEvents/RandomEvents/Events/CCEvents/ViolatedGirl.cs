@@ -58,7 +58,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var msid = new MultiSelectionInquiryData(
                 EventTitle,
-                "As your party is resting you are approached by an unknown woman. You invite her into your tent to listen to what she has to say. She claims that while you were in the previous town she was violated by one of your men. What do you do?",
+                "As your party is resting you are approached by an unknown young woman. You invite her into your tent to listen to what she has to say. She claims that while you were in the previous town she was violated by one of your men. What do you do?",
                 inquiryElements,
                 false,
                 1,
@@ -73,7 +73,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 new InquiryData(EventTitle,
                                     "You tell her that this sort of behaviour is unacceptable. You order all your men to attention as you and the woman search for the man. She finally stops and points to one of your men. You order him to you.\n" +
                                     "You ask him if her story is true and he confirms that it is. You immediately punch him in the face so hard that he falls on his back. You strip him of his rank on the spot and have some men take him in chains.\n" +
-                                    $"You ask the woman what she wants to do with him. She wants him to pay for his misdeed so you have 5 of your men escort him {closestCity} where he will face justice. \n" +
+                                    $"You ask the woman what she wants to do with him. She wants him to pay for his misdeed so you have 5 of your men escort him to {closestCity} where he will face justice. \n" +
                                     "The woman thank you for believing her and appreciate your swift action.",
                                     true, false, "Done", null, null, null), true);
                             break;

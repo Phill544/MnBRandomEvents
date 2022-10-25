@@ -105,5 +105,8 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         public ViolatedGirlData ViolatedGirlData { get; } =
             new ViolatedGirlData("ViolatedGirl", 1024, 50, 750);
+        
+        public FallenSoldierFamilyData FallenSoldierFamilyData { get; } =
+            new FallenSoldierFamilyData("FallenSoldierFamily", 1024, 500, 2500 );
     }
 }
