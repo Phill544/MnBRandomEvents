@@ -15,10 +15,10 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private const string EventTitle = "Target Practice!";
 
-		public TargetPractice() : base(Settings.Settings.RandomEvents.TargetPracticeData)
+		public TargetPractice() : base(Settings.ModSettings.RandomEvents.TargetPracticeData)
 		{
-			minimumSoldiers = Settings.Settings.RandomEvents.TargetPracticeData.minimumSoldiers;
-			percentageDifferenceOfCurrentTroop = Settings.Settings.RandomEvents.TargetPracticeData.percentageDifferenceOfCurrentTroop;
+			minimumSoldiers = Settings.ModSettings.RandomEvents.TargetPracticeData.minimumSoldiers;
+			percentageDifferenceOfCurrentTroop = Settings.ModSettings.RandomEvents.TargetPracticeData.percentageDifferenceOfCurrentTroop;
 		}
 
 		public override void CancelEvent()
@@ -32,7 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.Settings.GeneralSettings.DebugMode)
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}

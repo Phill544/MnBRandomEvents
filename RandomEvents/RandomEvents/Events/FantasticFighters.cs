@@ -9,9 +9,9 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly int renownGain;
 
-		public FantasticFighters() : base(Settings.Settings.RandomEvents.FantasticFightersData)
+		public FantasticFighters() : base(Settings.ModSettings.RandomEvents.FantasticFightersData)
 		{
-			renownGain = Settings.Settings.RandomEvents.FantasticFightersData.renownGain;
+			renownGain = Settings.ModSettings.RandomEvents.FantasticFightersData.renownGain;
 		}
 
 		public override void CancelEvent()

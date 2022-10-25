@@ -17,11 +17,11 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private const string EventTitle = "Food Fight!";
 
-		public FoodFight() : base(Settings.Settings.RandomEvents.FoodFightData)
+		public FoodFight() : base(Settings.ModSettings.RandomEvents.FoodFightData)
 		{
-			minFoodLoss = Settings.Settings.RandomEvents.FoodFightData.minFoodLoss;
-			maxFoodLoss = Settings.Settings.RandomEvents.FoodFightData.maxFoodLoss;
-			moraleLoss = Settings.Settings.RandomEvents.FoodFightData.moraleLoss;
+			minFoodLoss = Settings.ModSettings.RandomEvents.FoodFightData.minFoodLoss;
+			maxFoodLoss = Settings.ModSettings.RandomEvents.FoodFightData.maxFoodLoss;
+			moraleLoss = Settings.ModSettings.RandomEvents.FoodFightData.moraleLoss;
 		}
 
 		public override void CancelEvent()
@@ -35,7 +35,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.Settings.GeneralSettings.DebugMode)
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
@@ -67,7 +67,7 @@ namespace CryingBuffalo.RandomEvents.Events
 						{
 							string extraDialogue = "";
 
-							float xpToGive = Settings.Settings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
+							float xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
 							Hero.MainHero.AddSkillXp(DefaultSkills.Throwing, xpToGive);
 
 							int foodToRemove = MBRandom.RandomInt(minFoodLoss, maxFoodLoss);

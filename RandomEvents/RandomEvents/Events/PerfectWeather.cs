@@ -9,9 +9,9 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly int moraleGain;
 
-		public PerfectWeather() : base(Settings.Settings.RandomEvents.PerfectWeatherData)
+		public PerfectWeather() : base(Settings.ModSettings.RandomEvents.PerfectWeatherData)
 		{
-			moraleGain = Settings.Settings.RandomEvents.PerfectWeatherData.moraleGain;
+			moraleGain = Settings.ModSettings.RandomEvents.PerfectWeatherData.moraleGain;
 		}
 
 		public override void CancelEvent()

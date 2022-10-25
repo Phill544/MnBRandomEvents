@@ -10,9 +10,9 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly int moraleGain;
 
-		public HotSprings() : base(Settings.Settings.RandomEvents.HotSpringsData)
+		public HotSprings() : base(Settings.ModSettings.RandomEvents.HotSpringsData)
 		{
-			moraleGain = Settings.Settings.RandomEvents.HotSpringsData.moraleGain;
+			moraleGain = Settings.ModSettings.RandomEvents.HotSpringsData.moraleGain;
 		}
 
 		public override void CancelEvent()

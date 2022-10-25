@@ -9,9 +9,9 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly int moraleGain;
 
-		public SecretSinger() : base(Settings.Settings.RandomEvents.SecretSingerData)
+		public SecretSinger() : base(Settings.ModSettings.RandomEvents.SecretSingerData)
 		{
-			moraleGain = Settings.Settings.RandomEvents.SecretSingerData.moraleGain;
+			moraleGain = Settings.ModSettings.RandomEvents.SecretSingerData.moraleGain;
 		}
 
 		public override void CancelEvent()

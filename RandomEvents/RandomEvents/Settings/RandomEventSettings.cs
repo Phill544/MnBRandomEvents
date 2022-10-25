@@ -102,5 +102,8 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         public UnexpectedWeddingData UnexpectedWeddingData { get; } =
             new UnexpectedWeddingData("UnexpectedWedding", 1024, 10, 100, 10, 50, 200, 15, 50, 200, 1000);
+        
+        public ViolatedGirlData ViolatedGirlData { get; } =
+            new ViolatedGirlData("ViolatedGirl", 1024, 50, 750);
     }
 }

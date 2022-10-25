@@ -23,17 +23,17 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int minGoldRaided;
         private readonly int maxGoldRaided;
 
-        public UnexpectedWedding() : base(Settings.Settings.RandomEvents.UnexpectedWeddingData)
+        public UnexpectedWedding() : base(Settings.ModSettings.RandomEvents.UnexpectedWeddingData)
         {
-            minGoldToDonate = Settings.Settings.RandomEvents.UnexpectedWeddingData.minGoldToDonate;
-            maxGoldToDonate = Settings.Settings.RandomEvents.UnexpectedWeddingData.maxGoldToDonate;
-            minPeopleInWedding = Settings.Settings.RandomEvents.UnexpectedWeddingData.minPeopleInWedding;
-            maxPeopleInWedding = Settings.Settings.RandomEvents.UnexpectedWeddingData.maxPeopleInWedding;
-            embarrassedSoliderMaxGold = Settings.Settings.RandomEvents.UnexpectedWeddingData.embarrassedSoliderMaxGold;
-            minMoraleGain = Settings.Settings.RandomEvents.UnexpectedWeddingData.minMoraleGain;
-            maxMoraleGain = Settings.Settings.RandomEvents.UnexpectedWeddingData.maxMoraleGain;
-            minGoldRaided = Settings.Settings.RandomEvents.UnexpectedWeddingData.minGoldRaided;
-            maxGoldRaided = Settings.Settings.RandomEvents.UnexpectedWeddingData.maxGoldRaided;
+            minGoldToDonate = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.minGoldToDonate;
+            maxGoldToDonate = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.maxGoldToDonate;
+            minPeopleInWedding = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.minPeopleInWedding;
+            maxPeopleInWedding = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.maxPeopleInWedding;
+            embarrassedSoliderMaxGold = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.embarrassedSoliderMaxGold;
+            minMoraleGain = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.minMoraleGain;
+            maxMoraleGain = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.maxMoraleGain;
+            minGoldRaided = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.minGoldRaided;
+            maxGoldRaided = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.maxGoldRaided;
         }
 
         public override void CancelEvent()
@@ -47,7 +47,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (Settings.Settings.GeneralSettings.DebugMode)
+            if (Settings.ModSettings.GeneralSettings.DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
                     RandomEventsSubmodule.TextColor));
@@ -106,7 +106,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             var embarrassedSoliderGold = MBRandom.RandomInt(10, embarrassedSoliderMaxGold);
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
-                                    $"You have your men find 5 bottles of your best wine. After  a few minutes, one clearly embarrassed solider approaches you and tells you you are all out of wine. You slap him across his face for putting you in such a humiliating situation. You tell the solider to hand over all his coin to you. He does as you command him to do. You apologises to the bride and hand her {embarrassedSoliderGold} gold instead of wine. She thanks you and your party moves on. ",
+                                    "You have your men find 5 bottles of your best wine. After  a few minutes, one clearly embarrassed solider approaches you and tells you you are all out of wine. " +
+                                    "You slap him across his face for putting you in such a humiliating situation. You tell the solider to hand over all his coin to you. He does as you command him to do. " +
+                                    $"You apologises to the bride and hand her {embarrassedSoliderGold} gold instead of wine. She thanks you and your party moves on. ",
                                     true, false, "Done", null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-embarrassedSoliderGold);
                             break;
@@ -127,7 +129,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "e":
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
-                                    $"You have your men surround the area while you go and talk to the guests. You have all guests empty their pockets and give you anything valuable. Some guests resists but after a few threatening gestures from your men they too fall in line. After you have stolen {raidedGold} gold and anything of value from the wedding, you order your men to trash the entire area. Your men does so without blinking an eye. You see the bride crying while being comforted by some guests. You can see the hate in the groom's eyes. He will undoubtedly remember you.\n \nAfter you have personally made sure that you have thoroughly ruined this once joyful moment, you order your men to leave.",
+                                    "You have your men surround the area while you go and talk to the guests. You have all guests empty their pockets and give you anything valuable. " +
+                                    $"Some guests resists but after a few threatening gestures from your men they too fall in line. After you have stolen {raidedGold} gold and anything of value from the wedding, you order your men to trash the entire area. " +
+                                    "Your men does so without blinking an eye. You see the bride crying while being comforted by some guests. You can see the hate in the groom's eyes. He will undoubtedly remember you.\n \n" +
+                                    "After you have personally made sure that you have thoroughly ruined this once joyful moment, you order your men to leave.",
                                     true, false, "Done", null, null, null), true);
                             break;
                         default:

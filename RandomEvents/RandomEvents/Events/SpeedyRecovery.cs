@@ -11,10 +11,10 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minTroopsToHeal;
 		private readonly int maxTroopsToHeal;
 
-		public SpeedyRecovery() : base(Settings.Settings.RandomEvents.SpeedyRecoveryData)
+		public SpeedyRecovery() : base(Settings.ModSettings.RandomEvents.SpeedyRecoveryData)
 		{
-			minTroopsToHeal = Settings.Settings.RandomEvents.SpeedyRecoveryData.minTroopsToHeal;
-			maxTroopsToHeal = Settings.Settings.RandomEvents.SpeedyRecoveryData.maxTroopsToHeal;
+			minTroopsToHeal = Settings.ModSettings.RandomEvents.SpeedyRecoveryData.minTroopsToHeal;
+			maxTroopsToHeal = Settings.ModSettings.RandomEvents.SpeedyRecoveryData.maxTroopsToHeal;
 		}
 
 		public override void CancelEvent()

@@ -13,9 +13,9 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly float foodLossPercent;
 
-		public GranaryRats() : base(Settings.Settings.RandomEvents.GranaryRatsData)
+		public GranaryRats() : base(Settings.ModSettings.RandomEvents.GranaryRatsData)
 		{
-			foodLossPercent = Settings.Settings.RandomEvents.GranaryRatsData.foodLossPercent;
+			foodLossPercent = Settings.ModSettings.RandomEvents.GranaryRatsData.foodLossPercent;
 		}
 
 		public override void CancelEvent()

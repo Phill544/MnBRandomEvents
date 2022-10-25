@@ -9,7 +9,7 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class Momentum : BaseEvent
 	{
-		public Momentum() : base(Settings.Settings.RandomEvents.MomentumData)
+		public Momentum() : base(Settings.ModSettings.RandomEvents.MomentumData)
 		{
 		}
 
@@ -30,13 +30,13 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			if (isOnFoot)
 			{
-				float xpToGive = Settings.Settings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Athletics);
+				float xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Athletics);
 				Hero.MainHero.AddSkillXp(DefaultSkills.Athletics, xpToGive);
 				dialogue = "on foot";
 			}
 			else
 			{
-				float xpToGive = Settings.Settings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Riding);
+				float xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Riding);
 				Hero.MainHero.AddSkillXp(DefaultSkills.Riding, xpToGive);
 				dialogue = "riding";
 			}

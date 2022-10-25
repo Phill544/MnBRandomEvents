@@ -18,10 +18,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int minGold;
         private readonly int maxGold;
 
-        public RunawaySon() : base(Settings.Settings.RandomEvents.RunawaySonData)
+        public RunawaySon() : base(Settings.ModSettings.RandomEvents.RunawaySonData)
         {
-            minGold = Settings.Settings.RandomEvents.RunawaySonData.minGold;
-            maxGold = Settings.Settings.RandomEvents.RunawaySonData.maxGold;
+            minGold = Settings.ModSettings.RandomEvents.RunawaySonData.minGold;
+            maxGold = Settings.ModSettings.RandomEvents.RunawaySonData.maxGold;
         }
 
         public override void CancelEvent()
@@ -35,7 +35,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (Settings.Settings.GeneralSettings.DebugMode)
+            if (Settings.ModSettings.GeneralSettings.DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
                     RandomEventsSubmodule.TextColor));
@@ -53,7 +53,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var msid = new MultiSelectionInquiryData(
                 EventTitle,
-                "As your party moves through the land you are approached by a young man. He explains that he ran away from the family farm after suffering abuse from his parents for years. He wants to your party but he lacks any real combat skill.",
+                "As your party moves through the land you are approached by a young man. He explains that he ran away from the family farm after suffering abuse from his parents for years. " +
+                "He wants to your party and he tells you he has some skills with weapons.",
                 inquiryElements,
                 false,
                 1,
@@ -87,7 +88,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "d":
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
-                                    $"You laugh as you hear his plea and your men soon joins in. You approach the man and thrust a dagger into his stomach. You watch him fall to the ground in a pool of blood and screaming in pain. You kneel down beside him and watch as the light soon leaves his eyes and he dies from his injury. You and some men decide to cut him open and hang his body from a tree as a warning but not before looting his body for {goldLooted} gold.",
+                                    "You laugh as you hear his plea and your men soon joins in the laughter. You approach the man and thrust a dagger into his stomach. You watch him fall to the ground in a pool of blood and screaming in pain.\n " +
+                                    "You kneel down beside him and watch as the light soon leaves his eyes and he dies from his injury. " +
+                                    $"You and some men decide to cut him open and hang his body from a tree as a warning but not before looting his body for {goldLooted} gold.",
                                     true, false, "Done", null, null, null), true);
 
                             Hero.MainHero.ChangeHeroGold(goldLooted);

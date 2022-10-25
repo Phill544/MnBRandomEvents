@@ -21,14 +21,14 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private const string EventTitle = "Look up!";
 
-		public LookUp() : base(Settings.Settings.RandomEvents.LookUpData)
+		public LookUp() : base(Settings.ModSettings.RandomEvents.LookUpData)
 		{
-			treeShakeChance = Settings.Settings.RandomEvents.LookUpData.treeShakeChance;
-			baseRangeChance = Settings.Settings.RandomEvents.LookUpData.baseRangeChance;
-			minRangeLevel = Settings.Settings.RandomEvents.LookUpData.minRangeLevel;
-			maxRangeLevel = Settings.Settings.RandomEvents.LookUpData.maxRangeLevel;
-			minGold = Settings.Settings.RandomEvents.LookUpData.minGold;
-			maxGold = Settings.Settings.RandomEvents.LookUpData.maxGold;
+			treeShakeChance = Settings.ModSettings.RandomEvents.LookUpData.treeShakeChance;
+			baseRangeChance = Settings.ModSettings.RandomEvents.LookUpData.baseRangeChance;
+			minRangeLevel = Settings.ModSettings.RandomEvents.LookUpData.minRangeLevel;
+			maxRangeLevel = Settings.ModSettings.RandomEvents.LookUpData.maxRangeLevel;
+			minGold = Settings.ModSettings.RandomEvents.LookUpData.minGold;
+			maxGold = Settings.ModSettings.RandomEvents.LookUpData.maxGold;
 		}
 
 		public override void CancelEvent()
@@ -42,7 +42,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.Settings.GeneralSettings.DebugMode)
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
@@ -117,7 +117,7 @@ namespace CryingBuffalo.RandomEvents.Events
 								int goldGained = MBRandom.RandomInt(minGold, maxGold);
 								Hero.MainHero.ChangeHeroGold(goldGained);
 
-								Hero.MainHero.AddSkillXp(skillToUse, Settings.Settings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(skillToUse));
+								Hero.MainHero.AddSkillXp(skillToUse, Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(skillToUse));
 
 								InformationManager.ShowInquiry(new InquiryData(EventTitle, $"You manage to knock the shiny object out of the tree with (what you consider) a fantastic shot! Shame no one was there to see it. You notice that object was in fact a purse full of {goldGained} gold!", true, false, "Done", null, null, null), true);
 							}

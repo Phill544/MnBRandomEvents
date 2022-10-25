@@ -12,9 +12,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private bool heroInPrisonerRoster;
 
-		public PrisonerRebellion() : base(Settings.Settings.RandomEvents.PrisonerRebellionData)
+		public PrisonerRebellion() : base(Settings.ModSettings.RandomEvents.PrisonerRebellionData)
 		{
-			minimumPrisoners = Settings.Settings.RandomEvents.PrisonerRebellionData.minimumPrisoners;
+			minimumPrisoners = Settings.ModSettings.RandomEvents.PrisonerRebellionData.minimumPrisoners;
 		}
 
 		public override void CancelEvent()
@@ -28,7 +28,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.Settings.GeneralSettings.DebugMode)
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}

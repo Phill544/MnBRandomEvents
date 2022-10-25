@@ -12,9 +12,9 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly float moneyBetPercent;
 
-		public BetMoney() : base(Settings.Settings.RandomEvents.BetMoneyData)
+		public BetMoney() : base(Settings.ModSettings.RandomEvents.BetMoneyData)
 		{
-			moneyBetPercent = Settings.Settings.RandomEvents.BetMoneyData.moneyBetPercent;
+			moneyBetPercent = Settings.ModSettings.RandomEvents.BetMoneyData.moneyBetPercent;
 		}
 
 		public override void StartEvent()

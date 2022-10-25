@@ -9,9 +9,9 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly float influenceGain;
 
-		public SuccessfulDeeds() : base(Settings.Settings.RandomEvents.SuccessfulDeedsData)
+		public SuccessfulDeeds() : base(Settings.ModSettings.RandomEvents.SuccessfulDeedsData)
 		{
-			influenceGain = Settings.Settings.RandomEvents.SuccessfulDeedsData.influenceGain;
+			influenceGain = Settings.ModSettings.RandomEvents.SuccessfulDeedsData.influenceGain;
 		}
 
 		public override void CancelEvent()

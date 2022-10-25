@@ -18,12 +18,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private const string EventTitle = "It’s Airborne!";
 
-		public DiseasedCity() : base(Settings.Settings.RandomEvents.DiseasedCityData)
+		public DiseasedCity() : base(Settings.ModSettings.RandomEvents.DiseasedCityData)
 		{
-			baseSuccessChance = Settings.Settings.RandomEvents.DiseasedCityData.baseSuccessChance;
-			highMedicineChance = Settings.Settings.RandomEvents.DiseasedCityData.highMedicineChance;
-			highMedicineLevel = Settings.Settings.RandomEvents.DiseasedCityData.highMedicineLevel;
-			percentLoss = Settings.Settings.RandomEvents.DiseasedCityData.percentLoss;
+			baseSuccessChance = Settings.ModSettings.RandomEvents.DiseasedCityData.baseSuccessChance;
+			highMedicineChance = Settings.ModSettings.RandomEvents.DiseasedCityData.highMedicineChance;
+			highMedicineLevel = Settings.ModSettings.RandomEvents.DiseasedCityData.highMedicineLevel;
+			percentLoss = Settings.ModSettings.RandomEvents.DiseasedCityData.percentLoss;
 		}
 
 		public override void CancelEvent()
@@ -137,7 +137,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					plaguedSettlement.Town.Loyalty *= 1 - percentLoss;
 
 					// Give the hero half xp for trying
-					var xpToGive = Settings.Settings.GeneralSettings.GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) * 0.5f;
+					var xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) * 0.5f;
 
 					highestMedicineHero.AddSkillXp(DefaultSkills.Medicine, xpToGive);
 
@@ -183,7 +183,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				if (highestMedicineHero != null)
 				{
 					// Give the hero xp for saving the settlement
-					var xpToGive = Settings.Settings.GeneralSettings.GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine);
+					var xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine);
 
 					highestMedicineHero.AddSkillXp(DefaultSkills.Medicine, xpToGive);
 

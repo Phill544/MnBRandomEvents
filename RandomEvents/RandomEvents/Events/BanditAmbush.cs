@@ -19,12 +19,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private const string EventTitle = "Ambushed by bandits";
 
-		public BanditAmbush() : base(Settings.Settings.RandomEvents.BanditAmbushData)
+		public BanditAmbush() : base(Settings.ModSettings.RandomEvents.BanditAmbushData)
 		{
-			moneyMinPercent = Settings.Settings.RandomEvents.BanditAmbushData.moneyMinPercent;
-			moneyMaxPercent = Settings.Settings.RandomEvents.BanditAmbushData.moneyMaxPercent;
-			troopScareCount = Settings.Settings.RandomEvents.BanditAmbushData.troopScareCount;
-			banditCap = Settings.Settings.RandomEvents.BanditAmbushData.banditCap;
+			moneyMinPercent = Settings.ModSettings.RandomEvents.BanditAmbushData.moneyMinPercent;
+			moneyMaxPercent = Settings.ModSettings.RandomEvents.BanditAmbushData.moneyMaxPercent;
+			troopScareCount = Settings.ModSettings.RandomEvents.BanditAmbushData.troopScareCount;
+			banditCap = Settings.ModSettings.RandomEvents.BanditAmbushData.banditCap;
 		}
 
 		public override void CancelEvent()
@@ -38,7 +38,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.Settings.GeneralSettings.DebugMode)
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}

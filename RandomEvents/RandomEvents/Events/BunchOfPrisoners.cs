@@ -18,10 +18,10 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minPrisonerGain;
 		private readonly int maxPrisonerGain;
 
-		public BunchOfPrisoners() : base(Settings.Settings.RandomEvents.BunchOfPrisonersData)
+		public BunchOfPrisoners() : base(Settings.ModSettings.RandomEvents.BunchOfPrisonersData)
 		{
-			minPrisonerGain = Settings.Settings.RandomEvents.BunchOfPrisonersData.minPrisonerGain;
-			maxPrisonerGain = Settings.Settings.RandomEvents.BunchOfPrisonersData.maxPrisonerGain;
+			minPrisonerGain = Settings.ModSettings.RandomEvents.BunchOfPrisonersData.minPrisonerGain;
+			maxPrisonerGain = Settings.ModSettings.RandomEvents.BunchOfPrisonersData.maxPrisonerGain;
 		}
 
 		public override void CancelEvent()
@@ -35,7 +35,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.Settings.GeneralSettings.DebugMode)
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
