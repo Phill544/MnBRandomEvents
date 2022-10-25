@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
@@ -21,6 +20,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int embarrassedSoliderMaxGold;
         private readonly int minMoraleGain;
         private readonly int maxMoraleGain;
+        private readonly int minGoldRaided;
+        private readonly int maxGoldRaided;
 
         public UnexpectedWedding() : base(Settings.Settings.RandomEvents.UnexpectedWeddingData)
         {
@@ -31,6 +32,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             embarrassedSoliderMaxGold = Settings.Settings.RandomEvents.UnexpectedWeddingData.embarrassedSoliderMaxGold;
             minMoraleGain = Settings.Settings.RandomEvents.UnexpectedWeddingData.minMoraleGain;
             maxMoraleGain = Settings.Settings.RandomEvents.UnexpectedWeddingData.maxMoraleGain;
+            minGoldRaided = Settings.Settings.RandomEvents.UnexpectedWeddingData.minGoldRaided;
+            maxGoldRaided = Settings.Settings.RandomEvents.UnexpectedWeddingData.maxGoldRaided;
         }
 
         public override void CancelEvent()
@@ -56,26 +59,23 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             {
                 new InquiryElement("a", $"Give them {goldToDonate} gold as a gift", null, true, "This is a special day after all"),
                 new InquiryElement("b", "Give them some wine to enjoy", null, true, "Who doesn't appreciate a good bottle of wine, right?"),
-                new InquiryElement("c", "Stay and watch the ceremony but leave once it's concluded", null, true, "You really don't want to waste any time"),
-                new InquiryElement("d", "Leave", null, true, "Not interested")
+                new InquiryElement("c", "Watch the ceremony but leave once it's concluded", null, true, "It's beautiful but you really don't want to waste any time"),
+                new InquiryElement("d", "Leave", null, true, "Not interested"),
+                new InquiryElement("e", "Raid the wedding", null, true, "You could do with some gold.")
             };
 
             
             var peopleInWedding = MBRandom.RandomInt(minPeopleInWedding, maxPeopleInWedding);
             
-            var settlements = Settlement.FindAll(s => !s.IsHideout).ToList();
-            var closestSettlement =  settlements.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
-            
-            var currentCulture = closestSettlement.Culture.GetName();
-
             var partyFood = MobileParty.MainParty.TotalFoodAtInventory;
 
             var moraleGain = MBRandom.RandomInt(minMoraleGain, maxMoraleGain);
-            
+
+            var raidedGold = MBRandom.RandomInt(minGoldRaided, maxGoldRaided);
 
             var msid = new MultiSelectionInquiryData(
                 EventTitle,
-                $"You and your party stumble across {peopleInWedding} people in a {currentCulture} wedding taking place. The guests invite you over to celebrate this momentous event with them.",
+                $"You and your party stumble across {peopleInWedding} people in a wedding taking place. The guests invite you over to celebrate this momentous event with them.",
                 inquiryElements,
                 false,
                 1,
@@ -91,10 +91,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                     $"You congratulate the couple and you and your men scrape together {goldToDonate} gold and give it as a gift. You and your men spend the evening having fun. You really feel the morale of the men increase.",
                                     true, false, "Done", null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldToDonate);
-                            
+
                             MobileParty.MainParty.RecentEventsMorale += moraleGain;
-                            MobileParty.MainParty.MoraleExplained.Add(moraleGain, new TaleWorlds.Localization.TextObject("Random Event"));
-                            
+                            MobileParty.MainParty.MoraleExplained.Add(moraleGain, new TextObject("Random Event"));
                             break;
                         case "b" when partyFood >= 5:
                             InformationManager.ShowInquiry(
@@ -115,13 +114,20 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "c":
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
-                                    "You and your men stay for the ceremony but you leave once it is concluded.",
+                                    $"You and your men stay for the ceremony but you leave once it is concluded. You leave a small gift of {goldToDonate} gold to the newlyweds.",
                                     true, false, "Done", null, null, null), true);
+                            Hero.MainHero.ChangeHeroGold(-goldToDonate);
                             break;
                         case "d":
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
-                                    "You don't have time for this so you order your men to leave",
+                                    "You don't have time for this so you order your men to leave.",
+                                    true, false, "Done", null, null, null), true);
+                            break;
+                        case "e":
+                            InformationManager.ShowInquiry(
+                                new InquiryData(EventTitle,
+                                    $"You have your men surround the area while you go and talk to the guests. You have all guests empty their pockets and give you anything valuable. Some guests resists but after a few threatening gestures from your men they too fall in line. After you have stolen {raidedGold} gold and anything of value from the wedding, you order your men to trash the entire area. Your men does so without blinking an eye. You see the bride crying while being comforted by some guests. You can see the hate in the groom's eyes. He will undoubtedly remember you.\n \nAfter you have personally made sure that you have thoroughly ruined this once joyful moment, you order your men to leave.",
                                     true, false, "Done", null, null, null), true);
                             break;
                         default:
@@ -160,8 +166,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public readonly int embarrassedSoliderMaxGold;
         public readonly int minMoraleGain;
         public readonly int maxMoraleGain;
+        public readonly int minGoldRaided;
+        public readonly int maxGoldRaided;
 
-        public UnexpectedWeddingData(string eventType, float chanceWeight, int minGoldToDonate, int maxGoldToDonate, int minPeopleInWedding, int maxPeopleInWedding, int embarrassedSoliderMaxGold, int minMoraleGain, int maxMoraleGain) : base(eventType,
+        public UnexpectedWeddingData(string eventType, float chanceWeight, int minGoldToDonate, int maxGoldToDonate, int minPeopleInWedding, int maxPeopleInWedding, int embarrassedSoliderMaxGold, int minMoraleGain, int maxMoraleGain, int minGoldRaided, int maxGoldRaided) : base(eventType,
             chanceWeight)
         {
             this.minGoldToDonate = minGoldToDonate;
@@ -171,6 +179,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             this.embarrassedSoliderMaxGold = embarrassedSoliderMaxGold;
             this.minMoraleGain = minMoraleGain;
             this.maxMoraleGain = maxMoraleGain;
+            this.minGoldRaided = minGoldRaided;
+            this.maxGoldRaided = maxGoldRaided;
         }
 
         public override BaseEvent GetBaseEvent()

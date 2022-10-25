@@ -123,6 +123,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var closestSettlement =
                 settlements.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 
+            //Currently it gives just a random solider from the current culture. Will fix once API docs are updated
             var bandits = PartySetup.CreateBanditParty();
             bandits.MemberRoster.Clear();
             PartySetup.AddRandomCultureUnits(bandits, 1, closestSettlement.Culture);

@@ -101,6 +101,6 @@ namespace CryingBuffalo.RandomEvents.Settings
             new RunawaySonData("RunawaySon", 1024, 10, 50);
         
         public UnexpectedWeddingData UnexpectedWeddingData { get; } =
-            new UnexpectedWeddingData("UnexpectedWedding", 1024, 10, 100, 10, 50, 200, 15, 50);
+            new UnexpectedWeddingData("UnexpectedWedding", 1024, 10, 100, 10, 50, 200, 15, 50, 200, 1000);
     }
 }
