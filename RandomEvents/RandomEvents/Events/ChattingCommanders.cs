@@ -11,9 +11,9 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly float cohesionIncrease;
 
-		public ChattingCommanders() : base(Settings.Settings.RandomEvents.ChattingCommandersData)
+		public ChattingCommanders() : base(Settings.ModSettings.RandomEvents.ChattingCommandersData)
 		{
-			cohesionIncrease = Settings.Settings.RandomEvents.ChattingCommandersData.cohesionIncrease;
+			cohesionIncrease = Settings.ModSettings.RandomEvents.ChattingCommandersData.cohesionIncrease;
 		}
 
 		public override void CancelEvent()
@@ -27,7 +27,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.Settings.GeneralSettings.DebugMode)
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}

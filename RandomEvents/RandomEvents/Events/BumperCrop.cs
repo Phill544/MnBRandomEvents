@@ -13,9 +13,9 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly float cropGainPercent;
 
-		public BumperCrop() : base(Settings.Settings.RandomEvents.BumperCropData)
+		public BumperCrop() : base(Settings.ModSettings.RandomEvents.BumperCropData)
 		{
-			cropGainPercent = Settings.Settings.RandomEvents.BumperCropData.cropGainPercent;
+			cropGainPercent = Settings.ModSettings.RandomEvents.BumperCropData.cropGainPercent;
 		}
 
 		public override void StartEvent()

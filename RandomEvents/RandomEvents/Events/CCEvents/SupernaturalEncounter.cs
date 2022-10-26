@@ -4,13 +4,13 @@ using System.Windows;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public sealed class SupernaturalEncounter : BaseEvent
     {
         private const string EventTitle = "A Supernatural Encounter";
 
-        public SupernaturalEncounter() : base(Settings.Settings.RandomEvents.SupernaturalEncounterData)
+        public SupernaturalEncounter() : base(Settings.ModSettings.RandomEvents.SupernaturalEncounterData)
         {
         }
 
@@ -25,7 +25,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
         public override void StartEvent()
         {
-            if (Settings.Settings.GeneralSettings.DebugMode)
+            if (Settings.ModSettings.GeneralSettings.DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
                     RandomEventsSubmodule.TextColor));

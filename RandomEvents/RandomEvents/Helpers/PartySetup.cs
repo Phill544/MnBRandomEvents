@@ -49,16 +49,11 @@ namespace CryingBuffalo.RandomEvents.Helpers
 		public static void AddRandomCultureUnits(MobileParty party, int numberToAdd, CultureObject overrideCulture = null)
 		{
 			// Get culture
-			CultureObject partyCultureObject = null;
-			if (overrideCulture != null)
-				partyCultureObject = overrideCulture;
-			else
-				partyCultureObject = party.Party.Culture;
+			var partyCultureObject = overrideCulture ?? party.Party.Culture;
 
 			// Get possible units to create
-			List<CharacterObject> characterObjectList = null;
-			characterObjectList = partyCultureObject.IsBandit ? GetBanditCharacters(partyCultureObject) : GetMainCultureCharacters(partyCultureObject);
-			
+			var characterObjectList = partyCultureObject.IsBandit ? GetBanditCharacters(partyCultureObject) : GetMainCultureCharacters(partyCultureObject);
+
 			// Split spawn based on number to add
 			int[] spawnNumbers = new int[characterObjectList.Count];
 			int currentSpawned = 0;

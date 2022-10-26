@@ -63,12 +63,12 @@ namespace CryingBuffalo.RandomEvents
             ResetEventTimer();
         }
 
-        private uint inGameHoursPassed = 0;
+        private uint inGameHoursPassed;
 
         private DateTime lastEventTime = DateTime.Now;
         private int minutesForNextEvent;
 
-        private BaseEvent currentEvent = null;
+        private BaseEvent currentEvent;
 
         /// <summary>
         /// Check whether a random event should occur now
@@ -82,7 +82,7 @@ namespace CryingBuffalo.RandomEvents
 
             inGameHoursPassed++;
 
-            if (inGameHoursPassed < Settings.Settings.GeneralSettings.MinimumInGameHours ||
+            if (inGameHoursPassed < Settings.ModSettings.GeneralSettings.MinimumInGameHours ||
                 (DateTime.Now - lastEventTime).Minutes < minutesForNextEvent) return;
             // Select which event should be played
             BaseEvent eventToPlay = SelectEvent();
@@ -144,15 +144,15 @@ namespace CryingBuffalo.RandomEvents
         private void ResetEventTimer()
         {
             inGameHoursPassed = 0;
-            minutesForNextEvent = MBRandom.RandomInt(Settings.Settings.GeneralSettings.MinimumRealMinutes, Settings.Settings.GeneralSettings.MaximumRealMinutes);
+            minutesForNextEvent = MBRandom.RandomInt(Settings.ModSettings.GeneralSettings.MinimumRealMinutes, Settings.ModSettings.GeneralSettings.MaximumRealMinutes);
             lastEventTime = DateTime.Now;
         }
 
-        private static List<RandomEventData> GetRandomEventData()
+        private static IEnumerable<RandomEventData> GetRandomEventData()
         {
-            var properties = Settings.Settings.RandomEvents.GetType().GetProperties();
+            var properties = Settings.ModSettings.RandomEvents.GetType().GetProperties();
 
-            return properties.Select(propertyInfo => (RandomEventData)propertyInfo.GetValue(Settings.Settings.RandomEvents, null)).ToList();
+            return properties.Select(propertyInfo => (RandomEventData)propertyInfo.GetValue(Settings.ModSettings.RandomEvents, null)).ToList();
         }
     }
 }

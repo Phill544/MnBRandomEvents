@@ -18,10 +18,10 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minPrisonerGain;
 		private readonly int maxPrisonerGain;
 
-		public BunchOfPrisoners() : base(Settings.Settings.RandomEvents.BunchOfPrisonersData)
+		public BunchOfPrisoners() : base(Settings.ModSettings.RandomEvents.BunchOfPrisonersData)
 		{
-			minPrisonerGain = Settings.Settings.RandomEvents.BunchOfPrisonersData.minPrisonerGain;
-			maxPrisonerGain = Settings.Settings.RandomEvents.BunchOfPrisonersData.maxPrisonerGain;
+			minPrisonerGain = Settings.ModSettings.RandomEvents.BunchOfPrisonersData.minPrisonerGain;
+			maxPrisonerGain = Settings.ModSettings.RandomEvents.BunchOfPrisonersData.maxPrisonerGain;
 		}
 
 		public override void CancelEvent()
@@ -35,7 +35,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.Settings.GeneralSettings.DebugMode)
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
@@ -92,16 +92,13 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			var factionsAtWar = Campaign.Current.Factions.Where(faction => Hero.MainHero.Clan.IsAtWarWith(faction) && !faction.IsBanditFaction).ToList();
 
-			if (factionsAtWar.Count == 0)
-			{
-				// The player isn't at war with anyone, we'll spawn bandits.
-				var hideouts = Settlement.FindAll(s => s.IsHideout).ToList();
-				var closestHideout = hideouts.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
-				return closestHideout.Culture;
-			}
+			if (factionsAtWar.Count != 0) return RandomSelection<IFaction>.GetRandomElement(factionsAtWar).Culture;
+			// The player isn't at war with anyone, we'll spawn bandits.
+			var hideouts = Settlement.FindAll(s => s.IsHideout).ToList();
+			var closestHideout = hideouts.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+			return closestHideout.Culture;
 
 			// Pick one of the factions to spawn prisoners of
-			return RandomSelection<IFaction>.GetRandomElement(factionsAtWar).Culture;
 		}
 	}
 

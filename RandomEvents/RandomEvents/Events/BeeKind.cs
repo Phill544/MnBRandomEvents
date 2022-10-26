@@ -12,11 +12,11 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int reactionDamage;
 		private readonly float reactionChance;
 
-		public BeeKind() : base(Settings.Settings.RandomEvents.BeeKindData)
+		public BeeKind() : base(Settings.ModSettings.RandomEvents.BeeKindData)
 		{
-			damage = Settings.Settings.RandomEvents.BeeKindData.damage;
-			reactionDamage = Settings.Settings.RandomEvents.BeeKindData.reactionDamage;
-			reactionChance = Settings.Settings.RandomEvents.BeeKindData.reactionChance;
+			damage = Settings.ModSettings.RandomEvents.BeeKindData.damage;
+			reactionDamage = Settings.ModSettings.RandomEvents.BeeKindData.reactionDamage;
+			reactionChance = Settings.ModSettings.RandomEvents.BeeKindData.reactionChance;
 		}
 
 		public override void CancelEvent()

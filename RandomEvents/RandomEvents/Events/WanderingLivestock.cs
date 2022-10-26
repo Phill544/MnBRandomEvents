@@ -15,10 +15,10 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private const string EventTitle = "Free Range Meat";
 
-		public WanderingLivestock() : base(Settings.Settings.RandomEvents.WanderingLivestockData)
+		public WanderingLivestock() : base(Settings.ModSettings.RandomEvents.WanderingLivestockData)
 		{
-			minFood = Settings.Settings.RandomEvents.WanderingLivestockData.minFood;
-			maxFood = Settings.Settings.RandomEvents.WanderingLivestockData.maxFood;
+			minFood = Settings.ModSettings.RandomEvents.WanderingLivestockData.minFood;
+			maxFood = Settings.ModSettings.RandomEvents.WanderingLivestockData.maxFood;
 		}
 
 		public override void CancelEvent()
@@ -32,7 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.Settings.GeneralSettings.DebugMode)
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}

@@ -10,9 +10,9 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly int moraleGain;
 
-		public HotSprings() : base(Settings.Settings.RandomEvents.HotSpringsData)
+		public HotSprings() : base(Settings.ModSettings.RandomEvents.HotSpringsData)
 		{
-			moraleGain = Settings.Settings.RandomEvents.HotSpringsData.moraleGain;
+			moraleGain = Settings.ModSettings.RandomEvents.HotSpringsData.moraleGain;
 		}
 
 		public override void CancelEvent()
@@ -34,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				TroopRosterElement elementCopyAtIndex = PartyBase.MainParty.MemberRoster.GetElementCopyAtIndex(i);
 				if (elementCopyAtIndex.Character.IsHero)
 				{
-					elementCopyAtIndex.Character.HeroObject.Heal(PartyBase.MainParty, 100);
+					elementCopyAtIndex.Character.HeroObject.Heal(100);
 				}
 				else
 				{

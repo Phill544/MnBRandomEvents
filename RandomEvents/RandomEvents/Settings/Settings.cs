@@ -4,7 +4,7 @@ using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Settings
 {
-	internal static class Settings
+	internal static class ModSettings
 	{
 		public static RandomEventSettings RandomEvents { get; private set; }
 

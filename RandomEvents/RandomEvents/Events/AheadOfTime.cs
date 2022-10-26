@@ -13,7 +13,7 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private List<Settlement> eligibleSettlements;
 
-		public AheadOfTime() : base(Settings.Settings.RandomEvents.AheadOfTimeData)
+		public AheadOfTime() : base(Settings.ModSettings.RandomEvents.AheadOfTimeData)
 		{
 		}
 

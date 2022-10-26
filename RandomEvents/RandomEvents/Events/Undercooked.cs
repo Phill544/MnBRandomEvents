@@ -11,10 +11,10 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minTroopsToInjure;
 		private readonly int maxTroopsToInjure;
 
-		public Undercooked() : base(Settings.Settings.RandomEvents.UndercookedData)
+		public Undercooked() : base(Settings.ModSettings.RandomEvents.UndercookedData)
 		{
-			minTroopsToInjure = Settings.Settings.RandomEvents.UndercookedData.minTroopsToInjure;
-			maxTroopsToInjure = Settings.Settings.RandomEvents.UndercookedData.maxTroopsToInjure;
+			minTroopsToInjure = Settings.ModSettings.RandomEvents.UndercookedData.minTroopsToInjure;
+			maxTroopsToInjure = Settings.ModSettings.RandomEvents.UndercookedData.maxTroopsToInjure;
 		}
 
 		public override void CancelEvent()

@@ -17,10 +17,10 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private const string EventTitle = "Eager Troops!";
 
-		public EagerTroops() : base(Settings.Settings.RandomEvents.EagerTroopsData)
+		public EagerTroops() : base(Settings.ModSettings.RandomEvents.EagerTroopsData)
 		{
-			minTroopGain = Settings.Settings.RandomEvents.EagerTroopsData.minTroopGain;
-			maxTroopGain = Settings.Settings.RandomEvents.EagerTroopsData.maxTroopGain;
+			minTroopGain = Settings.ModSettings.RandomEvents.EagerTroopsData.minTroopGain;
+			maxTroopGain = Settings.ModSettings.RandomEvents.EagerTroopsData.maxTroopGain;
 		}
 
 		public override void CancelEvent()
@@ -34,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.Settings.GeneralSettings.DebugMode)
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
