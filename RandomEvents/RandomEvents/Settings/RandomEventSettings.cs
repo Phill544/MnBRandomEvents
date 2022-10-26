@@ -108,5 +108,13 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         public FallenSoldierFamilyData FallenSoldierFamilyData { get; } =
             new FallenSoldierFamilyData("FallenSoldierFamily", 1024, 500, 2500 );
+        
+        public NotOfThisWorldData NotOfThisWorldData { get; } =
+            new NotOfThisWorldData("NotOfThisWorld", 1024, 5, 15 );
+        
+        public FishingSpotData FishingSpotData { get; } =
+            new FishingSpotData("FishingSpot", 1024, 2, 10, 25, 5, 20 );
+        public HuntingTripData HuntingTripData { get; } =
+            new HuntingTripData("HuntingTrip", 1024, 1, 10, 5, 5, 20, 2, 5 );
     }
 }

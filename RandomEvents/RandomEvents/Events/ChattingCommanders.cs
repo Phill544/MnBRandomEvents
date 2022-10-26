@@ -9,6 +9,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class ChattingCommanders : BaseEvent
 	{
+		private const string EventTitle = "The Same Page";
+		
 		private readonly float cohesionIncrease;
 
 		public ChattingCommanders() : base(Settings.ModSettings.RandomEvents.ChattingCommandersData)
@@ -37,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				MobileParty.MainParty.Army.Cohesion += cohesionIncrease;
 
 				InformationManager.ShowInquiry(
-					new InquiryData("The Same Page",
+					new InquiryData(EventTitle,
 									"After a good chat with the commanders of your army, there is a noticeable increase cohesion.",
 									true,
 									false,

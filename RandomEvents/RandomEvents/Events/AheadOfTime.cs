@@ -11,6 +11,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class AheadOfTime : BaseEvent
 	{
+		private const string EventTitle = "Ahead of Time!";
+		
 		private List<Settlement> eligibleSettlements;
 
 		public AheadOfTime() : base(Settings.ModSettings.RandomEvents.AheadOfTimeData)
@@ -49,7 +51,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				settlement.Town.BuildingsInProgress.Dequeue();
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Ahead of Time!",
+					new InquiryData(EventTitle,
 						$"You receive word that {settlement} has completed its current project earlier than expected.",
 						true,
 						false,

@@ -8,6 +8,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class BeeKind : BaseEvent
 	{
+		private const string EventTitle = "Bee Kind";
+		
 		private readonly int damage;
 		private readonly int reactionDamage;
 		private readonly float reactionChance;
@@ -42,7 +44,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			Hero.MainHero.HitPoints -= damageToInflict;
 
 			InformationManager.ShowInquiry(
-				new InquiryData("Bee Kind",
+				new InquiryData(EventTitle,
 					$"As you sit down next to some flowers you get stung by a bee! {extraDialogue}Why is nature so cruel?",
 					true,
 					false,

@@ -15,6 +15,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class BunchOfPrisoners : BaseEvent
 	{
+		private const string EventTitle = "Bunch of Prisoners";
+		
 		private readonly int minPrisonerGain;
 		private readonly int maxPrisonerGain;
 
@@ -52,7 +54,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			prisoners.RemoveParty();
 
 			InformationManager.ShowInquiry(
-				new InquiryData("Bunch of Prisoners",
+				new InquiryData(EventTitle,
 					$"You receive word that your guards have expertly stopped a force inciting violence at {settlement.Name}, they have been put in cells",
 					true,
 					false,

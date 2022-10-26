@@ -7,6 +7,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class FantasticFighters : BaseEvent
 	{
+		private const string EventTitle = "Fantastic Fighters?";
+		
 		private readonly int renownGain;
 
 		public FantasticFighters() : base(Settings.ModSettings.RandomEvents.FantasticFightersData)
@@ -30,7 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				Hero.MainHero.Clan.Renown += renownGain;
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Fantastic Fighters?",
+					new InquiryData(EventTitle,
 						"A rumor spreads that your clan managed to decisively win a battle when outnumbered 10-1.",
 						true,
 						false,

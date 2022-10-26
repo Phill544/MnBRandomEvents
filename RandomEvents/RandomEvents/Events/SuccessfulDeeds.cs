@@ -7,6 +7,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class SuccessfulDeeds : BaseEvent
 	{
+		private const string EventTitle = "Successful Deeds!";
+		
 		private readonly float influenceGain;
 
 		public SuccessfulDeeds() : base(Settings.ModSettings.RandomEvents.SuccessfulDeedsData)
@@ -30,7 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				Hero.MainHero.AddInfluenceWithKingdom(influenceGain);
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Successful Deeds!",
+					new InquiryData(EventTitle,
 						"Some of your deeds have reached other members of the kingdom.",
 						true,
 						false,

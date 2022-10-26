@@ -54,7 +54,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "a":
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
-                                    "You follow the apparition. A few men who also have seen the spectacle joins in following her.\n The apparition stops under a lone tree in a meadow and disappears. You and your men stare at each other in disbelief.\n \n You and your men go back to the main camp and discuss what should be done.\n After some deliberation, you come to the conclusion that you go back and dig at the site she disappeared to see if you find anything.\n After digging for about 30 minutes you come across a single skeleton.\n This must be her! You and your men respectfully gather up the bones and gives them a proper burial.\n Hopefully the restless spirit will finally have peace.",
+                                    "You follow the apparition. A few men who also have seen the spectacle joins in following her.\n The apparition stops under a lone tree in a meadow and disappears. You and your men stare at each other in disbelief.\n \n " +
+                                    "You and your men go back to the main camp and discuss what should be done.\n After some deliberation, you come to the conclusion that you go back and dig at the site she disappeared to see if you find anything.\n " +
+                                    "After digging for about 30 minutes you come across a single skeleton.\n This must be her! You and your men respectfully gather up the bones and gives them a proper burial.\n " +
+                                    "Hopefully the restless spirit will finally have peace.",
                                     true, false, "Done", null, null, null), true);
                             break;
                         case "b":

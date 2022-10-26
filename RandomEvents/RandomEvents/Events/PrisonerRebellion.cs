@@ -8,6 +8,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class PrisonerRebellion : BaseEvent
 	{
+		private const string EventTitle = "Prisoner Rebellion!";
+		
 		private readonly int minimumPrisoners;
 
 		private bool heroInPrisonerRoster;
@@ -50,7 +52,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				}
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Prisoner rebellion!",
+					new InquiryData(EventTitle,
 									$"While your guards weren't looking the prisoners managed to break free. \"We'd rather die than stay in captivity another day!\"{heroDialogue}",
 									true,
 									false,

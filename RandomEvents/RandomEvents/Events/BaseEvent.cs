@@ -8,7 +8,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		/// <summary>
 		/// The data associated with the random event
 		/// </summary>
-		public readonly RandomEventData randomEventData = null;
+		public readonly RandomEventData randomEventData;
 
 		/// <summary>
 		/// The code that's called when the event has been completed

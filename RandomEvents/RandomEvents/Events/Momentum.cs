@@ -9,6 +9,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class Momentum : BaseEvent
 	{
+		private const string EventTitle = "Momentum";
+		
 		public Momentum() : base(Settings.ModSettings.RandomEvents.MomentumData)
 		{
 		}
@@ -42,7 +44,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 
 			InformationManager.ShowInquiry(
-				new InquiryData("Momentum",
+				new InquiryData(EventTitle,
 					$"After spending so much time {dialogue} you gain a second wind!",
 					true,
 					false,

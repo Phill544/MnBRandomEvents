@@ -11,6 +11,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	internal sealed class BumperCrop : BaseEvent
 	{
+		private const string EventTitle = "Bumper Crop!";
+		
 		private readonly float cropGainPercent;
 
 		public BumperCrop() : base(Settings.ModSettings.RandomEvents.BumperCropData)
@@ -37,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				var bumperSettlement = winningSettlement.Name.ToString();
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Bumper Crop!",
+					new InquiryData(EventTitle,
 									$"You have been informed that {bumperSettlement} has had an excellent harvest!",
 									true,
 									false,

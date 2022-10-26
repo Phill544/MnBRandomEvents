@@ -10,6 +10,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	internal sealed class BetMoney : BaseEvent
 	{
+		
+		private const string EventTitle = "All or nothing";
 		private readonly float moneyBetPercent;
 
 		public BetMoney() : base(Settings.ModSettings.RandomEvents.BetMoneyData)
@@ -32,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				extraDialogue = " You have no idea how they have that much money. You contemplate stealing it.";
 
 			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				"All or nothing", // Title
+				EventTitle, // Title
 				$"One of your soldiers wants to flip a coin. Heads you win, tails they do. The prize is {goldToBet} gold.{extraDialogue}", // Description
 				inquiryElements, // Options
 				false, // Can close menu without selecting an option. Should always be false.

@@ -8,6 +8,9 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class Undercooked : BaseEvent
 	{
+		private const string EventTitle = "Undercooked";
+		
+		
 		private readonly int minTroopsToInjure;
 		private readonly int maxTroopsToInjure;
 
@@ -36,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(numberToInjure);
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Undercooked",
+					new InquiryData(EventTitle,
 						"Some of your troops fall ill to bad food, although you're unsure of what caused it, you're glad it wasn't you.",
 						true,
 						false,

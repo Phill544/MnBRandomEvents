@@ -7,6 +7,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class SecretSinger : BaseEvent
 	{
+		private const string EventTitle = "Secret Singer!";
+		
 		private readonly int moraleGain;
 
 		public SecretSinger() : base(Settings.ModSettings.RandomEvents.SecretSingerData)
@@ -29,7 +31,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			MobileParty.MainParty.MoraleExplained.Add(moraleGain, new TaleWorlds.Localization.TextObject("Random Event"));
 
 			InformationManager.ShowInquiry(
-				new InquiryData("Secret Singer!",
+				new InquiryData(EventTitle,
 					"You discover one of your party members is an extremely good singer!",
 					true,
 					false,

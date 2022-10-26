@@ -8,6 +8,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class SpeedyRecovery : BaseEvent
 	{
+		private const string EventTitle = "Speedy Recovery!";
+		
 		private readonly int minTroopsToHeal;
 		private readonly int maxTroopsToHeal;
 
@@ -51,7 +53,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				}
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Speedy Recovery!",
+					new InquiryData(EventTitle,
 						"You receive word that a group of your troops are feeling better, and are ready for combat.",
 						true,
 						false,

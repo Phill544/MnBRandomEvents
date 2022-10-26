@@ -42,10 +42,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             
             var cities = Settlement.FindAll(s => s.IsTown).ToList();
-            Settlement closestCity = cities.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+            var closestCity = cities.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 
             var goldToCompensate = MBRandom.RandomInt(minGoldCompensation, maxGoldCompensation);
             var totalCompensation = goldToCompensate + 300;
+
+            var compensation = MBRandom.RandomInt(minGoldCompensation, maxGoldCompensation);
 
             var inquiryElements = new List<InquiryElement>
             {
@@ -74,8 +76,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                     "You tell her that this sort of behaviour is unacceptable. You order all your men to attention as you and the woman search for the man. She finally stops and points to one of your men. You order him to you.\n" +
                                     "You ask him if her story is true and he confirms that it is. You immediately punch him in the face so hard that he falls on his back. You strip him of his rank on the spot and have some men take him in chains.\n" +
                                     $"You ask the woman what she wants to do with him. She wants him to pay for his misdeed so you have 5 of your men escort him to {closestCity} where he will face justice. \n" +
-                                    "The woman thank you for believing her and appreciate your swift action.",
+                                    $"You also give the woman {compensation} gold as an apology from you personally. The woman thank you for believing her and appreciate your swift action.",
                                     true, false, "Done", null, null, null), true);
+                            Hero.MainHero.ChangeHeroGold(-compensation);
                             break;
                         case "b":
                         {

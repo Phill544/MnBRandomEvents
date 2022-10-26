@@ -8,6 +8,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class HotSprings : BaseEvent
 	{
+		private const string EventTitle = "The Hot Springs";
+		
 		private readonly int moraleGain;
 
 		public HotSprings() : base(Settings.ModSettings.RandomEvents.HotSpringsData)
@@ -43,7 +45,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 
 			InformationManager.ShowInquiry(
-				new InquiryData("The Hot Springs",
+				new InquiryData(EventTitle,
 					"You stumble upon some beautiful hot springs. After bathing with your soldiers you feel fantastic!",
 					true,
 					false,

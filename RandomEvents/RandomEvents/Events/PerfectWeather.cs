@@ -7,6 +7,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class PerfectWeather : BaseEvent
 	{
+		private const string EventTitle = "Perfect Weather";
+		
 		private readonly int moraleGain;
 
 		public PerfectWeather() : base(Settings.ModSettings.RandomEvents.PerfectWeatherData)
@@ -29,7 +31,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			MobileParty.MainParty.MoraleExplained.Add(moraleGain, new TaleWorlds.Localization.TextObject("Random Event"));
 
 			InformationManager.ShowInquiry(
-				new InquiryData("Perfect Weather",
+				new InquiryData(EventTitle,
 					"The weather today is so perfect that everyone relaxes and the mood improves!",
 					true,
 					false,

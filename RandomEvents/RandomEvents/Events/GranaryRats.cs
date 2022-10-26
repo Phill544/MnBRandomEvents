@@ -11,6 +11,8 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class GranaryRats : BaseEvent
 	{
+		private const string EventTitle = "Rats in the granary!";
+		
 		private readonly float foodLossPercent;
 
 		public GranaryRats() : base(Settings.ModSettings.RandomEvents.GranaryRatsData)
@@ -48,7 +50,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				var ratSettlement = infestedSettlement.Name.ToString();
 
 				InformationManager.ShowInquiry(
-					new InquiryData("Rats in the granary!",
+					new InquiryData(EventTitle,
 									$"You have been informed that {ratSettlement} had an infestation of rats that went unchecked... The rats won't starve this month, but your peasants might.",
 									true,
 									false,
