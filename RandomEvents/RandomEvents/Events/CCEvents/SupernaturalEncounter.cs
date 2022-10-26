@@ -41,7 +41,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var msid = new MultiSelectionInquiryData(
                 EventTitle,
-                "You are sleeping peacefully in your tent at night when you are awoken by the apparition of a young woman. She stands there looking at you and then she turns to leave but stops at the exit and turn to you. You get the feeling she wants you to follow her.",
+                "You are sleeping peacefully in your tent at night when you are awoken by the apparition of a young woman. She stands there looking at you and then she turns to leave but stops at the exit and turns back to you. You get the feeling she wants you to follow her.",
                 inquiryElements,
                 false,
                 1,
@@ -66,13 +66,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "c":
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
-                                    "HELP!\n You leap from your bed and bolt out the door. \n Your men around the campfire starts laughing as soon as you tell them about the event.",
+                                    "HELP!\n You leap from your bed and bolt out the door. \n Your men around the campfire start laughing as soon as you tell them about the event.",
                                     true, false, "Done", null, null, null), true);
                             break;
                         case "d":
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
-                                    "You wake up fully rested the next morning, the event of the night not on your mind. ",
+                                    "You wake up fully rested the next morning with the previous night's event absent from your mind. ",
                                     true, false, "Done", null, null, null), true);
                             break;
                         default:

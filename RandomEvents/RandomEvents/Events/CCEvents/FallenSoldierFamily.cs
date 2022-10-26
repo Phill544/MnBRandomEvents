@@ -29,7 +29,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage;
+            return MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
         }
 
         public override void StartEvent()
@@ -54,7 +54,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var msid = new MultiSelectionInquiryData(
                 EventTitle,
-                "As you are having a drink at the local tavern, you are approached by 3 individuals. It's an woman and two young boys. They ask if they can talk to you. They explain that they are the family of a soldier who died under your command." +
+                "As you are having a drink at the local tavern, you are approached by 3 individuals. It's a woman and two young boys. They ask if they can talk to you. They explain that they are the family of a soldier who died under your command." +
                 "They are here requesting compensation for his death as they are in desperate need of gold to be able to keep their farm. What do you do?",
                 inquiryElements,
                 false,
@@ -69,9 +69,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
                                     "You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. The soldier in question was executed by your hands as it was discovered he was a traitor. \n" +
-                                    "The question you ask yourself now is if his entire family should suffer from his mistake. They have spoken so warmly about him that you don't want to tell them the truth about how he died so you make up an heroic story.\n" +
+                                    "The question you ask yourself now is if his entire family should suffer from his mistake. They have spoken so warmly about him that you don't want to tell them the truth about how he died so you make up a heroic story.\n" +
                                     $"Even though the family have no right for compensation, you agree to pay them {familyCompensation} gold in compensation so they can keep their family farm.\n \n" +
-                                    "After you have handed over they gold to them and they have left, you cannot help but wonder if you did the right thing keeping the mother in the dark about her sons true nature. You end up drinking the night away.",
+                                    "After you have handed over they gold to them and they have left, you cannot help but wonder if you did the right thing keeping the mother in the dark about her son's true nature. You end up drinking the night away.",
                                     true, false, "Done", null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-familyCompensation);
                             break;

@@ -54,7 +54,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var msid = new MultiSelectionInquiryData(
                 EventTitle,
                 "As your party moves through the land you are approached by a young man. He explains that he ran away from the family farm after suffering abuse from his parents for years. " +
-                "He wants to your party and he tells you he has some skills with weapons.",
+                "He wants to join your party and he tells you he has some skills with weapons.",
                 inquiryElements,
                 false,
                 1,
@@ -88,7 +88,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "d":
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
-                                    "You laugh as you hear his plea and your men soon joins in the laughter. You approach the man and thrust a dagger into his stomach. You watch him fall to the ground in a pool of blood and screaming in pain.\n " +
+                                    "You laugh as you hear his plea and your men soon join in on the laughter. You approach the man and thrust a dagger into his stomach. You watch him fall to the ground in a pool of blood, screaming in pain.\n " +
                                     "You kneel down beside him and watch as the light soon leaves his eyes and he dies from his injury. " +
                                     $"You and some men decide to cut him open and hang his body from a tree as a warning but not before looting his body for {goldLooted} gold.",
                                     true, false, "Done", null, null, null), true);

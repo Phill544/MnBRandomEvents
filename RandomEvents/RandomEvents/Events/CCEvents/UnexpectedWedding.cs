@@ -88,7 +88,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "a":
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
-                                    $"You congratulate the couple and you and your men scrape together {goldToDonate} gold and give it as a gift. You and your men spend the evening having fun. You really feel the morale of the men increase.",
+                                    $"You congratulate the couple and you and your men scrape together {goldToDonate} gold and give it as a gift. Your party then spends the evening having fun! You really feel the morale of the men increase.",
                                     true, false, "Done", null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldToDonate);
 
@@ -107,7 +107,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
                                     "You have your men find 5 bottles of your best wine. After  a few minutes, one clearly embarrassed solider approaches you and tells you you are all out of wine. " +
-                                    "You slap him across his face for putting you in such a humiliating situation. You tell the solider to hand over all his coin to you. He does as you command him to do. " +
+                                    "You slap him across his face for putting you in such a humiliating situation. You tell the solider to hand over all his coin to you. He does as you command. " +
                                     $"You apologises to the bride and hand her {embarrassedSoliderGold} gold instead of wine. She thanks you and your party moves on. ",
                                     true, false, "Done", null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-embarrassedSoliderGold);
@@ -130,10 +130,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(
                                 new InquiryData(EventTitle,
                                     "You have your men surround the area while you go and talk to the guests. You have all guests empty their pockets and give you anything valuable. " +
-                                    $"Some guests resists but after a few threatening gestures from your men they too fall in line. After you have stolen {raidedGold} gold and anything of value from the wedding, you order your men to trash the entire area. " +
-                                    "Your men does so without blinking an eye. You see the bride crying while being comforted by some guests. You can see the hate in the groom's eyes. He will undoubtedly remember you.\n \n" +
+                                    $"Some guests resist but after a few threatening gestures from your men they too fall in line. After you have stolen {raidedGold} gold and anything of value from the wedding, you order your men to trash the entire area. " +
+                                    "Your men do so without blinking an eye. You see the bride crying while being comforted by some guests. You can see the hate in the groom's eyes. He will undoubtedly remember you.\n \n" +
                                     "After you have personally made sure that you have thoroughly ruined this once joyful moment, you order your men to leave.",
                                     true, false, "Done", null, null, null), true);
+                            Hero.MainHero.ChangeHeroGold(raidedGold);
                             break;
                         default:
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
