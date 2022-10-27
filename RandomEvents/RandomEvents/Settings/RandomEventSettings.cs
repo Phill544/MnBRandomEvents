@@ -114,7 +114,17 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         public FishingSpotData FishingSpotData { get; } =
             new FishingSpotData("FishingSpot", 1024, 2, 10, 25, 5, 20 );
+        
         public HuntingTripData HuntingTripData { get; } =
             new HuntingTripData("HuntingTrip", 1024, 1, 10, 5, 5, 20, 2, 5 );
+        
+        public LoggingSiteData LoggingSiteData { get; } =
+            new LoggingSiteData("LoggingSite", 1024, 5, 20, 10, 25);
+        
+        public RedMoonData RedMoonData { get; } =
+            new RedMoonData("RedMoon", 1024, 500, 5000);
+        
+        public PassingCometData PassingCometData { get; } =
+            new PassingCometData("PassingComet", 1024);
     }
 }
