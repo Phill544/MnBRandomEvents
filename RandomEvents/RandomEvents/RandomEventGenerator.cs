@@ -1,6 +1,6 @@
-﻿using CryingBuffalo.RandomEvents.Events;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using CryingBuffalo.RandomEvents.Events;
 using TaleWorlds.Core;
 
 namespace CryingBuffalo.RandomEvents

@@ -126,5 +126,11 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         public PassingCometData PassingCometData { get; } =
             new PassingCometData("PassingComet", 1024);
+        
+        public MassGraveData MassGraveData { get; } =
+            new MassGraveData("MassGrave", 1024, 2, 6, 10, 30);
+        
+        public BeggarBeggingData BeggarBeggingData { get; } =
+            new BeggarBeggingData("BeggarBegging",1024, 0, 50, 5, 10);
     }
 }

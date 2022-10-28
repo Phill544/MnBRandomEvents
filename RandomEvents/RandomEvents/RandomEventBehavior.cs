@@ -1,7 +1,7 @@
-﻿using CryingBuffalo.RandomEvents.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CryingBuffalo.RandomEvents.Events;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
