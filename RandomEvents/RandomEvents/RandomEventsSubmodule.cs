@@ -22,8 +22,6 @@ namespace CryingBuffalo.RandomEvents
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
             base.OnBeforeInitialModuleScreenSetAsRoot();
-
-            InformationManager.DisplayMessage(new InformationMessage("Successfully loaded 'RandomEvents'.", TextColor));
         }
 
         protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
