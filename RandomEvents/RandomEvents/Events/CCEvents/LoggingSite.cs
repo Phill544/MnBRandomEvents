@@ -54,7 +54,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var treesChopped = MBRandom.RandomInt(minYield, maxYield);
 
-            var yieldHardwood = treesChopped * MBRandom.RandomInt(3, 7);
+            var yieldHardwood = treesChopped * MBRandom.RandomInt(1, 5);
             
             ItemObject hardwood = MBObjectManager.Instance.GetObject<ItemObject>("hardwood");
 
@@ -62,8 +62,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             InformationManager.ShowInquiry(
                 new InquiryData(EventTitle,
                 $"While your party is traveling through the lands near {closestSettlement} you come across a forest rich in hardwood trees. You decide that it's time to stock up on hardwood so you order {soldiersGoneHunting} of your men " +
-                "to get to work. The men agree that this is a good opportunity to get some resources so they do as you say without much complaining.\n" +
-                "You don't really need much, just enough to start some smithing projects next time you come across a forge. The rest you can easily flip for a nice profit.",
+                "to get to work. The men agree that this is a good opportunity to get some resources so they do as you say without much complaint.\n" +
+                "You don't really need much, just enough to start some smithing projects next time you come across a forge. The rest you can easily sell for a nice profit.",
                     true,
                     false,
                     "Continue",
@@ -80,7 +80,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 InformationManager.ShowInquiry(
                     new InquiryData(EventTitle+" part II",
                         $"The logging crew return just as the sun is setting. In total they chopped down {treesChopped} trees which yielded {yieldHardwood} pieces of Hardwood.\n" +
-                        "You admittedly had hoped for more resources that this so you berate your men for being to lazy.",
+                        "You admittedly had hoped for more resources than this so you berate your men for being lazy.",
                         true,
                         false,
                         "Continue",
@@ -95,7 +95,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 InformationManager.ShowInquiry(
                     new InquiryData(EventTitle+" part II",
                         $"The logging crew return just as the sun is setting. In total they chopped down {treesChopped} trees which yielded {yieldHardwood} pieces of Hardwood.\n" +
-                        "You had hoped for a better result but all inn all this should be enough to cover your own projects.",
+                        "You had hoped for a better result but all in all this should be enough to cover your own projects.",
                         true,
                         false,
                         "Continue",

@@ -64,8 +64,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             InformationManager.ShowInquiry(
                 new InquiryData(EventTitle,
-                $"While your party has found a nice spot to camp for the day, {soldiersGoneHunting} of your men decide they want to go into the forest just west of camp to try hunting.\n " +
-                "You could always use the additional resources and it would be a great morale booster for the party if they catch some. You tell them to be back before nightfall.",
+                $"While camping, {soldiersGoneHunting} of your men decide they want to go into the forest just west of camp to try hunting.\n " +
+                "You could use the additional resources and it would be a great morale booster for the party if they catch some. You tell them to be back before nightfall.",
                     true,
                     false,
                     "Continue",
@@ -75,7 +75,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 ),
                 true);
             
-            MobileParty.MainParty.ItemRoster.AddToCounts(meat, animalsCaught * 3);
+            MobileParty.MainParty.ItemRoster.AddToCounts(meat, yieldedMeatResources);
             MobileParty.MainParty.ItemRoster.AddToCounts(hides, animalsCaught);
 
             if (animalsCaught == 0)
@@ -91,12 +91,15 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         null
                     ),
                     true);
+                
+                MobileParty.MainParty.RecentEventsMorale += moraleGained - 3;
+                MobileParty.MainParty.MoraleExplained.Add(moraleGained, new TaleWorlds.Localization.TextObject("Random Event"));
             }
             else if (animalsCaught > 0 && animalsCaught <= 5)
             {
                 InformationManager.ShowInquiry(
                     new InquiryData(EventTitle+" part II",
-                        $"Your hunters return just before nightfall, having successfully caught {animalsCaught} animals, yielding to {animalsCaught} pieces of hide and {yieldedMeatResources} pieces of meat. Better than nothing. " +
+                        $"Your hunters return just before nightfall, having successfully caught {animalsCaught} animals, yielding {animalsCaught} hides and {yieldedMeatResources} pieces of meat. Better than nothing. " +
                         "You let the hunters finish butchering the animals.",
                         true,
                         false,
@@ -113,7 +116,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             {
                 InformationManager.ShowInquiry(
                     new InquiryData(EventTitle+" part II",
-                        $"Your hunters return just before nightfall, having successfully caught {animalsCaught} animals, yielding to {animalsCaught} pieces of hide and {yieldedMeatResources} pieces of meat. " +
+                        $"Your hunters return just before nightfall, having successfully caught {animalsCaught} animals, yielding {animalsCaught} hides and {yieldedMeatResources} pieces of meat. " +
                         "You join the hunters in storing the meat.",
                         true,
                         false,
@@ -123,14 +126,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         null
                     ),
                     true);
-                MobileParty.MainParty.RecentEventsMorale += moraleGained - 3;
+                MobileParty.MainParty.RecentEventsMorale += moraleGained - 1;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained, new TaleWorlds.Localization.TextObject("Random Event"));
             }
             else if (animalsCaught > 15 && animalsCaught <= maxCatch)
             {
                 InformationManager.ShowInquiry(
                     new InquiryData(EventTitle+" part II",
-                        $"Your hunters return triumphantly just before nightfall, having successfully caught {animalsCaught} animals, yielding to {animalsCaught} pieces of hide and {yieldedMeatResources} pieces of meat. " +
+                        $"Your hunters return triumphantly just before nightfall, having successfully caught {animalsCaught} animals, yielding {animalsCaught} hides and {yieldedMeatResources} pieces of meat. " +
                         "You order your men to start preparing a feast for everyone.",
                         true,
                         false,

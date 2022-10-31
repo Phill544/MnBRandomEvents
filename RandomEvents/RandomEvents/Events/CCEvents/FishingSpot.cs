@@ -55,7 +55,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             InformationManager.ShowInquiry(
                 new InquiryData(EventTitle,
-                $"While your party has found a nice spot to camp for the night, {soldiersGoneFishing} of your men decide they want to go to the lake just outside the camp to try and catch some fish.\n " +
+                $"While camping, {soldiersGoneFishing} of your men decide they want to go to the lake just outside the camp to try and catch some fish.\n " +
                 "You could always use the additional resources and it would be a great morale booster for the party if they catch some. You tell them to be back before nightfall.",
                     true,
                     false,
@@ -81,6 +81,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         null
                     ),
                     true);
+                MobileParty.MainParty.RecentEventsMorale += moraleGained - 3;
+                MobileParty.MainParty.MoraleExplained.Add(moraleGained, new TaleWorlds.Localization.TextObject("Random Event"));
             }
             else if (fishCaught > 0 && fishCaught <= 5)
             {
@@ -102,7 +104,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             {
                 InformationManager.ShowInquiry(
                     new InquiryData(EventTitle+" part II",
-                        $"Your men return with {fishCaught} fish just before nightfall. This is a sizeable catch so you congratulate them. You join the fishermen in devouring their catch.",
+                        $"Your men return with {fishCaught} fish just before nightfall. This is a sizeable catch so you congratulate them. You join the fishermen in their feast.",
                         true,
                         false,
                         "Continue",
@@ -111,7 +113,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         null
                     ),
                     true);
-                MobileParty.MainParty.RecentEventsMorale += moraleGained - 3;
+                MobileParty.MainParty.RecentEventsMorale += moraleGained - 1;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained, new TaleWorlds.Localization.TextObject("Random Event"));
             }
             else if (fishCaught > 15 && fishCaught <= maxFishCatch)

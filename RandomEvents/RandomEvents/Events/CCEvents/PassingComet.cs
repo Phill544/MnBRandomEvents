@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
@@ -8,8 +9,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 	{
 		private const string EventTitle = "A Celestial Visitor";
 		
+		private readonly int moraleGained;
+		
 		public PassingComet() : base(Settings.ModSettings.RandomEvents.PassingCometData)
 		{
+			moraleGained = Settings.ModSettings.RandomEvents.PassingCometData.moraleGained;
 		}
 
 		public override void CancelEvent()
@@ -28,10 +32,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 			InformationManager.ShowInquiry(
 				new InquiryData(EventTitle,
 					"You and some of your men are standing in a field at night gazing up at a comet. It is one of the most beautiful sights you have ever seen. You cannot help wondering what it really is. You have always been fascinated " +
-					"by the stars and night sky. What are the stars you often ask yourself. Most people seems to think it's the gods looking down on us but you have never thought so.\n \n" +
-					"You have always thought that the stars are nothing more than the same thing as the Sun just much further away. You have never shared this with anyone as most would think you to be crazy. At least for now you " +
-					"can be fascinated by the amazing comet passing by. You and a couple of your men end up standing there all night looking up and talking. All in all you had a bonding moment with a couple of your men who ended up respecting " +
-					"you a lot more from this day on.",
+					"by the stars and night sky. Most people believe it's the gods looking down on us. But you think otherwise.\n \n" +
+					"You have always thought that the stars are nothing more than the same thing as the Sun just much further away. You have never shared this thought with anyone as most would think you to be crazy. At least for now you " +
+					"can be fascinated by the amazing comet passing by. You and a couple of your men end up standing there all night looking up and talking. This evening brought you closer with your men who have.",
 					true,
 					false,
 					"Done",
@@ -41,6 +44,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 					),
 				true);
 
+			MobileParty.MainParty.RecentEventsMorale += moraleGained;
+			MobileParty.MainParty.MoraleExplained.Add(moraleGained, new TaleWorlds.Localization.TextObject("Random Event"));
+			
 			StopEvent();
 		}
 
@@ -60,9 +66,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 	public class PassingCometData : RandomEventData
 	{
+		public readonly int moraleGained;
 
-		public PassingCometData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
+		public PassingCometData(string eventType, float chanceWeight, int moraleGained) : base(eventType, chanceWeight)
 		{
+			this.moraleGained = moraleGained;
 		}
 
 		public override BaseEvent GetBaseEvent()

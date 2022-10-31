@@ -88,6 +88,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     ),
                     true);
 
+                Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain - 5;
             }
             else if (goldToGive > 15 && goldToGive <= 35)
@@ -103,13 +104,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         null
                     ),
                     true);
+                Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain - 2;
             }
             else if (goldToGive > 35 && goldToGive <= maxGoldToGive)
             {
                 InformationManager.ShowInquiry(
                     new InquiryData(EventTitle+" part II",
-                        $"You hand over {goldToGive} gold to the beggar. He drops to his knees and kisses your shoes. You tell him to get himself som food.",
+                        $"You hand over {goldToGive} gold to the beggar. He drops to his knees and kisses your shoes. You tell him to get himself some food.",
                         true,
                         false,
                         "Continue",
@@ -118,6 +120,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         null
                     ),
                     true);
+                Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain;
             }
             

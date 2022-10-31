@@ -110,7 +110,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new FallenSoldierFamilyData("FallenSoldierFamily", 1024, 500, 2500 );
         
         public NotOfThisWorldData NotOfThisWorldData { get; } =
-            new NotOfThisWorldData("NotOfThisWorld", 1024, 5, 15 );
+            new NotOfThisWorldData("NotOfThisWorld", 1024, 3, 8 );
         
         public FishingSpotData FishingSpotData { get; } =
             new FishingSpotData("FishingSpot", 1024, 2, 10, 25, 5, 20 );
@@ -125,7 +125,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new RedMoonData("RedMoon", 1024, 500, 5000);
         
         public PassingCometData PassingCometData { get; } =
-            new PassingCometData("PassingComet", 1024);
+            new PassingCometData("PassingComet", 1024, 5);
         
         public MassGraveData MassGraveData { get; } =
             new MassGraveData("MassGrave", 1024, 2, 6, 10, 30);
