@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.MapEvents;
 using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.CampaignSystem.Party.PartyComponents;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
@@ -13,6 +15,37 @@ namespace CryingBuffalo.RandomEvents.Helpers
 {
 	public static class PartySetup
 	{
+		public static MobileParty CreateLooterParty(string partyName = null)
+		{
+			MobileParty banditParty = null;
+
+			try
+			{
+				List<Settlement> hideouts = Settlement.FindAll((s) => s.IsHideout).ToList();
+				Settlement closestHideout = hideouts.MinBy((s) => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+
+				var banditCultureObject = MBObjectManager.Instance.GetObject<CultureObject>("looters");
+
+				if (partyName == null)
+					partyName = $"{banditCultureObject.Name} (Random Event)";
+				
+				PartyTemplateObject partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
+				banditParty = BanditPartyComponent.CreateLooterParty(
+					$"randomevent_{banditCultureObject.StringId}_{MBRandom.RandomInt(int.MaxValue)}",
+					closestHideout.OwnerClan,
+					closestHideout,
+					false);
+				TextObject partyNameTextObject = new TextObject(partyName);
+				banditParty.InitializeMobilePartyAroundPosition(partyTemplate, MobileParty.MainParty.Position2D, 0.2f, 0.1f, 20);
+				banditParty.SetCustomName(partyNameTextObject);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Error while trying to create a mobile bandit party :\n\n {ex.Message} \n\n { ex.StackTrace}");
+			}
+
+			return banditParty;
+		}
 
 		public static MobileParty CreateBanditParty(string cultureObjectId = null, string partyName = null)
 		{
@@ -31,12 +64,14 @@ namespace CryingBuffalo.RandomEvents.Helpers
 				}
 
 				PartyTemplateObject partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
-				banditParty = MBObjectManager.Instance.CreateObject<MobileParty>($"randomevent_{banditCultureObject.StringId}_{MBRandom.RandomInt(int.MaxValue)}");
+				banditParty = BanditPartyComponent.CreateBanditParty(
+					$"randomevent_{banditCultureObject.StringId}_{MBRandom.RandomInt(int.MaxValue)}",
+					Clan.BanditFactions.First(clan => clan.DefaultPartyTemplate == partyTemplate),
+					closestHideout.Hideout,
+					false);
 				TextObject partyNameTextObject = new TextObject(partyName);
 				banditParty.InitializeMobilePartyAroundPosition(partyTemplate, MobileParty.MainParty.Position2D, 0.2f, 0.1f, 20);
 				banditParty.SetCustomName(partyNameTextObject);
-
-				banditParty.SetCustomHomeSettlement(closestHideout);
 			}
 			catch (Exception ex)
 			{

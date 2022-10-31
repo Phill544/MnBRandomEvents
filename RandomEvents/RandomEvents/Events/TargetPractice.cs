@@ -115,13 +115,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private static void SpawnLooters(int spawnCount)
 		{
-			MobileParty looterParty = PartySetup.CreateBanditParty("looters");
+			MobileParty looterParty = PartySetup.CreateLooterParty();
 
 			looterParty.MemberRoster.Clear();
 
 			looterParty.Aggressiveness = 10f;
 			looterParty.SetMoveEngageParty(MobileParty.MainParty);
-
 			PartySetup.AddRandomCultureUnits(looterParty, spawnCount);
 		}
 	}
