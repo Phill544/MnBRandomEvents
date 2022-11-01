@@ -132,5 +132,8 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         public BeggarBeggingData BeggarBeggingData { get; } =
             new BeggarBeggingData("BeggarBegging",1024, 0, 50, 5, 10);
+        
+        public BirthdayPartyData BirthdayPartyData { get; } =
+            new BirthdayPartyData("BirthdayParty",1024, 20, 60, 3, 12, 14, 20, 5, 10, 50, 200, 15, 25);
     }
 }
