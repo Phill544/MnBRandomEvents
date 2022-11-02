@@ -50,10 +50,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             };
 
             var goldLooted = MBRandom.RandomInt(minGold, maxGold);
+            
+            var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty);
 
             var msid = new MultiSelectionInquiryData(
                 EventTitle,
-                "As your party moves through the land you are approached by a young man. He explains that he ran away from the family farm after suffering abuse from his parents for years. " +
+                $"As your party moves through the land near {closestSettlement}, you are approached by a young man. He explains that he ran away from the family farm after suffering abuse from his parents for years. " +
                 "He wants to join your party and he tells you he has some skills with weapons.",
                 inquiryElements,
                 false,

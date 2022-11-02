@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
-using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
@@ -67,9 +67,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var bandits = MBRandom.RandomInt(minBandits, maxBandits);
             var goldGiven = MBRandom.RandomInt(minGoldGiven, maxGoldGiven);
             var renownGain = MBRandom.RandomInt(minRenownGain, maxRenownGain);
-            
-            var settlements = Settlement.FindAll(s => s.IsTown || s.IsCastle || s.IsVillage ).ToList();
-            var closestSettlement = settlements.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+
+            var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty);
 
             var inquiryElements = new List<InquiryElement>
             {
@@ -163,21 +162,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public readonly int minRenownGain;
         public readonly int maxRenownGain;
 
-        public BirthdayPartyData(
-            string eventType,
-            float chanceWeight,
-            int minAttending,
-            int maxAttending,
-            int minYourMenAttending,
-            int maxYourMenAttending,
-            int minAge, int maxAge,
-            int minBandits,
-            int maxBandits,
-            int minGoldGiven,
-            int maxGoldGiven,
-            int minRenownGain,
-            int maxRenownGain
-            ) : base(eventType, chanceWeight)
+        public BirthdayPartyData(string eventType, float chanceWeight, int minAttending, int maxAttending, int minYourMenAttending, int maxYourMenAttending, int minAge, int maxAge, int minBandits, int maxBandits, int minGoldGiven, int maxGoldGiven, int minRenownGain, int maxRenownGain) : base(eventType, chanceWeight)
         {
             this.minAttending = minAttending;
             this.maxAttending = maxAttending;

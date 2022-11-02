@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -72,10 +73,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var moraleGain = MBRandom.RandomInt(minMoraleGain, maxMoraleGain);
 
             var raidedGold = MBRandom.RandomInt(minGoldRaided, maxGoldRaided);
+            
+            var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty);
 
             var msid = new MultiSelectionInquiryData(
                 EventTitle,
-                $"You and your party stumble across {peopleInWedding} people in a wedding taking place. The guests invite you over to celebrate this momentous event with them.",
+                $"You and your party are traveling in the vicinity of {closestSettlement} when you stumble across {peopleInWedding} people in a wedding taking place. " +
+                "The guests invite you over to celebrate this momentous event with them.",
                 inquiryElements,
                 false,
                 1,

@@ -101,6 +101,7 @@
     <Compile Include="Events\TargetPractice.cs" />
     <Compile Include="Events\Undercooked.cs" />
     <Compile Include="Events\WanderingLivestock.cs" />
+    <Compile Include="Helpers\ClosestSettlement#.cs" />
     <Compile Include="Helpers\PartySetup.cs" />
     <Compile Include="Helpers\PlayerStatus.cs" />
     <Compile Include="Helpers\RandomSelection.cs" />

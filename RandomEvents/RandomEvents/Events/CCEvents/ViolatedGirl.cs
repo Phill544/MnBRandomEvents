@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
@@ -39,10 +38,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
                     RandomEventsSubmodule.TextColor));
             }
-            
-            
-            var cities = Settlement.FindAll(s => s.IsTown).ToList();
-            var closestCity = cities.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+
+            var closestCity = ClosestSettlements.GetClosestTown(MobileParty.MainParty);
 
             var goldToCompensate = MBRandom.RandomInt(minGoldCompensation, maxGoldCompensation);
             var totalCompensation = goldToCompensate + 300;

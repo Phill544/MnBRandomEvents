@@ -27,7 +27,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				new InquiryElement("b", "Decline", null)
 			};
 
-			int goldToBet = (int)MathF.Floor(Hero.MainHero.Gold * moneyBetPercent);
+			int goldToBet = MathF.Floor(Hero.MainHero.Gold * moneyBetPercent);
 
 			string extraDialogue = "";
 			if (goldToBet > 40000)

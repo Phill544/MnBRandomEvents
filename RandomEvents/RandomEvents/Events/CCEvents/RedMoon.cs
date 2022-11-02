@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
@@ -36,8 +35,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 			var goldLostToReligion = MBRandom.RandomInt(minGoldLost, maxGoldLost);
 			
-			var settlements = Settlement.FindAll(s => s.IsTown || s.IsVillage ).ToList();
-			var closestSettlement = settlements.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+			var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty);
 
 			InformationManager.ShowInquiry(
 				new InquiryData(EventTitle,

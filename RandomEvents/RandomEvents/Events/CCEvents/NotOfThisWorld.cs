@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
@@ -44,8 +43,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             }
 
             
-            var settlements = Settlement.FindAll(s => s.IsTown || s.IsCastle || s.IsVillage ).ToList();
-            var closestSettlement = settlements.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+            var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty);
 
             var missingSoldiers = MBRandom.RandomInt(minSoldiersToDisappear, maxSoldiersToDisappear);
 
