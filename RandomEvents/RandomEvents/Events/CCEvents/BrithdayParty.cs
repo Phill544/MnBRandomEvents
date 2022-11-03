@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class BirthdayParty : BaseEvent
     {
-        private const string EventTitle = "The Birthday Party";
-        
         private readonly int minAttending;
         private readonly int maxAttending;
         private readonly int minYourMenAttending;
@@ -57,9 +54,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (Settings.ModSettings.GeneralSettings.DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
-                    RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
             }
+
+            var heroName = Hero.MainHero.FirstName;
 
             var birthdayAge = MBRandom.RandomInt(minAge, maxAge);
             var yourMenAttending = MBRandom.RandomInt(minYourMenAttending, maxYourMenAttending);
@@ -68,64 +66,111 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var goldGiven = MBRandom.RandomInt(minGoldGiven, maxGoldGiven);
             var renownGain = MBRandom.RandomInt(minRenownGain, maxRenownGain);
 
-            var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty);
+            var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
+            
+            var eventTitle = new TextObject("{=BirthdayParty_Title}The Birthday Party!").ToString();
 
+            var eventDescription = new TextObject(
+                "{=BirthdayParty_Event_Desc}As you and your party are traveling in the vicinity of {closestSettlement}, you come across {peopleAttending} " +
+                "people in what seems to be a birthday party for a young girl. A couple of the guests invite you to join them in celebrating the girls {birthdayAge} " +
+                "birthday! What should you do?")
+                .SetTextVariable("closestSettlement", closestSettlement)
+                .SetTextVariable("peopleAttending", peopleAttending)
+                .SetTextVariable("birthdayAge", birthdayAge).ToString();
+
+            var eventOption1 = new TextObject("{=BirthdayParty_Event_Option_1}Join them in celebration!").ToString();
+            var eventOption1Hover = new TextObject("{=BirthdayParty_Event_Option_1_Hover}Not everyday you turn {birthdayAge} years old!").SetTextVariable("birthdayAge", birthdayAge).ToString();
+            
+            var eventOption2 = new TextObject("{=BirthdayParty_Event_Option_2}Give the girls some gold").ToString();
+            var eventOption2Hover = new TextObject("{=BirthdayParty_Event_Option_2_Hover}You don't have time to stay but you can still be nice right ?").ToString();
+            
+            var eventOption3 = new TextObject("{=BirthdayParty_Event_Option_3}Leave").ToString();
+            var eventOption3Hover = new TextObject("{=BirthdayParty_Event_Option_3_Hover}Don't have time").ToString();
+
+            var eventButtonText = new TextObject("{=BirthdayParty_Event_Button_Text}Okay").ToString();
+            
             var inquiryElements = new List<InquiryElement>
             {
-                new InquiryElement("a", "Join them in celebration", null, true, $"Not everyday you turn {birthdayAge} years old!"),
-                new InquiryElement("b", "Give the girls some gold", null, true, "You don't have time to stay but you can still be nice right ? "),
-                new InquiryElement("c", "Leave", null, true, "Don't have time")
+                new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
+                new InquiryElement("b", eventOption2, null, true, eventOption2Hover),
+                new InquiryElement("c", eventOption3, null, true, eventOption3Hover)
             };
+
+            var eventOptionAText = new TextObject(
+                "{=BirthdayParty_Event_Choice_1}You and {yourMenAttending} of your men decide to stay for the party while the rest makes their way to {closestSettlement}. " +
+                "You approach the girl and give her {goldGiven} gold as a gift. She give you a hug and a thank you. You get yourself some beer and sit down to enjoy the moment.\n \n" +
+                "Some time later, {bandits} bandits decide to crash the party. They go around from person to person and takes everything of value. " +
+                "You order your men to stand down as you don't want to start a fight with innocents caught in the middle. After they have taken everything of " +
+                "value they also try to take the young girl with them. This you will not stand for so you signal your men to strike. " +
+                "You and your men make quick work in incapacitating the bandits. One of your men rides to {closestSettlement} to fetch someone to throw these scum in the dungeon. \n" +
+                "The rest of the night you are celebrated as a hero! You even got to dance with the birthday girl!")
+                .SetTextVariable("yourMenAttending", yourMenAttending)
+                .SetTextVariable("closestSettlement", closestSettlement)
+                .SetTextVariable("goldGiven", goldGiven)
+                .SetTextVariable("bandits", bandits)
+                .ToString();
+            
+            var eventOptionBText = new TextObject(
+                    "{=BirthdayParty_Event_Choice_2}Your really don't have time to stay but you don't want to be rude either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. She seems grateful. \n" +
+                    "You say your goodbyes to the partygoers and you leave in the direction of {closestSettlement}.")
+                .SetTextVariable("closestSettlement", closestSettlement)
+                .SetTextVariable("goldGiven", goldGiven)
+                .ToString();
+            
+            var eventOptionCText = new TextObject(
+                    "{=BirthdayParty_Event_Choice_3}You don't have time for this so you leave for {closestSettlement} but not before casting one last look at the party.")
+                .SetTextVariable("closestSettlement", closestSettlement)
+                .ToString();
+            
+            var eventMsg1 =new TextObject(
+                    "{=BirthdayParty_Event_Msg_1}{heroName} gave away {goldGiven} to the girl gained {renownGain} renown for slaying the bandits.")
+                .SetTextVariable("heroName", heroName)
+                .SetTextVariable("goldGiven", goldGiven)
+                .SetTextVariable("renownGain", renownGain)
+                .ToString();
+            
+            var eventMsg2 =new TextObject(
+                    "{=BirthdayParty_Event_Msg_1}{heroName} gave away {goldGiven} to the girl.")
+                .SetTextVariable("heroName", heroName)
+                .SetTextVariable("goldGiven", goldGiven)
+                .ToString();
             
 
             var msid = new MultiSelectionInquiryData(
-                EventTitle,
-                $"As you and your party are traveling in the vicinity of {closestSettlement}, you come across {peopleAttending} people in what seems to be a birthday party for a young girl. A couple of the guests invites " +
-                $"you to join them in celebrating the girls {birthdayAge} birthday! What should you do?",
+                eventTitle,
+                eventDescription,
                 inquiryElements,
                 false,
                 1,
-                "Okay",
+                eventButtonText,
                 null,
                 elements =>
                 {
                     switch ((string)elements[0].Identifier)
                     {
                         case "a":
-                            InformationManager.ShowInquiry(
-                                new InquiryData(EventTitle,
-                                    $"You and {yourMenAttending} of your men decide to stay for the party while the rest makes their way to {closestSettlement}. You approach the girl and give her {goldGiven} gold as a gift. " +
-                                    "She give you a hug and a thank you. You get yourself some beer and sit down to enjoy the moment.\n \n" +
-                                    $"Some time later, {bandits} bandits decide to crash the party. They go around from person to person and takes everything of value. You order your men to stand down as you don't want to " +
-                                    "start a fight with innocents caught in the middle. After they have taken everything of value they also try to take the young girl with them. This you will not stand for so you signal " +
-                                    $"your men to strike. You and your men make quick work in incapacitating the bandits. One of your men rides to {closestSettlement} to fetch someone to throw these scum in the dungeon. \n" +
-                                    "The rest of the night you are celebrated as a hero! You even got to dance with the birthday girl!",
-                                    true, false, "Done", null, null, null), true);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldGiven);
                             Clan.PlayerClan.AddRenown(renownGain);
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
                             break;
+                        
                         case "b":
-                            InformationManager.ShowInquiry(
-                                new InquiryData(EventTitle,
-                                    $"Your really dont' have time to stay but you don't want to be rude either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. She seems grateful. \n" +
-                                    $"You say your goodbyes to the partygoers and you leave in the direction of {closestSettlement}.",
-                                    true, false, "Done", null, null, null), true);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldGiven);
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
                             break;
+                        
                         case "c":
-                        {
-                            InformationManager.ShowInquiry(
-                                new InquiryData(EventTitle,
-                                    $"You don't have time for this so you leave for {closestSettlement} but not before casting one last look at the party.",
-                                    true, false, "Done", null, null, null), true);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionCText, true, false, eventButtonText, null, null, null), true);
                             break;
-                        }
+                        
                         default:
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
                             break;
                     }
                 },
-                null); // What to do on the "cancel" button, shouldn't ever need it.
+                null);
 
             MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

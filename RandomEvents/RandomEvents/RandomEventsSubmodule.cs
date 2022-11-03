@@ -10,6 +10,7 @@ namespace CryingBuffalo.RandomEvents
     public class RandomEventsSubmodule : MBSubModuleBase
     {
         public static readonly Color TextColor = Color.FromUint(6750401U);
+        public static readonly Color MsgColor = Color.FromUint(11846692);
 
         protected override void OnSubModuleLoad()
         {

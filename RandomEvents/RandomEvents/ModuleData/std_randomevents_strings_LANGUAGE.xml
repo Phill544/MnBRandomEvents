@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="XX" />
+  </tags>
+  <strings>
+    <!--BirthdayParty Event-->
+    <string id="BirthdayParty_Title" text="@The Birthday Party!" />
+    <string id="BirthdayParty_Event_Desc" text="@As you and your party are traveling in the vicinity of {closestSettlement}, you come across {peopleAttending} people in what seems to be a birthday party for a young girl. A couple of the guests invite you to join them in celebrating the girls {birthdayAge} birthday! What should you do?" />
+
+    <!--BirthdayParty - Event Choices-->
+    <string id="BirthdayParty_Event_Option_1" text="@Join them in celebration!" />
+    <string id="BirthdayParty_Event_Option_1_Hover" text="@Not everyday you turn {birthdayAge} years old!" />
+    <string id="BirthdayParty_Event_Option_2" text="@Give the girls some gold" />
+    <string id="BirthdayParty_Event_Option_2_Hover" text="@You don't have time to stay but you can still be nice right ?" />
+    <string id="BirthdayParty_Event_Option_3" text="@Leave" />
+    <string id="BirthdayParty_Event_Option_3_Hover" text="@Don't have time" />
+
+    <!--BirthdayParty - Event Button-->
+    <string id="BirthdayParty_Event_Button_Text" text="@Okay" />
+
+    <!--BirthdayParty - Events-->
+    <string id="BirthdayParty_Event_Choice_1" text="@You and {yourMenAttending} of your men decide to stay for the party while the rest makes their way to {closestSettlement}. You approach the girl and give her {goldGiven} gold as a gift. She give you a hug and a thank you. You get yourself some beer and sit down to enjoy the moment.\n \n Some time later, {bandits} bandits decide to crash the party. They go around from person to person and takes everything of value. You order your men to stand down as you don't want to start a fight with innocents caught in the middle. After they have taken everything of value they also try to take the young girl with them. This you will not stand for so you signal your men to strike. You and your men make quick work in incapacitating the bandits. One of your men rides to {closestSettlement} to fetch someone to throw these scum in the dungeon. The rest of the night you are celebrated as a hero! You even got to dance with the birthday girl!" />
+    <string id="BirthdayParty_Event_Choice_2" text="@Your really don't have time to stay but you don't want to be rude either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. She seems grateful. \n You say your goodbyes to the partygoers and you leave in the direction of {closestSettlement}." />
+    <string id="BirthdayParty_Event_Choice_3" text="@You don't have time for this so you leave for {closestSettlement} but not before casting one last look at the party." />
+
+    <!--BirthdayParty - Log Messages-->
+    <string id="BirthdayParty_Event_Msg_1" text="@{heroName} gave away {goldGiven} to the girl gained {renownGain} renown for slaying the bandits." />
+    <string id="BirthdayParty_Event_Msg_2" text="@{heroName} gave away {goldGiven} to the girl." />
+
+
+    <!--BeggarBegging Event-->
+    <string id="BeggarBegging_Title" text="@Spare a coin" />
+    <string id="BeggarBegging_Event_Desc" text="@AWhile you are relaxing in {currentSettlement} you are approached by a beggar who asks if you can spare any gold. You check your pockets to see if you have anything to spare." />
+
+    <!--BeggarBegging - Event Outcomes-->
+    <string id="BeggarBegging_Outcome_1" text="@You inform the beggar that you currently don't have any gold on you. The beggar thanks you for your time and leaves." />
+    <string id="BeggarBegging_Outcome_2" text="@You hand over {goldToGive} gold to the beggar. He thanks you and move on." />
+    <string id="BeggarBegging_Outcome_3" text="@You hand over {goldToGive} gold to the beggar. He shakes your hand and kisses it. He is truly thankful." />
+    <string id="BeggarBegging_Outcome_4" text="@You hand over {goldToGive} gold to the beggar. He drops to his knees and kisses your shoes. You tell him to get himself some food." />
+
+    <!--BeggarBegging - Event Button-->
+    <string id="BeggarBegging_Event_Button_Text" text="@Continue" />
+
+    <!--BeggarBegging - Log Messages-->
+    <string id="BeggarBegging_Event_Msg_1" text="@{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown." />
+    <string id="BeggarBegging_Event_Msg_2" text="@{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown." />
+    <string id="BeggarBegging_Event_Msg_3" text="@{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown." />
+
+    <!--BirthdayParty Event-->
+    <string id="FallenSolider_Title" text="@Family of a fallen soldier" />
+    <string id="FallenSolider_Event_Desc" text="@As you are having a drink at the local tavern in {currentSettlement}, you are approached by 3 individuals. It's a woman and two young boys. They ask if they can talk to you. They explain that they are the family of a soldier who died under your command. They are here requesting compensation for his death as they are in desperate need of gold to be able to keep their farm. What do you do?" />
+
+    
+    <!--FallenSolider - Event Choices-->
+    <string id="FallenSolider_Event_Option_1" text="@Offer them compensation" />
+    <string id="FallenSolider_Event_Option_1_Hover" text="@They should be compensated" />
+    <string id="FallenSolider_Event_Option_2" text="@Explain that you owe them nothing" />
+    <string id="FallenSolider_Event_Option_2_Hover" text="@Not my problem!" />
+    <string id="FallenSolider_Event_Option_3" text="@Leave" />
+    <string id="FallenSolider_Event_Option_3_Hover" text="@You have a headache so you leave" />
+    <string id="FallenSolider_Event_Option_4" text="@Plot something malicious" />
+    <string id="FallenSolider_Event_Option_4_Hover" text="@The audacity!" />
+
+    <!--FallenSolider - Event Button-->
+    <string id="FallenSolider_Event_Button_Text_1" text="@Okay" />
+    <string id="FallenSolider_Event_Button_Text_2" text="@Done" />
+
+    <!--FallenSolider - Events-->
+    <string id="FallenSolider_Event_Choice_1" text="@You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. The soldier in question was executed by your hands as it was discovered he was a traitor. \n The question you ask yourself now is if his entire family should suffer from his mistake. They have spoken so warmly about him that you don't want to tell them the truth about how he died so you make up a heroic story.\n Even though the family have no right for compensation, you agree to pay them {familyCompensation} gold in compensation so they can keep their family farm.\n \n After you have handed over they gold to them and they have left, you cannot help but wonder if you did the right thing keeping the mother in the dark about her son's true nature.\n \nYou end up drinking the night away." />
+    <string id="FallenSolider_Event_Choice_2" text="@You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. The soldier in question was executed by your hands as it was discovered he was a traitor. \n You tell the family that you cannot grant them compensation as it was specified in his contract that the family left behind had no right to claim compensation. The women starts to cry and begs you to help them. You decline to help them and leave the tavern." />
+    <string id="FallenSolider_Event_Choice_3" text="@You don't have the energy to deal with this so you tell them that you don't owe them anything. You then leave the tavern." />
+    <string id="FallenSolider_Event_Choice_4" text="@You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. The soldier in question was executed by your hands as it was discovered he was a traitor.\n You ask them where their farm is and you tell them you will be there tomorrow. You then excuse yourself and leave. \n \n The following day you and your men arrive at the farm but you have no intention to pay them. Instead you order your men to burn the farm to the ground and kill the owners.\n  You watch as your men execute your orders. You see them dragging the family outside with their hands bound behind their backs. You watch as the farmhouse burns and you witness your men executing all of the family.\n Once they are done you order your men back and you ride back to your main party." />
+
+    <!--FallenSolider - Log Messages-->
+    <string id="FallenSolider_Event_Msg_1" text="@{heroName} gives the family {familyCompensation} gold in compensation." />
+    <string id="FallenSolider_Event_Msg_2" text="@{heroName} No one messes with {heroName}!" />
+  </strings>
+</base>
