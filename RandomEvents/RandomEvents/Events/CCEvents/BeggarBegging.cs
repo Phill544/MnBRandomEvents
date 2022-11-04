@@ -95,45 +95,15 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("renownGain", renownGain)
                 .ToString();
 
-            InformationManager.ShowInquiry(
-                new InquiryData(eventTitle,
-                    eventDescription,
-                    true,
-                    false,
-                    eventButtonText,
-                    null,
-                    null,
-                    null
-                ),
-                true);
+            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription, true, false, eventButtonText, null, null, null), true);
 
             if (goldToGive == 0)
             {
-                InformationManager.ShowInquiry(
-                    new InquiryData(eventTitle,
-                        eventOutcome1,
-                        true,
-                        false,
-                        eventButtonText,
-                        null,
-                        null,
-                        null
-                    ),
-                    true);
+                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1, true, false, eventButtonText, null, null, null), true);
             }
             else if (goldToGive > 0 && goldToGive <= 15)
             {
-                InformationManager.ShowInquiry(
-                    new InquiryData(eventTitle,
-                        eventOutcome2,
-                        true,
-                        false,
-                        eventButtonText,
-                        null,
-                        null,
-                        null
-                    ),
-                    true);
+                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2, true, false, eventButtonText, null, null, null), true);
 
                 Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain - 5;
@@ -142,17 +112,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             }
             else if (goldToGive > 15 && goldToGive <= 35)
             {
-                InformationManager.ShowInquiry(
-                    new InquiryData(eventTitle,
-                        eventOutcome3,
-                        true,
-                        false,
-                        eventButtonText,
-                        null,
-                        null,
-                        null
-                    ),
-                    true);
+                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome3, true, false, eventButtonText, null, null, null), true);
+                
                 Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain - 2;
                 
@@ -160,17 +121,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             }
             else if (goldToGive > 35 && goldToGive <= maxGoldToGive)
             {
-                InformationManager.ShowInquiry(
-                    new InquiryData(eventTitle,
-                        eventOutcome4,
-                        true,
-                        false,
-                        eventButtonText,
-                        null,
-                        null,
-                        null
-                    ),
-                    true);
+                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome4, true, false, eventButtonText, null, null, null), true);
+                
                 Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain;
                 

@@ -117,14 +117,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
 
-            var msid = new MultiSelectionInquiryData(
-                eventTitle,
-                eventDescription,
-                inquiryElements,
-                false,
-                1,
-                eventButtonText1,
-                null,
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null,
                 elements =>
                 {
                     switch ((string)elements[0].Identifier)
