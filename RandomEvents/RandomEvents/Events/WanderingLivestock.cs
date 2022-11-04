@@ -4,6 +4,7 @@ using System.Windows;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
 namespace CryingBuffalo.RandomEvents.Events
@@ -12,8 +13,6 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly int minFood;
 		private readonly int maxFood;
-
-		private const string EventTitle = "Free Range Meat";
 
 		public WanderingLivestock() : base(Settings.ModSettings.RandomEvents.WanderingLivestockData)
 		{
@@ -36,22 +35,34 @@ namespace CryingBuffalo.RandomEvents.Events
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
+			
+			var eventTitle = new TextObject("{=WanderingLivestock_Title}Free Range Meat").ToString();
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			var eventOption1 = new TextObject("{=WanderingLivestock_Event_Option_1}Take them in").ToString();
+			var eventOption2 = new TextObject("{=WanderingLivestock_Event_Option_2}Ignore them").ToString();
+
+			var inquiryElements = new List<InquiryElement>
 			{
-				new InquiryElement("a", "Take them in", null),
-				new InquiryElement("b", "Ignore them", null)
+				new InquiryElement("a", eventOption1, null),
+				new InquiryElement("b", eventOption2, null)
 			};
+			
+			var eventDescription = new TextObject("{=WanderingLivestock_Event_Desc}You come across some wandering livestock.")
+				.ToString();
+			
+			var eventButtonText1 = new TextObject("{=WanderingLivestock_Event_Button_Text_1}Okay").ToString();
+			var eventButtonText2 = new TextObject("{=WanderingLivestock_Event_Button_Text_2}Yum").ToString();
+			var eventButtonText3 = new TextObject("{=WanderingLivestock_Event_Button_Text_3}Done").ToString();
 
-			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				EventTitle, // Title
-				"You come across some wandering livestock.", // Description
-				inquiryElements, // Options
-				false, // Can close menu without selecting an option. Should always be false.
-				1, // Force a single option to be selected. Should usually be true
-				"Okay", // The text on the button that continues the event
-				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+			var msid = new MultiSelectionInquiryData(
+				eventTitle, 
+				eventDescription, 
+				inquiryElements, 
+				false, 
+				1, 
+				eventButtonText1, 
+				null, 
+				elements => 
 				{
 					switch ((string)elements[0].Identifier)
 					{
@@ -63,13 +74,20 @@ namespace CryingBuffalo.RandomEvents.Events
 							var cowCount = totalCount - sheepCount;
 
 							string cowText;
-
+							
+							var eventPluralEnd= new TextObject("{=WanderingLivestock_Event_Plural_End}s").ToString();
+							
 							if (cowCount > 0)
 							{
-								string cowPlural = "";
-								if (cowCount > 1) cowPlural = "s";
+								var cowPlural = "";
+								if (cowCount > 1) cowPlural = eventPluralEnd;
+								
+								var eventCowText= new TextObject("{=WanderingLivestock_Event_Cow_Text}, and {cowCount} cow{cowPlural}.")
+									.SetTextVariable("cowCount", cowCount)
+									.SetTextVariable("cowPlural", cowPlural)
+									.ToString();
 
-								cowText = $", and {cowCount} cow{cowPlural}.";
+								cowText = eventCowText;
 							}
 							else
 							{
@@ -81,19 +99,30 @@ namespace CryingBuffalo.RandomEvents.Events
 
 							MobileParty.MainParty.ItemRoster.AddToCounts(sheep, sheepCount);
 							MobileParty.MainParty.ItemRoster.AddToCounts(cow, cowCount);
+							
+							var eventOptionAText = new TextObject("{=WanderingLivestock_Event_Choice_1}Who could say no to such a delicious -- I mean, reasonable proposition? You end up in possession of {sheepCount} sheep{cowText}")
+								.SetTextVariable("sheepCount", sheepCount)
+								.SetTextVariable("cowText", cowText)
+								.ToString();
+							
 
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, $"Who could say no to such a delicious -- I mean, reasonable proposition? You end up in possession of {sheepCount} sheep{cowText}", true, false, "Yum", null, null, null), true);
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
 							break;
 						}
 						case "b":
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, "The last thing you need right now is to tend to livestock, so you leave them.", true, false, "Done", null, null, null), true);
+							
+							var eventOptionBText = new TextObject(
+									"{=WanderingLivestock_Event_Choice_2}The last thing you need right now is to tend to livestock, so you leave them.")
+								.ToString();
+							
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText3, null, null, null), true);
 							break;
 						default:
 							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
 							break;
 					}
 				},
-				null); // What to do on the "cancel" button, shouldn't ever need it.
+				null);
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

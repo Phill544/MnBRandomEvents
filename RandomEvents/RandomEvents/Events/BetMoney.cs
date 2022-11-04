@@ -5,13 +5,12 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	internal sealed class BetMoney : BaseEvent
 	{
-		
-		private const string EventTitle = "All or nothing";
 		private readonly float moneyBetPercent;
 
 		public BetMoney() : base(Settings.ModSettings.RandomEvents.BetMoneyData)
@@ -21,39 +20,50 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			var eventTitle = new TextObject("{=BetMoney_Title}All or nothing").ToString();
+			
+			var eventOption1 = new TextObject("{=BetMoney_Event_Option_1}Gamble").ToString();
+
+			var eventOption2 = new TextObject("{=BetMoney_Event_Option_2}Decline").ToString();
+			
+			var inquiryElements = new List<InquiryElement>
 			{
-				new InquiryElement("a", "Gamble", null),
-				new InquiryElement("b", "Decline", null)
+				new InquiryElement("a", eventOption1, null),
+				new InquiryElement("b", eventOption2, null)
 			};
+			
+			var eventExtraDialogue = new TextObject("{=BetMoney_Event_Extra_Dialogue}You have no idea how they have that much money. You contemplate stealing it.").ToString();
 
-			int goldToBet = MathF.Floor(Hero.MainHero.Gold * moneyBetPercent);
+			var goldToBet = MathF.Floor(Hero.MainHero.Gold * moneyBetPercent);
 
-			string extraDialogue = "";
+			var extraDialogue = "";
 			if (goldToBet > 40000)
-				extraDialogue = " You have no idea how they have that much money. You contemplate stealing it.";
+				extraDialogue = eventExtraDialogue;
+			
+			var eventDescription = new TextObject("{=BetMoney_Event_Desc}One of your soldiers wants to flip a coin. Heads you win, tails they do. The prize is {goldToBet} gold.{extraDialogue}")
+				.SetTextVariable("goldToBet", goldToBet)
+				.SetTextVariable("extraDialogue", extraDialogue)
+				.ToString();
+			
+			var eventButtonText1 = new TextObject("{=BetMoney_Event_Button_Text_1}Okay").ToString();
+			var eventButtonText2 = new TextObject("{=BetMoney_Event_Button_Text_2}Done").ToString();
 
-			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				EventTitle, // Title
-				$"One of your soldiers wants to flip a coin. Heads you win, tails they do. The prize is {goldToBet} gold.{extraDialogue}", // Description
-				inquiryElements, // Options
-				false, // Can close menu without selecting an option. Should always be false.
-				1, // Force a single option to be selected. Should usually be true
-				"Okay", // The text on the button that continues the event
-				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+			var eventNoBet = new TextObject("{=BetMoney_Event_No_Bet}You walk away.").ToString();
+
+			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null, 
+				elements => 
 				{
 					if ((string)elements[0].Identifier == "a")
 					{
-						string outcomeText = DoBet(goldToBet);
-						InformationManager.ShowInquiry(new InquiryData("All or nothing", outcomeText, true, false, "Done", null, null, null), true);
+						var outcomeText = DoBet(goldToBet);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, outcomeText, true, false, eventButtonText2, null, null, null), true);
 					}
 					else
 					{
-						InformationManager.ShowInquiry(new InquiryData("All or nothing", "You walk away.", true, false, "Done", null, null, null), true);
+						InformationManager.ShowInquiry(new InquiryData(eventTitle, eventNoBet, true, false, eventButtonText2, null, null, null), true);
 					}
 				},
-				null); // What to do on the "cancel" button, shouldn't ever need it.
+				null);
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
@@ -63,18 +73,20 @@ namespace CryingBuffalo.RandomEvents.Events
 		private static string DoBet(int goldToBet)
 		{
 			var decision = MBRandom.RandomFloatRanged(0.0f, 1.0f);
-					
-
+			
 			string outcomeText;
+			
+			var eventOutcomeText1 = new TextObject("{=BetMoney_Event_Outcome_Text_1}Well, I'm never going to make that money back... Your companion says with a heavy sigh as your pocket your 'hard earned' gold.").ToString();
+			var eventOutcomeText2 = new TextObject("{=BetMoney_Event_Outcome_Text_2}Better luck next time. Your companion says smugly.").ToString();
 
 			if (decision >= 0.5f)
 			{
-				outcomeText = "\"Well, I'm never going to make that money back...\" Your companion says with a heavy sigh as your pocket your 'hard earned' gold.";
+				outcomeText = eventOutcomeText1;
 				Hero.MainHero.ChangeHeroGold(goldToBet);
 			}
 			else
 			{
-				outcomeText = "\"Better luck next time\" Your companion says smugly.";
+				outcomeText = eventOutcomeText2;
 				Hero.MainHero.ChangeHeroGold(-goldToBet);
 			}
 

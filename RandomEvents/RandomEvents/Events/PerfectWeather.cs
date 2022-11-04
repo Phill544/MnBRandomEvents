@@ -2,13 +2,12 @@
 using System.Windows;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class PerfectWeather : BaseEvent
 	{
-		private const string EventTitle = "Perfect Weather";
-		
 		private readonly int moraleGain;
 
 		public PerfectWeather() : base(Settings.ModSettings.RandomEvents.PerfectWeatherData)
@@ -28,19 +27,16 @@ namespace CryingBuffalo.RandomEvents.Events
 		public override void StartEvent()
 		{
 			MobileParty.MainParty.RecentEventsMorale += moraleGain;
-			MobileParty.MainParty.MoraleExplained.Add(moraleGain, new TaleWorlds.Localization.TextObject("Random Event"));
+			MobileParty.MainParty.MoraleExplained.Add(moraleGain);
+			
+			var eventTitle = new TextObject("{=PerfectWeather_Title}Perfect Weather").ToString();
+			
+			var eventOption1 = new TextObject("{=PerfectWeather_Event_Text}The weather today is so perfect that everyone relaxes and the mood improves!")
+				.ToString();
+				
+			var eventButtonText = new TextObject("{=PerfectWeather_Event_Button_Text}Done").ToString();
 
-			InformationManager.ShowInquiry(
-				new InquiryData(EventTitle,
-					"The weather today is so perfect that everyone relaxes and the mood improves!",
-					true,
-					false,
-					"Done",
-					null,
-					null,
-					null
-					),
-				true);
+			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
 
 			StopEvent();
 		}

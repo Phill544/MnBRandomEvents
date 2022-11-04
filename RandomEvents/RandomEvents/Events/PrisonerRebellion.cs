@@ -3,13 +3,12 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class PrisonerRebellion : BaseEvent
 	{
-		private const string EventTitle = "Prisoner Rebellion!";
-		
 		private readonly int minimumPrisoners;
 
 		private bool heroInPrisonerRoster;
@@ -37,7 +36,16 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			try
 			{
-				MobileParty prisonerParty = PartySetup.CreateBanditParty("looters", "Escaped prisoners (Random Event)");
+				
+				var eventTitle = new TextObject("{=PrisonerRebellion_Title}Prisoner Rebellion!").ToString();
+
+				var eventPartyLabel= new TextObject("{=PrisonerRebellion_Event_Party_Label}Escaped prisoners (Random Event)").ToString();
+				
+				var eventButtonText = new TextObject("{=PrisonerRebellion_Event_Button_Text}To arms!").ToString();
+				
+				var prisonerParty = PartySetup.CreateBanditParty("looters", eventPartyLabel);
+				
+				var eventHeroDialogue= new TextObject("{=PrisonerRebellion_Hero_Dialogue}\n\nFortunately, you keep the important prisoners separate and they were unable to escape!").ToString();
 
 				prisonerParty.MemberRoster.Clear();
 				DoPrisonerTransfer(prisonerParty);
@@ -45,22 +53,18 @@ namespace CryingBuffalo.RandomEvents.Events
 				prisonerParty.Aggressiveness = 10;
 				prisonerParty.SetMoveEngageParty(MobileParty.MainParty);
 
-				string heroDialogue = "";
+				var heroDialogue = "";
 				if (heroInPrisonerRoster)
 				{
-					heroDialogue = "\n\nFortunately, you keep the important prisoners separate and they were unable to escape!";
+					heroDialogue = eventHeroDialogue;
 				}
+				
+				var eventOption1 = new TextObject("{=PrisonerRebellion_Event_Text}While your guards weren't looking the prisoners managed to break free. They'd rather die than stay in captivity another day! {heroDialogue}")
+					.SetTextVariable("heroDialogue", heroDialogue)
+					.ToString();
 
-				InformationManager.ShowInquiry(
-					new InquiryData(EventTitle,
-									$"While your guards weren't looking the prisoners managed to break free. \"We'd rather die than stay in captivity another day!\"{heroDialogue}",
-									true,
-									false,
-									"To arms!",
-									null,
-									null,
-									null
-									), true);
+				InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
+				
 			}
 			catch (Exception ex)
 			{

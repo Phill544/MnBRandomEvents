@@ -13,6 +13,7 @@ namespace CryingBuffalo.RandomEvents.Events
 	/// KNOWN BUG -- IF GAME SAVED DURING EVENT PLAYER WILL NOT BE ABLE TO MOVE (MobileParty.MainParty.IsActive = true)
 	/// Also, using that value to stop movement means that the player cannot be interacted with.
 	/// Disabled until it can be reimplemented
+	/// Not compatible with localization.
 	/// </summary>
 	public sealed class GloriousFood : BaseEvent
 	{

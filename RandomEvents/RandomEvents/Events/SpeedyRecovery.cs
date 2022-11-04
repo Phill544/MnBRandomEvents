@@ -3,13 +3,12 @@ using System.Windows;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class SpeedyRecovery : BaseEvent
 	{
-		private const string EventTitle = "Speedy Recovery!";
-		
 		private readonly int minTroopsToHeal;
 		private readonly int maxTroopsToHeal;
 
@@ -51,18 +50,15 @@ namespace CryingBuffalo.RandomEvents.Events
 					MobileParty.MainParty.MemberRoster.AddToCountsAtIndex(randomElement, 0, -1);
 					totalHealed++;
 				}
+				
+				var eventTitle = new TextObject("{=SpeedyRecovery_Title}Speedy Recovery!").ToString();
+			
+				var eventOption1 = new TextObject("{=SpeedyRecovery_Event_Text}You receive word that a group of your troops are feeling better, and are ready for combat.")
+					.ToString();
+				
+				var eventButtonText = new TextObject("{=SpeedyRecovery_Event_Button_Text}Done").ToString();
 
-				InformationManager.ShowInquiry(
-					new InquiryData(EventTitle,
-						"You receive word that a group of your troops are feeling better, and are ready for combat.",
-						true,
-						false,
-						"Done",
-						null,
-						null,
-						null
-						),
-					true);
+				InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
 
 				StopEvent();
 			}

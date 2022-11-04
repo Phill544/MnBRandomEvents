@@ -6,6 +6,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
@@ -16,9 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly float moneyMaxPercent;
 		private readonly int troopScareCount;
 		private readonly int banditCap;
-
-		private const string EventTitle = "Ambushed by bandits";
-
+		
 		public BanditAmbush() : base(Settings.ModSettings.RandomEvents.BanditAmbushData)
 		{
 			moneyMinPercent = Settings.ModSettings.RandomEvents.BanditAmbushData.moneyMinPercent;
@@ -42,52 +41,71 @@ namespace CryingBuffalo.RandomEvents.Events
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
+			
+			var eventTitle = new TextObject("{=BanditAmbush_Title}Ambushed by bandits!").ToString();
+			
+			var eventOption1 = new TextObject("{=BanditAmbush_Event_Option_1}Pay gold to have them leave").ToString();
+			var eventOption1Hover = new TextObject("{=BanditAmbush_Event_Option_1_Hover}What is gold good for, if not to dissuade people from killing you?").ToString();
+            
+			var eventOption2 = new TextObject("{=BanditAmbush_Event_Option_2}Attack").ToString();
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			var eventOption3 = new TextObject("{=BanditAmbush_Event_Option_3}Intimidate them").ToString();
+			
+			var eventButtonText1 = new TextObject("{=ViolatedGirl_Event_Button_Text_1}Okay").ToString();
+			var eventButtonText2 = new TextObject("{=ViolatedGirl_Event_Button_Text_2}Done").ToString();
+
+			var inquiryElements = new List<InquiryElement>
 			{
-				new InquiryElement("a", "Pay gold to have them leave", null, true, "What is gold good for, if not to dissuade people from killing you?"),
-				new InquiryElement("b", "Attack", null)
+				new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
+				new InquiryElement("b", eventOption2, null)
 			};
 
 			if (Hero.MainHero.PartyBelongedTo.MemberRoster.TotalHealthyCount > troopScareCount)
 			{
-				inquiryElements.Add(new InquiryElement("c", "Intimidate them", null)); 
+				inquiryElements.Add(new InquiryElement("c", eventOption3, null)); 
 			}
+			
+			var percentMoneyLost = MBRandom.RandomFloatRanged(moneyMinPercent, moneyMaxPercent);
+			var goldLost = MathF.Floor(Hero.MainHero.Gold * percentMoneyLost);
+			
+			var eventOptionAText = new TextObject(
+					"{=BanditAmbush_Event_Choice_1}You give the bandits {goldLost} coins and they quickly flee. At least you and your soldiers live to fight another day.")
+				.SetTextVariable("goldLost", goldLost)
+				.ToString();
+			
+			var eventOptionBText = new TextObject(
+					"{=BanditAmbush_Event_Choice_2}Seeing you won't back down, the bandits get ready for a fight.")
+				.ToString();
+			
+			var eventOptionCText = new TextObject(
+					"{=BanditAmbush_Event_Choice_3}You laugh as you watch the rest of your party emerge over the crest of the hill. The bandits get ready to flee.")
+				.ToString();
 
-			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				EventTitle, // Title
-				CalculateDescription(), // Description
-				inquiryElements, // Options
-				false, // Can close menu without selecting an option. Should always be false.
-				1, // Force a single option to be selected. Should usually be true
-				"Okay", // The text on the button that continues the event
-				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+			var msid = new MultiSelectionInquiryData(eventTitle, CalculateDescription(), inquiryElements, false, 1, eventButtonText1, null, 
+				elements => 
 				{
 					switch ((string)elements[0].Identifier)
 					{
 						case "a":
 						{
-							float percentMoneyLost = MBRandom.RandomFloatRanged(moneyMinPercent, moneyMaxPercent);
-							int goldLost = MathF.Floor(Hero.MainHero.Gold * percentMoneyLost);
 							Hero.MainHero.ChangeHeroGold(-goldLost);
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, $"You give the bandits {goldLost} coins and they quickly flee. At least you and your soldiers live to fight another day.", true, false, "Done", null, null, null), true);
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
 							break;
 						}
 						case "b":
 							SpawnBandits(false);
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, "Seeing you won't back down, the bandits get ready for a fight.", true, false, "Done", null, null, null), true);
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
 							break;
 						case "c":
 							SpawnBandits(true);
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, "You laugh as you watch the rest of your party emerge over the crest of the hill. The bandits get ready to flee.", true, false, "Done", null, null, null), true);
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null, null), true);
 							break;
 						default:
 							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
 							break;
 					}
 				},
-				null); // What to do on the "cancel" button, shouldn't ever need it.
+				null);
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
@@ -108,7 +126,16 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private string CalculateDescription()
 		{
-			return Hero.MainHero.PartyBelongedTo.MemberRoster.Count > troopScareCount ? "You are traveling with your forward party when you get surrounded by a group of bandits!" : "While traveling your party gets surrounded by a group of bandits!";
+			
+			var eventDescription1 = new TextObject(
+					"{=BanditAmbush_Event_Desc_1}You are traveling with your forward party when you get surrounded by a group of bandits!")
+				.ToString();
+			
+			var eventDescription2 = new TextObject(
+					"{=BanditAmbush_Event_Desc_2}While traveling your party gets surrounded by a group of bandits!")
+				.ToString();
+			
+			return Hero.MainHero.PartyBelongedTo.MemberRoster.Count > troopScareCount ? eventDescription1 : eventDescription2;
 		}
 
 		private void SpawnBandits(bool shouldFlee)
@@ -142,23 +169,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class BanditAmbushData : RandomEventData
 	{
-		/// <summary>
-		/// The min percent the bandits will ask
-		/// </summary>
 		public readonly float moneyMinPercent;
-		/// <summary>
-		/// The max percent the bandits will ask
-		/// </summary>
 		public readonly float moneyMaxPercent;
-
-		/// <summary>
-		/// The amount of troops the player needs in order to scare the bandits
-		/// </summary>
 		public readonly int troopScareCount;
-
-		/// <summary>
-		///  The maximum amount of bandits that can spawn
-		/// </summary>
 		public readonly int banditCap;
 
 		public BanditAmbushData(string eventType, float chanceWeight, float moneyMinPercent, float moneyMaxPercent, int troopScareCount, int banditCap) : base(eventType, chanceWeight)

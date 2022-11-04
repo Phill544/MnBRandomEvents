@@ -7,13 +7,12 @@ using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class BunchOfPrisoners : BaseEvent
 	{
-		private const string EventTitle = "Bunch of Prisoners";
-		
 		private readonly int minPrisonerGain;
 		private readonly int maxPrisonerGain;
 
@@ -50,17 +49,17 @@ namespace CryingBuffalo.RandomEvents.Events
 				
 			prisoners.RemoveParty();
 
-			InformationManager.ShowInquiry(
-				new InquiryData(EventTitle,
-					$"You receive word that your guards have expertly stopped a force inciting violence at {settlement.Name}, they have been put in cells",
-					true,
-					false,
-					"Done",
-					null,
-					null,
-					null
-					),
-				true);
+			var settlementName = settlement.Name;
+			
+			var eventTitle = new TextObject("{=BunchOfPrisoners_Title}Bunch of Prisoners").ToString();
+			
+			var eventOption1 = new TextObject("{=BunchOfPrisoners_Event_Text}You receive word that your guards have expertly stopped a force inciting violence at {settlementName}, they have been put in cells.")
+				.SetTextVariable("settlementName", settlementName)
+				.ToString();
+				
+			var eventButtonText = new TextObject("{=BunchOfPrisoners_Event_Button_Text}Done").ToString();
+
+			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
 
 			StopEvent();
 		}
@@ -80,8 +79,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		private static Settlement GetRandomSettlement()
 		{
 			var eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
-
-			// Randomly pick one of the eligible settlements
+			
 			var index = MBRandom.RandomInt(0, eligibleSettlements.Count);
 
 			return eligibleSettlements[index];
@@ -96,8 +94,6 @@ namespace CryingBuffalo.RandomEvents.Events
 			var hideouts = Settlement.FindAll(s => s.IsHideout).ToList();
 			var closestHideout = hideouts.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 			return closestHideout.Culture;
-
-			// Pick one of the factions to spawn prisoners of
 		}
 	}
 

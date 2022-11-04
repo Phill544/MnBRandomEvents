@@ -6,6 +6,7 @@ using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
@@ -15,8 +16,6 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly float highMedicineChance;
 		private readonly int highMedicineLevel;
 		private readonly float percentLoss;
-
-		private const string EventTitle = "It’s Airborne!";
 
 		public DiseasedCity() : base(Settings.ModSettings.RandomEvents.DiseasedCityData)
 		{
@@ -121,6 +120,30 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private void ResolvePlague(bool plagueKills, Settlement plaguedSettlement, Hero highestMedicineHero)
 		{
+
+			var highestMedicine = highestMedicineHero;
+			var eventTitle = new TextObject("{=DiseasedCity_Title}It's Airborne!").ToString();
+			
+			var eventOutcome1 = new TextObject("{=DiseasedCity_Event_Choice_1}{plaguedSettlement} has suffered a devastating plague. Although {highestMedicine} tried their best to save the population, it wasn't enough...")
+				.SetTextVariable("plaguedSettlement", plaguedSettlement.Name)
+				.SetTextVariable("highestHero", highestMedicine.Name)
+				.ToString();
+			
+			var eventOutcome2 = new TextObject("{=DiseasedCity_Event_Choice_2}{plaguedSettlement} has suffered a devastating plague. As there wasn't anyone able to provide assistance to the population, the sickness cut through the population without mercy.")
+				.SetTextVariable("plaguedSettlement", plaguedSettlement.Name)
+				.ToString();
+			
+			var eventOutcome3 = new TextObject("{=DiseasedCity_Event_Choice_3}Although the telltale signs of an emerging plague started to appear in {plaguedSettlement}, because of {highestMedicine}'s expertise, measures were put in place that saved the settlement from unnecessary death.")
+				.SetTextVariable("plaguedSettlement", plaguedSettlement.Name)
+				.SetTextVariable("highestHero", highestMedicine.Name)
+				.ToString();
+			
+			var eventOutcome4 = new TextObject("{=DiseasedCity_Event_Choice_4}Although the telltale signs of an emerging plague starting to appear in {plaguedSettlement}, as luck would have it, nothing ever came of it. Those that were ill recovered, and the fears of a deadly pandemic can be laid to rest... For now.")
+				.SetTextVariable("plaguedSettlement", plaguedSettlement.Name)
+				.ToString();
+			
+			var eventButtonText = new TextObject("{=DiseasedCity_Event_Button_Text}Done").ToString();
+			
 			if (plagueKills)
 			{
 				if (highestMedicineHero != null)
@@ -141,17 +164,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 					highestMedicineHero.AddSkillXp(DefaultSkills.Medicine, xpToGive);
 
-					InformationManager.ShowInquiry(
-						new InquiryData(EventTitle,
-							$"{plaguedSettlement} has suffered a devastating plague. Although {highestMedicineHero.Name} tried their best to save the population, it wasn't enough...",
-							true,
-							false,
-							"Done",
-							null,
-							null,
-							null
-							), 
-						true);
+					InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1, true, false, eventButtonText, null, null, null), true);
 				}
 				else
 				{
@@ -165,17 +178,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					plaguedSettlement.Town.Loyalty *= 1 - percentLoss;
 
 					// Lack of Hero meant they were left to fend for themselves
-					InformationManager.ShowInquiry(
-						new InquiryData(EventTitle,
-							$"{plaguedSettlement} has suffered a devastating plague. As there wasn't anyone able to provide assistance to the population, the sickness cut through the population without mercy.",
-							true,
-							false,
-							"Done",
-							null,
-							null,
-							null
-							),
-						true);
+					InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2, true, false, eventButtonText, null, null, null), true);
 				}
 			}
 			else
@@ -188,32 +191,12 @@ namespace CryingBuffalo.RandomEvents.Events
 					highestMedicineHero.AddSkillXp(DefaultSkills.Medicine, xpToGive);
 
 					// Thanks to hero's efforts lives were saved
-					InformationManager.ShowInquiry(
-						new InquiryData(EventTitle,
-							$"Although the telltale signs of an emerging plague started to appear in {plaguedSettlement}, because of {highestMedicineHero.Name}'s expertise, measures were put in place that saved the settlement from unnecessary death.",
-							true,
-							false,
-							"Done",
-							null,
-							null,
-							null
-							),
-						true);
+					InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome3, true, false, eventButtonText, null, null, null), true);
 				}
 				else
 				{
 					// Although there was no one to help, the population managed to subdue the sickness.
-					InformationManager.ShowInquiry(
-						new InquiryData(EventTitle,
-							$"Although the telltale signs of an emerging plague starting to appear in {plaguedSettlement}, as luck would have it, nothing ever came of it. Those that were ill recovered, and the fears of a deadly pandemic can be laid to rest... For now.",
-							true,
-							false,
-							"Done",
-							null,
-							null,
-							null
-							),
-						true);
+					InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome4, true, false, eventButtonText, null, null, null), true);
 				}
 			}
 		}

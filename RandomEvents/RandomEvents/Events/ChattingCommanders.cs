@@ -4,6 +4,7 @@ using System.Windows;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
@@ -37,17 +38,15 @@ namespace CryingBuffalo.RandomEvents.Events
 			try
 			{
 				MobileParty.MainParty.Army.Cohesion += cohesionIncrease;
+				
+				var eventTitle = new TextObject("{=ChattingCommanders_Title}The Same Page").ToString();
+			
+				var eventOption1 = new TextObject("{=ChattingCommanders_Event_Text}After a good chat with the commanders of your army, there is a noticeable increase cohesion.")
+					.ToString();
+				
+				var eventButtonText = new TextObject("{=ChattingCommanders_Event_Button_Text}Done").ToString();
 
-				InformationManager.ShowInquiry(
-					new InquiryData(EventTitle,
-									"After a good chat with the commanders of your army, there is a noticeable increase cohesion.",
-									true,
-									false,
-									"Done",
-									null,
-									null,
-									null
-									), true);
+				InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
 			}
 			catch (Exception ex)
 			{

@@ -7,6 +7,7 @@ using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
@@ -44,22 +45,30 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			var settlements = Settlement.FindAll(s => !s.IsHideout).ToList();
 			var closestSettlement = settlements.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+			
+			var eventTitle = new TextObject("{=EagerTroops_Title}Eager Troops!").ToString();
+			
+			var eventDescription = new TextObject("{=EagerTroops_Event_Desc}You come across {numberToAdd} troops that are eager for battle and glory. They want to join your ranks!")
+				.SetTextVariable("numberToAdd", numberToAdd)
+				.ToString();
+			
+			var eventOutcome1 = new TextObject("{=EagerTroops_Event_Text_2}Disappointed, the soldiers leave.")
+				.ToString();
+				
+			var eventButtonText1 = new TextObject("{=EagerTroops_Event_Button_Text_1}Okay").ToString();
+			var eventButtonText2 = new TextObject("{=EagerTroops_Event_Button_Text_2}Done").ToString();
+			
+			var eventOption1 = new TextObject("{=EagerTroops_Event_Option_1}Accept").ToString();
+			var eventOption2 = new TextObject("{=EagerTroops_Event_Option_2}Decline").ToString();
 
 			var inquiryElements = new List<InquiryElement>
 			{
-				new InquiryElement("a", "Accept", null),
-				new InquiryElement("b", "Decline", null)
+				new InquiryElement("a", eventOption1, null),
+				new InquiryElement("b", eventOption2, null)
 			};
 
-			var msid = new MultiSelectionInquiryData(
-				EventTitle, // Title
-				$"You come across {numberToAdd} troops that are eager for battle and glory. They want to join your ranks!", // Description
-				inquiryElements, // Options
-				false, // Can close menu without selecting an option. Should always be false.
-				1, // Force a single option to be selected. Should usually be true
-				"Okay", // The text on the button that continues the event
-				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null, 
+				elements => 
 				{
 					switch ((string)elements[0].Identifier)
 					{
@@ -75,14 +84,14 @@ namespace CryingBuffalo.RandomEvents.Events
 							break;
 						}
 						case "b":
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, "Disappointed, the soldiers leave.", true, false, "Done", null, null, null), true);
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1, true, false, eventButtonText2, null, null, null), true);
 							break;
 						default:
 							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
 							break;
 					}
 				},
-				null); // What to do on the "cancel" button, shouldn't ever need it.
+				null);
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

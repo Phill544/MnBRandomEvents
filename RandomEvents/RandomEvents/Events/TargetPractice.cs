@@ -5,6 +5,7 @@ using CryingBuffalo.RandomEvents.Helpers;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
@@ -12,8 +13,6 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly int minimumSoldiers;
 		private readonly float percentageDifferenceOfCurrentTroop;
-
-		private const string EventTitle = "Target Practice!";
 
 		public TargetPractice() : base(Settings.ModSettings.RandomEvents.TargetPracticeData)
 		{
@@ -42,38 +41,50 @@ namespace CryingBuffalo.RandomEvents.Events
 			int spawnCount = (int)(MobileParty.MainParty.MemberRoster.Count * ( 1 + percentOffset)) ;
 			if (spawnCount < minimumSoldiers)
 				spawnCount = minimumSoldiers;
+			
+			var eventTitle = new TextObject("{=TargetPractice_Title}Target Practice!").ToString();
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			var eventOption1 = new TextObject("{=TargetPractice_Event_Option_1}Let the soldiers have some fun!").ToString();
+			var eventOption2 = new TextObject("{=TargetPractice_Event_Option_2}Do nothing").ToString();
+			var eventOption2Hover = new TextObject("{=TargetPractice_Event_Option_2_Hover}Think about the experience you're giving up!").ToString();
+			
+			var eventButtonText1 = new TextObject("{=TargetPractice_Event_Button_Text_1}Okay").ToString();
+			var eventButtonText2 = new TextObject("{=TargetPractice_Event_Button_Text_2}Good").ToString();
+			var eventButtonText3 = new TextObject("{=TargetPractice_Event_Button_Text_3}Done").ToString();
+
+
+			var inquiryElements = new List<InquiryElement>
 			{
-				new InquiryElement("a", "Let the soldiers have some fun!", null),
-				new InquiryElement("b", "Do nothing.", null, true, "Think about the experience you're giving up!")
+				new InquiryElement("a", eventOption1, null),
+				new InquiryElement("b", eventOption2, null, true, eventOption2Hover)
 			};
+			
+			var eventOptionAText = new TextObject(
+					"{=TargetPractice_Event_Choice_1}The looters look terrified.")
+				.ToString();
+            
+			var eventOptionBText = new TextObject(
+					"{=TargetPractice_Event_Choice_2}The looters, seeing that you aren't about to attack, quickly scatter to the wind. Your soldiers grumble.")
+				.ToString();
 
-			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				EventTitle, // Title
-				CalculateDescription(spawnCount), // Description
-				inquiryElements, // Options
-				false, // Can close menu without selecting an option. Should always be false.
-				1, // Force a single option to be selected. Should usually be true
-				"Okay", // The text on the button that continues the event
-				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+			var msid = new MultiSelectionInquiryData(eventTitle, CalculateDescription(spawnCount), inquiryElements, false, 1, eventButtonText1, null, 
+				elements => 
 				{
 					switch ((string)elements[0].Identifier)
 					{
 						case "a":
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, "The looters look terrified.", true, false, "Good", null, null, null), true);
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
 							SpawnLooters(spawnCount);
 							break;
 						case "b":
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, "The looters, seeing that you aren't about to attack, quickly scatter to the wind. Your soldiers grumble.", true, false, "Done", null, null, null), true);
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText3, null, null, null), true);
 							break;
 						default:
 							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
 							break;
 					}
 				},
-				null); // What to do on the "cancel" button, shouldn't ever need it.
+				null); 
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
@@ -94,21 +105,33 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private string CalculateDescription(int spawnCount)
 		{
+			
+			var eventSizeDesc1 = new TextObject("{=TargetPractice_Event_Size_Desc_1}reasonable").ToString();
+			var eventSizeDesc2 = new TextObject("{=TargetPractice_Event_Size_Desc_2}large").ToString();
+			var eventSizeDesc3 = new TextObject("{=TargetPractice_Event_Size_Desc_3}huge").ToString();
+			
+			
 			string sizeDescription;
 			if (spawnCount <= minimumSoldiers)
 			{
-				sizeDescription = "reasonable";
+				sizeDescription = eventSizeDesc1;
 			}
 			else if (spawnCount < minimumSoldiers * 1.5f)
 			{
-				sizeDescription = "large";
+				sizeDescription = eventSizeDesc2;
 			}
 			else
 			{
-				sizeDescription = "huge";
+				sizeDescription = eventSizeDesc3;
 			}
+			
+			var eventDescription = new TextObject(
+					"{=TargetPractice_Event_Desc}You stumble upon a {sizeDescription} amount of looters! Your soldiers seem very eager to show you what they've learned.")
+				.SetTextVariable("sizeDescription", sizeDescription)
+				.ToString();
 
-			string description = $"You stumble upon a {sizeDescription} amount of looters! Your soldiers seem very eager to show you what they've learned";
+
+			string description = eventDescription;
 
 			return description;
 		}

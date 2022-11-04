@@ -3,13 +3,12 @@ using System.Windows;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class BeeKind : BaseEvent
 	{
-		private const string EventTitle = "Bee Kind";
-		
 		private readonly int damage;
 		private readonly int reactionDamage;
 		private readonly float reactionChance;
@@ -34,26 +33,26 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			var extraDialogue = "";
 			var damageToInflict = damage;
+			
+			var eventTitle = new TextObject("{=BeeKind_Title}Bee Kind").ToString();
 
+			var eventExtraDialogue = new TextObject("{=BeeKind_Event_Extra_Dialogue}Your body reacts painfully to the sting. ").ToString();
+			
+			var eventText = new TextObject("{=BeeKind_Event_Text}As you sit down next to some flowers you get stung by a bee! {extraDialogue}Why is nature so cruel?")
+				.SetTextVariable("extraDialogue", extraDialogue)
+				.ToString();
+			
+			var eventButtonText = new TextObject("{=BeeKind_Event_Button_Text}Ouch").ToString();
+			
 			if (MBRandom.RandomFloatRanged(0.0f,1.0f) <= reactionChance)
 			{
-				extraDialogue = "Your body reacts painfully to the sting. ";
+				extraDialogue = eventExtraDialogue;
 				damageToInflict = reactionDamage;
 			}
 
 			Hero.MainHero.HitPoints -= damageToInflict;
 
-			InformationManager.ShowInquiry(
-				new InquiryData(EventTitle,
-					$"As you sit down next to some flowers you get stung by a bee! {extraDialogue}Why is nature so cruel?",
-					true,
-					false,
-					"Ouch.",
-					null,
-					null,
-					null
-					),
-				true);
+			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText, true, false, eventButtonText, null, null, null), true);
 
 			StopEvent();
 		}

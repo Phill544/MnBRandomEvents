@@ -2,13 +2,12 @@
 using System.Windows;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class FantasticFighters : BaseEvent
 	{
-		private const string EventTitle = "Fantastic Fighters?";
-		
 		private readonly int renownGain;
 
 		public FantasticFighters() : base(Settings.ModSettings.RandomEvents.FantasticFightersData)
@@ -30,18 +29,15 @@ namespace CryingBuffalo.RandomEvents.Events
 			try
 			{
 				Hero.MainHero.Clan.Renown += renownGain;
+				
+				var eventTitle = new TextObject("{=FantasticFighters_Title}Fantastic Fighters?").ToString();
+			
+				var eventOption1 = new TextObject("{=FantasticFighters_Event_Text}A rumor spreads that your clan managed to decisively win a battle when outnumbered 10-1.")
+					.ToString();
+				
+				var eventButtonText = new TextObject("{=FantasticFighters_Event_Button_Text}Done").ToString();
 
-				InformationManager.ShowInquiry(
-					new InquiryData(EventTitle,
-						"A rumor spreads that your clan managed to decisively win a battle when outnumbered 10-1.",
-						true,
-						false,
-						"Done",
-						null,
-						null,
-						null
-						),
-					true);
+				InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
 
 				StopEvent();
 			}

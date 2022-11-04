@@ -6,6 +6,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
 namespace CryingBuffalo.RandomEvents.Events
@@ -18,8 +19,6 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int maxRangeLevel;
 		private readonly int minGold;
 		private readonly int maxGold;
-
-		private const string EventTitle = "Look up!";
 
 		public LookUp() : base(Settings.ModSettings.RandomEvents.LookUpData)
 		{
@@ -46,45 +45,61 @@ namespace CryingBuffalo.RandomEvents.Events
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
+			
+			var eventTitle = new TextObject("{=LookUp_Title}Look up!").ToString();
+			
+			var eventDescription = new TextObject("{=LookUp_Event_Desc}While walking past some trees you notice something shiny high up in its branches.")
+				.ToString();
+			
+			var eventOption1 = new TextObject("{=LookUp_Event_Option_1}Shake the tree").ToString();
+			var eventOption2 = new TextObject("{=LookUp_Event_Option_2}Leave it be").ToString();
+			var eventOption3 = new TextObject("{=LookUp_Event_Option_3}Use ranged weapon").ToString();
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			var eventButtonText1 = new TextObject("{=LookUp_Event_Button_Text_1}Okay").ToString();
+			var eventButtonText2 = new TextObject("{=LookUp_Event_Button_Text_2}Done").ToString();
+			var eventButtonText3 = new TextObject("{=LookUp_Event_Button_Text_3}Sorry").ToString();
+			
+			var inquiryElements = new List<InquiryElement>
 			{
-				new InquiryElement("a", "Shake the tree", null),
-				new InquiryElement("b", "Leave it be", null)
+				new InquiryElement("a", eventOption1, null),
+				new InquiryElement("b", eventOption2, null)
 			};
 
 			if (PlayerStatus.HasRangedWeaponEquipped())
 			{
-				inquiryElements.Add(new InquiryElement("c", "Use ranged weapon", null));
+				inquiryElements.Add(new InquiryElement("c", eventOption3, null));
 			}
 
-			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				EventTitle, // Title
-				"While walking past some trees you notice something shiny high up in its branches.", // Description
-				inquiryElements, // Options
-				false, // Can close menu without selecting an option. Should always be false.
-				1, // Force a single option to be selected. Should usually be true
-				"Okay", // The text on the button that continues the event
-				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null, 
+				elements => 
 				{
 					switch ((string)elements[0].Identifier)
 					{
 						case "a" when MBRandom.RandomFloat <= treeShakeChance:
 						{
 							// Success, calculate gold
-							int goldGained = MBRandom.RandomInt(minGold, maxGold);
+							var goldGained = MBRandom.RandomInt(minGold, maxGold);
 							Hero.MainHero.ChangeHeroGold(goldGained);
+							
+							var eventOutcome1 = new TextObject("{=LookUp_Event_Text_1}You eventually shake the shiny object free from the tree! It hits the ground with a heavy thunk. It turns out that it was a purse with {goldGained} gold inside.")
+								.SetTextVariable("goldGained", goldGained)
+								.ToString();
 
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, $"You eventually shake the shiny object free from the tree! It hits the ground with a heavy thunk. It turns out that it was a purse with {goldGained} gold inside.", true, false, "Done", null, null, null), true);
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1, true, false, eventButtonText2, null, null, null), true);
 							break;
 						}
 						case "a":
 							// Failure
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, "Try as you might, you're unable to get dislodge the shiny object.", true, false, "Done", null, null, null), true);
+							
+							var eventOutcome2 = new TextObject("{=LookUp_Event_Text_2}Try as you might, you're unable to get dislodge the shiny object.")
+								.ToString();
+							
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2, true, false, eventButtonText2, null, null, null), true);
 							break;
 						case "b":
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, "You decide to leave the tree alone. Throughout the next few hours you can't help but wonder it was...", true, false, "Done", null, null, null), true);
+							var eventOutcome3 = new TextObject("{=LookUp_Event_Text_3}You decide to leave the tree alone. Throughout the next few hours you can't help but wonder it was...")
+								.ToString();
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome3, true, false, eventButtonText2, null, null, null), true);
 							break;
 						case "c":
 						{
@@ -93,7 +108,10 @@ namespace CryingBuffalo.RandomEvents.Events
 
 							if (skillToUse == null)
 							{
-								InformationManager.ShowInquiry(new InquiryData(EventTitle, "Something went wrong with selecting your weapon, what have you done?! Aborting event.", true, false, "Sorry", null, null, null), true);
+								var eventOutcome4 = new TextObject("{=LookUp_Event_Text_4}Something went wrong with selecting your weapon, what have you done?! Aborting event.")
+									.ToString();
+								
+								InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome4, true, false, eventButtonText3, null, null, null), true);
 								return;
 							}
 
@@ -114,12 +132,17 @@ namespace CryingBuffalo.RandomEvents.Events
 							if (MBRandom.RandomFloat < chancePercent)
 							{
 								// Success -- Add gold and xp
-								int goldGained = MBRandom.RandomInt(minGold, maxGold);
+								var goldGained = MBRandom.RandomInt(minGold, maxGold);
 								Hero.MainHero.ChangeHeroGold(goldGained);
 
 								Hero.MainHero.AddSkillXp(skillToUse, Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(skillToUse));
 
-								InformationManager.ShowInquiry(new InquiryData(EventTitle, $"You manage to knock the shiny object out of the tree with (what you consider) a fantastic shot! Shame no one was there to see it. You notice that object was in fact a purse full of {goldGained} gold!", true, false, "Done", null, null, null), true);
+								
+								var eventOutcome5 = new TextObject("{=LookUp_Event_Text_5}You manage to knock the shiny object out of the tree with (what you consider) a fantastic shot! Shame no one was there to see it. You notice that object was in fact a purse full of {goldGained} gold!")
+									.SetTextVariable("goldGained", goldGained)
+									.ToString();
+								
+								InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome5, true, false, eventButtonText2, null, null, null), true);
 							}
 							else
 							{
@@ -127,8 +150,11 @@ namespace CryingBuffalo.RandomEvents.Events
 
 								ItemObject meat = MBObjectManager.Instance.GetObject<ItemObject>("meat");
 								MobileParty.MainParty.ItemRoster.AddToCounts(meat, 1);
+								
+								var eventOutcome6 = new TextObject("{=LookUp_Event_Text_6}Shot after shot you attempt to knock down the object without success. At one stage a bird drops out of the tree. It's time to give up... At least you have dinner.")
+									.ToString();
 
-								InformationManager.ShowInquiry(new InquiryData(EventTitle, "Shot after shot you attempt to knock down the object without success. At one stage a bird drops out of the tree. It's time to give up... At least you have dinner.", true, false, "Done", null, null, null), true);
+								InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome6, true, false, eventButtonText2, null, null, null), true);
 							}
 
 							break;
@@ -138,7 +164,7 @@ namespace CryingBuffalo.RandomEvents.Events
 							break;
 					}
 				},
-				null); // What to do on the "cancel" button, shouldn't ever need it.
+				null); 
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

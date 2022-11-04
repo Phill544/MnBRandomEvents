@@ -6,13 +6,12 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class GranaryRats : BaseEvent
-	{
-		private const string EventTitle = "Rats in the granary!";
-		
+	{ 
 		private readonly float foodLossPercent;
 
 		public GranaryRats() : base(Settings.ModSettings.RandomEvents.GranaryRatsData)
@@ -48,17 +47,16 @@ namespace CryingBuffalo.RandomEvents.Events
 
 				// set the name to display
 				var ratSettlement = infestedSettlement.Name.ToString();
+				
+				var eventTitle = new TextObject("{=GranaryRats_Title}Rats in the granary!").ToString();
+			
+				var eventOption1 = new TextObject("{=GranaryRats_Event_Text}You have been informed that {ratSettlement} had an infestation of rats that went unchecked... The rats won't starve this month, but your peasants might.")
+					.SetTextVariable("ratSettlement", ratSettlement)
+					.ToString();
+				
+				var eventButtonText = new TextObject("{=GranaryRats_Event_Button_Text}Done").ToString();
 
-				InformationManager.ShowInquiry(
-					new InquiryData(EventTitle,
-									$"You have been informed that {ratSettlement} had an infestation of rats that went unchecked... The rats won't starve this month, but your peasants might.",
-									true,
-									false,
-									"Done",
-									null,
-									null,
-									null
-									), true);
+				InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
 			}
 			catch (Exception ex)
 			{

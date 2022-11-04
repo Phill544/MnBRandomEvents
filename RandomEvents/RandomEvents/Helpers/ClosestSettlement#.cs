@@ -73,6 +73,22 @@ namespace CryingBuffalo.RandomEvents.Helpers
             }
             return closestSettlement;
         }
+        
+        public static Settlement GetClosestTownOrVillage(MobileParty heroParty)
+        {
+            Settlement closestSettlement = null;
+            
+            try
+            {
+                var settlements = Settlement.FindAll(s => s.IsTown || s.IsVillage).ToList();
+                closestSettlement = settlements.MinBy(s => heroParty.GetPosition().DistanceSquared(s.GetPosition()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error when trying to find the closest town or village :\n\n {ex.Message} \n\n { ex.StackTrace}");
+            }
+            return closestSettlement;
+        }
             
         
     }

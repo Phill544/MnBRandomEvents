@@ -89,7 +89,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg3 =new TextObject(
-                    "{=BeggarBegging_Event_Msg_2}{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown.")
+                    "{=BeggarBegging_Event_Msg_3}{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldToGive", goldToGive)
                 .SetTextVariable("renownGain", renownGain)

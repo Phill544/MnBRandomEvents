@@ -6,13 +6,12 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class AheadOfTime : BaseEvent
 	{
-		private const string EventTitle = "Ahead of Time!";
-		
 		private List<Settlement> eligibleSettlements;
 
 		public AheadOfTime() : base(Settings.ModSettings.RandomEvents.AheadOfTimeData)
@@ -42,6 +41,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		{	
 			try
 			{
+				var eventTitle = new TextObject("{=AheadOfTime_Title}Ahead of Time!").ToString();
 
 				var randomElement = MBRandom.RandomInt(eligibleSettlements.Count);
 				var settlement = eligibleSettlements[randomElement];
@@ -50,17 +50,14 @@ namespace CryingBuffalo.RandomEvents.Events
 				settlement.Town.CurrentBuilding.LevelUp();
 				settlement.Town.BuildingsInProgress.Dequeue();
 
-				InformationManager.ShowInquiry(
-					new InquiryData(EventTitle,
-						$"You receive word that {settlement} has completed its current project earlier than expected.",
-						true,
-						false,
-						"Done",
-						null,
-						null,
-						null
-						),
-					true);
+				var eventText =new TextObject(
+						"{=AheadOfTimeEvent_Text}You receive word that {settlement} has completed its current project earlier than expected.")
+					.SetTextVariable("settlement", settlement.ToString())
+					.ToString();
+				
+				var eventButtonText1 = new TextObject("{=AheadOfTimeEvent_Event_Button_Text_1}Done").ToString();
+
+				InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText, true, false, eventButtonText1, null, null, null), true);
 
 				StopEvent();
 			}

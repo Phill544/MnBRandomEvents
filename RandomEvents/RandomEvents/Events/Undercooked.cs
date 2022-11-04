@@ -3,14 +3,12 @@ using System.Windows;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class Undercooked : BaseEvent
 	{
-		private const string EventTitle = "Undercooked";
-		
-		
 		private readonly int minTroopsToInjure;
 		private readonly int maxTroopsToInjure;
 
@@ -37,18 +35,15 @@ namespace CryingBuffalo.RandomEvents.Events
 				numberToInjure = Math.Min(numberToInjure, maxTroopsToInjure);
 
 				MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(numberToInjure);
+				
+				var eventTitle = new TextObject("{=Undercooked_Title}Undercooked").ToString();
+			
+				var eventOption1 = new TextObject("{=Undercooked_Event_Text}Some of your troops fall ill to bad food, although you're unsure of what caused it, you're glad it wasn't you.")
+					.ToString();
+				
+				var eventButtonText = new TextObject("{=Undercooked_Event_Button_Text}Done").ToString();
 
-				InformationManager.ShowInquiry(
-					new InquiryData(EventTitle,
-						"Some of your troops fall ill to bad food, although you're unsure of what caused it, you're glad it wasn't you.",
-						true,
-						false,
-						"Done",
-						null,
-						null,
-						null
-						),
-					true);
+				InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
 
 				StopEvent();
 			}

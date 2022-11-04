@@ -101,7 +101,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new RunawaySonData("RunawaySon", 1024, 10, 50);
         
         public UnexpectedWeddingData UnexpectedWeddingData { get; } =
-            new UnexpectedWeddingData("UnexpectedWedding", 1024, 10, 100, 10, 50, 200, 15, 50, 200, 1000);
+            new UnexpectedWeddingData("UnexpectedWedding", 1024, 10, 100, 10, 50, 200, 200, 1000);
         
         public ViolatedGirlData ViolatedGirlData { get; } =
             new ViolatedGirlData("ViolatedGirl", 1024, 50, 750);
@@ -125,7 +125,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new RedMoonData("RedMoon", 1024, 500, 5000);
         
         public PassingCometData PassingCometData { get; } =
-            new PassingCometData("PassingComet", 1024, 5);
+            new PassingCometData("PassingComet", 1024);
         
         public MassGraveData MassGraveData { get; } =
             new MassGraveData("MassGrave", 1024, 2, 6, 10, 30);

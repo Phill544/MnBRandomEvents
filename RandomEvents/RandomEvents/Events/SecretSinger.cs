@@ -2,13 +2,12 @@
 using System.Windows;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class SecretSinger : BaseEvent
 	{
-		private const string EventTitle = "Secret Singer!";
-		
 		private readonly int moraleGain;
 
 		public SecretSinger() : base(Settings.ModSettings.RandomEvents.SecretSingerData)
@@ -28,19 +27,16 @@ namespace CryingBuffalo.RandomEvents.Events
 		public override void StartEvent()
 		{
 			MobileParty.MainParty.RecentEventsMorale += moraleGain;
-			MobileParty.MainParty.MoraleExplained.Add(moraleGain, new TaleWorlds.Localization.TextObject("Random Event"));
+			MobileParty.MainParty.MoraleExplained.Add(moraleGain);
+			
+			var eventTitle = new TextObject("{=SecretSinger_Title}Secret Singer!").ToString();
+			
+			var eventOption1 = new TextObject("{=SecretSinger_Event_Text}You discover one of your party members is an extremely good singer!")
+				.ToString();
+				
+			var eventButtonText = new TextObject("{=SecretSinger_Event_Button_Text}Done").ToString();
 
-			InformationManager.ShowInquiry(
-				new InquiryData(EventTitle,
-					"You discover one of your party members is an extremely good singer!",
-					true,
-					false,
-					"Done",
-					null,
-					null,
-					null
-					),
-				true);
+			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
 
 			StopEvent();
 		}

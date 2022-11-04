@@ -4,13 +4,12 @@ using System.Windows;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
 	internal sealed class BumperCrop : BaseEvent
 	{
-		private const string EventTitle = "Bumper Crop!";
-		
 		private readonly float cropGainPercent;
 
 		public BumperCrop() : base(Settings.ModSettings.RandomEvents.BumperCropData)
@@ -22,30 +21,25 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			try
 			{
-				// The list of settlements that are able to have food added to them
 				var eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
-
-				// Randomly pick one of the eligible settlements
+				
 				var index = MBRandom.RandomInt(0, eligibleSettlements.Count);
-
-				// Grab the winning settlement and add food to it
+				
 				var winningSettlement = eligibleSettlements[index];
 				
 				winningSettlement.Town.FoodStocks += MathF.Abs(winningSettlement.Town.FoodChange * cropGainPercent);
-
-				// set the name to display
+				
 				var bumperSettlement = winningSettlement.Name.ToString();
+				
+				var eventTitle = new TextObject("{=BumperCrop_Title}Bumper Crop!").ToString();
+			
+				var eventOption1 = new TextObject("{=BumperCrop_Event_Text}You have been informed that {bumperSettlement} has had an excellent harvest!")
+					.SetTextVariable("bumperSettlement", bumperSettlement)
+					.ToString();
+				
+				var eventButtonText = new TextObject("{=BumperCrop_Event_Button_Text}Done").ToString();
 
-				InformationManager.ShowInquiry(
-					new InquiryData(EventTitle,
-									$"You have been informed that {bumperSettlement} has had an excellent harvest!",
-									true,
-									false,
-									"Done",
-									null,
-									null,
-									null
-									), true);
+				InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
 			}
 			catch (Exception ex)
 			{

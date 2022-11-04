@@ -6,6 +6,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events
 {
@@ -14,8 +15,6 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minFoodLoss;
 		private readonly int maxFoodLoss;
 		private readonly int moraleLoss;
-
-		private const string EventTitle = "Food Fight!";
 
 		public FoodFight() : base(Settings.ModSettings.RandomEvents.FoodFightData)
 		{
@@ -39,45 +38,61 @@ namespace CryingBuffalo.RandomEvents.Events
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
 			}
+			
+			var eventTitle = new TextObject("{=FoodFight_Title}Food Fight!").ToString();
+			
+			var eventDescription = new TextObject("{=FoodFight_Event_Desc}While your party is eating, a large food fight breaks out.")
+				.ToString();
+			
+			var eventOption1 = new TextObject("{=FoodFight_Event_Option_1}Break it up").ToString();
+			var eventOption1Hover = new TextObject("{=FoodFight_Event_Option_1_Hover}Where do these fools think this food comes from?").ToString();
+			
+			var eventOption2 = new TextObject("{=FoodFight_Event_Option_2}Join in!").ToString();
+			var eventOption2Hover = new TextObject("{=FoodFight_Event_Option_2_Hover}You were done eating anyway.").ToString();
+			
+			var eventButtonText1 = new TextObject("{=FoodFight_Event_Button_Text_1}Okay").ToString();
+			var eventButtonText2 = new TextObject("{=FoodFight_Event_Button_Text_2}Done").ToString();
+			
+			var eventOutcome1 = new TextObject("{=FoodFight_Event_Text_1}You command that everyone stops this nonsense. Although the party looks displeased, at least you saved the food.")
+				.ToString();
 
-			List<InquiryElement> inquiryElements = new List<InquiryElement>
+			var eventExtraDialogue = new TextObject("{=FoodFight_Event_Extra_Dialogue} Quickly you realise that there is no food left. If you can't source some more soon there may be trouble.").ToString();
+
+			var inquiryElements = new List<InquiryElement>
 			{
-				new InquiryElement("a", "Break it up.", null, true, "Where do these fools think this food comes from?"),
-				new InquiryElement("b", "Join in!", null, true, "You were done eating anyway.")
+				new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
+				new InquiryElement("b", eventOption2, null, true, eventOption2Hover)
 			};
 
-			MultiSelectionInquiryData msid = new MultiSelectionInquiryData(
-				EventTitle, // Title
-				"While your party is eating, a large food fight breaks out.", // Description
-				inquiryElements, // Options
-				false, // Can close menu without selecting an option. Should always be false.
-				1, // Force a single option to be selected. Should usually be true
-				"Okay", // The text on the button that continues the event
-				null, // The text to display on the "cancel" button, shouldn't ever need it.
-				elements => // How to handle the selected option. Will only ever be a single element unless force single option is off.
+			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null, 
+				elements => 
 				{
 					switch ((string)elements[0].Identifier)
 					{
 						case "a":
 							MobileParty.MainParty.RecentEventsMorale -= moraleLoss;
 
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, "You command that everyone stops this nonsense. Although the party looks displeased, at least you saved the food.", true, false, "Done", null, null, null), true);
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1, true, false, eventButtonText2, null, null, null), true);
 							break;
 						case "b":
 						{
-							string extraDialogue = "";
+							var extraDialogue = "";
 
-							float xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
+							var xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
 							Hero.MainHero.AddSkillXp(DefaultSkills.Throwing, xpToGive);
 
-							int foodToRemove = MBRandom.RandomInt(minFoodLoss, maxFoodLoss);
-							bool runOutOfFood = RemoveFood(foodToRemove);
+							var foodToRemove = MBRandom.RandomInt(minFoodLoss, maxFoodLoss);
+							var runOutOfFood = RemoveFood(foodToRemove);
 							if (runOutOfFood)
 							{
-								extraDialogue = " Quickly you realise that there is no food left. If you can't source some more soon there may be trouble.";
+								extraDialogue = eventExtraDialogue;
 							}
+							
+							var eventOutcome2 = new TextObject("{=FoodFight_Event_Text_2}You decide to join in on the fun! You even manage to deal out some black eyes. Did you go too far? Probably.{extraDialogue}")
+								.SetTextVariable("extraDialogue", extraDialogue)
+								.ToString();
 
-							InformationManager.ShowInquiry(new InquiryData(EventTitle, $"You decide to join in on the fun! You even manage to deal out some black eyes. Did you go too far? Probably.{extraDialogue}", true, false, "Done", null, null, null), true);
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2, true, false, eventButtonText2, null, null, null), true);
 							break;
 						}
 						default:
@@ -85,7 +100,7 @@ namespace CryingBuffalo.RandomEvents.Events
 							break;
 					}
 				},
-				null); // What to do on the "cancel" button, shouldn't ever need it.
+				null);
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
@@ -104,21 +119,21 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 		}
 
-		private bool RemoveFood(int foodToRemove)
+		private static bool RemoveFood(int foodToRemove)
 		{
-			int currentlyRemovedFood = 0;
+			var currentlyRemovedFood = 0;
 
 			while (currentlyRemovedFood < foodToRemove)
 			{
-				List<ItemRosterElement> foodItems = MobileParty.MainParty.ItemRoster.Where(item => item.EquipmentElement.Item.IsFood).ToList();
+				var foodItems = MobileParty.MainParty.ItemRoster.Where(item => item.EquipmentElement.Item.IsFood).ToList();
 
 				if (!foodItems.Any())
 				{
 					return true;
 				}
 
-				int element = MBRandom.RandomInt(0, foodItems.Count());
-				int amount = foodItems[element].Amount;
+				var element = MBRandom.RandomInt(0, foodItems.Count());
+				var amount = foodItems[element].Amount;
 				amount--;
 				MobileParty.MainParty.ItemRoster.Remove(foodItems[element]);
 				MobileParty.MainParty.ItemRoster.AddToCounts(foodItems[element].EquipmentElement.Item, amount);

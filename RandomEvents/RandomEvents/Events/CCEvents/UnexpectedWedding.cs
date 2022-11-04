@@ -12,15 +12,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class UnexpectedWedding : BaseEvent
     {
-        private const string EventTitle = "An Unexpected Wedding";
-        
         private readonly int minGoldToDonate;
         private readonly int maxGoldToDonate;
         private readonly int minPeopleInWedding;
         private readonly int maxPeopleInWedding;
         private readonly int embarrassedSoliderMaxGold;
-        private readonly int minMoraleGain;
-        private readonly int maxMoraleGain;
         private readonly int minGoldRaided;
         private readonly int maxGoldRaided;
 
@@ -31,8 +27,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             minPeopleInWedding = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.minPeopleInWedding;
             maxPeopleInWedding = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.maxPeopleInWedding;
             embarrassedSoliderMaxGold = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.embarrassedSoliderMaxGold;
-            minMoraleGain = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.minMoraleGain;
-            maxMoraleGain = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.maxMoraleGain;
             minGoldRaided = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.minGoldRaided;
             maxGoldRaided = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.maxGoldRaided;
         }
@@ -54,98 +48,154 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     RandomEventsSubmodule.TextColor));
             }
             
+            var eventTitle = new TextObject("{=UnexpectedWedding_Title}An Unexpected Wedding").ToString();
+            
             var goldToDonate = MBRandom.RandomInt(minGoldToDonate, maxGoldToDonate);
-
-            var inquiryElements = new List<InquiryElement>
-            {
-                new InquiryElement("a", $"Give them {goldToDonate} gold as a gift", null, true, "This is a special day after all"),
-                new InquiryElement("b", "Give them some wine to enjoy", null, true, "Who doesn't appreciate a good bottle of wine, right?"),
-                new InquiryElement("c", "Watch the ceremony but leave once it's concluded", null, true, "It's beautiful but you really don't want to waste any time"),
-                new InquiryElement("d", "Leave", null, true, "Not interested"),
-                new InquiryElement("e", "Raid the wedding", null, true, "You could do with some gold.")
-            };
-
             
             var peopleInWedding = MBRandom.RandomInt(minPeopleInWedding, maxPeopleInWedding);
             
             var partyFood = MobileParty.MainParty.TotalFoodAtInventory;
 
-            var moraleGain = MBRandom.RandomInt(minMoraleGain, maxMoraleGain);
-
             var raidedGold = MBRandom.RandomInt(minGoldRaided, maxGoldRaided);
             
-            var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty);
+            var embarrassedSoliderGold = MBRandom.RandomInt(10, embarrassedSoliderMaxGold);
+            
+            var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
+            
+            var eventDescription = new TextObject(
+                    "{=UnexpectedWedding_Event_Desc}You and your party are traveling in the vicinity of {closestSettlement} when you stumble across {peopleInWedding} people in a wedding taking place. " +
+                    "The guests invite you over to celebrate this momentous event with them.")
+                .SetTextVariable("closestSettlement", closestSettlement)
+                .SetTextVariable("peopleInWedding",peopleInWedding)
+                .ToString();
+            
+            var eventOption1 = new TextObject("{=UnexpectedWedding_Event_Option_1}Give them {goldToDonate} gold as a gift").SetTextVariable("goldToDonate",goldToDonate).ToString();
+            var eventOption1Hover = new TextObject("{=UnexpectedWedding_Event_Option_1_Hover}This is a special day after all").ToString();
+            
+            var eventOption2 = new TextObject("{=UnexpectedWedding_Event_Option_2}Give them some wine to enjoy").ToString();
+            var eventOption2Hover = new TextObject("{=UnexpectedWedding_Event_Option_2_Hover}Who doesn't appreciate a good bottle of wine, right?").ToString();
+            
+            var eventOption3 = new TextObject("{=UnexpectedWedding_Event_Option_3}Stay for the ceremony").ToString();
+            var eventOption3Hover = new TextObject("{=UnexpectedWedding_Event_Option_3_Hover}It's beautiful but you really don't want to waste any time").ToString();
+            
+            var eventOption4 = new TextObject("{=UnexpectedWedding_Event_Option_4}Leave").ToString();
+            var eventOption4Hover = new TextObject("{=UnexpectedWedding_Event_Option_4_Hover}Not interested").ToString();
+            
+            var eventOption5 = new TextObject("{=UnexpectedWedding_Event_Option_5}Raid the wedding").ToString();
+            var eventOption5Hover = new TextObject("{=UnexpectedWedding_Event_Option_5_Hover}You could do with some gold").ToString();
+            
+            var eventButtonText1 = new TextObject("{=UnexpectedWedding_Event_Button_Text_1}Okay").ToString();
+            var eventButtonText2 = new TextObject("{=UnexpectedWedding_Event_Button_Text_2}Done").ToString();
+            
+            var inquiryElements = new List<InquiryElement>
+            {
+                new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
+                new InquiryElement("b", eventOption2, null, true, eventOption2Hover),
+                new InquiryElement("c", eventOption3, null, true, eventOption3Hover),
+                new InquiryElement("d", eventOption4, null, true, eventOption4Hover),
+                new InquiryElement("e", eventOption5, null, true, eventOption5Hover)
+            };
+            
+            var eventOptionAText = new TextObject(
+                    "{=UnexpectedWedding_Event_Choice_1}You congratulate the couple and you and your men scrape together {goldToDonate} gold and give it as a gift. Your party then spends the evening having fun!")
+                .SetTextVariable("goldToDonate", goldToDonate)
+                .ToString();
+            
+            var eventOptionB1Text = new TextObject(
+                    "{=UnexpectedWedding_Event_Choice_2-1}You have your men find 5 bottles of your best wine. You offer it to the bride and groom. They thank you for this exquisite gift.")
+                .ToString();
+            
+            var eventOptionB2Text = new TextObject(
+                    "{=UnexpectedWedding_Event_Choice_2-2}You have your men find 5 bottles of your best wine. After a few minutes, one clearly embarrassed solider approaches you and tells you you are all out of wine. " +
+                    "You slap him across his face for putting you in such a humiliating situation. You tell the solider to hand over all his coin to you. He does as you command. " +
+                    "You apologises to the bride and hand her {embarrassedSoliderGold} gold instead of wine. She thanks you and your party moves on.")
+                .SetTextVariable("embarrassedSoliderGold", embarrassedSoliderGold)
+                .ToString();
+            
+            var eventOptionCText = new TextObject(
+                    "{=UnexpectedWedding_Event_Choice_3}You and your men stay for the ceremony but you leave once it is concluded. You leave a small gift of {goldToDonate} gold to the newlyweds.")
+                .SetTextVariable("goldToDonate", goldToDonate)
+                .ToString();
+            
+            var eventOptionDText = new TextObject(
+                    "{=UnexpectedWedding_Event_Choice_4}You politely decline and order your men to leave.")
+                .ToString();
+            
+            var eventOptionEText = new TextObject(
+                    "{=UnexpectedWedding_Event_Choice_5}You have your men surround the area while you go and talk to the guests. You have all guests empty their pockets and give you anything valuable. " + 
+                    "Some guests resist but after a few threatening gestures from your men they too fall in line. After you have stolen {raidedGold} gold and anything of value from the wedding, " +
+                    "you order your men to trash the entire area. Your men do so without blinking an eye. You see the bride crying while being comforted by some guests. You can see the " +
+                    "hate in the groom's eyes. He will undoubtedly remember you.\n \n After you have personally made sure that you have thoroughly ruined this once joyful moment, you order your men to leave.")
+                .SetTextVariable("raidedGold", raidedGold)
+                .ToString();
+            
+            var eventMsg1 =new TextObject(
+                    "{=UnexpectedWedding_Event_Msg_1}You gave the newlyweds {goldToDonate} gold.")
+                .SetTextVariable("goldToDonate", goldToDonate)
+                .ToString();
+            
+            var eventMsg2 =new TextObject(
+                    "{=UnexpectedWedding_Event_Msg_2}You made the soldier who embarrassed you give the newlyweds {embarrassedSoliderGold} gold.")
+                .SetTextVariable("embarrassedSoliderGold", embarrassedSoliderGold)
+                .ToString();
+            
+            var eventMsg3 =new TextObject(
+                    "{=UnexpectedWedding_Event_Msg_3}You gave the newlyweds {goldToDonate} gold.")
+                .SetTextVariable("goldToDonate", goldToDonate)
+                .ToString();
+            
+            var eventMsg4 =new TextObject(
+                    "{=UnexpectedWedding_Event_Msg_4}You stole {raidedGold} gold from the wedding.")
+                .SetTextVariable("raidedGold", raidedGold)
+                .ToString();
 
-            var msid = new MultiSelectionInquiryData(
-                EventTitle,
-                $"You and your party are traveling in the vicinity of {closestSettlement} when you stumble across {peopleInWedding} people in a wedding taking place. " +
-                "The guests invite you over to celebrate this momentous event with them.",
-                inquiryElements,
-                false,
-                1,
-                "Okay",
-                null,
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null,
                 elements =>
                 {
                     switch ((string)elements[0].Identifier)
                     {
                         case "a":
-                            InformationManager.ShowInquiry(
-                                new InquiryData(EventTitle,
-                                    $"You congratulate the couple and you and your men scrape together {goldToDonate} gold and give it as a gift. Your party then spends the evening having fun! You really feel the morale of the men increase.",
-                                    true, false, "Done", null, null, null), true);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldToDonate);
+                            
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
 
-                            MobileParty.MainParty.RecentEventsMorale += moraleGain;
-                            MobileParty.MainParty.MoraleExplained.Add(moraleGain, new TextObject("Random Event"));
                             break;
                         case "b" when partyFood >= 5:
-                            InformationManager.ShowInquiry(
-                                new InquiryData(EventTitle,
-                                    "You have your men find 5 bottles of your best wine. You offer it to the bride and groom. They thank you for this exquisite gift.",
-                                    true, false, "Done", null, null, null), true);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionB1Text, true, false, eventButtonText2, null, null, null), true);
                             break;
                         case "b" when partyFood < 5:
                         {
-                            var embarrassedSoliderGold = MBRandom.RandomInt(10, embarrassedSoliderMaxGold);
-                            InformationManager.ShowInquiry(
-                                new InquiryData(EventTitle,
-                                    "You have your men find 5 bottles of your best wine. After  a few minutes, one clearly embarrassed solider approaches you and tells you you are all out of wine. " +
-                                    "You slap him across his face for putting you in such a humiliating situation. You tell the solider to hand over all his coin to you. He does as you command. " +
-                                    $"You apologises to the bride and hand her {embarrassedSoliderGold} gold instead of wine. She thanks you and your party moves on. ",
-                                    true, false, "Done", null, null, null), true);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionB2Text, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-embarrassedSoliderGold);
+                            
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                            
                             break;
                         }
                         case "c":
-                            InformationManager.ShowInquiry(
-                                new InquiryData(EventTitle,
-                                    $"You and your men stay for the ceremony but you leave once it is concluded. You leave a small gift of {goldToDonate} gold to the newlyweds.",
-                                    true, false, "Done", null, null, null), true);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldToDonate);
+                            
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                            
                             break;
                         case "d":
-                            InformationManager.ShowInquiry(
-                                new InquiryData(EventTitle,
-                                    "You don't have time for this so you order your men to leave.",
-                                    true, false, "Done", null, null, null), true);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                             break;
                         case "e":
-                            InformationManager.ShowInquiry(
-                                new InquiryData(EventTitle,
-                                    "You have your men surround the area while you go and talk to the guests. You have all guests empty their pockets and give you anything valuable. " +
-                                    $"Some guests resist but after a few threatening gestures from your men they too fall in line. After you have stolen {raidedGold} gold and anything of value from the wedding, you order your men to trash the entire area. " +
-                                    "Your men do so without blinking an eye. You see the bride crying while being comforted by some guests. You can see the hate in the groom's eyes. He will undoubtedly remember you.\n \n" +
-                                    "After you have personally made sure that you have thoroughly ruined this once joyful moment, you order your men to leave.",
-                                    true, false, "Done", null, null, null), true);
-                            Hero.MainHero.ChangeHeroGold(raidedGold);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionEText, true, false, eventButtonText2, null, null, null), true);
+                            Hero.MainHero.ChangeHeroGold(+raidedGold);
+                            
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.MsgColor));
+                            
                             break;
                         default:
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
                             break;
                     }
                 },
-                null); // What to do on the "cancel" button, shouldn't ever need it.
+                null);
 
             MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
@@ -174,12 +224,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public readonly int minPeopleInWedding;
         public readonly int maxPeopleInWedding;
         public readonly int embarrassedSoliderMaxGold;
-        public readonly int minMoraleGain;
-        public readonly int maxMoraleGain;
         public readonly int minGoldRaided;
         public readonly int maxGoldRaided;
 
-        public UnexpectedWeddingData(string eventType, float chanceWeight, int minGoldToDonate, int maxGoldToDonate, int minPeopleInWedding, int maxPeopleInWedding, int embarrassedSoliderMaxGold, int minMoraleGain, int maxMoraleGain, int minGoldRaided, int maxGoldRaided) : base(eventType,
+        public UnexpectedWeddingData(string eventType, float chanceWeight, int minGoldToDonate, int maxGoldToDonate, int minPeopleInWedding, int maxPeopleInWedding, int embarrassedSoliderMaxGold, int minGoldRaided, int maxGoldRaided) : base(eventType,
             chanceWeight)
         {
             this.minGoldToDonate = minGoldToDonate;
@@ -187,8 +235,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             this.minPeopleInWedding = minPeopleInWedding;
             this.maxPeopleInWedding = maxPeopleInWedding;
             this.embarrassedSoliderMaxGold = embarrassedSoliderMaxGold;
-            this.minMoraleGain = minMoraleGain;
-            this.maxMoraleGain = maxMoraleGain;
             this.minGoldRaided = minGoldRaided;
             this.maxGoldRaided = maxGoldRaided;
         }
