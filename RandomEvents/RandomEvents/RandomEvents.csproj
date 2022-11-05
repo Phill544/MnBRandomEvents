@@ -76,6 +76,7 @@
     <Compile Include="Events\CCEvents\LoggingSite.cs" />
     <Compile Include="Events\CCEvents\MassGrave.cs" />
     <Compile Include="Events\CCEvents\NotOfThisWorld.cs" />
+    <Compile Include="Events\CCEvents\OldRuins.cs" />
     <Compile Include="Events\CCEvents\PassingComet.cs" />
     <Compile Include="Events\CCEvents\RedMoon.cs" />
     <Compile Include="Events\CCEvents\RunawaySon.cs" />
