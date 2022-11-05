@@ -326,6 +326,39 @@
 
 
 
+
+    <!--OldRuins Event-->
+    <string id="OldRuins_Title" text="@The old ruins" />
+    <string id="OldRuins_Event_Desc" text="You are traveling through the lands near {closestSettlement} when you come across the ruins of a small abandoned settlement. You don't remember there being any settlements out here on any map so you tell your men to set up camp nearby. You and {men} of your men decide to investigate it. \n\nWhen you enter the settlement it becomes apparent that it has been abandoned for some time. There is an old farmhouse, an old well, a barn and a small shack at the settlement. You ask your men where they want to check first but before they can answer a bolt of lightning rips through the clouds followed by a thunderous roar. You decide that you only have time to check one of the locations before you head back. Which will it be ?" />
+
+    <!--OldRuins - Event Choices-->
+    <string id="OldRuins_Event_Option_1" text="@The old farmhouse" />
+    <string id="OldRuins_Event_Option_1_Hover" text="@Better to check the homestead" />
+    <string id="OldRuins_Event_Option_2" text="@The old well" />
+    <string id="OldRuins_Event_Option_2_Hover" text="@...It's a well" />
+    <string id="OldRuins_Event_Option_3" text="@The barn" />
+    <string id="OldRuins_Event_Option_3_Hover" text="@Barns always hold something interesting" />
+    <string id="OldRuins_Event_Option_4" text="@The small shack" />
+    <string id="OldRuins_Event_Option_4_Hover" text="@The shack might be interesting" />
+    <string id="OldRuins_Event_Option_5" text="@Neither, just leave" />
+    <string id="OldRuins_Event_Option_5_Hover" text="@You don't want to get wet" />
+
+    <!--OldRuins - Event Button-->
+    <string id="OldRuins_Event_Button_Text_1" text="@Choose" />
+    <string id="OldRuins_Event_Button_Text_2" text="@Done" />
+
+    <!--OldRuins - Events-->
+    <string id="OldRuins_Event_Choice_1" text="@You decide to check the farmhouse. You approach the door and push it inwards. It falls off and the entire building is beginning to creak. You push into the building and have your men scatter to search for anything interesting. You decide to check the living room. Nothing special here at all except bugs ans spiders. You head back out to make sure yur horses are still there. As you head out of the building you hear the deafening sound of the entire building collapsing behind you. \n\nConfused you start to call out the names of your men but no one responds. You return to the main party and gathers some additional soldiers to help retrieve them men trapped. Sadly only 2 of them survived and the {killedMen} others perished from being crushed." />
+    <string id="OldRuins_Event_Choice_2" text="@You all decide to check the well as it's closest to you. You encircle it, look down and... Nothing... Just dirt. You then leave." />
+    <string id="OldRuins_Event_Choice_3" text="@The men want to check the barn so you agree. Once inside you can only see some skeletons from what you can only assume were farm animals. The men scatter and search the barn but they all come up empty handed. You proceed to leave." />
+    <string id="OldRuins_Event_Choice_4" text="@You all agree to head to the shack. You pry the door open and inside you find a chest with a lock. After fidgeting for a couple of minutes you manage to break the lock. The chest is mostly filled with papers but all the way at the bottom you come across a rather hefty coin purse. You open it and to you amazement it's filled with lots of gold coins. You head back to camp where you split the content of the purse with your men. You found {goldFound} gold and there were {men} men who went with you so {goldFound} / {men} = {goldForYou}." />
+
+    <!--OldRuins - Log Messages-->
+    <string id="OldRuins_Event_Msg_1" text="@{heroName} lost {killedMen} men to a collapsing structure." />
+    <string id="OldRuins_Event_Msg_2" text="@{heroName} got {goldForYou} gold after splitting {goldFound} gold with {men} men." />
+
+
+
     <!--AheadOfTime Event-->
     <string id="AheadOfTime_Title" text="@Ahead of Time!" />
     <string id="AheadOfTimeEvent_Text" text="@You receive word that {settlement} has completed its current project earlier than expected." />
@@ -616,7 +649,8 @@
     <string id="WanderingLivestock_Event_Button_Text_3" text="@Done" />
 
     <!--WanderingLivestock - Plural-->
-    <string id="WanderingLivestock_Event_Plural_End" text="@s" /><!-- The ending of the plural form of the language your are translating to, eg cow, cows -->
+    <string id="WanderingLivestock_Event_Plural_End" text="@s" />
+    <!-- The ending of the plural form of the language your are translating to, eg cow, cows -->
     <string id="WanderingLivestock_Event_Cow_Text" text="@, and {cowCount} cow{cowPlural}." />
 
     <!--WanderingLivestock - Outcomes-->
