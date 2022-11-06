@@ -31,9 +31,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(SolutionDir)RandomEvents\ModuleData\" "$(TargetDir)..\..\ModuleData\" /S /Y &amp;
+COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</PostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>E:\SteamLibrary\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -42,22 +46,22 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml.Serialization" />
     <Reference Include="TaleWorlds.CampaignSystem">
-      <HintPath>E:\SteamLibrary\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
     </Reference>
     <Reference Include="TaleWorlds.Core">
-      <HintPath>E:\SteamLibrary\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Core.dll</HintPath>
     </Reference>
     <Reference Include="TaleWorlds.Library">
-      <HintPath>E:\SteamLibrary\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Library.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Library.dll</HintPath>
     </Reference>
     <Reference Include="TaleWorlds.Localization">
-      <HintPath>E:\SteamLibrary\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Localization.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Localization.dll</HintPath>
     </Reference>
     <Reference Include="TaleWorlds.MountAndBlade">
-      <HintPath>E:\SteamLibrary\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.dll</HintPath>
     </Reference>
     <Reference Include="TaleWorlds.ObjectSystem">
-      <HintPath>E:\SteamLibrary\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.ObjectSystem.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.ObjectSystem.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
