@@ -122,7 +122,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new LoggingSiteData("LoggingSite", 1024, 5, 20, 10, 25);
         
         public RedMoonData RedMoonData { get; } =
-            new RedMoonData("RedMoon", 1024, 500, 5000);
+            new RedMoonData("RedMoon", 1024, 500, 5000, 10, 50);
         
         public PassingCometData PassingCometData { get; } =
             new PassingCometData("PassingComet", 1024);
