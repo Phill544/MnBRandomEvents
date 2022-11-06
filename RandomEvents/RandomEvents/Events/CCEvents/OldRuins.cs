@@ -144,6 +144,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "a":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                            MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(killedMen, false);
                             break;
                         
                         case "b":
@@ -158,9 +159,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(+goldForYou);
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
-                            
-                            
                             break;
+                            
+                        case "e":
+                            break;
+                        
                         default:
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
                             break;
