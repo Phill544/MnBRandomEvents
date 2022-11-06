@@ -82,7 +82,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption1Hover = new TextObject("{=BirthdayParty_Event_Option_1_Hover}Not everyday you turn {birthdayAge} years old!").SetTextVariable("birthdayAge", birthdayAge).ToString();
             
             var eventOption2 = new TextObject("{=BirthdayParty_Event_Option_2}Give the girls some gold").ToString();
-            var eventOption2Hover = new TextObject("{=BirthdayParty_Event_Option_2_Hover}You don't have time to stay but you can still be nice right ?").ToString();
+            var eventOption2Hover = new TextObject("{=BirthdayParty_Event_Option_2_Hover}You don't have time to stay but you can still be nice, right?").ToString();
             
             var eventOption3 = new TextObject("{=BirthdayParty_Event_Option_3}Leave").ToString();
             var eventOption3Hover = new TextObject("{=BirthdayParty_Event_Option_3_Hover}Don't have time").ToString();
@@ -97,13 +97,16 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             };
 
             var eventOptionAText = new TextObject(
-                "{=BirthdayParty_Event_Choice_1}You and {yourMenAttending} of your men decide to stay for the party while the rest makes their way to {closestSettlement}. " +
-                "You approach the girl and give her {goldGiven} gold as a gift. She give you a hug and a thank you. You get yourself some beer and sit down to enjoy the moment.\n \n" +
-                "Some time later, {bandits} bandits decide to crash the party. They go around from person to person and takes everything of value. " +
-                "You order your men to stand down as you don't want to start a fight with innocents caught in the middle. After they have taken everything of " +
-                "value they also try to take the young girl with them. This you will not stand for so you signal your men to strike. " +
-                "You and your men make quick work in incapacitating the bandits. One of your men rides to {closestSettlement} to fetch someone to throw these scum in the dungeon. \n" +
-                "The rest of the night you are celebrated as a hero! You even got to dance with the birthday girl!")
+                "{=BirthdayParty_Event_Choice_1}You and {yourMenAttending} of your men decide to stay for the party " +
+                "while the rest makes their way to {closestSettlement}. You approach the girl and give her {goldGiven} " +
+                "gold as a gift. She gives you a hug and says thank you. You get yourself some beer and sit down to enjoy " +
+                "the moment.\n \n Some time later, {bandits} bandits decide to crash the party. They go around from person" +
+                " to person and takes everything of value. You order your men to stand down as you don't want to start" +
+                " a fight with innocent people caught in the middle. After they have taken everything of value they" +
+                " also try to take the young girl with them. This you will not stand for so you signal your men to" +
+                " strike. You and your men make quick work in incapacitating the bandits. One of your men rides" +
+                " to {closestSettlement} to fetch someone to throw these scum in the dungeon. The rest of the night" +
+                " you are celebrated as a hero! You even get to dance with the birthday girl!")
                 .SetTextVariable("yourMenAttending", yourMenAttending)
                 .SetTextVariable("closestSettlement", closestSettlement)
                 .SetTextVariable("goldGiven", goldGiven)
@@ -111,8 +114,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventOptionBText = new TextObject(
-                    "{=BirthdayParty_Event_Choice_2}Your really don't have time to stay but you don't want to be rude either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. She seems grateful. \n" +
-                    "You say your goodbyes to the partygoers and you leave in the direction of {closestSettlement}.")
+                    "{=BirthdayParty_Event_Choice_2}You really don't have time to stay but you don't want to be rude" +
+                    " either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. She " +
+                    "seems grateful. \n You say your goodbyes to the partygoers and leave in the direction of {closestSettlement}.")
                 .SetTextVariable("closestSettlement", closestSettlement)
                 .SetTextVariable("goldGiven", goldGiven)
                 .ToString();
@@ -123,7 +127,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg1 =new TextObject(
-                    "{=BirthdayParty_Event_Msg_1}{heroName} gave away {goldGiven} to the girl gained {renownGain} renown for slaying the bandits.")
+                    "{=BirthdayParty_Event_Msg_1}{heroName} gave away {goldGiven} to the girl and gained {renownGain} renown for slaying the bandits.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldGiven", goldGiven)
                 .SetTextVariable("renownGain", renownGain)

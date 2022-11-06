@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
   <tags>
-    <tag language="XX" />
+    <tag language="English" />
   </tags>
   <strings>
     <!--BirthdayParty Event-->
@@ -13,7 +12,7 @@
     <string id="BirthdayParty_Event_Option_1" text="@Join them in celebration!" />
     <string id="BirthdayParty_Event_Option_1_Hover" text="@Not everyday you turn {birthdayAge} years old!" />
     <string id="BirthdayParty_Event_Option_2" text="@Give the girls some gold" />
-    <string id="BirthdayParty_Event_Option_2_Hover" text="@You don't have time to stay but you can still be nice right ?" />
+    <string id="BirthdayParty_Event_Option_2_Hover" text="@You don't have time to stay but you can still be nice, right?" />
     <string id="BirthdayParty_Event_Option_3" text="@Leave" />
     <string id="BirthdayParty_Event_Option_3_Hover" text="@Don't have time" />
 
@@ -21,12 +20,12 @@
     <string id="BirthdayParty_Event_Button_Text" text="@Okay" />
 
     <!--BirthdayParty - Events-->
-    <string id="BirthdayParty_Event_Choice_1" text="@You and {yourMenAttending} of your men decide to stay for the party while the rest makes their way to {closestSettlement}. You approach the girl and give her {goldGiven} gold as a gift. She give you a hug and a thank you. You get yourself some beer and sit down to enjoy the moment.\n \n Some time later, {bandits} bandits decide to crash the party. They go around from person to person and takes everything of value. You order your men to stand down as you don't want to start a fight with innocents caught in the middle. After they have taken everything of value they also try to take the young girl with them. This you will not stand for so you signal your men to strike. You and your men make quick work in incapacitating the bandits. One of your men rides to {closestSettlement} to fetch someone to throw these scum in the dungeon. The rest of the night you are celebrated as a hero! You even got to dance with the birthday girl!" />
-    <string id="BirthdayParty_Event_Choice_2" text="@Your really don't have time to stay but you don't want to be rude either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. She seems grateful. \n You say your goodbyes to the partygoers and you leave in the direction of {closestSettlement}." />
+    <string id="BirthdayParty_Event_Choice_1" text="@You and {yourMenAttending} of your men decide to stay for the party while the rest makes their way to {closestSettlement}. You approach the girl and give her {goldGiven} gold as a gift. She gives you a hug and says thank you. You get yourself some beer and sit down to enjoy the moment.\n \n Some time later, {bandits} bandits decide to crash the party. They go around from person to person and takes everything of value. You order your men to stand down as you don't want to start a fight with innocent people caught in the middle. After they have taken everything of value they also try to take the young girl with them. This you will not stand for so you signal your men to strike. You and your men make quick work in incapacitating the bandits. One of your men rides to {closestSettlement} to fetch someone to throw these scum in the dungeon. The rest of the night you are celebrated as a hero! You even get to dance with the birthday girl!" />
+    <string id="BirthdayParty_Event_Choice_2" text="@You really don't have time to stay but you don't want to be rude either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. She seems grateful. \n You say your goodbyes to the partygoers and leave in the direction of {closestSettlement}." />
     <string id="BirthdayParty_Event_Choice_3" text="@You don't have time for this so you leave for {closestSettlement} but not before casting one last look at the party." />
 
     <!--BirthdayParty - Log Messages-->
-    <string id="BirthdayParty_Event_Msg_1" text="@{heroName} gave away {goldGiven} to the girl gained {renownGain} renown for slaying the bandits." />
+    <string id="BirthdayParty_Event_Msg_1" text="@{heroName} gave away {goldGiven} to the girl and gained {renownGain} renown for slaying the bandits." />
     <string id="BirthdayParty_Event_Msg_2" text="@{heroName} gave away {goldGiven} to the girl." />
 
 
@@ -329,7 +328,7 @@
 
     <!--OldRuins Event-->
     <string id="OldRuins_Title" text="@The old ruins" />
-    <string id="OldRuins_Event_Desc" text="You are traveling through the lands near {closestSettlement} when you come across the ruins of a small abandoned settlement. You don't remember there being any settlements out here on any map so you tell your men to set up camp nearby. You and {men} of your men decide to investigate it. \n\nWhen you enter the settlement it becomes apparent that it has been abandoned for some time. There is an old farmhouse, an old well, a barn and a small shack at the settlement. You ask your men where they want to check first but before they can answer a bolt of lightning rips through the clouds followed by a thunderous roar. You decide that you only have time to check one of the locations before you head back. Which will it be ?" />
+    <string id="OldRuins_Event_Desc" text="You are traveling through the lands near {closestSettlement} when you come across the ruins of a small abandoned settlement. You don't remember there being any settlements out here on any map so you tell your men to set up camp nearby. You and {manCount} of your men decide to investigate it. \n\nWhen you enter the settlement it becomes apparent that it has been abandoned for some time. There is an old farmhouse, well, barn, and a small shack at the settlement. You ask your men where they want to check first but before they can answer a bolt of lightning rips through the clouds followed by a thunderous roar. You decide that you only have time to check one of the locations before you head back. Which will it be?" />
 
     <!--OldRuins - Event Choices-->
     <string id="OldRuins_Event_Option_1" text="@The old farmhouse" />
@@ -340,7 +339,7 @@
     <string id="OldRuins_Event_Option_3_Hover" text="@Barns always hold something interesting" />
     <string id="OldRuins_Event_Option_4" text="@The small shack" />
     <string id="OldRuins_Event_Option_4_Hover" text="@The shack might be interesting" />
-    <string id="OldRuins_Event_Option_5" text="@Neither, just leave" />
+    <string id="OldRuins_Event_Option_5" text="@None of them, just leave" />
     <string id="OldRuins_Event_Option_5_Hover" text="@You don't want to get wet" />
 
     <!--OldRuins - Event Button-->
@@ -348,14 +347,14 @@
     <string id="OldRuins_Event_Button_Text_2" text="@Done" />
 
     <!--OldRuins - Events-->
-    <string id="OldRuins_Event_Choice_1" text="@You decide to check the farmhouse. You approach the door and push it inwards. It falls off and the entire building is beginning to creak. You push into the building and have your men scatter to search for anything interesting. You decide to check the living room. Nothing special here at all except bugs ans spiders. You head back out to make sure yur horses are still there. As you head out of the building you hear the deafening sound of the entire building collapsing behind you. \n\nConfused you start to call out the names of your men but no one responds. You return to the main party and gathers some additional soldiers to help retrieve them men trapped. Sadly only 2 of them survived and the {killedMen} others perished from being crushed." />
+    <string id="OldRuins_Event_Choice_1" text="@You decide to check the farmhouse. You approach the door and push it inwards. It falls off and the entire building is beginning to creak. You push into the building and have your men scatter to search for anything interesting. You decide to check the living room. Nothing special here except bugs and spiders. You head back out to make sure your horses are still there. As you head out of the building you hear the deafening sound of the entire building collapsing behind you. \n\nConfused you start to call out the names of your men but no one responds. You return to the main party and gathers some additional soldiers to help retrieve them men trapped. Sadly only 2 of them survived and the {killedMen} others perished from being crushed." />
     <string id="OldRuins_Event_Choice_2" text="@You all decide to check the well as it's closest to you. You encircle it, look down and... Nothing... Just dirt. You then leave." />
     <string id="OldRuins_Event_Choice_3" text="@The men want to check the barn so you agree. Once inside you can only see some skeletons from what you can only assume were farm animals. The men scatter and search the barn but they all come up empty handed. You proceed to leave." />
     <string id="OldRuins_Event_Choice_4" text="@You all agree to head to the shack. You pry the door open and inside you find a chest with a lock. After fidgeting for a couple of minutes you manage to break the lock. The chest is mostly filled with papers but all the way at the bottom you come across a rather hefty coin purse. You open it and to you amazement it's filled with lots of gold coins. You head back to camp where you split the content of the purse with your men. You found {goldFound} gold and there were {men} men who went with you so {goldFound} / {men} = {goldForYou}." />
 
     <!--OldRuins - Log Messages-->
     <string id="OldRuins_Event_Msg_1" text="@{heroName} lost {killedMen} men to a collapsing structure." />
-    <string id="OldRuins_Event_Msg_2" text="@{heroName} got {goldForYou} gold after splitting {goldFound} gold with {men} men." />
+    <string id="OldRuins_Event_Msg_2" text="@{heroName} received {goldForYou} gold after splitting {goldFound} gold with {men} men." />
 
 
 
