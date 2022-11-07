@@ -112,7 +112,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=FallenSoldier_Event_Msg_1}No one messes with {heroName}!")
+                    "{=FallenSoldier_Event_Msg_2}No one messes with {heroName}!")
                 .SetTextVariable("heroName", heroName)
                 .ToString();
             

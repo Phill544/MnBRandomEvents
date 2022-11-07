@@ -117,5 +117,11 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModuleData\std_module_strings_xml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ModuleData\Languages\DE" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
