@@ -36,6 +36,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public override void StartEvent()
 		{
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+			}
 			
 			var eventTitle = new TextObject("{=RedMoon_Title}A Coming Apocalypse?").ToString();
 
