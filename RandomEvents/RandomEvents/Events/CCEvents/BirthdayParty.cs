@@ -24,6 +24,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int maxGoldGiven;
         private readonly int minRenownGain;
         private readonly int maxRenownGain;
+        private readonly int minGoldLooted;
+        private readonly int maxGoldLooted;
 
         public BirthdayParty() : base(Settings.ModSettings.RandomEvents.BirthdayPartyData)
         {
@@ -39,6 +41,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             maxGoldGiven = Settings.ModSettings.RandomEvents.BirthdayPartyData.maxGoldGiven;
             minRenownGain = Settings.ModSettings.RandomEvents.BirthdayPartyData.minRenownGain;
             maxRenownGain = Settings.ModSettings.RandomEvents.BirthdayPartyData.maxRenownGain;
+            minGoldLooted = Settings.ModSettings.RandomEvents.BirthdayPartyData.minGoldLooted;
+            maxGoldLooted = Settings.ModSettings.RandomEvents.BirthdayPartyData.maxGoldLooted;
         }
 
         public override void CancelEvent()
@@ -65,6 +69,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var bandits = MBRandom.RandomInt(minBandits, maxBandits);
             var goldGiven = MBRandom.RandomInt(minGoldGiven, maxGoldGiven);
             var renownGain = MBRandom.RandomInt(minRenownGain, maxRenownGain);
+            var goldLooted = MBRandom.RandomInt(minGoldLooted, maxGoldLooted);
 
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
             
@@ -86,6 +91,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var eventOption3 = new TextObject("{=BirthdayParty_Event_Option_3}Leave").ToString();
             var eventOption3Hover = new TextObject("{=BirthdayParty_Event_Option_3_Hover}Don't have time").ToString();
+            
+            var eventOption4 = new TextObject("{=BirthdayParty_Event_Option_4}Raid the party").ToString();
+            var eventOption4Hover = new TextObject("{=BirthdayParty_Event_Option_4_Hover}Have some fun").ToString();
 
             var eventButtonText = new TextObject("{=BirthdayParty_Event_Button_Text}Okay").ToString();
             
@@ -93,7 +101,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             {
                 new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
                 new InquiryElement("b", eventOption2, null, true, eventOption2Hover),
-                new InquiryElement("c", eventOption3, null, true, eventOption3Hover)
+                new InquiryElement("c", eventOption3, null, true, eventOption3Hover),
+                new InquiryElement("d", eventOption4, null, true, eventOption4Hover)
             };
 
             var eventOptionAText = new TextObject(
@@ -111,8 +120,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventOptionBText = new TextObject(
-                    "{=BirthdayParty_Event_Choice_2}Your really don't have time to stay but you don't want to be rude either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. She seems grateful. \n" +
-                    "You say your goodbyes to the partygoers and you leave in the direction of {closestSettlement}.")
+                    "{=BirthdayParty_Event_Choice_2}Your really don't have time to stay but you don't want to be rude either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. " +
+                    "She seems grateful. \nYou say your goodbyes to the partygoers and you leave in the direction of {closestSettlement}.")
                 .SetTextVariable("closestSettlement", closestSettlement)
                 .SetTextVariable("goldGiven", goldGiven)
                 .ToString();
@@ -120,6 +129,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOptionCText = new TextObject(
                     "{=BirthdayParty_Event_Choice_3}You don't have time for this so you leave for {closestSettlement} but not before casting one last look at the party.")
                 .SetTextVariable("closestSettlement", closestSettlement)
+                .ToString();
+            
+            var eventOptionDText = new TextObject(
+                    "{=BirthdayParty_Event_Choice_4}You decide that this is the perfect moment to let loose your somewhat evil side. You order your men you surround the party and you tell every guest to hand over " +
+                    "everything of value. They refuse at the beginning but you have one of your men kill a random person. They all fall in line after that and hand over everything. Once you have everything " +
+                    "you and your men leave but not before tossing over 1 gold coin to the birthday girl who is clearly very upset. You are left with {goldLooted} gold.")
+                .SetTextVariable("goldLooted", goldLooted)
                 .ToString();
             
             var eventMsg1 =new TextObject(
@@ -130,10 +146,17 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=BirthdayParty_Event_Msg_1}{heroName} gave away {goldGiven} to the girl.")
+                    "{=BirthdayParty_Event_Msg_2}{heroName} gave away {goldGiven} to the girl.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldGiven", goldGiven)
                 .ToString();
+            
+            var eventMsg3 =new TextObject(
+                    "{=BirthdayParty_Event_Msg_3}{heroName} looted {goldLooted} from the birthday party.")
+                .SetTextVariable("heroName", heroName)
+                .SetTextVariable("goldGiven", goldGiven)
+                .ToString();
+
             
 
             var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText, null,
@@ -156,6 +179,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         
                         case "c":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionCText, true, false, eventButtonText, null, null, null), true);
+                            break;
+                        case "d":
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionDText, true, false, eventButtonText, null, null, null), true);
+                            Hero.MainHero.ChangeHeroGold(+goldGiven);
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
                             break;
                         
                         default:
@@ -199,8 +227,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public readonly int maxGoldGiven;
         public readonly int minRenownGain;
         public readonly int maxRenownGain;
+        public readonly int minGoldLooted;
+        public readonly int maxGoldLooted;
 
-        public BirthdayPartyData(string eventType, float chanceWeight, int minAttending, int maxAttending, int minYourMenAttending, int maxYourMenAttending, int minAge, int maxAge, int minBandits, int maxBandits, int minGoldGiven, int maxGoldGiven, int minRenownGain, int maxRenownGain) : base(eventType, chanceWeight)
+        public BirthdayPartyData(string eventType, float chanceWeight, int minAttending, int maxAttending, int minYourMenAttending, int maxYourMenAttending, int minAge, int maxAge, int minBandits, int maxBandits, int minGoldGiven, int maxGoldGiven, int minRenownGain, int maxRenownGain, int minGoldLooted, int maxGoldLooted) : base(eventType, chanceWeight)
         {
             this.minAttending = minAttending;
             this.maxAttending = maxAttending;
@@ -214,6 +244,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             this.maxGoldGiven = maxGoldGiven;
             this.minRenownGain = minRenownGain;
             this.maxRenownGain = maxRenownGain;
+            this.minGoldLooted = minGoldLooted;
+            this.maxGoldLooted = maxGoldLooted;
         }
 
         public override BaseEvent GetBaseEvent()

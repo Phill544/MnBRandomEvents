@@ -38,17 +38,17 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			var eventExtraDialogue = new TextObject("{=BeeKind_Event_Extra_Dialogue}Your body reacts painfully to the sting. ").ToString();
 			
-			var eventText = new TextObject("{=BeeKind_Event_Text}As you sit down next to some flowers you get stung by a bee! {extraDialogue}Why is nature so cruel?")
-				.SetTextVariable("extraDialogue", extraDialogue)
-				.ToString();
-			
-			var eventButtonText = new TextObject("{=BeeKind_Event_Button_Text}Ouch").ToString();
-			
 			if (MBRandom.RandomFloatRanged(0.0f,1.0f) <= reactionChance)
 			{
 				extraDialogue = eventExtraDialogue;
 				damageToInflict = reactionDamage;
 			}
+			
+			var eventText = new TextObject("{=BeeKind_Event_Text}As you sit down next to some flowers you get stung by a bee! {extraDialogue}Why is nature so cruel?")
+				.SetTextVariable("extraDialogue", extraDialogue)
+				.ToString();
+			
+			var eventButtonText = new TextObject("{=BeeKind_Event_Button_Text}Ouch").ToString();
 
 			Hero.MainHero.HitPoints -= damageToInflict;
 
