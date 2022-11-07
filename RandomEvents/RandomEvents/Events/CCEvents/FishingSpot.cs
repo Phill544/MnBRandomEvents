@@ -52,7 +52,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var moraleGained = MBRandom.RandomInt(minMoraleGain, maxMoraleGain);
             
-            ItemObject fish = MBObjectManager.Instance.GetObject<ItemObject>("fish");
+            var fish = MBObjectManager.Instance.GetObject<ItemObject>("fish");
             
             var eventDescription = new TextObject(
                     "{=FishingSpot_Event_Desc}While camping, {soldiersGoneFishing} of your men decide they want to go to the lake just outside the camp to try and catch some fish.\n " +

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Bannerlord.RandomEvents")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A module that adds random events in Bannerlord")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Bannerlord.RandomEvents")]

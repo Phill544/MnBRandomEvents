@@ -59,8 +59,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var moraleGained = MBRandom.RandomInt(minMoraleGain, maxMoraleGain);
             
-            ItemObject meat = MBObjectManager.Instance.GetObject<ItemObject>("meat");
-            ItemObject hides = MBObjectManager.Instance.GetObject<ItemObject>("hides");
+            var meat = MBObjectManager.Instance.GetObject<ItemObject>("meat");
+            var hides = MBObjectManager.Instance.GetObject<ItemObject>("hides");
             
             var eventDescription = new TextObject(
                     "{=HuntingTrip_Event_Desc}While camping, {soldiersGoneHunting} of your men decide they want to go into the forest just west of camp to try hunting.\n " +
