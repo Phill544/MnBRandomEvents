@@ -85,46 +85,39 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "{=RedMoon_Event_Choice_1}You fall to your knees and start praying to the gods. Several of your men join you in prayer. \n \n" +
                     "After praying for almost 10 minutes you realize that this won't help. You order your men to give you {goldLostToReligion} gold that you will rush to the " +
                     "nearest chapel. Hopefully the priests can help you. You mount your steed and ride of. You ride like a madman towards {closestSettlement} as you know the " +
-                    "settlement has a place of worship. As your steed jumps over a fence you fall off and black out.\n" +
-                    "You wake up to find that it's morning, so you make your way back to camp. Only after you arrived back did you think of the chest of gold you lost.")
+                    "settlement has a chapel. As your steed jumps over a fence you fall off and black out.\n" +
+                    "When you wake up it's morning you make your way back to camp. Only after you arrived back did you think of the chest of gold you lost.")
 				.SetTextVariable("goldLostToReligion", goldLostToReligion)
 				.SetTextVariable("closestSettlement", closestSettlement)
 				.ToString();
             
             var eventOptionBText = new TextObject(
-                    "{=RedMoon_Event_Choice_2}You call your men to you. Many are panicking and you see genuine fear in " +
-                    "their faces. You tell them to stop and calm down but to no avail. They start running around like " +
-                    "headless chickens again. You decide not to waste your time and let the fanatics do what they want. " +
-                    "You decide to retire to your tent.\n \nWhen you wake up the following morning you learn that " +
-                    "{menLostToReligion} of your men left your party in the direction of {closestSettlement}. They also " +
-                    "inform you they took {goldLostToReligion} gold from the treasury as an offering to the church. At " +
-                    "least the fanatics are gone!")
+                    "{=RedMoon_Event_Choice_2}You call your men to you. Many are panicking and you see genuine fear in their faces. You tell to stop and calm down but to no avail. They start " +
+                    "running around like headless chickens again. You decide not to waste your time and let the fanatics do what they want so you retire to your tent.\n \n" +
+                    "When you wake up the following morning you learned that {menLostToReligion} of your men left your party in the direction of {closestSettlement}. They also inform you they " +
+                    "took {goldLostToReligion} gold from the treasury as an offering to the church. At least the fanatics are gone!")
 	            .SetTextVariable("menLostToReligion", menLostToReligion)
 	            .SetTextVariable("closestSettlement", closestSettlement)
 	            .SetTextVariable("goldLostToReligion", goldLostToReligion)
 	            .ToString();
             
             var eventOptionCText = new TextObject(
-                    "{=RedMoon_Event_Choice_3}You order your men to you! Most fall in line immediately, but some still " +
-                    "act like idiots. You tell your men that what you are witnessing is a naturally occuring phenomenon " +
-                    "since you have witnessed this before. You explain how you saw the exact same thing a few years ago " +
-                    "and nothing bad came out of it. Your men seem to be reassured by hearing this. There are still " +
-                    "some fools praying in the back but you kick them from the party. The last thing you need is " +
-                    "mentally unstable warriors. You have several of your guards kick them out of camp!")
+                    "{=RedMoon_Event_Choice_3}You order your men to you! Most fall in line immediately, but some still act like idiots. You tell your men that what you are witnessing is a " +
+                    "natural occuring phenomenon since you have witnessed this before. You explain how you saw the exact same thing a few years ago and nothing bad came out of it. You men seem to be " +
+                    "happy to hear this. There are still some idiots praying in the back but you kick them from the party claiming you don't need mentally unstable warriors. You have several " +
+                    "of your guards kick them out of camp!")
                 .ToString();
             
             var eventOptionDText = new TextObject(
-                    "{=RedMoon_Event_Choice_4}Nope...\n \nYou turn around and go back into your tent, straight to " +
-                    "sleep.\n \nWhen you wake up the following morning you learn that {menLostToReligion} of your men " +
-                    "left your party in the direction of {closestSettlement}. They also inform you they took " +
-                    "{goldLostToReligion} gold from the treasury as an offering to the church. At least the fanatics " +
-                    "are gone!")
+                    "{=RedMoon_Event_Choice_4}Nope...\n \nYou turn around and go back into your tent and straight back to bed.\n \n" +
+                    "When you wake up the following morning you learned that {menLostToReligion} of your men left your party in the direction of {closestSettlement}. They also inform you they " +
+                    "took {goldLostToReligion} gold from the treasury as an offering to the church. At least the fanatics are gone!")
 	            .SetTextVariable("closestSettlement", closestSettlement)
 	            .SetTextVariable("goldLostToReligion", goldLostToReligion)
                 .ToString();
             
             var eventMsg1 = new TextObject(
-		            "{=RedMoon_Event_Msg_1}{heroName} lost {goldLostToReligion} gold due to an... unfortunate accident.")
+		            "{=RedMoon_Event_Msg_1}{heroName} lost {goldLostToReligion} gold due to a... unfortunate accident.")
 	            .SetTextVariable("goldLostToReligion", goldLostToReligion)
 	            .SetTextVariable("heroName", heroName)
 	            .ToString();

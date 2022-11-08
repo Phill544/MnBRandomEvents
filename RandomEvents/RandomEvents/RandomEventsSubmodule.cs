@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -11,18 +12,22 @@ namespace CryingBuffalo.RandomEvents
     {
         public static readonly Color TextColor = Color.FromUint(6750401U);
         public static readonly Color MsgColor = Color.FromUint(11846692);
+        
+        //MCM Settings
+        public static readonly string ModuleFolderName = "RandomEvents";
+        public static readonly string ModName = "RandomEvents";
 
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();
 
-            Settings.ModSettings.LoadGeneralSettings();
-            Settings.ModSettings.LoadRandomEventSettings();
+            ModSettings.LoadGeneralSettings();
+            ModSettings.LoadRandomEventSettings();
         }
 
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
-            base.OnBeforeInitialModuleScreenSetAsRoot();
+            MenuConfig.Instance.Settings();
         }
 
         protected override void OnGameStart(Game game, IGameStarter gameStarterObject)

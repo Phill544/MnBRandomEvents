@@ -47,7 +47,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			var eventText = new TextObject("{=BeeKind_Event_Text}As you sit down next to some flowers you get stung by a bee! {extraDialogue}Why is nature so cruel?")
 				.SetTextVariable("extraDialogue", extraDialogue)
 				.ToString();
-			
+
 			var eventButtonText = new TextObject("{=BeeKind_Event_Button_Text}Ouch").ToString();
 
 			Hero.MainHero.HitPoints -= damageToInflict;

@@ -106,16 +106,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             };
 
             var eventOptionAText = new TextObject(
-                "{=BirthdayParty_Event_Choice_1}You and {yourMenAttending} of your men decide to stay for the party " +
-                "while the rest makes their way to {closestSettlement}. You approach the girl and give her {goldGiven} " +
-                "gold as a gift. She gives you a hug and says thank you. You get yourself some beer and sit down to enjoy " +
-                "the moment.\n \n Some time later, {bandits} bandits decide to crash the party. They go around from person" +
-                " to person and takes everything of value. You order your men to stand down as you don't want to start" +
-                " a fight with innocent people caught in the middle. After they have taken everything of value they" +
-                " also try to take the young girl with them. This you will not stand for so you signal your men to" +
-                " strike. You and your men make quick work in incapacitating the bandits. One of your men rides" +
-                " to {closestSettlement} to fetch someone to throw these scum in the dungeon. The rest of the night" +
-                " you are celebrated as a hero! You even get to dance with the birthday girl!")
+                "{=BirthdayParty_Event_Choice_1}You and {yourMenAttending} of your men decide to stay for the party while the rest makes their way to {closestSettlement}. " +
+                "You approach the girl and give her {goldGiven} gold as a gift. She give you a hug and a thank you. You get yourself some beer and sit down to enjoy the moment.\n \n" +
+                "Some time later, {bandits} bandits decide to crash the party. They go around from person to person and takes everything of value. " +
+                "You order your men to stand down as you don't want to start a fight with innocents caught in the middle. After they have taken everything of " +
+                "value they also try to take the young girl with them. This you will not stand for so you signal your men to strike. " +
+                "You and your men make quick work in incapacitating the bandits. One of your men rides to {closestSettlement} to fetch someone to throw these scum in the dungeon. \n" +
+                "The rest of the night you are celebrated as a hero! You even got to dance with the birthday girl!")
                 .SetTextVariable("yourMenAttending", yourMenAttending)
                 .SetTextVariable("closestSettlement", closestSettlement)
                 .SetTextVariable("goldGiven", goldGiven)
@@ -123,9 +120,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventOptionBText = new TextObject(
-                    "{=BirthdayParty_Event_Choice_2}You really don't have time to stay but you don't want to be rude" +
-                    " either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. She " +
-                    "seems grateful. \n You say your goodbyes to the partygoers and leave in the direction of {closestSettlement}.")
+                    "{=BirthdayParty_Event_Choice_2}Your really don't have time to stay but you don't want to be rude either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. " +
+                    "She seems grateful. \nYou say your goodbyes to the partygoers and you leave in the direction of {closestSettlement}.")
                 .SetTextVariable("closestSettlement", closestSettlement)
                 .SetTextVariable("goldGiven", goldGiven)
                 .ToString();
@@ -136,12 +132,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventOptionDText = new TextObject(
-                    "{=BirthdayParty_Event_Choice_4}You decide that this is the perfect moment to let loose your" +
-                    " somewhat evil side. You order your men you surround the party and you every guest to hand over" +
-                    " everything of value. They refuse at the beginning but you have one of your men kill a random " +
-                    "person. They all fall in line after that, handing over everything. Once you have gathered your " +
-                    "loot, you and your men leave but not before tossing over 1 gold coin to the birthday girl who is " +
-                    "clearly very upset. You are left with {goldLooted} gold.")
+                    "{=BirthdayParty_Event_Choice_4}You decide that this is the perfect moment to let loose your somewhat evil side. You order your men you surround the party and you tell every guest to hand over " +
+                    "everything of value. They refuse at the beginning but you have one of your men kill a random person. They all fall in line after that and hand over everything. Once you have everything " +
+                    "you and your men leave but not before tossing over 1 gold coin to the birthday girl who is clearly very upset. You are left with {goldLooted} gold.")
                 .SetTextVariable("goldLooted", goldLooted)
                 .ToString();
             
@@ -161,7 +154,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventMsg3 =new TextObject(
                     "{=BirthdayParty_Event_Msg_3}{heroName} looted {goldLooted} from the birthday party.")
                 .SetTextVariable("heroName", heroName)
-                .SetTextVariable("goldLooted", goldLooted)
+                .SetTextVariable("goldGiven", goldGiven)
                 .ToString();
 
             
@@ -189,7 +182,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             break;
                         case "d":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionDText, true, false, eventButtonText, null, null, null), true);
-                            Hero.MainHero.ChangeHeroGold(goldLooted);
+                            Hero.MainHero.ChangeHeroGold(+goldGiven);
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
                             break;
                         

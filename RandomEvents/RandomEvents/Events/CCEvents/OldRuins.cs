@@ -38,31 +38,30 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (Settings.ModSettings.GeneralSettings.DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
-                    RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
             }
 
             var heroName = Hero.MainHero.FirstName;
             
             var eventTitle = new TextObject("{=OldRuins_Title}The old ruins").ToString();
             
-            var manCount = MBRandom.RandomInt(minMen, maxMen);
+            var manCount  = MBRandom.RandomInt(minMen, maxMen);
 
-            var killedMen = manCount - 2;
+            var killedMen = manCount  - 2;
 
             var goldFound = MBRandom.RandomInt(minGoldFound, maxGoldFound);
 
-            var goldForYou = goldFound / manCount;
+            var goldForYou = goldFound / manCount ;
             
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
             
             var eventDescription = new TextObject(
                     "{=OldRuins_Event_Desc}You are traveling through the lands near {closestSettlement} when you come across the ruins of a small abandoned settlement. You don't remember there being any " +
                     "settlements out here on any map so you tell your men to set up camp nearby. You and {manCount} of your men decide to investigate it. \n\nWhen you enter the settlement it becomes apparent " +
-                    "that it has been abandoned for some time. There is an old farmhouse, well, barn, and a small shack at the settlement. You ask your men where they want to check first but before " +
-                    "they can answer a bolt of lightning rips through the clouds followed by a thunderous roar. You decide that you only have time to check one of the locations before you head back. Which will it be?")
+                    "that it has been abandoned for some time. There is an old farmhouse, well, barn and a small shack at the settlement. You ask your men where they want to check first but before " +
+                    "they can answer a bolt of lightning rips through the clouds followed by a thunderous roar. You decide that you only have time to check one of the locations before you head back. Which will it be ?")
                 .SetTextVariable("closestSettlement", closestSettlement)
-                .SetTextVariable("manCount", manCount)
+                .SetTextVariable("manCount", manCount )
                 .ToString();
             
             var eventOption1 = new TextObject("{=OldRuins_Event_Option_1}The old farmhouse").ToString();
@@ -93,14 +92,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             };
             
             var eventOptionAText = new TextObject(
-                    "{=OldRuins_Event_Choice_1}You decide to check the farmhouse. You approach the door and push it" +
-                    " inwards. It falls off and the entire building is beginning to creak. You push into the building" +
-                    " and have your men scatter to search for anything interesting. You decide to check the living room." +
-                    " Nothing special here except bugs and spiders. You head back out to make sure your horses are" +
-                    " still there. As you head out of the building you hear the deafening sound of the entire building" +
-                    " collapsing behind you. \n\nConfused you start to call out the names of your men but no one" +
-                    " responds. You return to the main party and gathers some additional soldiers to help retrieve" +
-                    " them men trapped. Sadly only 2 of them survived and the {killedMen} others perished from being crushed.")
+                    "{=OldRuins_Event_Choice_1}You decide to check the farmhouse. You approach the door and push it inwards. It falls off and the entire building is beginning to creak. You push into the building and " +
+                    "have your men scatter to search for anything interesting. You decide to check the living room. Nothing special here at all except bugs ans spiders. You head back out to make sure yur horses are " +
+                    "still there. As you head out of the building you hear the deafening sound of the entire building collapsing behind you. \n\n" +
+                    "Confused you start to call out the names of your men but no one responds. You return to the main party and gathers some additional soldiers to help retrieve them men trapped. " +
+                    "Sadly only 2 of them survived and the {killedMen} others perished from being crushed.")
                 .SetTextVariable("killedMen", killedMen)
                 .ToString();
             
@@ -118,7 +114,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "The chest is mostly filled with papers but all the way at the bottom you come across a rather hefty coin purse. You open it and to you amazement it's filled with lots of gold coins. " +
                     "You head back to camp where you split the content of the purse with your men. You found {goldFound} gold and there were {men} men who went with you so {goldFound} / {men} = {goldForYou}. ")
                 .SetTextVariable("goldFound",goldFound)
-                .SetTextVariable("men",manCount)
+                .SetTextVariable("men",manCount )
                 .SetTextVariable("goldForYou",goldForYou)
                 .ToString();
             
@@ -129,11 +125,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=OldRuins_Event_Msg_1}{heroName} received {goldForYou} gold after splitting {goldFound} gold with {men} men.")
+                    "{=OldRuins_Event_Msg_1}{heroName} received  {goldForYou} gold after splitting {goldFound} gold with {manCount} men.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldForYou", goldForYou)
                 .SetTextVariable("goldFound", goldFound)
-                .SetTextVariable("men", manCount)
+                .SetTextVariable("manCount", manCount )
                 .ToString();
 
             var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null,
@@ -160,11 +156,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(+goldForYou);
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
-                            break;
                             
-                        case "e":
                             break;
-                        
                         default:
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
                             break;

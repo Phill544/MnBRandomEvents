@@ -2,7 +2,7 @@
 
 namespace CryingBuffalo.RandomEvents.Settings
 {
-	class GeneralSettings
+	internal class GeneralSettings
 	{
 		[JsonIgnore]
 		public bool DebugMode { get; private set; } = false;

@@ -122,7 +122,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new LoggingSiteData("LoggingSite", 1024, 5, 20, 10, 25);
         
         public RedMoonData RedMoonData { get; } =
-            new RedMoonData("RedMoon", 1024, 500, 5000, 2, 15);
+            new RedMoonData("RedMoon", 1024, 500, 5000, 10, 50);
         
         public PassingCometData PassingCometData { get; } =
             new PassingCometData("PassingComet", 1024);
@@ -131,7 +131,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new MassGraveData("MassGrave", 1024, 2, 6, 10, 30);
         
         public BeggarBeggingData BeggarBeggingData { get; } =
-            new BeggarBeggingData("BeggarBegging",1024, 0, 50, 5, 10);
+            new BeggarBeggingData("BeggarBegging",1024);
         
         public BirthdayPartyData BirthdayPartyData { get; } =
             new BirthdayPartyData("BirthdayParty",1024, 20, 60, 3, 12, 14, 20, 5, 10, 50, 200, 15, 25, 500, 1500);

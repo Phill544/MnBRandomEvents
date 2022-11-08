@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -16,12 +17,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int maxRenownGain;
 
 
-        public BeggarBegging() : base(Settings.ModSettings.RandomEvents.BeggarBeggingData)
+        public BeggarBegging() : base(ModSettings.RandomEvents.BeggarBeggingData)
         {
-            minGoldToGive = Settings.ModSettings.RandomEvents.BeggarBeggingData.minGoldToGive;
-            maxGoldToGive = Settings.ModSettings.RandomEvents.BeggarBeggingData.maxGoldToGive;
-            minRenownGain = Settings.ModSettings.RandomEvents.BeggarBeggingData.minRenownGain;
-            maxRenownGain = Settings.ModSettings.RandomEvents.BeggarBeggingData.maxRenownGain;
+            /*
+            minGoldToGive = MenuConfig.Instance.MinGoldToGive;
+            maxGoldToGive = MenuConfig.Instance.MaxGoldToGive;
+            minRenownGain = MenuConfig.Instance.MinRenownGain;
+            maxRenownGain = MenuConfig.Instance.MaxRenownGain;
+            */
         }
 
         public override void CancelEvent()
@@ -36,10 +39,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (ModSettings.GeneralSettings.DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
-                    RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
             }
             
             var heroName = Hero.MainHero.FirstName;
@@ -78,14 +80,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "{=BeggarBegging_Event_Msg_1}{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldToGive", goldToGive)
-                .SetTextVariable("renownGain", renownGain - 5)
+                .SetTextVariable("renownGain", renownGain)
                 .ToString();
             
             var eventMsg2 =new TextObject(
                     "{=BeggarBegging_Event_Msg_2}{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldToGive", goldToGive)
-                .SetTextVariable("renownGain", renownGain - 2)
+                .SetTextVariable("renownGain", renownGain)
                 .ToString();
             
             var eventMsg3 =new TextObject(
@@ -149,18 +151,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class BeggarBeggingData : RandomEventData
     {
-        public readonly int minGoldToGive;
-        public readonly int maxGoldToGive;
-        public readonly int minRenownGain;
-        public readonly int maxRenownGain;
-
-        public BeggarBeggingData(string eventType, float chanceWeight, int minGoldToGive, int maxGoldToGive, int minRenownGain, int maxRenownGain) : base(eventType,
-            chanceWeight)
+        public BeggarBeggingData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
         {
-            this.minGoldToGive = minGoldToGive;
-            this.maxGoldToGive = maxGoldToGive;
-            this.minRenownGain = minRenownGain;
-            this.maxRenownGain = maxRenownGain;
         }
 
         public override BaseEvent GetBaseEvent()
