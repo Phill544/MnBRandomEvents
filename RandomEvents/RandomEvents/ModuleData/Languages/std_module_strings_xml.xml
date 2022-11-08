@@ -15,6 +15,8 @@
     <string id="BirthdayParty_Event_Option_2_Hover" text="You don't have time to stay but you can still be nice, right?" />
     <string id="BirthdayParty_Event_Option_3" text="Leave" />
     <string id="BirthdayParty_Event_Option_3_Hover" text="Don't have time" />
+    <string id="BirthdayParty_Event_Option_4" text="Raid the party" />
+    <string id="BirthdayParty_Event_Option_4_Hover" text="Have some fun" />
 
     <!--BirthdayParty - Event Button-->
     <string id="BirthdayParty_Event_Button_Text" text="Okay" />
@@ -23,10 +25,12 @@
     <string id="BirthdayParty_Event_Choice_1" text="You and {yourMenAttending} of your men decide to stay for the party while the rest makes their way to {closestSettlement}. You approach the girl and give her {goldGiven} gold as a gift. She gives you a hug and says thank you. You get yourself some beer and sit down to enjoy the moment.\n \n Some time later, {bandits} bandits decide to crash the party. They go around from person to person and takes everything of value. You order your men to stand down as you don't want to start a fight with innocent people caught in the middle. After they have taken everything of value they also try to take the young girl with them. This you will not stand for so you signal your men to strike. You and your men make quick work in incapacitating the bandits. One of your men rides to {closestSettlement} to fetch someone to throw these scum in the dungeon. The rest of the night you are celebrated as a hero! You even get to dance with the birthday girl!" />
     <string id="BirthdayParty_Event_Choice_2" text="You really don't have time to stay but you don't want to be rude either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. She seems grateful. \n You say your goodbyes to the partygoers and leave in the direction of {closestSettlement}." />
     <string id="BirthdayParty_Event_Choice_3" text="You don't have time for this so you leave for {closestSettlement} but not before casting one last look at the party." />
+    <string id="BirthdayParty_Event_Choice_4" text="You decide that this is the perfect moment to let loose your somewhat evil side. You order your men you surround the party and you tell every guest to hand over everything of value. They refuse at the beginning but you have one of your men kill a random person. They all fall in line after that and hand over everything. Once you have everything you and your men leave but not before tossing over 1 gold coin to the birthday girl who is clearly very upset. You are left with {goldLooted} gold." />
 
     <!--BirthdayParty - Log Messages-->
     <string id="BirthdayParty_Event_Msg_1" text="{heroName} gave away {goldGiven} to the girl and gained {renownGain} renown for slaying the bandits." />
     <string id="BirthdayParty_Event_Msg_2" text="{heroName} gave away {goldGiven} to the girl." />
+    <string id="BirthdayParty_Event_Msg_3" text="{heroName} looted {goldLooted} from the birthday party." />
 
 
 
@@ -195,11 +199,34 @@
 
 
     <!--RedMoon Event-->
-    <string id="RedMoon_Title" text="A Coming Apocalypse" />
-    <string id="RedMoon_Event_Text" text="You are in your tent late one night when you hear your men starting a commotion. Annoyed, you go out and tell them to quiet down but as soon as you step foot outside your tent you see what the commotion is about. The moon has become blood red. As you gaze up on the moon you fall to your knees and start praying to the gods. Several of your men join you in prayer. \n \nAfter praying for almost 10 minutes you realize that this won't help. You order your men to give you {goldLostToReligion} gold that you will rush to the nearest chapel. Hopefully the priests can help you. You mount your steed and ride of. You ride like a madman towards {closestSettlement} as you know the settlement has a chapel. As your steed jumps over a fence you fall off and black out.\nWhen you wake up it's morning. The chest of gold you had with you is gone, but you are alive. You make your way back to camp." />
+    <string id="RedMoon_Title" text="A Coming Apocalypse?" />
+    <string id="RedMoon_Event_Desc" text="You are in your tent late one night when you are awoken by your men starting a commotion. Annoyed, you go out and tell them to quiet down but as soon as you step foot outside your tent you see what the commotion is about. The moon has become blood red. Your men are panicking and running around in all directions and proclaiming this to be the end of days. The only question you can ask yourself is what are you going to do about this?" />
+   
+    <!--RedMoon Event Choices-->
+    <string id="RedMoon_Event_Option_1" text="Panic with your men" />
+    <string id="RedMoon_Event_Option_1_Hover" text="This really **is** the end!" />
+    <string id="RedMoon_Event_Option_2" text="Call your men to you" />
+    <string id="RedMoon_Event_Option_2_Hover" text="Let's talk instead of acting like idiots" />
+    <string id="RedMoon_Event_Option_3" text="Order your men to stop" />
+    <string id="RedMoon_Event_Option_3_Hover" text="This is embarrassing!" />
+    <string id="RedMoon_Event_Option_4" text="Ignore everything" />
+    <string id="RedMoon_Event_Option_4_Hover" text="Just head back to your tent" />
 
-    <!--RedMoon - Event Button-->
-    <string id="RedMoon_Event_Button_Text" text="Done" />
+    <!--RedMoon Events-->
+    <string id="RedMoon_Event_Choice_1" text="You fall to your knees and start praying to the gods. Several of your men join you in prayer. \n \nAfter praying for almost 10 minutes you realize that this won't help. You order your men to give you {goldLostToReligion} gold that you will rush to the nearest chapel. Hopefully the priests can help you. You mount your steed and ride of. You ride like a madman towards {closestSettlement} as you know the settlement has a chapel. As your steed jumps over a fence you fall off and black out.\nWhen you wake up it's morning you make your way back to camp. Only after you arrived back did you think of the chest of gold you lost." />
+    <string id="RedMoon_Event_Choice_2" text="You call your men to you. Many are panicking and you see genuine fear in their faces. You tell to stop and calm down but to no avail. They start running around like headless chickens again. You decide not to waste your time and let the fanatics do what they want so you retire to your tent.\n \nWhen you wake up the following morning you learned that {menLostToReligion} of your men left your party in the direction of {closestSettlement}. They also inform you they took {goldLostToReligion} gold from the treasury as an offering to the church. At least the fanatics are gone!" />
+    <string id="RedMoon_Event_Choice_3" text="You order your men to you! Most fall in line immediately, but some still act like idiots. You tell your men that what you are witnessing is a natural occuring phenomenon since you have witnessed this before. You explain how you saw the exact same thing a few years ago and nothing bad came out of it. You men seem to be happy to hear this. There are still some idiots praying in the back but you kick them from the party claiming you don't need mentally unstable warriors. You have several of your guards kick them out of camp!" />
+    <string id="RedMoon_Event_Choice_4" text="Nope...\n \nYou turn around and go back into your tent and straight back to bed.\n \nWhen you wake up the following morning you learned that {menLostToReligion} of your men left your party in the direction of {closestSettlement}. They also inform you they took {goldLostToReligion} gold from the treasury as an offering to the church. At least the fanatics are gone!" />
+   
+    <!--RedMoon Event Buttons-->
+    <string id="RedMoon_Event_Button_Text_1" text="Choose" />
+    <string id="RedMoon_Event_Button_Text_2" text="Done" />
+
+    <!--RedMoon Log Messages-->
+    <string id="RedMoon_Event_Msg_1" text="{heroName} lost {goldLostToReligion} gold due to a... unfortunate accident." />
+    <string id="RedMoon_Event_Msg_2" text="{heroName} lost {menLostToReligion} men and {goldLostToReligion} gold after the red moon." />
+    <string id="RedMoon_Event_Msg_3" text="{heroName} threw {menLostToReligion} men out of his party for being unworthy." />
+    <string id="RedMoon_Event_Msg_4" text="{heroName} lost {menLostToReligion} men and {goldLostToReligion} gold after ignoring the men last night." />
 
 
 
@@ -217,7 +244,7 @@
     <string id="RunawaySon_Event_Option_4" text="Kill him" />
     <string id="RunawaySon_Event_Option_4_Hover" text="It's a cruel world" />
 
-    <!--RunawaySon - Event Button-->
+    <!--RunawaySon - Event Buttons-->
     <string id="RunawaySon_Event_Button_Text_1" text="Okay" />
     <string id="RunawaySon_Event_Button_Text_2" text="Done" />
 

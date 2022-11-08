@@ -56,7 +56,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var yieldHardwood = treesChopped * MBRandom.RandomInt(1, 5);
             
-            ItemObject hardwood = MBObjectManager.Instance.GetObject<ItemObject>("hardwood");
+            var hardwood = MBObjectManager.Instance.GetObject<ItemObject>("hardwood");
             
             var eventDescription = new TextObject(
                     "{=LoggingSite_Event_Desc}While your party is traveling through the lands near {closestSettlement} you come across a forest rich in hardwood trees. " +

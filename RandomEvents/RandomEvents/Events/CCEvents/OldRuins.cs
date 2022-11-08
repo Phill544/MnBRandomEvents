@@ -144,6 +144,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "a":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                            
                             MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(killedMen, false);
                             break;
                         
