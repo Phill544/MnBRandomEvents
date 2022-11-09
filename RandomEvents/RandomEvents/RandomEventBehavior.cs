@@ -82,7 +82,7 @@ namespace CryingBuffalo.RandomEvents
 
             inGameHoursPassed++;
 
-            if (inGameHoursPassed < Settings.MenuConfig.Instance.MinimumInGameHours ||
+            if (inGameHoursPassed < Settings.MenuConfig.Instance.GS_MinimumInGameHours ||
                 (DateTime.Now - lastEventTime).Minutes < minutesForNextEvent) return;
             // Select which event should be played
             BaseEvent eventToPlay = SelectEvent();
@@ -144,7 +144,7 @@ namespace CryingBuffalo.RandomEvents
         private void ResetEventTimer()
         {
             inGameHoursPassed = 0;
-            minutesForNextEvent = MBRandom.RandomInt(Settings.MenuConfig.Instance.MinimumRealMinutes, Settings.MenuConfig.Instance.MaximumRealMinutes);
+            minutesForNextEvent = MBRandom.RandomInt(Settings.MenuConfig.Instance.GS_MaximumRealMinutes, Settings.MenuConfig.Instance.GS_MaximumRealMinutes);
             lastEventTime = DateTime.Now;
         }
 

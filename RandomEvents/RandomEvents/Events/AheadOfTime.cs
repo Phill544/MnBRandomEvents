@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
@@ -14,7 +15,7 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private List<Settlement> eligibleSettlements;
 
-		public AheadOfTime() : base(Settings.ModSettings.RandomEvents.AheadOfTimeData)
+		public AheadOfTime() : base(ModSettings.RandomEvents.AheadOfTimeData)
 		{
 		}
 
@@ -24,22 +25,28 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			if (!Hero.MainHero.Clan.Settlements.Any()) return false;
-			eligibleSettlements = new List<Settlement>();
 
-			// Out of the settlements the main hero owns, only the towns or castles have food.
-			foreach (var s in Hero.MainHero.Clan.Settlements.Where(s => (s.IsTown || s.IsCastle) && s.Town.BuildingsInProgress.Count > 0))
+			if (MenuConfig.Instance.AoT_Disable == false)
 			{
-				eligibleSettlements.Add(s);
+				if (!Hero.MainHero.Clan.Settlements.Any()) return false;
+				eligibleSettlements = new List<Settlement>();
+
+				// Out of the settlements the main hero owns, only the towns or castles have food.
+				foreach (var s in Hero.MainHero.Clan.Settlements.Where(s => (s.IsTown || s.IsCastle) && s.Town.BuildingsInProgress.Count > 0))
+				{
+					eligibleSettlements.Add(s);
+				}
+
+				return eligibleSettlements.Count > 0;
 			}
 
-			return eligibleSettlements.Count > 0;
+			return false;
 
 		}
 
 		public override void StartEvent()
 		{	
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

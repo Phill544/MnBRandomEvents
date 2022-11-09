@@ -7,14 +7,14 @@ namespace CryingBuffalo.RandomEvents.Settings
     class RandomEventSettings
     {
         [JsonProperty]
-        public BetMoneyData BetMoneyData { get; private set; } = new BetMoneyData("BetMoney", 1024f, 0.15f);
+        public BetMoneyData BetMoneyData { get; private set; } = new BetMoneyData("BetMoney", 1024f);
 
         [JsonProperty]
         public BumperCropData BumperCropData { get; private set; } = new BumperCropData("BumperCrop", 1024f, 0.75f);
 
         [JsonProperty]
         public BanditAmbushData BanditAmbushData { get; private set; } =
-            new BanditAmbushData("BanditAmbush", 1024, 0.05f, 0.15f, 50, 100);
+            new BanditAmbushData("BanditAmbush", 1024);
 
         [JsonProperty]
         public GranaryRatsData GranaryRatsData { get; private set; } = new GranaryRatsData("GranaryRats", 1024, 0.75f);
@@ -44,7 +44,7 @@ namespace CryingBuffalo.RandomEvents.Settings
         public SecretSingerData SecretSingerData { get; private set; } = new SecretSingerData("SecretSinger", 1024, 10);
 
         [JsonProperty]
-        public BeeKindData BeeKindData { get; private set; } = new BeeKindData("BeeKind", 1024, 10, 25, 0.3f);
+        public BeeKindData BeeKindData { get; private set; } = new BeeKindData("BeeKind", 1024);
 
         [JsonProperty]
         public FoodFightData FoodFightData { get; private set; } = new FoodFightData("FoodFight", 1024, 10, 20, 5);
@@ -134,7 +134,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new BeggarBeggingData("BeggarBegging",1024);
         
         public BirthdayPartyData BirthdayPartyData { get; } =
-            new BirthdayPartyData("BirthdayParty",1024, 20, 60, 3, 12, 14, 20, 5, 10, 50, 200, 15, 25, 500, 1500);
+            new BirthdayPartyData("BirthdayParty",1024);
         
         public OldRuinsData OldRuinsData { get; } =
             new OldRuinsData("OldRuins",1024, 5, 10, 400, 2000);

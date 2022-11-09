@@ -20,10 +20,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public BeggarBegging() : base(ModSettings.RandomEvents.BeggarBeggingData)
         {
-            minGoldToGive = MenuConfig.Instance.MinGoldToBeggar;
-            maxGoldToGive = MenuConfig.Instance.MinGoldToBeggar;
-            minRenownGain = MenuConfig.Instance.MinRenownGain;
-            maxRenownGain = MenuConfig.Instance.MaxRenownGain;
+            minGoldToGive = MenuConfig.Instance.BB_MinGoldToBeggar;
+            maxGoldToGive = MenuConfig.Instance.BB_MaxGoldToBeggar;
+            minRenownGain = MenuConfig.Instance.BB_MinRenownGain;
+            maxRenownGain = MenuConfig.Instance.BB_MaxRenownGain;
     
         }
 
@@ -36,15 +36,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             var status = false;
             
-            if (MenuConfig.Instance.BeggarBeggingDisable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage))
+            if (MenuConfig.Instance.BB_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage))
             {
                 status = true;
             }
-            if (MenuConfig.Instance.BeggarBeggingDisable)
+            if (MenuConfig.Instance.BB_Disable)
             {
                 status = false;
-                InformationManager.DisplayMessage(new InformationMessage("Event - BeggarBegging - is disabled.", RandomEventsSubmodule.Msg_Color));
-                
+
             }
 
             return status;
@@ -53,7 +52,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (MenuConfig.Instance.DebugMode)
+            if (MenuConfig.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }

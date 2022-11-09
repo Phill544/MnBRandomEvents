@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -10,14 +11,15 @@ namespace CryingBuffalo.RandomEvents.Events
 	public sealed class BeeKind : BaseEvent
 	{
 		private readonly int damage;
-		private readonly int reactionDamage;
 		private readonly float reactionChance;
+		private readonly int reactionDamage;
+		
 
-		public BeeKind() : base(Settings.ModSettings.RandomEvents.BeeKindData)
+		public BeeKind() : base(ModSettings.RandomEvents.BeeKindData)
 		{
-			damage = Settings.ModSettings.RandomEvents.BeeKindData.damage;
-			reactionDamage = Settings.ModSettings.RandomEvents.BeeKindData.reactionDamage;
-			reactionChance = Settings.ModSettings.RandomEvents.BeeKindData.reactionChance;
+			damage = MenuConfig.Instance.BK_damage;
+			reactionChance = MenuConfig.Instance.BK_Reaction_Chance;
+			reactionDamage = MenuConfig.Instance.BK_Add_Damage;
 		}
 
 		public override void CancelEvent()
@@ -26,12 +28,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return true;
+			return MenuConfig.Instance.BK_Disable == false;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -78,15 +80,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class BeeKindData : RandomEventData
 	{
-		public readonly int damage;
-		public readonly int reactionDamage;
-		public readonly float reactionChance;
 
-		public BeeKindData(string eventType, float chanceWeight, int damage, int reactionDamage, float reactionChance) : base(eventType, chanceWeight)
+		public BeeKindData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.damage = damage;
-			this.reactionDamage = reactionDamage;
-			this.reactionChance = reactionChance;
 		}
 
 		public override BaseEvent GetBaseEvent()

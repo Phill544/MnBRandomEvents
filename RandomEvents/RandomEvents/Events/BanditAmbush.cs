@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -18,12 +19,12 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int troopScareCount;
 		private readonly int banditCap;
 		
-		public BanditAmbush() : base(Settings.ModSettings.RandomEvents.BanditAmbushData)
+		public BanditAmbush() : base(ModSettings.RandomEvents.BanditAmbushData)
 		{
-			moneyMinPercent = Settings.ModSettings.RandomEvents.BanditAmbushData.moneyMinPercent;
-			moneyMaxPercent = Settings.ModSettings.RandomEvents.BanditAmbushData.moneyMaxPercent;
-			troopScareCount = Settings.ModSettings.RandomEvents.BanditAmbushData.troopScareCount;
-			banditCap = Settings.ModSettings.RandomEvents.BanditAmbushData.banditCap;
+			moneyMinPercent = MenuConfig.Instance.BA_MoneyMinPercent;
+			moneyMaxPercent = MenuConfig.Instance.BA_MoneyMaxPercent;
+			troopScareCount = MenuConfig.Instance.BA_TroopScareCount;
+			banditCap = MenuConfig.Instance.BA_BanditCap;
 		}
 
 		public override void CancelEvent()
@@ -32,12 +33,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MobileParty.MainParty.CurrentSettlement == null;
+			return MenuConfig.Instance.BA_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -51,8 +52,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			var eventOption3 = new TextObject("{=BanditAmbush_Event_Option_3}Intimidate them").ToString();
 			
-			var eventButtonText1 = new TextObject("{=ViolatedGirl_Event_Button_Text_1}Okay").ToString();
-			var eventButtonText2 = new TextObject("{=ViolatedGirl_Event_Button_Text_2}Done").ToString();
+			var eventButtonText1 = new TextObject("{=BanditAmbush_Event_Button_Text_1}Okay").ToString();
+			var eventButtonText2 = new TextObject("{=BanditAmbush_Event_Button_Text_2}Done").ToString();
 
 			var inquiryElements = new List<InquiryElement>
 			{
@@ -66,6 +67,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			
 			var percentMoneyLost = MBRandom.RandomFloatRanged(moneyMinPercent, moneyMaxPercent);
+			
 			var goldLost = MathF.Floor(Hero.MainHero.Gold * percentMoneyLost);
 			
 			var eventOptionAText = new TextObject(
@@ -169,17 +171,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class BanditAmbushData : RandomEventData
 	{
-		public readonly float moneyMinPercent;
-		public readonly float moneyMaxPercent;
-		public readonly int troopScareCount;
-		public readonly int banditCap;
 
-		public BanditAmbushData(string eventType, float chanceWeight, float moneyMinPercent, float moneyMaxPercent, int troopScareCount, int banditCap) : base(eventType, chanceWeight)
+		public BanditAmbushData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.moneyMinPercent = moneyMinPercent;
-			this.moneyMaxPercent = moneyMaxPercent;
-			this.troopScareCount = troopScareCount;
-			this.banditCap = banditCap;
 		}
 
 		public override BaseEvent GetBaseEvent()
