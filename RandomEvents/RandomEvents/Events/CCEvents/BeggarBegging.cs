@@ -34,19 +34,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         
         public override bool CanExecuteEvent()
         {
-            var status = false;
-            
-            if (MenuConfig.Instance.BB_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage))
-            {
-                status = true;
-            }
-            if (MenuConfig.Instance.BB_Disable)
-            {
-                status = false;
 
-            }
-
-            return status;
+            return MenuConfig.Instance.BB_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
         }
 
 
