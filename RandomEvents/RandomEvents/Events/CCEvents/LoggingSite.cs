@@ -11,9 +11,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class LoggingSite : BaseEvent
     {
-        private const string EventTitle = "The Hardwood Forest";
-
-
         private readonly int minSoldiersToGo;
         private readonly int maxSoldiersToGo;
         private readonly int minYield;
@@ -42,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (Settings.ModSettings.GeneralSettings.DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
             
             var eventTitle = new TextObject("{=LoggingSite_Title}The Hardwood Forest").ToString();
@@ -114,17 +111,17 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             if (yieldHardwood > 5 && yieldHardwood <= 15)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
             }
             else if (yieldHardwood > 15 && yieldHardwood <= 30)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
             }
             else if (yieldHardwood > 30 && yieldHardwood <= 50)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome3, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
             }
             
 

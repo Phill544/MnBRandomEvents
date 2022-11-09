@@ -44,7 +44,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (Settings.ModSettings.GeneralSettings.DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
             
             var eventTitle = new TextObject("{=UnexpectedWedding_Title}An Unexpected Wedding").ToString();
@@ -157,7 +157,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldToDonate);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
 
                             break;
                         case "b" when partyFood >= 5:
@@ -168,7 +168,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionB2Text, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-embarrassedSoliderGold);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
                             
                             break;
                         }
@@ -176,7 +176,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldToDonate);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
                             
                             break;
                         case "d":
@@ -186,7 +186,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionEText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(+raidedGold);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
                             
                             break;
                         default:

@@ -44,7 +44,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (Settings.ModSettings.GeneralSettings.DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
 
             var eventTitle = new TextObject("{=HuntingTrip_Title}The Great Hunt").ToString();
@@ -134,7 +134,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained - 3;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
             }
             else if (animalsCaught > 0 && animalsCaught <= 5)
             {
@@ -143,7 +143,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained - 2;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
             }
             else if (animalsCaught > 5 && animalsCaught <= 15)
             {
@@ -152,7 +152,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained - 1;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
             }
             else if (animalsCaught > 15 && animalsCaught <= maxCatch)
             {
@@ -161,7 +161,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
             }
             
 

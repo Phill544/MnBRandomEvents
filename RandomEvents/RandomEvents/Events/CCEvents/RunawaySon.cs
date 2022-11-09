@@ -36,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (Settings.ModSettings.GeneralSettings.DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
             
             var eventTitle = new TextObject("{=RunawaySon_Title}Runaway Son").ToString();
@@ -123,7 +123,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "d":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(goldLooted);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
                             
                             
                             break;

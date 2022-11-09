@@ -33,7 +33,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			if (Settings.ModSettings.GeneralSettings.DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 			
 			var eventTitle = new TextObject("{=WanderingLivestock_Title}Free Range Meat").ToString();
@@ -54,14 +54,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			var eventButtonText2 = new TextObject("{=WanderingLivestock_Event_Button_Text_2}Yum").ToString();
 			var eventButtonText3 = new TextObject("{=WanderingLivestock_Event_Button_Text_3}Done").ToString();
 
-			var msid = new MultiSelectionInquiryData(
-				eventTitle, 
-				eventDescription, 
-				inquiryElements, 
-				false, 
-				1, 
-				eventButtonText1, 
-				null, 
+			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null, 
 				elements => 
 				{
 					switch ((string)elements[0].Identifier)

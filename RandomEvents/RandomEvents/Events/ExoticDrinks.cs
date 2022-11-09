@@ -30,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			if (Settings.ModSettings.GeneralSettings.DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 			
 			var eventTitle = new TextObject("{=ExoticDrinks_Title}Exotic Drinks").ToString();

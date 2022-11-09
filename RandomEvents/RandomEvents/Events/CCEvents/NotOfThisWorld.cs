@@ -33,7 +33,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (Settings.ModSettings.GeneralSettings.DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
             
             var eventTitle = new TextObject("{=NotOfThisWorld_Title}Not of this world").ToString();
@@ -78,7 +78,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventPt1, true, false, eventButtonText1, null, null, null), true);
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventPt2, true, false, eventButtonText2, null, null, null), true);
             
-            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
             
 
             StopEvent();

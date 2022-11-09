@@ -40,7 +40,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (Settings.ModSettings.GeneralSettings.DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
             
             
@@ -112,7 +112,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained - 3;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
             }
             else if (fishCaught > 0 && fishCaught <= 5)
             {
@@ -121,7 +121,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained - 2;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
             }
             else if (fishCaught > 5 && fishCaught <= 15)
             {
@@ -130,7 +130,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained - 1;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
             }
             else if (fishCaught > 15 && fishCaught <= maxFishCatch)
             {
@@ -139,7 +139,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
             }
             
 

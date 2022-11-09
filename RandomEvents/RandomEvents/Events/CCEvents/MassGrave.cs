@@ -45,7 +45,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (Settings.ModSettings.GeneralSettings.DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
             
             var eventTitle = new TextObject("{=MassGrave_Title}The Mass Grave").ToString();
@@ -142,7 +142,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MobileParty.MainParty.RecentEventsMorale -= moraleLossA;
                             MobileParty.MainParty.MoraleExplained.Add(-moraleLossA);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
                             
                             break;
                         case "b":
@@ -151,7 +151,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MobileParty.MainParty.RecentEventsMorale -= moraleLossB;
                             MobileParty.MainParty.MoraleExplained.Add(-moraleLossB);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
                             
                             break;
                         case "c":
@@ -160,7 +160,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MobileParty.MainParty.RecentEventsMorale -= moraleLossC;
                             MobileParty.MainParty.MoraleExplained.Add(-moraleLossC);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
                             
                             break;
                         case "d":
@@ -169,7 +169,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MobileParty.MainParty.RecentEventsMorale -= moraleLossD;
                             MobileParty.MainParty.MoraleExplained.Add(-moraleLossD);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
                             
                             break;
                         default:

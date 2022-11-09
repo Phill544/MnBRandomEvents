@@ -39,6 +39,11 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{	
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
+			
 			try
 			{
 				var eventTitle = new TextObject("{=AheadOfTime_Title}Ahead of Time!").ToString();

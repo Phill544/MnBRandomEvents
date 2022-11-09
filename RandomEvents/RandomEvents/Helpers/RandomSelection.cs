@@ -4,12 +4,12 @@ using TaleWorlds.Core;
 
 namespace CryingBuffalo.RandomEvents.Helpers
 {
-	public static class RandomSelection<T>
-	{
-		public static T GetRandomElement(IEnumerable<T> enumerable)
-		{
-			var enumerable1 = enumerable as T[] ?? enumerable.ToArray();
-			return enumerable1.ElementAt(MBRandom.RandomInt(0, enumerable1.Count()));
-		}
-	}
+    public static class RandomSelection<T>
+    {
+        public static T GetRandomElement(IEnumerable<T> enumerable)
+        {
+            var enumerable1 = enumerable as T[] ?? enumerable.ToArray();
+            return enumerable1.ElementAt(MBRandom.RandomInt(0, enumerable1.Count()));
+        }
+    }
 }

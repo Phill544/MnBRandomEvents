@@ -29,6 +29,11 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
+			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
+			
 			try
 			{
 				int totalToHeal = MBRandom.RandomInt(minTroopsToHeal, Math.Min(maxTroopsToHeal, MobileParty.MainParty.MemberRoster.TotalWoundedRegulars));
