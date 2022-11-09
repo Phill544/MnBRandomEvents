@@ -32,8 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            
-            return true;
+            return MobileParty.MainParty.MemberRoster.TotalRegulars >= 50;
         }
 
         public override void StartEvent()

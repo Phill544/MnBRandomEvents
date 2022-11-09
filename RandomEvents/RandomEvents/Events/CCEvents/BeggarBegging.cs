@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
@@ -29,16 +30,30 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-
+        
+        
         public override bool CanExecuteEvent()
         {
+            var status = false;
             
-            return MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
+            if (MenuConfig.Instance.BeggarBeggingDisable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage))
+            {
+                status = true;
+            }
+            if (MenuConfig.Instance.BeggarBeggingDisable)
+            {
+                status = false;
+                InformationManager.DisplayMessage(new InformationMessage("Event - BeggarBegging - is disabled.", RandomEventsSubmodule.Msg_Color));
+                
+            }
+
+            return status;
         }
+
 
         public override void StartEvent()
         {
-            if (ModSettings.GeneralSettings.DebugMode)
+            if (MenuConfig.Instance.DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }

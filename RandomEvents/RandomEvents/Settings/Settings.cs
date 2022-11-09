@@ -1,8 +1,4 @@
-﻿using System.IO;
-using Newtonsoft.Json;
-using TaleWorlds.Library;
-
-namespace CryingBuffalo.RandomEvents.Settings
+﻿namespace CryingBuffalo.RandomEvents.Settings
 {
     internal static class ModSettings
     {
