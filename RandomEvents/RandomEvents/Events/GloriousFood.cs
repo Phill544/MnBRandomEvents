@@ -14,6 +14,7 @@ namespace CryingBuffalo.RandomEvents.Events
 	/// Also, using that value to stop movement means that the player cannot be interacted with.
 	/// Disabled until it can be reimplemented
 	/// Not compatible with localization.
+	/// Not included in MCM
 	/// </summary>
 	public sealed class GloriousFood : BaseEvent
 	{

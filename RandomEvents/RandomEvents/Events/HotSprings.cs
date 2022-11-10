@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
+using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
@@ -9,11 +11,13 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class HotSprings : BaseEvent
 	{
-		private readonly int moraleGain;
+		private readonly int minMoraleGain;
+		private readonly int maxMoraleGain;
 
-		public HotSprings() : base(Settings.ModSettings.RandomEvents.HotSpringsData)
+		public HotSprings() : base(ModSettings.RandomEvents.HotSpringsData)
 		{
-			moraleGain = Settings.ModSettings.RandomEvents.HotSpringsData.moraleGain;
+			minMoraleGain = MCM_MenuConfig.Instance.HS_MinMoraleGain;
+			maxMoraleGain = MCM_MenuConfig.Instance.HS_MaxMoraleGain;
 		}
 
 		public override void CancelEvent()
@@ -22,18 +26,21 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig.Instance.HS_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
+
+			var moraleGain = MBRandom.RandomInt(minMoraleGain, maxMoraleGain);
 			
 			MobileParty.MainParty.RecentEventsMorale += moraleGain;
 			MobileParty.MainParty.MoraleExplained.Add(moraleGain);
+			
 
 			for (int i = 0; i < PartyBase.MainParty.MemberRoster.Count; i++)
 			{
@@ -75,11 +82,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class HotSpringsData : RandomEventData
 	{
-		public readonly int moraleGain;
 
-		public HotSpringsData(string eventType, float chanceWeight, int moraleGain) : base(eventType, chanceWeight)
+		public HotSpringsData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.moraleGain = moraleGain;
 		}
 
 		public override BaseEvent GetBaseEvent()

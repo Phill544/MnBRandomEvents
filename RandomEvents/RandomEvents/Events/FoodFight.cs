@@ -15,13 +15,15 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly int minFoodLoss;
 		private readonly int maxFoodLoss;
-		private readonly int moraleLoss;
+		private readonly int minMoraleLoss;
+		private readonly int maxMoraleLoss;
 
 		public FoodFight() : base(ModSettings.RandomEvents.FoodFightData)
 		{
-			minFoodLoss = ModSettings.RandomEvents.FoodFightData.minFoodLoss;
-			maxFoodLoss = ModSettings.RandomEvents.FoodFightData.maxFoodLoss;
-			moraleLoss = ModSettings.RandomEvents.FoodFightData.moraleLoss;
+			minFoodLoss = MCM_MenuConfig.Instance.FoF_MinFoodLoss;
+			maxFoodLoss = MCM_MenuConfig.Instance.FoF_MaxFoodLoss;
+			minMoraleLoss = MCM_MenuConfig.Instance.FoF_MinMoraleLoss;
+			maxMoraleLoss = MCM_MenuConfig.Instance.FoF_MaxMoraleLoss;
 		}
 
 		public override void CancelEvent()
@@ -30,15 +32,17 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return (MobileParty.MainParty.ItemRoster.Any(item => item.EquipmentElement.Item.IsFood)) && MobileParty.MainParty.MemberRoster.TotalManCount > 1;
+			return  MCM_MenuConfig.Instance.FoF_Disable == false && MobileParty.MainParty.MemberRoster.TotalManCount > 1 && (MobileParty.MainParty.ItemRoster.Any(item => item.EquipmentElement.Item.IsFood));
 		}
 
 		public override void StartEvent()
 		{
-			if (ModSettings.GeneralSettings.DebugMode)
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
+			
+			var moraleLoss = MBRandom.RandomInt(minMoraleLoss, maxMoraleLoss);
 			
 			var eventTitle = new TextObject("{=FoodFight_Title}Food Fight!").ToString();
 			
@@ -148,15 +152,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class FoodFightData : RandomEventData
 	{
-		public readonly int minFoodLoss;
-		public readonly int maxFoodLoss;
-		public readonly int moraleLoss;
 
-		public FoodFightData(string eventType, float chanceWeight, int minFoodLoss, int maxFoodLoss, int moraleLoss) : base(eventType, chanceWeight)
+		public FoodFightData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.minFoodLoss = minFoodLoss;
-			this.maxFoodLoss = maxFoodLoss;
-			this.moraleLoss = moraleLoss;
 		}
 
 		public override BaseEvent GetBaseEvent()

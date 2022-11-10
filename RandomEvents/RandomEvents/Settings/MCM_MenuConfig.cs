@@ -153,7 +153,7 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         #endregion
 
-        #region Fishing Spot
+        #region Fishing Spot - Variables
 
         public bool FS_Disable { get; private set; }
         public int FS_MinSoldiersToGo { get; private set; }
@@ -163,7 +163,47 @@ namespace CryingBuffalo.RandomEvents.Settings
         public int FS_MaxMoraleGain { get; private set; }
 
         #endregion
+
+        #region Food Fight - Variables
+
+        public bool FoF_Disable { get; private set; }
+        public int FoF_MinFoodLoss { get; private set; }
+        public int FoF_MaxFoodLoss { get; private set; }
+        public int FoF_MinMoraleLoss { get; private set; }
+        public int FoF_MaxMoraleLoss { get; private set; }
+
+        #endregion
         
+        #region Granary Rats - Variables
+        
+        public bool GR_Disable { get; private set; }
+        public float GR_MinFoodLoss { get; private set; }
+        public float GR_MaxFoodLoss { get; private set; }
+        
+        #endregion
+        
+        #region Hot Springs - Variables
+        
+        public bool HS_Disable { get; private set; }
+        public int HS_MinMoraleGain { get; private set; }
+        public int HS_MaxMoraleGain { get; private set; }
+        
+        #endregion
+
+        #region Hunting Trip - Variables
+
+        public bool HT_Disable { get; private set; }
+        public int HT_MinSoldiersToGo { get; private set; }
+        public int HT_MaxSoldiersToGo { get; private set; }
+        public int HT_MaxCatch { get; private set; }
+        public int HT_MinMoraleGain { get; private set; }
+        public int HT_MaxMoraleGain { get; private set; }
+        public int HT_MinYieldMultiplier { get; private set; }
+        public int HT_MaxYieldMultiplier { get; private set; }
+        
+
+        #endregion
+
         #endregion
 
 
@@ -414,6 +454,68 @@ namespace CryingBuffalo.RandomEvents.Settings
 
             #endregion
             
+            #region Food Fight - Strings
+
+            var fof_heading = new TextObject("{=mcm_fof_heading}Food Fight").ToString();
+            var fof1_text = new TextObject("{=mcm_fof1_text}1. Min Soldiers").ToString();
+            var fof1_hint = new TextObject("{=mcm_fof1_hint}Minimum soldiers to go fishing.").ToString();
+            var fof2_text = new TextObject("{=mcm_fof2_text}2. Max Soldiers").ToString();
+            var fof2_hint = new TextObject("{=mcm_fof2_hint}Maximum soldiers to go fishing.").ToString();
+            var fof3_text = new TextObject("{=mcm_fof3_text}3. Max Fish Catch").ToString();
+            var fof3_hint = new TextObject("{=mcm_fof3_hint}Minimum amount of fish to catch.").ToString();
+            var fof4_text = new TextObject("{=mcm_fof4_text}4. Min Morale Gained").ToString();
+            var fof4_hint = new TextObject("{=mcm_fof4_hint}Minimum amount of morale gained.").ToString();
+            var fof5_text = new TextObject("{=mcm_fof5_text}5. Deactivate event").ToString();
+            var fof5_hint = new TextObject("{=mcm_fof5_hint}If you dont want this event to show up you can deactivate it.").ToString();
+
+            #endregion
+            
+            #region Granary Rats - Strings
+            
+            var gr_heading = new TextObject("{=mcm_gr_heading}Bee Kind").ToString();
+            var gr1_text = new TextObject("{=mcm_gr1_text}1. Min Food loss percent").ToString();
+            var gr1_hint = new TextObject("{=mcm_gr1_hint}Minimum amount of food lost during this event.").ToString();
+            var gr2_text = new TextObject("{=mcm_gr2_text}2. Max Food loss percent").ToString();
+            var gr2_hint = new TextObject("{=mcm_gr2_hint}Maximum amount of food lost during this event.").ToString();
+            var gr3_text = new TextObject("{=mcm_gr3_text}3. Deactivate event").ToString();
+            var gr3_hint = new TextObject("{=mcm_gr3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            
+            #endregion
+            
+            #region Hot Springs - Strings
+            
+            var hs_heading = new TextObject("{=mcm_hs_heading}Hot Springs").ToString();
+            var hs1_text = new TextObject("{=mcm_hs1_text}1. Min Morale Gain").ToString();
+            var hs1_hint = new TextObject("{=mcm_hs1_hint}Minimum amount of morale gained during this event.").ToString();
+            var hs2_text = new TextObject("{=mcm_hs2_text}2. Max Morale Gain").ToString();
+            var hs2_hint = new TextObject("{=mcm_hs2_hint}Maximum amount morale gained lost during this event.").ToString();
+            var hs3_text = new TextObject("{=mcm_hs3_text}3. Deactivate event").ToString();
+            var hs3_hint = new TextObject("{=mcm_hs3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            
+            #endregion
+            
+            #region Hunting Trip - Strings
+
+            var ht_heading = new TextObject("{=mcm_ht_heading}Hunting Trip").ToString();
+            var ht1_text = new TextObject("{=mcm_ht1_text}1. Min Soldiers").ToString();
+            var ht1_hint = new TextObject("{=mcm_ht1_hint}Minimum soldiers to go hunting.").ToString();
+            var ht2_text = new TextObject("{=mcm_ht2_text}2. Max Soldiers").ToString();
+            var ht2_hint = new TextObject("{=mcm_ht2_hint}Maximum soldiers to go hunting.").ToString();
+            var ht3_text = new TextObject("{=mcm_ht3_text}3. Max Catch").ToString();
+            var ht3_hint = new TextObject("{=mcm_ht3_hint}Minimum amount of prey to catch.").ToString();
+            var ht4_text = new TextObject("{=mcm_ht4_text}4. Min Morale Gained").ToString();
+            var ht4_hint = new TextObject("{=mcm_ht4_hint}Minimum amount of morale gained.").ToString();
+            var ht5_text = new TextObject("{=mcm_ht5_text}5. Max Morale Gained").ToString();
+            var ht5_hint = new TextObject("{=mcm_ht5_hint}Maximum amount of morale gained.").ToString();
+            var ht6_text = new TextObject("{=mcm_ht6_text}6. Min Yield Multiplier").ToString();
+            var ht6_hint = new TextObject("{=mcm_ht6_hint}The amount of prey you catch is multiplied by this to get meat resources.").ToString();
+            var ht7_text = new TextObject("{=mcm_ht7_text}7. Max Yield Multiplier").ToString();
+            var ht7_hint = new TextObject("{=mcm_ht7_hint}The amount of prey you catch is multiplied by this to get meat resources.").ToString();
+            var ht8_text = new TextObject("{=mcm_ht8_text}8. Deactivate event").ToString();
+            var ht8_hint = new TextObject("{=mcm_ht8_hint}If you dont want this event to show up you can deactivate it.").ToString();
+
+            #endregion
+            
             #endregion
             
             
@@ -655,7 +757,7 @@ namespace CryingBuffalo.RandomEvents.Settings
                 
                 #region Fishing Spot - Builder
                 
-                .CreateGroup(ed_heading, groupBuilder => groupBuilder
+                .CreateGroup(fs_heading, groupBuilder => groupBuilder
                     .AddInteger("FS1", fs1_text,2,15, new ProxyRef<int>(() => FS_MinSoldiersToGo, o => FS_MinSoldiersToGo = o), integerBuilder => integerBuilder
                         .SetHintText(fs1_hint))
                     .AddInteger("FS2", fs2_text,2,15, new ProxyRef<int>(() => FS_MaxSoldiersToGo, o => FS_MaxSoldiersToGo = o), integerBuilder => integerBuilder
@@ -666,11 +768,79 @@ namespace CryingBuffalo.RandomEvents.Settings
                         .SetHintText(fs4_hint))
                     .AddInteger("FS5", fs5_text,5,30, new ProxyRef<int>(() => FS_MaxMoraleGain, o => FS_MaxMoraleGain = o), integerBuilder => integerBuilder
                         .SetHintText(fs5_hint))
-                    .AddBool("FS6", fs6_text, new ProxyRef<bool>(() => FSF_Disable, o => FSF_Disable = o), boolBuilder => boolBuilder
+                    .AddBool("FS6", fs6_text, new ProxyRef<bool>(() => FS_Disable, o => FS_Disable = o), boolBuilder => boolBuilder
                         .SetHintText(fs6_hint))
+                    )
                     
                 #endregion
+                
+                #region Food Fight - Builder
+                
+                .CreateGroup(fof_heading, groupBuilder => groupBuilder
+                        .AddInteger("FoF1", fof1_text,2,15, new ProxyRef<int>(() => FoF_MinFoodLoss, o => FoF_MinFoodLoss = o), integerBuilder => integerBuilder
+                            .SetHintText(fof1_hint))
+                        .AddInteger("FoF2", fof2_text,2,15, new ProxyRef<int>(() => FoF_MaxFoodLoss, o => FoF_MaxFoodLoss = o), integerBuilder => integerBuilder
+                            .SetHintText(fof2_hint))
+                        .AddInteger("FoF3", fof3_text,5,30, new ProxyRef<int>(() => FoF_MinMoraleLoss, o => FoF_MinMoraleLoss = o), integerBuilder => integerBuilder
+                            .SetHintText(fof3_hint))
+                        .AddInteger("FoF4", fof4_text,5,30, new ProxyRef<int>(() => FoF_MaxMoraleLoss, o => FoF_MaxMoraleLoss = o), integerBuilder => integerBuilder
+                            .SetHintText(fof4_hint))
+                        .AddBool("FoF5", fof5_text, new ProxyRef<bool>(() => FoF_Disable, o => FoF_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(fof5_hint))
+                    )
+                    
+                    #endregion
+                    
+                #region Granary Rats - Builder
+                
+                .CreateGroup(gr_heading, groupBuilder => groupBuilder
+                    .AddFloatingInteger("GR1", gr1_text,20,90, new ProxyRef<float>(() => GR_MinFoodLoss, o => GR_MinFoodLoss = o), floatBuilder => floatBuilder
+                        .SetHintText(gr1_hint))
+                    .AddFloatingInteger("GR2", gr2_text,20,90, new ProxyRef<float>(() => GR_MaxFoodLoss, o => GR_MaxFoodLoss = o), floatBuilder => floatBuilder
+                        .SetHintText(gr2_hint))
+                    .AddBool("GR3", gr3_text, new ProxyRef<bool>(() => GR_Disable, o => GR_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(gr3_hint))
+                    )
+                
+                
+                #endregion
+                
+                #region Granary Rats - Builder
+                
+                .CreateGroup(hs_heading, groupBuilder => groupBuilder
+                        .AddInteger("HS1", hs1_text,5,30, new ProxyRef<int>(() => HS_MinMoraleGain, o => HS_MinMoraleGain = o), integerBuilder => integerBuilder
+                            .SetHintText(hs1_hint))
+                        .AddInteger("HS2", hs2_text,5,30, new ProxyRef<int>(() => HS_MaxMoraleGain, o => HS_MaxMoraleGain = o), integerBuilder => integerBuilder
+                            .SetHintText(hs2_hint))
+                        .AddBool("HS2", hs3_text, new ProxyRef<bool>(() => HS_Disable, o => HS_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(hs3_hint))
+                    )
+                
+                
+                #endregion
+                
+                #region Hunting Trip - Builder
+                
+                .CreateGroup(ht_heading, groupBuilder => groupBuilder
+                    .AddInteger("HT1", ht1_text,2,15, new ProxyRef<int>(() => HT_MinSoldiersToGo, o => HT_MinSoldiersToGo = o), integerBuilder => integerBuilder
+                        .SetHintText(ht1_hint))
+                    .AddInteger("HT2", ht2_text,2,15, new ProxyRef<int>(() => HT_MaxSoldiersToGo, o => HT_MaxSoldiersToGo = o), integerBuilder => integerBuilder
+                        .SetHintText(ht2_hint))
+                    .AddInteger("HT3", ht3_text,10,30, new ProxyRef<int>(() => HT_MaxCatch, o => HT_MaxCatch = o), integerBuilder => integerBuilder
+                        .SetHintText(ht3_hint))
+                    .AddInteger("HT4", ht4_text,5,30, new ProxyRef<int>(() => HT_MinMoraleGain, o => HT_MinMoraleGain = o), integerBuilder => integerBuilder
+                        .SetHintText(ht4_hint))
+                    .AddInteger("HT5", ht5_text,5,30, new ProxyRef<int>(() => HT_MaxMoraleGain, o => HT_MaxMoraleGain = o), integerBuilder => integerBuilder
+                        .SetHintText(ht5_hint))
+                    .AddInteger("HT6", ht6_text,2,7, new ProxyRef<int>(() => HT_MinYieldMultiplier, o => HT_MinYieldMultiplier = o), integerBuilder => integerBuilder
+                        .SetHintText(ht6_hint))
+                    .AddInteger("HT7", ht7_text,2,7, new ProxyRef<int>(() => HT_MaxYieldMultiplier, o => HT_MaxYieldMultiplier = o), integerBuilder => integerBuilder
+                        .SetHintText(ht7_hint))
+                    .AddBool("HT8", ht8_text, new ProxyRef<bool>(() => HT_Disable, o => HT_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(ht8_hint))
 
+                #endregion
+                
                 #endregion
                 
                 );
@@ -831,12 +1001,51 @@ namespace CryingBuffalo.RandomEvents.Settings
             
             #region Fishing Spot
             
-            Instance.FSF_Disable = false;
+            Instance.FS_Disable = false;
             Instance.FS_MinSoldiersToGo = 3;
             Instance.FS_MaxSoldiersToGo = 12;
             Instance.FS_MaxFishCatch = 20;
             Instance.FS_MinMoraleGain = 7;
             Instance.FS_MaxMoraleGain = 20;
+
+            #endregion
+            
+            #region Food Fight
+            
+            Instance.FoF_Disable = false;
+            Instance.FoF_MinFoodLoss = 5;
+            Instance.FoF_MaxFoodLoss = 30;
+            Instance.FoF_MinMoraleLoss = 5;
+            Instance.FoF_MaxMoraleLoss = 20;
+
+            #endregion
+
+            #region Granary Rats
+
+            Instance.GR_Disable = false;
+            Instance.GR_MinFoodLoss = 0.35f;
+            Instance.GR_MaxFoodLoss = 0.75f;
+
+            #endregion
+            
+            #region Hot Springs
+
+            Instance.HS_Disable = false;
+            Instance.HS_MinMoraleGain = 10;
+            Instance.HS_MaxMoraleGain = 25;
+
+            #endregion
+            
+            #region Hunting Trip
+            
+            Instance.HT_Disable = false;
+            Instance.HT_MinSoldiersToGo = 3;
+            Instance.HT_MaxSoldiersToGo = 12;
+            Instance.HT_MaxCatch = 20;
+            Instance.HT_MinMoraleGain = 7;
+            Instance.HT_MaxMoraleGain = 20;
+            Instance.HT_MinYieldMultiplier = 3;
+            Instance.HT_MaxYieldMultiplier = 6;
 
             #endregion
 

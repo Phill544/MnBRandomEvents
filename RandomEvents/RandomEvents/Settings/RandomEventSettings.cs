@@ -32,22 +32,28 @@ namespace CryingBuffalo.RandomEvents.Settings
             new ChattingCommandersData("ChattingCommanders", 1024);
 
         //[JsonProperty]
-        //public GloriousFoodData GloriousFoodData { get; private set; } = new GloriousFoodData("GloriousFood", 1024, 5, 25, 5);
+        //public GloriousFoodData GloriousFoodData { get; private set; } =
+        //new GloriousFoodData("GloriousFood", 1024, 5, 25, 5);
 
         [JsonProperty]
         public DiseasedCityData DiseasedCityData { get; private set; } =
             new DiseasedCityData("DiseasedCity", 1024);
 
-        [JsonProperty] public MomentumData MomentumData { get; private set; } = new MomentumData("Momentum", 1024);
+        [JsonProperty] 
+        public MomentumData MomentumData { get; private set; } = 
+            new MomentumData("Momentum", 1024);
 
         [JsonProperty]
-        public SecretSingerData SecretSingerData { get; private set; } = new SecretSingerData("SecretSinger", 1024, 10);
+        public SecretSingerData SecretSingerData { get; private set; } = 
+            new SecretSingerData("SecretSinger", 1024, 10);
 
         [JsonProperty]
-        public BeeKindData BeeKindData { get; private set; } = new BeeKindData("BeeKind", 1024);
+        public BeeKindData BeeKindData { get; private set; } = 
+            new BeeKindData("BeeKind", 1024);
 
         [JsonProperty]
-        public FoodFightData FoodFightData { get; private set; } = new FoodFightData("FoodFight", 1024, 10, 20, 5);
+        public FoodFightData FoodFightData { get; private set; } = 
+            new FoodFightData("FoodFight", 1024);
 
         [JsonProperty]
         public PerfectWeatherData PerfectWeatherData { get; private set; } =
@@ -58,7 +64,8 @@ namespace CryingBuffalo.RandomEvents.Settings
             new WanderingLivestockData("WanderingLivestock", 1024, 5, 10);
 
         [JsonProperty]
-        public EagerTroopsData EagerTroopsData { get; private set; } = new EagerTroopsData("EagerTroops", 1024);
+        public EagerTroopsData EagerTroopsData { get; private set; } = 
+            new EagerTroopsData("EagerTroops", 1024);
 
         [JsonProperty]
         public SpeedyRecoveryData SpeedyRecoveryData { get; private set; } =
@@ -73,7 +80,8 @@ namespace CryingBuffalo.RandomEvents.Settings
             new ExoticDrinksData("ExoticDrinks", 1024);
 
         [JsonProperty]
-        public AheadOfTimeData AheadOfTimeData { get; private set; } = new AheadOfTimeData("AheadOfTime", 1024);
+        public AheadOfTimeData AheadOfTimeData { get; private set; } = 
+            new AheadOfTimeData("AheadOfTime", 1024);
 
         [JsonProperty]
         public SuccessfulDeedsData SuccessfulDeedsData { get; private set; } =
@@ -84,14 +92,16 @@ namespace CryingBuffalo.RandomEvents.Settings
             new BunchOfPrisonersData("BunchOfPrisoners", 1024);
 
         [JsonProperty]
-        public UndercookedData UndercookedData { get; private set; } = new UndercookedData("Undercooked", 1024, 2, 20);
+        public UndercookedData UndercookedData { get; private set; } = 
+            new UndercookedData("Undercooked", 1024, 2, 20);
 
         [JsonProperty]
         public LookUpData LookUpData { get; private set; } =
             new LookUpData("LookUp", 1024, 0.25f, 0.1f, 5, 75, 250, 5000);
 
         [JsonProperty]
-        public HotSpringsData HotSpringsData { get; private set; } = new HotSpringsData("HotSprings", 1024, 15);
+        public HotSpringsData HotSpringsData { get; private set; } = 
+            new HotSpringsData("HotSprings", 1024);
         
         [JsonProperty]
         public SupernaturalEncounterData SupernaturalEncounterData { get; private set; } =
@@ -116,7 +126,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new FishingSpotData("FishingSpot", 1024 );
         
         public HuntingTripData HuntingTripData { get; } =
-            new HuntingTripData("HuntingTrip", 1024, 1, 10, 5, 5, 20, 2, 5 );
+            new HuntingTripData("HuntingTrip", 1024);
         
         public LoggingSiteData LoggingSiteData { get; } =
             new LoggingSiteData("LoggingSite", 1024, 5, 20, 10, 25);

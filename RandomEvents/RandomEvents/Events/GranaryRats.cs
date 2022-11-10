@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
@@ -12,11 +13,13 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class GranaryRats : BaseEvent
 	{ 
-		private readonly float foodLossPercent;
+		private readonly float MinFoodLossPercent;
+		private readonly float MaxFoodLossPercent;
 
-		public GranaryRats() : base(Settings.ModSettings.RandomEvents.GranaryRatsData)
+		public GranaryRats() : base(ModSettings.RandomEvents.GranaryRatsData)
 		{
-			foodLossPercent = Settings.ModSettings.RandomEvents.GranaryRatsData.foodLossPercent;
+			MinFoodLossPercent = MCM_MenuConfig.Instance.GR_MinFoodLoss;
+			MaxFoodLossPercent = MCM_MenuConfig.Instance.GR_MaxFoodLoss;
 		}
 
 		public override void CancelEvent()
@@ -25,31 +28,28 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return Hero.MainHero.Clan.Settlements.Any();
+			return MCM_MenuConfig.Instance.GR_Disable == false && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 			try
 			{
-				// The list of settlements that are able to have food added to them
+
+				var foodLossPercent = MBRandom.RandomFloatRanged(MinFoodLossPercent, MaxFoodLossPercent);
+				
 				List<Settlement> eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
-
-				// Out of the settlements the main hero owns, only the towns or castles have food.
-
-				// Randomly pick one of the eligible settlements
+				
 				int index = MBRandom.RandomInt(0, eligibleSettlements.Count);
-
-				// Grab the winning settlement and add food to it
+				
 				Settlement infestedSettlement = eligibleSettlements[index];
 
 				infestedSettlement.Town.FoodStocks -= MathF.Abs(infestedSettlement.Town.FoodChange * foodLossPercent);
-
-				// set the name to display
+				
 				var ratSettlement = infestedSettlement.Name.ToString();
 				
 				var eventTitle = new TextObject("{=GranaryRats_Title}Rats in the granary!").ToString();
@@ -58,9 +58,17 @@ namespace CryingBuffalo.RandomEvents.Events
 					.SetTextVariable("ratSettlement", ratSettlement)
 					.ToString();
 				
+				var eventMsg1 =new TextObject(
+						"{=GranaryRats_Event_Msg_1}{ratSettlement} lost {foodLossPercent}% of it's food to rats in the granary.")
+					.SetTextVariable("ratSettlement", ratSettlement)
+					.SetTextVariable("foodLossPercent", foodLossPercent)
+					.ToString();
+				
 				var eventButtonText = new TextObject("{=GranaryRats_Event_Button_Text}Done").ToString();
 
 				InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
+				
+				InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
 			}
 			catch (Exception ex)
 			{

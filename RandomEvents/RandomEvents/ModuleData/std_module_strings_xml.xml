@@ -552,6 +552,7 @@
     <string id="GranaryRats_Title" text="Rats in the granary!" />
     <string id="GranaryRats_Event_Text" text="You have been informed that {ratSettlement} had an infestation of rats that went unchecked... The rats won't starve this month, but your peasants might." />
     <string id="GranaryRats_Event_Button_Text" text="Done" />
+    <string id="GranaryRats_Event_Msg_1" text="{ratSettlement} lost {foodLossPercent}% of it's food to rats in the granary." />
 
 
 
