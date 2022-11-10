@@ -134,6 +134,35 @@ namespace CryingBuffalo.RandomEvents.Settings
         public int ED_MaxPrice{ get; private set; }
 
         #endregion
+
+        #region Fallen Soldier Family - Variables
+
+        public bool FSF_Disable { get; private set; }
+        public int FSF_MinFamilyCompensation { get; private set; }
+        public int FSF_MaxFamilyCompensation { get; private set; }
+        public int FSF_MinGoldLooted { get; private set; }
+        public int FSF_MaxGoldLooted { get; private set; }
+
+        #endregion
+        
+        #region Fantastic Fighters - Variables
+        
+        public bool FF_Disable { get; private set; }
+        public int FF_MinRenownGain { get; private set; }
+        public int FF_MaxRenownGain { get; private set; }
+        
+        #endregion
+
+        #region Fishing Spot
+
+        public bool FS_Disable { get; private set; }
+        public int FS_MinSoldiersToGo { get; private set; }
+        public int FS_MaxSoldiersToGo { get; private set; }
+        public int FS_MaxFishCatch { get; private set; }
+        public int FS_MinMoraleGain { get; private set; }
+        public int FS_MaxMoraleGain { get; private set; }
+
+        #endregion
         
         #endregion
 
@@ -336,6 +365,52 @@ namespace CryingBuffalo.RandomEvents.Settings
             var ed2_hint = new TextObject("{=mcm_ed2_hint}Maximum price for the drink.").ToString();
             var ed3_text = new TextObject("{=mcm_ed3_text}3. Deactivate event").ToString();
             var ed3_hint = new TextObject("{=mcm_ed3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+
+            #endregion
+            
+            #region Fallen Soldier Family - Strings
+            
+            var fsf_heading = new TextObject("{=mcm_fsf_heading}Fallen Soldier Family").ToString();
+            var fsf1_text = new TextObject("{=mcm_fsf1_text}1. Min Compensation").ToString();
+            var fsf1_hint = new TextObject("{=mcm_fsf1_hint}Minimum amount compensation to the family.").ToString();
+            var fsf2_text = new TextObject("{=mcm_fsf2_text}2. Max Compensation").ToString();
+            var fsf2_hint = new TextObject("{=mcm_fsf2_hint}Maximum amount compensation to the family").ToString();
+            var fsf3_text = new TextObject("{=mcm_fsf3_text}3. Min Loot").ToString();
+            var fsf3_hint = new TextObject("{=mcm_fsf3_hint}Minimum amount of gold looted.").ToString();
+            var fsf4_text = new TextObject("{=mcm_fsf4_text}4. Max Loot").ToString();
+            var fsf4_hint = new TextObject("{=mcm_fsf4_hint}Maximum amount of gold looted.").ToString();
+            var fsf5_text = new TextObject("{=mcm_fsf5_text}5. Deactivate event").ToString();
+            var fsf5_hint = new TextObject("{=mcm_fsf5_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            
+            #endregion
+            
+            #region Fantastic Fighters - Strings
+
+            var ff_heading = new TextObject("{=mcm_ff_heading}Fantastic Fighters").ToString();
+            var ff1_text = new TextObject("{=mcm_ff1_text}1. Min Renown Gained").ToString();
+            var ff1_hint = new TextObject("{=mcm_ff1_hint}Minimum amount of renown gained.").ToString();
+            var ff2_text = new TextObject("{=mcm_ff2_text}2. Max Renown Gained").ToString();
+            var ff2_hint = new TextObject("{=mcm_ff2_hint}Maximum amount of renown gained.").ToString();
+            var ff3_text = new TextObject("{=mcm_ff3_text}3. Deactivate event").ToString();
+            var ff3_hint = new TextObject("{=mcm_ff3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+
+            #endregion
+            
+            #region Fishing Spot - Strings
+
+            var fs_heading = new TextObject("{=mcm_fs_heading}Fishing Spot").ToString();
+            var fs1_text = new TextObject("{=mcm_fs1_text}1. Min Soldiers").ToString();
+            var fs1_hint = new TextObject("{=mcm_fs1_hint}Minimum soldiers to go fishing.").ToString();
+            var fs2_text = new TextObject("{=mcm_fs2_text}2. Max Soldiers").ToString();
+            var fs2_hint = new TextObject("{=mcm_fs2_hint}Maximum soldiers to go fishing.").ToString();
+            var fs3_text = new TextObject("{=mcm_fs3_text}3. Max Fish Catch").ToString();
+            var fs3_hint = new TextObject("{=mcm_fs3_hint}Minimum amount of fish to catch.").ToString();
+            var fs4_text = new TextObject("{=mcm_fs4_text}4. Min Morale Gained").ToString();
+            var fs4_hint = new TextObject("{=mcm_fs4_hint}Minimum amount of morale gained.").ToString();
+            var fs5_text = new TextObject("{=mcm_fs5_text}5. Max Morale Gained").ToString();
+            var fs5_hint = new TextObject("{=mcm_fs5_hint}Maximum amount of morale gained.").ToString();
+            var fs6_text = new TextObject("{=mcm_fs6_text}6. Deactivate event").ToString();
+            var fs6_hint = new TextObject("{=mcm_fs6_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
             
@@ -544,9 +619,58 @@ namespace CryingBuffalo.RandomEvents.Settings
                             .SetHintText(ed2_hint))
                         .AddBool("ED3", ed3_text, new ProxyRef<bool>(() => ED_Disable, o => ED_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(ed3_hint))
+                    )
 
                 #endregion
                 
+                #region Fallen Soldier Family - Builder
+                
+                .CreateGroup(fsf_heading, groupBuilder => groupBuilder
+                        .AddInteger("FSF1", fsf1_text,500,2500, new ProxyRef<int>(() => FSF_MinFamilyCompensation, o => FSF_MinFamilyCompensation = o), integerBuilder => integerBuilder
+                            .SetHintText(fsf1_hint))
+                        .AddInteger("FSF2", fsf2_text,500,2500, new ProxyRef<int>(() => FSF_MaxFamilyCompensation, o => FSF_MaxFamilyCompensation = o), integerBuilder => integerBuilder
+                            .SetHintText(fsf2_hint))
+                        .AddInteger("FSF3", fsf3_text,500,1500, new ProxyRef<int>(() => FSF_MinGoldLooted, o => FSF_MinGoldLooted = o), integerBuilder => integerBuilder
+                            .SetHintText(fsf3_hint))
+                        .AddInteger("FSF4", fsf4_text,500,1500, new ProxyRef<int>(() => FSF_MaxGoldLooted, o => FSF_MaxGoldLooted = o), integerBuilder => integerBuilder
+                            .SetHintText(fsf4_hint))
+                        .AddBool("FSF5", fsf5_text, new ProxyRef<bool>(() => FSF_Disable, o => FSF_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(fsf5_hint))
+                    )
+
+                #endregion
+                
+                #region Fantastic Fighters - Builder
+                
+                .CreateGroup(ff_heading, groupBuilder => groupBuilder
+                    .AddInteger("FF1", ff1_text,10,100, new ProxyRef<int>(() => FF_MinRenownGain, o => FF_MinRenownGain = o), integerBuilder => integerBuilder
+                        .SetHintText(ff1_hint))
+                    .AddInteger("FF2", ff2_text,10,100, new ProxyRef<int>(() => FF_MaxRenownGain, o => FF_MaxRenownGain = o), integerBuilder => integerBuilder
+                        .SetHintText(ff2_hint))
+                    .AddBool("FF3", ff3_text, new ProxyRef<bool>(() => FF_Disable, o => FF_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(ff3_hint))
+                    )
+
+                #endregion
+                
+                #region Fishing Spot - Builder
+                
+                .CreateGroup(ed_heading, groupBuilder => groupBuilder
+                    .AddInteger("FS1", fs1_text,2,15, new ProxyRef<int>(() => FS_MinSoldiersToGo, o => FS_MinSoldiersToGo = o), integerBuilder => integerBuilder
+                        .SetHintText(fs1_hint))
+                    .AddInteger("FS2", fs2_text,2,15, new ProxyRef<int>(() => FS_MaxSoldiersToGo, o => FS_MaxSoldiersToGo = o), integerBuilder => integerBuilder
+                        .SetHintText(fs2_hint))
+                    .AddInteger("FS3", fs3_text,10,30, new ProxyRef<int>(() => FS_MaxFishCatch, o => FS_MaxFishCatch = o), integerBuilder => integerBuilder
+                        .SetHintText(fs3_hint))
+                    .AddInteger("FS4", fs4_text,5,30, new ProxyRef<int>(() => FS_MinMoraleGain, o => FS_MinMoraleGain = o), integerBuilder => integerBuilder
+                        .SetHintText(fs4_hint))
+                    .AddInteger("FS5", fs5_text,5,30, new ProxyRef<int>(() => FS_MaxMoraleGain, o => FS_MaxMoraleGain = o), integerBuilder => integerBuilder
+                        .SetHintText(fs5_hint))
+                    .AddBool("FS6", fs6_text, new ProxyRef<bool>(() => FSF_Disable, o => FSF_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(fs6_hint))
+                    
+                #endregion
+
                 #endregion
                 
                 );
@@ -686,6 +810,37 @@ namespace CryingBuffalo.RandomEvents.Settings
             Instance.ED_MaxPrice = 6000;
 
             #endregion
+            
+            #region Fallen Soldier Family
+            
+            Instance.FSF_Disable = false;
+            Instance.FSF_MinFamilyCompensation = 750;
+            Instance.FSF_MaxFamilyCompensation = 1750;
+            Instance.FSF_MinGoldLooted = 750;
+            Instance.FSF_MaxGoldLooted = 1500;
+
+            #endregion
+            
+            #region Fantastic Fighters
+            
+            Instance.FF_Disable = false;
+            Instance.FF_MinRenownGain = 25;
+            Instance.FF_MaxRenownGain = 75;
+
+            #endregion
+            
+            #region Fishing Spot
+            
+            Instance.FSF_Disable = false;
+            Instance.FS_MinSoldiersToGo = 3;
+            Instance.FS_MaxSoldiersToGo = 12;
+            Instance.FS_MaxFishCatch = 20;
+            Instance.FS_MinMoraleGain = 7;
+            Instance.FS_MaxMoraleGain = 20;
+
+            #endregion
+
+
 
             #endregion
         }
