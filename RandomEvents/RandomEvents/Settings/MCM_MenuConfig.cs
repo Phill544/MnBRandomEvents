@@ -6,46 +6,68 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Settings
 {
-    public class MenuConfig : IDisposable
+    public class MCM_MenuConfig : IDisposable
     {
-        private static MenuConfig _instance;
+        private static MCM_MenuConfig _instance;
 
         private FluentGlobalSettings globalSettings;
 
+        #region Variables
+        
+        #region General Settings - Variables
+        
         public bool GS_FirstRunDone { get; set; }
         public bool GS_DebugMode { get; private set; }
         public int GS_MinimumInGameHours { get; private set; }
         public int GS_MinimumRealMinutes { get; private set; }
         public int GS_MaximumRealMinutes { get; private set; }
         
-        //AheadOfTime
+        #endregion
+        
+        #region Ahead of Time - Variables
+        
         public bool AoT_Disable { get; private set; }
         
-        //BanditAmbush
+        #endregion
+
+        #region Bandit Ambush - Variables
+        
         public bool BA_Disable { get; private set; }
         public float BA_MoneyMinPercent { get; private set; }
         public float BA_MoneyMaxPercent { get; private set; }
         public int BA_TroopScareCount { get; private set; }
         public int BA_BanditCap { get; private set; }
         
-        //BeeKind
+        #endregion
+        
+        #region Bee Kind - Variables
+        
         public bool BK_Disable { get; private set; }
         public int BK_damage { get; private set; }
         public float BK_Reaction_Chance { get; private set; }
         public int BK_Add_Damage { get; private set; }
         
-        //BetMoney
+        #endregion
+        
+        #region Bet Money - Variables
+        
         public bool BM_Disable { get; private set; }
         public float BM_Money_Percent { get; private set; }
+        
+        #endregion
 
-        //BeggarBegging
+        #region Beggar Begging - Variables
+        
         public bool BB_Disable { get; private set; }
         public int BB_MinGoldToBeggar { get; private set; }
         public int BB_MaxGoldToBeggar { get; private set; }
         public int BB_MinRenownGain { get; private set; }
         public int BB_MaxRenownGain { get; private set; }
         
-        //BirthdayParty
+        #endregion
+        
+        #region Birthday Party - Variables
+        
         public bool BP_Disable { get; private set; }
         public int BP_MinAttending{ get; private set; }
         public int BP_MaxAttending{ get; private set; }
@@ -61,17 +83,47 @@ namespace CryingBuffalo.RandomEvents.Settings
         public int BP_MaxRenownGain{ get; private set; }
         public int BP_MinGoldLooted{ get; private set; }
         public int BP_MaxGoldLooted{ get; private set; }
+        
+        #endregion
+        
+        #region Bumper Crop - Variables
+        
+        public bool BC_Disable { get; private set; }
+        public float BC_CropGainPercent { get; private set; }
+        
+        #endregion
+        
+        #region Bunch of Prisoners - Variables
+        
+        public bool BoP_Disable { get; private set; }
+        public int BoP_MinPrisonerGain { get; private set; }
+        public int BoP_MaxPrisonerGain { get; private set; }
+        
+        #endregion
+        
+        #region Chatting Commanders - Variables
+        
+        public bool CC_Disable { get; private set; }
+        public float CC_CohesionGainPercent { get; private set; }
+        
+        #endregion
+        
+        #endregion
 
 
-        public static MenuConfig Instance
+        public static MCM_MenuConfig Instance
         {
-            get { return _instance ??= new MenuConfig(); }
+            get { return _instance ??= new MCM_MenuConfig(); }
         }
 
         public void Settings()
         {
             
-        //General Settings - Strings
+
+            #region Strings
+            
+            #region General Settings - Strings
+            
             var gs_heading = new TextObject("{=mcm_gs_heading}1. General Settings").ToString();
             var gs1_text = new TextObject("{=mcm_gs1_text}1. Initial Setup").ToString();
             var gs1_hint = new TextObject("{=mcm_gs1_hint}Uncheck this to re-run the Initial Setup and set all values back to the original.").ToString();
@@ -84,12 +136,18 @@ namespace CryingBuffalo.RandomEvents.Settings
             var gs5_text = new TextObject("{=mcm_gs5_text}5. Max minutes between events").ToString();
             var gs5_hint = new TextObject("{=mcm_gs5_hint}Maximum amount of minutes in between events.").ToString();
             
-            //Ahead of Time - Strings
+            #endregion
+
+            #region Ahead of Time - Strings
+            
             var aot_heading = new TextObject("{=mcm_aot_heading}2. Ahead of Time").ToString();
             var aot1_text = new TextObject("{=mcm_aot1_text}1. Deactivate event").ToString();
             var aot1_hint = new TextObject("{=mcm_aot1_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
-            //Bandit Ambush - Strings
+            #endregion
+            
+            #region Bandit Ambush - Strings
+            
             var ba_heading = new TextObject("{=mcm_ba_heading}3. Bandit Ambush").ToString();
             var ba1_text = new TextObject("{=mcm_ba1_text}1. Min % gold loss").ToString();
             var ba1_hint = new TextObject("{=mcm_ba1_hint}The minimum amount of gold loss that can occur from this event.").ToString();
@@ -102,7 +160,10 @@ namespace CryingBuffalo.RandomEvents.Settings
             var ba5_text = new TextObject("{=mcm_ba5_text}5. Deactivate event").ToString();
             var ba5_hint = new TextObject("{=mcm_ba5_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
-            //Bee Kind - Strings
+            #endregion
+            
+            #region Bee Kind - Strings
+            
             var bk_heading = new TextObject("{=mcm_bk_heading}4. Bee Kind").ToString();
             var bk1_text = new TextObject("{=mcm_bk1_text}1. Damage to inflict").ToString();
             var bk1_hint = new TextObject("{=mcm_bk1_hint}The amount of damage the player gets.").ToString();
@@ -113,14 +174,20 @@ namespace CryingBuffalo.RandomEvents.Settings
             var bk4_text = new TextObject("{=mcm_bk4_text}4. Deactivate event").ToString();
             var bk4_hint = new TextObject("{=mcm_bk4_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
-            //Bet Money - Strings
+            #endregion
+            
+            #region Bet Money - Strings
+            
             var bm_heading = new TextObject("{=mcm_bm_heading}5. Bet Money").ToString();
             var bm1_text = new TextObject("{=mcm_bm1_text}1. Percent of money to bet").ToString();
             var bm1_hint = new TextObject("{=mcm_bm1_hint}The amount of money in percent to bet.").ToString();
             var bm2_text = new TextObject("{=mcm_bm2_text}2. Deactivate event").ToString();
             var bm2_hint = new TextObject("{=mcm_bm2_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
-            //Beggar Begging - Strings
+            #endregion
+            
+            #region Beggar Begging - Strings
+            
             var bb_heading = new TextObject("{=mcm_bb_heading}6. Beggar Begging").ToString();
             var bb1_text = new TextObject("{=mcm_bb1_text}1. Min gold to give").ToString();
             var bb1_hint = new TextObject("{=mcm_bb1_hint}Minimum amount of gold to give to the beggar.").ToString();
@@ -133,7 +200,10 @@ namespace CryingBuffalo.RandomEvents.Settings
             var bb5_text = new TextObject("{=mcm_bb5_text}5. Deactivate event").ToString();
             var bb5_hint = new TextObject("{=mcm_bb5_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
-            //Birthday Party - Strings
+            #endregion
+            
+            #region Birthday Party - Strings
+            
             var bp_heading = new TextObject("{=mcm_bp_heading}7. Birthday Party").ToString();
             var bp1_text = new TextObject("{=mcm_bp1_text}1. Min Attending").ToString();
             var bp1_hint = new TextObject("{=mcm_bp1_hint}Minimum amount of guests attending.").ToString();
@@ -166,6 +236,42 @@ namespace CryingBuffalo.RandomEvents.Settings
             var bp15_text = new TextObject("{=mcm_bp15_text}15. Deactivate event").ToString();
             var bp15_hint = new TextObject("{=mcm_bp15_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
+            #endregion
+            
+            #region Bumper Crop - Strings
+            
+            var bc_heading = new TextObject("{=mcm_bc_heading}8. Bumper Crop").ToString();
+            var bc1_text = new TextObject("{=mcm_bc1_text}1. Crop % gain").ToString();
+            var bc1_hint = new TextObject("{=mcm_bc1_hint}The amount of % the crop yield is increased.").ToString();
+            var bc2_text = new TextObject("{=mcm_bc2_text}2. Deactivate event").ToString();
+            var bc2_hint = new TextObject("{=mcm_bc2_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            
+            #endregion
+            
+            #region Bunch of Prisoners - Strings
+            
+            var bop_heading = new TextObject("{=mcm_bop_heading}9. Bumper Crop").ToString();
+            var bop1_text = new TextObject("{=mcm_bop1_text}1. Min amount of prisoners").ToString();
+            var bop1_hint = new TextObject("{=mcm_bop1_hint}The minimum amount of prisoners the settlement gains.").ToString();
+            var bop2_text = new TextObject("{=mcm_bop2_text}2. Max amount of prisoners").ToString();
+            var bop2_hint = new TextObject("{=mcm_bop2_hint}The maximum amount of prisoners the settlement gains.").ToString();
+            var bop3_text = new TextObject("{=mcm_bop3_text}3. Deactivate event").ToString();
+            var bop3_hint = new TextObject("{=mcm_bop3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            
+            #endregion
+            
+            #region Chatting Commanders - Strings
+            
+            var cc_heading = new TextObject("{=mcm_cc_heading}10. Chatting Commanders").ToString();
+            var cc1_text = new TextObject("{=mcm_cc1_text}1. Crop % gain").ToString();
+            var cc1_hint = new TextObject("{=mcm_cc1_hint}The amount of % the cohesion is increased.").ToString();
+            var cc2_text = new TextObject("{=mcm_cc2_text}2. Deactivate event").ToString();
+            var cc2_hint = new TextObject("{=mcm_cc2_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            
+            #endregion
+            
+            #endregion
+            
             
             
             var builder = BaseSettingsBuilder.Create("RandomEvents","Random Events")!
@@ -173,7 +279,10 @@ namespace CryingBuffalo.RandomEvents.Settings
                 .SetFolderName(RandomEventsSubmodule.FolderName)
                 .SetSubFolder(RandomEventsSubmodule.ModName)
                 
-                //General Settings
+                #region Builder Modules
+                
+                #region General Settings - Builder
+                
                 .CreateGroup(gs_heading, groupBuilder => groupBuilder
                     .AddBool("GS1", gs1_text, new ProxyRef<bool>(() => GS_FirstRunDone, o => GS_FirstRunDone = o), boolBuilder => boolBuilder
                         .SetHintText(gs1_hint)
@@ -187,13 +296,19 @@ namespace CryingBuffalo.RandomEvents.Settings
                     .AddInteger("GS5", gs5_text,5,60, new ProxyRef<int>(() => GS_MaximumRealMinutes, o => GS_MaximumRealMinutes = o), integerBuilder => integerBuilder
                         .SetHintText(gs5_hint)))
                 
-                //Event - Ahead Of Time
+                #endregion
+                
+                #region Ahead of Time - Builder
+                
                 .CreateGroup(aot_heading, groupBuilder => groupBuilder
                     .AddBool("AoT1", aot1_text, new ProxyRef<bool>(() => AoT_Disable, o => AoT_Disable = o), boolBuilder => boolBuilder
                         .SetHintText(aot1_hint))
                     )
                 
-                //Event - Bandit Ambush
+                #endregion
+                
+                #region Bandit Ambush - Builder
+                
                 .CreateGroup(ba_heading, groupBuilder => groupBuilder
                     .AddFloatingInteger("BA1", ba1_text,3,25, new ProxyRef<float>(() => BA_MoneyMinPercent, o => BA_MoneyMinPercent = o), floatBuilder => floatBuilder
                         .SetHintText(ba1_hint))
@@ -207,7 +322,10 @@ namespace CryingBuffalo.RandomEvents.Settings
                         .SetHintText(ba5_hint))
                 )
                 
-                //Event - Bee Kind
+                #endregion
+                
+                #region Bee Kind - Builder
+                
                 .CreateGroup(bk_heading, groupBuilder => groupBuilder
                     .AddInteger("BK1", bk1_text,5,50, new ProxyRef<int>(() => BK_damage, o => BK_damage = o), floatBuilder => floatBuilder
                         .SetHintText(bk1_hint))
@@ -219,15 +337,37 @@ namespace CryingBuffalo.RandomEvents.Settings
                         .SetHintText(bk4_hint))
                 )
                 
-                //Event - Bet Money
+                #endregion
+                
+                #region Bet Money - Builder
+                
                 .CreateGroup(bm_heading, groupBuilder => groupBuilder
                     .AddFloatingInteger("BM1", bm1_text,1,90, new ProxyRef<float>(() => BM_Money_Percent, o => BM_Money_Percent = o), floatBuilder => floatBuilder
                         .SetHintText(bm1_hint))
                     .AddBool("BM2", bm2_text, new ProxyRef<bool>(() => BM_Disable, o => BM_Disable = o), boolBuilder => boolBuilder
                         .SetHintText(bm2_hint))
                 )
+                
+                #endregion
+                
+                #region Beggar Begging - Builder
+                
+                .CreateGroup(bb_heading, groupBuilder => groupBuilder
+                .AddInteger("BB1", bb1_text,2,50, new ProxyRef<int>(() => BB_MinGoldToBeggar, o => BB_MinGoldToBeggar = o), integerBuilder => integerBuilder
+                    .SetHintText(bb1_hint))
+                .AddInteger("BB2", bb2_text,2,50, new ProxyRef<int>(() => BB_MaxGoldToBeggar, o => BB_MaxGoldToBeggar = o), integerBuilder => integerBuilder
+                    .SetHintText(bb2_hint))
+                .AddInteger("BB3", bb3_text,5,20, new ProxyRef<int>(() => BB_MinRenownGain, o => BB_MinRenownGain = o), integerBuilder => integerBuilder
+                    .SetHintText(bb3_hint))
+                .AddInteger("BB4", bb4_text,5,20, new ProxyRef<int>(() => BB_MaxRenownGain, o => BB_MaxRenownGain = o), integerBuilder => integerBuilder
+                    .SetHintText(bb4_hint))
+                .AddBool("BB5", bb5_text, new ProxyRef<bool>(() => BB_Disable, o => BB_Disable = o), boolBuilder => boolBuilder
+                    .SetHintText(bb5_hint))
+                )
+                
+                #endregion
             
-                //Event - Birthday Party
+                #region Bandit Ambush - Builder
                 .CreateGroup(bp_heading, groupBuilder => groupBuilder
                 .AddInteger("BP1", bp1_text,10,25, new ProxyRef<int>(() => BP_MinAttending, o => BP_MinAttending = o), integerBuilder => integerBuilder
                     .SetHintText(bp1_hint))
@@ -259,6 +399,42 @@ namespace CryingBuffalo.RandomEvents.Settings
                     .SetHintText(bp14_hint))
                 .AddBool("BP15", bp15_text, new ProxyRef<bool>(() => BP_Disable, o => BP_Disable = o), boolBuilder => boolBuilder
                     .SetHintText(bp15_hint))
+                )
+                #endregion
+                
+                #region Bumper Crop - Builder
+                
+                .CreateGroup(bc_heading, groupBuilder => groupBuilder
+                    .AddFloatingInteger("BC1", bc1_text,1,33, new ProxyRef<float>(() => BM_Money_Percent, o => BM_Money_Percent = o), floatBuilder => floatBuilder
+                        .SetHintText(bc1_hint))
+                    .AddBool("BC2", bc2_text, new ProxyRef<bool>(() => BM_Disable, o => BM_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(bc2_hint))
+                )
+                #endregion
+                
+                #region Bunch of Prisoners - Builder
+                
+                .CreateGroup(bop_heading, groupBuilder => groupBuilder
+                    .AddInteger("BoP1", bop1_text,5,75, new ProxyRef<int>(() => BoP_MinPrisonerGain, o => BoP_MinPrisonerGain = o), integerBuilder => integerBuilder
+                        .SetHintText(bop1_hint))
+                    .AddInteger("BoP2", bop2_text,5, 75, new ProxyRef<int>(() => BoP_MaxPrisonerGain, o => BoP_MaxPrisonerGain = o), integerBuilder => integerBuilder
+                        .SetHintText(bop2_hint))
+                    .AddBool("BoP3", bop3_text, new ProxyRef<bool>(() => BoP_Disable, o => BoP_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(bop3_hint))
+                    )
+                #endregion
+                
+                #region Chatting Commanders - Builder
+                
+                .CreateGroup(cc_heading, groupBuilder => groupBuilder
+                        .AddFloatingInteger("CC1", cc1_text,5,75, new ProxyRef<float>(() => CC_CohesionGainPercent, o => CC_CohesionGainPercent = o), floatBuilder => floatBuilder
+                            .SetHintText(cc1_hint))
+                        .AddBool("CC2", cc2_text, new ProxyRef<bool>(() => CC_Disable, o => CC_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(cc2_hint))
+                #endregion
+                
+                #endregion
+                
                 );
 
 
@@ -274,40 +450,62 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         private static void Perform_First_Time_Setup()
         {
+            #region First Time Setup
+            
+            #region General Settings
+            
             Instance.GS_FirstRunDone = true;
             Instance.GS_DebugMode = false;
             Instance.GS_MinimumInGameHours = 24;
             Instance.GS_MinimumRealMinutes = 5;
             Instance.GS_MaximumRealMinutes = 30;
             
-            //AheadOfTime 
+            #endregion
+            
+            #region Ahead of Time
+            
             Instance.AoT_Disable = false;
             
-            //BanditAmbush
+            #endregion
+            
+            #region Bandit Ambush
+            
             Instance.BA_Disable = false;
             Instance.BA_MoneyMinPercent = 0.05f;
             Instance.BA_MoneyMaxPercent = 0.15f;
             Instance.BA_TroopScareCount = 25;
             Instance.BA_BanditCap = 50;
             
-            //BeeKind
+            #endregion
+            
+            #region Bee Kind
+            
             Instance.BK_Disable = false;
             Instance.BK_damage = 10;
             Instance.BK_Reaction_Chance = 0.33f;
             Instance.BK_Add_Damage = 15;
             
-            //BetMoney 
+            #endregion
+            
+            #region Bet Money
+            
             Instance.BM_Disable = false;
             Instance.BM_Money_Percent = 0.15f;
             
-            //BeggarBegging
+            #endregion
+            
+            #region Beggar Begging
+            
             Instance.BB_MinGoldToBeggar = 25;
             Instance.BB_MaxGoldToBeggar = 75;
             Instance.BB_MinRenownGain = 10;
             Instance.BB_MaxRenownGain = 20;
             Instance.BB_Disable = false;
             
-            //BirthdayParty
+            #endregion
+            
+            #region Birthday Party
+            
             Instance.BP_Disable = false;
             Instance.BP_MinAttending = 20;
             Instance.BP_MaxAttending = 60;
@@ -323,7 +521,34 @@ namespace CryingBuffalo.RandomEvents.Settings
             Instance.BP_MaxRenownGain = 30;
             Instance.BP_MinGoldLooted = 500;
             Instance.BP_MaxGoldLooted = 1500;
+            
+            #endregion
+            
+            #region Bumper Crop
+            
+            Instance.BC_Disable = false;
+            Instance.BC_CropGainPercent = 0.75f;
+            
+            #endregion
+            
+            #region Bunch of Prisoners
+            
+            Instance.BoP_Disable = false;
+            Instance.BoP_MinPrisonerGain = 15;
+            Instance.BoP_MaxPrisonerGain = 50;
+
+            #endregion
+            
+            #region Chatting Commanders
+            
+            Instance.CC_Disable = false;
+            Instance.CC_CohesionGainPercent = 30.0f;
+            
+            #endregion
+
+            #endregion
         }
+        
 
         public void Dispose()
         {

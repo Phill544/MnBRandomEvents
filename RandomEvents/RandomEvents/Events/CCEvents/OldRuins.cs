@@ -76,8 +76,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption4 = new TextObject("{=OldRuins_Event_Option_4}The small shack").ToString();
             var eventOption4Hover = new TextObject("{=OldRuins_Event_Option_4_Hover}The shack might be interesting").ToString();
             
-            var eventOption5 = new TextObject("{=OldRuins_Event_Option_4}None of them, just leave").ToString();
-            var eventOption5Hover = new TextObject("{=OldRuins_Event_Option_4_Hover}You don't want to get wet").ToString();
+            var eventOption5 = new TextObject("{=OldRuins_Event_Option_5}None of them, just leave").ToString();
+            var eventOption5Hover = new TextObject("{=OldRuins_Event_Option_5_Hover}You don't want to get wet").ToString();
             
             var eventButtonText1 = new TextObject("{=OldRuins_Event_Button_Text_1}Choose").ToString();
             var eventButtonText2 = new TextObject("{=OldRuins_Event_Button_Text_2}Done").ToString();
@@ -118,6 +118,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("goldForYou",goldForYou)
                 .ToString();
             
+            var eventOptionEText = new TextObject(
+                    "{=OldRuins_Event_Choice_5}You all agree that you don't want to get wet so you make your way back to camp.")
+                .ToString();
+            
             var eventMsg1 =new TextObject(
                     "{=OldRuins_Event_Msg_1}{heroName} lost {killedMen} men to a collapsing structure.")
                 .SetTextVariable("heroName", heroName)
@@ -156,7 +160,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(+goldForYou);
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
-                            
+                            break;
+                        case "e":
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionEText, true, false, eventButtonText2, null, null, null), true);
                             break;
                         default:
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");

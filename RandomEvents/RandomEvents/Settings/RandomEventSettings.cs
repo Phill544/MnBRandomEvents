@@ -10,7 +10,7 @@ namespace CryingBuffalo.RandomEvents.Settings
         public BetMoneyData BetMoneyData { get; private set; } = new BetMoneyData("BetMoney", 1024f);
 
         [JsonProperty]
-        public BumperCropData BumperCropData { get; private set; } = new BumperCropData("BumperCrop", 1024f, 0.75f);
+        public BumperCropData BumperCropData { get; private set; } = new BumperCropData("BumperCrop", 1024f);
 
         [JsonProperty]
         public BanditAmbushData BanditAmbushData { get; private set; } =
@@ -29,7 +29,7 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public ChattingCommandersData ChattingCommandersData { get; private set; } =
-            new ChattingCommandersData("ChattingCommanders", 1024, 30.0f);
+            new ChattingCommandersData("ChattingCommanders", 1024);
 
         //[JsonProperty]
         //public GloriousFoodData GloriousFoodData { get; private set; } = new GloriousFoodData("GloriousFood", 1024, 5, 25, 5);
@@ -81,7 +81,7 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public BunchOfPrisonersData BunchOfPrisonersData { get; private set; } =
-            new BunchOfPrisonersData("BunchOfPrisoners", 1024, 5, 35);
+            new BunchOfPrisonersData("BunchOfPrisoners", 1024);
 
         [JsonProperty]
         public UndercookedData UndercookedData { get; private set; } = new UndercookedData("Undercooked", 1024, 2, 20);
@@ -138,5 +138,9 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         public OldRuinsData OldRuinsData { get; } =
             new OldRuinsData("OldRuins",1024, 5, 10, 400, 2000);
+        
+        //Placeholder
+        public AFlirtatiousEncounterData AFlirtatiousEncounterData { get; } =
+            new AFlirtatiousEncounterData("AFlirtatiousEncounter", 1024);
     }
 }

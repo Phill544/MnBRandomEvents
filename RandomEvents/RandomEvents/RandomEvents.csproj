@@ -65,6 +65,7 @@
     <Compile Include="Events\BetMoney.cs" />
     <Compile Include="Events\BumperCrop.cs" />
     <Compile Include="Events\BunchOfPrisoners.cs" />
+    <Compile Include="Events\CCEvents\AFlirtatiousEncounter.cs" />
     <Compile Include="Events\CCEvents\BeggarBegging.cs" />
     <Compile Include="Events\CCEvents\BirthdayParty.cs" />
     <Compile Include="Events\CCEvents\FallenSoldierFamily.cs" />
@@ -105,7 +106,7 @@
     <Compile Include="Helpers\RandomSelection.cs" />
     <Compile Include="RandomEventBehavior.cs" />
     <Compile Include="Settings\GeneralSettings.cs" />
-    <Compile Include="Settings\MenuConfig.cs" />
+    <Compile Include="Settings\MCM_MenuConfig.cs" />
     <Compile Include="Settings\RandomEventSettings.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="RandomEventGenerator.cs" />
@@ -113,7 +114,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Bannerlord.MCM" Version="5.0.4" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.MCM" Version="5.1.0" IncludeAssets="compile" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>

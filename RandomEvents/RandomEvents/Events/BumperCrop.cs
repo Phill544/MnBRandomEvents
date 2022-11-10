@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -12,14 +13,14 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly float cropGainPercent;
 
-		public BumperCrop() : base(Settings.ModSettings.RandomEvents.BumperCropData)
+		public BumperCrop() : base(ModSettings.RandomEvents.BumperCropData)
 		{
-			cropGainPercent = Settings.ModSettings.RandomEvents.BumperCropData.cropGainPercent;
+			cropGainPercent = MCM_MenuConfig.Instance.BC_CropGainPercent;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -72,17 +73,14 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return Hero.MainHero.Clan.Settlements.Any();
+			return MCM_MenuConfig.Instance.BC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
 		}
 	}
 
 	public class BumperCropData : RandomEventData
 	{
-		public readonly float cropGainPercent;
-
-		public BumperCropData(string eventType, float chanceWeight, float cropGainPercent) : base(eventType, chanceWeight)
+		public BumperCropData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.cropGainPercent = cropGainPercent;
 		}
 
 		public override BaseEvent GetBaseEvent()

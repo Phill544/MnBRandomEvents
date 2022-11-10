@@ -379,7 +379,8 @@
     <string id="OldRuins_Event_Choice_2" text="You all decide to check the well as it's closest to you. You encircle it, look down and... Nothing... Just dirt. You then leave." />
     <string id="OldRuins_Event_Choice_3" text="The men want to check the barn so you agree. Once inside you can only see some skeletons from what you can only assume were farm animals. The men scatter and search the barn but they all come up empty handed. You proceed to leave." />
     <string id="OldRuins_Event_Choice_4" text="You all agree to head to the shack. You pry the door open and inside you find a chest with a lock. After fidgeting for a couple of minutes you manage to break the lock. The chest is mostly filled with papers but all the way at the bottom you come across a rather hefty coin purse. You open it and to you amazement it's filled with lots of gold coins. You head back to camp where you split the content of the purse with your men. You found {goldFound} gold and there were {men} men who went with you so {goldFound} / {men} = {goldForYou}." />
-
+    <string id="OldRuins_Event_Choice_5" text="You all agree that you don't want to get wet so you make your way back to camp." />
+    
     <!--OldRuins - Log Messages-->
     <string id="OldRuins_Event_Msg_1" text="{heroName} lost {killedMen} men to a collapsing structure." />
     <string id="OldRuins_Event_Msg_2" text="{heroName} got {goldForYou} gold after splitting {goldFound} gold with {men} men." />

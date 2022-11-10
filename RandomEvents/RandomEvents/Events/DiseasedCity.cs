@@ -226,3 +226,4 @@ namespace CryingBuffalo.RandomEvents.Events
 		}
 	}
 }
+ 
