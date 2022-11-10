@@ -7,10 +7,10 @@ namespace CryingBuffalo.RandomEvents.Settings
     class RandomEventSettings
     {
         [JsonProperty]
-        public BetMoneyData BetMoneyData { get; private set; } = new BetMoneyData("BetMoney", 1024f);
+        public BetMoneyData BetMoneyData { get; private set; } = new BetMoneyData("BetMoney", 1024);
 
         [JsonProperty]
-        public BumperCropData BumperCropData { get; private set; } = new BumperCropData("BumperCrop", 1024f);
+        public BumperCropData BumperCropData { get; private set; } = new BumperCropData("BumperCrop", 1024);
 
         [JsonProperty]
         public BanditAmbushData BanditAmbushData { get; private set; } =
@@ -36,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public DiseasedCityData DiseasedCityData { get; private set; } =
-            new DiseasedCityData("DiseasedCity", 1024, 0.5f, 0.75f, 75, 0.2f);
+            new DiseasedCityData("DiseasedCity", 1024);
 
         [JsonProperty] public MomentumData MomentumData { get; private set; } = new MomentumData("Momentum", 1024);
 
@@ -58,7 +58,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new WanderingLivestockData("WanderingLivestock", 1024, 5, 10);
 
         [JsonProperty]
-        public EagerTroopsData EagerTroopsData { get; private set; } = new EagerTroopsData("EagerTroops", 1024, 5, 35);
+        public EagerTroopsData EagerTroopsData { get; private set; } = new EagerTroopsData("EagerTroops", 1024);
 
         [JsonProperty]
         public SpeedyRecoveryData SpeedyRecoveryData { get; private set; } =
@@ -70,7 +70,7 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public ExoticDrinksData ExoticDrinksData { get; private set; } =
-            new ExoticDrinksData("ExoticDrinks", 1024, 5000);
+            new ExoticDrinksData("ExoticDrinks", 1024);
 
         [JsonProperty]
         public AheadOfTimeData AheadOfTimeData { get; private set; } = new AheadOfTimeData("AheadOfTime", 1024);

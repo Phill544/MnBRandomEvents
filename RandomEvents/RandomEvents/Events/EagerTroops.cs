@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
@@ -16,12 +17,10 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minTroopGain;
 		private readonly int maxTroopGain;
 
-		private const string EventTitle = "Eager Troops!";
-
-		public EagerTroops() : base(Settings.ModSettings.RandomEvents.EagerTroopsData)
+		public EagerTroops() : base(ModSettings.RandomEvents.EagerTroopsData)
 		{
-			minTroopGain = Settings.ModSettings.RandomEvents.EagerTroopsData.minTroopGain;
-			maxTroopGain = Settings.ModSettings.RandomEvents.EagerTroopsData.maxTroopGain;
+			minTroopGain = MCM_MenuConfig.Instance.ET_MinTroopGain;
+			maxTroopGain = MCM_MenuConfig.Instance.ET_MaxTroopGain;
 		}
 
 		public override void CancelEvent()
@@ -30,12 +29,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MobileParty.MainParty.Party.PartySizeLimit >= MobileParty.MainParty.MemberRoster.TotalHealthyCount + minTroopGain;
+			return MCM_MenuConfig.Instance.ET_Disable == false && MobileParty.MainParty.Party.PartySizeLimit >= MobileParty.MainParty.MemberRoster.TotalHealthyCount + minTroopGain;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -113,13 +112,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class EagerTroopsData : RandomEventData
 	{
-		public readonly int minTroopGain;
-		public readonly int maxTroopGain;
 
-		public EagerTroopsData(string eventType, float chanceWeight, int minTroopGain, int maxTroopGain) : base(eventType, chanceWeight)
+		public EagerTroopsData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.minTroopGain = minTroopGain;
-			this.maxTroopGain = maxTroopGain;
 		}
 
 		public override BaseEvent GetBaseEvent()

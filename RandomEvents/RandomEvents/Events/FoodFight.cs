@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -16,11 +17,11 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int maxFoodLoss;
 		private readonly int moraleLoss;
 
-		public FoodFight() : base(Settings.ModSettings.RandomEvents.FoodFightData)
+		public FoodFight() : base(ModSettings.RandomEvents.FoodFightData)
 		{
-			minFoodLoss = Settings.ModSettings.RandomEvents.FoodFightData.minFoodLoss;
-			maxFoodLoss = Settings.ModSettings.RandomEvents.FoodFightData.maxFoodLoss;
-			moraleLoss = Settings.ModSettings.RandomEvents.FoodFightData.moraleLoss;
+			minFoodLoss = ModSettings.RandomEvents.FoodFightData.minFoodLoss;
+			maxFoodLoss = ModSettings.RandomEvents.FoodFightData.maxFoodLoss;
+			moraleLoss = ModSettings.RandomEvents.FoodFightData.moraleLoss;
 		}
 
 		public override void CancelEvent()
@@ -34,7 +35,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (ModSettings.GeneralSettings.DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -78,7 +79,7 @@ namespace CryingBuffalo.RandomEvents.Events
 						{
 							var extraDialogue = "";
 
-							var xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
+							var xpToGive = MCM_MenuConfig.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
 							Hero.MainHero.AddSkillXp(DefaultSkills.Throwing, xpToGive);
 
 							var foodToRemove = MBRandom.RandomInt(minFoodLoss, maxFoodLoss);

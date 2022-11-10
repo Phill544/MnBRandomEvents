@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -10,7 +11,7 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class Momentum : BaseEvent
 	{
-		public Momentum() : base(Settings.ModSettings.RandomEvents.MomentumData)
+		public Momentum() : base(ModSettings.RandomEvents.MomentumData)
 		{
 		}
 
@@ -25,7 +26,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (ModSettings.GeneralSettings.DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -44,13 +45,13 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			if (isOnFoot)
 			{
-				float xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Athletics);
+				float xpToGive = MCM_MenuConfig.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Athletics);
 				Hero.MainHero.AddSkillXp(DefaultSkills.Athletics, xpToGive);
 				dialogue = eventDialogue1;
 			}
 			else
 			{
-				float xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Riding);
+				float xpToGive = MCM_MenuConfig.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Riding);
 				Hero.MainHero.AddSkillXp(DefaultSkills.Riding, xpToGive);
 				dialogue = eventDialogue2;
 			}

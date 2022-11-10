@@ -12,8 +12,5 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public int HintLevel { get; private set; } = 1;
-
-        [JsonProperty]
-        public float GeneralLevelXpMultiplier { get; private set; } = 40;
     }
 }

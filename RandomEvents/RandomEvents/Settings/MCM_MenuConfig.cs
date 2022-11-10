@@ -21,6 +21,7 @@ namespace CryingBuffalo.RandomEvents.Settings
         public int GS_MinimumInGameHours { get; private set; }
         public int GS_MinimumRealMinutes { get; private set; }
         public int GS_MaximumRealMinutes { get; private set; }
+        public int GS_GeneralLevelXpMultiplier { get; private set; }
         
         #endregion
         
@@ -107,6 +108,32 @@ namespace CryingBuffalo.RandomEvents.Settings
         public float CC_CohesionGainPercent { get; private set; }
         
         #endregion
+
+        #region Diseased City - Variables
+
+        public bool DC_Disable { get; private set; }
+        public float DC_BaseSuccessChance{ get; private set; }
+        public float DC_HighMedicineChance{ get; private set; }
+        public int DC_HighMedicineLevel{ get; private set; }
+        public float DC_PercentLoss{ get; private set; }
+
+        #endregion
+        
+        #region Eager Troops - Variables
+
+        public bool ET_Disable { get; private set; }
+        public int ET_MinTroopGain{ get; private set; }
+        public int ET_MaxTroopGain{ get; private set; }
+
+        #endregion
+        
+        #region ExoticDrinks - Variables
+
+        public bool ED_Disable { get; private set; }
+        public int ED_MinPrice{ get; private set; }
+        public int ED_MaxPrice{ get; private set; }
+
+        #endregion
         
         #endregion
 
@@ -135,12 +162,14 @@ namespace CryingBuffalo.RandomEvents.Settings
             var gs4_hint = new TextObject("{=mcm_gs4_hint}Minimum amount of minutes in between events.").ToString();
             var gs5_text = new TextObject("{=mcm_gs5_text}5. Max minutes between events").ToString();
             var gs5_hint = new TextObject("{=mcm_gs5_hint}Maximum amount of minutes in between events.").ToString();
+            var gs6_text = new TextObject("{=mcm_gs6_text}6. General Level XP Multiplier ").ToString();
+            var gs6_hint = new TextObject("{=mcm_gs6_hint}The number used to define the XP multiplier. Higher number means higher XP.").ToString();
             
             #endregion
 
             #region Ahead of Time - Strings
             
-            var aot_heading = new TextObject("{=mcm_aot_heading}2. Ahead of Time").ToString();
+            var aot_heading = new TextObject("{=mcm_aot_heading}Ahead of Time").ToString();
             var aot1_text = new TextObject("{=mcm_aot1_text}1. Deactivate event").ToString();
             var aot1_hint = new TextObject("{=mcm_aot1_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
@@ -148,7 +177,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             
             #region Bandit Ambush - Strings
             
-            var ba_heading = new TextObject("{=mcm_ba_heading}3. Bandit Ambush").ToString();
+            var ba_heading = new TextObject("{=mcm_ba_heading}Bandit Ambush").ToString();
             var ba1_text = new TextObject("{=mcm_ba1_text}1. Min % gold loss").ToString();
             var ba1_hint = new TextObject("{=mcm_ba1_hint}The minimum amount of gold loss that can occur from this event.").ToString();
             var ba2_text = new TextObject("{=mcm_ba2_text}2. Max % gold loss").ToString();
@@ -164,7 +193,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             
             #region Bee Kind - Strings
             
-            var bk_heading = new TextObject("{=mcm_bk_heading}4. Bee Kind").ToString();
+            var bk_heading = new TextObject("{=mcm_bk_heading}Bee Kind").ToString();
             var bk1_text = new TextObject("{=mcm_bk1_text}1. Damage to inflict").ToString();
             var bk1_hint = new TextObject("{=mcm_bk1_hint}The amount of damage the player gets.").ToString();
             var bk2_text = new TextObject("{=mcm_bk2_text}2. Reaction chance").ToString();
@@ -178,7 +207,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             
             #region Bet Money - Strings
             
-            var bm_heading = new TextObject("{=mcm_bm_heading}5. Bet Money").ToString();
+            var bm_heading = new TextObject("{=mcm_bm_heading}Bet Money").ToString();
             var bm1_text = new TextObject("{=mcm_bm1_text}1. Percent of money to bet").ToString();
             var bm1_hint = new TextObject("{=mcm_bm1_hint}The amount of money in percent to bet.").ToString();
             var bm2_text = new TextObject("{=mcm_bm2_text}2. Deactivate event").ToString();
@@ -188,7 +217,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             
             #region Beggar Begging - Strings
             
-            var bb_heading = new TextObject("{=mcm_bb_heading}6. Beggar Begging").ToString();
+            var bb_heading = new TextObject("{=mcm_bb_heading}Beggar Begging").ToString();
             var bb1_text = new TextObject("{=mcm_bb1_text}1. Min gold to give").ToString();
             var bb1_hint = new TextObject("{=mcm_bb1_hint}Minimum amount of gold to give to the beggar.").ToString();
             var bb2_text = new TextObject("{=mcm_bb2_text}2. Max gold to give").ToString();
@@ -204,7 +233,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             
             #region Birthday Party - Strings
             
-            var bp_heading = new TextObject("{=mcm_bp_heading}7. Birthday Party").ToString();
+            var bp_heading = new TextObject("{=mcm_bp_heading}Birthday Party").ToString();
             var bp1_text = new TextObject("{=mcm_bp1_text}1. Min Attending").ToString();
             var bp1_hint = new TextObject("{=mcm_bp1_hint}Minimum amount of guests attending.").ToString();
             var bp2_text = new TextObject("{=mcm_bp2_text}2. Max Attending").ToString();
@@ -240,7 +269,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             
             #region Bumper Crop - Strings
             
-            var bc_heading = new TextObject("{=mcm_bc_heading}8. Bumper Crop").ToString();
+            var bc_heading = new TextObject("{=mcm_bc_heading}Bumper Crop").ToString();
             var bc1_text = new TextObject("{=mcm_bc1_text}1. Crop % gain").ToString();
             var bc1_hint = new TextObject("{=mcm_bc1_hint}The amount of % the crop yield is increased.").ToString();
             var bc2_text = new TextObject("{=mcm_bc2_text}2. Deactivate event").ToString();
@@ -250,7 +279,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             
             #region Bunch of Prisoners - Strings
             
-            var bop_heading = new TextObject("{=mcm_bop_heading}9. Bumper Crop").ToString();
+            var bop_heading = new TextObject("{=mcm_bop_heading}Bumper Crop").ToString();
             var bop1_text = new TextObject("{=mcm_bop1_text}1. Min amount of prisoners").ToString();
             var bop1_hint = new TextObject("{=mcm_bop1_hint}The minimum amount of prisoners the settlement gains.").ToString();
             var bop2_text = new TextObject("{=mcm_bop2_text}2. Max amount of prisoners").ToString();
@@ -262,12 +291,52 @@ namespace CryingBuffalo.RandomEvents.Settings
             
             #region Chatting Commanders - Strings
             
-            var cc_heading = new TextObject("{=mcm_cc_heading}10. Chatting Commanders").ToString();
+            var cc_heading = new TextObject("{=mcm_cc_heading}Chatting Commanders").ToString();
             var cc1_text = new TextObject("{=mcm_cc1_text}1. Crop % gain").ToString();
             var cc1_hint = new TextObject("{=mcm_cc1_hint}The amount of % the cohesion is increased.").ToString();
             var cc2_text = new TextObject("{=mcm_cc2_text}2. Deactivate event").ToString();
             var cc2_hint = new TextObject("{=mcm_cc2_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
+            #endregion
+
+            #region Diseased City - Strings
+
+            var dc_heading = new TextObject("{=mcm_dc_heading}Diseased City").ToString();
+            var dc1_text = new TextObject("{=mcm_dc1_text}1. Base Success Chance").ToString();
+            var dc1_hint = new TextObject("{=mcm_dc1_hint}The base success chance that this event will have a positive outcome.").ToString();
+            var dc2_text = new TextObject("{=mcm_dc2_text}2. High Medicine Chance").ToString();
+            var dc2_hint = new TextObject("{=mcm_dc2_hint}PHILL_MUST_COMMENT").ToString();
+            var dc3_text = new TextObject("{=mcm_dc3_text}3. High Medicine Level").ToString();
+            var dc3_hint = new TextObject("{=mcm_dc3_hint}PHILL_MUST_COMMENT").ToString();
+            var dc4_text = new TextObject("{=mcm_dc4_text}4. Percentage Lost").ToString();
+            var dc4_hint = new TextObject("{=mcm_dc4_hint}The amount of men lost at the stricken settlement.").ToString();
+            var dc5_text = new TextObject("{=mcm_dc5_text}5. Deactivate event").ToString();
+            var dc5_hint = new TextObject("{=mcm_dc5_hint}If you dont want this event to show up you can deactivate it.").ToString();
+
+            #endregion
+            
+            #region Eager Troops - Strings
+
+            var et_heading = new TextObject("{=mcm_et_heading}Eager Troops").ToString();
+            var et1_text = new TextObject("{=mcm_et1_text}1. Min Troops Gained").ToString();
+            var et1_hint = new TextObject("{=mcm_et1_hint}Minimum amount of troops gained.").ToString();
+            var et2_text = new TextObject("{=mcm_et2_text}2. Max Troops Gained").ToString();
+            var et2_hint = new TextObject("{=mcm_et2_hint}Maximum amount of troops gained.").ToString();
+            var et3_text = new TextObject("{=mcm_et3_text}3. Deactivate event").ToString();
+            var et3_hint = new TextObject("{=mcm_et3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+
+            #endregion
+            
+            #region Exotic Drinks - Strings
+
+            var ed_heading = new TextObject("{=mcm_ed_heading}Exotic Drinks").ToString();
+            var ed1_text = new TextObject("{=mcm_ed1_text}1. Min Price").ToString();
+            var ed1_hint = new TextObject("{=mcm_ed1_hint}Minimum price for the drink.").ToString();
+            var ed2_text = new TextObject("{=mcm_ed2_text}2. Max Price").ToString();
+            var ed2_hint = new TextObject("{=mcm_ed2_hint}Maximum price for the drink.").ToString();
+            var ed3_text = new TextObject("{=mcm_ed3_text}3. Deactivate event").ToString();
+            var ed3_hint = new TextObject("{=mcm_ed3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+
             #endregion
             
             #endregion
@@ -294,7 +363,9 @@ namespace CryingBuffalo.RandomEvents.Settings
                     .AddInteger("GS4", gs4_text,5,60, new ProxyRef<int>(() => GS_MinimumRealMinutes, o => GS_MinimumRealMinutes = o), integerBuilder => integerBuilder
                         .SetHintText(gs4_hint))
                     .AddInteger("GS5", gs5_text,5,60, new ProxyRef<int>(() => GS_MaximumRealMinutes, o => GS_MaximumRealMinutes = o), integerBuilder => integerBuilder
-                        .SetHintText(gs5_hint)))
+                        .SetHintText(gs5_hint))
+                    .AddInteger("GS6", gs6_text,10,70, new ProxyRef<int>(() => GS_GeneralLevelXpMultiplier, o => GS_GeneralLevelXpMultiplier = o), integerBuilder => integerBuilder
+                        .SetHintText(gs6_hint)))
                 
                 #endregion
                 
@@ -431,6 +502,49 @@ namespace CryingBuffalo.RandomEvents.Settings
                             .SetHintText(cc1_hint))
                         .AddBool("CC2", cc2_text, new ProxyRef<bool>(() => CC_Disable, o => CC_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(cc2_hint))
+                    )
+                #endregion
+                
+                #region Diseased City - Builder
+                
+                .CreateGroup(dc_heading, groupBuilder => groupBuilder
+                        .AddFloatingInteger("DC1", dc1_text,10,75, new ProxyRef<float>(() => DC_BaseSuccessChance, o => DC_BaseSuccessChance = o), floatBuilder => floatBuilder
+                            .SetHintText(dc1_hint))
+                        .AddFloatingInteger("DC2", dc2_text,25,90, new ProxyRef<float>(() => DC_HighMedicineChance, o => DC_HighMedicineChance = o), floatBuilder => floatBuilder
+                            .SetHintText(dc2_hint))
+                        .AddInteger("DC3", dc3_text,40,90, new ProxyRef<int>(() => DC_HighMedicineLevel, o => DC_HighMedicineLevel = o), integerBuilder => integerBuilder
+                            .SetHintText(dc3_hint))
+                        .AddFloatingInteger("DC4", dc4_text,10,50, new ProxyRef<float>(() => DC_PercentLoss, o => DC_PercentLoss = o), floatBuilder => floatBuilder
+                            .SetHintText(dc4_hint))
+                        .AddBool("DC5", dc5_text, new ProxyRef<bool>(() => DC_Disable, o => DC_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(dc5_hint))
+                    )
+                    
+                    #endregion
+                
+                #region Eager Troops - Builder
+                
+                .CreateGroup(et_heading, groupBuilder => groupBuilder
+                        .AddInteger("ET1", et1_text,5,50, new ProxyRef<int>(() => ET_MinTroopGain, o => ET_MinTroopGain = o), integerBuilder => integerBuilder
+                            .SetHintText(et1_hint))
+                        .AddInteger("ET2", et2_text,5,50, new ProxyRef<int>(() => ET_MaxTroopGain, o => ET_MaxTroopGain = o), integerBuilder => integerBuilder
+                            .SetHintText(et2_hint))
+                        .AddBool("ET3", et3_text, new ProxyRef<bool>(() => ET_Disable, o => ET_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(et3_hint))
+                    )
+
+                    #endregion
+                
+                #region Exotic Drinks - Builder
+                
+                .CreateGroup(ed_heading, groupBuilder => groupBuilder
+                        .AddInteger("ED1", ed1_text,2500,7500, new ProxyRef<int>(() => ED_MinPrice, o => ED_MinPrice = o), integerBuilder => integerBuilder
+                            .SetHintText(ed1_hint))
+                        .AddInteger("ED2", ed2_text,2500,7500, new ProxyRef<int>(() => ED_MaxPrice, o => ED_MaxPrice = o), integerBuilder => integerBuilder
+                            .SetHintText(ed2_hint))
+                        .AddBool("ED3", ed3_text, new ProxyRef<bool>(() => ED_Disable, o => ED_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(ed3_hint))
+
                 #endregion
                 
                 #endregion
@@ -459,6 +573,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             Instance.GS_MinimumInGameHours = 24;
             Instance.GS_MinimumRealMinutes = 5;
             Instance.GS_MaximumRealMinutes = 30;
+            Instance.GS_GeneralLevelXpMultiplier = 40;
             
             #endregion
             
@@ -544,6 +659,32 @@ namespace CryingBuffalo.RandomEvents.Settings
             Instance.CC_Disable = false;
             Instance.CC_CohesionGainPercent = 30.0f;
             
+            #endregion
+            
+            #region Diseased City
+            
+            Instance.DC_Disable = false;
+            Instance.DC_BaseSuccessChance = 0.5f;
+            Instance.DC_HighMedicineChance = 0.75f;
+            Instance.DC_HighMedicineLevel = 75;
+            Instance.DC_PercentLoss = 0.2f;
+
+            #endregion
+            
+            #region Eager Troops
+            
+            Instance.ET_Disable = false;
+            Instance.ET_MinTroopGain = 10;
+            Instance.ET_MaxTroopGain = 35;
+
+            #endregion
+            
+            #region Exotic Drinks
+            
+            Instance.ED_Disable = false;
+            Instance.ED_MinPrice = 3000;
+            Instance.ED_MaxPrice = 6000;
+
             #endregion
 
             #endregion
