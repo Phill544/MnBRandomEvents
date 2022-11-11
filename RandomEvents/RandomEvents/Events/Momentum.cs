@@ -21,12 +21,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig.Instance.MO_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (ModSettings.GeneralSettings.DebugMode)
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

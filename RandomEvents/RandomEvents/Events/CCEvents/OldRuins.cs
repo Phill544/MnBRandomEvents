@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -14,15 +15,17 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
     {
         private readonly int minMen;
         private readonly int maxMen;
+        private readonly float menToKill;
         private readonly int minGoldFound;
         private readonly int maxGoldFound;
 
-        public OldRuins() : base(Settings.ModSettings.RandomEvents.OldRuinsData)
+        public OldRuins() : base(ModSettings.RandomEvents.OldRuinsData)
         {
-            minMen = Settings.ModSettings.RandomEvents.OldRuinsData.minMen;
-            maxMen = Settings.ModSettings.RandomEvents.OldRuinsData.maxMen;
-            minGoldFound = Settings.ModSettings.RandomEvents.OldRuinsData.minGoldFound;
-            maxGoldFound = Settings.ModSettings.RandomEvents.OldRuinsData.maxGoldFound;
+            minMen = MCM_MenuConfig.Instance.OR_MinSoldiers;
+            maxMen = MCM_MenuConfig.Instance.OR_MaxSoldiers;
+            menToKill = MCM_MenuConfig.Instance.OR_MenToKill;
+            minGoldFound = MCM_MenuConfig.Instance.OR_MinGoldFound;
+            maxGoldFound = MCM_MenuConfig.Instance.OR_MaxGoldFound;
         }
 
         public override void CancelEvent()
@@ -31,12 +34,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return true;
+            return MCM_MenuConfig.Instance.OR_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_MenuConfig.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
@@ -47,7 +50,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var manCount  = MBRandom.RandomInt(minMen, maxMen);
 
-            var killedMen = manCount  - 2;
+            var killedMen = (int)Math.Floor(manCount * menToKill);
 
             var goldFound = MBRandom.RandomInt(minGoldFound, maxGoldFound);
 
@@ -129,7 +132,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=OldRuins_Event_Msg_1}{heroName} received  {goldForYou} gold after splitting {goldFound} gold with {manCount} men.")
+                    "{=OldRuins_Event_Msg_2}{heroName} received  {goldForYou} gold after splitting {goldFound} gold with {manCount} men.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldForYou", goldForYou)
                 .SetTextVariable("goldFound", goldFound)
@@ -193,18 +196,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class OldRuinsData : RandomEventData
     {
-        public readonly int minMen;
-        public readonly int maxMen;
-        public readonly int minGoldFound;
-        public readonly int maxGoldFound;
 
-        public OldRuinsData(string eventType, float chanceWeight, int minMen, int maxMen, int minGoldFound, int maxGoldFound) : base(eventType,
+        public OldRuinsData(string eventType, float chanceWeight) : base(eventType,
             chanceWeight)
         {
-            this.minMen = minMen;
-            this.maxMen = maxMen;
-            this.minGoldFound = minGoldFound;
-            this.maxGoldFound = maxGoldFound;
         }
 
         public override BaseEvent GetBaseEvent()

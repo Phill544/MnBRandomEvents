@@ -23,12 +23,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public LookUp() : base(ModSettings.RandomEvents.LookUpData)
 		{
-			treeShakeChance = ModSettings.RandomEvents.LookUpData.treeShakeChance;
-			baseRangeChance = ModSettings.RandomEvents.LookUpData.baseRangeChance;
-			minRangeLevel = ModSettings.RandomEvents.LookUpData.minRangeLevel;
-			maxRangeLevel = ModSettings.RandomEvents.LookUpData.maxRangeLevel;
-			minGold = ModSettings.RandomEvents.LookUpData.minGold;
-			maxGold = ModSettings.RandomEvents.LookUpData.maxGold;
+			treeShakeChance = MCM_MenuConfig.Instance.LU_TreeShakeChance;
+			baseRangeChance = MCM_MenuConfig.Instance.LU_BaseRangeChance;
+			minRangeLevel = MCM_MenuConfig.Instance.LU_MinRangeLevel;
+			maxRangeLevel = MCM_MenuConfig.Instance.LU_MaxRangeLevel;
+			minGold = MCM_MenuConfig.Instance.LU_MinGold;
+			maxGold = MCM_MenuConfig.Instance.LU_MaxGold;
 		}
 
 		public override void CancelEvent()
@@ -37,12 +37,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return true;
+			return MCM_MenuConfig.Instance.LU_Disable == false;
 		}
 
 		public override void StartEvent()
 		{
-			if (ModSettings.GeneralSettings.DebugMode)
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -216,21 +216,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class LookUpData : RandomEventData
 	{
-		public readonly float treeShakeChance; // Chance player will successfully shake the gold out of the tree
-		public readonly float baseRangeChance; // Chance player will be able to get gold out of the tree with ranged weapon at minimum skill level
-		public readonly int minRangeLevel; // Below, the player will always miss
-		public readonly int maxRangeLevel; // At or above, the player will always succeed
-		public readonly int minGold;
-		public readonly int maxGold;
 
-		public LookUpData(string eventType, float chanceWeight, float treeShakeChance, float baseRangeChance, int minRangeLevel, int maxRangeLevel, int minGold, int maxGold) : base(eventType, chanceWeight)
+		public LookUpData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.treeShakeChance = treeShakeChance;
-			this.baseRangeChance = baseRangeChance;
-			this.minRangeLevel = minRangeLevel;
-			this.maxRangeLevel = maxRangeLevel;
-			this.minGold = minGold;
-			this.maxGold = maxGold;
 		}
 
 		public override BaseEvent GetBaseEvent()

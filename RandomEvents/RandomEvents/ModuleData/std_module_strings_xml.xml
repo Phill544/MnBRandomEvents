@@ -169,10 +169,10 @@
     <string id="MassGrave_Event_Choice_4" text="You decide to just leave the area as it is. You tell your men they can handle this in any way they want. Later that evening your men return having buried the bodies." />
 
     <!--MassGrave - Log Messages-->
-    <string id="MassGrave_Event_Msg_1" text="Your party lost {moraleLossA} morale due to recent events." />
-    <string id="MassGrave_Event_Msg_2" text="Your party lost {moraleLossB} morale due to recent events." />
-    <string id="MassGrave_Event_Msg_1" text="Your party lost {moraleLossC} morale due to recent events." />
-    <string id="MassGrave_Event_Msg_2" text="Your party lost {moraleLossD} morale due to recent events." />
+    <string id="MassGrave_Event_Msg_1" text="Your party lost {baseMoraleLoss} morale due to recent events." />
+    <string id="MassGrave_Event_Msg_2" text="Your party lost {baseMoraleLoss} morale due to recent events." />
+    <string id="MassGrave_Event_Msg_3" text="Your party lost {baseMoraleLoss} morale due to recent events." />
+    <string id="MassGrave_Event_Msg_4" text="Your party lost {baseMoraleLoss} morale due to recent events." />
 
 
 

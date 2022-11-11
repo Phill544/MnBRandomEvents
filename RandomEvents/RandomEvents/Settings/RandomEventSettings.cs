@@ -7,17 +7,20 @@ namespace CryingBuffalo.RandomEvents.Settings
     class RandomEventSettings
     {
         [JsonProperty]
-        public BetMoneyData BetMoneyData { get; private set; } = new BetMoneyData("BetMoney", 1024);
+        public BetMoneyData BetMoneyData { get; private set; } = 
+            new BetMoneyData("BetMoney", 1024);
 
         [JsonProperty]
-        public BumperCropData BumperCropData { get; private set; } = new BumperCropData("BumperCrop", 1024);
+        public BumperCropData BumperCropData { get; private set; } = 
+            new BumperCropData("BumperCrop", 1024);
 
         [JsonProperty]
         public BanditAmbushData BanditAmbushData { get; private set; } =
             new BanditAmbushData("BanditAmbush", 1024);
 
         [JsonProperty]
-        public GranaryRatsData GranaryRatsData { get; private set; } = new GranaryRatsData("GranaryRats", 1024, 0.75f);
+        public GranaryRatsData GranaryRatsData { get; private set; } = 
+            new GranaryRatsData("GranaryRats", 1024, 0.75f);
 
         [JsonProperty]
         public TargetPracticeData TargetPracticeData { get; private set; } =
@@ -57,7 +60,7 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public PerfectWeatherData PerfectWeatherData { get; private set; } =
-            new PerfectWeatherData("PerfectWeather", 1024, 5);
+            new PerfectWeatherData("PerfectWeather", 1024);
 
         [JsonProperty]
         public WanderingLivestockData WanderingLivestockData { get; private set; } =
@@ -97,7 +100,7 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public LookUpData LookUpData { get; private set; } =
-            new LookUpData("LookUp", 1024, 0.25f, 0.1f, 5, 75, 250, 5000);
+            new LookUpData("LookUp", 1024);
 
         [JsonProperty]
         public HotSpringsData HotSpringsData { get; private set; } = 
@@ -120,7 +123,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new FallenSoldierFamilyData("FallenSoldierFamily", 1024 );
         
         public NotOfThisWorldData NotOfThisWorldData { get; } =
-            new NotOfThisWorldData("NotOfThisWorld", 1024, 3, 8 );
+            new NotOfThisWorldData("NotOfThisWorld", 1024 );
         
         public FishingSpotData FishingSpotData { get; } =
             new FishingSpotData("FishingSpot", 1024 );
@@ -129,7 +132,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new HuntingTripData("HuntingTrip", 1024);
         
         public LoggingSiteData LoggingSiteData { get; } =
-            new LoggingSiteData("LoggingSite", 1024, 5, 20, 10, 25);
+            new LoggingSiteData("LoggingSite", 1024);
         
         public RedMoonData RedMoonData { get; } =
             new RedMoonData("RedMoon", 1024, 500, 5000, 10, 50);
@@ -138,7 +141,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             new PassingCometData("PassingComet", 1024);
         
         public MassGraveData MassGraveData { get; } =
-            new MassGraveData("MassGrave", 1024, 2, 6, 10, 30);
+            new MassGraveData("MassGrave", 1024);
         
         public BeggarBeggingData BeggarBeggingData { get; } =
             new BeggarBeggingData("BeggarBegging",1024);
@@ -147,9 +150,9 @@ namespace CryingBuffalo.RandomEvents.Settings
             new BirthdayPartyData("BirthdayParty",1024);
         
         public OldRuinsData OldRuinsData { get; } =
-            new OldRuinsData("OldRuins",1024, 5, 10, 400, 2000);
+            new OldRuinsData("OldRuins",1024);
         
-        //Placeholder
+        //New Event Soon
         public AFlirtatiousEncounterData AFlirtatiousEncounterData { get; } =
             new AFlirtatiousEncounterData("AFlirtatiousEncounter", 1024);
     }
