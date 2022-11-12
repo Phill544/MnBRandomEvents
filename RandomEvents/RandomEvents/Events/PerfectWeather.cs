@@ -13,7 +13,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minMoraleGain;
 		private readonly int maxMoraleGain;
 
-		public PerfectWeather() : base(Settings.ModSettings.RandomEvents.PerfectWeatherData)
+		public PerfectWeather() : base(ModSettings.RandomEvents.PerfectWeatherData)
 		{
 			minMoraleGain = MCM_MenuConfig.Instance.PW_MinMoraleGain;
 			maxMoraleGain = MCM_MenuConfig.Instance.PW_MaxMoraleGain;

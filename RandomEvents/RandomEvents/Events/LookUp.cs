@@ -37,7 +37,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.LU_Disable == false;
+			return MCM_MenuConfig.Instance.LU_Disable == false && MobileParty.MainParty.CurrentSettlement == null;;
 		}
 
 		public override void StartEvent()
