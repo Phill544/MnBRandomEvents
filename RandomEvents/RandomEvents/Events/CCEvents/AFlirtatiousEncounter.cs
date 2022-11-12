@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.CampaignSystem.Settlements.Locations;
 using TaleWorlds.Library;
@@ -26,7 +28,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
             //Will need a few conditions to align in order to execute.
-            return true;
+            return Hero.MainHero.IsFemale == false;
             
         }
 
@@ -45,20 +47,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             //Then pick a random character that fits.
             //Random variable for pregnancy chance to occur.
             //Event ends with either a NPC gets pregnant or not.
-
-            var heroGender = Hero.MainHero.IsFemale;
-
-            var notables = Settlement.CurrentSettlement.Notables;
-            var heroes = Settlement.CurrentSettlement.HeroesWithoutParty;
-
-            foreach (var character in notables)
-            {
-                var name = character.Name;
-                var gender = character.IsFemale;
-
-                InformationManager.DisplayMessage(new InformationMessage($"{name}, {gender},", RandomEventsSubmodule.Dbg_Color));
-            }
-
+            
+                
+            StopEvent();
         }
 
         private void StopEvent()

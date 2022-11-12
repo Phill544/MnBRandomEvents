@@ -114,7 +114,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Bannerlord.MCM" Version="5.1.0" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.MCM" Version="5.1.1" IncludeAssets="compile" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
