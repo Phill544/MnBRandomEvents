@@ -32,7 +32,7 @@ namespace CryingBuffalo.RandomEvents
 
         public RandomEventData GetRandom()
         {
-            float rand = MBRandom.RandomFloatRanged(0.0f, accumulatedWeight);
+            var rand = MBRandom.RandomFloatRanged(0.0f, accumulatedWeight);
 
             return (from weightedEvent in weightedEvents where weightedEvent.accumulatedWeight >= rand select weightedEvent.randomEventData).FirstOrDefault();
         }
@@ -41,5 +41,7 @@ namespace CryingBuffalo.RandomEvents
         {
             return weightedEvents.FirstOrDefault((x) => x.randomEventData.eventType.ToLower() == id.ToLower()).randomEventData;
         }
+        
+        
     }
 }

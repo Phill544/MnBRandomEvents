@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Documents;
 using MCM.Abstractions.Base.Global;
 using MCM.Abstractions.FluentBuilder;
 using MCM.Common;
@@ -28,7 +29,7 @@ namespace CryingBuffalo.RandomEvents.Settings
         #region Ahead of Time - Variables
         
         public bool AoT_Disable { get; private set; }
-        
+
         #endregion
 
         #region Bandit Ambush - Variables
@@ -998,7 +999,7 @@ namespace CryingBuffalo.RandomEvents.Settings
                 #region Ahead of Time - Builder
                 
                 .CreateGroup(aot_heading, groupBuilder => groupBuilder
-                    .AddBool("AoT1", aot1_text, new ProxyRef<bool>(() => AoT_Disable, o => AoT_Disable = o), boolBuilder => boolBuilder
+                    .AddBool("AoT", aot1_text, new ProxyRef<bool>(() => AoT_Disable, o => AoT_Disable = o), boolBuilder => boolBuilder
                         .SetHintText(aot1_hint))
                     )
                 

@@ -166,7 +166,7 @@ namespace CryingBuffalo.RandomEvents.Settings
         public OldRuinsData OldRuinsData { get; } =
             new OldRuinsData("OldRuins",1024);
         
-        //New Event Soon
+        [JsonProperty]
         public AFlirtatiousEncounterData AFlirtatiousEncounterData { get; } =
             new AFlirtatiousEncounterData("AFlirtatiousEncounter", 1024);
     }
