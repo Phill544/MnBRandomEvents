@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -20,15 +21,15 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int minGoldRaided;
         private readonly int maxGoldRaided;
 
-        public UnexpectedWedding() : base(Settings.ModSettings.RandomEvents.UnexpectedWeddingData)
+        public UnexpectedWedding() : base(ModSettings.RandomEvents.UnexpectedWeddingData)
         {
-            minGoldToDonate = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.minGoldToDonate;
-            maxGoldToDonate = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.maxGoldToDonate;
-            minPeopleInWedding = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.minPeopleInWedding;
-            maxPeopleInWedding = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.maxPeopleInWedding;
-            embarrassedSoliderMaxGold = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.embarrassedSoliderMaxGold;
-            minGoldRaided = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.minGoldRaided;
-            maxGoldRaided = Settings.ModSettings.RandomEvents.UnexpectedWeddingData.maxGoldRaided;
+            minGoldToDonate = MCM_MenuConfig.Instance.UW_MinGoldToDonate;
+            maxGoldToDonate = MCM_MenuConfig.Instance.UW_MaxGoldToDonate;
+            minPeopleInWedding = MCM_MenuConfig.Instance.UW_MinPeopleInWedding;
+            maxPeopleInWedding = MCM_MenuConfig.Instance.UW_MaxPeopleInWedding;
+            embarrassedSoliderMaxGold = MCM_MenuConfig.Instance.UW_EmbarrassedSoliderMaxGold;
+            minGoldRaided = MCM_MenuConfig.Instance.UW_MinGoldRaided;
+            maxGoldRaided = MCM_MenuConfig.Instance.UW_MaxGoldRaided;
         }
 
         public override void CancelEvent()
@@ -37,12 +38,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return true;
+            return MCM_MenuConfig.Instance.UW_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_MenuConfig.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
@@ -218,24 +219,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class UnexpectedWeddingData : RandomEventData
     {
-        public readonly int minGoldToDonate;
-        public readonly int maxGoldToDonate;
-        public readonly int minPeopleInWedding;
-        public readonly int maxPeopleInWedding;
-        public readonly int embarrassedSoliderMaxGold;
-        public readonly int minGoldRaided;
-        public readonly int maxGoldRaided;
-
-        public UnexpectedWeddingData(string eventType, float chanceWeight, int minGoldToDonate, int maxGoldToDonate, int minPeopleInWedding, int maxPeopleInWedding, int embarrassedSoliderMaxGold, int minGoldRaided, int maxGoldRaided) : base(eventType,
+        public UnexpectedWeddingData(string eventType, float chanceWeight) : base(eventType,
             chanceWeight)
         {
-            this.minGoldToDonate = minGoldToDonate;
-            this.maxGoldToDonate = maxGoldToDonate;
-            this.minPeopleInWedding = minPeopleInWedding;
-            this.maxPeopleInWedding = maxPeopleInWedding;
-            this.embarrassedSoliderMaxGold = embarrassedSoliderMaxGold;
-            this.minGoldRaided = minGoldRaided;
-            this.maxGoldRaided = maxGoldRaided;
         }
 
         public override BaseEvent GetBaseEvent()

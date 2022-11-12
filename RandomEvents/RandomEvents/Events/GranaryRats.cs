@@ -93,11 +93,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class GranaryRatsData : RandomEventData
 	{
-		public readonly float foodLossPercent;
 
-		public GranaryRatsData(string eventType, float chanceWeight, float foodLossPercent) : base(eventType, chanceWeight)
+		public GranaryRatsData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.foodLossPercent = foodLossPercent;
 		}
 
 		public override BaseEvent GetBaseEvent()

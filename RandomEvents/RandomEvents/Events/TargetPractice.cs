@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -14,10 +15,10 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minimumSoldiers;
 		private readonly float percentageDifferenceOfCurrentTroop;
 
-		public TargetPractice() : base(Settings.ModSettings.RandomEvents.TargetPracticeData)
+		public TargetPractice() : base(ModSettings.RandomEvents.TargetPracticeData)
 		{
-			minimumSoldiers = Settings.ModSettings.RandomEvents.TargetPracticeData.minimumSoldiers;
-			percentageDifferenceOfCurrentTroop = Settings.ModSettings.RandomEvents.TargetPracticeData.percentageDifferenceOfCurrentTroop;
+			minimumSoldiers = MCM_MenuConfig.Instance.TP_MinSoldiers;
+			percentageDifferenceOfCurrentTroop = MCM_MenuConfig.Instance.TP_PercentageDifferenceOfCurrentTroop;
 		}
 
 		public override void CancelEvent()
@@ -26,12 +27,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig.Instance.TP_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -150,14 +151,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class TargetPracticeData : RandomEventData
 	{
-		public readonly int minimumSoldiers;
-
-		public readonly float percentageDifferenceOfCurrentTroop;
-
-		public TargetPracticeData(string eventType, float chanceWeight, float percentageDifferenceOfCurrentTroop, int minimumSoldiers) : base(eventType, chanceWeight)
+		public TargetPracticeData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.percentageDifferenceOfCurrentTroop = percentageDifferenceOfCurrentTroop;
-			this.minimumSoldiers = minimumSoldiers;
 		}
 
 		public override BaseEvent GetBaseEvent()

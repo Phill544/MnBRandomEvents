@@ -20,15 +20,15 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public GranaryRatsData GranaryRatsData { get; private set; } = 
-            new GranaryRatsData("GranaryRats", 1024, 0.75f);
+            new GranaryRatsData("GranaryRats", 1024);
 
         [JsonProperty]
         public TargetPracticeData TargetPracticeData { get; private set; } =
-            new TargetPracticeData("TargetPractice", 1024, 0.5f, 30);
+            new TargetPracticeData("TargetPractice", 1024);
 
         [JsonProperty]
         public PrisonerRebellionData PrisonerRebellionData { get; private set; } =
-            new PrisonerRebellionData("PrisonerRebellion", 1024, 30);
+            new PrisonerRebellionData("PrisonerRebellion", 1024);
 
         [JsonProperty]
         public ChattingCommandersData ChattingCommandersData { get; private set; } =
@@ -48,7 +48,7 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public SecretSingerData SecretSingerData { get; private set; } = 
-            new SecretSingerData("SecretSinger", 1024, 10);
+            new SecretSingerData("SecretSinger", 1024);
 
         [JsonProperty]
         public BeeKindData BeeKindData { get; private set; } = 
@@ -64,7 +64,7 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public WanderingLivestockData WanderingLivestockData { get; private set; } =
-            new WanderingLivestockData("WanderingLivestock", 1024, 5, 10);
+            new WanderingLivestockData("WanderingLivestock", 1024);
 
         [JsonProperty]
         public EagerTroopsData EagerTroopsData { get; private set; } = 
@@ -72,7 +72,7 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public SpeedyRecoveryData SpeedyRecoveryData { get; private set; } =
-            new SpeedyRecoveryData("SpeedyRecovery", 1024, 2, 20);
+            new SpeedyRecoveryData("SpeedyRecovery", 1024);
 
         [JsonProperty]
         public FantasticFightersData FantasticFightersData { get; private set; } =
@@ -88,7 +88,7 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public SuccessfulDeedsData SuccessfulDeedsData { get; private set; } =
-            new SuccessfulDeedsData("SuccessfulDeeds", 1024, 50.0f);
+            new SuccessfulDeedsData("SuccessfulDeeds", 1024);
 
         [JsonProperty]
         public BunchOfPrisonersData BunchOfPrisonersData { get; private set; } =
@@ -96,7 +96,7 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         [JsonProperty]
         public UndercookedData UndercookedData { get; private set; } = 
-            new UndercookedData("Undercooked", 1024, 2, 20);
+            new UndercookedData("Undercooked", 1024);
 
         [JsonProperty]
         public LookUpData LookUpData { get; private set; } =
@@ -110,45 +110,59 @@ namespace CryingBuffalo.RandomEvents.Settings
         public SupernaturalEncounterData SupernaturalEncounterData { get; private set; } =
             new SupernaturalEncounterData("SupernaturalEncounter", 1024);
         
+        [JsonProperty]
         public RunawaySonData RunawaySonData { get; } =
-            new RunawaySonData("RunawaySon", 1024, 10, 50);
+            new RunawaySonData("RunawaySon", 1024);
         
+        [JsonProperty]
         public UnexpectedWeddingData UnexpectedWeddingData { get; } =
-            new UnexpectedWeddingData("UnexpectedWedding", 1024, 10, 100, 10, 50, 200, 200, 1000);
+            new UnexpectedWeddingData("UnexpectedWedding", 1024);
         
+        [JsonProperty]
         public ViolatedGirlData ViolatedGirlData { get; } =
-            new ViolatedGirlData("ViolatedGirl", 1024, 50, 750);
+            new ViolatedGirlData("ViolatedGirl", 1024);
         
+        [JsonProperty]
         public FallenSoldierFamilyData FallenSoldierFamilyData { get; } =
             new FallenSoldierFamilyData("FallenSoldierFamily", 1024 );
         
+        [JsonProperty]
         public NotOfThisWorldData NotOfThisWorldData { get; } =
             new NotOfThisWorldData("NotOfThisWorld", 1024 );
         
+        [JsonProperty]
         public FishingSpotData FishingSpotData { get; } =
             new FishingSpotData("FishingSpot", 1024 );
         
+        [JsonProperty]
         public HuntingTripData HuntingTripData { get; } =
             new HuntingTripData("HuntingTrip", 1024);
         
+        [JsonProperty]
         public LoggingSiteData LoggingSiteData { get; } =
             new LoggingSiteData("LoggingSite", 1024);
         
+        [JsonProperty]
         public RedMoonData RedMoonData { get; } =
-            new RedMoonData("RedMoon", 1024, 500, 5000, 10, 50);
+            new RedMoonData("RedMoon", 1024);
         
+        [JsonProperty]
         public PassingCometData PassingCometData { get; } =
             new PassingCometData("PassingComet", 1024);
         
+        [JsonProperty]
         public MassGraveData MassGraveData { get; } =
             new MassGraveData("MassGrave", 1024);
         
+        [JsonProperty]
         public BeggarBeggingData BeggarBeggingData { get; } =
             new BeggarBeggingData("BeggarBegging",1024);
         
+        [JsonProperty]
         public BirthdayPartyData BirthdayPartyData { get; } =
             new BirthdayPartyData("BirthdayParty",1024);
         
+        [JsonProperty]
         public OldRuinsData OldRuinsData { get; } =
             new OldRuinsData("OldRuins",1024);
         

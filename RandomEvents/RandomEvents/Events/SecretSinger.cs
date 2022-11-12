@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
@@ -8,11 +10,13 @@ namespace CryingBuffalo.RandomEvents.Events
 {
     public sealed class SecretSinger : BaseEvent
     {
-        private readonly int moraleGain;
+        private readonly int minMoraleGain;
+        private readonly int maxMoraleGain;
 
-        public SecretSinger() : base(Settings.ModSettings.RandomEvents.SecretSingerData)
+        public SecretSinger() : base(ModSettings.RandomEvents.SecretSingerData)
         {
-            moraleGain = Settings.ModSettings.RandomEvents.SecretSingerData.moraleGain;
+            minMoraleGain = MCM_MenuConfig.Instance.SS_MinMoraleGained;
+            maxMoraleGain = MCM_MenuConfig.Instance.SS_MaxMoraleGained;
         }
 
         public override void CancelEvent()
@@ -21,15 +25,17 @@ namespace CryingBuffalo.RandomEvents.Events
 
         public override bool CanExecuteEvent()
         {
-            return true;
+            return MCM_MenuConfig.Instance.SS_Disable == false;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_MenuConfig.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
+
+            var moraleGain = MBRandom.RandomInt(minMoraleGain,maxMoraleGain);
 			
             MobileParty.MainParty.RecentEventsMorale += moraleGain;
             MobileParty.MainParty.MoraleExplained.Add(moraleGain);
@@ -61,11 +67,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
     public class SecretSingerData : RandomEventData
     {
-        public readonly int moraleGain;
 
-        public SecretSingerData(string eventType, float chanceWeight, int moraleGain) : base(eventType, chanceWeight)
+        public SecretSingerData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
         {
-            this.moraleGain = moraleGain;
         }
 
         public override BaseEvent GetBaseEvent()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -17,10 +18,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int minGold;
         private readonly int maxGold;
 
-        public RunawaySon() : base(Settings.ModSettings.RandomEvents.RunawaySonData)
+        public RunawaySon() : base(ModSettings.RandomEvents.RunawaySonData)
         {
-            minGold = Settings.ModSettings.RandomEvents.RunawaySonData.minGold;
-            maxGold = Settings.ModSettings.RandomEvents.RunawaySonData.maxGold;
+            minGold = MCM_MenuConfig.Instance.RS_MinGoldGained;
+            maxGold = MCM_MenuConfig.Instance.RS_MaxGoldGained;
         }
 
         public override void CancelEvent()
@@ -29,12 +30,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return true;
+            return MCM_MenuConfig.Instance.RS_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_MenuConfig.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
@@ -132,7 +133,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             break;
                     }
                 },
-                null); // What to do on the "cancel" button, shouldn't ever need it.
+                null);
 
             MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
@@ -157,7 +158,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var settlements = Settlement.FindAll(s => !s.IsHideout).ToList();
             var closestSettlement = settlements.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 
-            //Currently it gives just a random solider from the current culture. Will fix once API docs are updated
+            //Currently it gives just a random solider from the current culture.
+            //PHILL
+            
             var bandits = PartySetup.CreateBanditParty();
             bandits.MemberRoster.Clear();
             PartySetup.AddRandomCultureUnits(bandits, 1, closestSettlement.Culture);
@@ -169,14 +172,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class RunawaySonData : RandomEventData
     {
-        public readonly int minGold;
-        public readonly int maxGold;
 
-        public RunawaySonData(string eventType, float chanceWeight, int minGold, int maxGold) : base(eventType,
+        public RunawaySonData(string eventType, float chanceWeight) : base(eventType,
             chanceWeight)
         {
-            this.minGold = minGold;
-            this.maxGold = maxGold;
         }
 
         public override BaseEvent GetBaseEvent()

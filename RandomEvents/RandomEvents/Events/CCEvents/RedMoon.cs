@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -17,12 +18,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 		private readonly int minMenLost;
 		private readonly int maxMenLost;
 
-		public RedMoon() : base(Settings.ModSettings.RandomEvents.RedMoonData)
+		public RedMoon() : base(ModSettings.RandomEvents.RedMoonData)
 		{
-			minGoldLost = Settings.ModSettings.RandomEvents.RedMoonData.minGoldLost;
-			maxGoldLost = Settings.ModSettings.RandomEvents.RedMoonData.maxGoldLost;
-			minMenLost = Settings.ModSettings.RandomEvents.RedMoonData.minMenLost;
-			maxMenLost = Settings.ModSettings.RandomEvents.RedMoonData.maxMenLost;
+			minGoldLost = MCM_MenuConfig.Instance.RM_MinGoldLost;
+			maxGoldLost = MCM_MenuConfig.Instance.RM_MaxGoldLost;
+			minMenLost = MCM_MenuConfig.Instance.RM_MinMenLost;
+			maxMenLost = MCM_MenuConfig.Instance.RM_MaxMenLost;
 		}
 
 		public override void CancelEvent()
@@ -31,12 +32,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return true;
+			return MCM_MenuConfig.Instance.RM_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -209,17 +210,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 	public class RedMoonData : RandomEventData
 	{
-		public readonly int minGoldLost;
-		public readonly int maxGoldLost;
-		public readonly int minMenLost;
-		public readonly int maxMenLost;
-
-		public RedMoonData(string eventType, float chanceWeight, int minGoldLost, int maxGoldLost, int minMenLost, int maxMenLost) : base(eventType, chanceWeight)
+		public RedMoonData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.minGoldLost = minGoldLost;
-			this.maxGoldLost = maxGoldLost;
-			this.minMenLost = minMenLost;
-			this.maxMenLost = maxMenLost;
 		}
 
 		public override BaseEvent GetBaseEvent()

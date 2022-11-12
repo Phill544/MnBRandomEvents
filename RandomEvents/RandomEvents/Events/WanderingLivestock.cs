@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -14,10 +15,10 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minFood;
 		private readonly int maxFood;
 
-		public WanderingLivestock() : base(Settings.ModSettings.RandomEvents.WanderingLivestockData)
+		public WanderingLivestock() : base(ModSettings.RandomEvents.WanderingLivestockData)
 		{
-			minFood = Settings.ModSettings.RandomEvents.WanderingLivestockData.minFood;
-			maxFood = Settings.ModSettings.RandomEvents.WanderingLivestockData.maxFood;
+			minFood = MCM_MenuConfig.Instance.WL_MinFood;
+			maxFood = MCM_MenuConfig.Instance.WL_MaxFood;
 		}
 
 		public override void CancelEvent()
@@ -26,12 +27,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig.Instance.WL_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -137,13 +138,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class WanderingLivestockData : RandomEventData
 	{
-		public readonly int minFood;
-		public readonly int maxFood;
-
-		public WanderingLivestockData(string eventType, float chanceWeight, int minFood, int maxFood) : base(eventType, chanceWeight)
+		public WanderingLivestockData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.minFood = minFood;
-			this.maxFood = maxFood;
 		}
 
 		public override BaseEvent GetBaseEvent()

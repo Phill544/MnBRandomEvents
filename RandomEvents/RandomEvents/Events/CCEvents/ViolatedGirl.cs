@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -15,10 +16,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int minGoldCompensation;
         private readonly int maxGoldCompensation;
 
-        public ViolatedGirl() : base(Settings.ModSettings.RandomEvents.ViolatedGirlData)
+        public ViolatedGirl() : base(ModSettings.RandomEvents.ViolatedGirlData)
         {
-            minGoldCompensation = Settings.ModSettings.RandomEvents.ViolatedGirlData.minGoldCompensation;
-            maxGoldCompensation = Settings.ModSettings.RandomEvents.ViolatedGirlData.maxGoldCompensation;
+            minGoldCompensation = MCM_MenuConfig.Instance.VG_MinCompensation;
+            maxGoldCompensation = MCM_MenuConfig.Instance.VG_MaxCompensation;
         }
 
         public override void CancelEvent()
@@ -27,12 +28,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return true;
+            return MCM_MenuConfig.Instance.VG_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.PartyTradeGold >= maxGoldCompensation;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_MenuConfig.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
@@ -182,14 +183,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class ViolatedGirlData : RandomEventData
     {
-        public readonly int minGoldCompensation;
-        public readonly int maxGoldCompensation;
 
-        public ViolatedGirlData(string eventType, float chanceWeight, int minGoldCompensation, int maxGoldCompensation) : base(eventType,
+        public ViolatedGirlData(string eventType, float chanceWeight) : base(eventType,
             chanceWeight)
         {
-            this.minGoldCompensation = minGoldCompensation;
-            this.maxGoldCompensation = maxGoldCompensation;
         }
 
         public override BaseEvent GetBaseEvent()
