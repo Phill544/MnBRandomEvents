@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -14,6 +15,7 @@ namespace CryingBuffalo.RandomEvents.Events
 	/// Also, using that value to stop movement means that the player cannot be interacted with.
 	/// Disabled until it can be reimplemented
 	/// Not compatible with localization.
+	/// Not included in MCM
 	/// </summary>
 	public sealed class GloriousFood : BaseEvent
 	{
@@ -48,9 +50,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 
 			List<InquiryElement> inquiryElements = new List<InquiryElement>

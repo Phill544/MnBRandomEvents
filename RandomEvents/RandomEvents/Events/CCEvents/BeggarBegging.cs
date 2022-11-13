@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
@@ -19,29 +20,30 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public BeggarBegging() : base(ModSettings.RandomEvents.BeggarBeggingData)
         {
-            /*
-            minGoldToGive = MenuConfig.Instance.MinGoldToGive;
-            maxGoldToGive = MenuConfig.Instance.MaxGoldToGive;
-            minRenownGain = MenuConfig.Instance.MinRenownGain;
-            maxRenownGain = MenuConfig.Instance.MaxRenownGain;
-            */
+            minGoldToGive = MCM_MenuConfig.Instance.BB_MinGoldToBeggar;
+            maxGoldToGive = MCM_MenuConfig.Instance.BB_MaxGoldToBeggar;
+            minRenownGain = MCM_MenuConfig.Instance.BB_MinRenownGain;
+            maxRenownGain = MCM_MenuConfig.Instance.BB_MaxRenownGain;
+    
         }
 
         public override void CancelEvent()
         {
         }
-
+        
+        
         public override bool CanExecuteEvent()
         {
-            
-            return MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
+
+            return MCM_MenuConfig.Instance.BB_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
         }
+
 
         public override void StartEvent()
         {
-            if (ModSettings.GeneralSettings.DebugMode)
+            if (MCM_MenuConfig.Instance.GS_DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
             
             var heroName = Hero.MainHero.FirstName;
@@ -110,7 +112,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain - 5;
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
             }
             else if (goldToGive > 15 && goldToGive <= 35)
             {
@@ -119,7 +121,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain - 2;
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
             }
             else if (goldToGive > 35 && goldToGive <= maxGoldToGive)
             {
@@ -128,7 +130,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain;
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
             }
             
             StopEvent();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -17,12 +18,12 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int highMedicineLevel;
 		private readonly float percentLoss;
 
-		public DiseasedCity() : base(Settings.ModSettings.RandomEvents.DiseasedCityData)
+		public DiseasedCity() : base(ModSettings.RandomEvents.DiseasedCityData)
 		{
-			baseSuccessChance = Settings.ModSettings.RandomEvents.DiseasedCityData.baseSuccessChance;
-			highMedicineChance = Settings.ModSettings.RandomEvents.DiseasedCityData.highMedicineChance;
-			highMedicineLevel = Settings.ModSettings.RandomEvents.DiseasedCityData.highMedicineLevel;
-			percentLoss = Settings.ModSettings.RandomEvents.DiseasedCityData.percentLoss;
+			baseSuccessChance = MCM_MenuConfig.Instance.DC_BaseSuccessChance;
+			highMedicineChance = MCM_MenuConfig.Instance.DC_HighMedicineChance;
+			highMedicineLevel = MCM_MenuConfig.Instance.DC_HighMedicineLevel;
+			percentLoss = MCM_MenuConfig.Instance.DC_PercentLoss;
 		}
 
 		public override void CancelEvent()
@@ -31,11 +32,15 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return Hero.MainHero.Clan.Settlements.Any();
+			return MCM_MenuConfig.Instance.DC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()
 		{
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
 			try
 			{
 				// The name of the settlement that receives the food
@@ -160,7 +165,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					plaguedSettlement.Town.Loyalty *= 1 - percentLoss;
 
 					// Give the hero half xp for trying
-					var xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) * 0.5f;
+					var xpToGive = MCM_MenuConfig.Instance.GS_GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) * 0.5f;
 
 					highestMedicineHero.AddSkillXp(DefaultSkills.Medicine, xpToGive);
 
@@ -186,7 +191,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				if (highestMedicineHero != null)
 				{
 					// Give the hero xp for saving the settlement
-					var xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine);
+					var xpToGive = MCM_MenuConfig.Instance.GS_GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine);
 
 					highestMedicineHero.AddSkillXp(DefaultSkills.Medicine, xpToGive);
 
@@ -204,16 +209,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class DiseasedCityData : RandomEventData
 	{
-		public readonly float baseSuccessChance;
-		public readonly float highMedicineChance;
-		public readonly int highMedicineLevel;
-		public readonly float percentLoss;
-		public DiseasedCityData(string eventType, float chanceWeight, float baseSuccessChance, float highMedicineChance, int highMedicineLevel, float percentLoss) : base(eventType, chanceWeight)
+		public DiseasedCityData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.baseSuccessChance = baseSuccessChance;
-			this.highMedicineChance = highMedicineChance;
-			this.highMedicineLevel = highMedicineLevel;
-			this.percentLoss = percentLoss;
 		}
 
 		public override BaseEvent GetBaseEvent()
@@ -222,3 +219,4 @@ namespace CryingBuffalo.RandomEvents.Events
 		}
 	}
 }
+ 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -11,24 +12,22 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class MassGrave : BaseEvent
     {
-        // The letters correspond to the inquiry element ids
-        private readonly int moraleLossA = 2;
-        private readonly int moraleLossB = 3;
-        private readonly int moraleLossC = 4;
-        private readonly int moraleLossD = 5;
-        
         private readonly int minSoldiers;
         private readonly int maxSoldiers;
         private readonly int minBodies;
         private readonly int maxBodies;
+        private readonly int minBaseMoraleLoss;
+        private readonly int maxBaseMoraleLoss;
         
 
-        public MassGrave() : base(Settings.ModSettings.RandomEvents.MassGraveData)
+        public MassGrave() : base(ModSettings.RandomEvents.MassGraveData)
         {
-            minSoldiers = Settings.ModSettings.RandomEvents.MassGraveData.minSoldiers;
-            maxSoldiers = Settings.ModSettings.RandomEvents.MassGraveData.maxSoldiers;
-            minBodies = Settings.ModSettings.RandomEvents.MassGraveData.minBodies;
-            maxBodies = Settings.ModSettings.RandomEvents.MassGraveData.maxBodies;
+            minSoldiers = MCM_MenuConfig.Instance.MG_MinSoldiers;
+            maxSoldiers = MCM_MenuConfig.Instance.MG_MaxSoldiers;
+            minBodies = MCM_MenuConfig.Instance.MG_MinBodies;
+            maxBodies = MCM_MenuConfig.Instance.MG_MaxBodies;
+            minBaseMoraleLoss = MCM_MenuConfig.Instance.MG_MinBaseMoraleLoss;
+            maxBaseMoraleLoss = MCM_MenuConfig.Instance.MG_MaxBaseMoraleLoss;
         }
 
         public override void CancelEvent()
@@ -37,20 +36,22 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            
-            return true;
+
+            return MCM_MenuConfig.Instance.MG_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_MenuConfig.Instance.GS_DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
             
             var eventTitle = new TextObject("{=MassGrave_Title}The Mass Grave").ToString();
             
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
+
+            var baseMoraleLoss = MBRandom.RandomInt(minBaseMoraleLoss, maxBaseMoraleLoss);
 
             var soldiersDiscovery = MBRandom.RandomInt(minSoldiers, maxSoldiers);
             var bodiesInGrave = MBRandom.RandomInt(minBodies, maxBodies);
@@ -111,23 +112,23 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg1 =new TextObject(
-                    "{=MassGrave_Event_Msg_1}Your party lost {moraleLossA} morale due to recent events.")
-                .SetTextVariable("moraleLossA", moraleLossA)
+                    "{=MassGrave_Event_Msg_1}Your party lost {baseMoraleLoss} morale due to recent events.")
+                .SetTextVariable("baseMoraleLoss", baseMoraleLoss - 2)
                 .ToString();
             
             var eventMsg2=new TextObject(
-                    "{=MassGrave_Event_Msg_2}Your party lost {moraleLossB} morale due to recent events.")
-                .SetTextVariable("moraleLossB", moraleLossB)
+                    "{=MassGrave_Event_Msg_2}Your party lost {baseMoraleLoss} morale due to recent events.")
+                .SetTextVariable("baseMoraleLoss", baseMoraleLoss - 3)
                 .ToString();
             
             var eventMsg3 =new TextObject(
-                    "{=MassGrave_Event_Msg_3}Your party lost {moraleLossC} morale due to recent events.")
-                .SetTextVariable("moraleLossC", moraleLossC)
+                    "{=MassGrave_Event_Msg_3}Your party lost {baseMoraleLoss} morale due to recent events.")
+                .SetTextVariable("baseMoraleLoss", baseMoraleLoss - 4)
                 .ToString();
             
             var eventMsg4 =new TextObject(
-                    "{=MassGrave_Event_Msg_4}Your party lost {moraleLossD} morale due to recent events.")
-                .SetTextVariable("moraleLossD", moraleLossD)
+                    "{=MassGrave_Event_Msg_4}Your party lost {baseMoraleLoss} morale due to recent events.")
+                .SetTextVariable("baseMoraleLoss", baseMoraleLoss - 5)
                 .ToString();
 
 
@@ -139,37 +140,37 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "a":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             
-                            MobileParty.MainParty.RecentEventsMorale -= moraleLossA;
-                            MobileParty.MainParty.MoraleExplained.Add(-moraleLossA);
+                            MobileParty.MainParty.RecentEventsMorale -= baseMoraleLoss - 2;
+                            MobileParty.MainParty.MoraleExplained.Add(-baseMoraleLoss - 2);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
                             
                             break;
                         case "b":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
                             
-                            MobileParty.MainParty.RecentEventsMorale -= moraleLossB;
-                            MobileParty.MainParty.MoraleExplained.Add(-moraleLossB);
+                            MobileParty.MainParty.RecentEventsMorale -= baseMoraleLoss - 3;
+                            MobileParty.MainParty.MoraleExplained.Add(-baseMoraleLoss - 3);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
                             
                             break;
                         case "c":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null, null), true);
                             
-                            MobileParty.MainParty.RecentEventsMorale -= moraleLossC;
-                            MobileParty.MainParty.MoraleExplained.Add(-moraleLossC);
+                            MobileParty.MainParty.RecentEventsMorale -= baseMoraleLoss - 4;
+                            MobileParty.MainParty.MoraleExplained.Add(-baseMoraleLoss - 4);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
                             
                             break;
                         case "d":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                             
-                            MobileParty.MainParty.RecentEventsMorale -= moraleLossD;
-                            MobileParty.MainParty.MoraleExplained.Add(-moraleLossD);
+                            MobileParty.MainParty.RecentEventsMorale -= baseMoraleLoss - 5;
+                            MobileParty.MainParty.MoraleExplained.Add(-baseMoraleLoss - 5);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
                             
                             break;
                         default:
@@ -202,18 +203,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class MassGraveData : RandomEventData
     {
-        public readonly int minSoldiers;
-        public readonly int maxSoldiers;
-        public readonly int minBodies;
-        public readonly int maxBodies;
-
-        public MassGraveData(string eventType, float chanceWeight, int minSoldiers, int maxSoldiers, int minBodies, int maxBodies) : base(eventType,
+        public MassGraveData(string eventType, float chanceWeight) : base(eventType,
             chanceWeight)
         {
-            this.minSoldiers = minSoldiers;
-            this.maxSoldiers = maxSoldiers;
-            this.minBodies = minBodies;
-            this.maxBodies = maxBodies;
         }
 
         public override BaseEvent GetBaseEvent()

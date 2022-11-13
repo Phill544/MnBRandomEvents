@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -27,22 +28,22 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int minGoldLooted;
         private readonly int maxGoldLooted;
 
-        public BirthdayParty() : base(Settings.ModSettings.RandomEvents.BirthdayPartyData)
+        public BirthdayParty() : base(ModSettings.RandomEvents.BirthdayPartyData)
         {
-            minAttending = Settings.ModSettings.RandomEvents.BirthdayPartyData.minAttending;
-            maxAttending = Settings.ModSettings.RandomEvents.BirthdayPartyData.maxAttending;
-            minYourMenAttending = Settings.ModSettings.RandomEvents.BirthdayPartyData.minYourMenAttending;
-            maxYourMenAttending = Settings.ModSettings.RandomEvents.BirthdayPartyData.maxYourMenAttending;
-            minAge = Settings.ModSettings.RandomEvents.BirthdayPartyData.minAge;
-            maxAge = Settings.ModSettings.RandomEvents.BirthdayPartyData.maxAge;
-            minBandits = Settings.ModSettings.RandomEvents.BirthdayPartyData.minBandits;
-            maxBandits = Settings.ModSettings.RandomEvents.BirthdayPartyData.maxBandits;
-            minGoldGiven = Settings.ModSettings.RandomEvents.BirthdayPartyData.minGoldGiven;
-            maxGoldGiven = Settings.ModSettings.RandomEvents.BirthdayPartyData.maxGoldGiven;
-            minRenownGain = Settings.ModSettings.RandomEvents.BirthdayPartyData.minRenownGain;
-            maxRenownGain = Settings.ModSettings.RandomEvents.BirthdayPartyData.maxRenownGain;
-            minGoldLooted = Settings.ModSettings.RandomEvents.BirthdayPartyData.minGoldLooted;
-            maxGoldLooted = Settings.ModSettings.RandomEvents.BirthdayPartyData.maxGoldLooted;
+            minAttending = MCM_MenuConfig.Instance.BP_MinAttending;
+            maxAttending = MCM_MenuConfig.Instance.BP_MaxAttending;
+            minYourMenAttending = MCM_MenuConfig.Instance.BP_MinYourMenAttending;
+            maxYourMenAttending = MCM_MenuConfig.Instance.BP_MaxYourMenAttending;
+            minAge = MCM_MenuConfig.Instance.BP_MinAge;
+            maxAge = MCM_MenuConfig.Instance.BP_MaxAge;
+            minBandits = MCM_MenuConfig.Instance.BP_MinBandits;
+            maxBandits = MCM_MenuConfig.Instance.BP_MaxBandits;
+            minGoldGiven = MCM_MenuConfig.Instance.BP_MinGoldGiven;
+            maxGoldGiven = MCM_MenuConfig.Instance.BP_MaxGoldGiven;
+            minRenownGain = MCM_MenuConfig.Instance.BP_MinRenownGain;
+            maxRenownGain = MCM_MenuConfig.Instance.BP_MaxRenownGain;
+            minGoldLooted = MCM_MenuConfig.Instance.BP_MinGoldLooted;
+            maxGoldLooted = MCM_MenuConfig.Instance.BP_MaxGoldLooted;
         }
 
         public override void CancelEvent()
@@ -51,14 +52,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return true;
+            return MCM_MenuConfig.Instance.BP_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_MenuConfig.Instance.GS_DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
 
             var heroName = Hero.MainHero.FirstName;
@@ -168,13 +169,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldGiven);
                             Clan.PlayerClan.AddRenown(renownGain);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
                             break;
                         
                         case "b":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldGiven);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
                             break;
                         
                         case "c":
@@ -183,7 +184,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "d":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionDText, true, false, eventButtonText, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(+goldGiven);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
                             break;
                         
                         default:
@@ -215,37 +216,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class BirthdayPartyData : RandomEventData
     {
-        public readonly int minAttending;
-        public readonly int maxAttending;
-        public readonly int minYourMenAttending;
-        public readonly int maxYourMenAttending;
-        public readonly int minAge;
-        public readonly int maxAge;
-        public readonly int minBandits;
-        public readonly int maxBandits;
-        public readonly int minGoldGiven;
-        public readonly int maxGoldGiven;
-        public readonly int minRenownGain;
-        public readonly int maxRenownGain;
-        public readonly int minGoldLooted;
-        public readonly int maxGoldLooted;
-
-        public BirthdayPartyData(string eventType, float chanceWeight, int minAttending, int maxAttending, int minYourMenAttending, int maxYourMenAttending, int minAge, int maxAge, int minBandits, int maxBandits, int minGoldGiven, int maxGoldGiven, int minRenownGain, int maxRenownGain, int minGoldLooted, int maxGoldLooted) : base(eventType, chanceWeight)
+        public BirthdayPartyData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
         {
-            this.minAttending = minAttending;
-            this.maxAttending = maxAttending;
-            this.minYourMenAttending = minYourMenAttending;
-            this.maxYourMenAttending = maxYourMenAttending;
-            this.minAge = minAge;
-            this.maxAge = maxAge;
-            this.minBandits = minBandits;
-            this.maxBandits = maxBandits;
-            this.minGoldGiven = minGoldGiven;
-            this.maxGoldGiven = maxGoldGiven;
-            this.minRenownGain = minRenownGain;
-            this.maxRenownGain = maxRenownGain;
-            this.minGoldLooted = minGoldLooted;
-            this.maxGoldLooted = maxGoldLooted;
         }
 
         public override BaseEvent GetBaseEvent()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -13,13 +14,18 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly float moneyBetPercent;
 
-		public BetMoney() : base(Settings.ModSettings.RandomEvents.BetMoneyData)
+		public BetMoney() : base(ModSettings.RandomEvents.BetMoneyData)
 		{
-			moneyBetPercent = Settings.ModSettings.RandomEvents.BetMoneyData.moneyBetPercent;
+			moneyBetPercent = MCM_MenuConfig.Instance.BM_Money_Percent;
 		}
 
 		public override void StartEvent()
 		{
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
+			
 			var eventTitle = new TextObject("{=BetMoney_Title}All or nothing").ToString();
 			
 			var eventOption1 = new TextObject("{=BetMoney_Event_Option_1}Gamble").ToString();
@@ -111,17 +117,15 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MobileParty.MainParty.MemberRoster.TotalRegulars > 0;
+			return MCM_MenuConfig.Instance.BM_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars > 0;
 		}
 	}
 
 	public class BetMoneyData : RandomEventData
 	{
-		public readonly float moneyBetPercent;
 
-		public BetMoneyData(string eventType, float chanceWeight, float moneyBetPercent) : base(eventType, chanceWeight)
+		public BetMoneyData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.moneyBetPercent = moneyBetPercent;
 		}
 
 		public override BaseEvent GetBaseEvent()

@@ -1,10 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+<base type="string">
   <tags>
     <tag language="XX" />
   </tags>
   <strings>
+    <!--AFlirttiousEncounter Event-->
+    <string id="AFlirtatiousEncounter_Title" text="TA Flirtatious Encounter" />
+    <string id="AFlirtatiousEncounter_Event_Desc" text="You are currently enjoying a drink in the tavern in {currentSettlement} and just relaxing. You take a look at the various guest in the tavern. There is quite a diverse mix of people here tonight. Your eyes suddenly lock eyes with a {Demonym} woman who stands across the room. She smiles back when you look at her and she starts to make her way over to you. How shall you proceed?" />
+
+    <!--AFlirttiousEncounter - Event Choices-->
+    <string id="AFlirtatiousEncounter_Event_Option_1" text="Strike up a conversation" />
+    <string id="AFlirtatiousEncounter_Event_Option_1_Hover" text="Have a nice chat with her" />
+    <string id="AFlirtatiousEncounter_Event_Option_2" text="Buy her a drink" />
+    <string id="AFlirtatiousEncounter_Event_Option_2_Hover" text="Always a gentleman." />
+    <string id="AFlirtatiousEncounter_Event_Option_3" text="Hit on her" />
+    <string id="AFlirtatiousEncounter_Event_Option_3_Hover" text="She's cute!" />
+    <string id="AFlirtatiousEncounter_Event_Option_4" text="Be an ass" />
+    <string id="AFlirtatiousEncounter_Event_Option_4_Hover" text="Seriously?" />
+
+    <!--AFlirttiousEncounter - Event Buttons-->
+    <string id="AFlirtatiousEncounter_Event_Button_Text_1" text="Choose" />
+    <string id="AFlirtatiousEncounter_Event_Button_Text_2" text="Okay" />
+
+    <!--AFlirttiousEncounter - Events-->
+    <string id="AFlirtatiousEncounter_Event_Choice_1" text="When she gets over to you the two of you starts talking. You learn that her name is {name} and she's {age} years old. Both of you end up sitting and chatting for a few hours but eventually you both go your separate ways, but not before sharing a warming hug. As you watch her walk away into the night you are left wondering if you'll ever see her again." />
+    <string id="AFlirtatiousEncounter_Event_Choice_2" text="When she gets over to you the two of you starts talking. You offer to buy her a drink which she accepts. As the evening progresses the two of you get more and more drunk. You manage to learn that her name is {name} and she's {age} years old. Eventually you are both so drunk that you are thrown out of the bar.\n\nBoth of you giggle as you wobble down the streets of {currentSettlement} while singing songs. Eventually the alcohol starts wearing off and you both decide it was a lovely night. You give each other a tender hug before you go your separate ways. After a few seconds you hear your name being called. “{heroName} wait!” You turn around and see {name} running back to you. She stops just a few inches from you face and gives you a deep and tender kiss on the lips. “That was for a lovely evening” she said. You kiss her back before saying you final goodbye for the night." />
+    <string id="AFlirtatiousEncounter_Event_Choice_3" text="When she gets over to you the two of you starts talking. You tell her that you don't often get noticed by such beautiful women. She says it's not often she find such handsome men in town. With the tone being set for the event the two of you continue to talk (and naturally to hit on each other as well...) She tells you that her name is {name} and she's {age} years old. After a few minutes the two of you move away from the bar and go somewhere a bit more comfortable. There you both continue your flirtatious behaviour. It does not take long before the two of you start kissing each other.\n\n You kiss her on the neck, on the cheeks, on the lips and so on. She whispers to you “I know a more private place...” with fire in her eyes. Wanna head there she asks. You tell her to lead the way. She takes your hand and leads you out into the street. After a few minutes of walking you arrive at what is clearly {name}'s home in {currentSettlement}. As you enter her house she turns to you and start kissing you passionately again with more lust that you can ever remember. After just a few seconds all your clothes have been removed and you make your way towards {name}'s bed. \n\nThe rest of the night fades out in ecstasy." />
+    <string id="AFlirtatiousEncounter_Event_Choice_4" text="You cannot help but be a little annoyed as you'd rather drink in peace. When she gets over to you she introduces herself as {name}. It does not take long for you to have insulted her enough so she leave you alone. You may have hurt her feelings but at least  you are able to enjoy the night in peace. A few hours later as you are about to leave you come across {name} again. You tell her that you're sorry for what you said and you didn't mean it as you just wanted to be left alone. She somehow manages to politely and kindly tell you to F**k off." />
+
+    <!--AFlirttiousEncounter - Log Messages-->
+    <string id="AFlirtatiousEncounter_Event_Msg_1" text="Relationship between {name} and {heroName}is now {newRelationship}." />
+    <string id="AFlirtatiousEncounter_Event_Msg_2" text="Relationship between {name} and {heroName}is now {newRelationship}." />
+    <string id="AFlirtatiousEncounter_Event_Msg_3" text="Relationship between {name} and {heroName}is now {newRelationship}." />
+    <string id="AFlirtatiousEncounter_Event_Msg_4" text="Relationship between {name} and {heroName}is now {newRelationship}." />
+
+    
+
     <!--BirthdayParty Event-->
     <string id="BirthdayParty_Title" text="The Birthday Party!" />
     <string id="BirthdayParty_Event_Desc" text="As you and your party are traveling in the vicinity of {closestSettlement}, you come across {peopleAttending} people in what seems to be a birthday party for a young girl. A couple of the guests invite you to join them in celebrating the girls {birthdayAge} birthday! What should you do?" />
@@ -77,11 +108,11 @@
     <string id="FallenSoldier_Event_Choice_1" text="You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. The soldier in question was executed by your hands as it was discovered he was a traitor. \n The question you ask yourself now is if his entire family should suffer from his mistake. They have spoken so warmly about him that you don't want to tell them the truth about how he died so you make up a heroic story.\n Even though the family have no right for compensation, you agree to pay them {familyCompensation} gold in compensation so they can keep their family farm.\n \n After you have handed over they gold to them and they have left, you cannot help but wonder if you did the right thing keeping the mother in the dark about her son's true nature.\n \nYou end up drinking the night away." />
     <string id="FallenSoldier_Event_Choice_2" text="You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. The soldier in question was executed by your hands as it was discovered he was a traitor. \n You tell the family that you cannot grant them compensation as it was specified in his contract that the family left behind had no right to claim compensation. The women starts to cry and begs you to help them. You decline to help them and leave the tavern." />
     <string id="FallenSoldier_Event_Choice_3" text="You don't have the energy to deal with this so you tell them that you don't owe them anything. You then leave the tavern." />
-    <string id="FallenSoldier_Event_Choice_4" text="You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. The soldier in question was executed by your hands as it was discovered he was a traitor.\n You ask them where their farm is and you tell them you will be there tomorrow. You then excuse yourself and leave. \n \n The following day you and your men arrive at the farm but you have no intention to pay them. Instead you order your men to burn the farm to the ground and kill the owners.\n  You watch as your men execute your orders. You see them dragging the family outside with their hands bound behind their backs. You watch as the farmhouse burns and you witness your men executing all of the family.\n Once they are done you order your men back and you ride back to your main party." />
+    <string id="FallenSoldier_Event_Choice_4" text="You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. The soldier in question was executed by your hands as it was discovered he was a traitor.\n You ask them where their farm is and you tell them you will be there tomorrow. You then excuse yourself and leave. \n \n The following day you and your men arrive at the farm but you have no intention to pay them. Instead you order your men to burn the farm to the ground and kill the owners.\n  You watch as your men execute your orders. You see them dragging the family outside with their hands bound behind their backs. You see you men exit the farmhouse with some valuables. You watch as the farmhouse burns and you witness your men executing all of the family.\n Once they are done you order your men back and you ride back to your main party. \n \nBack at camp your men told you they looted {goldLooted} gold from the house." />
 
     <!--FallenSoldier - Log Messages-->
     <string id="FallenSoldier_Event_Msg_1" text="{heroName} gives the family {familyCompensation} gold in compensation." />
-    <string id="FallenSoldier_Event_Msg_2" text="{heroName} No one messes with {heroName}!" />
+    <string id="FallenSoldier_Event_Msg_2" text="{heroName}'s party looted {goldLooted} gold from the farmhouse." />
 
 
 
@@ -169,10 +200,10 @@
     <string id="MassGrave_Event_Choice_4" text="You decide to just leave the area as it is. You tell your men they can handle this in any way they want. Later that evening your men return having buried the bodies." />
 
     <!--MassGrave - Log Messages-->
-    <string id="MassGrave_Event_Msg_1" text="Your party lost {moraleLossA} morale due to recent events." />
-    <string id="MassGrave_Event_Msg_2" text="Your party lost {moraleLossB} morale due to recent events." />
-    <string id="MassGrave_Event_Msg_1" text="Your party lost {moraleLossC} morale due to recent events." />
-    <string id="MassGrave_Event_Msg_2" text="Your party lost {moraleLossD} morale due to recent events." />
+    <string id="MassGrave_Event_Msg_1" text="Your party lost {baseMoraleLoss} morale due to recent events." />
+    <string id="MassGrave_Event_Msg_2" text="Your party lost {baseMoraleLoss} morale due to recent events." />
+    <string id="MassGrave_Event_Msg_3" text="Your party lost {baseMoraleLoss} morale due to recent events." />
+    <string id="MassGrave_Event_Msg_4" text="Your party lost {baseMoraleLoss} morale due to recent events." />
 
 
 
@@ -202,7 +233,7 @@
     <!--RedMoon Event-->
     <string id="RedMoon_Title" text="A Coming Apocalypse?" />
     <string id="RedMoon_Event_Desc" text="You are in your tent late one night when you are awoken by your men starting a commotion. Annoyed, you go out and tell them to quiet down but as soon as you step foot outside your tent you see what the commotion is about. The moon has become blood red. Your men are panicking and running around in all directions and proclaiming this to be the end of days. The only question you can ask yourself is what are you going to do about this?" />
-   
+
     <!--RedMoon Event Choices-->
     <string id="RedMoon_Event_Option_1" text="Panic with your men" />
     <string id="RedMoon_Event_Option_1_Hover" text="This really **is** the end!" />
@@ -218,7 +249,7 @@
     <string id="RedMoon_Event_Choice_2" text="You call your men to you. Many are panicking and you see genuine fear in their faces. You tell to stop and calm down but to no avail. They start running around like headless chickens again. You decide not to waste your time and let the fanatics do what they want so you retire to your tent.\n \nWhen you wake up the following morning you learned that {menLostToReligion} of your men left your party in the direction of {closestSettlement}. They also inform you they took {goldLostToReligion} gold from the treasury as an offering to the church. At least the fanatics are gone!" />
     <string id="RedMoon_Event_Choice_3" text="You order your men to you! Most fall in line immediately, but some still act like idiots. You tell your men that what you are witnessing is a natural occuring phenomenon since you have witnessed this before. You explain how you saw the exact same thing a few years ago and nothing bad came out of it. You men seem to be happy to hear this. There are still some idiots praying in the back but you kick them from the party claiming you don't need mentally unstable warriors. You have several of your guards kick them out of camp!" />
     <string id="RedMoon_Event_Choice_4" text="Nope...\n \nYou turn around and go back into your tent and straight back to bed.\n \nWhen you wake up the following morning you learned that {menLostToReligion} of your men left your party in the direction of {closestSettlement}. They also inform you they took {goldLostToReligion} gold from the treasury as an offering to the church. At least the fanatics are gone!" />
-   
+
     <!--RedMoon Event Buttons-->
     <string id="RedMoon_Event_Button_Text_1" text="Choose" />
     <string id="RedMoon_Event_Button_Text_2" text="Done" />
@@ -379,7 +410,8 @@
     <string id="OldRuins_Event_Choice_2" text="You all decide to check the well as it's closest to you. You encircle it, look down and... Nothing... Just dirt. You then leave." />
     <string id="OldRuins_Event_Choice_3" text="The men want to check the barn so you agree. Once inside you can only see some skeletons from what you can only assume were farm animals. The men scatter and search the barn but they all come up empty handed. You proceed to leave." />
     <string id="OldRuins_Event_Choice_4" text="You all agree to head to the shack. You pry the door open and inside you find a chest with a lock. After fidgeting for a couple of minutes you manage to break the lock. The chest is mostly filled with papers but all the way at the bottom you come across a rather hefty coin purse. You open it and to you amazement it's filled with lots of gold coins. You head back to camp where you split the content of the purse with your men. You found {goldFound} gold and there were {men} men who went with you so {goldFound} / {men} = {goldForYou}." />
-
+    <string id="OldRuins_Event_Choice_5" text="You all agree that you don't want to get wet so you make your way back to camp." />
+    
     <!--OldRuins - Log Messages-->
     <string id="OldRuins_Event_Msg_1" text="{heroName} lost {killedMen} men to a collapsing structure." />
     <string id="OldRuins_Event_Msg_2" text="{heroName} got {goldForYou} gold after splitting {goldFound} gold with {men} men." />
@@ -551,6 +583,7 @@
     <string id="GranaryRats_Title" text="Rats in the granary!" />
     <string id="GranaryRats_Event_Text" text="You have been informed that {ratSettlement} had an infestation of rats that went unchecked... The rats won't starve this month, but your peasants might." />
     <string id="GranaryRats_Event_Button_Text" text="Done" />
+    <string id="GranaryRats_Event_Msg_1" text="{ratSettlement} lost {foodLossPercent}% of it's food to rats in the granary." />
 
 
 

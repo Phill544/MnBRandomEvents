@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -19,15 +20,15 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int maxYieldMultiplier;
         
 
-        public HuntingTrip() : base(Settings.ModSettings.RandomEvents.HuntingTripData)
+        public HuntingTrip() : base(ModSettings.RandomEvents.HuntingTripData)
         {
-            minSoldiersToGo = Settings.ModSettings.RandomEvents.HuntingTripData.minSoldiersToGo;
-            maxSoldiersToGo = Settings.ModSettings.RandomEvents.HuntingTripData.maxSoldiersToGo;
-            maxCatch = Settings.ModSettings.RandomEvents.HuntingTripData.maxCatch;
-            minMoraleGain = Settings.ModSettings.RandomEvents.HuntingTripData.minMoraleGain;
-            maxMoraleGain = Settings.ModSettings.RandomEvents.HuntingTripData.maxMoraleGain;
-            minYieldMultiplier = Settings.ModSettings.RandomEvents.HuntingTripData.minYieldMultiplier;
-            maxYieldMultiplier = Settings.ModSettings.RandomEvents.HuntingTripData.maxYieldMultiplier;
+            minSoldiersToGo = MCM_MenuConfig.Instance.HT_MinSoldiersToGo;
+            maxSoldiersToGo = MCM_MenuConfig.Instance.HT_MaxSoldiersToGo;
+            maxCatch = MCM_MenuConfig.Instance.HT_MaxCatch;
+            minMoraleGain = MCM_MenuConfig.Instance.HT_MinMoraleGain;
+            maxMoraleGain = MCM_MenuConfig.Instance.HT_MaxMoraleGain;
+            minYieldMultiplier = MCM_MenuConfig.Instance.HT_MinYieldMultiplier;
+            maxYieldMultiplier = MCM_MenuConfig.Instance.HT_MaxYieldMultiplier;
         }
 
         public override void CancelEvent()
@@ -37,14 +38,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
             
-            return true;
+            return MCM_MenuConfig.Instance.HT_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= 50;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_MenuConfig.Instance.GS_DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
 
             var eventTitle = new TextObject("{=HuntingTrip_Title}The Great Hunt").ToString();
@@ -134,7 +135,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained - 3;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
             }
             else if (animalsCaught > 0 && animalsCaught <= 5)
             {
@@ -143,7 +144,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained - 2;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
             }
             else if (animalsCaught > 5 && animalsCaught <= 15)
             {
@@ -152,7 +153,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained - 1;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
             }
             else if (animalsCaught > 15 && animalsCaught <= maxCatch)
             {
@@ -161,7 +162,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
             }
             
 
@@ -185,24 +186,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class HuntingTripData : RandomEventData
     {
-        public readonly int minSoldiersToGo;
-        public readonly int maxSoldiersToGo;
-        public readonly int maxCatch;
-        public readonly int minMoraleGain;
-        public readonly int maxMoraleGain;
-        public readonly int minYieldMultiplier;
-        public readonly int maxYieldMultiplier;
 
-        public HuntingTripData(string eventType, float chanceWeight, int minSoldiersToGo, int maxSoldiersToGo, int maxCatch, int minMoraleGain, int maxMoraleGain, int minYieldMultiplier, int maxYieldMultiplier) : base(eventType,
+        public HuntingTripData(string eventType, float chanceWeight) : base(eventType,
             chanceWeight)
         {
-            this.minSoldiersToGo = minSoldiersToGo;
-            this.maxSoldiersToGo = maxSoldiersToGo;
-            this.maxCatch = maxCatch;
-            this.minMoraleGain = minMoraleGain;
-            this.maxMoraleGain = maxMoraleGain;
-            this.minYieldMultiplier = minYieldMultiplier;
-            this.maxYieldMultiplier = maxYieldMultiplier;
         }
 
         public override BaseEvent GetBaseEvent()

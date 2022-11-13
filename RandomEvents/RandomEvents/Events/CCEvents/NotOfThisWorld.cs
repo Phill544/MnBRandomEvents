@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -13,10 +14,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int minSoldiersToDisappear;
         private readonly int maxSoldiersToDisappear;
 
-        public NotOfThisWorld() : base(Settings.ModSettings.RandomEvents.NotOfThisWorldData)
+        public NotOfThisWorld() : base(ModSettings.RandomEvents.NotOfThisWorldData)
         {
-            minSoldiersToDisappear = Settings.ModSettings.RandomEvents.NotOfThisWorldData.minSoldiersToDisappear;
-            maxSoldiersToDisappear = Settings.ModSettings.RandomEvents.NotOfThisWorldData.maxSoldiersToDisappear;
+            minSoldiersToDisappear = MCM_MenuConfig.Instance.NotW_MinSoldiersGone;
+            maxSoldiersToDisappear = MCM_MenuConfig.Instance.NotW_MaxSoldiersGone;
         }
 
         public override void CancelEvent()
@@ -26,14 +27,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
 
-            return true;
+            return MCM_MenuConfig.Instance.NotW_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToDisappear;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_MenuConfig.Instance.GS_DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
             
             var eventTitle = new TextObject("{=NotOfThisWorld_Title}Not of this world").ToString();
@@ -78,7 +79,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventPt1, true, false, eventButtonText1, null, null, null), true);
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventPt2, true, false, eventButtonText2, null, null, null), true);
             
-            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
             
 
             StopEvent();
@@ -101,14 +102,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class NotOfThisWorldData : RandomEventData
     {
-        public readonly int minSoldiersToDisappear;
-        public readonly int maxSoldiersToDisappear;
 
-        public NotOfThisWorldData(string eventType, float chanceWeight, int minSoldiersToDisappear, int maxSoldiersToDisappear) : base(eventType,
+        public NotOfThisWorldData(string eventType, float chanceWeight) : base(eventType,
             chanceWeight)
         {
-            this.minSoldiersToDisappear = minSoldiersToDisappear;
-            this.maxSoldiersToDisappear = maxSoldiersToDisappear;
         }
 
         public override BaseEvent GetBaseEvent()

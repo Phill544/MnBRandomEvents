@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
@@ -7,7 +9,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
 	public sealed class PassingComet : BaseEvent
 	{
-		public PassingComet() : base(Settings.ModSettings.RandomEvents.PassingCometData)
+		public PassingComet() : base(ModSettings.RandomEvents.PassingCometData)
 		{
 			
 		}
@@ -18,15 +20,15 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return true;
+			return MCM_MenuConfig.Instance.PC_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
 			
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_MenuConfig.Instance.GS_DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 			
 			var eventTitle = new TextObject("{=PassingComet_Title}A Celestial Visitor").ToString();
