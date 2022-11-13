@@ -26,6 +26,16 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         #endregion
         
+        #region A Flirtatious Encounter - Variables
+        
+        public bool AFE_Disable { get; private set; }
+        public int AFE_minWomanAge { get; private set; }
+        public int AFE_maxWomanAge { get; private set; }
+        public float AFE_minRelationshipIncrease { get; private set; }
+        public float AFE_maxRelationshipIncrease { get; private set; }
+
+        #endregion
+        
         #region Ahead of Time - Variables
         
         public bool AoT_Disable { get; private set; }
@@ -412,6 +422,22 @@ namespace CryingBuffalo.RandomEvents.Settings
             var gs5_hint = new TextObject("{=mcm_gs5_hint}Maximum amount of minutes in between events.").ToString();
             var gs6_text = new TextObject("{=mcm_gs6_text}6. General Level XP Multiplier ").ToString();
             var gs6_hint = new TextObject("{=mcm_gs6_hint}The number used to define the XP multiplier. Higher number means higher XP.").ToString();
+            
+            #endregion
+            
+            #region A Flirtatious Encounter - Strings
+            
+            var afe_heading = new TextObject("{=mcm_afe_heading}A Flirtatious Encounter").ToString();
+            var afe1_text = new TextObject("{=mcm_afe1_text}1. Min Age").ToString();
+            var afe1_hint = new TextObject("{=mcm_afe1_hint}The minimum age the target must be.").ToString();
+            var afe2_text = new TextObject("{=mcm_afe2_text}2. Max Age").ToString();
+            var afe2_hint = new TextObject("{=mcm_afe2_hint}The maximum age the target must be.").ToString();
+            var afe3_text = new TextObject("{=mcm_afe3_text}3. Min Relationship Gain").ToString();
+            var afe3_hint = new TextObject("{=mcm_afe3_hint}The minimum amount of relationship increase.").ToString();
+            var afe4_text = new TextObject("{=mcm_afe4_text}4. Max Relationship Gain").ToString();
+            var afe4_hint = new TextObject("{=mcm_afe4_hint}The maximum amount of relationship increase.").ToString();
+            var afe5_text = new TextObject("{=mcm_afe5_text}5. Deactivate event").ToString();
+            var afe5_hint = new TextObject("{=mcm_afe5_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
 
@@ -993,6 +1019,23 @@ namespace CryingBuffalo.RandomEvents.Settings
                         .SetHintText(gs5_hint))
                     .AddInteger("GS6", gs6_text,10,70, new ProxyRef<int>(() => GS_GeneralLevelXpMultiplier, o => GS_GeneralLevelXpMultiplier = o), integerBuilder => integerBuilder
                         .SetHintText(gs6_hint)))
+                
+                #endregion
+                
+                #region A Flirtatious Encounter - Builder
+                
+                .CreateGroup(ba_heading, groupBuilder => groupBuilder
+                    .AddInteger("AFE1", afe1_text,18,50, new ProxyRef<int>(() => AFE_minWomanAge, o => AFE_minWomanAge = o), integerBuilder => integerBuilder
+                        .SetHintText(afe1_hint))
+                    .AddInteger("AFE2", afe2_text,18,50, new ProxyRef<int>(() => AFE_maxWomanAge, o => AFE_maxWomanAge = o), integerBuilder => integerBuilder
+                        .SetHintText(afe2_hint))
+                    .AddFloatingInteger("AFE3", afe3_text,3,50, new ProxyRef<float>(() => AFE_minRelationshipIncrease, o => AFE_minRelationshipIncrease = o), floatBuilder => floatBuilder
+                        .SetHintText(afe3_hint))
+                    .AddFloatingInteger("AFE4", afe4_text,3,50, new ProxyRef<float>(() => AFE_maxRelationshipIncrease, o => AFE_maxRelationshipIncrease = o), floatBuilder => floatBuilder
+                        .SetHintText(afe4_hint))
+                    .AddBool("AFE7", afe5_text, new ProxyRef<bool>(() => AFE_Disable, o => AFE_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(afe5_hint))
+                )
                 
                 #endregion
                 
@@ -1614,6 +1657,16 @@ namespace CryingBuffalo.RandomEvents.Settings
             Instance.GS_MaximumRealMinutes = 30;
             Instance.GS_GeneralLevelXpMultiplier = 40;
             
+            #endregion
+            
+            #region A Flirtatious Encounter
+            
+            Instance.AFE_Disable = false;
+            Instance.AFE_minWomanAge = 18;
+            Instance.AFE_maxWomanAge = 45;
+            Instance.AFE_minRelationshipIncrease = 0.1f;
+            Instance.AFE_maxRelationshipIncrease = 0.33f;
+
             #endregion
             
             #region Ahead of Time
