@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
 using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
-using TaleWorlds.CampaignSystem.Settlements.Locations;
-using TaleWorlds.CampaignSystem.TournamentGames;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
@@ -48,33 +43,75 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             //Then pick a random character that fits.
             //Random variable for pregnancy chance to occur.
             //Event ends with either a NPC gets pregnant or not.
+            
+
+            var target = GetTarget();
+
+            var targetCulture = target.Culture.Name.ToString();
+
+            var Demonym = GetDemonym(targetCulture);
+            
+                var text = $"Your woman is {target.Name}. She is {Math.Round(target.Age)} years old. She is a {Demonym}. Enjoy!";
+                
+
+            InformationManager.ShowInquiry(new InquiryData(target.Name.ToString(), text, true, false, "OK", null, null, null), true);
+
+
+            StopEvent();
+        }
+        
+        private string GetDemonym(string culture)
+        {
+            string citizenName = culture switch
+            {
+                "Empire" => "imperial",
+                "Vlandia" => "vlandian",
+                "Sturgia" => "sturgian",
+                "Battania" => "battanian",
+                "Aserai" => "aserai",
+                "Khuzait" => "khuzait",
+                _ => "ERROR_DEMONYM"
+            };
+
+            return citizenName;
+        }
+
+        private static Hero GetTarget()
+        {
 
             var notables = Settlement.CurrentSettlement.Notables;
             var heroes = Settlement.CurrentSettlement.HeroesWithoutParty;
-            
+
             var characters = notables.Concat(heroes).Distinct().ToList();
 
-            List<Hero> femaleList = new List<Hero>();
+            var femaleList = new List<Hero>();
 
             foreach (var character in characters)
             {
                 if (character.IsFemale)
                 {
-                    femaleList.Add(character);
+                    if (!character.IsPregnant)
+                    {
+                        if (character.Age >= 18 && character.Age <= 50)
+                        {
+                            femaleList.Add(character);
+                        }
+                    }
                 }
             }
 
-            var random = new Random();
-            int index = random.Next(femaleList.Count);
+            if (femaleList.Count != 0)
+            {
+                var random = new Random();
+                var index = random.Next(femaleList.Count);
 
-            var target = femaleList[index];
+                 var target = femaleList[index];
+                
+                return target;
+            }
 
-            var text = $"Your woman is {target.Name}. Enjoy!";
-            
-            InformationManager.DisplayMessage(new InformationMessage(text, RandomEventsSubmodule.Msg_Color));
-            
+            return null;
 
-            StopEvent();
         }
 
         private void StopEvent()
