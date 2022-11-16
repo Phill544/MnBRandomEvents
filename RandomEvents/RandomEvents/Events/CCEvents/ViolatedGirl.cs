@@ -18,8 +18,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public ViolatedGirl() : base(ModSettings.RandomEvents.ViolatedGirlData)
         {
-            minGoldCompensation = MCM_MenuConfig.Instance.VG_MinCompensation;
-            maxGoldCompensation = MCM_MenuConfig.Instance.VG_MaxCompensation;
+            minGoldCompensation = MCM_MenuConfig_N_Z.Instance.VG_MinCompensation;
+            maxGoldCompensation = MCM_MenuConfig_N_Z.Instance.VG_MaxCompensation;
         }
 
         public override void CancelEvent()
@@ -28,12 +28,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig.Instance.VG_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.PartyTradeGold >= maxGoldCompensation;
+            return MCM_MenuConfig_N_Z.Instance.VG_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.PartyTradeGold >= maxGoldCompensation;
         }
 
         public override void StartEvent()
         {
-            if (MCM_MenuConfig.Instance.GS_DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }

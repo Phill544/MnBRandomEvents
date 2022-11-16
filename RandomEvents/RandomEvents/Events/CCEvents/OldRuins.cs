@@ -21,11 +21,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public OldRuins() : base(ModSettings.RandomEvents.OldRuinsData)
         {
-            minMen = MCM_MenuConfig.Instance.OR_MinSoldiers;
-            maxMen = MCM_MenuConfig.Instance.OR_MaxSoldiers;
-            menToKill = MCM_MenuConfig.Instance.OR_MenToKill;
-            minGoldFound = MCM_MenuConfig.Instance.OR_MinGoldFound;
-            maxGoldFound = MCM_MenuConfig.Instance.OR_MaxGoldFound;
+            minMen = MCM_MenuConfig_N_Z.Instance.OR_MinSoldiers;
+            maxMen = MCM_MenuConfig_N_Z.Instance.OR_MaxSoldiers;
+            menToKill = MCM_MenuConfig_N_Z.Instance.OR_MenToKill;
+            minGoldFound = MCM_MenuConfig_N_Z.Instance.OR_MinGoldFound;
+            maxGoldFound = MCM_MenuConfig_N_Z.Instance.OR_MaxGoldFound;
         }
 
         public override void CancelEvent()
@@ -34,12 +34,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig.Instance.OR_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_N_Z.Instance.OR_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
         {
-            if (MCM_MenuConfig.Instance.GS_DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }

@@ -15,12 +15,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public BumperCrop() : base(ModSettings.RandomEvents.BumperCropData)
 		{
-			cropGainPercent = MCM_MenuConfig.Instance.BC_CropGainPercent;
+			cropGainPercent = MCM_MenuConfig_A_M.Instance.BC_CropGainPercent;
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -73,7 +73,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.BC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
+			return MCM_MenuConfig_A_M.Instance.BC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
 		}
 	}
 

@@ -17,8 +17,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public TargetPractice() : base(ModSettings.RandomEvents.TargetPracticeData)
 		{
-			minimumSoldiers = MCM_MenuConfig.Instance.TP_MinSoldiers;
-			percentageDifferenceOfCurrentTroop = MCM_MenuConfig.Instance.TP_PercentageDifferenceOfCurrentTroop;
+			minimumSoldiers = MCM_MenuConfig_N_Z.Instance.TP_MinSoldiers;
+			percentageDifferenceOfCurrentTroop = MCM_MenuConfig_N_Z.Instance.TP_PercentageDifferenceOfCurrentTroop;
 		}
 
 		public override void CancelEvent()
@@ -27,12 +27,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.TP_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_N_Z.Instance.TP_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

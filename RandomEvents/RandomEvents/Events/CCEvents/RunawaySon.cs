@@ -20,8 +20,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public RunawaySon() : base(ModSettings.RandomEvents.RunawaySonData)
         {
-            minGold = MCM_MenuConfig.Instance.RS_MinGoldGained;
-            maxGold = MCM_MenuConfig.Instance.RS_MaxGoldGained;
+            minGold = MCM_MenuConfig_N_Z.Instance.RS_MinGoldGained;
+            maxGold = MCM_MenuConfig_N_Z.Instance.RS_MaxGoldGained;
         }
 
         public override void CancelEvent()
@@ -30,12 +30,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig.Instance.RS_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_N_Z.Instance.RS_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
         {
-            if (MCM_MenuConfig.Instance.GS_DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }

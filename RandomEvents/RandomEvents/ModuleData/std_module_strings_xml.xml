@@ -289,6 +289,36 @@
     <!--RunawaySon - Log Messages-->
     <string id="RunawaySon_Event_Msg_1" text="Looted {goldLooted} from his corpse." />
 
+    <!--SuddenStorm Event-->
+    <string id="RunawaySon_Title" text="A Sudden Storm" />
+    <string id="RunawaySon_Event_Desc" text="Your party is traveling though the near {closestSettlement} when you are suddenly caught in a massive hail and thunderstorm. The hails are massive, the rain is pouring, the wind is intense and there are lightning strikes all around you. You waste no time telling your men what do to." />
+
+    <!--SuddenStorm - Event Choices-->
+    <string id="SuddenStorm_Event_Option_1" text="Run for cover in the forest!" />
+    <string id="SuddenStorm_Event_Option_1_Hover" text="It offers some protection" />
+    <string id="SuddenStorm_Event_Option_2" text="Hide underneath the wagons!" />
+    <string id="SuddenStorm_Event_Option_2_Hover" text="Not all are going to fit" />
+    <string id="SuddenStorm_Event_Option_3" text="Press on a bit further" />
+    <string id="SuddenStorm_Event_Option_3_Hover" text="Try to find better shelter" />
+    <string id="SuddenStorm_Event_Option_4" text="The storm won't stop us" />
+    <string id="SuddenStorm_Event_Option_4_Hover" text="You force your men to continue" />
+
+    <!--SuddenStorm - Event Buttons-->
+    <string id="SuddenStorm_Event_Button_Text_1" text="Choose" />
+    <string id="SuddenStorm_Event_Button_Text_2" text="Done" />
+
+    <!--SuddenStorm - Events-->
+    <string id="SuddenStorm_Event_Choice_1" text="You order your men to run into the forest to the right. The men drop what they can and makes for the woods. When you make it to the woods you look back and see that there are already some dead horses and wounded men on the ground. You cannot do anything for them now so you and your men huddle together in a group and wait for the storm to pass.\n\nLuckily the storm passes just as quickly as it came. You and your men start to inspect the damage and help those who are wounded. You decide to take the wounded men to {closestSettlement} to get help there. All in all {horsesLost} horses and {menDied} men died from the storm. {menWounded} men were taken to {closestSettlement} to get help. You bury your deceased men in a single grave and you manage to get {meatFromHorse} meat from the dead horses." />
+    <string id="SuddenStorm_Event_Choice_2" text="You order your men to hide underneath the wagons, but some men are running into the forest nearby. While you lay on the muddy ground beneath a wagon with some other you can hear the sound of the giant hail destroying some of your equipment as well as killing some horses. \n\nSuddenly a bolt of lightning hit the forest where some of your men had run into. Over the deafening sound of the wind you can hear some of them crying out for help.You cannot do anything for them now so you and your men wait for the storm to pass.\n\nLuckily the storm passes just as quickly as it came. You and your men start to inspect the damage and help those who are wounded in the forest. You decide to take the wounded men to {closestSettlement} to get help there. All in all {horsesLost} horses and {menDied} men died from the storm. {menWounded} men were taken to {closestSettlement} to get help. You bury your deceased men in a single grave and you manage to get {meatFromHorse} meat from the dead horses." />
+    <string id="SuddenStorm_Event_Choice_3" text="You order your men to press on through the storm in an attempt to find better shelter. The men reluctantly follow your lead towards a rock face not to far away. When you reach it you order your men to dismount and stand close to the wall. The men all do as you say and you all stand there for what seams like forever in waiting for the storm to pass. A lightning bolt rips through the sky and the deafening boom that follows spooks the horses so they start to run in all directions. Some of your mn start to run after the horses but you manage to stop them by saying the we all look for the horses after the storm passes.\n\nThe storm passes relatively quick. You and your men start to inspect the damage to your gear and help those who have been wounded. You decide to take the wounded men to {closestSettlement} to get help there. After a few hours you have found all the surviving horses. All in all {horsesLost} horses died and {menWounded} men were wounded and they were taken to {closestSettlement} to get help. You manage to get {meatFromHorse} meat from the dead horses." />
+    <string id="SuddenStorm_Event_Choice_4" text="You tell your men that no storm shall stop you so you order them to keep going though the storm. After a few minutes you hear them men begging you to stop saying that some of your men already have been killed by the giant hail. Hearing this you agree to stop and you and your men starting to take cover. As you jump of your horse you suddenly feel an intense pain in the back of your head before the world fades to darkness.\n\nYou are awoken by several of your men saying your name and pouring water in your face. They help you to your feet. The sun is shining, the birds are singing and there is no sign of the storm except distant rumbling. One of your men shows you the helmet you were wearing. You are shocked when you see it has a massive dent in the back from the hail. If you weren't wearing this there is no doubt you would be dead.\nYou and your men start to inspect the damage and help those who are wounded. You decide to take the wounded men to {closestSettlement} to get help there. All in all {horsesLost} horses and {menDied} men died from the storm, but you cannot help thinking that number would have been lower if you had stopped sooner. {menWounded} men were taken to {closestSettlement} to get help. You bury your deceased men in a single grave and you manage to get {meatFromHorse} meat from the dead horses." />
+
+    <!--SuddenStorm - Log Messages-->
+    <string id="SuddenStorm_Event_Msg_1" text="{heroName} lost {horsesLost} horses and {menDied} men to a sudden storm. He also got {meatFromHorse} meat from butchering the dead horses." />
+    <string id="SuddenStorm_Event_Msg_2" text="{heroName} lost {horsesLost} horses and {menDied} men to a sudden storm. He also got {meatFromHorse} meat from butchering the dead horses." />
+    <string id="SuddenStorm_Event_Msg_3" text="{heroName} lost {horsesLost} horses to a sudden storm. He got {meatFromHorse} meat from butchering the dead horses." />
+    <string id="SuddenStorm_Event_Msg_4" text="In refusing his men shelter from the storm, {heroName} lost {horsesLost} horses and {menDied} men to a sudden storm." />
+
 
 
     <!--SupernaturalEncounter Event-->

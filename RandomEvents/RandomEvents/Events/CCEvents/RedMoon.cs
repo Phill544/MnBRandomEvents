@@ -20,10 +20,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public RedMoon() : base(ModSettings.RandomEvents.RedMoonData)
 		{
-			minGoldLost = MCM_MenuConfig.Instance.RM_MinGoldLost;
-			maxGoldLost = MCM_MenuConfig.Instance.RM_MaxGoldLost;
-			minMenLost = MCM_MenuConfig.Instance.RM_MinMenLost;
-			maxMenLost = MCM_MenuConfig.Instance.RM_MaxMenLost;
+			minGoldLost = MCM_MenuConfig_N_Z.Instance.RM_MinGoldLost;
+			maxGoldLost = MCM_MenuConfig_N_Z.Instance.RM_MaxGoldLost;
+			minMenLost = MCM_MenuConfig_N_Z.Instance.RM_MinMenLost;
+			maxMenLost = MCM_MenuConfig_N_Z.Instance.RM_MaxMenLost;
 		}
 
 		public override void CancelEvent()
@@ -32,12 +32,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.RM_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_N_Z.Instance.RM_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

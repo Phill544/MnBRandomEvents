@@ -17,7 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public PrisonerRebellion() : base(ModSettings.RandomEvents.PrisonerRebellionData)
 		{
-			minimumPrisoners = MCM_MenuConfig.Instance.PR_MinPrisoners;
+			minimumPrisoners = MCM_MenuConfig_N_Z.Instance.PR_MinPrisoners;
 		}
 
 		public override void CancelEvent()
@@ -26,12 +26,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.PR_Disable == false && MobileParty.MainParty.PrisonRoster.TotalHealthyCount > minimumPrisoners && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_N_Z.Instance.PR_Disable == false && MobileParty.MainParty.PrisonRoster.TotalHealthyCount > minimumPrisoners && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

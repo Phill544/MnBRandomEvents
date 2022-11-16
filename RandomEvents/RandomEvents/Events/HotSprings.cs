@@ -16,8 +16,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public HotSprings() : base(ModSettings.RandomEvents.HotSpringsData)
 		{
-			minMoraleGain = MCM_MenuConfig.Instance.HS_MinMoraleGain;
-			maxMoraleGain = MCM_MenuConfig.Instance.HS_MaxMoraleGain;
+			minMoraleGain = MCM_MenuConfig_A_M.Instance.HS_MinMoraleGain;
+			maxMoraleGain = MCM_MenuConfig_A_M.Instance.HS_MaxMoraleGain;
 		}
 
 		public override void CancelEvent()
@@ -26,12 +26,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.HS_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_A_M.Instance.HS_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

@@ -15,8 +15,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public Undercooked() : base(ModSettings.RandomEvents.UndercookedData)
 		{
-			minTroopsToInjure = MCM_MenuConfig.Instance.UC_MinSoldiersToInjure;
-			maxTroopsToInjure = MCM_MenuConfig.Instance.UC_MaxSoldiersToInjure;
+			minTroopsToInjure = MCM_MenuConfig_N_Z.Instance.UC_MinSoldiersToInjure;
+			maxTroopsToInjure = MCM_MenuConfig_N_Z.Instance.UC_MaxSoldiersToInjure;
 		}
 
 		public override void CancelEvent()
@@ -25,12 +25,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.UC_Disable == false && (MobileParty.MainParty.MemberRoster.TotalRegulars - MobileParty.MainParty.MemberRoster.TotalWoundedRegulars) >= minTroopsToInjure;
+			return MCM_MenuConfig_N_Z.Instance.UC_Disable == false && (MobileParty.MainParty.MemberRoster.TotalRegulars - MobileParty.MainParty.MemberRoster.TotalWoundedRegulars) >= minTroopsToInjure;
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

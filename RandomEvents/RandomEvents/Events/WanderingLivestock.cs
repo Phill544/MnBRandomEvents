@@ -17,8 +17,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public WanderingLivestock() : base(ModSettings.RandomEvents.WanderingLivestockData)
 		{
-			minFood = MCM_MenuConfig.Instance.WL_MinFood;
-			maxFood = MCM_MenuConfig.Instance.WL_MaxFood;
+			minFood = MCM_MenuConfig_N_Z.Instance.WL_MinFood;
+			maxFood = MCM_MenuConfig_N_Z.Instance.WL_MaxFood;
 		}
 
 		public override void CancelEvent()
@@ -27,12 +27,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.WL_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_N_Z.Instance.WL_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -62,7 +62,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					{
 						case "a":
 						{
-							int totalCount = MBRandom.RandomInt(minFood, maxFood);
+							var totalCount = MBRandom.RandomInt(minFood, maxFood);
 
 							var sheepCount = MBRandom.RandomInt(1, totalCount);
 							var cowCount = totalCount - sheepCount;

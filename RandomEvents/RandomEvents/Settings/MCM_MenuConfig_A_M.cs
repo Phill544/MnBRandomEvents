@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Documents;
 using MCM.Abstractions.Base.Global;
 using MCM.Abstractions.FluentBuilder;
 using MCM.Common;
@@ -7,25 +6,14 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Settings
 {
-    public class MCM_MenuConfig : IDisposable
+    public class MCM_MenuConfig_A_M : IDisposable
     {
-        private static MCM_MenuConfig _instance;
+        private static MCM_MenuConfig_A_M _instance;
 
         private FluentGlobalSettings globalSettings;
 
         #region Variables
-        
-        #region General Settings - Variables
-        
-        public bool GS_FirstRunDone { get; set; }
-        public bool GS_DebugMode { get; private set; }
-        public int GS_MinimumInGameHours { get; private set; }
-        public int GS_MinimumRealMinutes { get; private set; }
-        public int GS_MaximumRealMinutes { get; private set; }
-        public int GS_GeneralLevelXpMultiplier { get; private set; }
-        
-        #endregion
-        
+
         #region A Flirtatious Encounter - Variables
         
         public bool AFE_Disable { get; private set; }
@@ -259,146 +247,13 @@ namespace CryingBuffalo.RandomEvents.Settings
         public bool MO_Disable { get; private set; }
 
         #endregion
-        
-        #region Not Of This World - Variables
 
-        public bool NotW_Disable { get; private set; }
-        public int NotW_MinSoldiersGone{ get; private set; }
-        public int NotW_MaxSoldiersGone { get; private set; }
-        
-        #endregion
-        
-        #region Old Ruins - Variables
-
-        public bool OR_Disable { get; private set; }
-        public int OR_MinSoldiers { get; private set; }
-        public int OR_MaxSoldiers { get; private set; }
-        public float OR_MenToKill { get; private set; }
-        public int OR_MinGoldFound { get; private set; }
-        public int OR_MaxGoldFound { get; private set; }
-        
-        #endregion
-        
-        #region Passing Comet - Variables
-
-        public bool PC_Disable { get; private set; }
-
-        #endregion
-        
-        #region Perfect Weather - Variables
-        
-        public bool PW_Disable { get; private set; }
-        public int PW_MinMoraleGain { get; private set; }
-        public int PW_MaxMoraleGain { get; private set; }
-        
-        #endregion
-        
-        #region Prisoner Rebellion - Variables
-        
-        public bool PR_Disable { get; private set; }
-        public int PR_MinPrisoners { get; private set; }
-
-        #endregion
-        
-        #region Red Moon - Variables
-        
-        public bool RM_Disable { get; private set; }
-        public int RM_MinGoldLost { get; private set; }
-        public int RM_MaxGoldLost { get; private set; }
-        public int RM_MinMenLost { get; private set; }
-        public int RM_MaxMenLost { get; private set; }
-
-        #endregion
-        
-        #region Runaway Son - Variables
-        
-        public bool RS_Disable { get; private set; }
-        public int RS_MinGoldGained { get; private set; }
-        public int RS_MaxGoldGained { get; private set; }
-        
-        #endregion
-        
-        #region Secret Singer - Variables
-        
-        public bool SS_Disable { get; private set; }
-        public int SS_MinMoraleGained { get; private set; }
-        public int SS_MaxMoraleGained { get; private set; }
-        
-        #endregion
-        
-        #region Speedy Recovery - Variables
-        
-        public bool SR_Disable { get; private set; }
-        public int SR_MinMenToRecover { get; private set; }
-        public int SR_MaxMenToRecover { get; private set; }
-        
-        #endregion
-        
-        #region Successful Deeds - Variables
-        
-        public bool SD_Disable { get; private set; }
-        public int SD_MinInfluenceGained { get; private set; }
-        public int SD_MaxInfluenceGained { get; private set; }
-        
-        #endregion
-        
-        #region Supernatural Encounter - Variables
-
-        public bool SE_Disable { get; private set; }
-
-        #endregion
-        
-        #region Target Practice - Variables
-        
-        public bool TP_Disable { get; private set; }
-        public int TP_MinSoldiers { get; private set; }
-        public float TP_PercentageDifferenceOfCurrentTroop { get; private set; }
-        
-        #endregion
-        
-        #region Unexcpected Wedding - Variables
-        
-        public bool UW_Disable { get; private set; }
-        public int UW_MinGoldToDonate { get; private set; }
-        public int UW_MaxGoldToDonate { get; private set; }
-        public int UW_MinPeopleInWedding { get; private set; }
-        public int UW_MaxPeopleInWedding { get; private set; }
-        public int UW_EmbarrassedSoliderMaxGold { get; private set; }
-        public int UW_MinGoldRaided { get; private set; }
-        public int UW_MaxGoldRaided { get; private set; }
-        
-        #endregion
-        
-        #region Undercooked - Variables
-        
-        public bool UC_Disable { get; private set; }
-        public int UC_MinSoldiersToInjure { get; private set; }
-        public int UC_MaxSoldiersToInjure { get; private set; }
-        
-        #endregion
-        
-        #region Violated Girl - Variables
-        
-        public bool VG_Disable { get; private set; }
-        public int VG_MinCompensation { get; private set; }
-        public int VG_MaxCompensation { get; private set; }
-        
-        #endregion
-        
-        #region Wandering Livestock - Variables
-        
-        public bool WL_Disable { get; private set; }
-        public int WL_MinFood { get; private set; }
-        public int WL_MaxFood { get; private set; }
-        
-        #endregion
-        
         #endregion
 
 
-        public static MCM_MenuConfig Instance
+        public static MCM_MenuConfig_A_M Instance
         {
-            get { return _instance ??= new MCM_MenuConfig(); }
+            get { return _instance ??= new MCM_MenuConfig_A_M(); }
         }
 
         public void Settings()
@@ -406,25 +261,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             
 
             #region Strings
-            
-            #region General Settings - Strings
-            
-            var gs_heading = new TextObject("{=mcm_gs_heading}1. General Settings").ToString();
-            var gs1_text = new TextObject("{=mcm_gs1_text}1. Initial Setup").ToString();
-            var gs1_hint = new TextObject("{=mcm_gs1_hint}Uncheck this to re-run the Initial Setup and set all values back to the original.").ToString();
-            var gs2_text = new TextObject("{=mcm_gs2_text}2. Enable Debug mode").ToString();
-            var gs2_hint = new TextObject("{=mcm_gs2_hint}Displays more info in the logs.").ToString();
-            var gs3_text = new TextObject("{=mcm_gs3_text}3. In-game hours before events").ToString();
-            var gs3_hint = new TextObject("{=mcm_gs3_hint}Minimum amount of in-game hours that must pass before the random events begin to occur.").ToString();
-            var gs4_text = new TextObject("{=mcm_gs4_text}4. Min minutes between events").ToString();
-            var gs4_hint = new TextObject("{=mcm_gs4_hint}Minimum amount of minutes in between events.").ToString();
-            var gs5_text = new TextObject("{=mcm_gs5_text}5. Max minutes between events").ToString();
-            var gs5_hint = new TextObject("{=mcm_gs5_hint}Maximum amount of minutes in between events.").ToString();
-            var gs6_text = new TextObject("{=mcm_gs6_text}6. General Level XP Multiplier ").ToString();
-            var gs6_hint = new TextObject("{=mcm_gs6_hint}The number used to define the XP multiplier. Higher number means higher XP.").ToString();
-            
-            #endregion
-            
+
             #region A Flirtatious Encounter - Strings
             
             var afe_heading = new TextObject("{=mcm_afe_heading}A Flirtatious Encounter").ToString();
@@ -788,250 +625,28 @@ namespace CryingBuffalo.RandomEvents.Settings
             var mo1_hint = new TextObject("{=mcm_mo1_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
-            
-            #region Not Of This World - Strings
-
-            var notw_heading = new TextObject("{=mcm_notw_heading}Not of this World").ToString();
-            var notw1_text = new TextObject("{=mcm_notw1_text}1. Min Soldiers To Disappear").ToString();
-            var notw1_hint = new TextObject("{=mcm_notw1_hint}The minimum amount of men who will disappear.").ToString();
-            var notw2_text = new TextObject("{=mcm_notw2_text}2. Max Soldiers To Disappear").ToString();
-            var notw2_hint = new TextObject("{=mcm_notw2_hint}The maximum amount of men who will disappear.").ToString();
-            var notw3_text = new TextObject("{=mcm_notw3_text}3. Deactivate event").ToString();
-            var notw3_hint = new TextObject("{=mcm_notw3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-
-            #endregion
-            
-            #region Old Ruins - Strings
-
-            var or_heading = new TextObject("{=mcm_or_heading}Old Ruins").ToString();
-            var or1_text = new TextObject("{=mcm_or1_text}1. Min Soldiers").ToString();
-            var or1_hint = new TextObject("{=mcm_or1_hint}The minimum amount of men who come with you.").ToString();
-            var or2_text = new TextObject("{=mcm_or2_text}2. Max Soldiers").ToString();
-            var or2_hint = new TextObject("{=mcm_or2_hint}The maximum amount of men who come with you.").ToString();
-            var or3_text = new TextObject("{=mcm_or3_text}3. Men Who Will Die").ToString();
-            var or3_hint = new TextObject("{=mcm_or3_hint}The % of men who will die in this event if the circumstances align.").ToString();
-            var or4_text = new TextObject("{=mcm_or4_text}4. Min Gold Found").ToString();
-            var or4_hint = new TextObject("{=mcm_or4_hint}The minimum amount of gold to be found.").ToString();
-            var or5_text = new TextObject("{=mcm_or5_text}5. Max Gold Found").ToString();
-            var or5_hint = new TextObject("{=mcm_or5_hint}The maximum amount of gold to be found.").ToString();
-            var or6_text = new TextObject("{=mcm_or6_text}6. Deactivate event").ToString();
-            var or6_hint = new TextObject("{=mcm_or6_hint}If you dont want this event to show up you can deactivate it.").ToString();
-
-            #endregion
-            
-            #region Passing Comet - Strings
-
-            var pc_heading = new TextObject("{=mcm_pc_heading}Passing Comet").ToString();
-            var pc1_text = new TextObject("{=mcm_pc1_text}1. Deactivate event").ToString();
-            var pc1_hint = new TextObject("{=mcm_pc1_hint}If you dont want this event to show up you can deactivate it.").ToString();
-
-            #endregion
-            
-            #region Perfect Weather - Strings
-            
-            var pw_heading = new TextObject("{=mcm_pw_heading}Perfect Weather").ToString();
-            var pw1_text = new TextObject("{=mcm_pw1_text}1. Min Morale Gain").ToString();
-            var pw1_hint = new TextObject("{=mcm_pw1_hint}Minimum amount of morale gained during this event.").ToString();
-            var pw2_text = new TextObject("{=mcm_pw2_text}2. Max Morale Gain").ToString();
-            var pw2_hint = new TextObject("{=mcm_pw2_hint}Maximum amount morale gained lost during this event.").ToString();
-            var pw3_text = new TextObject("{=mcm_pw3_text}3. Deactivate event").ToString();
-            var pw3_hint = new TextObject("{=mcm_pw3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Prisoner Rebellion - Strings
-            
-            var pr_heading = new TextObject("{=mcm_pr_heading}Prisoner Rebellion").ToString();
-            var pr1_text = new TextObject("{=mcm_pr1_text}1. Min Prisoners").ToString();
-            var pr1_hint = new TextObject("{=mcm_pr1_hint}Minimum amount of prisoners needed for the event to trigger.").ToString();
-            var pr2_text = new TextObject("{=mcm_pr2_text}2. Deactivate event").ToString();
-            var pr2_hint = new TextObject("{=mcm_pr2_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Red Moon - Strings
-            
-            var rm_heading = new TextObject("{=mcm_rm_heading}Prisoner Rebellion").ToString();
-            var rm1_text = new TextObject("{=mcm_rm1_text}1. Min Gold Lost").ToString();
-            var rm1_hint = new TextObject("{=mcm_rm1_hint}Minimum amount of gold that can be lost during this event.").ToString();
-            var rm2_text = new TextObject("{=mcm_rm2_text}2. Max Gold Lost").ToString();
-            var rm2_hint = new TextObject("{=mcm_rm2_hint}Maximum amount of gold that can be lost during this event.").ToString();
-            var rm3_text = new TextObject("{=mcm_rm3_text}3. Min Men Lost").ToString();
-            var rm3_hint = new TextObject("{=mcm_rm3_hint}Minimum amount of men that can be lost during this event.").ToString();
-            var rm4_text = new TextObject("{=mcm_rm4_text}4. Max Men Lost").ToString();
-            var rm4_hint = new TextObject("{=mcm_rm4_hint}Maximum amount of gold that can be lost during this event.").ToString();
-            var rm5_text = new TextObject("{=mcm_rm5_text}5. Deactivate event").ToString();
-            var rm5_hint = new TextObject("{=mcm_rm5_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Runaway Son - Strings
-            
-            var rs_heading = new TextObject("{=mcm_rs_heading}Runaway Son").ToString();
-            var rs1_text = new TextObject("{=mcm_rs1_text}1. Min Gold Gained").ToString();
-            var rs1_hint = new TextObject("{=mcm_rs1_hint}Minimum amount of gold that can gained during this event.").ToString();
-            var rs2_text = new TextObject("{=mcm_rs2_text}2. Max Gold Gain").ToString();
-            var rs2_hint = new TextObject("{=mcm_rs2_hint}Maximum amount of gold that can gained during this event.").ToString();
-            var rs3_text = new TextObject("{=mcm_rs3_text}3. Deactivate event").ToString();
-            var rs3_hint = new TextObject("{=mcm_rs3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Secret Singer - Strings
-            
-            var ss_heading = new TextObject("{=mcm_ss_heading}Secret Singer").ToString();
-            var ss1_text = new TextObject("{=mcm_ss1_text}1. Min Morale Gained").ToString();
-            var ss1_hint = new TextObject("{=mcm_ss1_hint}Minimum amount of morale that can gained during this event.").ToString();
-            var ss2_text = new TextObject("{=mcm_ss2_text}2. Max Morale Gain").ToString();
-            var ss2_hint = new TextObject("{=mcm_ss2_hint}Maximum amount of morale that can gained during this event.").ToString();
-            var ss3_text = new TextObject("{=mcm_ss3_text}3. Deactivate event").ToString();
-            var ss3_hint = new TextObject("{=mcm_ss3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Speedy Recover - Strings
-            
-            var sr_heading = new TextObject("{=mcm_sr_heading}Speedy Recovery").ToString();
-            var sr1_text = new TextObject("{=mcm_sr1_text}1. Min Men To Heal").ToString();
-            var sr1_hint = new TextObject("{=mcm_sr1_hint}Minimum amount of men that can be healed during this event.").ToString();
-            var sr2_text = new TextObject("{=mcm_sr2_text}2. Max Men To Heal").ToString();
-            var sr2_hint = new TextObject("{=mcm_sr2_hint}Maximum amount of of men that can be healed during this event.").ToString();
-            var sr3_text = new TextObject("{=mcm_sr3_text}3. Deactivate event").ToString();
-            var sr3_hint = new TextObject("{=mcm_sr3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Successful Deeds - Strings
-            
-            var sd_heading = new TextObject("{=mcm_sd_heading}Successful Deeds").ToString();
-            var sd1_text = new TextObject("{=mcm_sd1_text}1. Min Influence Gained").ToString();
-            var sd1_hint = new TextObject("{=mcm_sd1_hint}Minimum amount of influence that can be gained during this event.").ToString();
-            var sd2_text = new TextObject("{=mcm_sd2_text}2. Max Influence Gained").ToString();
-            var sd2_hint = new TextObject("{=mcm_sd2_hint}Maximum amount of of influence that can be gained during this event.").ToString();
-            var sd3_text = new TextObject("{=mcm_sd3_text}3. Deactivate event").ToString();
-            var sd3_hint = new TextObject("{=mcm_sd3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Momentum - Strings
-
-            var se_heading = new TextObject("{=mcm_se_heading}Supernatural Encounter").ToString();
-            var se1_text = new TextObject("{=mcm_se1_text}1. Deactivate event").ToString();
-            var se1_hint = new TextObject("{=mcm_se1_hint}If you dont want this event to show up you can deactivate it.").ToString();
-
-            #endregion
-            
-            #region Target Practice - Strings
-            
-            var tp_heading = new TextObject("{=mcm_tp_heading}Target Practice").ToString();
-            var tp1_text = new TextObject("{=mcm_tp1_text}1. Min Soldiers").ToString();
-            var tp1_hint = new TextObject("{=mcm_tp1_hint}PHILL MUST COMMENT").ToString();
-            var tp2_text = new TextObject("{=mcm_tp2_text}2. % Difference Of Current Troop").ToString();
-            var tp2_hint = new TextObject("{=mcm_tp2_hint}PHILL MUST COMMENT").ToString();
-            var tp3_text = new TextObject("{=mcm_tp3_text}3. Deactivate event").ToString();
-            var tp3_hint = new TextObject("{=mcm_tp3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Unexpected Wedding - Strings
-            
-            var uw_heading = new TextObject("{=mcm_uw_heading}Unexpected Wedding").ToString();
-            var uw1_text = new TextObject("{=mcm_uw1_text}1. Min Gold To Give").ToString();
-            var uw1_hint = new TextObject("{=mcm_uw1_hint}Minimum amount of gold you give as a gift.").ToString();
-            var uw2_text = new TextObject("{=mcm_uw2_text}2. Max Gold To Give").ToString();
-            var uw2_hint = new TextObject("{=mcm_uw2_hint}Maximum amount of gold you give as a gift.").ToString();
-            var uw3_text = new TextObject("{=mcm_uw3_text}3. Min People In Wedding").ToString();
-            var uw3_hint = new TextObject("{=mcm_uw3_hint}Minimum amount of people in the wedding.").ToString();
-            var uw4_text = new TextObject("{=mcm_uw4_text}4. Max People In Wedding").ToString();
-            var uw4_hint = new TextObject("{=mcm_uw4_hint}Maximum amount of people in the wedding.").ToString();
-            var uw5_text = new TextObject("{=mcm_uw5_text}5. Max Gold Soldier Must Give").ToString();
-            var uw5_hint = new TextObject("{=mcm_uw5_hint}Maximum amount of gold a solider is forced to give if the event requires it.").ToString();
-            var uw6_text = new TextObject("{=mcm_uw6_text}6. Min Gold To Raid").ToString();
-            var uw6_hint = new TextObject("{=mcm_uw6_hint}Minimum amount of of gold that can be raided during this event.").ToString();
-            var uw7_text = new TextObject("{=mcm_uw7_text}7. Max Gold To Raid").ToString();
-            var uw7_hint = new TextObject("{=mcm_uw7_hint}Maximum amount of gold that can be raided during this event.").ToString();
-            var uw8_text = new TextObject("{=mcm_uw8_text}8. Deactivate event").ToString();
-            var uw8_hint = new TextObject("{=mcm_uw8_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Undercooked- Strings
-            
-            var uc_heading = new TextObject("{=mcm_uc_heading}Undercooked").ToString();
-            var uc1_text = new TextObject("{=mcm_uc1_text}1. Min Soldiers To Injure").ToString();
-            var uc1_hint = new TextObject("{=mcm_uc1_hint}The minimum amount of soldiers to get injured during this event.").ToString();
-            var uc2_text = new TextObject("{=mcm_uc2_text}2. Max Soldiers To Injure").ToString();
-            var uc2_hint = new TextObject("{=mcm_uc2_hint}The maximum amount of soldiers to get injured during this event.").ToString();
-            var uc3_text = new TextObject("{=mcm_uc3_text}3. Deactivate event").ToString();
-            var uc3_hint = new TextObject("{=mcm_uc3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Violated Girl - Strings
-            
-            var vg_heading = new TextObject("{=mcm_vg_heading}Violated Girl").ToString();
-            var vg1_text = new TextObject("{=mcm_vg1_text}1. Min Gold Compensation").ToString();
-            var vg1_hint = new TextObject("{=mcm_vg1_hint}The minimum amount of compensation the girl gets during this event.").ToString();
-            var vg2_text = new TextObject("{=mcm_vg2_text}2. Max Gold Compensation").ToString();
-            var vg2_hint = new TextObject("{=mcm_vg2_hint}The maximum amount of compensation the girl gets during this event.").ToString();
-            var vg3_text = new TextObject("{=mcm_vg3_text}3. Deactivate event").ToString();
-            var vg3_hint = new TextObject("{=mcm_vg3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Wandering Livestock - Strings
-            
-            var wl_heading = new TextObject("{=mcm_wl_heading}Wandering Livestock").ToString();
-            var wl1_text = new TextObject("{=mcm_wl1_text}1. Min Food").ToString();
-            var wl1_hint = new TextObject("{=mcm_wl1_hint}The minimum amount of food to get during this event.").ToString();
-            var wl2_text = new TextObject("{=mcm_wl2_text}2. Max Food").ToString();
-            var wl2_hint = new TextObject("{=mcm_wl2_hint}The maximum amount of food to get during this event.").ToString();
-            var wl3_text = new TextObject("{=mcm_wl3_text}3. Deactivate event").ToString();
-            var wl3_hint = new TextObject("{=mcm_wl3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-
 
             #endregion
             
             
             
-            var builder = BaseSettingsBuilder.Create("RandomEvents","Random Events")!
+            var builder = BaseSettingsBuilder.Create("RandomEvents1","1. Random Events - A to M")!
                 .SetFormat("xml")
                 .SetFolderName(RandomEventsSubmodule.FolderName)
                 .SetSubFolder(RandomEventsSubmodule.ModName)
                 
-                #region Builder Modules
-                
-                #region General Settings - Builder
-                
-                .CreateGroup(gs_heading, groupBuilder => groupBuilder
-                    .AddBool("GS1", gs1_text, new ProxyRef<bool>(() => GS_FirstRunDone, o => GS_FirstRunDone = o), boolBuilder => boolBuilder
-                        .SetHintText(gs1_hint)
-                        .SetRequireRestart(true))
-                    .AddBool("GS2", gs2_text, new ProxyRef<bool>(() => GS_DebugMode, o => GS_DebugMode = o), boolBuilder => boolBuilder
-                        .SetHintText(gs2_hint))
-                    .AddInteger("GS3", gs3_text,5,360, new ProxyRef<int>(() => GS_MinimumInGameHours, o => GS_MinimumInGameHours = o), integerBuilder => integerBuilder
-                        .SetHintText(gs3_hint))
-                    .AddInteger("GS4", gs4_text,5,60, new ProxyRef<int>(() => GS_MinimumRealMinutes, o => GS_MinimumRealMinutes = o), integerBuilder => integerBuilder
-                        .SetHintText(gs4_hint))
-                    .AddInteger("GS5", gs5_text,5,60, new ProxyRef<int>(() => GS_MaximumRealMinutes, o => GS_MaximumRealMinutes = o), integerBuilder => integerBuilder
-                        .SetHintText(gs5_hint))
-                    .AddInteger("GS6", gs6_text,10,70, new ProxyRef<int>(() => GS_GeneralLevelXpMultiplier, o => GS_GeneralLevelXpMultiplier = o), integerBuilder => integerBuilder
-                        .SetHintText(gs6_hint)))
-                
-                #endregion
-                
+           #region Builder Modules
+
                 #region A Flirtatious Encounter - Builder
                 
-                .CreateGroup(ba_heading, groupBuilder => groupBuilder
+                .CreateGroup(afe_heading, groupBuilder => groupBuilder
                     .AddInteger("AFE1", afe1_text,18,50, new ProxyRef<int>(() => AFE_minWomanAge, o => AFE_minWomanAge = o), integerBuilder => integerBuilder
                         .SetHintText(afe1_hint))
                     .AddInteger("AFE2", afe2_text,18,50, new ProxyRef<int>(() => AFE_maxWomanAge, o => AFE_maxWomanAge = o), integerBuilder => integerBuilder
                         .SetHintText(afe2_hint))
-                    .AddFloatingInteger("AFE3", afe3_text,3,50, new ProxyRef<float>(() => AFE_minRelationshipIncrease, o => AFE_minRelationshipIncrease = o), floatBuilder => floatBuilder
+                    .AddFloatingInteger("AFE3", afe3_text,3,65, new ProxyRef<float>(() => AFE_minRelationshipIncrease, o => AFE_minRelationshipIncrease = o), floatBuilder => floatBuilder
                         .SetHintText(afe3_hint))
-                    .AddFloatingInteger("AFE4", afe4_text,3,50, new ProxyRef<float>(() => AFE_maxRelationshipIncrease, o => AFE_maxRelationshipIncrease = o), floatBuilder => floatBuilder
+                    .AddFloatingInteger("AFE4", afe4_text,3,65, new ProxyRef<float>(() => AFE_maxRelationshipIncrease, o => AFE_maxRelationshipIncrease = o), floatBuilder => floatBuilder
                         .SetHintText(afe4_hint))
                     .AddBool("AFE7", afe5_text, new ProxyRef<bool>(() => AFE_Disable, o => AFE_Disable = o), boolBuilder => boolBuilder
                         .SetHintText(afe5_hint))
@@ -1403,234 +1018,10 @@ namespace CryingBuffalo.RandomEvents.Settings
                 .CreateGroup(mo_heading, groupBuilder => groupBuilder
                         .AddBool("MO1", mo1_text, new ProxyRef<bool>(() => MO_Disable, o => MO_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(mo1_hint))
-                    )
-
-                #endregion
-                
-                #region Not Of This World - Builder
-                
-                .CreateGroup(notw_heading, groupBuilder => groupBuilder
-                    .AddInteger("NotW1", notw1_text,2,20, new ProxyRef<int>(() => NotW_MinSoldiersGone, o => NotW_MinSoldiersGone = o), integerBuilder => integerBuilder
-                        .SetHintText(notw1_hint))
-                    .AddInteger("NotW2", notw2_text,2,20, new ProxyRef<int>(() => NotW_MaxSoldiersGone, o => NotW_MinSoldiersGone = o), integerBuilder => integerBuilder
-                        .SetHintText(notw2_hint))
-                    .AddBool("NotW3", notw3_text, new ProxyRef<bool>(() => NotW_Disable, o => NotW_Disable = o), boolBuilder => boolBuilder
-                        .SetHintText(notw3_hint))
-                    )
-
-                #endregion
-                
-                #region Old Ruins - Builder
-                
-                .CreateGroup(or_heading, groupBuilder => groupBuilder
-                        .AddInteger("OR1", or1_text,5,15, new ProxyRef<int>(() => OR_MinSoldiers, o => OR_MinSoldiers = o), integerBuilder => integerBuilder
-                            .SetHintText(or1_hint))
-                        .AddInteger("OR2", or2_text,5,15, new ProxyRef<int>(() => OR_MaxSoldiers, o => OR_MaxSoldiers = o), integerBuilder => integerBuilder
-                            .SetHintText(or2_hint))
-                        .AddFloatingInteger("OR3", or3_text,20,90, new ProxyRef<float>(() => OR_MenToKill, o => OR_MenToKill = o), floatBuilder => floatBuilder
-                            .SetHintText(or3_hint))
-                        .AddInteger("OR4", or4_text,100,5000, new ProxyRef<int>(() => OR_MinGoldFound, o => OR_MinGoldFound = o), integerBuilder => integerBuilder
-                            .SetHintText(or4_hint))
-                        .AddInteger("OR5", or5_text,100,5000, new ProxyRef<int>(() => OR_MaxGoldFound, o => OR_MaxGoldFound = o), integerBuilder => integerBuilder
-                            .SetHintText(or5_hint))
-                        .AddBool("OR6", or6_text, new ProxyRef<bool>(() => OR_Disable, o => OR_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(or6_hint))
-                    )
 
                     #endregion
-                
-                #region Passing Comet - Builder
-                
-                .CreateGroup(pc_heading, groupBuilder => groupBuilder
-                    .AddBool("PC1", pc1_text, new ProxyRef<bool>(() => PC_Disable, o => PC_Disable = o), boolBuilder => boolBuilder
-                        .SetHintText(pc1_hint))
-                    )
 
                 #endregion
-                
-                #region Perfect Weather - Builder
-                
-                .CreateGroup(pw_heading, groupBuilder => groupBuilder
-                    .AddInteger("PW1", pw1_text,5,30, new ProxyRef<int>(() => PW_MinMoraleGain, o => PW_MinMoraleGain = o), integerBuilder => integerBuilder
-                        .SetHintText(pw1_hint))
-                    .AddInteger("PW2", pw2_text,5,30, new ProxyRef<int>(() => PW_MaxMoraleGain, o => PW_MaxMoraleGain = o), integerBuilder => integerBuilder
-                        .SetHintText(pw2_hint))
-                    .AddBool("PW3", pw3_text, new ProxyRef<bool>(() => PW_Disable, o => PW_Disable = o), boolBuilder => boolBuilder
-                        .SetHintText(pw3_hint))
-                    )
-
-
-                #endregion
-                
-                #region Prisoner Rebellion - Builder
-                
-                .CreateGroup(pr_heading, groupBuilder => groupBuilder
-                        .AddInteger("PR1", pr1_text,10,60, new ProxyRef<int>(() => PR_MinPrisoners, o => PR_MinPrisoners = o), integerBuilder => integerBuilder
-                            .SetHintText(pr1_hint))
-                        .AddBool("PR2", pr2_text, new ProxyRef<bool>(() => PR_Disable, o => PR_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(pr2_hint))
-                    )
-                #region Red Moon - Builder
-                
-                .CreateGroup(rm_heading, groupBuilder => groupBuilder
-                    .AddInteger("RM1", rm1_text,500,5000, new ProxyRef<int>(() => RM_MinGoldLost, o => RM_MinGoldLost = o), integerBuilder => integerBuilder
-                        .SetHintText(rm1_hint))
-                    .AddInteger("RM2", rm2_text,500,5000, new ProxyRef<int>(() => RM_MaxGoldLost, o => RM_MaxGoldLost = o), integerBuilder => integerBuilder
-                        .SetHintText(rm2_hint))
-                    .AddInteger("RM3", rm3_text,10,100, new ProxyRef<int>(() => RM_MinMenLost, o => RM_MinMenLost = o), integerBuilder => integerBuilder
-                        .SetHintText(rm3_hint))
-                    .AddInteger("RM4", rm4_text,10,100, new ProxyRef<int>(() => RM_MaxMenLost, o => RM_MaxMenLost = o), integerBuilder => integerBuilder
-                        .SetHintText(rm4_hint))
-                    .AddBool("RM5", rm5_text, new ProxyRef<bool>(() => RM_Disable, o => RM_Disable = o), boolBuilder => boolBuilder
-                        .SetHintText(rm5_hint))
-                )
-                            
-                    #endregion
-
-
-                #endregion
-                
-                #region Runaway Son - Builder
-                
-                .CreateGroup(rs_heading, groupBuilder => groupBuilder
-                        .AddInteger("RS1", rs1_text,5,250, new ProxyRef<int>(() => RS_MinGoldGained, o => RS_MinGoldGained = o), integerBuilder => integerBuilder
-                            .SetHintText(rs1_hint))
-                        .AddInteger("RS2", rs2_text,5,250, new ProxyRef<int>(() => RS_MaxGoldGained, o => RS_MaxGoldGained = o), integerBuilder => integerBuilder
-                            .SetHintText(rs2_hint))
-                        .AddBool("RS3", rs3_text, new ProxyRef<bool>(() => RS_Disable, o => RS_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(rs3_hint))
-                    )
-                    
-                #endregion
-                
-                #region Secret Singer - Builder
-                
-                .CreateGroup(ss_heading, groupBuilder => groupBuilder
-                        .AddInteger("SS1", ss1_text,5,100, new ProxyRef<int>(() => SS_MinMoraleGained, o => SS_MinMoraleGained = o), integerBuilder => integerBuilder
-                            .SetHintText(ss1_hint))
-                        .AddInteger("SS2", ss2_text,5,100, new ProxyRef<int>(() => SS_MaxMoraleGained, o => SS_MaxMoraleGained = o), integerBuilder => integerBuilder
-                            .SetHintText(ss2_hint))
-                        .AddBool("SS3", ss3_text, new ProxyRef<bool>(() => SS_Disable, o => SS_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(ss3_hint))
-                    )
-                    
-                    #endregion
-                    
-                #region Speedy Recovery - Builder
-                
-                .CreateGroup(sr_heading, groupBuilder => groupBuilder
-                        .AddInteger("SR1", sr1_text,2,50, new ProxyRef<int>(() => SR_MinMenToRecover, o => SR_MinMenToRecover = o), integerBuilder => integerBuilder
-                            .SetHintText(sr1_hint))
-                        .AddInteger("SR2", sr2_text,2,50, new ProxyRef<int>(() => SR_MaxMenToRecover, o => SR_MaxMenToRecover = o), integerBuilder => integerBuilder
-                            .SetHintText(sr2_hint))
-                        .AddBool("SR3", sr3_text, new ProxyRef<bool>(() => SR_Disable, o => SR_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(sr3_hint))
-                    )
-                    
-                #endregion
-                
-                #region Speedy Recovery - Builder
-                
-                .CreateGroup(sd_heading, groupBuilder => groupBuilder
-                        .AddInteger("SD1", sd1_text,10,500, new ProxyRef<int>(() => SD_MinInfluenceGained, o => SD_MinInfluenceGained = o), integerBuilder => integerBuilder
-                            .SetHintText(sd1_hint))
-                        .AddInteger("SD2", sd2_text,10,500, new ProxyRef<int>(() => SD_MaxInfluenceGained, o => SD_MaxInfluenceGained = o), integerBuilder => integerBuilder
-                            .SetHintText(sd2_hint))
-                        .AddBool("SD3", sd3_text, new ProxyRef<bool>(() => SD_Disable, o => SD_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(sd3_hint))
-                    )
-                    
-                #endregion
-                
-                #region Supernatural Encounter - Builder
-                
-                .CreateGroup(se_heading, groupBuilder => groupBuilder
-                    .AddBool("SE1", se1_text, new ProxyRef<bool>(() => MO_Disable, o => MO_Disable = o), boolBuilder => boolBuilder
-                        .SetHintText(se1_hint))
-                    )
-                
-
-                #endregion
-                
-                #region Target Practice- Builder
-                
-                .CreateGroup(tp_heading, groupBuilder => groupBuilder
-                        .AddInteger("TP1", tp1_text,20,60, new ProxyRef<int>(() => TP_MinSoldiers, o => TP_MinSoldiers = o), integerBuilder => integerBuilder
-                            .SetHintText(tp1_hint))
-                        .AddFloatingInteger("TP2", tp2_text,10,100, new ProxyRef<float>(() => TP_PercentageDifferenceOfCurrentTroop, o => TP_PercentageDifferenceOfCurrentTroop = o), floatBuilder => floatBuilder
-                            .SetHintText(tp2_hint))
-                        .AddBool("TP3", tp3_text, new ProxyRef<bool>(() => TP_Disable, o => TP_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(tp3_hint))
-                        )
-
-                #endregion
-                
-                #region Unexpected Wedding - Builder
-                
-                .CreateGroup(uw_heading, groupBuilder => groupBuilder
-                        .AddInteger("UW1", uw1_text,20,500, new ProxyRef<int>(() => UW_MinGoldToDonate, o => UW_MinGoldToDonate = o), integerBuilder => integerBuilder
-                            .SetHintText(uw1_hint))
-                        .AddInteger("UW2", uw2_text,20,500, new ProxyRef<int>(() => UW_MaxGoldToDonate, o => UW_MaxGoldToDonate = o), integerBuilder => integerBuilder
-                            .SetHintText(uw2_hint))
-                        .AddInteger("UW3", uw3_text,15,75, new ProxyRef<int>(() => UW_MinPeopleInWedding, o => UW_MinPeopleInWedding = o), integerBuilder => integerBuilder
-                            .SetHintText(uw3_hint))
-                        .AddInteger("UW4", uw4_text,15,75, new ProxyRef<int>(() => UW_MaxPeopleInWedding, o => UW_MaxPeopleInWedding = o), integerBuilder => integerBuilder
-                            .SetHintText(uw4_hint))
-                        .AddInteger("UW5", uw5_text,50,200, new ProxyRef<int>(() => UW_EmbarrassedSoliderMaxGold, o => UW_EmbarrassedSoliderMaxGold = o), integerBuilder => integerBuilder
-                            .SetHintText(uw5_hint))
-                        .AddInteger("UW6", uw6_text,250,1500, new ProxyRef<int>(() => UW_MinGoldRaided, o => UW_MinGoldRaided = o), integerBuilder => integerBuilder
-                            .SetHintText(uw6_hint))
-                        .AddInteger("UW7", uw7_text,250,1500, new ProxyRef<int>(() => UW_MaxGoldRaided, o => UW_MaxGoldRaided = o), integerBuilder => integerBuilder
-                            .SetHintText(uw7_hint))
-                        .AddBool("UW8", uw8_text, new ProxyRef<bool>(() => UW_Disable, o => UW_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(uw8_hint))
-                    )
-                            
-                    #endregion
-                
-                #region Undercooked - Builder
-                
-                .CreateGroup(uc_heading, groupBuilder => groupBuilder
-                    .AddInteger("UC1", uc1_text,5,50, new ProxyRef<int>(() => UC_MinSoldiersToInjure, o => UC_MinSoldiersToInjure = o), integerBuilder => integerBuilder
-                        .SetHintText(uc1_hint))
-                    .AddInteger("UC2", uc2_text,5,50, new ProxyRef<int>(() => UC_MaxSoldiersToInjure, o => UC_MaxSoldiersToInjure = o), integerBuilder => integerBuilder
-                        .SetHintText(uc2_hint))
-                    .AddBool("UC3", uc3_text, new ProxyRef<bool>(() => UC_Disable, o => UC_Disable = o), boolBuilder => boolBuilder
-                        .SetHintText(uc3_hint))
-                    )
-                
-
-                #endregion
-                
-                #region Violated Girl -  Builder
-                
-                .CreateGroup(vg_heading, groupBuilder => groupBuilder
-                        .AddInteger("VG1", vg1_text,250,7500, new ProxyRef<int>(() => UC_MinSoldiersToInjure, o => UC_MinSoldiersToInjure = o), integerBuilder => integerBuilder
-                            .SetHintText(vg1_hint))
-                        .AddInteger("VG2", vg2_text,250,7500, new ProxyRef<int>(() => UC_MaxSoldiersToInjure, o => UC_MaxSoldiersToInjure = o), integerBuilder => integerBuilder
-                            .SetHintText(vg2_hint))
-                        .AddBool("VG3", vg3_text, new ProxyRef<bool>(() => UC_Disable, o => UC_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(vg3_hint))
-                    )
-                
-
-                #endregion
-                
-                #region Wandering Livestock -  Builder
-                
-                .CreateGroup(wl_heading, groupBuilder => groupBuilder
-                        .AddInteger("WL1", wl1_text,5,20, new ProxyRef<int>(() => UC_MinSoldiersToInjure, o => UC_MinSoldiersToInjure = o), integerBuilder => integerBuilder
-                            .SetHintText(wl1_hint))
-                        .AddInteger("WL2", wl2_text,5,20, new ProxyRef<int>(() => UC_MaxSoldiersToInjure, o => UC_MaxSoldiersToInjure = o), integerBuilder => integerBuilder
-                            .SetHintText(wl2_hint))
-                        .AddBool("WL3", wl3_text, new ProxyRef<bool>(() => UC_Disable, o => UC_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(wl3_hint))
-                
-
-                #endregion
-                    
-                #endregion
-
                 );
 
 
@@ -1638,7 +1029,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             globalSettings = builder.BuildAsGlobal();
             globalSettings.Register();
 
-            if (!GS_FirstRunDone)
+            if (!MCM_ConfigMenu_General.Instance.GS_FirstRunDone)
             {
                 Perform_First_Time_Setup();
             }
@@ -1648,24 +1039,14 @@ namespace CryingBuffalo.RandomEvents.Settings
         {
             #region First Time Setup
             
-            #region General Settings
-            
-            Instance.GS_FirstRunDone = true;
-            Instance.GS_DebugMode = false;
-            Instance.GS_MinimumInGameHours = 24;
-            Instance.GS_MinimumRealMinutes = 5;
-            Instance.GS_MaximumRealMinutes = 30;
-            Instance.GS_GeneralLevelXpMultiplier = 40;
-            
-            #endregion
             
             #region A Flirtatious Encounter
             
             Instance.AFE_Disable = false;
             Instance.AFE_minWomanAge = 18;
             Instance.AFE_maxWomanAge = 45;
-            Instance.AFE_minRelationshipIncrease = 0.1f;
-            Instance.AFE_maxRelationshipIncrease = 0.33f;
+            Instance.AFE_minRelationshipIncrease = 15.0f;
+            Instance.AFE_maxRelationshipIncrease = 50.0f;
 
             #endregion
             
@@ -1678,8 +1059,8 @@ namespace CryingBuffalo.RandomEvents.Settings
             #region Bandit Ambush
             
             Instance.BA_Disable = false;
-            Instance.BA_MoneyMinPercent = 0.05f;
-            Instance.BA_MoneyMaxPercent = 0.15f;
+            Instance.BA_MoneyMinPercent = 5.0f;
+            Instance.BA_MoneyMaxPercent = 15.0f;
             Instance.BA_TroopScareCount = 25;
             Instance.BA_BanditCap = 50;
             
@@ -1689,7 +1070,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             
             Instance.BK_Disable = false;
             Instance.BK_damage = 10;
-            Instance.BK_Reaction_Chance = 0.33f;
+            Instance.BK_Reaction_Chance = 33.3f;
             Instance.BK_Add_Damage = 15;
             
             #endregion
@@ -1697,7 +1078,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             #region Bet Money
             
             Instance.BM_Disable = false;
-            Instance.BM_Money_Percent = 0.15f;
+            Instance.BM_Money_Percent = 15.0f;
             
             #endregion
             
@@ -1734,7 +1115,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             #region Bumper Crop
             
             Instance.BC_Disable = false;
-            Instance.BC_CropGainPercent = 0.75f;
+            Instance.BC_CropGainPercent = 75.0f;
             
             #endregion
             
@@ -1756,10 +1137,10 @@ namespace CryingBuffalo.RandomEvents.Settings
             #region Diseased City
             
             Instance.DC_Disable = false;
-            Instance.DC_BaseSuccessChance = 0.5f;
-            Instance.DC_HighMedicineChance = 0.75f;
+            Instance.DC_BaseSuccessChance = 50.0f;
+            Instance.DC_HighMedicineChance = 75.0f;
             Instance.DC_HighMedicineLevel = 75;
-            Instance.DC_PercentLoss = 0.2f;
+            Instance.DC_PercentLoss = 20.0f;
 
             #endregion
             
@@ -1821,8 +1202,8 @@ namespace CryingBuffalo.RandomEvents.Settings
             #region Granary Rats
 
             Instance.GR_Disable = false;
-            Instance.GR_MinFoodLoss = 0.35f;
-            Instance.GR_MaxFoodLoss = 0.75f;
+            Instance.GR_MinFoodLoss = 35.0f;
+            Instance.GR_MaxFoodLoss = 75.0f;
 
             #endregion
             
@@ -1863,7 +1244,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             
             Instance.LU_Disable = false;
             Instance.LU_TreeShakeChance = 0.25f;
-            Instance.LU_BaseRangeChance = 0.165f;
+            Instance.LU_BaseRangeChance = 0.1f;
             Instance.LU_MinRangeLevel = 10;
             Instance.LU_MaxRangeLevel = 60;
             Instance.LU_MinGold = 500;
@@ -1889,139 +1270,8 @@ namespace CryingBuffalo.RandomEvents.Settings
 
             #endregion
             
-            #region Not of this World
             
-            Instance.NotW_Disable = false;
-            Instance.NotW_MinSoldiersGone = 3;
-            Instance.NotW_MaxSoldiersGone = 8;
-
-            #endregion
             
-            #region Old Ruins
-            
-            Instance.OR_Disable = false;
-            Instance.OR_MinSoldiers = 6;
-            Instance.OR_MaxSoldiers = 12;
-            Instance.OR_MenToKill = 0.70f;
-            Instance.OR_MinGoldFound = 250;
-            Instance.OR_MaxGoldFound = 5000;
-
-            #endregion
-            
-            #region Passing Comet
-            
-            Instance.PC_Disable = false;
-
-            #endregion
-            
-            #region Perfect Weather
-
-            Instance.PW_Disable = false;
-            Instance.PW_MinMoraleGain = 10;
-            Instance.PW_MaxMoraleGain = 25;
-
-            #endregion
-            
-            #region Prisoner Rebellion
-
-            Instance.PR_Disable = false;
-            Instance.PR_MinPrisoners = 30;
-
-            #endregion
-            
-            #region Red Moon
-
-            Instance.RM_Disable = false;
-            Instance.RM_MinGoldLost = 700;
-            Instance.RM_MaxGoldLost = 4000;
-            Instance.RM_MinMenLost = 15;
-            Instance.RM_MaxMenLost = 50;
-
-            #endregion
-            
-            #region Runaway Son
-
-            Instance.RS_Disable = false;
-            Instance.RS_MinGoldGained = 50;
-            Instance.RS_MaxGoldGained = 150;
-
-            #endregion
-            
-            #region Secret Singer
-
-            Instance.SS_Disable = false;
-            Instance.SS_MinMoraleGained = 10;
-            Instance.SS_MaxMoraleGained = 75;
-
-            #endregion
-            
-            #region Speedy Recovery
-
-            Instance.SR_Disable = false;
-            Instance.SR_MinMenToRecover = 5;
-            Instance.SR_MaxMenToRecover = 25;
-
-            #endregion
-            
-            #region Successful Deeds
-
-            Instance.SD_Disable = false;
-            Instance.SD_MinInfluenceGained = 50;
-            Instance.SD_MaxInfluenceGained = 250;
-
-            #endregion
-            
-            #region Supernatural Encounter
-            
-            Instance.SE_Disable = false;
-
-            #endregion
-            
-            #region Target Practice
-
-            Instance.TP_Disable = false;
-            Instance.TP_MinSoldiers = 50;
-            Instance.TP_PercentageDifferenceOfCurrentTroop = 0.5f;
-
-            #endregion
-            
-            #region Unexpected Wedding
-
-            Instance.UW_Disable = false;
-            Instance.UW_MinGoldToDonate = 200;
-            Instance.UW_MaxGoldToDonate = 750;
-            Instance.UW_MinPeopleInWedding = 20;
-            Instance.UW_MaxPeopleInWedding = 50;
-            Instance.UW_EmbarrassedSoliderMaxGold = 150;
-            Instance.UW_MinGoldRaided = 500;
-            Instance.UW_MaxGoldRaided = 1250;
-
-            #endregion
-            
-            #region Undercooked
-
-            Instance.UC_Disable = false;
-            Instance.UC_MinSoldiersToInjure = 15;
-            Instance.UC_MaxSoldiersToInjure = 40;
-
-            #endregion
-            
-            #region Violated Girl
-
-            Instance.VG_Disable = false;
-            Instance.VG_MinCompensation = 2000;
-            Instance.VG_MaxCompensation = 5000;
-
-            #endregion
-            
-            #region Wandering Livestock
-
-            Instance.WL_Disable = false;
-            Instance.WL_MinFood = 10;
-            Instance.WL_MaxFood = 20;
-
-            #endregion
-
             #endregion
         }
         
