@@ -70,6 +70,7 @@
     <Compile Include="Events\CCEvents\BirthdayParty.cs" />
     <Compile Include="Events\CCEvents\FallenSoldierFamily.cs" />
     <Compile Include="Events\CCEvents\FishingSpot.cs" />
+    <Compile Include="Events\CCEvents\SuddenStorm.cs" />
     <Compile Include="Events\CCEvents\HuntingTrip.cs" />
     <Compile Include="Events\CCEvents\LoggingSite.cs" />
     <Compile Include="Events\CCEvents\MassGrave.cs" />
@@ -106,7 +107,10 @@
     <Compile Include="Helpers\RandomSelection.cs" />
     <Compile Include="RandomEventBehavior.cs" />
     <Compile Include="Settings\GeneralSettings.cs" />
-    <Compile Include="Settings\MCM_MenuConfig.cs" />
+    <Compile Include="Settings\MCM_MenuConfig_A_M.cs" />
+    <Compile Include="Settings\MCM_MenuConfig_Chances.cs" />
+    <Compile Include="Settings\MCM_MenuConfig_General.cs" />
+    <Compile Include="Settings\MCM_MenuConfig_N_Z.cs" />
     <Compile Include="Settings\RandomEventSettings.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="RandomEventGenerator.cs" />
@@ -114,7 +118,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Bannerlord.MCM" Version="5.3.0" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.MCM" Version="5.3.1" IncludeAssets="compile" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>

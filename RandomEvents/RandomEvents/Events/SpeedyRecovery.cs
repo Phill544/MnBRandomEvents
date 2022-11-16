@@ -15,8 +15,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public SpeedyRecovery() : base(ModSettings.RandomEvents.SpeedyRecoveryData)
 		{
-			minTroopsToHeal = MCM_MenuConfig.Instance.SR_MinMenToRecover;
-			maxTroopsToHeal = MCM_MenuConfig.Instance.SR_MaxMenToRecover;
+			minTroopsToHeal = MCM_MenuConfig_N_Z.Instance.SR_MinMenToRecover;
+			maxTroopsToHeal = MCM_MenuConfig_N_Z.Instance.SR_MaxMenToRecover;
 		}
 
 		public override void CancelEvent()
@@ -25,12 +25,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.SR_Disable == false && MobileParty.MainParty.MemberRoster.TotalWoundedRegulars >= minTroopsToHeal;
+			return MCM_MenuConfig_N_Z.Instance.SR_Disable == false && MobileParty.MainParty.MemberRoster.TotalWoundedRegulars >= minTroopsToHeal;
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

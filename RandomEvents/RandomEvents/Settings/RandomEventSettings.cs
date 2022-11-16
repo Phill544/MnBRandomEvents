@@ -1,173 +1,134 @@
 ﻿using CryingBuffalo.RandomEvents.Events;
 using CryingBuffalo.RandomEvents.Events.CCEvents;
-using Newtonsoft.Json;
 
 namespace CryingBuffalo.RandomEvents.Settings
 {
     class RandomEventSettings
     {
-        [JsonProperty]
-        public BetMoneyData BetMoneyData { get; private set; } = 
-            new BetMoneyData("BetMoney", 1024);
+        public BetMoneyData BetMoneyData { get; } = 
+            new BetMoneyData("BetMoney", MCM_MenuConfig_Chances.Instance.Bet_Money_Chance);
+        
+        public BumperCropData BumperCropData { get; } = 
+            new BumperCropData("BumperCrop", MCM_MenuConfig_Chances.Instance.Bumper_Crop_Chance);
+        
+        public BanditAmbushData BanditAmbushData { get; } =
+            new BanditAmbushData("BanditAmbush", MCM_MenuConfig_Chances.Instance.Bandit_Ambush_Chance);
+        
+        public GranaryRatsData GranaryRatsData { get; } = 
+            new GranaryRatsData("GranaryRats", MCM_MenuConfig_Chances.Instance.Granary_Rats_Chance);
+        
+        public TargetPracticeData TargetPracticeData { get; } =
+            new TargetPracticeData("TargetPractice", MCM_MenuConfig_Chances.Instance.Target_Practice_Chance);
+        
+        public PrisonerRebellionData PrisonerRebellionData { get; } =
+            new PrisonerRebellionData("PrisonerRebellion", MCM_MenuConfig_Chances.Instance.Prisoner_Rebellion_Chance);
+        
+        public ChattingCommandersData ChattingCommandersData { get; } =
+            new ChattingCommandersData("ChattingCommanders", MCM_MenuConfig_Chances.Instance.Chatting_Commanders_Chance);
 
-        [JsonProperty]
-        public BumperCropData BumperCropData { get; private set; } = 
-            new BumperCropData("BumperCrop", 1024);
-
-        [JsonProperty]
-        public BanditAmbushData BanditAmbushData { get; private set; } =
-            new BanditAmbushData("BanditAmbush", 1024);
-
-        [JsonProperty]
-        public GranaryRatsData GranaryRatsData { get; private set; } = 
-            new GranaryRatsData("GranaryRats", 1024);
-
-        [JsonProperty]
-        public TargetPracticeData TargetPracticeData { get; private set; } =
-            new TargetPracticeData("TargetPractice", 1024);
-
-        [JsonProperty]
-        public PrisonerRebellionData PrisonerRebellionData { get; private set; } =
-            new PrisonerRebellionData("PrisonerRebellion", 1024);
-
-        [JsonProperty]
-        public ChattingCommandersData ChattingCommandersData { get; private set; } =
-            new ChattingCommandersData("ChattingCommanders", 1024);
-
-        //[JsonProperty]
         //public GloriousFoodData GloriousFoodData { get; private set; } =
         //new GloriousFoodData("GloriousFood", 1024, 5, 25, 5);
-
-        [JsonProperty]
-        public DiseasedCityData DiseasedCityData { get; private set; } =
-            new DiseasedCityData("DiseasedCity", 1024);
-
-        [JsonProperty] 
-        public MomentumData MomentumData { get; private set; } = 
-            new MomentumData("Momentum", 1024);
-
-        [JsonProperty]
-        public SecretSingerData SecretSingerData { get; private set; } = 
-            new SecretSingerData("SecretSinger", 1024);
-
-        [JsonProperty]
-        public BeeKindData BeeKindData { get; private set; } = 
-            new BeeKindData("BeeKind", 1024);
-
-        [JsonProperty]
-        public FoodFightData FoodFightData { get; private set; } = 
-            new FoodFightData("FoodFight", 1024);
-
-        [JsonProperty]
-        public PerfectWeatherData PerfectWeatherData { get; private set; } =
-            new PerfectWeatherData("PerfectWeather", 1024);
-
-        [JsonProperty]
-        public WanderingLivestockData WanderingLivestockData { get; private set; } =
-            new WanderingLivestockData("WanderingLivestock", 1024);
-
-        [JsonProperty]
-        public EagerTroopsData EagerTroopsData { get; private set; } = 
-            new EagerTroopsData("EagerTroops", 1024);
-
-        [JsonProperty]
-        public SpeedyRecoveryData SpeedyRecoveryData { get; private set; } =
-            new SpeedyRecoveryData("SpeedyRecovery", 1024);
-
-        [JsonProperty]
-        public FantasticFightersData FantasticFightersData { get; private set; } =
-            new FantasticFightersData("FantasticFighters", 1024);
-
-        [JsonProperty]
-        public ExoticDrinksData ExoticDrinksData { get; private set; } =
-            new ExoticDrinksData("ExoticDrinks", 1024);
-
-        [JsonProperty]
-        public AheadOfTimeData AheadOfTimeData { get; private set; } = 
-            new AheadOfTimeData("AheadOfTime", 1024);
-
-        [JsonProperty]
-        public SuccessfulDeedsData SuccessfulDeedsData { get; private set; } =
-            new SuccessfulDeedsData("SuccessfulDeeds", 1024);
-
-        [JsonProperty]
-        public BunchOfPrisonersData BunchOfPrisonersData { get; private set; } =
-            new BunchOfPrisonersData("BunchOfPrisoners", 1024);
-
-        [JsonProperty]
-        public UndercookedData UndercookedData { get; private set; } = 
-            new UndercookedData("Undercooked", 1024);
-
-        [JsonProperty]
-        public LookUpData LookUpData { get; private set; } =
-            new LookUpData("LookUp", 1024);
-
-        [JsonProperty]
-        public HotSpringsData HotSpringsData { get; private set; } = 
-            new HotSpringsData("HotSprings", 1024);
         
-        [JsonProperty]
-        public SupernaturalEncounterData SupernaturalEncounterData { get; private set; } =
-            new SupernaturalEncounterData("SupernaturalEncounter", 1024);
+        public DiseasedCityData DiseasedCityData { get; } =
+            new DiseasedCityData("DiseasedCity", MCM_MenuConfig_Chances.Instance.Diseased_City_Chance);
         
-        [JsonProperty]
+        public MomentumData MomentumData { get; } = 
+            new MomentumData("Momentum", MCM_MenuConfig_Chances.Instance.Momentum_Chance);
+        
+        public SecretSingerData SecretSingerData { get; } = 
+            new SecretSingerData("SecretSinger", MCM_MenuConfig_Chances.Instance.Secret_Singer_Chance);
+        
+        public BeeKindData BeeKindData { get; } = 
+            new BeeKindData("BeeKind", MCM_MenuConfig_Chances.Instance.Bee_Kind_Chance);
+        
+        public FoodFightData FoodFightData { get; } = 
+            new FoodFightData("FoodFight", MCM_MenuConfig_Chances.Instance.Food_Fight_Chance);
+        
+        public PerfectWeatherData PerfectWeatherData { get; } =
+            new PerfectWeatherData("PerfectWeather", MCM_MenuConfig_Chances.Instance.Perfect_Weather_Chance);
+        
+        public WanderingLivestockData WanderingLivestockData { get; } =
+            new WanderingLivestockData("WanderingLivestock", MCM_MenuConfig_Chances.Instance.Wandering_Livestock_Chance);
+        
+        public EagerTroopsData EagerTroopsData { get; } = 
+            new EagerTroopsData("EagerTroops", MCM_MenuConfig_Chances.Instance.Eager_Troops_Chance);
+
+        public SpeedyRecoveryData SpeedyRecoveryData { get; } =
+            new SpeedyRecoveryData("SpeedyRecovery", MCM_MenuConfig_Chances.Instance.Speedy_Recovery_Chance);
+        
+        public FantasticFightersData FantasticFightersData { get; } =
+            new FantasticFightersData("FantasticFighters", MCM_MenuConfig_Chances.Instance.Fantastic_Fighters_Chance);
+
+        public ExoticDrinksData ExoticDrinksData { get; } =
+            new ExoticDrinksData("ExoticDrinks", MCM_MenuConfig_Chances.Instance.Exotic_Drinks_Chance);
+
+        public AheadOfTimeData AheadOfTimeData { get; } = 
+            new AheadOfTimeData("AheadOfTime", MCM_MenuConfig_Chances.Instance.Ahead_Of_Time_Chance);
+
+        public SuccessfulDeedsData SuccessfulDeedsData { get; } =
+            new SuccessfulDeedsData("SuccessfulDeeds", MCM_MenuConfig_Chances.Instance.Successful_Deeds_Chance);
+
+        public BunchOfPrisonersData BunchOfPrisonersData { get; } =
+            new BunchOfPrisonersData("BunchOfPrisoners", MCM_MenuConfig_Chances.Instance.Bunch_Of_Prisoners_Chance);
+
+        public UndercookedData UndercookedData { get; } = 
+            new UndercookedData("Undercooked", MCM_MenuConfig_Chances.Instance.Undercooked_Chance);
+
+        public LookUpData LookUpData { get; } =
+            new LookUpData("LookUp", MCM_MenuConfig_Chances.Instance.Look_Up_Chance);
+        
+        public HotSpringsData HotSpringsData { get; } = 
+            new HotSpringsData("HotSprings", MCM_MenuConfig_Chances.Instance.Hot_Springs_Chance);
+        
+        public SupernaturalEncounterData SupernaturalEncounterData { get; } =
+            new SupernaturalEncounterData("SupernaturalEncounter", MCM_MenuConfig_Chances.Instance.Supernatural_Encounter_Chance);
+        
         public RunawaySonData RunawaySonData { get; } =
-            new RunawaySonData("RunawaySon", 1024);
-        
-        [JsonProperty]
+            new RunawaySonData("RunawaySon", MCM_MenuConfig_Chances.Instance.Runaway_Son_Chance);
+
         public UnexpectedWeddingData UnexpectedWeddingData { get; } =
-            new UnexpectedWeddingData("UnexpectedWedding", 1024);
-        
-        [JsonProperty]
+            new UnexpectedWeddingData("UnexpectedWedding", MCM_MenuConfig_Chances.Instance.Unexpected_Wedding_Chance);
+
         public ViolatedGirlData ViolatedGirlData { get; } =
-            new ViolatedGirlData("ViolatedGirl", 1024);
+            new ViolatedGirlData("ViolatedGirl", MCM_MenuConfig_Chances.Instance.Violated_Girl_Chance);
         
-        [JsonProperty]
         public FallenSoldierFamilyData FallenSoldierFamilyData { get; } =
-            new FallenSoldierFamilyData("FallenSoldierFamily", 1024 );
-        
-        [JsonProperty]
+            new FallenSoldierFamilyData("FallenSoldierFamily", MCM_MenuConfig_Chances.Instance.Fallen_Soldier_Family_Chance );
+
         public NotOfThisWorldData NotOfThisWorldData { get; } =
-            new NotOfThisWorldData("NotOfThisWorld", 1024 );
+            new NotOfThisWorldData("NotOfThisWorld", MCM_MenuConfig_Chances.Instance.Not_Of_This_World_Chance );
         
-        [JsonProperty]
         public FishingSpotData FishingSpotData { get; } =
-            new FishingSpotData("FishingSpot", 1024 );
+            new FishingSpotData("FishingSpot", MCM_MenuConfig_Chances.Instance.Fishing_Spot_Chance );
         
-        [JsonProperty]
         public HuntingTripData HuntingTripData { get; } =
-            new HuntingTripData("HuntingTrip", 1024);
+            new HuntingTripData("HuntingTrip", MCM_MenuConfig_Chances.Instance.Hunting_Trip_Chance);
         
-        [JsonProperty]
         public LoggingSiteData LoggingSiteData { get; } =
-            new LoggingSiteData("LoggingSite", 1024);
+            new LoggingSiteData("LoggingSite", MCM_MenuConfig_Chances.Instance.Logging_Site_Chance);
         
-        [JsonProperty]
         public RedMoonData RedMoonData { get; } =
-            new RedMoonData("RedMoon", 1024);
+            new RedMoonData("RedMoon", MCM_MenuConfig_Chances.Instance.Red_Moon_Chance);
         
-        [JsonProperty]
         public PassingCometData PassingCometData { get; } =
-            new PassingCometData("PassingComet", 1024);
+            new PassingCometData("PassingComet", MCM_MenuConfig_Chances.Instance.Passing_Comet_Chance);
         
-        [JsonProperty]
         public MassGraveData MassGraveData { get; } =
-            new MassGraveData("MassGrave", 1024);
+            new MassGraveData("MassGrave", MCM_MenuConfig_Chances.Instance.Mass_Grave_Chance);
         
-        [JsonProperty]
         public BeggarBeggingData BeggarBeggingData { get; } =
-            new BeggarBeggingData("BeggarBegging",1024);
+            new BeggarBeggingData("BeggarBegging",MCM_MenuConfig_Chances.Instance.Beggar_Begging_Chance);
         
-        [JsonProperty]
         public BirthdayPartyData BirthdayPartyData { get; } =
-            new BirthdayPartyData("BirthdayParty",1024);
-        
-        [JsonProperty]
+            new BirthdayPartyData("BirthdayParty",MCM_MenuConfig_Chances.Instance.Birthday_Party_Chance);
+
         public OldRuinsData OldRuinsData { get; } =
-            new OldRuinsData("OldRuins",1024);
+            new OldRuinsData("OldRuins", MCM_MenuConfig_Chances.Instance.Old_Ruins_Chance);
         
-        [JsonProperty]
         public AFlirtatiousEncounterData AFlirtatiousEncounterData { get; } =
-            new AFlirtatiousEncounterData("AFlirtatiousEncounter", 1024);
+            new AFlirtatiousEncounterData("AFlirtatiousEncounter", MCM_MenuConfig_Chances.Instance.A_Flirtatious_Encounter_Chance);
+        
+        public SuddenStormData SuddenStormData { get; } =
+            new SuddenStormData("SuddenStorm",MCM_MenuConfig_Chances.Instance.Sudden_Storm_Chance);
     }
 }

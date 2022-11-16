@@ -26,7 +26,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		public override bool CanExecuteEvent()
 		{
 
-			if (MCM_MenuConfig.Instance.AoT_Disable == false)
+			if (MCM_MenuConfig_A_M.Instance.AoT_Disable == false)
 			{
 				if (!Hero.MainHero.Clan.Settlements.Any()) return false;
 				eligibleSettlements = new List<Settlement>();
@@ -46,7 +46,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{	
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

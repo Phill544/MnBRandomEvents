@@ -23,13 +23,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public UnexpectedWedding() : base(ModSettings.RandomEvents.UnexpectedWeddingData)
         {
-            minGoldToDonate = MCM_MenuConfig.Instance.UW_MinGoldToDonate;
-            maxGoldToDonate = MCM_MenuConfig.Instance.UW_MaxGoldToDonate;
-            minPeopleInWedding = MCM_MenuConfig.Instance.UW_MinPeopleInWedding;
-            maxPeopleInWedding = MCM_MenuConfig.Instance.UW_MaxPeopleInWedding;
-            embarrassedSoliderMaxGold = MCM_MenuConfig.Instance.UW_EmbarrassedSoliderMaxGold;
-            minGoldRaided = MCM_MenuConfig.Instance.UW_MinGoldRaided;
-            maxGoldRaided = MCM_MenuConfig.Instance.UW_MaxGoldRaided;
+            minGoldToDonate = MCM_MenuConfig_N_Z.Instance.UW_MinGoldToDonate;
+            maxGoldToDonate = MCM_MenuConfig_N_Z.Instance.UW_MaxGoldToDonate;
+            minPeopleInWedding = MCM_MenuConfig_N_Z.Instance.UW_MinPeopleInWedding;
+            maxPeopleInWedding = MCM_MenuConfig_N_Z.Instance.UW_MaxPeopleInWedding;
+            embarrassedSoliderMaxGold = MCM_MenuConfig_N_Z.Instance.UW_EmbarrassedSoliderMaxGold;
+            minGoldRaided = MCM_MenuConfig_N_Z.Instance.UW_MinGoldRaided;
+            maxGoldRaided = MCM_MenuConfig_N_Z.Instance.UW_MaxGoldRaided;
         }
 
         public override void CancelEvent()
@@ -38,12 +38,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig.Instance.UW_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_N_Z.Instance.UW_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
         {
-            if (MCM_MenuConfig.Instance.GS_DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }

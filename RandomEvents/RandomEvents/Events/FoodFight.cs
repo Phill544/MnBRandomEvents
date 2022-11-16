@@ -20,10 +20,10 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public FoodFight() : base(ModSettings.RandomEvents.FoodFightData)
 		{
-			minFoodLoss = MCM_MenuConfig.Instance.FoF_MinFoodLoss;
-			maxFoodLoss = MCM_MenuConfig.Instance.FoF_MaxFoodLoss;
-			minMoraleLoss = MCM_MenuConfig.Instance.FoF_MinMoraleLoss;
-			maxMoraleLoss = MCM_MenuConfig.Instance.FoF_MaxMoraleLoss;
+			minFoodLoss = MCM_MenuConfig_A_M.Instance.FoF_MinFoodLoss;
+			maxFoodLoss = MCM_MenuConfig_A_M.Instance.FoF_MaxFoodLoss;
+			minMoraleLoss = MCM_MenuConfig_A_M.Instance.FoF_MinMoraleLoss;
+			maxMoraleLoss = MCM_MenuConfig_A_M.Instance.FoF_MaxMoraleLoss;
 		}
 
 		public override void CancelEvent()
@@ -32,12 +32,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return  MCM_MenuConfig.Instance.FoF_Disable == false && MobileParty.MainParty.MemberRoster.TotalManCount > 1 && (MobileParty.MainParty.ItemRoster.Any(item => item.EquipmentElement.Item.IsFood));
+			return  MCM_MenuConfig_A_M.Instance.FoF_Disable == false && MobileParty.MainParty.MemberRoster.TotalManCount > 1 && (MobileParty.MainParty.ItemRoster.Any(item => item.EquipmentElement.Item.IsFood));
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -83,7 +83,7 @@ namespace CryingBuffalo.RandomEvents.Events
 						{
 							var extraDialogue = "";
 
-							var xpToGive = MCM_MenuConfig.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
+							var xpToGive = MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
 							Hero.MainHero.AddSkillXp(DefaultSkills.Throwing, xpToGive);
 
 							var foodToRemove = MBRandom.RandomInt(minFoodLoss, maxFoodLoss);

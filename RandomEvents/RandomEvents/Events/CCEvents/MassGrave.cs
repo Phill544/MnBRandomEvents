@@ -22,12 +22,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public MassGrave() : base(ModSettings.RandomEvents.MassGraveData)
         {
-            minSoldiers = MCM_MenuConfig.Instance.MG_MinSoldiers;
-            maxSoldiers = MCM_MenuConfig.Instance.MG_MaxSoldiers;
-            minBodies = MCM_MenuConfig.Instance.MG_MinBodies;
-            maxBodies = MCM_MenuConfig.Instance.MG_MaxBodies;
-            minBaseMoraleLoss = MCM_MenuConfig.Instance.MG_MinBaseMoraleLoss;
-            maxBaseMoraleLoss = MCM_MenuConfig.Instance.MG_MaxBaseMoraleLoss;
+            minSoldiers = MCM_MenuConfig_A_M.Instance.MG_MinSoldiers;
+            maxSoldiers = MCM_MenuConfig_A_M.Instance.MG_MaxSoldiers;
+            minBodies = MCM_MenuConfig_A_M.Instance.MG_MinBodies;
+            maxBodies = MCM_MenuConfig_A_M.Instance.MG_MaxBodies;
+            minBaseMoraleLoss = MCM_MenuConfig_A_M.Instance.MG_MinBaseMoraleLoss;
+            maxBaseMoraleLoss = MCM_MenuConfig_A_M.Instance.MG_MaxBaseMoraleLoss;
         }
 
         public override void CancelEvent()
@@ -37,12 +37,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
 
-            return MCM_MenuConfig.Instance.MG_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_A_M.Instance.MG_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
         {
-            if (MCM_MenuConfig.Instance.GS_DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }

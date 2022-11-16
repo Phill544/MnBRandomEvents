@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -20,10 +21,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public AFlirtatiousEncounter() : base(ModSettings.RandomEvents.AFlirtatiousEncounterData)
         {
-            minWomanAge = MCM_MenuConfig.Instance.AFE_minWomanAge;
-            maxWomanAge = MCM_MenuConfig.Instance.AFE_maxWomanAge;
-            minRelationshipIncrease = MCM_MenuConfig.Instance.AFE_minRelationshipIncrease;
-            maxRelationshipIncrease = MCM_MenuConfig.Instance.AFE_maxRelationshipIncrease;
+            minWomanAge = MCM_MenuConfig_A_M.Instance.AFE_minWomanAge;
+            maxWomanAge = MCM_MenuConfig_A_M.Instance.AFE_maxWomanAge;
+            minRelationshipIncrease = MCM_MenuConfig_A_M.Instance.AFE_minRelationshipIncrease;
+            maxRelationshipIncrease = MCM_MenuConfig_A_M.Instance.AFE_maxRelationshipIncrease;
         }
 
         public override void CancelEvent()
@@ -32,18 +33,18 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig.Instance.AFE_Disable == false && Hero.MainHero.IsFemale == false && (Settlement.CurrentSettlement.IsTown || Settlement.CurrentSettlement.IsVillage);
+            return MCM_MenuConfig_A_M.Instance.AFE_Disable == false && Hero.MainHero.IsFemale == false && (Settlement.CurrentSettlement.IsTown || Settlement.CurrentSettlement.IsVillage);
 
         }
 
         public override void StartEvent()
         {
-            if (MCM_MenuConfig.Instance.GS_DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
                     RandomEventsSubmodule.Dbg_Color));
             }
-            
+
 
             var eventTitle = new TextObject("{=AFlirtatiousEncounter_Title}A Flirtatious Encounter").ToString();
 
@@ -103,9 +104,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 var eventOption3Hover =
                     new TextObject("{=AFlirtatiousEncounter_Event_Option_3_Hover}She's cute!").ToString();
 
-                var eventOption4 = new TextObject("{=AFlirtatiousEncounter_Event_Option_5}Be an ass").ToString();
+                var eventOption4 = new TextObject("{=AFlirtatiousEncounter_Event_Option_4}Be an ass").ToString();
                 var eventOption4Hover =
-                    new TextObject("{=AFlirtatiousEncounter_Event_Option_5_Hover}Seriously?").ToString();
+                    new TextObject("{=AFlirtatiousEncounter_Event_Option_4_Hover}Seriously?").ToString();
 
                 var eventButtonText1 = new TextObject("{=AFlirtatiousEncounter_Event_Button_Text_1}Choose").ToString();
                 var eventButtonText2 = new TextObject("{=AFlirtatiousEncounter_Event_Button_Text_2}Done").ToString();
@@ -141,7 +142,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         "{=AFlirtatiousEncounter_Event_Choice_3}When she gets over to you the two of you starts talking. You tell her that you don't often get noticed by such beautiful women. She says it's not often she find such handsome men in town. " +
                         "With the tone being set for the event the two of you continue to talk (and naturally to hit on each other as well...) " +
                         "She tells you that her name is {name} and she's {age} years old. After a few minutes the two of you move away from the bar and go somewhere a bit more comfortable. There you both continue your " +
-                        "flirtatious behaviour. It does not take long before the two of you start kissing each other.\n\n You kiss her on the neck, on the cheeks, on the lips and so on. She whispers to you “I know a more private place...” with fire in her eyes. " +
+                        "flirtatious behaviour. It does not take long before the two of you start kissing each other.\n\nYou kiss her on the neck, on the cheeks, on the lips and so on. She whispers to you “I know a more private place...” with fire in her eyes. " +
                         "Wanna head there she asks. You tell her to lead the way. She takes your hand and leads you out into the street. After a few minutes of walking you arrive at what is clearly {name}'s home in {currentSettlement}. " +
                         "As you enter her house she turns to you and start kissing you passionately again with more lust that you can ever remember. After just a few seconds all your clothes have been removed and you make your way towards {name}'s bed. " +
                         "\n\nThe rest of the night fades out in ecstasy.")

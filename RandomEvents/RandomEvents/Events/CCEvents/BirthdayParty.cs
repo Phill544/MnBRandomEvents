@@ -30,20 +30,20 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public BirthdayParty() : base(ModSettings.RandomEvents.BirthdayPartyData)
         {
-            minAttending = MCM_MenuConfig.Instance.BP_MinAttending;
-            maxAttending = MCM_MenuConfig.Instance.BP_MaxAttending;
-            minYourMenAttending = MCM_MenuConfig.Instance.BP_MinYourMenAttending;
-            maxYourMenAttending = MCM_MenuConfig.Instance.BP_MaxYourMenAttending;
-            minAge = MCM_MenuConfig.Instance.BP_MinAge;
-            maxAge = MCM_MenuConfig.Instance.BP_MaxAge;
-            minBandits = MCM_MenuConfig.Instance.BP_MinBandits;
-            maxBandits = MCM_MenuConfig.Instance.BP_MaxBandits;
-            minGoldGiven = MCM_MenuConfig.Instance.BP_MinGoldGiven;
-            maxGoldGiven = MCM_MenuConfig.Instance.BP_MaxGoldGiven;
-            minRenownGain = MCM_MenuConfig.Instance.BP_MinRenownGain;
-            maxRenownGain = MCM_MenuConfig.Instance.BP_MaxRenownGain;
-            minGoldLooted = MCM_MenuConfig.Instance.BP_MinGoldLooted;
-            maxGoldLooted = MCM_MenuConfig.Instance.BP_MaxGoldLooted;
+            minAttending = MCM_MenuConfig_A_M.Instance.BP_MinAttending;
+            maxAttending = MCM_MenuConfig_A_M.Instance.BP_MaxAttending;
+            minYourMenAttending = MCM_MenuConfig_A_M.Instance.BP_MinYourMenAttending;
+            maxYourMenAttending = MCM_MenuConfig_A_M.Instance.BP_MaxYourMenAttending;
+            minAge = MCM_MenuConfig_A_M.Instance.BP_MinAge;
+            maxAge = MCM_MenuConfig_A_M.Instance.BP_MaxAge;
+            minBandits = MCM_MenuConfig_A_M.Instance.BP_MinBandits;
+            maxBandits = MCM_MenuConfig_A_M.Instance.BP_MaxBandits;
+            minGoldGiven = MCM_MenuConfig_A_M.Instance.BP_MinGoldGiven;
+            maxGoldGiven = MCM_MenuConfig_A_M.Instance.BP_MaxGoldGiven;
+            minRenownGain = MCM_MenuConfig_A_M.Instance.BP_MinRenownGain;
+            maxRenownGain = MCM_MenuConfig_A_M.Instance.BP_MaxRenownGain;
+            minGoldLooted = MCM_MenuConfig_A_M.Instance.BP_MinGoldLooted;
+            maxGoldLooted = MCM_MenuConfig_A_M.Instance.BP_MaxGoldLooted;
         }
 
         public override void CancelEvent()
@@ -52,12 +52,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig.Instance.BP_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_A_M.Instance.BP_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
         {
-            if (MCM_MenuConfig.Instance.GS_DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }

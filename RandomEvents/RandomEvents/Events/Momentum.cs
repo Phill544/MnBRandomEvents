@@ -21,12 +21,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.MO_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_A_M.Instance.MO_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -45,13 +45,13 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			if (isOnFoot)
 			{
-				float xpToGive = MCM_MenuConfig.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Athletics);
+				float xpToGive = MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Athletics);
 				Hero.MainHero.AddSkillXp(DefaultSkills.Athletics, xpToGive);
 				dialogue = eventDialogue1;
 			}
 			else
 			{
-				float xpToGive = MCM_MenuConfig.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Riding);
+				float xpToGive = MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Riding);
 				Hero.MainHero.AddSkillXp(DefaultSkills.Riding, xpToGive);
 				dialogue = eventDialogue2;
 			}

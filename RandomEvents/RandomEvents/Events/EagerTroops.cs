@@ -19,8 +19,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public EagerTroops() : base(ModSettings.RandomEvents.EagerTroopsData)
 		{
-			minTroopGain = MCM_MenuConfig.Instance.ET_MinTroopGain;
-			maxTroopGain = MCM_MenuConfig.Instance.ET_MaxTroopGain;
+			minTroopGain = MCM_MenuConfig_A_M.Instance.ET_MinTroopGain;
+			maxTroopGain = MCM_MenuConfig_A_M.Instance.ET_MaxTroopGain;
 		}
 
 		public override void CancelEvent()
@@ -29,12 +29,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.ET_Disable == false && MobileParty.MainParty.Party.PartySizeLimit >= MobileParty.MainParty.MemberRoster.TotalHealthyCount + minTroopGain;
+			return MCM_MenuConfig_A_M.Instance.ET_Disable == false && MobileParty.MainParty.Party.PartySizeLimit >= MobileParty.MainParty.MemberRoster.TotalHealthyCount + minTroopGain;
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

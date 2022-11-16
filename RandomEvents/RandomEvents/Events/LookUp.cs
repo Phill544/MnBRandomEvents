@@ -23,12 +23,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public LookUp() : base(ModSettings.RandomEvents.LookUpData)
 		{
-			treeShakeChance = MCM_MenuConfig.Instance.LU_TreeShakeChance;
-			baseRangeChance = MCM_MenuConfig.Instance.LU_BaseRangeChance;
-			minRangeLevel = MCM_MenuConfig.Instance.LU_MinRangeLevel;
-			maxRangeLevel = MCM_MenuConfig.Instance.LU_MaxRangeLevel;
-			minGold = MCM_MenuConfig.Instance.LU_MinGold;
-			maxGold = MCM_MenuConfig.Instance.LU_MaxGold;
+			treeShakeChance = MCM_MenuConfig_A_M.Instance.LU_TreeShakeChance;
+			baseRangeChance = MCM_MenuConfig_A_M.Instance.LU_BaseRangeChance;
+			minRangeLevel = MCM_MenuConfig_A_M.Instance.LU_MinRangeLevel;
+			maxRangeLevel = MCM_MenuConfig_A_M.Instance.LU_MaxRangeLevel;
+			minGold = MCM_MenuConfig_A_M.Instance.LU_MinGold;
+			maxGold = MCM_MenuConfig_A_M.Instance.LU_MaxGold;
 		}
 
 		public override void CancelEvent()
@@ -37,12 +37,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.LU_Disable == false && MobileParty.MainParty.CurrentSettlement == null;;
+			return MCM_MenuConfig_A_M.Instance.LU_Disable == false && MobileParty.MainParty.CurrentSettlement == null;;
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -136,7 +136,7 @@ namespace CryingBuffalo.RandomEvents.Events
 								var goldGained = MBRandom.RandomInt(minGold, maxGold);
 								Hero.MainHero.ChangeHeroGold(goldGained);
 
-								Hero.MainHero.AddSkillXp(skillToUse, MCM_MenuConfig.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(skillToUse));
+								Hero.MainHero.AddSkillXp(skillToUse, MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(skillToUse));
 
 								
 								var eventOutcome5 = new TextObject("{=LookUp_Event_Text_5}You manage to knock the shiny object out of the tree with (what you consider) a fantastic shot! Shame no one was there to see it. You notice that object was in fact a purse full of {goldGained} gold!")

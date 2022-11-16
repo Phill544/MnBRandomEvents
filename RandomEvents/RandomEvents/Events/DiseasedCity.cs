@@ -20,10 +20,10 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public DiseasedCity() : base(ModSettings.RandomEvents.DiseasedCityData)
 		{
-			baseSuccessChance = MCM_MenuConfig.Instance.DC_BaseSuccessChance;
-			highMedicineChance = MCM_MenuConfig.Instance.DC_HighMedicineChance;
-			highMedicineLevel = MCM_MenuConfig.Instance.DC_HighMedicineLevel;
-			percentLoss = MCM_MenuConfig.Instance.DC_PercentLoss;
+			baseSuccessChance = MCM_MenuConfig_A_M.Instance.DC_BaseSuccessChance;
+			highMedicineChance = MCM_MenuConfig_A_M.Instance.DC_HighMedicineChance;
+			highMedicineLevel = MCM_MenuConfig_A_M.Instance.DC_HighMedicineLevel;
+			percentLoss = MCM_MenuConfig_A_M.Instance.DC_PercentLoss;
 		}
 
 		public override void CancelEvent()
@@ -32,12 +32,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.DC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
+			return MCM_MenuConfig_A_M.Instance.DC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -165,7 +165,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					plaguedSettlement.Town.Loyalty *= 1 - percentLoss;
 
 					// Give the hero half xp for trying
-					var xpToGive = MCM_MenuConfig.Instance.GS_GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) * 0.5f;
+					var xpToGive = MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) * 0.5f;
 
 					highestMedicineHero.AddSkillXp(DefaultSkills.Medicine, xpToGive);
 
@@ -191,7 +191,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				if (highestMedicineHero != null)
 				{
 					// Give the hero xp for saving the settlement
-					var xpToGive = MCM_MenuConfig.Instance.GS_GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine);
+					var xpToGive = MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine);
 
 					highestMedicineHero.AddSkillXp(DefaultSkills.Medicine, xpToGive);
 

@@ -21,10 +21,10 @@ namespace CryingBuffalo.RandomEvents.Events
 		
 		public BanditAmbush() : base(ModSettings.RandomEvents.BanditAmbushData)
 		{
-			moneyMinPercent = MCM_MenuConfig.Instance.BA_MoneyMinPercent;
-			moneyMaxPercent = MCM_MenuConfig.Instance.BA_MoneyMaxPercent;
-			troopScareCount = MCM_MenuConfig.Instance.BA_TroopScareCount;
-			banditCap = MCM_MenuConfig.Instance.BA_BanditCap;
+			moneyMinPercent = MCM_MenuConfig_A_M.Instance.BA_MoneyMinPercent;
+			moneyMaxPercent = MCM_MenuConfig_A_M.Instance.BA_MoneyMaxPercent;
+			troopScareCount = MCM_MenuConfig_A_M.Instance.BA_TroopScareCount;
+			banditCap = MCM_MenuConfig_A_M.Instance.BA_BanditCap;
 		}
 
 		public override void CancelEvent()
@@ -33,12 +33,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig.Instance.BA_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_A_M.Instance.BA_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (MCM_MenuConfig.Instance.GS_DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

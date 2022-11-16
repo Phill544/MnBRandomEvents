@@ -20,10 +20,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public BeggarBegging() : base(ModSettings.RandomEvents.BeggarBeggingData)
         {
-            minGoldToGive = MCM_MenuConfig.Instance.BB_MinGoldToBeggar;
-            maxGoldToGive = MCM_MenuConfig.Instance.BB_MaxGoldToBeggar;
-            minRenownGain = MCM_MenuConfig.Instance.BB_MinRenownGain;
-            maxRenownGain = MCM_MenuConfig.Instance.BB_MaxRenownGain;
+            minGoldToGive = MCM_MenuConfig_A_M.Instance.BB_MinGoldToBeggar;
+            maxGoldToGive = MCM_MenuConfig_A_M.Instance.BB_MaxGoldToBeggar;
+            minRenownGain = MCM_MenuConfig_A_M.Instance.BB_MinRenownGain;
+            maxRenownGain = MCM_MenuConfig_A_M.Instance.BB_MaxRenownGain;
     
         }
 
@@ -35,13 +35,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
 
-            return MCM_MenuConfig.Instance.BB_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
+            return MCM_MenuConfig_A_M.Instance.BB_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
         }
 
 
         public override void StartEvent()
         {
-            if (MCM_MenuConfig.Instance.GS_DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
