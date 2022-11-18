@@ -230,6 +230,34 @@
 
 
 
+    <!--PrisonerTransfer Event-->
+    <string id="PrisonerTransfer_Title" text="A Bunch of Prisoners" />
+    <string id="PrisonerTransfer_Event_Desc" text="You and your men are traveling near {closestSettlement} when you are approached by a ban of mercenaries from {randomCulture}. They inform you that they were tasked with capturing a bunch of soldiers who had deserted from their duty. They were on their way to {closestCastle} with the prisoners but they have not received payment for their job. They are offering you the chance to buy some or all of the prisoners for a nice sum of {pricePrPrisoner} gold per prisoner. You look at the prisoners and all you see are young recruits who can easily be trained and given a worthy cause to fight for. What do you do?" />
+
+    <!--PrisonerTransfer Event Choices-->
+    <string id="PrisonerTransfer_Event_Option_1" text="Buy all the prisoners" />
+    <string id="PrisonerTransfer_Event_Option_1_Hover" text="You could use ever man" />
+    <string id="PrisonerTransfer_Event_Option_2" text="Buy some prisoners" />
+    <string id="PrisonerTransfer_Event_Option_2_Hover" text="You don't need everyone" />
+    <string id="PrisonerTransfer_Event_Option_3" text="Decline" />
+    <string id="PrisonerTransfer_Event_Option_3_Hover" text="You really don't need any more men" />
+
+    <!--PrisonerTransfer Events-->
+    <string id="PrisonerTransfer_Event_Choice_1" text="You tell the mercenary captain that you will take all his prisoners of his hands. You haggle for a few minutes over the price and you end up paying {totalGold} gold for all the prisoners.\n\n{pricePrPrisoner} gold * {prisonerForTransfer} men = {totalGold} gold in total.\n\n Once the negotiations have been concluded and the mercenaries has left you make sure to feed your prisoners. They cannot thank you enough for taking them in and it does not take long for all the prisoners to swear their allegiance to you." />
+    <string id="PrisonerTransfer_Event_Choice_2" text="You tell him you will take some of his men. He agrees and lets you inspect the men." />
+    <string id="PrisonerTransfer_Event_Choice_3" text="You tell him that you don't have room for anymore but you wish him luck on his journeys. You watch on as the mercenaries and the prisoners disappears over a small hill in the distance." />
+
+    <!--PrisonerTransfer Event Buttons-->
+    <string id="PrisonerTransfer_Event_Button_Text_1" text="Choose" />
+    <string id="PrisonerTransfer_Event_Button_Text_2" text="Done" />
+
+    <!--PrisonerTransfer Log Messages-->
+    <string id="PrisonerTransfer_Event_Msg_1" text="{heroName} bought {prisonerForTransfer} prisoners for {totalGold} gold." />
+    <string id="PrisonerTransfer_Event_Msg_2" text="{heroName} is thinking about buying some prisoners." />
+    <string id="PrisonerTransfer_Event_Msg_3" text="{heroName} did not buy any prisoners." />
+    
+    
+    
     <!--RedMoon Event-->
     <string id="RedMoon_Title" text="A Coming Apocalypse?" />
     <string id="RedMoon_Event_Desc" text="You are in your tent late one night when you are awoken by your men starting a commotion. Annoyed, you go out and tell them to quiet down but as soon as you step foot outside your tent you see what the commotion is about. The moon has become blood red. Your men are panicking and running around in all directions and proclaiming this to be the end of days. The only question you can ask yourself is what are you going to do about this?" />

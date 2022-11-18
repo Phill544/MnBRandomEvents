@@ -63,6 +63,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             }
 
             var heroName = Hero.MainHero.FirstName;
+            
 
             var birthdayAge = MBRandom.RandomInt(minAge, maxAge);
             var yourMenAttending = MBRandom.RandomInt(minYourMenAttending, maxYourMenAttending);

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -39,7 +41,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             }
 
             var heroName = Hero.MainHero.FirstName;
-            
+
             var eventTitle = new TextObject("{=ViolatedGirl_Title}A violated girl").ToString();
             
             var closestCity = ClosestSettlements.GetClosestTown(MobileParty.MainParty).ToString();

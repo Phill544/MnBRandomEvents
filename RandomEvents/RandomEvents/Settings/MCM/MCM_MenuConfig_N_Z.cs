@@ -54,6 +54,16 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         #endregion
         
+        #region Prisoner Transfer - Variables
+        
+        public bool PT_Disable { get; private set; }
+        public int PT_MinPrisoners { get; private set; }
+        public int PT_MaxPrisoners { get; private set; }
+        public int PT_MinPricePrPrisoner { get; private set; }
+        public int PT_MaxPricePrPrisoner { get; private set; }
+
+        #endregion
+        
         #region Red Moon - Variables
         
         public bool RM_Disable { get; private set; }
@@ -233,6 +243,22 @@ namespace CryingBuffalo.RandomEvents.Settings
             var pr1_hint = new TextObject("{=mcm_pr1_hint}Minimum amount of prisoners needed for the event to trigger.").ToString();
             var pr2_text = new TextObject("{=mcm_pr2_text}2. Deactivate event").ToString();
             var pr2_hint = new TextObject("{=mcm_pr2_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            
+            #endregion
+            
+            #region Prisoner Transfer - Strings
+            
+            var pt_heading = new TextObject("{=mcm_pt_heading}Prisoner Transfer").ToString();
+            var pt1_text = new TextObject("{=mcm_pt1_text}1. Min Prisoners").ToString();
+            var pt1_hint = new TextObject("{=mcm_pt1_hint}Minimum amount of prisoners to transfer.").ToString();
+            var pt2_text = new TextObject("{=mcm_pt2_text}2. Min Prisoners").ToString();
+            var pt2_hint = new TextObject("{=mcm_pt2_hint}Maximum amount of prisoners to transfer.").ToString();
+            var pt3_text = new TextObject("{=mcm_pt3_text}3. Min Price for each prisoner").ToString();
+            var pt3_hint = new TextObject("{=mcm_pt3_hint}Minimum price for each prisoner.").ToString();
+            var pt4_text = new TextObject("{=mcm_pt4_text}4. Max Price for each prisoner").ToString();
+            var pt4_hint = new TextObject("{=mcm_pt4_hint}Maximum price for each prisoner.").ToString();
+            var pt5_text = new TextObject("{=mcm_pt5_text}5. Deactivate event").ToString();
+            var pt5_hint = new TextObject("{=mcm_pt5_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -477,6 +503,27 @@ namespace CryingBuffalo.RandomEvents.Settings
                         .AddBool("PR2", pr2_text, new ProxyRef<bool>(() => PR_Disable, o => PR_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(pr2_hint))
                     )
+                
+                #endregion
+                
+                #region Prisoner Transfer - Builder
+                
+                .CreateGroup(pt_heading, groupBuilder => groupBuilder
+                    .AddInteger("PT1", pt1_text,10,60, new ProxyRef<int>(() => PT_MinPrisoners, o => PT_MinPrisoners = o), integerBuilder => integerBuilder
+                        .SetHintText(pt1_hint))
+                    .AddInteger("PT2", pt2_text,10,60, new ProxyRef<int>(() => PT_MaxPrisoners, o => PT_MaxPrisoners = o), integerBuilder => integerBuilder
+                        .SetHintText(pt2_hint))
+                    .AddInteger("PT3", pt3_text,10,60, new ProxyRef<int>(() => PT_MinPricePrPrisoner, o => PT_MinPricePrPrisoner = o), integerBuilder => integerBuilder
+                        .SetHintText(pt3_hint))
+                    .AddInteger("PT4", pt4_text,10,60, new ProxyRef<int>(() => PT_MaxPricePrPrisoner, o => PT_MaxPricePrPrisoner = o), integerBuilder => integerBuilder
+                        .SetHintText(pt4_hint))
+                    .AddBool("PT5", pt5_text, new ProxyRef<bool>(() => PT_Disable, o => PT_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(pt5_hint))
+                )
+                
+                #endregion
+
+                
                 #region Red Moon - Builder
                 
                 .CreateGroup(rm_heading, groupBuilder => groupBuilder
@@ -492,11 +539,8 @@ namespace CryingBuffalo.RandomEvents.Settings
                         .SetHintText(rm5_hint))
                 )
                             
-                    #endregion
-
-
                 #endregion
-                
+
                 #region Runaway Son - Builder
                 
                 .CreateGroup(rs_heading, groupBuilder => groupBuilder
@@ -715,6 +759,16 @@ namespace CryingBuffalo.RandomEvents.Settings
 
             Instance.PR_Disable = false;
             Instance.PR_MinPrisoners = 30;
+
+            #endregion
+            
+            #region Prisoner Transfer
+
+            Instance.PT_Disable = false;
+            Instance.PT_MinPrisoners = 10;
+            Instance.PT_MaxPrisoners = 50;
+            Instance.PT_MinPricePrPrisoner = 50;
+            Instance.PT_MaxPricePrPrisoner = 400;
 
             #endregion
             

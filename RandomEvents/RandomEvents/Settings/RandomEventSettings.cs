@@ -26,9 +26,6 @@ namespace CryingBuffalo.RandomEvents.Settings
         public ChattingCommandersData ChattingCommandersData { get; } =
             new ChattingCommandersData("ChattingCommanders", MCM_MenuConfig_Chances.Instance.Chatting_Commanders_Chance);
 
-        //public GloriousFoodData GloriousFoodData { get; private set; } =
-        //new GloriousFoodData("GloriousFood", 1024, 5, 25, 5);
-        
         public DiseasedCityData DiseasedCityData { get; } =
             new DiseasedCityData("DiseasedCity", MCM_MenuConfig_Chances.Instance.Diseased_City_Chance);
         
@@ -130,5 +127,8 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         public SuddenStormData SuddenStormData { get; } =
             new SuddenStormData("SuddenStorm",MCM_MenuConfig_Chances.Instance.Sudden_Storm_Chance);
+
+        public PrisonerTransferData PrisonerTransferData { get; } =
+            new PrisonerTransferData("PrisonerTransfer", MCM_MenuConfig_Chances.Instance.Prisoner_Transfer_Chance);
     }
 }

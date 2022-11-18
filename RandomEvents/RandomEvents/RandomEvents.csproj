@@ -70,6 +70,7 @@
     <Compile Include="Events\CCEvents\BirthdayParty.cs" />
     <Compile Include="Events\CCEvents\FallenSoldierFamily.cs" />
     <Compile Include="Events\CCEvents\FishingSpot.cs" />
+    <Compile Include="Events\CCEvents\PrisonerTransfer.cs" />
     <Compile Include="Events\CCEvents\SuddenStorm.cs" />
     <Compile Include="Events\CCEvents\HuntingTrip.cs" />
     <Compile Include="Events\CCEvents\LoggingSite.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="Events\ExoticDrinks.cs" />
     <Compile Include="Events\FantasticFighters.cs" />
     <Compile Include="Events\FoodFight.cs" />
-    <Compile Include="Events\GloriousFood.cs" />
     <Compile Include="Events\GranaryRats.cs" />
     <Compile Include="Events\HotSprings.cs" />
     <Compile Include="Events\LookUp.cs" />
@@ -102,6 +102,7 @@
     <Compile Include="Events\Undercooked.cs" />
     <Compile Include="Events\WanderingLivestock.cs" />
     <Compile Include="Helpers\ClosestSettlement.cs" />
+    <Compile Include="Helpers\Demonym.cs" />
     <Compile Include="Helpers\PartySetup.cs" />
     <Compile Include="Helpers\PlayerStatus.cs" />
     <Compile Include="Helpers\RandomSelection.cs" />

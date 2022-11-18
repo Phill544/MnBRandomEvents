@@ -41,6 +41,7 @@ namespace CryingBuffalo.RandomEvents.Settings
         public float Passing_Comet_Chance{ get; private set; }
         public float Perfect_Weather_Chance{ get; private set; }
         public float Prisoner_Rebellion_Chance{ get; private set; }
+        public float Prisoner_Transfer_Chance{ get; private set; }
         public float Red_Moon_Chance{ get; private set; }
         public float Runaway_Son_Chance{ get; private set; }
         public float Secret_Singer_Chance{ get; private set; }
@@ -99,6 +100,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             var adv27_text = new TextObject("{=mcm_adv27_text}Passing Comet").ToString();
             var adv28_text = new TextObject("{=mcm_adv28_text}Perfect Weather").ToString();
             var adv29_text = new TextObject("{=mcm_adv29_text}Prisoner Rebellion").ToString();
+            var adv43_text = new TextObject("{=mcm_adv43_text}Prisoner Transfer").ToString();
             var adv30_text = new TextObject("{=mcm_adv30_text}Red Moon").ToString();
             var adv31_text = new TextObject("{=mcm_adv31_text}Runaway Son").ToString();
             var adv32_text = new TextObject("{=mcm_adv32_text}Secret Singer").ToString();
@@ -184,6 +186,8 @@ namespace CryingBuffalo.RandomEvents.Settings
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV29", adv29_text,5,100, new ProxyRef<float>(() => Prisoner_Rebellion_Chance, o => Prisoner_Rebellion_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
+                        .AddFloatingInteger ("ADV43", adv43_text,5,100, new ProxyRef<float>(() => Prisoner_Transfer_Chance, o => Prisoner_Transfer_Chance = o), floatBuilder => floatBuilder
+                            .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV30", adv30_text,5,100, new ProxyRef<float>(() => Red_Moon_Chance, o => Red_Moon_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV31", adv31_text,5,100, new ProxyRef<float>(() => Runaway_Son_Chance, o => Runaway_Son_Chance = o), floatBuilder => floatBuilder
@@ -259,6 +263,7 @@ namespace CryingBuffalo.RandomEvents.Settings
             Instance.Passing_Comet_Chance = 50.0f;
             Instance.Perfect_Weather_Chance = 50.0f;
             Instance.Prisoner_Rebellion_Chance = 50.0f;
+            Instance.Prisoner_Transfer_Chance = 50.0f;
             Instance.Red_Moon_Chance = 50.0f;
             Instance.Runaway_Son_Chance = 50.0f;
             Instance.Secret_Singer_Chance = 50.0f;

@@ -53,18 +53,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var characters = notables.Concat(heroes).Distinct().ToList();
 
-            var femaleList = new List<Hero>();
-
-            foreach (var character in characters)
-            {
-                if (character.IsFemale)
-                {
-                    if (character.Age >= minWomanAge && character.Age <= maxWomanAge)
-                    {
-                        femaleList.Add(character);
-                    }
-                }
-            }
+            var femaleList = characters.Where(character => character.IsFemale).Where(character => character.Age >= minWomanAge && character.Age <= maxWomanAge).ToList();
 
             if (femaleList.Count != 0)
             {
@@ -83,13 +72,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
                 var currentSettlement = Settlement.CurrentSettlement.Name.ToString();
 
-                var Demonym = GetDemonym(targetCulture);
+                var theDemonym = Demonym.GetTheDemonym(targetCulture, true);
 
                 var eventDescription = new TextObject(
                         "{=AFlirtatiousEncounter_Event_Desc}You are currently enjoying a drink in the tavern in {currentSettlement} and just relaxing. You take a look at the various guest in the tavern. There is quite a diverse mix of people " +
-                        "here tonight. Your eyes suddenly lock eyes with a {Demonym} woman who stands across the room. She smiles back when you look at her and she starts to make her way over to you. How shall you proceed?")
+                        "here tonight. Your eyes suddenly lock eyes with {Demonym} woman who stands across the room. She smiles back when you look at her and she starts to make her way over to you. How shall you proceed?")
                     .SetTextVariable("currentSettlement", currentSettlement)
-                    .SetTextVariable("Demonym", Demonym)
+                    .SetTextVariable("Demonym", theDemonym)
                     .ToString();
 
                 var eventOption1 = new TextObject("{=AFlirtatiousEncounter_Event_Option_1}Strike up a conversation").ToString();
@@ -239,22 +228,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 StopEvent();
             }
             StopEvent();
-        }
-
-        private static string GetDemonym(string culture)
-        {
-            string citizenName = culture switch
-            {
-                "Empire" => "imperial",
-                "Vlandia" => "vlandian",
-                "Sturgia" => "sturgian",
-                "Battania" => "battanian",
-                "Aserai" => "aserai",
-                "Khuzait" => "khuzait",
-                _ => "ERROR_DEMONYM"
-            };
-
-            return citizenName;
         }
 
         private void StopEvent()
