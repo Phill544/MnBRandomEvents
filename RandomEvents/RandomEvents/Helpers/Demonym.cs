@@ -2,28 +2,29 @@
 
 namespace CryingBuffalo.RandomEvents.Helpers
 {
+    //In English, demonyms are always capitalized.
     public static class Demonym
     {
         public static string GetTheDemonym(string culture, bool noun)
         {
             var citizenName = noun ? culture switch
                 {
-                    "Empire" => new TextObject("{=Demonym_Empire_Noun}an imperial").ToString(),
-                    "Vlandia" => new TextObject("{=Demonym_Vlandia_Noun}a vlandian").ToString(),
-                    "Sturgia" => new TextObject("{=Demonym_Sturgia_Noun}a sturgian").ToString(),
-                    "Battania" => new TextObject("{=Demonym_Battania_Noun}a battanian").ToString(),
-                    "Aserai" => new TextObject("{=Demonym_Aserai_Noun}an aserai").ToString(),
-                    "Khuzait" => new TextObject("{=Demonym_Khuzait_Noun}a khuzait").ToString(),
+                    "Empire" => new TextObject("{=Demonym_Empire_Noun}an Imperial").ToString(),
+                    "Vlandia" => new TextObject("{=Demonym_Vlandia_Noun}a Vlandian").ToString(),
+                    "Sturgia" => new TextObject("{=Demonym_Sturgia_Noun}a Sturgian").ToString(),
+                    "Battania" => new TextObject("{=Demonym_Battania_Noun}a Battanian").ToString(),
+                    "Aserai" => new TextObject("{=Demonym_Aserai_Noun}an Aserai").ToString(),
+                    "Khuzait" => new TextObject("{=Demonym_Khuzait_Noun}a Khuzait").ToString(),
                     _ => new TextObject("{=Demonym_Error}Error - Could not fetch Demonym").ToString()
                 }
                 : culture switch
                 {
-                    "Empire" => new TextObject("{=Demonym_Empire}imperial").ToString(),
-                    "Vlandia" => new TextObject("{=Demonym_Vlandia}vlandian").ToString(),
-                    "Sturgia" => new TextObject("{=Demonym_Sturgia}sturgian").ToString(),
-                    "Battania" => new TextObject("{=Demonym_Battania}battanian").ToString(),
-                    "Aserai" => new TextObject("{=Demonym_Aserai}aserai").ToString(),
-                    "Khuzait" => new TextObject("{=Demonym_Khuzait}khuzait").ToString(),
+                    "Empire" => new TextObject("{=Demonym_Empire}Imperial").ToString(),
+                    "Vlandia" => new TextObject("{=Demonym_Vlandia}Vlandian").ToString(),
+                    "Sturgia" => new TextObject("{=Demonym_Sturgia}Sturgian").ToString(),
+                    "Battania" => new TextObject("{=Demonym_Battania}Battanian").ToString(),
+                    "Aserai" => new TextObject("{=Demonym_Aserai}Aserai").ToString(),
+                    "Khuzait" => new TextObject("{=Demonym_Khuzait}Khuzait").ToString(),
                     _ => new TextObject("{=Demonym_Error}Error - Could not fetch Demonym").ToString()
                 };
 

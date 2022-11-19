@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -22,7 +23,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_N_Z.Instance.SE_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_N_Z.Instance.SE_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CampaignTime.Now.IsNightTime;
         }
 
         public override void StartEvent()

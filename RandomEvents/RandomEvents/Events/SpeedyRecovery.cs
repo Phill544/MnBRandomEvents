@@ -38,12 +38,14 @@ namespace CryingBuffalo.RandomEvents.Events
 			
 			try
 			{
-				int totalToHeal = MBRandom.RandomInt(minTroopsToHeal, Math.Min(maxTroopsToHeal, MobileParty.MainParty.MemberRoster.TotalWoundedRegulars));
-				int totalHealed = 0;
+				var totalToHeal = MBRandom.RandomInt(minTroopsToHeal, Math.Min(maxTroopsToHeal, MobileParty.MainParty.MemberRoster.TotalWoundedRegulars));
+				
+				var totalHealed = 0;
 
 				while (totalHealed < totalToHeal)
 				{
-					int randomElement = MBRandom.RandomInt(MobileParty.MainParty.MemberRoster.Count);
+					var randomElement = MBRandom.RandomInt(MobileParty.MainParty.MemberRoster.Count);
+					
 					while (MobileParty.MainParty.MemberRoster.GetElementWoundedNumber(randomElement) == 0 || !MobileParty.MainParty.MemberRoster.GetCharacterAtIndex(randomElement).IsRegular)
 					{
 						randomElement++;

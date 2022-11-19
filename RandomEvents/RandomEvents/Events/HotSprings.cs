@@ -43,16 +43,18 @@ namespace CryingBuffalo.RandomEvents.Events
 			MobileParty.MainParty.MoraleExplained.Add(moraleGain);
 			
 
-			for (int i = 0; i < PartyBase.MainParty.MemberRoster.Count; i++)
+			for (var i = 0; i < PartyBase.MainParty.MemberRoster.Count; i++)
 			{
-				TroopRosterElement elementCopyAtIndex = PartyBase.MainParty.MemberRoster.GetElementCopyAtIndex(i);
-				if (elementCopyAtIndex.Character.IsHero)
+				var elementCopyAtIndex = PartyBase.MainParty.MemberRoster.GetElementCopyAtIndex(i);
+
+				switch (elementCopyAtIndex.Character.IsHero)
 				{
-					elementCopyAtIndex.Character.HeroObject.Heal(100);
-				}
-				else
-				{
-					MobileParty.MainParty.Party.AddToMemberRosterElementAtIndex(i, 0, -PartyBase.MainParty.MemberRoster.GetElementWoundedNumber(i));
+					case true:
+						elementCopyAtIndex.Character.HeroObject.Heal(100);
+						break;
+					default:
+						MobileParty.MainParty.Party.AddToMemberRosterElementAtIndex(i, 0, -PartyBase.MainParty.MemberRoster.GetElementWoundedNumber(i));
+						break;
 				}
 			}
 			

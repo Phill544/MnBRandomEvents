@@ -89,6 +89,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 							var foodToRemove = MBRandom.RandomInt(minFoodLoss, maxFoodLoss);
 							var runOutOfFood = RemoveFood(foodToRemove);
+							
 							if (runOutOfFood)
 							{
 								extraDialogue = eventExtraDialogue;

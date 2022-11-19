@@ -44,8 +44,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			}
 			try
 			{
-				// The name of the settlement that receives the food
-
+				
 				var plaguedSettlement = GetPlaguedSettlement();
 
 				Hero highestMedicineHero = null;
@@ -71,7 +70,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					}
 				}
 
-				bool useSkill = highestMedicineHero != null && highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) >= highMedicineLevel;
+				var useSkill = highestMedicineHero != null && highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) >= highMedicineLevel;
 
 				var plagueKills = PlagueKills(useSkill);
 

@@ -33,7 +33,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_N_Z.Instance.RM_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_N_Z.Instance.RM_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CampaignTime.Now.IsNightTime;
 		}
 
 		public override void StartEvent()

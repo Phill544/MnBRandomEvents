@@ -12,13 +12,13 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class ExoticDrinks : BaseEvent
 	{
-		private readonly int minprice;
-		private readonly int maxprice;
+		private readonly int minPrice;
+		private readonly int maxPrice;
 
 		public ExoticDrinks() : base(ModSettings.RandomEvents.ExoticDrinksData)
 		{
-			minprice = MCM_MenuConfig_A_M.Instance.ED_MinPrice;
-			maxprice = MCM_MenuConfig_A_M.Instance.ED_MaxPrice;
+			minPrice = MCM_MenuConfig_A_M.Instance.ED_MinPrice;
+			maxPrice = MCM_MenuConfig_A_M.Instance.ED_MaxPrice;
 		}
 
 		public override void CancelEvent()
@@ -27,7 +27,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_M.Instance.ED_Disable == false && Hero.MainHero.Gold >= maxprice;
+			return MCM_MenuConfig_A_M.Instance.ED_Disable == false && Hero.MainHero.Gold >= maxPrice;
 		}
 
 		public override void StartEvent()
@@ -39,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			
 			var eventTitle = new TextObject("{=ExoticDrinks_Title}Exotic Drinks").ToString();
 
-			var price = MBRandom.RandomInt(minprice, maxprice);
+			var price = MBRandom.RandomInt(minPrice, maxPrice);
 			
 			var eventDescription = new TextObject("{=ExoticDrinks_Event_Desc}You come across a vendor selling exotic drinks for {price}. He won't tell you how, but says that it will make you a better person.")
 				.SetTextVariable("price", price)

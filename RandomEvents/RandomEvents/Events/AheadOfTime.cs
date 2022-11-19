@@ -31,8 +31,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			{
 				if (!Hero.MainHero.Clan.Settlements.Any()) return false;
 				eligibleSettlements = new List<Settlement>();
-
-				// Out of the settlements the main hero owns, only the towns or castles have food.
+				
 				foreach (var s in Hero.MainHero.Clan.Settlements.Where(s => (s.IsTown || s.IsCastle) && s.Town.BuildingsInProgress.Count > 0))
 				{
 					eligibleSettlements.Add(s);

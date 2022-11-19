@@ -38,9 +38,10 @@ namespace CryingBuffalo.RandomEvents.Events
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 
-			float percentOffset = MBRandom.RandomFloatRanged(-percentageDifferenceOfCurrentTroop, percentageDifferenceOfCurrentTroop);
+			var percentOffset = MBRandom.RandomFloatRanged(-percentageDifferenceOfCurrentTroop, percentageDifferenceOfCurrentTroop);
 
-			int spawnCount = (int)(MobileParty.MainParty.MemberRoster.Count * ( 1 + percentOffset)) ;
+			var spawnCount = (int)(MobileParty.MainParty.MemberRoster.Count * ( 1 + percentOffset));
+			
 			if (spawnCount < minimumSoldiers)
 				spawnCount = minimumSoldiers;
 			

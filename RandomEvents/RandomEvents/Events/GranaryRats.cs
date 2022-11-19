@@ -43,11 +43,11 @@ namespace CryingBuffalo.RandomEvents.Events
 
 				var foodLossPercent = MBRandom.RandomFloatRanged(MinFoodLossPercent, MaxFoodLossPercent);
 				
-				List<Settlement> eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
+				var eligibleSettlements = Hero.MainHero.Clan.Settlements.Where(s => s.IsTown || s.IsCastle).ToList();
 				
-				int index = MBRandom.RandomInt(0, eligibleSettlements.Count);
+				var index = MBRandom.RandomInt(0, eligibleSettlements.Count);
 				
-				Settlement infestedSettlement = eligibleSettlements[index];
+				var infestedSettlement = eligibleSettlements[index];
 
 				infestedSettlement.Town.FoodStocks -= MathF.Abs(infestedSettlement.Town.FoodChange * foodLossPercent);
 				

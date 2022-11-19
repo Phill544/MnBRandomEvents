@@ -76,27 +76,23 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 var theDemonym = Demonym.GetTheDemonym(targetCulture, true);
 
                 var eventDescription = new TextObject(
-                        "{=AFlirtatiousEncounter_Event_Desc}You are currently enjoying a drink in the tavern in {currentSettlement} and just relaxing. You take a look at the various guest in the tavern. There is quite a diverse mix of people " +
-                        "here tonight. Your eyes suddenly lock eyes with {Demonym} woman who stands across the room. She smiles back when you look at her and she starts to make her way over to you. How shall you proceed?")
+                        "{=AFlirtatiousEncounter_Event_Desc}This evening you are enjoying a drink in the tavern in {currentSettlement} and just relaxing. You take a look at the various guest in the tavern. There is quite a diverse mix of people " +
+                        "here tonight. Your eyes suddenly lock eyes with {Demonym} woman who stands across the room. She smiles back when you notice her and starts to make her way over to you. How shall you proceed?")
                     .SetTextVariable("currentSettlement", currentSettlement)
                     .SetTextVariable("Demonym", theDemonym)
                     .ToString();
 
                 var eventOption1 = new TextObject("{=AFlirtatiousEncounter_Event_Option_1}Strike up a conversation").ToString();
-                var eventOption1Hover =
-                    new TextObject("{=AFlirtatiousEncounter_Event_Option_1_Hover}Have a nice chat with her").ToString();
+                var eventOption1Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_1_Hover}Have a nice chat with her").ToString();
 
                 var eventOption2 = new TextObject("{=AFlirtatiousEncounter_Event_Option_2}Buy her a drink").ToString();
-                var eventOption2Hover =
-                    new TextObject("{=AFlirtatiousEncounter_Event_Option_2_Hover}Always a gentleman.").ToString();
+                var eventOption2Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_2_Hover}Always a gentleman.").ToString();
 
                 var eventOption3 = new TextObject("{=AFlirtatiousEncounter_Event_Option_3}Hit on her").ToString();
-                var eventOption3Hover =
-                    new TextObject("{=AFlirtatiousEncounter_Event_Option_3_Hover}She's cute!").ToString();
+                var eventOption3Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_3_Hover}She's cute!").ToString();
 
                 var eventOption4 = new TextObject("{=AFlirtatiousEncounter_Event_Option_4}Be an ass").ToString();
-                var eventOption4Hover =
-                    new TextObject("{=AFlirtatiousEncounter_Event_Option_4_Hover}Seriously?").ToString();
+                var eventOption4Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_4_Hover}Seriously?").ToString();
 
                 var eventButtonText1 = new TextObject("{=AFlirtatiousEncounter_Event_Button_Text_1}Choose").ToString();
                 var eventButtonText2 = new TextObject("{=AFlirtatiousEncounter_Event_Button_Text_2}Done").ToString();

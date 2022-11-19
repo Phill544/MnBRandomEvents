@@ -38,7 +38,8 @@ namespace CryingBuffalo.RandomEvents.Events
 			
 			try
 			{
-				int numberToInjure = MBRandom.RandomInt(minTroopsToInjure, maxTroopsToInjure);
+				var numberToInjure = MBRandom.RandomInt(minTroopsToInjure, maxTroopsToInjure);
+				
 				numberToInjure = Math.Min(numberToInjure, maxTroopsToInjure);
 
 				MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(numberToInjure);

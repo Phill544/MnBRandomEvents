@@ -43,6 +43,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public float Prisoner_Rebellion_Chance{ get; private set; }
         public float Prisoner_Transfer_Chance{ get; private set; }
         public float Red_Moon_Chance{ get; private set; }
+        public float Robbery_Chance { get; private set; }
         public float Runaway_Son_Chance{ get; private set; }
         public float Secret_Singer_Chance{ get; private set; }
         public float Speedy_Recovery_Chance{ get; private set; }
@@ -100,7 +101,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv27_text = new TextObject("{=mcm_adv27_text}Passing Comet").ToString();
             var adv28_text = new TextObject("{=mcm_adv28_text}Perfect Weather").ToString();
             var adv29_text = new TextObject("{=mcm_adv29_text}Prisoner Rebellion").ToString();
-            var adv43_text = new TextObject("{=mcm_adv43_text}Prisoner Transfer").ToString();
             var adv30_text = new TextObject("{=mcm_adv30_text}Red Moon").ToString();
             var adv31_text = new TextObject("{=mcm_adv31_text}Runaway Son").ToString();
             var adv32_text = new TextObject("{=mcm_adv32_text}Secret Singer").ToString();
@@ -115,6 +115,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv41_text = new TextObject("{=mcm_adv41_text}Wandering Livestock").ToString();
             var adv42_text = new TextObject("{=mcm_adv42_text}1. Initial Setup").ToString();
             var adv42_hint = new TextObject("{=mcm_adv42_hint}Uncheck this to re-run the Initial Setup and set all values back to the original.").ToString();
+            var adv43_text = new TextObject("{=mcm_adv43_text}Prisoner Transfer").ToString();
+            var adv44_text = new TextObject("{=mcm_adv44_text}Robbery").ToString();
 
             #endregion
 
@@ -186,8 +188,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV29", adv29_text,5,100, new ProxyRef<float>(() => Prisoner_Rebellion_Chance, o => Prisoner_Rebellion_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV43", adv43_text,5,100, new ProxyRef<float>(() => Prisoner_Transfer_Chance, o => Prisoner_Transfer_Chance = o), floatBuilder => floatBuilder
-                            .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV30", adv30_text,5,100, new ProxyRef<float>(() => Red_Moon_Chance, o => Red_Moon_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV31", adv31_text,5,100, new ProxyRef<float>(() => Runaway_Son_Chance, o => Runaway_Son_Chance = o), floatBuilder => floatBuilder
@@ -215,6 +215,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                         .AddBool("ADV42", adv42_text, new ProxyRef<bool>(() => CHANCES_FirstRunDone, o => CHANCES_FirstRunDone = o), boolBuilder => boolBuilder
                             .SetHintText(adv42_hint)
                             .SetRequireRestart(true))
+                        .AddFloatingInteger ("ADV43", adv43_text,5,100, new ProxyRef<float>(() => Prisoner_Transfer_Chance, o => Prisoner_Transfer_Chance = o), floatBuilder => floatBuilder
+                            .SetHintText(adv_hint))
+                        .AddFloatingInteger ("ADV44", adv44_text,5,100, new ProxyRef<float>(() => Robbery_Chance, o => Robbery_Chance = o), floatBuilder => floatBuilder
+                            .SetHintText(adv_hint))
                     #endregion
                     
                 );
@@ -258,18 +262,18 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Look_Up_Chance = 50.0f;
             Instance.Mass_Grave_Chance = 50.0f;
             Instance.Momentum_Chance = 50.0f;
-            Instance.Not_Of_This_World_Chance = 50.0f;
+            Instance.Not_Of_This_World_Chance = 10.0f;
             Instance.Old_Ruins_Chance = 50.0f;
-            Instance.Passing_Comet_Chance = 50.0f;
+            Instance.Passing_Comet_Chance = 15.0f;
             Instance.Perfect_Weather_Chance = 50.0f;
             Instance.Prisoner_Rebellion_Chance = 50.0f;
             Instance.Prisoner_Transfer_Chance = 50.0f;
-            Instance.Red_Moon_Chance = 50.0f;
+            Instance.Red_Moon_Chance = 25.0f;
+            Instance.Robbery_Chance = 50.0f;
             Instance.Runaway_Son_Chance = 50.0f;
             Instance.Secret_Singer_Chance = 50.0f;
             Instance.Speedy_Recovery_Chance = 50.0f;
             Instance.Successful_Deeds_Chance = 50.0f;
-            Instance.Sudden_Storm_Chance = 50.0f;
             Instance.Supernatural_Encounter_Chance = 50.0f;
             Instance.Target_Practice_Chance = 50.0f;
             Instance.Unexpected_Wedding_Chance = 50.0f;
@@ -277,7 +281,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Violated_Girl_Chance = 50.0f;
             Instance.Sudden_Storm_Chance = 50.0f;
             Instance.Wandering_Livestock_Chance = 50.0f;
-            
         }
         
 

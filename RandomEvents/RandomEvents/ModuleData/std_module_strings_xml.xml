@@ -6,7 +6,7 @@
   <strings>
     <!--AFlirttiousEncounter Event-->
     <string id="AFlirtatiousEncounter_Title" text="TA Flirtatious Encounter" />
-    <string id="AFlirtatiousEncounter_Event_Desc" text="You are currently enjoying a drink in the tavern in {currentSettlement} and just relaxing. You take a look at the various guest in the tavern. There is quite a diverse mix of people here tonight. Your eyes suddenly lock eyes with a {Demonym} woman who stands across the room. She smiles back when you look at her and she starts to make her way over to you. How shall you proceed?" />
+    <string id="AFlirtatiousEncounter_Event_Desc" text="This evening you are enjoying a drink in the tavern in {currentSettlement} and just relaxing. You take a look at the various guest in the tavern. There is quite a diverse mix of people here tonight. Your eyes suddenly lock eyes with {Demonym} woman who stands across the room. She smiles back when you notice her and starts to make her way over to you. How shall you proceed?" />
 
     <!--AFlirttiousEncounter - Event Choices-->
     <string id="AFlirtatiousEncounter_Event_Option_1" text="Strike up a conversation" />
@@ -145,7 +145,7 @@
     <string id="HuntingTrip_Outcome_1" text="Your men return empty handed just before nightfall. At least they had a good time together." />
     <string id="HuntingTrip_Outcome_2" text="Your hunters return just before nightfall, having successfully caught {animalsCaught} animals, yielding {animalsCaught} hides and {yieldedMeatResources} pieces of meat. Better than nothing. You let the hunters finish butchering the animals." />
     <string id="HuntingTrip_Outcome_3" text="Your hunters return just before nightfall, having successfully caught {animalsCaught} animals, yielding {animalsCaught} hides and {yieldedMeatResources} pieces of meat. You join the hunters in storing the meat." />
-    <string id="HuntingTrip_Outcome_4" text="Your hunters return triumphantly just before nightfall, having successfully caught {animalsCaught} animals, yielding {animalsCaught} hides and {FishingSpotyieldedMeatResources} pieces of meat. You order your men to start preparing a feast for everyone." />
+    <string id="HuntingTrip_Outcome_4" text="Your hunters return triumphantly just before nightfall, having successfully caught {animalsCaught} animals, yielding {animalsCaught} hides and {yieldedMeatResources} pieces of meat. You order your men to start preparing a feast for everyone." />
 
     <!--HuntingTrip - Event Button-->
     <string id="HuntingTrip_Event_Button_Text" text="Continue" />
@@ -222,8 +222,8 @@
 
 
     <!--PassingComet Event-->
-    <string id="PassingComet_Title" text="A Celestial Visitor" />
-    <string id="PassingComet_Event_Text" text="You and some of your men are standing in a field at night gazing up at a comet. It is one of the most beautiful sights you have ever seen. You cannot help wondering what it really is. You have always been fascinated by the stars and night sky. Most people believe it's the gods looking down on us, but you think otherwise.\n \nYou have always thought that the stars are nothing more than the same thing as the Sun just much further away. You have never shared this thought with anyone as most would think you to be crazy. At least for now you can be fascinated by the amazing comet passing by. You and a couple of your men end up standing there all night looking up and talking." />
+    <string id="PassingComet_Title" text="The Celestial Visitor" />
+    <string id="PassingComet_Event_Text" text="You and some of your men are standing in a field at night gazing up at a comet. You all agree that this is the most beautiful sight any of you have ever seen. You cannot help wondering what it really is. You have always been fascinated by the stars and night sky. Most people believe it's the gods looking down on us, but you think otherwise.\n \nYou have often wondered if the stars are nothing more than the same thing as the Sun just much further away or perhaps they're angels of our fallen ancestors watching over us. You have never shared these thoughts with anyone as most would think you to be crazy. At least for now you can be fascinated by the amazing comet passing by. You and a couple of your men end up standing there all night looking up and talking." />
 
     <!--PassingComet - Event Button-->
     <string id="PassingComet_Event_Button_Text" text="Done" />
@@ -768,12 +768,25 @@
 
     <!--WanderingLivestock - Plural-->
     <string id="WanderingLivestock_Event_Plural_End" text="s" />
+    
     <!-- The ending of the plural form of the language your are translating to, eg cow, cows -->
     <string id="WanderingLivestock_Event_Cow_Text" text=", and {cowCount} cow{cowPlural}." />
 
     <!--WanderingLivestock - Outcomes-->
     <string id="WanderingLivestock_Event_Choice_1" text="Who could say no to such a delicious -- I mean, reasonable proposition? You end up in possession of {sheepCount} sheep{cowText}" />
     <string id="WanderingLivestock_Event_Choice_2" text="The last thing you need right now is to tend to livestock, so you leave them." />
+
+
+
+    <!--Robbery Event-->
+    <string id="Robbery_Title" text="You've been robbed" />
+    <string id="Robbery_Event_Text" text="While leaving the tavern late at night in {currentSettlement} you decide to take a shortcut back through an alley. You quickly realize that this was a bad idea as you are surrounded by {thugs} thugs who are threatening you. Their leader, {gangLeader}, tells you to hand over any valuables you have on you. Knowing you are outnumbered, you comply and hand over {goldLost} gold to {gangLeader} and the thugs.\n\n{gangLeader} tells the thugs to teach you a lesson that will keep you out of their alley next time. The next few minutes are a blur as you are punched, kicked, thrown and intimidated.\nYou black out\n\nYou awake some time later only to realize the thugs have dumped you in a pigsty. You stumble to your feet and make haste back to where you are staying." />
+
+    <!--Robbery - Event Button-->
+    <string id="Robbery_Event_Button_Text" text="Rough Night" />
+
+    <!--Robbery - Log Messages-->
+    <string id="Robbery_Event_Msg_1" text="Clan {playerClan} lost {renownLost} renown after word spread that {heroName} was robbed by {gangLeader}'s thugs!" />
     
     
     

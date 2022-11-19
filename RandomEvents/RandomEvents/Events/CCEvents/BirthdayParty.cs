@@ -64,7 +64,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             }
 
             var heroName = Hero.MainHero.FirstName;
-            
 
             var birthdayAge = MBRandom.RandomInt(minAge, maxAge);
             var yourMenAttending = MBRandom.RandomInt(minYourMenAttending, maxYourMenAttending);
@@ -159,7 +158,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldGiven", goldGiven)
                 .ToString();
-
             
 
             var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText, null,

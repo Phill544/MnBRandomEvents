@@ -89,8 +89,8 @@ namespace CryingBuffalo.RandomEvents.Events
 								cowText = ".";
 							}
 
-							ItemObject sheep = MBObjectManager.Instance.GetObject<ItemObject>("sheep");
-							ItemObject cow = MBObjectManager.Instance.GetObject<ItemObject>("cow");
+							var sheep = MBObjectManager.Instance.GetObject<ItemObject>("sheep");
+							var cow = MBObjectManager.Instance.GetObject<ItemObject>("cow");
 
 							MobileParty.MainParty.ItemRoster.AddToCounts(sheep, sheepCount);
 							MobileParty.MainParty.ItemRoster.AddToCounts(cow, cowCount);
