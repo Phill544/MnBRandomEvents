@@ -1,4 +1,6 @@
-﻿namespace CryingBuffalo.RandomEvents.Helpers
+﻿using TaleWorlds.Localization;
+
+namespace CryingBuffalo.RandomEvents.Helpers
 {
     public static class Demonym
     {
@@ -6,23 +8,23 @@
         {
             var citizenName = noun ? culture switch
                 {
-                    "Empire" => "an imperial",
-                    "Vlandia" => "a vlandian",
-                    "Sturgia" => "a sturgian",
-                    "Battania" => "a battanian",
-                    "Aserai" => "an aserai",
-                    "Khuzait" => "a khuzait",
-                    _ => "ERROR_DEMONYM"
+                    "Empire" => new TextObject("{=Demonym_Empire_Noun}an imperial").ToString(),
+                    "Vlandia" => new TextObject("{=Demonym_Vlandia_Noun}a vlandian").ToString(),
+                    "Sturgia" => new TextObject("{=Demonym_Sturgia_Noun}a sturgian").ToString(),
+                    "Battania" => new TextObject("{=Demonym_Battania_Noun}a battanian").ToString(),
+                    "Aserai" => new TextObject("{=Demonym_Aserai_Noun}an aserai").ToString(),
+                    "Khuzait" => new TextObject("{=Demonym_Khuzait_Noun}a khuzait").ToString(),
+                    _ => new TextObject("{=Demonym_Error}Error - Could not fetch Demonym").ToString()
                 }
                 : culture switch
                 {
-                    "Empire" => "imperial",
-                    "Vlandia" => "vlandian",
-                    "Sturgia" => "sturgian",
-                    "Battania" => "battanian",
-                    "Aserai" => "aserai",
-                    "Khuzait" => "khuzait",
-                    _ => "ERROR_DEMONYM"
+                    "Empire" => new TextObject("{=Demonym_Empire}imperial").ToString(),
+                    "Vlandia" => new TextObject("{=Demonym_Vlandia}vlandian").ToString(),
+                    "Sturgia" => new TextObject("{=Demonym_Sturgia}sturgian").ToString(),
+                    "Battania" => new TextObject("{=Demonym_Battania}battanian").ToString(),
+                    "Aserai" => new TextObject("{=Demonym_Aserai}aserai").ToString(),
+                    "Khuzait" => new TextObject("{=Demonym_Khuzait}khuzait").ToString(),
+                    _ => new TextObject("{=Demonym_Error}Error - Could not fetch Demonym").ToString()
                 };
 
             return citizenName;
