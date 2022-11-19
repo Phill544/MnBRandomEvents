@@ -774,5 +774,23 @@
     <!--WanderingLivestock - Outcomes-->
     <string id="WanderingLivestock_Event_Choice_1" text="Who could say no to such a delicious -- I mean, reasonable proposition? You end up in possession of {sheepCount} sheep{cowText}" />
     <string id="WanderingLivestock_Event_Choice_2" text="The last thing you need right now is to tend to livestock, so you leave them." />
+    
+    
+    
+    <!--Demonyms-->
+    <string id="Demonym_Empire_Noun" text="an imperial" />
+    <string id="Demonym_Vlandia_Noun" text="a vlandian" />
+    <string id="Demonym_Sturgia_Noun" text="a sturgian" />
+    <string id="Demonym_Battania_Noun" text="a battanian" />
+    <string id="Demonym_Aserai_Noun" text="an aserai" />
+    <string id="Demonym_Khuzait_Noun" text="a khuzait" />
+    <string id="Demonym_Empire" text="imperial" />
+    <string id="Demonym_Vlandia" text="vlandian" />
+    <string id="Demonym_Sturgia" text="sturgian" />
+    <string id="Demonym_Battania" text="battanian" />
+    <string id="Demonym_Aserai" text="aserai" />
+    <string id="Demonym_Khuzait" text="khuzait" />
+    <string id="Demonym_Error" text="Error - Could not fetch Demonym" />
+    
   </strings>
 </base>

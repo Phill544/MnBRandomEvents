@@ -1,5 +1,6 @@
 ﻿using CryingBuffalo.RandomEvents.Events;
 using CryingBuffalo.RandomEvents.Events.CCEvents;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 
 namespace CryingBuffalo.RandomEvents.Settings
 {
@@ -130,5 +131,8 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         public PrisonerTransferData PrisonerTransferData { get; } =
             new PrisonerTransferData("PrisonerTransfer", MCM_MenuConfig_Chances.Instance.Prisoner_Transfer_Chance);
+
+        public TheDuelData TheDuelData { get; } =
+            new TheDuelData("TheDuel", 1024);
     }
 }

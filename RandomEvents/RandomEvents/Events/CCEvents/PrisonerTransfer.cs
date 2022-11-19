@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
@@ -135,44 +136,61 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("heroName", heroName)
                 .ToString();
 
-            
 
-            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null,
+
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1,
+                eventButtonText1, null,
                 elements =>
                 {
                     switch ((string)elements[0].Identifier)
                     {
                         case "a":
-                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.ShowInquiry(
+                                new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null,
+                                    null), true);
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1,
+                                RandomEventsSubmodule.Msg_Color));
                             break;
-                        
+
                         case "b":
-                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
-                            
+                            InformationManager.ShowInquiry(
+                                new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null,
+                                    null), true);
+
                             var troopRoster2 = TroopRoster.CreateDummyTroopRoster();
-                            
+
                             foreach (var characterObject in CharacterObject.All)
                             {
-                                if (characterObject.StringId.Contains("recruit") && !characterObject.StringId.Contains("vigla") 
-                                    && characterObject.Culture.ToString() == randomCulture || (characterObject.StringId.Contains("footman") && !characterObject.StringId.Contains("vlandia")
-                                        && !characterObject.StringId.Contains("aserai") && characterObject.Culture.ToString() == randomCulture) || (characterObject.StringId.Contains("volunteer") 
-                                        && characterObject.StringId.Contains("battanian") && characterObject.Culture.ToString() == randomCulture))
+                                if (characterObject.StringId.Contains("recruit") &&
+                                    !characterObject.StringId.Contains("vigla")
+                                    && characterObject.Culture.ToString() == randomCulture ||
+                                    (characterObject.StringId.Contains("footman") &&
+                                     !characterObject.StringId.Contains("vlandia")
+                                     && !characterObject.StringId.Contains("aserai") &&
+                                     characterObject.Culture.ToString() == randomCulture) ||
+                                    (characterObject.StringId.Contains("volunteer")
+                                     && characterObject.StringId.Contains("battanian") &&
+                                     characterObject.Culture.ToString() == randomCulture))
                                 {
                                     troopRoster2.AddToCounts(characterObject, prisonerForTransfer);
                                 }
                             }
-                            
+
                             var emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
-                            
-                            PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("Prisoners").SetTextVariable("cultureclass", randomCulture), 20);
-                            
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+
+                            PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2,
+                                new TextObject("Prisoners").SetTextVariable("cultureclass", randomCulture), 20);
+
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2,
+                                RandomEventsSubmodule.Msg_Color));
                             break;
-                        
+
                         case "c":
-                            InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionCText, true, false, eventButtonText2, null, null, null), true);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.ShowInquiry(
+                                new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null,
+                                    null), true);
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3,
+                                RandomEventsSubmodule.Msg_Color));
                             break;
 
                         default:
@@ -180,6 +198,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             break;
                     }
                 },
+
                 null);
 
             MBInformationManager.ShowMultiSelectionInquiry(msid, true);

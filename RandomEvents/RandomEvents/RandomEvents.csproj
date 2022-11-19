@@ -81,6 +81,7 @@
     <Compile Include="Events\CCEvents\RedMoon.cs" />
     <Compile Include="Events\CCEvents\RunawaySon.cs" />
     <Compile Include="Events\CCEvents\SupernaturalEncounter.cs" />
+    <Compile Include="Events\CCEvents\TheDuel.cs" />
     <Compile Include="Events\CCEvents\UnexpectedWedding.cs" />
     <Compile Include="Events\CCEvents\ViolatedGirl.cs" />
     <Compile Include="Events\ChattingCommanders.cs" />

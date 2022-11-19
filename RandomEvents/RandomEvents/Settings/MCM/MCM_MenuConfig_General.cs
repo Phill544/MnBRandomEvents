@@ -4,7 +4,7 @@ using MCM.Abstractions.FluentBuilder;
 using MCM.Common;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Settings
+namespace CryingBuffalo.RandomEvents.Settings.MCM
 {
     public class MCM_ConfigMenu_General : IDisposable
     {

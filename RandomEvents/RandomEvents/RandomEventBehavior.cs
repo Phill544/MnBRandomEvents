@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CryingBuffalo.RandomEvents.Events;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -82,7 +83,7 @@ namespace CryingBuffalo.RandomEvents
 
             inGameHoursPassed++;
 
-            if (inGameHoursPassed < Settings.MCM_ConfigMenu_General.Instance.GS_MinimumInGameHours ||
+            if (inGameHoursPassed < MCM_ConfigMenu_General.Instance.GS_MinimumInGameHours ||
                 (DateTime.Now - lastEventTime).Minutes < minutesForNextEvent) return;
             // Select which event should be played
             BaseEvent eventToPlay = SelectEvent();
@@ -144,7 +145,7 @@ namespace CryingBuffalo.RandomEvents
         private void ResetEventTimer()
         {
             inGameHoursPassed = 0;
-            minutesForNextEvent = MBRandom.RandomInt(Settings.MCM_ConfigMenu_General.Instance.GS_MaximumRealMinutes, Settings.MCM_ConfigMenu_General.Instance.GS_MaximumRealMinutes);
+            minutesForNextEvent = MBRandom.RandomInt(MCM_ConfigMenu_General.Instance.GS_MaximumRealMinutes, MCM_ConfigMenu_General.Instance.GS_MaximumRealMinutes);
             lastEventTime = DateTime.Now;
         }
 

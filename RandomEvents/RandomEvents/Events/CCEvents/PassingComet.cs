@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
