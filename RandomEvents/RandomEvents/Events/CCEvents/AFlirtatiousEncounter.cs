@@ -201,6 +201,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                         null, null), true);
                                 
                                 CharacterRelationManager.SetHeroRelation(target,Hero.MainHero, newRelationship);
+                                
                                 InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
                                 
                                 break;
