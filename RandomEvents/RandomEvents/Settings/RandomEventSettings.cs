@@ -1,4 +1,5 @@
 ﻿using CryingBuffalo.RandomEvents.Events;
+using CryingBuffalo.RandomEvents.Events.BicEvents;
 using CryingBuffalo.RandomEvents.Events.CCEvents;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 

@@ -6,7 +6,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class BirdSongs : BaseEvent
 	{

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -12,9 +11,8 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
-using static TaleWorlds.CampaignSystem.CharacterDevelopment.DefaultPerks;
 
-namespace CryingBuffalo.RandomEvents.Events.CCEvents
+namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
     public class Refugees : BaseEvent
     {

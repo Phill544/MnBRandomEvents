@@ -1,14 +1,13 @@
-﻿using CryingBuffalo.RandomEvents.Helpers;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class Courier : BaseEvent
 	{

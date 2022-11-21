@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using TaleWorlds.CampaignSystem;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class Dysentery : BaseEvent
 	{
