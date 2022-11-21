@@ -137,6 +137,14 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         public RobberyData RobberyData { get; } = new RobberyData("Robbery", MCM_MenuConfig_Chances.Instance.Robbery_Chance);
 
+        public BirdSongsData BirdSongsData { get; } = new BirdSongsData("BirdSongs", 50, 5, 20);
+        
+        public CourierData CourierData { get; } = new CourierData("Courier", 50, 5, 20);
+
+        public DysenteryData DysenteryData { get; } = new DysenteryData("Dysentery", 50, 5, 20, 2, 10);
+
+        public RefugeesData RefugeesData { get; } = new RefugeesData("Refugees", 50, 3, 15, 3, 15, 3, 15);
+
         #endregion
     }
 }
