@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
+using MCM.Common;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -13,9 +16,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private bool heroInPrisonerRoster;
 
-		public PrisonerRebellion() : base(Settings.ModSettings.RandomEvents.PrisonerRebellionData)
+		public PrisonerRebellion() : base(ModSettings.RandomEvents.PrisonerRebellionData)
 		{
-			minimumPrisoners = Settings.ModSettings.RandomEvents.PrisonerRebellionData.minimumPrisoners;
+			minimumPrisoners = MCM_MenuConfig_N_Z.Instance.PR_MinPrisoners;
 		}
 
 		public override void CancelEvent()
@@ -24,14 +27,14 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MobileParty.MainParty.PrisonRoster.TotalHealthyCount > minimumPrisoners && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_N_Z.Instance.PR_Disable == false && MobileParty.MainParty.PrisonRoster.TotalHealthyCount > minimumPrisoners && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 
 			try
@@ -106,11 +109,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class PrisonerRebellionData : RandomEventData
 	{
-		public readonly int minimumPrisoners;
 
-		public PrisonerRebellionData(string eventType, float chanceWeight, int minimumPrisoners) : base(eventType, chanceWeight)
+		public PrisonerRebellionData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.minimumPrisoners = minimumPrisoners;
 		}
 
 		public override BaseEvent GetBaseEvent()

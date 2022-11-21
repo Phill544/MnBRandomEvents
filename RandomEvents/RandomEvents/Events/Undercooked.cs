@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -12,10 +14,10 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minTroopsToInjure;
 		private readonly int maxTroopsToInjure;
 
-		public Undercooked() : base(Settings.ModSettings.RandomEvents.UndercookedData)
+		public Undercooked() : base(ModSettings.RandomEvents.UndercookedData)
 		{
-			minTroopsToInjure = Settings.ModSettings.RandomEvents.UndercookedData.minTroopsToInjure;
-			maxTroopsToInjure = Settings.ModSettings.RandomEvents.UndercookedData.maxTroopsToInjure;
+			minTroopsToInjure = MCM_MenuConfig_N_Z.Instance.UC_MinSoldiersToInjure;
+			maxTroopsToInjure = MCM_MenuConfig_N_Z.Instance.UC_MaxSoldiersToInjure;
 		}
 
 		public override void CancelEvent()
@@ -24,14 +26,20 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return (MobileParty.MainParty.MemberRoster.TotalRegulars - MobileParty.MainParty.MemberRoster.TotalWoundedRegulars) >= minTroopsToInjure;
+			return MCM_MenuConfig_N_Z.Instance.UC_Disable == false && (MobileParty.MainParty.MemberRoster.TotalRegulars - MobileParty.MainParty.MemberRoster.TotalWoundedRegulars) >= minTroopsToInjure;
 		}
 
 		public override void StartEvent()
 		{
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
+			
 			try
 			{
-				int numberToInjure = MBRandom.RandomInt(minTroopsToInjure, maxTroopsToInjure);
+				var numberToInjure = MBRandom.RandomInt(minTroopsToInjure, maxTroopsToInjure);
+				
 				numberToInjure = Math.Min(numberToInjure, maxTroopsToInjure);
 
 				MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(numberToInjure);
@@ -68,13 +76,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class UndercookedData : RandomEventData
 	{
-		public readonly int minTroopsToInjure;
-		public readonly int maxTroopsToInjure;
-
-		public UndercookedData(string eventType, float chanceWeight, int minTroopsToInjure, int maxTroopsToInjure) : base(eventType, chanceWeight)
+		public UndercookedData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.minTroopsToInjure = minTroopsToInjure;
-			this.maxTroopsToInjure = maxTroopsToInjure;
 		}
 
 		public override BaseEvent GetBaseEvent()

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -12,10 +14,10 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minTroopsToHeal;
 		private readonly int maxTroopsToHeal;
 
-		public SpeedyRecovery() : base(Settings.ModSettings.RandomEvents.SpeedyRecoveryData)
+		public SpeedyRecovery() : base(ModSettings.RandomEvents.SpeedyRecoveryData)
 		{
-			minTroopsToHeal = Settings.ModSettings.RandomEvents.SpeedyRecoveryData.minTroopsToHeal;
-			maxTroopsToHeal = Settings.ModSettings.RandomEvents.SpeedyRecoveryData.maxTroopsToHeal;
+			minTroopsToHeal = MCM_MenuConfig_N_Z.Instance.SR_MinMenToRecover;
+			maxTroopsToHeal = MCM_MenuConfig_N_Z.Instance.SR_MaxMenToRecover;
 		}
 
 		public override void CancelEvent()
@@ -24,19 +26,26 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MobileParty.MainParty.MemberRoster.TotalWoundedRegulars >= minTroopsToHeal;
+			return MCM_MenuConfig_N_Z.Instance.SR_Disable == false && MobileParty.MainParty.MemberRoster.TotalWoundedRegulars >= minTroopsToHeal;
 		}
 
 		public override void StartEvent()
 		{
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
+			
 			try
 			{
-				int totalToHeal = MBRandom.RandomInt(minTroopsToHeal, Math.Min(maxTroopsToHeal, MobileParty.MainParty.MemberRoster.TotalWoundedRegulars));
-				int totalHealed = 0;
+				var totalToHeal = MBRandom.RandomInt(minTroopsToHeal, Math.Min(maxTroopsToHeal, MobileParty.MainParty.MemberRoster.TotalWoundedRegulars));
+				
+				var totalHealed = 0;
 
 				while (totalHealed < totalToHeal)
 				{
-					int randomElement = MBRandom.RandomInt(MobileParty.MainParty.MemberRoster.Count);
+					var randomElement = MBRandom.RandomInt(MobileParty.MainParty.MemberRoster.Count);
+					
 					while (MobileParty.MainParty.MemberRoster.GetElementWoundedNumber(randomElement) == 0 || !MobileParty.MainParty.MemberRoster.GetCharacterAtIndex(randomElement).IsRegular)
 					{
 						randomElement++;
@@ -84,13 +93,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class SpeedyRecoveryData : RandomEventData
 	{
-		public readonly int minTroopsToHeal;
-		public readonly int maxTroopsToHeal;
-
-		public SpeedyRecoveryData(string eventType, float chanceWeight, int minTroopsToHeal, int maxTroopsToHeal) : base(eventType, chanceWeight)
+		public SpeedyRecoveryData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.minTroopsToHeal = minTroopsToHeal;
-			this.maxTroopsToHeal = maxTroopsToHeal;
 		}
 
 		public override BaseEvent GetBaseEvent()

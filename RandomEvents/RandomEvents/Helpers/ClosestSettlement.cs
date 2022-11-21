@@ -10,6 +10,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
 {
     public static class ClosestSettlements
     {
+        
         public static Settlement GetClosestAny(MobileParty heroParty)
         {
             Settlement closestSettlement = null;
@@ -25,6 +26,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
             }
             return closestSettlement;
         }
+        
         
         public static Settlement GetClosestTown(MobileParty heroParty)
         {
@@ -42,6 +44,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
             return closestSettlement;
         }
         
+        
         public static Settlement GetClosestCastle(MobileParty heroParty)
         {
             Settlement closestSettlement = null;
@@ -57,6 +60,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
             }
             return closestSettlement;
         }
+        
         
         public static Settlement GetClosestVillage(MobileParty heroParty)
         {
@@ -74,6 +78,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
             return closestSettlement;
         }
         
+        
         public static Settlement GetClosestTownOrVillage(MobileParty heroParty)
         {
             Settlement closestSettlement = null;
@@ -89,7 +94,6 @@ namespace CryingBuffalo.RandomEvents.Helpers
             }
             return closestSettlement;
         }
-            
-        
+
     }
 }

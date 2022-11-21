@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -17,13 +19,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int maxMoraleGain;
         
 
-        public FishingSpot() : base(Settings.ModSettings.RandomEvents.FishingSpotData)
+        public FishingSpot() : base(ModSettings.RandomEvents.FishingSpotData)
         {
-            minSoldiersToGo = Settings.ModSettings.RandomEvents.FishingSpotData.minSoldiersToGo;
-            maxSoldiersToGo = Settings.ModSettings.RandomEvents.FishingSpotData.maxSoldiersToGo;
-            maxFishCatch = Settings.ModSettings.RandomEvents.FishingSpotData.maxFishCatch;
-            minMoraleGain = Settings.ModSettings.RandomEvents.FishingSpotData.minMoraleGain;
-            maxMoraleGain = Settings.ModSettings.RandomEvents.FishingSpotData.maxMoraleGain;
+            minSoldiersToGo = MCM_MenuConfig_A_M.Instance.FS_MinSoldiersToGo;
+            maxSoldiersToGo = MCM_MenuConfig_A_M.Instance.FS_MaxSoldiersToGo;
+            maxFishCatch = MCM_MenuConfig_A_M.Instance.FS_MaxFishCatch;
+            minMoraleGain = MCM_MenuConfig_A_M.Instance.FS_MinMoraleGain;
+            maxMoraleGain = MCM_MenuConfig_A_M.Instance.FS_MaxMoraleGain;
         }
 
         public override void CancelEvent()
@@ -32,18 +34,15 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            
-            return true;
+            return MCM_MenuConfig_A_M.Instance.FS_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= 50 && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
-                    RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
-            
             
             var eventTitle = new TextObject("{=FishingSpot_Title}A Great Fishing Spot").ToString();
 
@@ -80,19 +79,19 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var eventMsg1 =new TextObject(
                     "{=FishingSpot_Event_Msg_1}Your men returned empty handed but it raised morale by {moraleGained}.")
-                .SetTextVariable("moraleGained", moraleGained - 3)
+                .SetTextVariable("moraleGained", MathF.Floor(moraleGained * 0.02f))
                 .ToString();
             
             var eventMsg2 =new TextObject(
                     "{=FishingSpot_Event_Msg_2}Your men returned with {fishCaught} and it raised morale by {moraleGained}.")
                 .SetTextVariable("fishCaught", fishCaught)
-                .SetTextVariable("moraleGained", moraleGained - 2)
+                .SetTextVariable("moraleGained", MathF.Floor(moraleGained * 0.04f))
                 .ToString();
             
             var eventMsg3 =new TextObject(
                     "{=FishingSpot_Event_Msg_3}Your men returned with {fishCaught} and it raised morale by {moraleGained}.")
                 .SetTextVariable("fishCaught", fishCaught)
-                .SetTextVariable("moraleGained", moraleGained - 1)
+                .SetTextVariable("moraleGained", MathF.Floor(moraleGained * 0.08f))
                 .ToString();
             
             var eventMsg4 =new TextObject(
@@ -110,28 +109,28 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1, true, false,eventButtonText, null, null, null), true);
                 
-                MobileParty.MainParty.RecentEventsMorale += moraleGained - 3;
+                MobileParty.MainParty.RecentEventsMorale += MathF.Floor(moraleGained * 0.02f);
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
             }
             else if (fishCaught > 0 && fishCaught <= 5)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2, true, false, eventButtonText, null, null, null), true);
                 
-                MobileParty.MainParty.RecentEventsMorale += moraleGained - 2;
+                MobileParty.MainParty.RecentEventsMorale += MathF.Floor(moraleGained * 0.04f);
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
             }
             else if (fishCaught > 5 && fishCaught <= 15)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome3, true, false, eventButtonText, null, null, null), true);
                 
-                MobileParty.MainParty.RecentEventsMorale += moraleGained - 1;
+                MobileParty.MainParty.RecentEventsMorale += MathF.Floor(moraleGained * 0.08f);
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
             }
             else if (fishCaught > 15 && fishCaught <= maxFishCatch)
             {
@@ -140,7 +139,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
             }
             
 
@@ -164,20 +163,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class FishingSpotData : RandomEventData
     {
-        public readonly int minSoldiersToGo;
-        public readonly int maxSoldiersToGo;
-        public readonly int maxFishCatch;
-        public readonly int minMoraleGain;
-        public readonly int maxMoraleGain;
 
-        public FishingSpotData(string eventType, float chanceWeight, int minSoldiersToGo, int maxSoldiersToGo, int maxFishCatch, int minMoraleGain, int maxMoraleGain) : base(eventType,
+        public FishingSpotData(string eventType, float chanceWeight) : base(eventType,
             chanceWeight)
         {
-            this.minSoldiersToGo = minSoldiersToGo;
-            this.maxSoldiersToGo = maxSoldiersToGo;
-            this.maxFishCatch = maxFishCatch;
-            this.minMoraleGain = minMoraleGain;
-            this.maxMoraleGain = maxMoraleGain;
         }
 
         public override BaseEvent GetBaseEvent()

@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -16,10 +18,10 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minPrisonerGain;
 		private readonly int maxPrisonerGain;
 
-		public BunchOfPrisoners() : base(Settings.ModSettings.RandomEvents.BunchOfPrisonersData)
+		public BunchOfPrisoners() : base(ModSettings.RandomEvents.BunchOfPrisonersData)
 		{
-			minPrisonerGain = Settings.ModSettings.RandomEvents.BunchOfPrisonersData.minPrisonerGain;
-			maxPrisonerGain = Settings.ModSettings.RandomEvents.BunchOfPrisonersData.maxPrisonerGain;
+			minPrisonerGain = MCM_MenuConfig_A_M.Instance.BoP_MinPrisonerGain;
+			maxPrisonerGain = MCM_MenuConfig_A_M.Instance.BoP_MaxPrisonerGain;
 		}
 
 		public override void CancelEvent()
@@ -28,14 +30,14 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return PlayerStatus.HasSettlement();
+			return MCM_MenuConfig_A_M.Instance.BoP_Disable == false && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 
 			var prisonerAmount = MBRandom.RandomInt(minPrisonerGain, maxPrisonerGain);
@@ -99,13 +101,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class BunchOfPrisonersData : RandomEventData
 	{
-		public readonly int minPrisonerGain;
-		public readonly int maxPrisonerGain;
-
-		public BunchOfPrisonersData(string eventType, float chanceWeight, int minPrisonerGain, int maxPrisonerGain) : base(eventType, chanceWeight)
+		public BunchOfPrisonersData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.minPrisonerGain = minPrisonerGain;
-			this.maxPrisonerGain = maxPrisonerGain;
 		}
 
 		public override BaseEvent GetBaseEvent()

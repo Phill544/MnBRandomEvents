@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -10,11 +12,13 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class ExoticDrinks : BaseEvent
 	{
-		private readonly int price;
+		private readonly int minPrice;
+		private readonly int maxPrice;
 
-		public ExoticDrinks() : base(Settings.ModSettings.RandomEvents.ExoticDrinksData)
+		public ExoticDrinks() : base(ModSettings.RandomEvents.ExoticDrinksData)
 		{
-			price = Settings.ModSettings.RandomEvents.ExoticDrinksData.price;
+			minPrice = MCM_MenuConfig_A_M.Instance.ED_MinPrice;
+			maxPrice = MCM_MenuConfig_A_M.Instance.ED_MaxPrice;
 		}
 
 		public override void CancelEvent()
@@ -23,17 +27,19 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return Hero.MainHero.Gold >= price;
+			return MCM_MenuConfig_A_M.Instance.ED_Disable == false && Hero.MainHero.Gold >= maxPrice;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 			
 			var eventTitle = new TextObject("{=ExoticDrinks_Title}Exotic Drinks").ToString();
+
+			var price = MBRandom.RandomInt(minPrice, maxPrice);
 			
 			var eventDescription = new TextObject("{=ExoticDrinks_Event_Desc}You come across a vendor selling exotic drinks for {price}. He won't tell you how, but says that it will make you a better person.")
 				.SetTextVariable("price", price)
@@ -105,11 +111,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class ExoticDrinksData : RandomEventData
 	{
-		public readonly int price;
 
-		public ExoticDrinksData(string eventType, float chanceWeight, int price) : base(eventType, chanceWeight)
+		public ExoticDrinksData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.price = price;
 		}
 
 		public override BaseEvent GetBaseEvent()

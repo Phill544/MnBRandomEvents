@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -14,13 +16,15 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly int minFoodLoss;
 		private readonly int maxFoodLoss;
-		private readonly int moraleLoss;
+		private readonly int minMoraleLoss;
+		private readonly int maxMoraleLoss;
 
-		public FoodFight() : base(Settings.ModSettings.RandomEvents.FoodFightData)
+		public FoodFight() : base(ModSettings.RandomEvents.FoodFightData)
 		{
-			minFoodLoss = Settings.ModSettings.RandomEvents.FoodFightData.minFoodLoss;
-			maxFoodLoss = Settings.ModSettings.RandomEvents.FoodFightData.maxFoodLoss;
-			moraleLoss = Settings.ModSettings.RandomEvents.FoodFightData.moraleLoss;
+			minFoodLoss = MCM_MenuConfig_A_M.Instance.FoF_MinFoodLoss;
+			maxFoodLoss = MCM_MenuConfig_A_M.Instance.FoF_MaxFoodLoss;
+			minMoraleLoss = MCM_MenuConfig_A_M.Instance.FoF_MinMoraleLoss;
+			maxMoraleLoss = MCM_MenuConfig_A_M.Instance.FoF_MaxMoraleLoss;
 		}
 
 		public override void CancelEvent()
@@ -29,15 +33,17 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return (MobileParty.MainParty.ItemRoster.Any(item => item.EquipmentElement.Item.IsFood)) && MobileParty.MainParty.MemberRoster.TotalManCount > 1;
+			return  MCM_MenuConfig_A_M.Instance.FoF_Disable == false && MobileParty.MainParty.MemberRoster.TotalManCount > 1 && (MobileParty.MainParty.ItemRoster.Any(item => item.EquipmentElement.Item.IsFood));
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
+			
+			var moraleLoss = MBRandom.RandomInt(minMoraleLoss, maxMoraleLoss);
 			
 			var eventTitle = new TextObject("{=FoodFight_Title}Food Fight!").ToString();
 			
@@ -78,11 +84,12 @@ namespace CryingBuffalo.RandomEvents.Events
 						{
 							var extraDialogue = "";
 
-							var xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
+							var xpToGive = MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
 							Hero.MainHero.AddSkillXp(DefaultSkills.Throwing, xpToGive);
 
 							var foodToRemove = MBRandom.RandomInt(minFoodLoss, maxFoodLoss);
 							var runOutOfFood = RemoveFood(foodToRemove);
+							
 							if (runOutOfFood)
 							{
 								extraDialogue = eventExtraDialogue;
@@ -147,15 +154,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class FoodFightData : RandomEventData
 	{
-		public readonly int minFoodLoss;
-		public readonly int maxFoodLoss;
-		public readonly int moraleLoss;
 
-		public FoodFightData(string eventType, float chanceWeight, int minFoodLoss, int maxFoodLoss, int moraleLoss) : base(eventType, chanceWeight)
+		public FoodFightData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.minFoodLoss = minFoodLoss;
-			this.maxFoodLoss = maxFoodLoss;
-			this.moraleLoss = moraleLoss;
 		}
 
 		public override BaseEvent GetBaseEvent()

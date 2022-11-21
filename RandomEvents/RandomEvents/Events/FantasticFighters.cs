@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
@@ -8,11 +11,13 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class FantasticFighters : BaseEvent
 	{
-		private readonly int renownGain;
+		private readonly int minRenownGain;
+		private readonly int maxRenownGain;
 
-		public FantasticFighters() : base(Settings.ModSettings.RandomEvents.FantasticFightersData)
+		public FantasticFighters() : base(ModSettings.RandomEvents.FantasticFightersData)
 		{
-			renownGain = Settings.ModSettings.RandomEvents.FantasticFightersData.renownGain;
+			minRenownGain = MCM_MenuConfig_A_M.Instance.FF_MinRenownGain;
+			maxRenownGain = MCM_MenuConfig_A_M.Instance.FF_MaxRenownGain;
 		}
 
 		public override void CancelEvent()
@@ -21,13 +26,20 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return Hero.MainHero.Clan != null;
+			return MCM_MenuConfig_A_M.Instance.FF_Disable == false && Hero.MainHero.Clan != null;
 		}
 
 		public override void StartEvent()
 		{
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
 			try
 			{
+
+				var renownGain = MBRandom.RandomInt(minRenownGain, maxRenownGain);
+				
 				Hero.MainHero.Clan.Renown += renownGain;
 				
 				var eventTitle = new TextObject("{=FantasticFighters_Title}Fantastic Fighters?").ToString();
@@ -62,11 +74,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class FantasticFightersData : RandomEventData
 	{
-		public readonly int renownGain;
 
-		public FantasticFightersData(string eventType, float chanceWeight, int renownGain) : base(eventType, chanceWeight)
+		public FantasticFightersData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.renownGain = renownGain;
 		}
 
 		public override BaseEvent GetBaseEvent()

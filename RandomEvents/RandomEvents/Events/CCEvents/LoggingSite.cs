@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -11,21 +13,22 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class LoggingSite : BaseEvent
     {
-        private const string EventTitle = "The Hardwood Forest";
-
-
         private readonly int minSoldiersToGo;
         private readonly int maxSoldiersToGo;
         private readonly int minYield;
         private readonly int maxYield;
+        private readonly int minYieldMultiplier;
+        private readonly int maxYieldMultiplier;
         
 
-        public LoggingSite() : base(Settings.ModSettings.RandomEvents.LoggingSiteData)
+        public LoggingSite() : base(ModSettings.RandomEvents.LoggingSiteData)
         {
-            minSoldiersToGo = Settings.ModSettings.RandomEvents.LoggingSiteData.minSoldiersToGo;
-            maxSoldiersToGo = Settings.ModSettings.RandomEvents.LoggingSiteData.maxSoldiersToGo;
-            minYield = Settings.ModSettings.RandomEvents.LoggingSiteData.minYield;
-            maxYield = Settings.ModSettings.RandomEvents.LoggingSiteData.maxYield;
+            minSoldiersToGo = MCM_MenuConfig_A_M.Instance.LS_MinSoldiersToGo;
+            maxSoldiersToGo = MCM_MenuConfig_A_M.Instance.LS_MaxSoldiersToGo;
+            minYield = MCM_MenuConfig_A_M.Instance.LS_MinYield;
+            maxYield = MCM_MenuConfig_A_M.Instance.LS_MaxYield;
+            minYieldMultiplier = MCM_MenuConfig_A_M.Instance.LS_MinYieldMultiplier;
+            maxYieldMultiplier = MCM_MenuConfig_A_M.Instance.LS_MaxYieldMultiplier;
         }
 
         public override void CancelEvent()
@@ -35,15 +38,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
             
-            return true;
+            return MCM_MenuConfig_A_M.Instance.LS_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= 50;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
-                    RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
             
             var eventTitle = new TextObject("{=LoggingSite_Title}The Hardwood Forest").ToString();
@@ -54,7 +56,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var treesChopped = MBRandom.RandomInt(minYield, maxYield);
 
-            var yieldHardwood = treesChopped * MBRandom.RandomInt(1, 5);
+            var yieldHardwood = treesChopped * MBRandom.RandomInt(minYieldMultiplier, maxYieldMultiplier);
             
             var hardwood = MBObjectManager.Instance.GetObject<ItemObject>("hardwood");
             
@@ -89,7 +91,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             
-            var eventButtonText = new TextObject("{=HuntingTrip_Event_Button_Text}Continue")
+            var eventButtonText = new TextObject("{=LoggingSite_Event_Button_Text}Continue")
                 .ToString();
 
             var eventMsg1 =new TextObject(
@@ -112,20 +114,20 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             MobileParty.MainParty.ItemRoster.AddToCounts(hardwood, yieldHardwood);
             
-            if (yieldHardwood > 5 && yieldHardwood <= 15)
+            if (yieldHardwood > 25 && yieldHardwood <= 35)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
             }
-            else if (yieldHardwood > 15 && yieldHardwood <= 30)
+            else if (yieldHardwood > 35 && yieldHardwood <= 50)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
             }
-            else if (yieldHardwood > 30 && yieldHardwood <= 50)
+            else if (yieldHardwood > 50)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome3, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
             }
             
 
@@ -149,18 +151,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class LoggingSiteData : RandomEventData
     {
-        public readonly int minSoldiersToGo;
-        public readonly int maxSoldiersToGo;
-        public readonly int minYield;
-        public readonly int maxYield;
 
-        public LoggingSiteData(string eventType, float chanceWeight, int minSoldiersToGo, int maxSoldiersToGo, int minYield, int maxYield) : base(eventType,
+        public LoggingSiteData(string eventType, float chanceWeight) : base(eventType,
             chanceWeight)
         {
-            this.minSoldiersToGo = minSoldiersToGo;
-            this.maxSoldiersToGo = maxSoldiersToGo;
-            this.minYield = minYield;
-            this.maxYield = maxYield;
         }
 
         public override BaseEvent GetBaseEvent()

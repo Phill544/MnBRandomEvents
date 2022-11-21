@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -10,14 +12,15 @@ namespace CryingBuffalo.RandomEvents.Events
 	public sealed class BeeKind : BaseEvent
 	{
 		private readonly int damage;
-		private readonly int reactionDamage;
 		private readonly float reactionChance;
+		private readonly int reactionDamage;
+		
 
-		public BeeKind() : base(Settings.ModSettings.RandomEvents.BeeKindData)
+		public BeeKind() : base(ModSettings.RandomEvents.BeeKindData)
 		{
-			damage = Settings.ModSettings.RandomEvents.BeeKindData.damage;
-			reactionDamage = Settings.ModSettings.RandomEvents.BeeKindData.reactionDamage;
-			reactionChance = Settings.ModSettings.RandomEvents.BeeKindData.reactionChance;
+			damage = MCM_MenuConfig_A_M.Instance.BK_damage;
+			reactionChance = MCM_MenuConfig_A_M.Instance.BK_Reaction_Chance;
+			reactionDamage = MCM_MenuConfig_A_M.Instance.BK_Add_Damage;
 		}
 
 		public override void CancelEvent()
@@ -26,11 +29,16 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return true;
+			return MCM_MenuConfig_A_M.Instance.BK_Disable == false;
 		}
 
 		public override void StartEvent()
 		{
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
+			
 			var extraDialogue = "";
 			var damageToInflict = damage;
 			
@@ -47,7 +55,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			var eventText = new TextObject("{=BeeKind_Event_Text}As you sit down next to some flowers you get stung by a bee! {extraDialogue}Why is nature so cruel?")
 				.SetTextVariable("extraDialogue", extraDialogue)
 				.ToString();
-			
+
 			var eventButtonText = new TextObject("{=BeeKind_Event_Button_Text}Ouch").ToString();
 
 			Hero.MainHero.HitPoints -= damageToInflict;
@@ -73,15 +81,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class BeeKindData : RandomEventData
 	{
-		public readonly int damage;
-		public readonly int reactionDamage;
-		public readonly float reactionChance;
 
-		public BeeKindData(string eventType, float chanceWeight, int damage, int reactionDamage, float reactionChance) : base(eventType, chanceWeight)
+		public BeeKindData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.damage = damage;
-			this.reactionDamage = reactionDamage;
-			this.reactionChance = reactionChance;
 		}
 
 		public override BaseEvent GetBaseEvent()

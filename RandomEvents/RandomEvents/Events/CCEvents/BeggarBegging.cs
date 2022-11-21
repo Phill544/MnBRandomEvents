@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -16,12 +19,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int maxRenownGain;
 
 
-        public BeggarBegging() : base(Settings.ModSettings.RandomEvents.BeggarBeggingData)
+        public BeggarBegging() : base(ModSettings.RandomEvents.BeggarBeggingData)
         {
-            minGoldToGive = Settings.ModSettings.RandomEvents.BeggarBeggingData.minGoldToGive;
-            maxGoldToGive = Settings.ModSettings.RandomEvents.BeggarBeggingData.maxGoldToGive;
-            minRenownGain = Settings.ModSettings.RandomEvents.BeggarBeggingData.minRenownGain;
-            maxRenownGain = Settings.ModSettings.RandomEvents.BeggarBeggingData.maxRenownGain;
+            minGoldToGive = MCM_MenuConfig_A_M.Instance.BB_MinGoldToBeggar;
+            maxGoldToGive = MCM_MenuConfig_A_M.Instance.BB_MaxGoldToBeggar;
+            minRenownGain = MCM_MenuConfig_A_M.Instance.BB_MinRenownGain;
+            maxRenownGain = MCM_MenuConfig_A_M.Instance.BB_MaxRenownGain;
+    
         }
 
         public override void CancelEvent()
@@ -30,16 +34,15 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            
-            return MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
+
+            return MCM_MenuConfig_A_M.Instance.BB_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
-                    RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
             
             var heroName = Hero.MainHero.FirstName;
@@ -108,7 +111,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain - 5;
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
             }
             else if (goldToGive > 15 && goldToGive <= 35)
             {
@@ -117,7 +120,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain - 2;
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
             }
             else if (goldToGive > 35 && goldToGive <= maxGoldToGive)
             {
@@ -126,7 +129,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain;
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
             }
             
             StopEvent();
@@ -149,18 +152,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class BeggarBeggingData : RandomEventData
     {
-        public readonly int minGoldToGive;
-        public readonly int maxGoldToGive;
-        public readonly int minRenownGain;
-        public readonly int maxRenownGain;
-
-        public BeggarBeggingData(string eventType, float chanceWeight, int minGoldToGive, int maxGoldToGive, int minRenownGain, int maxRenownGain) : base(eventType,
-            chanceWeight)
+        public BeggarBeggingData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
         {
-            this.minGoldToGive = minGoldToGive;
-            this.maxGoldToGive = maxGoldToGive;
-            this.minRenownGain = minRenownGain;
-            this.maxRenownGain = maxRenownGain;
         }
 
         public override BaseEvent GetBaseEvent()

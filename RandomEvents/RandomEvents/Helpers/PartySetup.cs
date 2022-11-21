@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.MapEvents;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Party.PartyComponents;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -35,7 +34,9 @@ namespace CryingBuffalo.RandomEvents.Helpers
 					closestHideout.OwnerClan,
 					closestHideout,
 					false);
-				TextObject partyNameTextObject = new TextObject(partyName);
+				
+				var partyNameTextObject = new TextObject(partyName);
+				
 				banditParty.InitializeMobilePartyAroundPosition(partyTemplate, MobileParty.MainParty.Position2D, 0.2f, 0.1f, 20);
 				banditParty.SetCustomName(partyNameTextObject);
 			}
@@ -69,7 +70,9 @@ namespace CryingBuffalo.RandomEvents.Helpers
 					Clan.BanditFactions.First(clan => clan.DefaultPartyTemplate == partyTemplate),
 					closestHideout.Hideout,
 					false);
-				TextObject partyNameTextObject = new TextObject(partyName);
+				
+				var partyNameTextObject = new TextObject(partyName);
+				
 				banditParty.InitializeMobilePartyAroundPosition(partyTemplate, MobileParty.MainParty.Position2D, 0.2f, 0.1f, 20);
 				banditParty.SetCustomName(partyNameTextObject);
 			}

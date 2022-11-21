@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -20,14 +22,14 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int minGold;
 		private readonly int maxGold;
 
-		public LookUp() : base(Settings.ModSettings.RandomEvents.LookUpData)
+		public LookUp() : base(ModSettings.RandomEvents.LookUpData)
 		{
-			treeShakeChance = Settings.ModSettings.RandomEvents.LookUpData.treeShakeChance;
-			baseRangeChance = Settings.ModSettings.RandomEvents.LookUpData.baseRangeChance;
-			minRangeLevel = Settings.ModSettings.RandomEvents.LookUpData.minRangeLevel;
-			maxRangeLevel = Settings.ModSettings.RandomEvents.LookUpData.maxRangeLevel;
-			minGold = Settings.ModSettings.RandomEvents.LookUpData.minGold;
-			maxGold = Settings.ModSettings.RandomEvents.LookUpData.maxGold;
+			treeShakeChance = MCM_MenuConfig_A_M.Instance.LU_TreeShakeChance;
+			baseRangeChance = MCM_MenuConfig_A_M.Instance.LU_BaseRangeChance;
+			minRangeLevel = MCM_MenuConfig_A_M.Instance.LU_MinRangeLevel;
+			maxRangeLevel = MCM_MenuConfig_A_M.Instance.LU_MaxRangeLevel;
+			minGold = MCM_MenuConfig_A_M.Instance.LU_MinGold;
+			maxGold = MCM_MenuConfig_A_M.Instance.LU_MaxGold;
 		}
 
 		public override void CancelEvent()
@@ -36,14 +38,14 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return true;
+			return MCM_MenuConfig_A_M.Instance.LU_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 			
 			var eventTitle = new TextObject("{=LookUp_Title}Look up!").ToString();
@@ -135,7 +137,7 @@ namespace CryingBuffalo.RandomEvents.Events
 								var goldGained = MBRandom.RandomInt(minGold, maxGold);
 								Hero.MainHero.ChangeHeroGold(goldGained);
 
-								Hero.MainHero.AddSkillXp(skillToUse, Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(skillToUse));
+								Hero.MainHero.AddSkillXp(skillToUse, MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(skillToUse));
 
 								
 								var eventOutcome5 = new TextObject("{=LookUp_Event_Text_5}You manage to knock the shiny object out of the tree with (what you consider) a fantastic shot! Shame no one was there to see it. You notice that object was in fact a purse full of {goldGained} gold!")
@@ -215,21 +217,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class LookUpData : RandomEventData
 	{
-		public readonly float treeShakeChance; // Chance player will successfully shake the gold out of the tree
-		public readonly float baseRangeChance; // Chance player will be able to get gold out of the tree with ranged weapon at minimum skill level
-		public readonly int minRangeLevel; // Below, the player will always miss
-		public readonly int maxRangeLevel; // At or above, the player will always succeed
-		public readonly int minGold;
-		public readonly int maxGold;
 
-		public LookUpData(string eventType, float chanceWeight, float treeShakeChance, float baseRangeChance, int minRangeLevel, int maxRangeLevel, int minGold, int maxGold) : base(eventType, chanceWeight)
+		public LookUpData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.treeShakeChance = treeShakeChance;
-			this.baseRangeChance = baseRangeChance;
-			this.minRangeLevel = minRangeLevel;
-			this.maxRangeLevel = maxRangeLevel;
-			this.minGold = minGold;
-			this.maxGold = maxGold;
 		}
 
 		public override BaseEvent GetBaseEvent()

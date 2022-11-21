@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,9 +42,6 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml.Serialization" />
     <Reference Include="TaleWorlds.CampaignSystem">
       <HintPath>TaleWorlds.CampaignSystem.dll</HintPath>
     </Reference>
@@ -72,10 +69,14 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\BetMoney.cs" />
     <Compile Include="Events\BumperCrop.cs" />
     <Compile Include="Events\BunchOfPrisoners.cs" />
+    <Compile Include="Events\CCEvents\AFlirtatiousEncounter.cs" />
     <Compile Include="Events\CCEvents\BeggarBegging.cs" />
     <Compile Include="Events\CCEvents\BirthdayParty.cs" />
     <Compile Include="Events\CCEvents\FallenSoldierFamily.cs" />
     <Compile Include="Events\CCEvents\FishingSpot.cs" />
+    <Compile Include="Events\CCEvents\PrisonerTransfer.cs" />
+    <Compile Include="Events\CCEvents\Robbery.cs" />
+    <Compile Include="Events\CCEvents\SuddenStorm.cs" />
     <Compile Include="Events\CCEvents\HuntingTrip.cs" />
     <Compile Include="Events\CCEvents\LoggingSite.cs" />
     <Compile Include="Events\CCEvents\MassGrave.cs" />
@@ -93,7 +94,6 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\ExoticDrinks.cs" />
     <Compile Include="Events\FantasticFighters.cs" />
     <Compile Include="Events\FoodFight.cs" />
-    <Compile Include="Events\GloriousFood.cs" />
     <Compile Include="Events\GranaryRats.cs" />
     <Compile Include="Events\HotSprings.cs" />
     <Compile Include="Events\LookUp.cs" />
@@ -107,16 +107,24 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\Undercooked.cs" />
     <Compile Include="Events\WanderingLivestock.cs" />
     <Compile Include="Helpers\ClosestSettlement.cs" />
+    <Compile Include="Helpers\Demonym.cs" />
     <Compile Include="Helpers\PartySetup.cs" />
     <Compile Include="Helpers\PlayerStatus.cs" />
     <Compile Include="Helpers\RandomSelection.cs" />
     <Compile Include="RandomEventBehavior.cs" />
     <Compile Include="Settings\GeneralSettings.cs" />
+    <Compile Include="Settings\MCM\MCM_MenuConfig_A_M.cs" />
+    <Compile Include="Settings\MCM\MCM_MenuConfig_Chances.cs" />
+    <Compile Include="Settings\MCM\MCM_MenuConfig_General.cs" />
+    <Compile Include="Settings\MCM\MCM_MenuConfig_N_Z.cs" />
     <Compile Include="Settings\RandomEventSettings.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="RandomEventGenerator.cs" />
     <Compile Include="RandomEventsSubmodule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Bannerlord.MCM" Version="5.3.1" IncludeAssets="compile" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

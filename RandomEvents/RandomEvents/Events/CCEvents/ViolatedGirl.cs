@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -12,15 +16,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class ViolatedGirl : BaseEvent
     {
-        private const string EventTitle = "A violated girl";
-        
         private readonly int minGoldCompensation;
         private readonly int maxGoldCompensation;
 
-        public ViolatedGirl() : base(Settings.ModSettings.RandomEvents.ViolatedGirlData)
+        public ViolatedGirl() : base(ModSettings.RandomEvents.ViolatedGirlData)
         {
-            minGoldCompensation = Settings.ModSettings.RandomEvents.ViolatedGirlData.minGoldCompensation;
-            maxGoldCompensation = Settings.ModSettings.RandomEvents.ViolatedGirlData.maxGoldCompensation;
+            minGoldCompensation = MCM_MenuConfig_N_Z.Instance.VG_MinCompensation;
+            maxGoldCompensation = MCM_MenuConfig_N_Z.Instance.VG_MaxCompensation;
         }
 
         public override void CancelEvent()
@@ -29,19 +31,18 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return true;
+            return MCM_MenuConfig_N_Z.Instance.VG_Disable == false && MobileParty.MainParty.CurrentSettlement == null && Hero.MainHero.Gold >= maxGoldCompensation;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
-                    RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
 
             var heroName = Hero.MainHero.FirstName;
-            
+
             var eventTitle = new TextObject("{=ViolatedGirl_Title}A violated girl").ToString();
             
             var closestCity = ClosestSettlements.GetClosestTown(MobileParty.MainParty).ToString();
@@ -140,13 +141,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "a":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-compensation);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
                             break;
                         case "b":
                         {
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-totalCompensation);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
                             break;
                         }
                         case "c":
@@ -154,7 +155,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             break;
                         case "d":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
                             break;
                         default:
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
@@ -185,14 +186,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class ViolatedGirlData : RandomEventData
     {
-        public readonly int minGoldCompensation;
-        public readonly int maxGoldCompensation;
 
-        public ViolatedGirlData(string eventType, float chanceWeight, int minGoldCompensation, int maxGoldCompensation) : base(eventType,
+        public ViolatedGirlData(string eventType, float chanceWeight) : base(eventType,
             chanceWeight)
         {
-            this.minGoldCompensation = minGoldCompensation;
-            this.maxGoldCompensation = maxGoldCompensation;
         }
 
         public override BaseEvent GetBaseEvent()

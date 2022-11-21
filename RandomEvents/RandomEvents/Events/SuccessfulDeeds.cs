@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
@@ -9,11 +12,13 @@ namespace CryingBuffalo.RandomEvents.Events
 	public sealed class SuccessfulDeeds : BaseEvent
 	{
 
-		private readonly float influenceGain;
+		private readonly int minInfluenceGain;
+		private readonly int maxInfluenceGain;
 
-		public SuccessfulDeeds() : base(Settings.ModSettings.RandomEvents.SuccessfulDeedsData)
+		public SuccessfulDeeds() : base(ModSettings.RandomEvents.SuccessfulDeedsData)
 		{
-			influenceGain = Settings.ModSettings.RandomEvents.SuccessfulDeedsData.influenceGain;
+			minInfluenceGain = MCM_MenuConfig_N_Z.Instance.SD_MinInfluenceGained;
+			maxInfluenceGain = MCM_MenuConfig_N_Z.Instance.SD_MaxInfluenceGained;
 		}
 
 		public override void CancelEvent()
@@ -22,13 +27,21 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return Hero.MainHero.Clan.Kingdom != null;
+			return MCM_MenuConfig_N_Z.Instance.SD_Disable == false && Hero.MainHero.Clan.Kingdom != null;
 		}
 
 		public override void StartEvent()
 		{
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
+			
 			try
 			{
+
+				var influenceGain = MBRandom.RandomInt(minInfluenceGain,maxInfluenceGain);
+				
 				Hero.MainHero.AddInfluenceWithKingdom(influenceGain);
 				
 				var eventTitle = new TextObject("{=SuccessfulDeeds_Title}Successful Deeds!").ToString();
@@ -63,11 +76,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class SuccessfulDeedsData : RandomEventData
 	{
-		public readonly float influenceGain;
 
-		public SuccessfulDeedsData(string eventType, float chanceWeight, float influenceGain) : base(eventType, chanceWeight)
+		public SuccessfulDeedsData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.influenceGain = influenceGain;
 		}
 
 		public override BaseEvent GetBaseEvent()

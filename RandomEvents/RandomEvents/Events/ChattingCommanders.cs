@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
@@ -10,13 +12,11 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class ChattingCommanders : BaseEvent
 	{
-		private const string EventTitle = "The Same Page";
-		
 		private readonly float cohesionIncrease;
 
-		public ChattingCommanders() : base(Settings.ModSettings.RandomEvents.ChattingCommandersData)
+		public ChattingCommanders() : base(ModSettings.RandomEvents.ChattingCommandersData)
 		{
-			cohesionIncrease = Settings.ModSettings.RandomEvents.ChattingCommandersData.cohesionIncrease;
+			cohesionIncrease = MCM_MenuConfig_A_M.Instance.CC_CohesionGain;
 		}
 
 		public override void CancelEvent()
@@ -25,14 +25,14 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.ArmyOwner == Hero.MainHero && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 1;
+			return MCM_MenuConfig_A_M.Instance.CC_Disable == false && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.ArmyOwner == Hero.MainHero && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 1;
 		}
 
 		public override void StartEvent()
 		{
-			if (Settings.ModSettings.GeneralSettings.DebugMode)
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.TextColor));
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 
 			try
@@ -71,11 +71,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class ChattingCommandersData : RandomEventData
 	{
-		public readonly float cohesionIncrease;
 
-		public ChattingCommandersData(string eventType, float chanceWeight, float cohesionIncrease) : base(eventType, chanceWeight)
+		public ChattingCommandersData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.cohesionIncrease = cohesionIncrease;
 		}
 
 		public override BaseEvent GetBaseEvent()

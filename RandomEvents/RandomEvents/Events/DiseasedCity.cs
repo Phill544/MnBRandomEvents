@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -17,12 +19,12 @@ namespace CryingBuffalo.RandomEvents.Events
 		private readonly int highMedicineLevel;
 		private readonly float percentLoss;
 
-		public DiseasedCity() : base(Settings.ModSettings.RandomEvents.DiseasedCityData)
+		public DiseasedCity() : base(ModSettings.RandomEvents.DiseasedCityData)
 		{
-			baseSuccessChance = Settings.ModSettings.RandomEvents.DiseasedCityData.baseSuccessChance;
-			highMedicineChance = Settings.ModSettings.RandomEvents.DiseasedCityData.highMedicineChance;
-			highMedicineLevel = Settings.ModSettings.RandomEvents.DiseasedCityData.highMedicineLevel;
-			percentLoss = Settings.ModSettings.RandomEvents.DiseasedCityData.percentLoss;
+			baseSuccessChance = MCM_MenuConfig_A_M.Instance.DC_BaseSuccessChance;
+			highMedicineChance = MCM_MenuConfig_A_M.Instance.DC_HighMedicineChance;
+			highMedicineLevel = MCM_MenuConfig_A_M.Instance.DC_HighMedicineLevel;
+			percentLoss = MCM_MenuConfig_A_M.Instance.DC_PercentLoss;
 		}
 
 		public override void CancelEvent()
@@ -31,11 +33,15 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return Hero.MainHero.Clan.Settlements.Any();
+			return MCM_MenuConfig_A_M.Instance.DC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()
 		{
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
 			try
 			{
 				// The name of the settlement that receives the food
@@ -65,7 +71,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					}
 				}
 
-				bool useSkill = highestMedicineHero != null && highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) >= highMedicineLevel;
+				var useSkill = highestMedicineHero != null && highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) >= highMedicineLevel;
 
 				var plagueKills = PlagueKills(useSkill);
 
@@ -124,18 +130,18 @@ namespace CryingBuffalo.RandomEvents.Events
 			var highestMedicine = highestMedicineHero;
 			var eventTitle = new TextObject("{=DiseasedCity_Title}It's Airborne!").ToString();
 			
-			var eventOutcome1 = new TextObject("{=DiseasedCity_Event_Choice_1}{plaguedSettlement} has suffered a devastating plague. Although {highestMedicine} tried their best to save the population, it wasn't enough...")
+			var eventOutcome1 = new TextObject("{=DiseasedCity_Event_Choice_1}{plaguedSettlement} has suffered a devastating plague. Although {highestHero} tried their best to save the population, it wasn't enough...")
 				.SetTextVariable("plaguedSettlement", plaguedSettlement.Name)
-				.SetTextVariable("highestHero", highestMedicine.Name)
+				.SetTextVariable("highestHero", highestMedicine?.Name)
 				.ToString();
 			
 			var eventOutcome2 = new TextObject("{=DiseasedCity_Event_Choice_2}{plaguedSettlement} has suffered a devastating plague. As there wasn't anyone able to provide assistance to the population, the sickness cut through the population without mercy.")
 				.SetTextVariable("plaguedSettlement", plaguedSettlement.Name)
 				.ToString();
 			
-			var eventOutcome3 = new TextObject("{=DiseasedCity_Event_Choice_3}Although the telltale signs of an emerging plague started to appear in {plaguedSettlement}, because of {highestMedicine}'s expertise, measures were put in place that saved the settlement from unnecessary death.")
+			var eventOutcome3 = new TextObject("{=DiseasedCity_Event_Choice_3}Although the telltale signs of an emerging plague started to appear in {plaguedSettlement}, because of {highestHero}'s expertise, measures were put in place that saved the settlement from unnecessary death.")
 				.SetTextVariable("plaguedSettlement", plaguedSettlement.Name)
-				.SetTextVariable("highestHero", highestMedicine.Name)
+				.SetTextVariable("highestHero", highestMedicine?.Name)
 				.ToString();
 			
 			var eventOutcome4 = new TextObject("{=DiseasedCity_Event_Choice_4}Although the telltale signs of an emerging plague starting to appear in {plaguedSettlement}, as luck would have it, nothing ever came of it. Those that were ill recovered, and the fears of a deadly pandemic can be laid to rest... For now.")
@@ -160,7 +166,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					plaguedSettlement.Town.Loyalty *= 1 - percentLoss;
 
 					// Give the hero half xp for trying
-					var xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) * 0.5f;
+					var xpToGive = MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) * 0.5f;
 
 					highestMedicineHero.AddSkillXp(DefaultSkills.Medicine, xpToGive);
 
@@ -186,7 +192,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				if (highestMedicineHero != null)
 				{
 					// Give the hero xp for saving the settlement
-					var xpToGive = Settings.ModSettings.GeneralSettings.GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine);
+					var xpToGive = MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine);
 
 					highestMedicineHero.AddSkillXp(DefaultSkills.Medicine, xpToGive);
 
@@ -204,16 +210,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 	public class DiseasedCityData : RandomEventData
 	{
-		public readonly float baseSuccessChance;
-		public readonly float highMedicineChance;
-		public readonly int highMedicineLevel;
-		public readonly float percentLoss;
-		public DiseasedCityData(string eventType, float chanceWeight, float baseSuccessChance, float highMedicineChance, int highMedicineLevel, float percentLoss) : base(eventType, chanceWeight)
+		public DiseasedCityData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.baseSuccessChance = baseSuccessChance;
-			this.highMedicineChance = highMedicineChance;
-			this.highMedicineLevel = highMedicineLevel;
-			this.percentLoss = percentLoss;
 		}
 
 		public override BaseEvent GetBaseEvent()
@@ -222,3 +220,4 @@ namespace CryingBuffalo.RandomEvents.Events
 		}
 	}
 }
+ 

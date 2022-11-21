@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -14,15 +16,17 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
     {
         private readonly int minMen;
         private readonly int maxMen;
+        private readonly float menToKill;
         private readonly int minGoldFound;
         private readonly int maxGoldFound;
 
-        public OldRuins() : base(Settings.ModSettings.RandomEvents.OldRuinsData)
+        public OldRuins() : base(ModSettings.RandomEvents.OldRuinsData)
         {
-            minMen = Settings.ModSettings.RandomEvents.OldRuinsData.minMen;
-            maxMen = Settings.ModSettings.RandomEvents.OldRuinsData.maxMen;
-            minGoldFound = Settings.ModSettings.RandomEvents.OldRuinsData.minGoldFound;
-            maxGoldFound = Settings.ModSettings.RandomEvents.OldRuinsData.maxGoldFound;
+            minMen = MCM_MenuConfig_N_Z.Instance.OR_MinSoldiers;
+            maxMen = MCM_MenuConfig_N_Z.Instance.OR_MaxSoldiers;
+            menToKill = MCM_MenuConfig_N_Z.Instance.OR_MenToKill;
+            minGoldFound = MCM_MenuConfig_N_Z.Instance.OR_MinGoldFound;
+            maxGoldFound = MCM_MenuConfig_N_Z.Instance.OR_MaxGoldFound;
         }
 
         public override void CancelEvent()
@@ -31,28 +35,27 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return true;
+            return MCM_MenuConfig_N_Z.Instance.OR_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
         {
-            if (Settings.ModSettings.GeneralSettings.DebugMode)
+            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
-                    RandomEventsSubmodule.TextColor));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
 
             var heroName = Hero.MainHero.FirstName;
             
             var eventTitle = new TextObject("{=OldRuins_Title}The old ruins").ToString();
             
-            var manCount = MBRandom.RandomInt(minMen, maxMen);
+            var manCount  = MBRandom.RandomInt(minMen, maxMen);
 
-            var killedMen = manCount - 2;
+            var killedMen = (int)Math.Floor(manCount * menToKill);
 
             var goldFound = MBRandom.RandomInt(minGoldFound, maxGoldFound);
 
-            var goldForYou = goldFound / manCount;
+            var goldForYou = goldFound / manCount ;
             
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
             
@@ -77,8 +80,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption4 = new TextObject("{=OldRuins_Event_Option_4}The small shack").ToString();
             var eventOption4Hover = new TextObject("{=OldRuins_Event_Option_4_Hover}The shack might be interesting").ToString();
             
-            var eventOption5 = new TextObject("{=OldRuins_Event_Option_4}None of them, just leave").ToString();
-            var eventOption5Hover = new TextObject("{=OldRuins_Event_Option_4_Hover}You don't want to get wet").ToString();
+            var eventOption5 = new TextObject("{=OldRuins_Event_Option_5}None of them, just leave").ToString();
+            var eventOption5Hover = new TextObject("{=OldRuins_Event_Option_5_Hover}You don't want to get wet").ToString();
             
             var eventButtonText1 = new TextObject("{=OldRuins_Event_Button_Text_1}Choose").ToString();
             var eventButtonText2 = new TextObject("{=OldRuins_Event_Button_Text_2}Done").ToString();
@@ -122,6 +125,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("goldForYou",goldForYou)
                 .ToString();
             
+            var eventOptionEText = new TextObject(
+                    "{=OldRuins_Event_Choice_5}You all agree that you don't want to get wet so you make your way back to camp.")
+                .ToString();
+            
             var eventMsg1 =new TextObject(
                     "{=OldRuins_Event_Msg_1}{heroName} lost {killedMen} men to a collapsing structure.")
                 .SetTextVariable("heroName", heroName)
@@ -129,11 +136,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=OldRuins_Event_Msg_1}{heroName} received {goldForYou} gold after splitting {goldFound} gold with {men} men.")
+                    "{=OldRuins_Event_Msg_2}{heroName} received  {goldForYou} gold after splitting {goldFound} gold with {manCount} men.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldForYou", goldForYou)
                 .SetTextVariable("goldFound", goldFound)
-                .SetTextVariable("men", manCount)
+                .SetTextVariable("manCount", manCount )
                 .ToString();
 
             var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null,
@@ -143,7 +150,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     {
                         case "a":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
                             
                             MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(killedMen, false);
                             break;
@@ -159,10 +166,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "d":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(+goldForYou);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.MsgColor));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
                             break;
-                            
                         case "e":
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionEText, true, false, eventButtonText2, null, null, null), true);
                             break;
                         
                         default:
@@ -194,18 +201,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class OldRuinsData : RandomEventData
     {
-        public readonly int minMen;
-        public readonly int maxMen;
-        public readonly int minGoldFound;
-        public readonly int maxGoldFound;
 
-        public OldRuinsData(string eventType, float chanceWeight, int minMen, int maxMen, int minGoldFound, int maxGoldFound) : base(eventType,
+        public OldRuinsData(string eventType, float chanceWeight) : base(eventType,
             chanceWeight)
         {
-            this.minMen = minMen;
-            this.maxMen = maxMen;
-            this.minGoldFound = minGoldFound;
-            this.maxGoldFound = maxGoldFound;
         }
 
         public override BaseEvent GetBaseEvent()
