@@ -128,7 +128,7 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Bannerlord.MCM" Version="5.3.1" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.MCM" Version="5.3.2" IncludeAssets="compile" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

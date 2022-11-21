@@ -84,7 +84,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
         #endregion
 
-        
         #region Runaway Son - Variables
         
         public bool RS_Disable { get; private set; }
@@ -548,6 +547,23 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                         .SetHintText(pt5_hint))
                 )
                 
+                #endregion
+                
+                #region Red Moon - Builder
+                
+                .CreateGroup(rm_heading, groupBuilder => groupBuilder
+                    .AddInteger("RM1", rm1_text,500,5000, new ProxyRef<int>(() => RM_MinGoldLost, o => RM_MinGoldLost = o), integerBuilder => integerBuilder
+                        .SetHintText(rm1_hint))
+                    .AddInteger("RM2", rm2_text,500,5000, new ProxyRef<int>(() => RM_MaxGoldLost, o => RM_MaxGoldLost = o), integerBuilder => integerBuilder
+                        .SetHintText(rm2_hint))
+                    .AddInteger("RM3", rm3_text,10,100, new ProxyRef<int>(() => RM_MinMenLost, o => RM_MinMenLost = o), integerBuilder => integerBuilder
+                        .SetHintText(rm3_hint))
+                    .AddInteger("RM4", rm4_text,10,100, new ProxyRef<int>(() => RO_MaxGoldLost, o => RO_MaxGoldLost = o), integerBuilder => integerBuilder
+                        .SetHintText(rm4_hint))
+                    .AddBool("RM5", rm5_text, new ProxyRef<bool>(() => RM_Disable, o => RM_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(rm5_hint))
+                )
+                            
                 #endregion
 
                 #region Robbery - Builder
