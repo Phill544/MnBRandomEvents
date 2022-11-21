@@ -32,6 +32,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public float Granary_Rats_Chance{ get; private set; }
         public float Hot_Springs_Chance{ get; private set; }
         public float Hunting_Trip_Chance{ get; private set; }
+        public float Lights_In_the_Skies_Chance{ get; private set; }
         public float Logging_Site_Chance{ get; private set; }
         public float Look_Up_Chance{ get; private set; }
         public float Mass_Grave_Chance{ get; private set; }
@@ -117,6 +118,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv42_hint = new TextObject("{=mcm_adv42_hint}Uncheck this to re-run the Initial Setup and set all values back to the original.").ToString();
             var adv43_text = new TextObject("{=mcm_adv43_text}Prisoner Transfer").ToString();
             var adv44_text = new TextObject("{=mcm_adv44_text}Robbery").ToString();
+            var adv45_text = new TextObject("{=mcm_adv45_text}Lights in the Skies").ToString();
 
             #endregion
 
@@ -219,6 +221,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV44", adv44_text,5,100, new ProxyRef<float>(() => Robbery_Chance, o => Robbery_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
+                        .AddFloatingInteger ("ADV45", adv45_text,5,100, new ProxyRef<float>(() => Lights_In_the_Skies_Chance, o => Lights_In_the_Skies_Chance = o), floatBuilder => floatBuilder
+                            .SetHintText(adv_hint))
                     #endregion
                     
                 );
@@ -258,6 +262,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Granary_Rats_Chance = 50.0f;
             Instance.Hot_Springs_Chance = 50.0f;
             Instance.Hunting_Trip_Chance = 50.0f;
+            Instance.Lights_In_the_Skies_Chance = 10.0f;
             Instance.Logging_Site_Chance = 50.0f;
             Instance.Look_Up_Chance = 50.0f;
             Instance.Mass_Grave_Chance = 50.0f;

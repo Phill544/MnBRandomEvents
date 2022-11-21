@@ -203,6 +203,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
         #endregion
         
+        #region Lights in the Skies - Variables
+
+        public bool LitS_Disable { get; private set; }
+
+        #endregion
+        
         #region Logging Site - Variables
 
         public bool LS_Disable { get; private set; }
@@ -557,6 +563,15 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var ht8_hint = new TextObject("{=mcm_ht8_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
+            
+            #region Lights in the Sky - Strings
+            
+            var lits_heading = new TextObject("{=mcm_lits_heading}Lights in the Skies").ToString();
+            var lits1_text = new TextObject("{=mcm_lits1_text}1. Deactivate event").ToString();
+            var lits1_hint = new TextObject("{=mcm_lits1_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            
+            #endregion
+
             
             #region Logging Site - Strings
 
@@ -950,6 +965,15 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
                 #endregion
                 
+                #region Lights in the Skies - Builder
+                
+                .CreateGroup(lits_heading, groupBuilder => groupBuilder
+                    .AddBool("LITS", lits1_text, new ProxyRef<bool>(() => LitS_Disable, o => LitS_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(lits1_hint))
+                )
+
+                #endregion
+                
                 #region Logging Site - Builder
                 
                 .CreateGroup(ls_heading, groupBuilder => groupBuilder
@@ -1225,6 +1249,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.HT_MaxMoraleGain = 20;
             Instance.HT_MinYieldMultiplier = 3;
             Instance.HT_MaxYieldMultiplier = 6;
+
+            #endregion
+            
+            #region Lights in the Skies
+            
+            Instance.LitS_Disable = false;
 
             #endregion
             
