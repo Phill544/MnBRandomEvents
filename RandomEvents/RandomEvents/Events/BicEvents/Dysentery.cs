@@ -42,14 +42,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 
-			var partysize = MobileParty.MainParty.MemberRoster.TotalHealthyCount;
+			var partySize = MobileParty.MainParty.MemberRoster.TotalHealthyCount;
 			var moraleLoss = MBRandom.RandomInt(minMoraleLoss, maxMoraleLoss);
 			var victims = MBRandom.RandomInt(minvictim, maxvictim);
-			var totalvictims = partysize / 10 + victims;
+			var totalVictims = partySize / 10 + victims;
 			Hero.MainHero.AddSkillXp(DefaultSkills.Medicine, 5);
 			MobileParty.MainParty.RecentEventsMorale -= moraleLoss;
 			MobileParty.MainParty.MoraleExplained.Add(-moraleLoss);
-			MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(totalvictims);
+			MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(totalVictims);
 
 
 			var eventTitle = new TextObject("{=Dysentery_Title}Dysentery").ToString();
@@ -64,7 +64,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
             string eventMsg1 = new TextObject(
 		"{=Refugees_Event_Msg_1}{totalvictims} troops have dysentery!")
-			.SetTextVariable("totalvictims", totalvictims)
+			.SetTextVariable("totalvictims", totalVictims)
 			.ToString();
 
             InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));

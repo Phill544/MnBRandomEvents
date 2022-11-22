@@ -422,9 +422,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var dc1_text = new TextObject("{=mcm_dc1_text}1. Base Success Chance").ToString();
             var dc1_hint = new TextObject("{=mcm_dc1_hint}The base success chance that this event will have a positive outcome.").ToString();
             var dc2_text = new TextObject("{=mcm_dc2_text}2. High Medicine Chance").ToString();
-            var dc2_hint = new TextObject("{=mcm_dc2_hint}PHILL_MUST_COMMENT").ToString();
             var dc3_text = new TextObject("{=mcm_dc3_text}3. High Medicine Level").ToString();
-            var dc3_hint = new TextObject("{=mcm_dc3_hint}PHILL_MUST_COMMENT").ToString();
             var dc4_text = new TextObject("{=mcm_dc4_text}4. Percentage Lost").ToString();
             var dc4_hint = new TextObject("{=mcm_dc4_hint}The amount of men lost at the stricken settlement.").ToString();
             var dc5_text = new TextObject("{=mcm_dc5_text}5. Deactivate event").ToString();
@@ -571,7 +569,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var lits1_hint = new TextObject("{=mcm_lits1_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
-
             
             #region Logging Site - Strings
 
@@ -811,9 +808,9 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                         .AddFloatingInteger("DC1", dc1_text,0.1f,0.75f, new ProxyRef<float>(() => DC_BaseSuccessChance, o => DC_BaseSuccessChance = o), floatBuilder => floatBuilder
                             .SetHintText(dc1_hint))
                         .AddFloatingInteger("DC2", dc2_text,0.25f,0.90f, new ProxyRef<float>(() => DC_HighMedicineChance, o => DC_HighMedicineChance = o), floatBuilder => floatBuilder
-                            .SetHintText(dc2_hint))
+                            .SetHintText(""))
                         .AddInteger("DC3", dc3_text,40,90, new ProxyRef<int>(() => DC_HighMedicineLevel, o => DC_HighMedicineLevel = o), integerBuilder => integerBuilder
-                            .SetHintText(dc3_hint))
+                            .SetHintText(""))
                         .AddFloatingInteger("DC4", dc4_text,0.1f,0.50f, new ProxyRef<float>(() => DC_PercentLoss, o => DC_PercentLoss = o), floatBuilder => floatBuilder
                             .SetHintText(dc4_hint))
                         .AddBool("DC5", dc5_text, new ProxyRef<bool>(() => DC_Disable, o => DC_Disable = o), boolBuilder => boolBuilder

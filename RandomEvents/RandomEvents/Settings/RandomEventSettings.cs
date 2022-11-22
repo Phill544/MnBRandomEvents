@@ -136,7 +136,7 @@ namespace CryingBuffalo.RandomEvents.Settings
         public PrisonerTransferData PrisonerTransferData { get; } = new PrisonerTransferData("PrisonerTransfer", MCM_MenuConfig_Chances.Instance.Prisoner_Transfer_Chance);
         
         
-        public LightsInTheSkiesData LightsInTheSkiesData { get; } = new LightsInTheSkiesData("LightsInTheSkies", 1024);
+        public LightsInTheSkiesData LightsInTheSkiesData { get; } = new LightsInTheSkiesData("LightsInTheSkies", MCM_MenuConfig_Chances.Instance.Lights_In_the_Skies_Chance);
 
 
         public RobberyData RobberyData { get; } = new RobberyData("Robbery", MCM_MenuConfig_Chances.Instance.Robbery_Chance);

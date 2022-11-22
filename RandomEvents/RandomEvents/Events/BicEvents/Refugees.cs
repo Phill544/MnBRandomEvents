@@ -60,7 +60,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
             var eventTitle = new TextObject("{=Refugees_Title}Refugees").ToString();
             var settlements = Settlement.FindAll(s => s.IsTown || s.IsCastle || s.IsVillage).ToList();
             var closestSettlement = settlements.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
-            string cultureclass = closestSettlement.Culture.ToString();
+            var cultureClass = closestSettlement.Culture.ToString();
             
 
 
@@ -68,7 +68,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
             var soldiers = MBRandom.RandomInt(minSoldiers, maxSoldiers);
             var food = MBRandom.RandomInt(minFood, maxFood);
             var captives = MBRandom.RandomInt(minCaptive, maxCaptive);
-        //________________________________________________________________    
+            //________________________________________________________________    
 
 
 
@@ -190,8 +190,10 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                         var datefruitStorage = MobileParty.MainParty.ItemRoster.GetItemNumber(datefruit);
 
                         //Attempt to give the refugees food
-                        int foodNeededToFeed = food;
-                        bool providedEnoughFood = true;
+                        var foodNeededToFeed = food;
+                        
+                        var providedEnoughFood = true;
+                        
                         if (grainStorage > 0 && foodNeededToFeed > 0)
                         {
                             MobileParty.MainParty.ItemRoster.AddToCounts(grain, -MathF.Min(grainStorage, foodNeededToFeed));
@@ -280,30 +282,30 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                         Hero.MainHero.AddSkillXp(DefaultSkills.Steward, 150);
                         Hero.MainHero.AddSkillXp(DefaultSkills.Leadership, 50);
 
-                            //Add Recruits
+                        //Add Recruits
                         TroopRoster troopRoster = TroopRoster.CreateDummyTroopRoster();
                         for (int i = 0; i < CharacterObject.All.Count; i++)
                         {
                                 CharacterObject characterObject = CharacterObject.All[i];
 
-                                if (characterObject.StringId.Contains("recruit") && !characterObject.StringId.Contains("vigla") && characterObject.Culture.ToString() == cultureclass ||
+                                if (characterObject.StringId.Contains("recruit") && !characterObject.StringId.Contains("vigla") && characterObject.Culture.ToString() == cultureClass ||
                                             (characterObject.StringId.Contains("footman") && !characterObject.StringId.Contains("vlandia") && !characterObject.StringId.Contains("aserai") 
-                                            && characterObject.Culture.ToString() == cultureclass) || (characterObject.StringId.Contains("volunteer")
-                                            && (characterObject.StringId.Contains("battanian") && characterObject.Culture.ToString() == cultureclass)))
+                                            && characterObject.Culture.ToString() == cultureClass) || (characterObject.StringId.Contains("volunteer")
+                                            && (characterObject.StringId.Contains("battanian") && characterObject.Culture.ToString() == cultureClass)))
                                 {
                                     troopRoster.AddToCounts(characterObject, soldiers);
                                 }
                         }                      
 
-                        PartyScreenManager.OpenScreenAsReceiveTroops(troopRoster, leftPartyName: new TextObject("{cultureclass} Refugees").SetTextVariable("cultureclass", cultureclass), null);
+                        PartyScreenManager.OpenScreenAsReceiveTroops(troopRoster, leftPartyName: new TextObject("{cultureclass} Refugees").SetTextVariable("cultureclass", cultureClass), null);
 
                         InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                             
                         break;
-                            //_______________________________________________________________________________________________________
+                        //_______________________________________________________________________________________________________
                           
 
-                            //Selected Option for Capture -------------------------------------------
+                        //Selected Option for Capture -------------------------------------------
                         case "c":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null, null), true);
                             
@@ -319,9 +321,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                                 CharacterObject characterObject = CharacterObject.All[i];
 
                                     if (characterObject.StringId.Contains("recruit") && !characterObject.StringId.Contains("vigla") 
-                                                && characterObject.Culture.ToString() == cultureclass || (characterObject.StringId.Contains("footman") && !characterObject.StringId.Contains("vlandia")
-                                                && !characterObject.StringId.Contains("aserai") && characterObject.Culture.ToString() == cultureclass) || (characterObject.StringId.Contains("volunteer") 
-                                                && (characterObject.StringId.Contains("battanian") && characterObject.Culture.ToString() == cultureclass)))
+                                                && characterObject.Culture.ToString() == cultureClass || (characterObject.StringId.Contains("footman") && !characterObject.StringId.Contains("vlandia")
+                                                && !characterObject.StringId.Contains("aserai") && characterObject.Culture.ToString() == cultureClass) || (characterObject.StringId.Contains("volunteer") 
+                                                && (characterObject.StringId.Contains("battanian") && characterObject.Culture.ToString() == cultureClass)))
                                     {
                                          troopRoster2.AddToCounts(characterObject, soldiers);
                                     }
@@ -329,7 +331,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
                             TroopRoster emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
 
-                            PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Refugees").SetTextVariable("cultureclass", cultureclass), 20, null);
+                            PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Refugees").SetTextVariable("cultureclass", cultureClass), 20, null);
 
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_MED_Outcome));
 

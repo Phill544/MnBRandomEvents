@@ -194,8 +194,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             
 
             #region Strings
-            
-            
+
             #region Not Of This World - Strings
 
             var notw_heading = new TextObject("{=mcm_notw_heading}Not of this World").ToString();
