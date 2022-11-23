@@ -240,17 +240,17 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV46", adv46_text,5,100, new ProxyRef<float>(() => Bird_Songs_Chance, o => Bird_Songs_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV47", adv47_text, 5, 100, new ProxyRef<float>(() => Courier_Chance, o => Courier_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV47", adv47_text,5, 100, new ProxyRef<float>(() => Courier_Chance, o => Courier_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV48", adv48_text, 5, 100, new ProxyRef<float>(() => Dysentery_Chance, o => Dysentery_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV48", adv48_text,5, 100, new ProxyRef<float>(() => Dysentery_Chance, o => Dysentery_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV49", adv49_text, 5, 100, new ProxyRef<float>(() => Refugees_Chance, o => Refugees_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV49", adv49_text,5, 100, new ProxyRef<float>(() => Refugees_Chance, o => Refugees_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV50", adv50_text, 5, 100, new ProxyRef<float>(() => Bottoms_Up_Chance, o => Bottoms_Up_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV50", adv50_text,5, 100, new ProxyRef<float>(() => Bottoms_Up_Chance, o => Bottoms_Up_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV51", adv51_text, 5, 100, new ProxyRef<float>(() => Dreaded_Sweats_Chance, o => Dreaded_Sweats_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV51", adv51_text,5, 100, new ProxyRef<float>(() => Dreaded_Sweats_Chance, o => Dreaded_Sweats_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV52", adv52_text, 5, 100, new ProxyRef<float>(() => Travelling_Merchant_Chance, o => Travelling_Merchant_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV52", adv52_text,5, 100, new ProxyRef<float>(() => Travelling_Merchant_Chance, o => Travelling_Merchant_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
 
                 #endregion
