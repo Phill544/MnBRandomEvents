@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -16,8 +17,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public Courier() : base(Settings.ModSettings.RandomEvents.CourierData)
 		{
-			minMoraleGain = Settings.ModSettings.RandomEvents.CourierData.minMoraleGain;
-			maxMoraleGain = Settings.ModSettings.RandomEvents.CourierData.maxMoraleGain;
+			minMoraleGain = MCM_MenuConfig_A_M.Instance.CR_minMoraleGain;
+			maxMoraleGain = MCM_MenuConfig_A_M.Instance.CR_maxMoraleGain;
 		}
 
 		public override void CancelEvent()
@@ -26,7 +27,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return true;
+			return MCM_MenuConfig_A_M.Instance.CR_Disable == false;
 		}
 
 		public override void StartEvent()
@@ -41,10 +42,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 			var eventTitle = new TextObject("{=Courier_Title}A Courier Arrives").ToString();
 			
-			var eventOption1 = new TextObject("{=Courier_Event_Text}A courier near {closestSettlement} has arrived with a handful of letters for { heroName }'s party.  The men seem quite excited, at least those who know how to read.")
-								.SetTextVariable("closestSettlement", closestSettlement)
+			var eventOption1 = new TextObject("{=Courier_Event_Text}A courier has arrived with a handful of letters for {heroName}'s party. The men seem quite excited, at least those who know how to read.")
 								.SetTextVariable("heroName", heroName)
-				.ToString();
+								.ToString();
 		
 				
 			var eventButtonText = new TextObject("{=Courier_Event_Button_Text}Accept").ToString();
@@ -69,13 +69,10 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 	public class CourierData : RandomEventData
 	{
-		public readonly int minMoraleGain;
-		public readonly int maxMoraleGain;
 
-		public CourierData(string eventType, float chanceWeight, int minMoraleGain, int maxMoraleGain) : base(eventType, chanceWeight)
+		public CourierData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.minMoraleGain = minMoraleGain;
-			this.maxMoraleGain = maxMoraleGain;
+
 		}
 
 		public override BaseEvent GetBaseEvent()
