@@ -30,7 +30,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		}
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_N_Z.Instance.TP_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 5;
+			return MCM_MenuConfig_N_Z.Instance.TP_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 5
+				&& Clan.PlayerClan.Renown >= 500;
 		}
 		public override void StartEvent()
 		{

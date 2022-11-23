@@ -314,7 +314,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Successful_Deeds_Chance = 50.0f;
             Instance.Supernatural_Encounter_Chance = 50.0f;
             Instance.Target_Practice_Chance = 50.0f;
-            Instance.Travelling_Merchant_Chance = 40.0f;
+            Instance.Travelling_Merchant_Chance = 30.0f;
             Instance.Unexpected_Wedding_Chance = 50.0f;
             Instance.Undercooked_Chance = 50.0f;
             Instance.Violated_Girl_Chance = 50.0f;
