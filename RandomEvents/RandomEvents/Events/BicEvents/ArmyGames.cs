@@ -51,8 +51,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 				var eventTitle = new TextObject("{=ArmyGames_Title}Army Games").ToString();
 			
-				var eventOption1 = new TextObject("{=ArmyGames_Event_Text}What started as a small competition has evolved itself into a full blown tournament.  {leader} has gathered all of the parties in this army for competitions to see who " +
-					"is the ultimate champion team.  The men haven't had this much fun in quite a long time, this will surely boost morale and cohesion.")
+				var eventOption1 = new TextObject("{=ArmyGames_Event_Text}What started as a small competition has evolved itself into a full blown tournament. {leader} has gathered all of the parties in this army for competitions to see who " +
+					"is the ultimate champion team. The men haven't had this much fun in quite a long time, this will surely boost morale and cohesion.")
 				.SetTextVariable("leader", ArmyLeader?.Name)
 				.ToString();
 					
