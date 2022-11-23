@@ -70,7 +70,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			var eventOutcome3 = new TextObject("{=TravellingMerchant_Event_Text_4}You pass by the merchant without so much as a glance.")
 				.ToString();
 				
-			var eventButtonText1 = new TextObject("{=TravellingMerchant_Event_Button_Text_1}Okay").ToString();
+			var eventButtonText1 = new TextObject("{=TravellingMerchant_Event_Button_Text_1}Choose").ToString();
 			var eventButtonText2 = new TextObject("{=TravellingMerchant_Event_Button_Text_2}Done").ToString();
 			
 			var eventOption1 = new TextObject("{=TravellingMerchant_Event_Option_1}Barter").ToString();
