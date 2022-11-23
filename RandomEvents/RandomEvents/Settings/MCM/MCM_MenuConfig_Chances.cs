@@ -133,6 +133,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv49_text = new TextObject("{=mcm_adv49_text}Refugees").ToString();
             var adv50_text = new TextObject("{=mcm_adv50_text}Bottoms Up").ToString();
             var adv51_text = new TextObject("{=mcm_adv51_text}Dreaded Sweats").ToString();
+            var adv52_text = new TextObject("{=mcm_adv52_text}Travelling Merchant").ToString();
 
             #endregion
 
@@ -249,9 +250,11 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV51", adv51_text, 5, 100, new ProxyRef<float>(() => Dreaded_Sweats_Chance, o => Dreaded_Sweats_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                    
-                    #endregion
-                    
+                        .AddFloatingInteger ("ADV52", adv52_text, 5, 100, new ProxyRef<float>(() => Travelling_Merchant_Chance, o => Travelling_Merchant_Chance = o), floatBuilder => floatBuilder
+                            .SetHintText(adv_hint))
+
+                #endregion
+
                 );
 
 
