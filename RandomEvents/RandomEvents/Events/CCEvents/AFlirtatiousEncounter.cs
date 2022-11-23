@@ -34,8 +34,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_A_M.Instance.AFE_Disable == false && Hero.MainHero.IsFemale == false && (Settlement.CurrentSettlement.IsTown || Settlement.CurrentSettlement.IsVillage);
-
+            return MCM_MenuConfig_A_M.Instance.AFE_Disable == false && 
+                   Hero.MainHero.IsFemale == false && 
+                   Settlement.CurrentSettlement != null && 
+                   (Settlement.CurrentSettlement.IsTown || Settlement.CurrentSettlement.IsVillage);
         }
 
         public override void StartEvent()
