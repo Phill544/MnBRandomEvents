@@ -43,7 +43,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
 			var settlements = Settlement.FindAll(s => s.IsTown || s.IsCastle || s.IsVillage).ToList();
 			var ClosestSettlement = settlements.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
-			string cultureclass = ClosestSettlement.Culture.ToString();
+			var cultureclass = ClosestSettlement.Culture.ToString();
 
 			var eventTitle = new TextObject("{=TravellingMerchant_Title}Travelling Merchant").ToString();
 			
@@ -156,7 +156,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 												  switch ((string)elements2a[0].Identifier)
 												  {
 													  case "2a": // Let Him Go--------
-														  InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1a, true, false, eventButtonText2, null, null, null), true);
+														  InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2a, true, false, eventButtonText2, null, null, null), true);
 														  break;
 													  case "2b": // Capture --------
 														  InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2d, true, false, eventButtonText2, null, null, null), true);

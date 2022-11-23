@@ -115,7 +115,9 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\Undercooked.cs" />
     <Compile Include="Events\WanderingLivestock.cs" />
     <Compile Include="Helpers\ClosestSettlement.cs" />
+    <Compile Include="Helpers\CurrentTimeOfDay.cs" />
     <Compile Include="Helpers\Demonym.cs" />
+    <Compile Include="Helpers\GenderAssignment.cs" />
     <Compile Include="Helpers\PartySetup.cs" />
     <Compile Include="Helpers\PlayerStatus.cs" />
     <Compile Include="Helpers\RandomSelection.cs" />

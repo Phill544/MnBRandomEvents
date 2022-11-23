@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
@@ -91,6 +92,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var gangLeader = gangLeaders[index];
 
+            var gangLeaderIsFemale = gangLeader.IsFemale;
+
+            var gangLeaderGender = gangLeaderIsFemale ? "female" : "male";
+
+            var gangLeaderGenderAdjective = GenderAssignment.GetTheGenderAssignment(gangLeaderGender, false, "adjective");
+            var gangLeaderGenderSubjective = GenderAssignment.GetTheGenderAssignment(gangLeaderGender, false, "subjective");
+
             var gangLeaderName = gangLeader.Name.ToString();
 
             var gangLeaderRelation = gangLeader.GetBaseHeroRelation(Hero.MainHero);
@@ -105,11 +113,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventText_Bad_Outcome =new TextObject(
                     "{=Robbery_Event_Text_Bad_Outcome}One evening, while leaving the tavern in {currentSettlement} late at night you decide to take a shortcut back through an alley. You quickly realize that this was a bad idea " +
                     "as you are surrounded by {thugs} thugs who start threatening you. Their leader, {gangLeader}, tells you to hand over any valuables you have on you. Knowing you are outnumbered, you comply and hand " +
-                    "over {goldLost} gold to {gangLeader} and the thugs.\n\n{gangLeader} tells the thugs to teach you a lesson that will keep you out of their alley next time. The next few minutes are a blur as you are " +
+                    "over {goldLost} gold to {gangLeader} and {Adjective} thugs.\n\n{gangLeader} tells {Adjective} thugs to teach you a lesson that will keep you out of their alley next time. The next few minutes are a blur as you are " +
                     "punched, kicked, thrown, and intimidated.\nYou black out\n\nYou awake some time later only to realize the thugs have dumped you in a pigsty. You stumble to your feet and make " +
                     "haste back to where you are staying.")
                 .SetTextVariable("currentSettlement", currentSettlement)
                 .SetTextVariable("thugs", thugs)
+                .SetTextVariable("Adjective", gangLeaderGenderAdjective)
                 .SetTextVariable("gangLeader", gangLeaderName)
                 .SetTextVariable("goldLost", goldLost)
                 .ToString();
@@ -117,40 +126,47 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventText_Convinced_Outcome =new TextObject(
                     "{=Robbery_Event_Text_Convinced_Outcome}One evening, while leaving the tavern in {currentSettlement} late at night you decide to take a shortcut back through an alley. You quickly realize that this was a bad idea " +
                     "as you are surrounded by {thugs} thugs who start threatening you. Their leader, {gangLeader}, tells you to hand over any valuables you have on you. You ask {gangLeader} if they are crazy and not recognize you. " +
-                    "{gangLeader} and the thugs look at you one more time before they remember you. {gangLeader} apologized and withdraw the thugs. They let you pass through their alley unhindered. The next person however will " +
+                    "{gangLeader} and {Adjective} thugs look at you one more time before they remember you. {gangLeader} apologized and withdraw {Adjective} thugs. They let you pass through their alley unhindered. The next person however will " +
                     "be in for quite a surprise.")
                 .SetTextVariable("currentSettlement", currentSettlement)
                 .SetTextVariable("gangLeader", gangLeaderName)
+                .SetTextVariable("Adjective", gangLeaderGenderAdjective)
                 .ToString();
             
             var eventText_Charmed_Outcome =new TextObject(
                     "{=Robbery_Event_Text_Charmed_Outcome}One evening, while leaving the tavern in {currentSettlement} late at night you decide to take a shortcut back through an alley. You quickly realize that this was a bad idea " +
                     "as you are surrounded by {thugs} thugs who start threatening you. Their leader, {gangLeader}, tells you to hand over any valuables you have on you. Knowing you are outnumbered, you do what you do best, talk." +
-                    "You strike up a somewhat friendly conversation with {gangLeader} and they actually seem interested in the conversation. You tell them som gossip you've heard about a rich guest visiting this city and so on. " +
-                    "{gangLeader} takes one long look at you before ordering the thugs to let you go. You hand over 100 gold to {gangLeader} and bids farewell.")
+                    "You strike up a somewhat friendly conversation with {gangLeader} and {Subjective} actually seem interested in the conversation. You tell them som gossip you've heard about a rich guest visiting this city and so on. " +
+                    "{gangLeader} takes one long look at you before ordering {Adjective} thugs to let you go. You hand over 100 gold to {gangLeader} and bids farewell.")
                 .SetTextVariable("currentSettlement", currentSettlement)
                 .SetTextVariable("gangLeader", gangLeaderName)
+                .SetTextVariable("Adjective", gangLeaderGenderAdjective)
+                .SetTextVariable("Subjective", gangLeaderGenderSubjective)
                 .ToString();
             
             var eventText_Intimidated_Outcome =new TextObject(
                     "{=Robbery_Event_Text_Intimidated_Outcome}One evening, while leaving the tavern in {currentSettlement} late at night you decide to take a shortcut back through an alley. You quickly realize that this was a bad idea " +
                     "as you are surrounded by {thugs} thugs who start threatening you. Their leader, {gangLeader}, tells you to hand over any valuables you have on you. You immediately burst out in laughter, much to " +
-                    "the surprise of {gangLeader} and the thugs. You go on to tell them the deeds you have done on the battlefields of Calradia, about all the looters and bandits who have died by your hand. You can see " +
-                    "the thugs are getting nervous. You ask {gangLeader} if they really think {thugs} thugs are gonna pose any threat to you. The thugs put away their weapons and {gangLeader} tells you that you " +
+                    "the surprise of {gangLeader} and {Adjective} thugs. You go on to tell them the deeds you have done on the battlefields of Calradia, about all the looters and bandits who have died by your hand. You can see " +
+                    "the thugs are getting nervous. You ask {gangLeader} if {Subjective} really think {thugs} thugs are gonna pose any threat to you. The thugs put away their weapons and {gangLeader} tells you that you " +
                     "may leave. You leave the alley but not before suggesting to the thugs that justice will soon catch up to them.")
                 .SetTextVariable("currentSettlement", currentSettlement)
                 .SetTextVariable("thugs", thugs)
                 .SetTextVariable("gangLeader", gangLeaderName)
+                .SetTextVariable("Adjective", gangLeaderGenderAdjective)
+                .SetTextVariable("Subjective", gangLeaderGenderSubjective)
                 .ToString();
             
             var eventText_Good_Relation_Outcome =new TextObject(
                     "{=Robbery_Event_Text_Good_Relation_Outcome}One evening, while leaving the tavern in {currentSettlement} late at night you decide to take a shortcut back through an alley. You quickly realize that this was a bad idea " +
-                    "as you are surrounded by {thugs} thugs who start threatening you. Their leader, {gangLeader}, tells you to hand over any valuables you have on you. You ask {gangLeader} if they don't recognize you. " +
+                    "as you are surrounded by {thugs} thugs who start threatening you. Their leader, {gangLeader}, tells you to hand over any valuables you have on you. You ask {gangLeader} if {Subjective} don't recognize you. " +
                     "{gangLeader} then approaches you and gives you a big hug while laughing. You and {gangLeader} go way back, back to the time before the turmoil the world is in. The two of you stand there talking " +
                     "for a few minutes and catches up on old and new. Eventually you tell {gangLeader} that it's time for you to get some rest. You say your goodbyes and embrace one last time.")
                 .SetTextVariable("currentSettlement", currentSettlement)
                 .SetTextVariable("thugs", thugs)
                 .SetTextVariable("gangLeader", gangLeaderName)
+                .SetTextVariable("Adjective", gangLeaderGenderAdjective)
+                .SetTextVariable("Subjective", gangLeaderGenderSubjective)
                 .ToString();
             
             var eventMsg1 =new TextObject(
