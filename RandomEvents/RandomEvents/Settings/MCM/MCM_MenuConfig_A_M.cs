@@ -23,9 +23,18 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public float AFE_maxRelationshipIncrease { get; private set; }
 
         #endregion
-        
+
+        #region Army Games - Variables
+
+        public bool AG_Disable { get; private set; }
+        public float AG_CohesionGain { get; private set; }
+        public int AG_minMoraleGain { get; private set; }
+        public int AG_maxMoraleGain { get; private set; }
+
+        #endregion
+
         #region Ahead of Time - Variables
-        
+
         public bool AoT_Disable { get; private set; }
 
         #endregion
@@ -326,11 +335,25 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var afe4_hint = new TextObject("{=mcm_afe4_hint}The maximum amount of relationship increase.").ToString();
             var afe5_text = new TextObject("{=mcm_afe5_text}5. Deactivate event").ToString();
             var afe5_hint = new TextObject("{=mcm_afe5_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
+
+            #endregion
+
+            #region Army games - Strings
+
+            var ag_heading = new TextObject("{=mcm_ag_heading}Army Games").ToString();
+            var ag1_text = new TextObject("{=mcm_ag1_text}1. Crop % gain").ToString();
+            var ag1_hint = new TextObject("{=mcm_ag1_hint}The amount of % the cohesion is increased.").ToString();
+            var ag2_text = new TextObject("{=mcm_ag1_text}1. Min amount of morale gain").ToString();
+            var ag2_hint = new TextObject("{=mcm_ag1_hint}The minimum amount of morale the party gains.").ToString();
+            var ag3_text = new TextObject("{=mcm_ag2_text}2. Max amount of morale gain").ToString();
+            var ag3_hint = new TextObject("{=mcm_ag2_hint}The maximum amount of morale the party gains.").ToString();
+            var ag4_text = new TextObject("{=mcm_ag3_text}4. Deactivate event").ToString();
+            var ag4_hint = new TextObject("{=mcm_ag3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+
             #endregion
 
             #region Ahead of Time - Strings
-            
+
             var aot_heading = new TextObject("{=mcm_aot_heading}Ahead of Time").ToString();
             var aot1_text = new TextObject("{=mcm_aot1_text}1. Deactivate event").ToString();
             var aot1_hint = new TextObject("{=mcm_aot1_hint}If you dont want this event to show up you can deactivate it.").ToString();
@@ -546,7 +569,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var dy5_hint = new TextObject("{=mcm_dy_text}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
-
             
             #region Eager Troops - Strings
 
@@ -781,11 +803,25 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                     .AddBool("AFE7", afe5_text, new ProxyRef<bool>(() => AFE_Disable, o => AFE_Disable = o), boolBuilder => boolBuilder
                         .SetHintText(afe5_hint))
                 )
-                
+
+            #endregion
+
+                #region Army Games - Builder
+
+               .CreateGroup(ag_heading, groupBuilder => groupBuilder
+                    .AddFloatingInteger("AG1", ag1_text, 5, 100, new ProxyRef<float>(() => AG_CohesionGain, o => AG_CohesionGain = o), floatBuilder => floatBuilder
+                        .SetHintText(ag1_hint))
+                    .AddInteger("AG2", ag2_text, 1, 30, new ProxyRef<int>(() => AG_minMoraleGain, o => AG_minMoraleGain = o), integerBuilder => integerBuilder
+                        .SetHintText(ag2_hint))
+                    .AddInteger("AG3", ag3_text, 1, 30, new ProxyRef<int>(() => AG_maxMoraleGain, o => AG_maxMoraleGain = o), integerBuilder => integerBuilder
+                        .SetHintText(ag3_hint))
+                    .AddBool("AG4", ag4_text, new ProxyRef<bool>(() => AG_Disable, o => AG_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(ag4_hint))
+                    )
                 #endregion
-                
+
                 #region Ahead of Time - Builder
-                
+
                 .CreateGroup(aot_heading, groupBuilder => groupBuilder
                     .AddBool("AoT", aot1_text, new ProxyRef<bool>(() => AoT_Disable, o => AoT_Disable = o), boolBuilder => boolBuilder
                         .SetHintText(aot1_hint))
@@ -852,7 +888,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                 )
                 
                 #endregion
-                
                 
                 #region Bird Songs - Builder
 
@@ -949,8 +984,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                         .AddBool("CC2", cc2_text, new ProxyRef<bool>(() => CC_Disable, o => CC_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(cc2_hint))
                     )
-                #endregion
-                
+                #endregion               
                 
                 #region Courier - Builder
                 
@@ -1267,9 +1301,18 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.AFE_maxRelationshipIncrease = 50.0f;
 
             #endregion
-            
+
+            #region Army Games
+
+            Instance.BS_Disable = false;
+            Instance.CC_CohesionGain = 30f;
+            Instance.BS_minMoraleGain = 10;
+            Instance.BS_maxMoraleGain = 30;
+
+            #endregion
+
             #region Ahead of Time
-            
+
             Instance.AoT_Disable = false;
             
             #endregion

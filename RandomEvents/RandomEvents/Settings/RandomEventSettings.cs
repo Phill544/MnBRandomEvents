@@ -162,6 +162,7 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         public DreadedSweatsData DreadedSweatsData { get; } = new DreadedSweatsData("DreadedSweats", MCM_MenuConfig_Chances.Instance.Dreaded_Sweats_Chance);
 
+        public ArmyGamesData ArmyGamesData { get; } = new ArmyGamesData("ArmyGames", MCM_MenuConfig_Chances.Instance.Army_Games_Chance);
 
         #endregion
     }
