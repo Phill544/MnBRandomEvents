@@ -133,6 +133,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv49_text = new TextObject("{=mcm_adv49_text}Refugees").ToString();
             var adv50_text = new TextObject("{=mcm_adv50_text}Bottoms Up").ToString();
             var adv51_text = new TextObject("{=mcm_adv51_text}Dreaded Sweats").ToString();
+            var adv52_text = new TextObject("{=mcm_adv52_text}Travelling Merchant").ToString();
 
             #endregion
 
@@ -239,19 +240,21 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV46", adv46_text,5,100, new ProxyRef<float>(() => Bird_Songs_Chance, o => Bird_Songs_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV47", adv47_text, 5, 100, new ProxyRef<float>(() => Courier_Chance, o => Courier_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV47", adv47_text,5, 100, new ProxyRef<float>(() => Courier_Chance, o => Courier_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV48", adv48_text, 5, 100, new ProxyRef<float>(() => Dysentery_Chance, o => Dysentery_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV48", adv48_text,5, 100, new ProxyRef<float>(() => Dysentery_Chance, o => Dysentery_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV49", adv49_text, 5, 100, new ProxyRef<float>(() => Refugees_Chance, o => Refugees_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV49", adv49_text,5, 100, new ProxyRef<float>(() => Refugees_Chance, o => Refugees_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV50", adv50_text, 5, 100, new ProxyRef<float>(() => Bottoms_Up_Chance, o => Bottoms_Up_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV50", adv50_text,5, 100, new ProxyRef<float>(() => Bottoms_Up_Chance, o => Bottoms_Up_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV51", adv51_text, 5, 100, new ProxyRef<float>(() => Dreaded_Sweats_Chance, o => Dreaded_Sweats_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV51", adv51_text,5, 100, new ProxyRef<float>(() => Dreaded_Sweats_Chance, o => Dreaded_Sweats_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                    
-                    #endregion
-                    
+                        .AddFloatingInteger ("ADV52", adv52_text,5, 100, new ProxyRef<float>(() => Travelling_Merchant_Chance, o => Travelling_Merchant_Chance = o), floatBuilder => floatBuilder
+                            .SetHintText(adv_hint))
+
+                #endregion
+
                 );
 
 
@@ -314,7 +317,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Successful_Deeds_Chance = 50.0f;
             Instance.Supernatural_Encounter_Chance = 50.0f;
             Instance.Target_Practice_Chance = 50.0f;
-            Instance.Travelling_Merchant_Chance = 40.0f;
+            Instance.Travelling_Merchant_Chance = 30.0f;
             Instance.Unexpected_Wedding_Chance = 50.0f;
             Instance.Undercooked_Chance = 50.0f;
             Instance.Violated_Girl_Chance = 50.0f;
