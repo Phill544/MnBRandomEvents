@@ -14,6 +14,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         
         public float A_Flirtatious_Encounter_Chance{ get; private set; }
         public float Ahead_Of_Time_Chance{ get; private set; }
+        public float Army_Games_Chance { get; private set; }
         public float Bandit_Ambush_Chance{ get; private set; }
         public float Bee_Kind_Chance{ get; private set; }
         public float Bet_Money_Chance{ get; private set; }
@@ -134,6 +135,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv50_text = new TextObject("{=mcm_adv50_text}Bottoms Up").ToString();
             var adv51_text = new TextObject("{=mcm_adv51_text}Dreaded Sweats").ToString();
             var adv52_text = new TextObject("{=mcm_adv52_text}Travelling Merchant").ToString();
+            var adv53_text = new TextObject("{=mcm_adv53_text}Army Games").ToString();
 
             #endregion
 
@@ -252,6 +254,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV52", adv52_text,5, 100, new ProxyRef<float>(() => Travelling_Merchant_Chance, o => Travelling_Merchant_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
+                        .AddFloatingInteger ("ADV53", adv53_text,5, 100, new ProxyRef<float>(() => Army_Games_Chance, o => Army_Games_Chance = o), floatBuilder => floatBuilder
+                            .SetHintText(adv_hint))
 
                 #endregion
 
@@ -274,6 +278,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.CHANCES_FirstRunDone = true;
             Instance.A_Flirtatious_Encounter_Chance = 50.0f;
             Instance.Ahead_Of_Time_Chance = 50.0f;
+            Instance.Army_Games_Chance = 60.0f;
             Instance.Bandit_Ambush_Chance = 50.0f;
             Instance.Bee_Kind_Chance = 50.0f;
             Instance.Bet_Money_Chance = 50.0f;
