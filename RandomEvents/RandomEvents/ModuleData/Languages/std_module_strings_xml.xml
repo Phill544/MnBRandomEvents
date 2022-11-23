@@ -34,7 +34,14 @@
     <string id="AFlirtatiousEncounter_Event_Msg_3" text="Relationship between {name} and {heroName}is now {newRelationship}." />
     <string id="AFlirtatiousEncounter_Event_Msg_4" text="Relationship between {name} and {heroName}is now {newRelationship}." />
 
-    
+	
+	
+	    <!--ArmyGames Event-->
+    <string id="ArmyGames_Title" text="Army Games" />
+    <string id="ArmyGames_Event_Desc" text="What started as a small competition has evolved itself into a full blown tournament. {leader} has gathered all of the parties in this army for competitions to see who is the ultimate champion team. The men haven't had this much fun in quite a long time, this will surely boost morale and cohesion." />
+    <string id="ArmyGames_Event_Button_Text_1" text="Done" />
+	
+
 
     <!--BirthdayParty Event-->
     <string id="BirthdayParty_Title" text="The Birthday Party!" />
@@ -63,7 +70,7 @@
     <string id="BirthdayParty_Event_Msg_1" text="{heroName} gave away {goldGiven} to the girl and gained {renownGain} renown for slaying the bandits." />
     <string id="BirthdayParty_Event_Msg_2" text="{heroName} gave away {goldGiven} to the girl." />
     <string id="BirthdayParty_Event_Msg_3" text="{heroName} looted {goldLooted} from the birthday party." />
-
+	
 
 
     <!--BeggarBegging Event-->

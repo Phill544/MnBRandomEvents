@@ -51,7 +51,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 				var eventTitle = new TextObject("{=ArmyGames_Title}Army Games").ToString();
 			
-				var eventOption1 = new TextObject("{=ArmyGames_Event_Text}What started as a small competition has evolved itself into a full blown tournament. {leader} has gathered all of the parties in this army for competitions to see who " +
+				var eventDesc = new TextObject("{=ArmyGames_Event_Text}What started as a small competition has evolved itself into a full blown tournament. {leader} has gathered all of the parties in this army for competitions to see who " +
 					"is the ultimate champion team. The men haven't had this much fun in quite a long time, this will surely boost morale and cohesion.")
 				.SetTextVariable("leader", ArmyLeader?.Name)
 				.ToString();
@@ -59,7 +59,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				
 				var eventButtonText = new TextObject("{=ArmyGames_Event_Button_Text}Done").ToString();
 
-				InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
+				InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDesc, true, false, eventButtonText, null, null, null), true);
 			}
 			catch (Exception ex)
 			{
