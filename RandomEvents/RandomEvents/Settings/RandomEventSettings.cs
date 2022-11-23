@@ -140,14 +140,28 @@ namespace CryingBuffalo.RandomEvents.Settings
 
 
         public RobberyData RobberyData { get; } = new RobberyData("Robbery", MCM_MenuConfig_Chances.Instance.Robbery_Chance);
-
-        public BirdSongsData BirdSongsData { get; } = new BirdSongsData("BirdSongs", 50, 5, 20);
         
-        public CourierData CourierData { get; } = new CourierData("Courier", 50, 5, 20);
 
-        public DysenteryData DysenteryData { get; } = new DysenteryData("Dysentery", 50, 5, 20, 2, 10);
+        public BirdSongsData BirdSongsData { get; } = new BirdSongsData("BirdSongs", MCM_MenuConfig_Chances.Instance.Bird_Songs_Chance);
+        
+        
+        public CourierData CourierData { get; } = new CourierData("Courier", MCM_MenuConfig_Chances.Instance.Courier_Chance);
+        
+        
+        public DysenteryData DysenteryData { get; } = new DysenteryData("Dysentery", MCM_MenuConfig_Chances.Instance.Dysentery_Chance);
+        
+        
+        public RefugeesData RefugeesData { get; } = new RefugeesData("Refugees", MCM_MenuConfig_Chances.Instance.Refugees_Chance);
 
-        public RefugeesData RefugeesData { get; } = new RefugeesData("Refugees", 50, 3, 15, 3, 15, 3, 15);
+        
+        public BottomsUpData BottomsUpData { get; } = new BottomsUpData("BottomsUp", MCM_MenuConfig_Chances.Instance.Bottoms_Up_Chance);
+
+        
+        public TravellingmerchantData TravellingMerchantData { get; } = new TravellingmerchantData("TravellingMerchant", MCM_MenuConfig_Chances.Instance.Travelling_Merchant_Chance);
+        
+        
+        public DreadedSweatsData DreadedSweatsData { get; } = new DreadedSweatsData("DreadedSweats", MCM_MenuConfig_Chances.Instance.Dreaded_Sweats_Chance);
+
 
         #endregion
     }

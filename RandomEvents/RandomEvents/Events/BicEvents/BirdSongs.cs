@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -17,8 +18,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public BirdSongs() : base(Settings.ModSettings.RandomEvents.BirdSongsData)
 		{
-			minMoraleGain = Settings.ModSettings.RandomEvents.BirdSongsData.minMoraleGain;
-			maxMoraleGain = Settings.ModSettings.RandomEvents.BirdSongsData.maxMoraleGain;
+			minMoraleGain = MCM_MenuConfig_A_M.Instance.BS_minMoraleGain;
+			maxMoraleGain = MCM_MenuConfig_A_M.Instance.BS_maxMoraleGain;
+
 		}
 
 		public override void CancelEvent()
@@ -28,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return true;
+			return MCM_MenuConfig_A_M.Instance.BS_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CampaignTime.Now.IsDayTime;
 		}
 
 		public override void StartEvent()
@@ -45,7 +47,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 			var eventTitle = new TextObject("{=BirdSongs_Title}Bird Songs").ToString();
 			
-			var eventOption1 = new TextObject("{=BirdSongs_Event_Text}This day has been blessed by the beautiful melodies of birds singing songs. Silence falls over your ranks as the relaxing sounds of nature's choir bring a sense of joy to your men.  This will surely boost their morale.")
+			var eventOption1 = new TextObject("{=BirdSongs_Event_Text}This day has been blessed by the beautiful melodies of birds singing songs. Silence falls over your ranks as the relaxing sounds of nature's choir bring a sense of joy to your men. This will surely boost their morale.")
 				.ToString();
 				
 			var eventButtonText = new TextObject("{=BirdSongs_Event_Button_Text}Done").ToString();
@@ -71,13 +73,10 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 	public class BirdSongsData : RandomEventData
 	{
-		public readonly int minMoraleGain;
-		public readonly int maxMoraleGain;
 
-		public BirdSongsData(string eventType, float chanceWeight, int minMoraleGain, int maxMoraleGain) : base(eventType, chanceWeight)
+		public BirdSongsData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-			this.minMoraleGain = minMoraleGain;
-			this.maxMoraleGain = maxMoraleGain;
+
 		}
 
 		public override BaseEvent GetBaseEvent()
