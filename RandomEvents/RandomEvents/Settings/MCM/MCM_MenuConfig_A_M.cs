@@ -988,7 +988,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                 
                 #region Courier - Builder
                 
-                .CreateGroup(bu_heading, groupBuilder => groupBuilder
+                .CreateGroup(cr_heading, groupBuilder => groupBuilder
                     .AddInteger("CR1", cr1_text, 1, 30, new ProxyRef<int>(() => CR_minMoraleGain, o => CR_minMoraleGain = o), integerBuilder => integerBuilder
                         .SetHintText(cr1_hint))
                     .AddInteger("CR2", cr2_text, 1, 30, new ProxyRef<int>(() => CR_maxMoraleGain, o => CR_maxMoraleGain = o), integerBuilder => integerBuilder
