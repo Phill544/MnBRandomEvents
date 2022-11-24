@@ -1,4 +1,5 @@
 ﻿using CryingBuffalo.RandomEvents.Events;
+using CryingBuffalo.RandomEvents.Events.BicEvents;
 using CryingBuffalo.RandomEvents.Events.CCEvents;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 
@@ -133,17 +134,37 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         
         public PrisonerTransferData PrisonerTransferData { get; } = new PrisonerTransferData("PrisonerTransfer", MCM_MenuConfig_Chances.Instance.Prisoner_Transfer_Chance);
+        
+        
+        public LightsInTheSkiesData LightsInTheSkiesData { get; } = new LightsInTheSkiesData("LightsInTheSkies", MCM_MenuConfig_Chances.Instance.Lights_In_the_Skies_Chance);
 
 
         public RobberyData RobberyData { get; } = new RobberyData("Robbery", MCM_MenuConfig_Chances.Instance.Robbery_Chance);
-
-        public BirdSongsData BirdSongsData { get; } = new BirdSongsData("BirdSongs", 50, 5, 20);
         
-        public CourierData CourierData { get; } = new CourierData("Courier", 50, 5, 20);
 
-        public DysenteryData DysenteryData { get; } = new DysenteryData("Dysentery", 50, 5, 20, 2, 10);
+        public BirdSongsData BirdSongsData { get; } = new BirdSongsData("BirdSongs", MCM_MenuConfig_Chances.Instance.Bird_Songs_Chance);
+        
+        
+        public CourierData CourierData { get; } = new CourierData("Courier", MCM_MenuConfig_Chances.Instance.Courier_Chance);
+        
+        
+        public DysenteryData DysenteryData { get; } = new DysenteryData("Dysentery", MCM_MenuConfig_Chances.Instance.Dysentery_Chance);
+        
+        
+        public RefugeesData RefugeesData { get; } = new RefugeesData("Refugees", MCM_MenuConfig_Chances.Instance.Refugees_Chance);
 
-        public RefugeesData RefugeesData { get; } = new RefugeesData("Refugees", 50, 3, 15, 3, 15, 3, 15);
+        
+        public BottomsUpData BottomsUpData { get; } = new BottomsUpData("BottomsUp", MCM_MenuConfig_Chances.Instance.Bottoms_Up_Chance);
+
+        
+        public TravellingmerchantData TravellingMerchantData { get; } = new TravellingmerchantData("TravellingMerchant", MCM_MenuConfig_Chances.Instance.Travelling_Merchant_Chance);
+        
+        
+        public DreadedSweatsData DreadedSweatsData { get; } = new DreadedSweatsData("DreadedSweats", MCM_MenuConfig_Chances.Instance.Dreaded_Sweats_Chance);
+
+        public ArmyGamesData ArmyGamesData { get; } = new ArmyGamesData("ArmyGames", MCM_MenuConfig_Chances.Instance.Army_Games_Chance);
+
+        public CompanionAdmireData CompanionAdmireData { get; } = new CompanionAdmireData("CompanionAdmire", MCM_MenuConfig_Chances.Instance.Companion_Admire_Chance);
 
         #endregion
     }
