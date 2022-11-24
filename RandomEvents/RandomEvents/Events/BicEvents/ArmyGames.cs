@@ -3,13 +3,12 @@ using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
-using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class ArmyGames : BaseEvent
 	{
@@ -44,8 +43,11 @@ namespace CryingBuffalo.RandomEvents.Events
 			try
 			{
 				var ArmyLeader = MobileParty.MainParty.Army.ArmyOwner;
+				
 				MobileParty.MainParty.Army.Cohesion += cohesionIncrease;
+				
 				var moraleGain = MBRandom.RandomInt(minMoraleGain, maxMoraleGain);
+				
 				MobileParty.MainParty.RecentEventsMorale += moraleGain;
 				MobileParty.MainParty.MoraleExplained.Add(moraleGain);
 
@@ -53,8 +55,8 @@ namespace CryingBuffalo.RandomEvents.Events
 			
 				var eventDesc = new TextObject("{=ArmyGames_Event_Text}What started as a small competition has evolved itself into a full blown tournament. {leader} has gathered all of the parties in this army for competitions to see who " +
 					"is the ultimate champion team. The men haven't had this much fun in quite a long time, this will surely boost morale and cohesion.")
-				.SetTextVariable("leader", ArmyLeader?.Name)
-				.ToString();
+					.SetTextVariable("leader", ArmyLeader.Name.ToString())
+					.ToString();
 					
 				
 				var eventButtonText = new TextObject("{=ArmyGames_Event_Button_Text}Done").ToString();

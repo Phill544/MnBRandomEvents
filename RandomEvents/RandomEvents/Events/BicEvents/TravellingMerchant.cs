@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
-using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -30,8 +28,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		}
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_N_Z.Instance.TP_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 5
-				&& Clan.PlayerClan.Renown >= 500;
+			return MCM_MenuConfig_N_Z.Instance.TM_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 5 && Clan.PlayerClan.Renown >= 500;
 		}
 		public override void StartEvent()
 		{
@@ -39,17 +36,18 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
+			
 			var loot = MBRandom.RandomInt(minloot, maxloot);
-			var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
-			var settlements = Settlement.FindAll(s => s.IsTown || s.IsCastle || s.IsVillage).ToList();
-			var ClosestSettlement = settlements.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
-			string cultureclass = ClosestSettlement.Culture.ToString();
+			
+			var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty);
+
+			var cultureclass = closestSettlement.Culture.ToString();
 
 			var eventTitle = new TextObject("{=TravellingMerchant_Title}Travelling Merchant").ToString();
 			
 			var eventDescription = new TextObject("{=TravellingMerchant_Event_Desc}Not too far from {closestSettlement} you are met by what appears to be a lone caravan master.  He looks a bit down on his luck, as if he had recently been in quite a fight. " +
 				"To your surprise he approaches your party, asking if you're interested in buying some of his wares.")
-				.SetTextVariable("closestSettlement", closestSettlement)
+				.SetTextVariable("closestSettlement", closestSettlement.ToString())
 				.ToString();
 			
 			var eventOutcome1 = new TextObject("{=TravellingMerchant_Event_Text_1}You ask to see the merchant's wares, he proceeds to open his cart and it appears empty except a few bits of food scrap." +
@@ -98,6 +96,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 						case "a": //Barter -------------------------------------------------------==============================================================
 							{
 								Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 25);
+								
 								var eventOption1a = new TextObject("{=TravellingMerchant_Event_Option_1a}Let him go").ToString();
 								var eventOption1Hovera = new TextObject("{=TravellingMerchant_Event_Option_1a_Hover}He's been through enough.").ToString();
 								var eventOption1b = new TextObject("{=TravellingMerchant_Event_Option_1b}Demand the coin purse").ToString();
@@ -107,16 +106,21 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								
 								var eventOutcome1a = new TextObject("{=TravellingMerchant_Event_Text_5}You leave the merchant in peace, Lord knows he has been through enough today.")
 									.ToString();
+								
 								var eventOutcome2a = new TextObject("{=TravellingMerchant_Event_Text_6}You demand the merchant hand over his coin purse, with defeat in his eyes he pulls out the purse and hands it over.")
 									.ToString();
+								
 								var eventOutcome3a = new TextObject("{=TravellingMerchant_Event_Text_7}You order your men to subdue the merchant. His cries for help fall on deaf ears. Unlike the looters, you don't forget the coin purse.")
 									.ToString();
+								
 								var inquiryElements1 = new List<InquiryElement>
-											{
-											new InquiryElement("1a", eventOption1a, null, true, eventOption1Hovera),
-											new InquiryElement("1b", eventOption1b, null, true, eventOption1Hoverb),
-											new InquiryElement("1c", eventOption1c, null, true, eventOption1Hoverc)
-											};
+								{
+									new InquiryElement("1a", eventOption1a, null, true, eventOption1Hovera),
+									new InquiryElement("1b", eventOption1b, null, true, eventOption1Hoverb),
+									new InquiryElement("1c", eventOption1c, null, true, eventOption1Hoverc)
+									
+								};
+								
 								var msid1 = new MultiSelectionInquiryData(eventTitle, eventOutcome1, inquiryElements1, false, 1, eventButtonText1, null,
 								elements1 =>
 								{
@@ -156,26 +160,29 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 												  switch ((string)elements2a[0].Identifier)
 												  {
 													  case "2a": // Let Him Go--------
-														  InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1a, true, false, eventButtonText2, null, null, null), true);
+														  InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2a, true, false, eventButtonText2, null, null, null), true);
 														  break;
 													  case "2b": // Capture --------
 														  InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2d, true, false, eventButtonText2, null, null, null), true);
+														  
 														  Hero.MainHero.ChangeHeroGold(+loot);
 														  Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 300);
-														  TroopRoster troopRoster2 = TroopRoster.CreateDummyTroopRoster();
-														  for (int i = 0; i < CharacterObject.All.Count; i++)
+														  
+														  var troopRoster2 = TroopRoster.CreateDummyTroopRoster();
+														  
+														  foreach (var characterObject in CharacterObject.All)
 														  {
-															  CharacterObject characterObject = CharacterObject.All[i];
-
 															  if (characterObject.StringId.Contains("caravan_master") && !characterObject.StringId.Contains("conspiracy") && characterObject.Culture.ToString() == cultureclass)
 															  {
 																  troopRoster2.AddToCounts(characterObject, 1);
 															  }
 														  }
-														  TroopRoster emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
-														  PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Merchant").SetTextVariable("cultureclass", cultureclass), 20, null);
 														  
-														  string eventMsg2 = new TextObject("{=TravellingMerchant_Event_Msg_2}You subdued the merchant")
+														  var emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
+														  
+														  PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Merchant").SetTextVariable("cultureclass", cultureclass), 20);
+														  
+														  var eventMsg2 = new TextObject("{=TravellingMerchant_Event_Msg_2}You subdued the merchant")
 														  .SetTextVariable("Loot", loot)
 														  .ToString();
 														  
@@ -183,37 +190,42 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 														  break;
 												  }
 
-											  },
-																null);
-																MBInformationManager.ShowMultiSelectionInquiry(msid2, true);
-																StopEvent();
+											  }, null);
+											
+											MBInformationManager.ShowMultiSelectionInquiry(msid2, true);
+											StopEvent();
 
 
 											break;
 										case "1c"://Capture -------------
 											InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome3a, true, false, eventButtonText2, null, null, null), true);
+											
 											Hero.MainHero.ChangeHeroGold(+loot);
 											Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 300);
-											TroopRoster troopRoster2 = TroopRoster.CreateDummyTroopRoster();
-											for (int i = 0; i < CharacterObject.All.Count; i++)
+											
+											var troopRoster2 = TroopRoster.CreateDummyTroopRoster();
+											
+											foreach (var characterObject in CharacterObject.All)
 											{
-												CharacterObject characterObject = CharacterObject.All[i];
-
 												if (characterObject.StringId.Contains("caravan_master") && !characterObject.StringId.Contains("conspiracy") && characterObject.Culture.ToString() == cultureclass)
 												{
 													troopRoster2.AddToCounts(characterObject, 1);
 												}
 											}
-											TroopRoster emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
-											PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Merchant").SetTextVariable("cultureclass", cultureclass), 20, null);
-											string eventMsg2 = new TextObject("{=TravellingMerchant_Event_Msg_3}You subdued the merchant")
+											
+											var emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
+											
+											PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Merchant").SetTextVariable("cultureclass", cultureclass), 20);
+											
+											var eventMsg2 = new TextObject("{=TravellingMerchant_Event_Msg_3}You subdued the merchant")
 											.SetTextVariable("Loot", loot)
 											.ToString();
+											
 											InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_POS_Outcome));
 											break;																										
 									}
-								},
-								null);
+								}, null);
+								
 								MBInformationManager.ShowMultiSelectionInquiry(msid1, true);
 								StopEvent();
 							}
@@ -227,16 +239,19 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 							
 							var eventOutcome2a = new TextObject("{=TravellingMerchant_Event_Text_2a}You leave the merchant in peace, Lord knows he has been through enough today.")
 							.ToString();
+							
 							var eventOutcome2c = new TextObject("{=TravellingMerchant_Event_Text_2c}You order your men to subdue the merchant. His cries for help fall on deaf ears.")
 							.ToString();
+							
 							var inquiryElements2 = new List<InquiryElement>
-											{
-											new InquiryElement("1a", eventOption2a, null, true, eventOption2Hovera),
-											new InquiryElement("1b", eventOption2b, null, true, eventOption2Hoverb)
-											};
+							{
+								new InquiryElement("1a", eventOption2a, null, true, eventOption2Hovera),
+								new InquiryElement("1b", eventOption2b, null, true, eventOption2Hoverb)
+							};
+							
 								Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 150);
 
-								var msid2 = new MultiSelectionInquiryData(eventTitle, eventOutcome2, inquiryElements2, false, 1, eventButtonText1, null,
+						var msid2 = new MultiSelectionInquiryData(eventTitle, eventOutcome2, inquiryElements2, false, 1, eventButtonText1, null,
 							elements2 =>
 							{
 								switch ((string)elements2[0].Identifier)
@@ -245,29 +260,34 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2a, true, false, eventButtonText2, null, null, null), true);
 									break;
 								case "1b"://Capture -------------
-											InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2c, true, false, eventButtonText2, null, null, null), true);
+									InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2c, true, false, eventButtonText2, null, null, null), true);
+									
 									Hero.MainHero.ChangeHeroGold(+loot);
-										Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 300);
-										TroopRoster troopRoster2 = TroopRoster.CreateDummyTroopRoster();
-									for (int i = 0; i < CharacterObject.All.Count; i++)
+									Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 300);
+									
+									var troopRoster2 = TroopRoster.CreateDummyTroopRoster();
+									
+									foreach (var characterObject in CharacterObject.All)
 									{
-										CharacterObject characterObject = CharacterObject.All[i];
 										if (characterObject.StringId.Contains("caravan_master") && !characterObject.StringId.Contains("conspiracy") && characterObject.Culture.ToString() == cultureclass)
 										{
 											troopRoster2.AddToCounts(characterObject, 1);
 										}
 									}
-									TroopRoster emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
-									PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Merchant").SetTextVariable("cultureclass", cultureclass), 20, null);
-										string eventMsg3 = new TextObject(
-										"{=TravellingMerchant_Event_Msg_4}You subdued the merchant")
+									
+									var emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
+									
+									PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Merchant").SetTextVariable("cultureclass", cultureclass), 20);
+									
+									var eventMsg3 = new TextObject("{=TravellingMerchant_Event_Msg_4}You subdued the merchant")
 										.SetTextVariable("Loot", loot)
 										.ToString();
+									
 										InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_POS_Outcome));
 										break;
 								}
-							},
-						null);
+							}, null);
+						
 						MBInformationManager.ShowMultiSelectionInquiry(msid2, true);
 						StopEvent();
 					}
@@ -279,8 +299,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
 							break;
 					}
-				},
-				null);
+				}, null);
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

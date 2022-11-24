@@ -996,7 +996,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
             #endregion
 
-            
             #region Unexpected Wedding
 
             Instance.UW_Disable = false;

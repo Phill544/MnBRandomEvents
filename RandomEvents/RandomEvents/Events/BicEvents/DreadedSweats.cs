@@ -39,31 +39,40 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		{
 
       		var partysize = MobileParty.MainParty.MemberRoster.TotalHealthyCount;
+            
 			var moraleLoss = MBRandom.RandomInt(minMoraleLoss, maxMoraleLoss);
+			
 			var victims = MBRandom.RandomInt(minvictim, maxvictim);
+			
 			var totalvictims = partysize / 10 + victims;
+			
 			Hero.MainHero.AddSkillXp(DefaultSkills.Medicine, 5);
+			
 			MobileParty.MainParty.SetIsDisorganized(true);
+			
 			MobileParty.MainParty.RecentEventsMorale -= moraleLoss;
 			MobileParty.MainParty.MoraleExplained.Add(-moraleLoss);
+			
 			MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(totalvictims);
 
 			
-				var eventTitle2 = new TextObject("{=DreadedSweats_Title}The Dreaded Sweat").ToString();
+			var eventTitle2 = new TextObject("{=DreadedSweats_Title}The Dreaded Sweat").ToString();
 
-				var eventOption2 = new TextObject("{=DreadedSweats_Event_Text}There has been an outbreak of some sort of illness among the troops.  Fever, debilitating aches and pains, a few of the men can barely stand.  " +
+			var eventOption2 = new TextObject("{=DreadedSweats_Event_Text}There has been an outbreak of some sort of illness among the troops.  Fever, debilitating aches and pains, a few of the men can barely stand.  " +
 					"All the symptoms point towards this being what many call 'the Dreaded Sweats'.  You order your men to wash up in the creak before moving out, hopefully this won't become something too serious.")
 					.ToString();
 
-				var eventButtonText = new TextObject("{=DreadedSweats_Event_Button_Text}Done").ToString();
+			var eventButtonText = new TextObject("{=DreadedSweats_Event_Button_Text}Done").ToString();
 
-				InformationManager.ShowInquiry(new InquiryData(eventTitle2, eventOption2, true, false, eventButtonText, null, null, null), true);
+			InformationManager.ShowInquiry(new InquiryData(eventTitle2, eventOption2, true, false, eventButtonText, null, null, null), true);
 
-				string eventMsg1 = new TextObject(
+			var eventMsg1 = new TextObject(
 				"{=DreadedSweats_Event_Msg_1}{totalvictims} troops have the Dreaded Sweats!")
 				.SetTextVariable("totalvictims", totalvictims)
 				.ToString();
+				
 			InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
+			
 			StopEvent();
 
         }

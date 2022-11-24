@@ -1010,7 +1010,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
                 #region Courier - Builder
 
-                .CreateGroup(bu_heading, groupBuilder => groupBuilder
+                .CreateGroup(cr_heading, groupBuilder => groupBuilder
                     .AddInteger("CR1", cr1_text, 1, 30, new ProxyRef<int>(() => CR_minMoraleGain, o => CR_minMoraleGain = o), integerBuilder => integerBuilder
                         .SetHintText(cr1_hint))
                     .AddInteger("CR2", cr2_text, 1, 30, new ProxyRef<int>(() => CR_maxMoraleGain, o => CR_maxMoraleGain = o), integerBuilder => integerBuilder
@@ -1326,10 +1326,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
             #region Army Games
 
-            Instance.BS_Disable = false;
-            Instance.CC_CohesionGain = 30f;
-            Instance.BS_minMoraleGain = 10;
-            Instance.BS_maxMoraleGain = 30;
+            Instance.AG_Disable = false;
+            Instance.AG_CohesionGain = 30f;
+            Instance.AG_minMoraleGain = 10;
+            Instance.AG_maxMoraleGain = 30;
 
             #endregion
 
