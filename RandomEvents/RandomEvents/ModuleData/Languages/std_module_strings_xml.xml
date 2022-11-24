@@ -926,9 +926,18 @@
     <string id="Refugees_Event_Msg_2" text="You have recruited refugees." />
     <string id="Refugees_Event_Msg_3" text="You have taken the refugees prisoner." />
     <string id="Refugees_Event_Msg_4" text="You have ignored the refugees." />
-    
-    
-    
+	
+	<!--Companion Admire-->
+	<string id="CompanionAdmire_Title" text="Companion Admiration" />
+	<string id="CompanionAdmire_Event_Text1" text="While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{scout} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can." />
+    <string id="CompanionAdmire_Event_Text2" text="While travelling near {closestsettlement} your quartermaster, {quartermaster}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{quartermaster} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can." />
+    <string id="CompanionAdmire_Event_Text3" text="While travelling near {closestsettlement} your surgeon, {surgeon}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{surgeon} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can. " />
+    <string id="CompanionAdmire_Event_Text4" text="While travelling near {closestsettlement} your engineer, {engineer}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{engineer} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can." />
+	<string id="CompanionAdmire_Event_Msg_1" text="Your relationship with {scout) has improved." />
+	<string id="CompanionAdmire_Event_Msg_2" text="Your relationship with {quartermaster) has improved." />
+	<string id="CompanionAdmire_Event_Msg_3" text="Your relationship with {surgeon) has improved." />
+	<string id="CompanionAdmire_Event_Msg_4" text="Your relationship with {engineer) has improved." />
+	
     <!--Demonyms-->
     <string id="Demonym_Empire_Noun" text="an imperial" />
     <string id="Demonym_Vlandia_Noun" text="a vlandian" />
@@ -999,6 +1008,9 @@
     <string id="mcm_adv49_text" text="Refugees" />
     <string id="mcm_adv50_text" text="Bottoms Up" />
     <string id="mcm_adv51_text" text="Dreaded Sweats" />
+	<string id="mcm_adv52_text" text="Travelling Merchant" />
+	<string id="mcm_adv53_text" text="Army Games" />
+	<string id="mcm_adv54_text" text="Companion Admire" />
 
     <string id="mcm_gs_heading" text="1. General Settings" />
     <string id="mcm_gs1_text" text="1. Initial Setup" />
@@ -1012,8 +1024,7 @@
     <string id="mcm_gs5_text" text="5. Max minutes between events" />
     <string id="mcm_gs5_hint" text="Maximum amount of minutes in between events." />
     <string id="mcm_gs6_text" text="6. General Level XP Multiplier " />
-    <string id="mcm_gs6_hint" text="The number used to define the XP multiplier. Higher number means higher XP." />
-    
+    <string id="mcm_gs6_hint" text="The number used to define the XP multiplier. Higher number means higher XP." />   
     <string id="mcm_afe_heading" text="A Flirtatious Encounter" />
     <string id="mcm_afe1_text" text="1. Min Age" />
     <string id="mcm_afe1_hint" text="The minimum age the target must be." />
@@ -1025,6 +1036,15 @@
     <string id="mcm_afe4_hint" text="The maximum amount of relationship increase." />
     <string id="mcm_afe5_text" text="5. Deactivate event" />
     <string id="mcm_afe5_hint" text="If you dont want this event to show up you can deactivate it." />
+	<string id="mcm_ag_heading" text="Army Games" />
+	<string id="mcm_ag1_text" text="1. Crop % gain" />
+	<string id="mcm_ag1_hint" text="The amount of % the cohesion is increased." />
+	<string id="mcm_ag2_text" text="2. Min amount of morale gain" />
+	<string id="mcm_ag2_hint" text="The minimum amount of morale the party gains." />
+	<string id="mcm_ag3_text" text="3. Max amount of morale gain" />
+	<string id="mcm_ag3_hint" text="The maximum amount of morale the party gains." />
+	<string id="mcm_ag4_text" text="4. Deactivate event" />
+	<string id="mcm_ag4_hint" text="If you dont want this event to show up you can deactivate it." />	
     <string id="mcm_aot_heading" text="Ahead of Time" />
     <string id="mcm_aot1_text" text="1. Deactivate event" />
     <string id="mcm_aot1_hint" text="If you dont want this event to show up you can deactivate it." />

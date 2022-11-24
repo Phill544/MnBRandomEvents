@@ -66,7 +66,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			Hero.MainHero.AddSkillXp(DefaultSkills.Leadership, 50);
 			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 30);
 
-			string eventButtonText = new TextObject("{=CompanionAdmire1_Event_Button_Text}Done").ToString();
+			string eventButtonText = new TextObject("{=CompanionAdmire_Event_Button_Text}Done").ToString();
 
 			//Event Messages___---___---=
 			string eventMsg1 = new TextObject("{=CompanionAdmire_Event_Msg_1}Your relationship with {scout) has improved.")
