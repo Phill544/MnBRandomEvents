@@ -269,7 +269,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                             Hero.MainHero.AddSkillXp(DefaultSkills.Leadership, 150);
                             Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 50);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
                         }
 
                         break;
@@ -301,7 +301,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
                         PartyScreenManager.OpenScreenAsReceiveTroops(troopRoster, leftPartyName: new TextObject("{cultureclass} Refugees").SetTextVariable("cultureclass", cultureclass), null);
 
-                        InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_POS_Outcome));
+                        InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
                             
                         break;
                             //_______________________________________________________________________________________________________

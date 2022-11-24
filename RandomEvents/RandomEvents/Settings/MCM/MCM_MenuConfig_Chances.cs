@@ -25,6 +25,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public float Bumper_Crop_Chance{ get; private set; }
         public float Bunch_Of_Prisoners_Chance{ get; private set; }
         public float Chatting_Commanders_Chance{ get; private set; }
+        public float Companion_Admire_Chance { get; private set; }
         public float Courier_Chance { get; private set; }
         public float Diseased_City_Chance{ get; private set; }
         public float Dreaded_Sweats_Chance { get; private set; }
@@ -136,6 +137,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv51_text = new TextObject("{=mcm_adv51_text}Dreaded Sweats").ToString();
             var adv52_text = new TextObject("{=mcm_adv52_text}Travelling Merchant").ToString();
             var adv53_text = new TextObject("{=mcm_adv53_text}Army Games").ToString();
+            var adv54_text = new TextObject("{=mcm_adv54_text}Companion Admire").ToString();
 
             #endregion
 
@@ -256,6 +258,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV53", adv53_text,5, 100, new ProxyRef<float>(() => Army_Games_Chance, o => Army_Games_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
+                        .AddFloatingInteger ("ADV54", adv53_text,5, 100, new ProxyRef<float>(() => Companion_Admire_Chance, o => Companion_Admire_Chance = o), floatBuilder => floatBuilder
+                            .SetHintText(adv_hint))
 
                 #endregion
 
@@ -290,6 +294,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Bumper_Crop_Chance = 50.0f;
             Instance.Chatting_Commanders_Chance = 50.0f;
             Instance.Courier_Chance = 50.0f;
+            Instance.Companion_Admire_Chance = 20.0f;
             Instance.Diseased_City_Chance = 50.0f;
             Instance.Dreaded_Sweats_Chance = 35.0f;
             Instance.Dysentery_Chance = 35.0f;

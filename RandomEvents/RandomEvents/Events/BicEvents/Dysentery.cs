@@ -54,13 +54,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(totalvictims);
 
 
-			var eventTitle = new TextObject("{=Dysentery_Title}Dysentery").ToString();
+			string eventTitle = new TextObject("{=Dysentery_Title}Dysentery").ToString();
 			
-			var eventOption1 = new TextObject("{=Dysentery_Event_Text}An illness of the stomach has taken hold of your troops. You inspect the food reserves but there are no signs of rot or spoil," +
+			string eventOption1 = new TextObject("{=Dysentery_Event_Text}An illness of the stomach has taken hold of your troops. You inspect the food reserves but there are no signs of rot or spoil," +
 				" perhaps it has come from a nearby creek? Or rather a divine sign of retribution? Regardless, the vile smell and debilitating condition surely call for worry.")
 				.ToString();
 				
-			var eventButtonText = new TextObject("{=Dysentery_Event_Button_Text}Done").ToString();
+			string eventButtonText = new TextObject("{=Dysentery_Event_Button_Text}Done").ToString();
 
 			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
 
