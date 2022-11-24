@@ -45,12 +45,18 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			}
 
 			var partysize = MobileParty.MainParty.MemberRoster.TotalHealthyCount;
+			
 			var moraleLoss = MBRandom.RandomInt(minMoraleLoss, maxMoraleLoss);
+			
 			var victims = MBRandom.RandomInt(minvictim, maxvictim);
+			
 			var totalvictims = partysize / 10 + victims;
+			
 			Hero.MainHero.AddSkillXp(DefaultSkills.Medicine, 5);
+			
 			MobileParty.MainParty.RecentEventsMorale -= moraleLoss;
 			MobileParty.MainParty.MoraleExplained.Add(-moraleLoss);
+			
 			MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(totalvictims);
 
 
@@ -64,7 +70,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOption1, true, false, eventButtonText, null, null, null), true);
 
-            string eventMsg1 = new TextObject("{=Dysentery_Event_Msg_1}{totalvictims} troops have dysentery!")
+            var eventMsg1 = new TextObject("{=Dysentery_Event_Msg_1}{totalvictims} troops have dysentery!")
 			.SetTextVariable("totalvictims", totalvictims)
 			.ToString();
 
@@ -93,9 +99,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public DysenteryData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-
-
-	}
+		}
 
 		public override BaseEvent GetBaseEvent()
 		{

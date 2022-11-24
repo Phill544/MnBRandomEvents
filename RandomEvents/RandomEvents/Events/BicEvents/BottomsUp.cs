@@ -74,11 +74,11 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 			// AFTER Challenge -------------------------------
 			var eventOptionAText = new TextObject(
-				   "{=BottomsUp_Event_Choice_1}You walk over to the boy and place a large mug on the table. His eyes light up, followed by a cold hard stare as he grabs the handle and clears his throat.  " +
+				   "{=BottomsUp_Event_Choice_1}You walk over to the boy and place a large mug on the table. His eyes light up, followed by a cold hard stare as he grabs the handle and clears his throat. " +
 				   "You hear patrons begin placing bets on who will win, adding to a victor's pot - winner takes 20%.  A young maiden " +
-				   "comes to your side and begins counting down. \n\n Three!  Two!  One!  Drink! \n\n" +
+				   "comes to your side and begins counting down.\n\nThree!  Two!  One!  Drink! \n\n" +
 				   "The boy raises his mug quickly and begins chugging as fast as he can, while you just stand there smiling, looking around.  You can hear your men laughing in the background as you boast your lack of " +
-				   "urgency.  When the boy is about half way finished you finally take your mug and begin drinking.  Within seconds you slam the mug back on the table, empty.  The young man realizes you have already finished " +
+				   "urgency. When the boy is about half way finished you finally take your mug and begin drinking.  Within seconds you slam the mug back on the table, empty.  The young man realizes you have already finished " +
 				   "and gasps for air.  His cheeks turn red as the whole tavern erupts in laughter.  You see the shame in his eyes, so you grab his hand and raise it to the air, ensuring no hard feelings as you buy him " +
 				   "another drink.")
 			   .ToString();
@@ -98,7 +98,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                     {
 						case "a":
 							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
+							
 							Hero.MainHero.ChangeHeroGold(goldGain);
+							
 							MobileParty.MainParty.RecentEventsMorale += moraleGain;
 							MobileParty.MainParty.MoraleExplained.Add(+moraleGain);
 

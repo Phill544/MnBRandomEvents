@@ -47,7 +47,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 			var eventTitle = new TextObject("{=BirdSongs_Title}Bird Songs").ToString();
 			
-			var eventOption1 = new TextObject("{=BirdSongs_Event_Text}This day has been blessed by the beautiful melodies of birds singing songs. Silence falls over your ranks as the relaxing sounds of nature's choir bring a sense of joy to your men. This will surely boost their morale.")
+			var eventOption1 = new TextObject("{=BirdSongs_Event_Text}This day has been blessed by the beautiful melodies of birds singing songs. Silence falls over your ranks as the relaxing sounds of " + 
+			    "nature's choir bring a sense of joy to your men. This will surely boost their morale.")
 				.ToString();
 				
 			var eventButtonText = new TextObject("{=BirdSongs_Event_Button_Text}Done").ToString();
