@@ -132,9 +132,14 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         
         public bool CC_Disable { get; private set; }
         public float CC_CohesionGain { get; private set; }
-        
+
         #endregion
-        
+
+        #region Companion Admire - Variables
+        public bool CA_Disable { get; private set; }
+
+        #endregion
+
         #region Courier - Variables
 
         public bool CR_Disable { get; private set; }
@@ -343,9 +348,9 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var ag_heading = new TextObject("{=mcm_ag_heading}Army Games").ToString();
             var ag1_text = new TextObject("{=mcm_ag1_text}1. Crop % gain").ToString();
             var ag1_hint = new TextObject("{=mcm_ag1_hint}The amount of % the cohesion is increased.").ToString();
-            var ag2_text = new TextObject("{=mcm_ag1_text}1. Min amount of morale gain").ToString();
+            var ag2_text = new TextObject("{=mcm_ag1_text}2. Min amount of morale gain").ToString();
             var ag2_hint = new TextObject("{=mcm_ag1_hint}The minimum amount of morale the party gains.").ToString();
-            var ag3_text = new TextObject("{=mcm_ag2_text}2. Max amount of morale gain").ToString();
+            var ag3_text = new TextObject("{=mcm_ag2_text}3. Max amount of morale gain").ToString();
             var ag3_hint = new TextObject("{=mcm_ag2_hint}The maximum amount of morale the party gains.").ToString();
             var ag4_text = new TextObject("{=mcm_ag3_text}4. Deactivate event").ToString();
             var ag4_hint = new TextObject("{=mcm_ag3_hint}If you dont want this event to show up you can deactivate it.").ToString();
@@ -509,9 +514,17 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var cc1_hint = new TextObject("{=mcm_cc1_hint}The amount of % the cohesion is increased.").ToString();
             var cc2_text = new TextObject("{=mcm_cc2_text}2. Deactivate event").ToString();
             var cc2_hint = new TextObject("{=mcm_cc2_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
+
             #endregion
-            
+
+            #region Companion Admire - Strings
+
+            var ca_heading = new TextObject("{=mcm_ca_heading}Companion Admire").ToString();
+            var ca1_text = new TextObject("{=mcm_ca_text}1. Deactivate event").ToString();
+            var ca1_hint = new TextObject("{=mcm_ca_text}If you dont want this event to show up you can deactivate it.").ToString();
+
+            #endregion
+
             #region Courier - Strings
 
             var cr_heading = new TextObject("{=mcm_cr_heading}Courier").ToString();
@@ -984,10 +997,19 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                         .AddBool("CC2", cc2_text, new ProxyRef<bool>(() => CC_Disable, o => CC_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(cc2_hint))
                     )
-                #endregion               
-                
+                #endregion
+
+                #region Companion Admire - Builder
+
+                 .CreateGroup(ca_heading, groupBuilder => groupBuilder
+                        .AddBool("CA2", ca1_text, new ProxyRef<bool>(() => CA_Disable, o => CA_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(ca1_hint))
+                 )
+
+                #endregion
+
                 #region Courier - Builder
-                
+
                 .CreateGroup(cr_heading, groupBuilder => groupBuilder
                     .AddInteger("CR1", cr1_text, 1, 30, new ProxyRef<int>(() => CR_minMoraleGain, o => CR_minMoraleGain = o), integerBuilder => integerBuilder
                         .SetHintText(cr1_hint))
@@ -1406,6 +1428,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             
             Instance.CC_Disable = false;
             Instance.CC_CohesionGain = 30f;
+
+            #endregion
+
+            #region Companion Admire
+
+            Instance.CA_Disable = false;
 
             #endregion
 
