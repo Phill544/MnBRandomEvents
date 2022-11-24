@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
-using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.Core;
-using TaleWorlds.Library;
-using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class ArmyGames : BaseEvent
 	{
