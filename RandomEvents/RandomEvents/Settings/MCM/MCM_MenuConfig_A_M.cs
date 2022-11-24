@@ -1304,10 +1304,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
             #region Army Games
 
-            Instance.AG_Disable = false;
-            Instance.AG_CohesionGain = 30f;
-            Instance.AG_minMoraleGain = 10;
-            Instance.AG_maxMoraleGain = 30;
+            Instance.BS_Disable = false;
+            Instance.CC_CohesionGain = 30f;
+            Instance.BS_minMoraleGain = 10;
+            Instance.BS_maxMoraleGain = 30;
 
             #endregion
 
