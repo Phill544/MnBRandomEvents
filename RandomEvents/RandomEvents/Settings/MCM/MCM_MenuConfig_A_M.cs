@@ -1004,7 +1004,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                 #region Companion Admire - Builder
 
                  .CreateGroup(ca_heading, groupBuilder => groupBuilder
-                        .AddBool("CA2", ca1_text, new ProxyRef<bool>(() => CA_Disable, o => CA_Disable = o), boolBuilder => boolBuilder
+                        .AddBool("CA1", ca1_text, new ProxyRef<bool>(() => CA_Disable, o => CA_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(ca1_hint))
                  )
 

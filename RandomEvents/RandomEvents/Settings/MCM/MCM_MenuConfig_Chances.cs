@@ -258,7 +258,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV53", adv53_text,5, 100, new ProxyRef<float>(() => Army_Games_Chance, o => Army_Games_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV54", adv53_text,5, 100, new ProxyRef<float>(() => Companion_Admire_Chance, o => Companion_Admire_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV54", adv54_text,5, 100, new ProxyRef<float>(() => Companion_Admire_Chance, o => Companion_Admire_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
 
                 #endregion
