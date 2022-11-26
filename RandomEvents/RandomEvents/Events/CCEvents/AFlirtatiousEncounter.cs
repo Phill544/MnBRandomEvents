@@ -177,21 +177,21 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     .ToString();
                 
                 var eventMsg2 =new TextObject(
-                        "{=AFlirtatiousEncounter_Event_Msg_1}Relationship between {name} and {heroName}is now {newRelationship}.")
+                        "{=AFlirtatiousEncounter_Event_Msg_2}Relationship between {name} and {heroName}is now {newRelationship}.")
                     .SetTextVariable("newRelationship", newRelationship - 3)
                     .SetTextVariable("name", target.FirstName.ToString())
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
                 
                 var eventMsg3 =new TextObject(
-                        "{=AFlirtatiousEncounter_Event_Msg_1}Relationship between {name} and {heroName}is now {newRelationship}.")
+                        "{=AFlirtatiousEncounter_Event_Msg_3}Relationship between {name} and {heroName}is now {newRelationship}.")
                     .SetTextVariable("newRelationship", newRelationship)
                     .SetTextVariable("name", target.FirstName.ToString())
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
                 
                 var eventMsg4 =new TextObject(
-                        "{=AFlirtatiousEncounter_Event_Msg_1}Relationship between {name} and {heroName}is now {newRelationship}.")
+                        "{=AFlirtatiousEncounter_Event_Msg_4}Relationship between {name} and {heroName}is now {newRelationship}.")
                     .SetTextVariable("newRelationship", newRelationship - 30)
                     .SetTextVariable("name", target.FirstName.ToString())
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
