@@ -115,7 +115,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "at night you decide to take a shortcut back through an alley. You quickly realize that this was a bad " +
                     "idea as you are surrounded by {thugs} thugs who start threatening you. Their leader, {gangLeader}, " +
                     "tells you to hand over any valuables you have on you. Knowing you are outnumbered, you comply and " +
-                    "hand over {goldLost} gold to {gangLeader} and the thugs.\n\n{gangLeader} tells the thugs to teach you " +
+                    "hand over {goldLost} gold to {gangLeader} and {Adjective} thugs.\n\n{gangLeader} tells {Adjective} thugs to teach you " +
                     "a lesson that will keep you out of their alley next time. The next few minutes are a blur as you are " +
                     "punched, kicked, thrown, and intimidated.\nYou black out\n\nYou awake some time later only to realize " +
                     "the thugs have dumped you in a pigsty. You stumble to your feet and make haste back to where you are staying.")
@@ -131,8 +131,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "late at night you decide to take a shortcut back through an alley. You quickly realize that this was " +
                     "a bad idea as you are surrounded by {thugs} thugs who start threatening you. Their leader, {gangLeader}, " +
                     "tells you to hand over any valuables you have on you. You ask {gangLeader} if they are crazy and " +
-                    "haven't recognized you. {gangLeader} and the thugs look at you one more time before realization sets " +
-                    "in. {gangLeader} apologizes and withdraws the thugs. They let you pass through their alley unhindered. " +
+                    "haven't recognized you. {gangLeader} and {Adjective} thugs look at you one more time before realization sets " +
+                    "in. {gangLeader} apologizes and withdraws {Adjective} thugs. They let you pass through their alley unhindered. " +
                     "The next person however will be in for quite a surprise.")
                 .SetTextVariable("currentSettlement", currentSettlement)
                 .SetTextVariable("gangLeader", gangLeaderName)
@@ -144,9 +144,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "late at night you decide to take a shortcut back through an alley. You quickly realize that this " +
                     "was a bad idea as you are surrounded by {thugs} thugs who start threatening you. Their leader, {gangLeader}, " +
                     "tells you to hand over any valuables you have on you. Knowing you are outnumbered, you do what you " +
-                    "do best, talk. You strike up a somewhat friendly conversation with {gangLeader} and they actually " +
-                    "seem interested in the conversation. You tell them some gossip you've heard about a rich guest " +
-                    "visiting this city and so on. {gangLeader} takes one long look at you before ordering the thugs to " +
+                    "do best, talk. You strike up a somewhat friendly conversation with {gangLeader} and {Subjective} actually " +
+                    "seem interested in the conversation. You tell {Adjective} some gossip you've heard about a rich guest " +
+                    "visiting this city and so on. {gangLeader} takes one long look at you before ordering {Adjective} thugs to " +
                     "let you go. You hand over 100 gold to {gangLeader} and bids farewell.")
                 .SetTextVariable("currentSettlement", currentSettlement)
                 .SetTextVariable("gangLeader", gangLeaderName)
@@ -159,9 +159,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "late at night you decide to take a shortcut back through an alley. You quickly realize that this " +
                     "was a bad idea as you are surrounded by {thugs} thugs who start threatening you. Their leader, {gangLeader}, " +
                     "tells you to hand over any valuables you have on you. You immediately burst out in laughter, much " +
-                    "to the surprise of {gangLeader} and the thugs. You go on to tell them the deeds you have done on the " +
+                    "to the surprise of {gangLeader} and {Adjective} thugs. You go on to tell them the deeds you have done on the " +
                     "battlefields of Calradia, about all the looters and bandits who have died by your hand. You can see " +
-                    "the thugs are getting nervous. You ask {gangLeader} if they really think {thugs} thugs are gonna pose " +
+                    "the thugs are getting nervous. You ask {gangLeader} if {Subjective} really think {thugs} thugs are gonna pose " +
                     "any threat to you. The thugs put away their weapons and {gangLeader} tells you that you may leave. " +
                     "You leave the alley but not before suggesting to the thugs that justice will soon catch up to them.")
                 .SetTextVariable("currentSettlement", currentSettlement)
@@ -175,7 +175,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "{=Robbery_Event_Text_Good_Relation_Outcome}One evening, while leaving the tavern in {currentSettlement} " +
                     "late at night you decide to take a shortcut back through an alley. You quickly realize that this " +
                     "was a bad idea as you are surrounded by {thugs} thugs who start threatening you. Their leader, {gangLeader}, " +
-                    "tells you to hand over any valuables you have on you. You ask {gangLeader} if they don't recognize you. " +
+                    "tells you to hand over any valuables you have on you. You ask {gangLeader} if {Subjective} don't recognize you. " +
                     "{gangLeader} then approaches you and gives you a big hug while laughing. You and {gangLeader} go way back, " +
                     "back to the time before the turmoil the world is in. The two of you stand there talking for a few minutes " +
                     "and catch up on the old and new. Eventually you tell {gangLeader} that it's time for you to get some rest. " +
@@ -183,22 +183,23 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("currentSettlement", currentSettlement)
                 .SetTextVariable("thugs", thugs)
                 .SetTextVariable("gangLeader", gangLeaderName)
-                .SetTextVariable("Adjective", gangLeaderGenderAdjective)
                 .SetTextVariable("Subjective", gangLeaderGenderSubjective)
                 .ToString();
             
             var eventMsg1 =new TextObject(
-                    "{=Robbery_Event_Msg_1}Clan {playerClan} lost {renownLost} renown after word spread that {heroName} was robbed by {gangLeader}'s thugs!")
+                    "{=Robbery_Event_Msg_1}Clan {playerClan} lost {renownLost} renown after word spread that {heroName} was robbed by {gangLeader} and {Adjective} thugs!")
                 .SetTextVariable("playerClan", Clan.PlayerClan.Name.ToString())
                 .SetTextVariable("renownLost", renownLost)
                 .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                 .SetTextVariable("gangLeader", gangLeaderName)
+                .SetTextVariable("Adjective", gangLeaderGenderAdjective)
                 .ToString();
             
             var eventMsg2=new TextObject(
-                    "{=Robbery_Event_Msg_2}{heroName} managed to convince {gangLeader} and the thugs that they were not worth it.")
+                    "{=Robbery_Event_Msg_2}{heroName} managed to convince {gangLeader} and {Adjective} thugs that they were not worth it.")
                 .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                 .SetTextVariable("gangLeader", gangLeaderName)
+                .SetTextVariable("Adjective", gangLeaderGenderAdjective)
                 .ToString();
             
             var eventMsg3=new TextObject(
@@ -208,9 +209,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg4=new TextObject(
-                    "{=Robbery_Event_Msg_4}{heroName} managed to intimidate {gangLeader} and their thugs.")
+                    "{=Robbery_Event_Msg_4}{heroName} managed to intimidate {gangLeader} and {Adjective} thugs.")
                 .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                 .SetTextVariable("gangLeader", gangLeaderName)
+                .SetTextVariable("Adjective", gangLeaderGenderAdjective)
                 .ToString();
 
 
