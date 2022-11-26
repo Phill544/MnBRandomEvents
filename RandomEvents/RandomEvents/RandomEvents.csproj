@@ -67,10 +67,15 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\BaseEvent.cs" />
     <Compile Include="Events\BeeKind.cs" />
     <Compile Include="Events\BetMoney.cs" />
+    <Compile Include="Events\BicEvents\CompanionAdmire.cs" />
     <Compile Include="Events\BicEvents\BirdSongs.cs" />
+    <Compile Include="Events\BicEvents\BottomsUp.cs" />
+    <Compile Include="Events\BicEvents\ArmyGames.cs" />
     <Compile Include="Events\BicEvents\Courier.cs" />
+    <Compile Include="Events\BicEvents\DreadedSweats.cs" />
     <Compile Include="Events\BicEvents\Dysentery.cs" />
     <Compile Include="Events\BicEvents\Refugees.cs" />
+    <Compile Include="Events\BicEvents\TravellingMerchant.cs" />
     <Compile Include="Events\BumperCrop.cs" />
     <Compile Include="Events\BunchOfPrisoners.cs" />
     <Compile Include="Events\CCEvents\AFlirtatiousEncounter.cs" />
@@ -78,6 +83,7 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\CCEvents\BirthdayParty.cs" />
     <Compile Include="Events\CCEvents\FallenSoldierFamily.cs" />
     <Compile Include="Events\CCEvents\FishingSpot.cs" />
+    <Compile Include="Events\CCEvents\LightsInTheSkies.cs" />
     <Compile Include="Events\CCEvents\PrisonerTransfer.cs" />
     <Compile Include="Events\CCEvents\Robbery.cs" />
     <Compile Include="Events\CCEvents\SuddenStorm.cs" />
@@ -111,7 +117,9 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\Undercooked.cs" />
     <Compile Include="Events\WanderingLivestock.cs" />
     <Compile Include="Helpers\ClosestSettlement.cs" />
+    <Compile Include="Helpers\CurrentTimeOfDay.cs" />
     <Compile Include="Helpers\Demonym.cs" />
+    <Compile Include="Helpers\GenderAssignment.cs" />
     <Compile Include="Helpers\PartySetup.cs" />
     <Compile Include="Helpers\PlayerStatus.cs" />
     <Compile Include="Helpers\RandomSelection.cs" />
@@ -128,10 +136,13 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Bannerlord.MCM" Version="5.3.1" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.MCM" Version="5.3.2" IncludeAssets="compile" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModuleData\Languages\std_module_strings_xml.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

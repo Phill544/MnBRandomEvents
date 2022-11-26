@@ -28,14 +28,6 @@ namespace CryingBuffalo.RandomEvents
         public const string FolderName = "RandomEvents";
         public const string ModName = "RandomEvents";
 
-        protected override void OnSubModuleLoad()
-        {
-            base.OnSubModuleLoad();
-
-            ModSettings.LoadGeneralSettings();
-            ModSettings.LoadRandomEventSettings();
-        }
-
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
             MCM_MenuConfig_A_M.Instance.Settings();
@@ -43,6 +35,9 @@ namespace CryingBuffalo.RandomEvents
             MCM_MenuConfig_Chances.Instance.Settings();
             MCM_ConfigMenu_General.Instance.Settings();
 
+            ModSettings.LoadGeneralSettings();
+            ModSettings.LoadRandomEventSettings();
+            
             //Many mods use this. Nice way to tell if a mod is loaded correctly
             InformationManager.DisplayMessage(new InformationMessage("Successfully loaded 'RandomEvents'.", Ini_Color));
         }

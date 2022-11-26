@@ -53,7 +53,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return true;
+            return MCM_MenuConfig_A_M.Instance.BP_Disable == false;
         }
 
         public override void StartEvent()

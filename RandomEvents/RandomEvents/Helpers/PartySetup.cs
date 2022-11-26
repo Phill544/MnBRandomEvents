@@ -20,13 +20,12 @@ namespace CryingBuffalo.RandomEvents.Helpers
 
 			try
 			{
-				List<Settlement> hideouts = Settlement.FindAll((s) => s.IsHideout).ToList();
-				Settlement closestHideout = hideouts.MinBy((s) => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+				var hideouts = Settlement.FindAll((s) => s.IsHideout).ToList();
+				var closestHideout = hideouts.MinBy((s) => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 
 				var banditCultureObject = MBObjectManager.Instance.GetObject<CultureObject>("looters");
 
-				if (partyName == null)
-					partyName = $"{banditCultureObject.Name} (Random Event)";
+				partyName ??= $"{banditCultureObject.Name} (Random Event)";
 				
 				PartyTemplateObject partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
 				banditParty = BanditPartyComponent.CreateLooterParty(
@@ -54,15 +53,12 @@ namespace CryingBuffalo.RandomEvents.Helpers
 
 			try
 			{
-				List<Settlement> hideouts = Settlement.FindAll((s) => s.IsHideout).ToList();
-				Settlement closestHideout = hideouts.MinBy((s) => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+				var hideouts = Settlement.FindAll((s) => s.IsHideout).ToList();
+				var closestHideout = hideouts.MinBy((s) => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 
 				var banditCultureObject = cultureObjectId != null ? MBObjectManager.Instance.GetObject<CultureObject>(cultureObjectId) : closestHideout.Culture;
 
-				if (partyName == null)
-				{
-					partyName = $"{banditCultureObject.Name} (Random Event)";
-				}
+				partyName ??= $"{banditCultureObject.Name} (Random Event)";
 
 				PartyTemplateObject partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
 				banditParty = BanditPartyComponent.CreateBanditParty(

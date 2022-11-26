@@ -74,6 +74,18 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
         #endregion
         
+        #region Refugees - Variables
+
+        public bool RF_Disable { get; private set; }
+        public int RF_minSoldiers { get; private set; }
+        public int RF_maxSoldiers { get; private set; }
+        public int RF_minFood { get; private set; }
+        public int RF_maxFood { get; private set; }
+        public int RF_minCaptive { get; private set; }
+        public int RF_maxCaptive { get; private set; }
+
+        #endregion
+        
         #region Robbery - Variables
         
         public bool RO_Disable { get; private set; }
@@ -84,7 +96,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
         #endregion
 
-        
         #region Runaway Son - Variables
         
         public bool RS_Disable { get; private set; }
@@ -145,6 +156,14 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         
         #endregion
         
+        #region Travelling Merchant - Variables
+
+        public bool TM_Disable { get; private set; }
+        public int TM_minloot { get; private set; }
+        public int TM_maxloot { get; private set; }
+
+        #endregion
+        
         #region Unexcpected Wedding - Variables
         
         public bool UW_Disable { get; private set; }
@@ -195,8 +214,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             
 
             #region Strings
-            
-            
+
             #region Not Of This World - Strings
 
             var notw_heading = new TextObject("{=mcm_notw_heading}Not of this World").ToString();
@@ -287,6 +305,26 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var rm5_text = new TextObject("{=mcm_rm5_text}5. Deactivate event").ToString();
             var rm5_hint = new TextObject("{=mcm_rm5_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
+            #endregion
+            
+            #region Refugees - Strings
+            
+            var rf_heading = new TextObject("{=mcm_rf_heading}Refugees").ToString();
+            var rf1_text = new TextObject("{=mcm_rf_text}1.Min Soldiers").ToString();
+            var rf1_hint = new TextObject("{=mcm_rf_text}The minimum amount of recruits.").ToString();
+            var rf2_text = new TextObject("{=mcm_rf_text}2.Max Soldiers").ToString();
+            var rf2_hint = new TextObject("{=mcm_rf_text}The maximum amount of recruits.").ToString();
+            var rf3_text = new TextObject("{=mcm_rf_text}3.Min Food").ToString();
+            var rf3_hint = new TextObject("{=mcm_rf_text}The minimum amount of Food.").ToString();
+            var rf4_text = new TextObject("{=mcm_rf_text}4.Max Food").ToString();
+            var rf4_hint = new TextObject("{=mcm_rf_text}The maximum amount of Food.").ToString();
+            var rf5_text = new TextObject("{=mcm_rf_text}5.Min Captives").ToString();
+            var rf5_hint = new TextObject("{=mcm_rf_text}The minimum amount of Captives.").ToString();
+            var rf6_text = new TextObject("{=mcm_rf_text}6.Max Captives").ToString();
+            var rf6_hint = new TextObject("{=mcm_rf_text}The maximum amount of Captives.").ToString();
+            var rf7_text = new TextObject("{=mcm_rf_text}7. Deactivate event").ToString();
+            var rf7_hint = new TextObject("{=mcm_rf_text}If you dont want this event to show up you can deactivate it.").ToString();
+
             #endregion
             
             #region Robbery - Strings
@@ -389,12 +427,24 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             
             var tp_heading = new TextObject("{=mcm_tp_heading}Target Practice").ToString();
             var tp1_text = new TextObject("{=mcm_tp1_text}1. Min Soldiers").ToString();
-            var tp1_hint = new TextObject("{=mcm_tp1_hint}PHILL MUST COMMENT").ToString();
+            var tp1_hint = new TextObject("{=mcm_tp1_hint}The minimum number of looters to spawn, regardless of player's party size").ToString();
             var tp2_text = new TextObject("{=mcm_tp2_text}2. % Difference Of Current Troop").ToString();
-            var tp2_hint = new TextObject("{=mcm_tp2_hint}PHILL MUST COMMENT").ToString();
+            var tp2_hint = new TextObject("{=mcm_tp2_hint}The percentage of looters that can be spawned vs the player's party size").ToString();
             var tp3_text = new TextObject("{=mcm_tp3_text}3. Deactivate event").ToString();
             var tp3_hint = new TextObject("{=mcm_tp3_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
+            #endregion
+            
+            #region Travelling Merchant - Strings
+
+            var tm_heading = new TextObject("{=mcm_tm_heading}Travelling Merchant").ToString();
+            var tm1_text = new TextObject("{=mcm_tm1_text}1. Min Loot").ToString();
+            var tm1_hint = new TextObject("{=mcm_tm1_hint}Minimum Amount of Loot").ToString();
+            var tm2_text = new TextObject("{=mcm_tm2_text}2. Max Loot").ToString();
+            var tm2_hint = new TextObject("{=mcm_tm2_hint}Maximum Amount of Loot").ToString();
+            var tm3_text = new TextObject("{=mcm_tm3_text}3. Deactivate event").ToString();
+            var tm3_hint = new TextObject("{=mcm_tm3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+
             #endregion
             
             #region Unexpected Wedding - Strings
@@ -549,6 +599,43 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                 )
                 
                 #endregion
+                
+                #region Red Moon - Builder
+                
+                .CreateGroup(rm_heading, groupBuilder => groupBuilder
+                    .AddInteger("RM1", rm1_text,500,5000, new ProxyRef<int>(() => RM_MinGoldLost, o => RM_MinGoldLost = o), integerBuilder => integerBuilder
+                        .SetHintText(rm1_hint))
+                    .AddInteger("RM2", rm2_text,500,5000, new ProxyRef<int>(() => RM_MaxGoldLost, o => RM_MaxGoldLost = o), integerBuilder => integerBuilder
+                        .SetHintText(rm2_hint))
+                    .AddInteger("RM3", rm3_text,10,100, new ProxyRef<int>(() => RM_MinMenLost, o => RM_MinMenLost = o), integerBuilder => integerBuilder
+                        .SetHintText(rm3_hint))
+                    .AddInteger("RM4", rm4_text,10,100, new ProxyRef<int>(() => RO_MaxGoldLost, o => RO_MaxGoldLost = o), integerBuilder => integerBuilder
+                        .SetHintText(rm4_hint))
+                    .AddBool("RM5", rm5_text, new ProxyRef<bool>(() => RM_Disable, o => RM_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(rm5_hint))
+                )
+                            
+                #endregion
+                
+                #region Refugees - Builder
+                .CreateGroup(rf_heading, groupBuilder => groupBuilder
+                    .AddInteger("RF1", rf1_text, 1, 30, new ProxyRef<int>(() => RF_minSoldiers, o => RF_minSoldiers = o), integerBuilder => integerBuilder
+                        .SetHintText(rf1_hint))
+                    .AddInteger("RF2", rf2_text, 1, 30, new ProxyRef<int>(() => RF_maxSoldiers, o => RF_maxSoldiers = o), integerBuilder => integerBuilder
+                        .SetHintText(rf2_hint))
+                    .AddInteger("RF3", rf3_text, 1, 20, new ProxyRef<int>(() => RF_minFood, o => RF_minFood = o), integerBuilder => integerBuilder
+                        .SetHintText(rf3_hint))
+                    .AddInteger("RF4", rf4_text, 1, 20, new ProxyRef<int>(() => RF_maxFood, o => RF_maxFood = o), integerBuilder => integerBuilder
+                        .SetHintText(rf4_hint))
+                    .AddInteger("RF5", rf5_text, 1, 30, new ProxyRef<int>(() => RF_minCaptive, o => RF_minCaptive = o), integerBuilder => integerBuilder
+                        .SetHintText(rf5_hint))
+                    .AddInteger("RF6", rf6_text, 1, 30, new ProxyRef<int>(() => RF_maxCaptive, o => RF_maxCaptive = o), integerBuilder => integerBuilder
+                        .SetHintText(rf6_hint))
+                    .AddBool("RF7", rf7_text, new ProxyRef<bool>(() => RF_Disable, o => RF_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(rf7_hint))
+
+                )
+                #endregion
 
                 #region Robbery - Builder
                 
@@ -663,6 +750,19 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                         .AddBool("TP3", tp3_text, new ProxyRef<bool>(() => TP_Disable, o => TP_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(tp3_hint))
                         )
+
+                #endregion
+                
+                #region Travelling Merchant - Builder
+
+                .CreateGroup(tm_heading, groupBuilder => groupBuilder
+                    .AddInteger("TM1", tm1_text, 1, 3500, new ProxyRef<int>(() => TM_minloot, o => TM_minloot = o), integerBuilder => integerBuilder
+                        .SetHintText(tm1_hint))
+                    .AddInteger("TM2", tm2_text, 1, 20000, new ProxyRef<int>(() => TM_maxloot, o => TM_maxloot = o), integerBuilder => integerBuilder
+                        .SetHintText(tm2_hint))
+                    .AddBool("TM3", tm3_text, new ProxyRef<bool>(() => TM_Disable, o => TM_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(tm3_hint))
+                )
 
                 #endregion
                 
@@ -808,6 +908,18 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
             #endregion
             
+            #region Refugees
+            
+            Instance.RF_Disable = false;
+            Instance.RF_minSoldiers = 8;
+            Instance.RF_maxSoldiers = 15;
+            Instance.RF_minFood = 3;
+            Instance.RF_maxFood = 5;
+            Instance.RF_minCaptive = 8;
+            Instance.RF_maxCaptive = 15;
+
+            #endregion
+            
             #region Robbery
 
             Instance.RO_Disable = false;
@@ -878,6 +990,14 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
             #endregion
             
+            #region Travelling Merchant
+
+            Instance.TM_Disable = false;
+            Instance.TM_minloot = 1000;
+            Instance.TM_maxloot = 6000;
+
+            #endregion
+
             #region Unexpected Wedding
 
             Instance.UW_Disable = false;

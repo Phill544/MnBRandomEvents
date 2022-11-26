@@ -58,6 +58,34 @@ namespace CryingBuffalo.RandomEvents
             Instance.ExecuteRandomEvent(evnt);
             return $"Starting {args[0]}";
         }
+        
+        [CommandLineFunctionality.CommandLineArgumentFunction("next", "randomevent")]
+        public static string RunNextEvent(List<string> args)
+        {
+            if (RandomEventBehavior.Instance.currentEvent != null)
+            {
+                return $"Currently running event: {Instance.currentEvent.randomEventData.eventType}. To start another first cancel this one.";
+            }
+
+            // Select which event should be played
+            BaseEvent eventToPlay = Instance.SelectEvent();
+
+            // Start the random event
+            Instance.ExecuteRandomEvent(eventToPlay);
+
+            return $"Starting {eventToPlay.randomEventData.eventType}";
+        }
+
+        [CommandLineFunctionality.CommandLineArgumentFunction("cancelevent", "randomevent")]
+        public static string CancelEvent(List<string> args)
+        {
+            if (Instance.CancelEvent())
+            {
+                return "Current random event canceled!";
+            }
+            return "No random event running.";
+        }
+
 
         private void OnSessionLaunched(CampaignGameStarter cgs)
         {
