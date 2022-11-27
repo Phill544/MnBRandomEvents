@@ -152,6 +152,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     switch ((string)elements[0].Identifier)
                     {
                         case "a":
+                            Hero.MainHero.AddSkillXp(DefaultSkills.Trade, 40);
                             InformationManager.ShowInquiry(
                                 new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null,
                                     null), true);

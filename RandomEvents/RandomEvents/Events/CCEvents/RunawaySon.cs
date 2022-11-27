@@ -107,12 +107,16 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     switch ((string)elements[0].Identifier)
                     {
                         case "a":
+                            Hero.MainHero.AddSkillXp(DefaultSkills.Leadership, 30);
+                            Hero.MainHero.AddSkillXp(DefaultSkills.Steward, 20);
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
 
                             GainOneRecruit();
                             break;
                         
                         case "b":
+                            Hero.MainHero.AddSkillXp(DefaultSkills.Leadership, 20);
+                            Hero.MainHero.AddSkillXp(DefaultSkills.Steward, 30);
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
                             
                             GainOneRecruit();
@@ -123,6 +127,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             break;
                         
                         case "d":
+                            Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 150);
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(goldLooted);
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
