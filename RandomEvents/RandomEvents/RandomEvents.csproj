@@ -67,6 +67,7 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\BaseEvent.cs" />
     <Compile Include="Events\BeeKind.cs" />
     <Compile Include="Events\BetMoney.cs" />
+    <Compile Include="Events\BicEvents\ArmyInvite.cs" />
     <Compile Include="Events\BicEvents\CompanionAdmire.cs" />
     <Compile Include="Events\BicEvents\BirdSongs.cs" />
     <Compile Include="Events\BicEvents\BottomsUp.cs" />

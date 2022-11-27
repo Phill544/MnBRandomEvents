@@ -33,6 +33,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
         #endregion
 
+        #region Army Invite - Variables
+
+        public bool AI_Disable { get; private set; }
+
+        #endregion
+
         #region Ahead of Time - Variables
 
         public bool AoT_Disable { get; private set; }
@@ -323,12 +329,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
         public void Settings()
         {
-            
+
 
             #region Strings
 
             #region A Flirtatious Encounter - Strings
-            
+
             var afe_heading = new TextObject("{=mcm_afe_heading}A Flirtatious Encounter").ToString();
             var afe1_text = new TextObject("{=mcm_afe1_text}1. Min Age").ToString();
             var afe1_hint = new TextObject("{=mcm_afe1_hint}The minimum age the target must be.").ToString();
@@ -356,6 +362,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var ag4_hint = new TextObject("{=mcm_ag3_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
+
+            #region Army Invite - Strings
+            var ai_heading = new TextObject("{=mcm_ai_heading}Army Invite").ToString();
+            var ai1_text = new TextObject("{=mcm_ai1_text}1. Deactivate event").ToString();
+            var ai1_hint = new TextObject("{=mcm_ai1_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            #endregion 
 
             #region Ahead of Time - Strings
 
@@ -834,6 +846,14 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                         .SetHintText(ag4_hint))
                     )
                 #endregion
+
+                #region Army invite - Builder
+
+               .CreateGroup(ai_heading, groupBuilder => groupBuilder
+               .AddBool("AI1", ai1_text, new ProxyRef<bool>(() => AI_Disable, o => AI_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(ai1_hint))
+               )
+               #endregion
 
                 #region Ahead of Time - Builder
 
@@ -1332,6 +1352,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.AG_CohesionGain = 30f;
             Instance.AG_minMoraleGain = 10;
             Instance.AG_maxMoraleGain = 30;
+
+            #endregion
+
+            #region Army Invite
+
+            Instance.AI_Disable = false;
 
             #endregion
 

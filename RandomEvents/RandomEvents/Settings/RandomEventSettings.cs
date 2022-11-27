@@ -164,8 +164,9 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         public ArmyGamesData ArmyGamesData { get; } = new ArmyGamesData("ArmyGames", MCM_MenuConfig_Chances.Instance.Army_Games_Chance);
 
-        public CompanionAdmireData CompanionAdmireData { get; } = new CompanionAdmireData("CompanionAdmire", MCM_MenuConfig_Chances.Instance.Companion_Admire_Chance);
+        public CompanionAdmireData CompanionAdmireData { get; } = new CompanionAdmireData("CompanionAdmire", MCM_MenuConfig_Chances.Instance.Companion_Admire_Chance); 
 
+        public ArmyInviteData ArmyInviteData { get; } = new ArmyInviteData("ArmyInvite", MCM_MenuConfig_Chances.Instance.ArmyInvite_Chance);
         #endregion
     }
 }

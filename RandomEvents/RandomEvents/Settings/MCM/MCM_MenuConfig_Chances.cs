@@ -15,6 +15,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public float A_Flirtatious_Encounter_Chance{ get; private set; }
         public float Ahead_Of_Time_Chance{ get; private set; }
         public float Army_Games_Chance { get; private set; }
+        public float ArmyInvite_Chance { get; private set; }
         public float Bandit_Ambush_Chance{ get; private set; }
         public float Bee_Kind_Chance{ get; private set; }
         public float Bet_Money_Chance{ get; private set; }
@@ -138,6 +139,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv52_text = new TextObject("{=mcm_adv52_text}Travelling Merchant").ToString();
             var adv53_text = new TextObject("{=mcm_adv53_text}Army Games").ToString();
             var adv54_text = new TextObject("{=mcm_adv54_text}Companion Admire").ToString();
+            var adv55_text = new TextObject("{=mcm_adv55_text}Army Invite").ToString();
 
             #endregion
 
@@ -260,6 +262,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV54", adv54_text,5, 100, new ProxyRef<float>(() => Companion_Admire_Chance, o => Companion_Admire_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
+                        .AddFloatingInteger ("ADV55", adv55_text, 5, 100, new ProxyRef<float>(() => ArmyInvite_Chance, o => ArmyInvite_Chance = o), floatBuilder => floatBuilder
+                            .SetHintText(adv_hint))
 
                 #endregion
 
@@ -283,6 +287,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.A_Flirtatious_Encounter_Chance = 50.0f;
             Instance.Ahead_Of_Time_Chance = 50.0f;
             Instance.Army_Games_Chance = 60.0f;
+            Instance.ArmyInvite_Chance = 60.0f;
             Instance.Bandit_Ambush_Chance = 50.0f;
             Instance.Bee_Kind_Chance = 50.0f;
             Instance.Bet_Money_Chance = 50.0f;
