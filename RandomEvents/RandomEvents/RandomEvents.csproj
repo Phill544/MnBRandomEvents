@@ -125,11 +125,11 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Helpers\PlayerStatus.cs" />
     <Compile Include="Helpers\RandomSelection.cs" />
     <Compile Include="RandomEventBehavior.cs" />
-    <Compile Include="Settings\GeneralSettings.cs" />
-    <Compile Include="Settings\MCM\MCM_MenuConfig_A_M.cs" />
+    <Compile Include="Settings\MCM\MCM_MenuConfig_A_F.cs" />
     <Compile Include="Settings\MCM\MCM_MenuConfig_Chances.cs" />
     <Compile Include="Settings\MCM\MCM_MenuConfig_General.cs" />
-    <Compile Include="Settings\MCM\MCM_MenuConfig_N_Z.cs" />
+    <Compile Include="Settings\MCM\MCM_MenuConfig_G_O.cs" />
+    <Compile Include="Settings\MCM\MCM_MenuConfig_P_Z.cs" />
     <Compile Include="Settings\RandomEventSettings.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="RandomEventGenerator.cs" />

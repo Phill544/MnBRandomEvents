@@ -14,8 +14,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 	{
 		public CompanionAdmire() : base(Settings.ModSettings.RandomEvents.CompanionAdmireData)
         {
-
-
+	        
 		}
 
 		public override void CancelEvent()
@@ -25,13 +24,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_M.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveScout != Hero.MainHero
+			return MCM_MenuConfig_A_F.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveScout != Hero.MainHero
 				&& MobileParty.MainParty.IsDisorganized == false && Clan.PlayerClan.Renown >= 500 ||
-				   MCM_MenuConfig_A_M.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveQuartermaster != Hero.MainHero
+				   MCM_MenuConfig_A_F.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveQuartermaster != Hero.MainHero
 				&& MobileParty.MainParty.IsDisorganized == false && Clan.PlayerClan.Renown >= 500 ||
-				   MCM_MenuConfig_A_M.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveSurgeon != Hero.MainHero
+				   MCM_MenuConfig_A_F.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveSurgeon != Hero.MainHero
 				&& MobileParty.MainParty.IsDisorganized == false && Clan.PlayerClan.Renown >= 500 ||
-				   MCM_MenuConfig_A_M.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveEngineer != Hero.MainHero
+				   MCM_MenuConfig_A_F.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveEngineer != Hero.MainHero
 				&& MobileParty.MainParty.IsDisorganized == false && Clan.PlayerClan.Renown >= 500;
 		}
 
@@ -61,6 +60,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 			var clanName = Clan.PlayerClan.Name;
 			var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
+			
 			Hero.MainHero.AddSkillXp(DefaultSkills.Leadership, 50);
 			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 30);
 

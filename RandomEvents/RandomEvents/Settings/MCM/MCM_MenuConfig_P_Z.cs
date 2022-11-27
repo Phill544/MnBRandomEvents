@@ -6,32 +6,13 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Settings.MCM
 {
-    public class MCM_MenuConfig_N_Z : IDisposable
+    public class MCM_MenuConfig_P_Z : IDisposable
     {
-        private static MCM_MenuConfig_N_Z _instance;
+        private static MCM_MenuConfig_P_Z _instance;
 
         private FluentGlobalSettings globalSettings;
 
         #region Variables
-        
-        #region Not Of This World - Variables
-
-        public bool NotW_Disable { get; private set; }
-        public int NotW_MinSoldiersGone{ get; private set; }
-        public int NotW_MaxSoldiersGone { get; private set; }
-        
-        #endregion
-        
-        #region Old Ruins - Variables
-
-        public bool OR_Disable { get; private set; }
-        public int OR_MinSoldiers { get; private set; }
-        public int OR_MaxSoldiers { get; private set; }
-        public float OR_MenToKill { get; private set; }
-        public int OR_MinGoldFound { get; private set; }
-        public int OR_MaxGoldFound { get; private set; }
-        
-        #endregion
         
         #region Passing Comet - Variables
 
@@ -204,9 +185,9 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         #endregion
 
 
-        public static MCM_MenuConfig_N_Z Instance
+        public static MCM_MenuConfig_P_Z Instance
         {
-            get { return _instance ??= new MCM_MenuConfig_N_Z(); }
+            get { return _instance ??= new MCM_MenuConfig_P_Z(); }
         }
 
         public void Settings()
@@ -215,36 +196,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
             #region Strings
 
-            #region Not Of This World - Strings
-
-            var notw_heading = new TextObject("{=mcm_notw_heading}Not of this World").ToString();
-            var notw1_text = new TextObject("{=mcm_notw1_text}1. Min Soldiers To Disappear").ToString();
-            var notw1_hint = new TextObject("{=mcm_notw1_hint}The minimum amount of men who will disappear.").ToString();
-            var notw2_text = new TextObject("{=mcm_notw2_text}2. Max Soldiers To Disappear").ToString();
-            var notw2_hint = new TextObject("{=mcm_notw2_hint}The maximum amount of men who will disappear.").ToString();
-            var notw3_text = new TextObject("{=mcm_notw3_text}3. Deactivate event").ToString();
-            var notw3_hint = new TextObject("{=mcm_notw3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-
-            #endregion
-            
-            #region Old Ruins - Strings
-
-            var or_heading = new TextObject("{=mcm_or_heading}Old Ruins").ToString();
-            var or1_text = new TextObject("{=mcm_or1_text}1. Min Soldiers").ToString();
-            var or1_hint = new TextObject("{=mcm_or1_hint}The minimum amount of men who come with you.").ToString();
-            var or2_text = new TextObject("{=mcm_or2_text}2. Max Soldiers").ToString();
-            var or2_hint = new TextObject("{=mcm_or2_hint}The maximum amount of men who come with you.").ToString();
-            var or3_text = new TextObject("{=mcm_or3_text}3. Men Who Will Die").ToString();
-            var or3_hint = new TextObject("{=mcm_or3_hint}The % of men who will die in this event if the circumstances align.").ToString();
-            var or4_text = new TextObject("{=mcm_or4_text}4. Min Gold Found").ToString();
-            var or4_hint = new TextObject("{=mcm_or4_hint}The minimum amount of gold to be found.").ToString();
-            var or5_text = new TextObject("{=mcm_or5_text}5. Max Gold Found").ToString();
-            var or5_hint = new TextObject("{=mcm_or5_hint}The maximum amount of gold to be found.").ToString();
-            var or6_text = new TextObject("{=mcm_or6_text}6. Deactivate event").ToString();
-            var or6_hint = new TextObject("{=mcm_or6_hint}If you dont want this event to show up you can deactivate it.").ToString();
-
-            #endregion
-            
             #region Passing Comet - Strings
 
             var pc_heading = new TextObject("{=mcm_pc_heading}Passing Comet").ToString();
@@ -509,45 +460,13 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             
             
             
-            var builder = BaseSettingsBuilder.Create("RandomEvents2","2. Random Events - N to Z")!
+            var builder = BaseSettingsBuilder.Create("RandomEvents3","3. Random Events - P to Z")!
                 .SetFormat("xml")
                 .SetFolderName(RandomEventsSubmodule.FolderName)
                 .SetSubFolder(RandomEventsSubmodule.ModName)
                 
            #region Builder Modules
                 
-                
-                #region Not Of This World - Builder
-                
-                .CreateGroup(notw_heading, groupBuilder => groupBuilder
-                    .AddInteger("NotW1", notw1_text,2,20, new ProxyRef<int>(() => NotW_MinSoldiersGone, o => NotW_MinSoldiersGone = o), integerBuilder => integerBuilder
-                        .SetHintText(notw1_hint))
-                    .AddInteger("NotW2", notw2_text,2,20, new ProxyRef<int>(() => NotW_MaxSoldiersGone, o => NotW_MinSoldiersGone = o), integerBuilder => integerBuilder
-                        .SetHintText(notw2_hint))
-                    .AddBool("NotW3", notw3_text, new ProxyRef<bool>(() => NotW_Disable, o => NotW_Disable = o), boolBuilder => boolBuilder
-                        .SetHintText(notw3_hint))
-                    )
-
-                #endregion
-                
-                #region Old Ruins - Builder
-                
-                .CreateGroup(or_heading, groupBuilder => groupBuilder
-                        .AddInteger("OR1", or1_text,5,15, new ProxyRef<int>(() => OR_MinSoldiers, o => OR_MinSoldiers = o), integerBuilder => integerBuilder
-                            .SetHintText(or1_hint))
-                        .AddInteger("OR2", or2_text,5,15, new ProxyRef<int>(() => OR_MaxSoldiers, o => OR_MaxSoldiers = o), integerBuilder => integerBuilder
-                            .SetHintText(or2_hint))
-                        .AddFloatingInteger("OR3", or3_text,20,90, new ProxyRef<float>(() => OR_MenToKill, o => OR_MenToKill = o), floatBuilder => floatBuilder
-                            .SetHintText(or3_hint))
-                        .AddInteger("OR4", or4_text,100,5000, new ProxyRef<int>(() => OR_MinGoldFound, o => OR_MinGoldFound = o), integerBuilder => integerBuilder
-                            .SetHintText(or4_hint))
-                        .AddInteger("OR5", or5_text,100,5000, new ProxyRef<int>(() => OR_MaxGoldFound, o => OR_MaxGoldFound = o), integerBuilder => integerBuilder
-                            .SetHintText(or5_hint))
-                        .AddBool("OR6", or6_text, new ProxyRef<bool>(() => OR_Disable, o => OR_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(or6_hint))
-                    )
-
-                    #endregion
                 
                 #region Passing Comet - Builder
                 
@@ -848,25 +767,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         {
             #region First Time Setup
 
-            #region Not of this World
-            
-            Instance.NotW_Disable = false;
-            Instance.NotW_MinSoldiersGone = 3;
-            Instance.NotW_MaxSoldiersGone = 8;
-
-            #endregion
-            
-            #region Old Ruins
-            
-            Instance.OR_Disable = false;
-            Instance.OR_MinSoldiers = 6;
-            Instance.OR_MaxSoldiers = 12;
-            Instance.OR_MenToKill = 70.0f;
-            Instance.OR_MinGoldFound = 250;
-            Instance.OR_MaxGoldFound = 5000;
-
-            #endregion
-            
             #region Passing Comet
             
             Instance.PC_Disable = false;

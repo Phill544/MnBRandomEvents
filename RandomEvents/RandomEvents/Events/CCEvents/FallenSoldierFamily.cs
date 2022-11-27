@@ -20,10 +20,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public FallenSoldierFamily() : base(ModSettings.RandomEvents.FallenSoldierFamilyData)
         {
-            minFamilyCompensation = MCM_MenuConfig_A_M.Instance.FSF_MinFamilyCompensation;
-            maxFamilyCompensation = MCM_MenuConfig_A_M.Instance.FSF_MaxFamilyCompensation;
-            minGoldLooted = MCM_MenuConfig_A_M.Instance.FSF_MinGoldLooted;
-            maxGoldLooted = MCM_MenuConfig_A_M.Instance.FSF_MaxGoldLooted;
+            minFamilyCompensation = MCM_MenuConfig_A_F.Instance.FSF_MinFamilyCompensation;
+            maxFamilyCompensation = MCM_MenuConfig_A_F.Instance.FSF_MaxFamilyCompensation;
+            minGoldLooted = MCM_MenuConfig_A_F.Instance.FSF_MinGoldLooted;
+            maxGoldLooted = MCM_MenuConfig_A_F.Instance.FSF_MaxGoldLooted;
         }
 
         public override void CancelEvent()
@@ -32,7 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_A_M.Instance.FSF_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
+            return MCM_MenuConfig_A_F.Instance.FSF_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
         }
 
         public override void StartEvent()

@@ -22,7 +22,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_N_Z.Instance.PC_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CampaignTime.Now.IsNightTime;
+			return MCM_MenuConfig_P_Z.Instance.PC_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CampaignTime.Now.IsNightTime;
 		}
 
 		public override void StartEvent()

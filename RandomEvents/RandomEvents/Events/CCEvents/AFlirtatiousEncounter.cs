@@ -22,10 +22,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public AFlirtatiousEncounter() : base(ModSettings.RandomEvents.AFlirtatiousEncounterData)
         {
-            minWomanAge = MCM_MenuConfig_A_M.Instance.AFE_minWomanAge;
-            maxWomanAge = MCM_MenuConfig_A_M.Instance.AFE_maxWomanAge;
-            minRelationshipIncrease = MCM_MenuConfig_A_M.Instance.AFE_minRelationshipIncrease;
-            maxRelationshipIncrease = MCM_MenuConfig_A_M.Instance.AFE_maxRelationshipIncrease;
+            minWomanAge = MCM_MenuConfig_A_F.Instance.AFE_minWomanAge;
+            maxWomanAge = MCM_MenuConfig_A_F.Instance.AFE_maxWomanAge;
+            minRelationshipIncrease = MCM_MenuConfig_A_F.Instance.AFE_minRelationshipIncrease;
+            maxRelationshipIncrease = MCM_MenuConfig_A_F.Instance.AFE_maxRelationshipIncrease;
         }
 
         public override void CancelEvent()
@@ -34,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_A_M.Instance.AFE_Disable == false && 
+            return MCM_MenuConfig_A_F.Instance.AFE_Disable == false && 
                    Hero.MainHero.IsFemale == false && 
                    Settlement.CurrentSettlement != null && 
                    (Settlement.CurrentSettlement.IsTown || Settlement.CurrentSettlement.IsVillage);

@@ -19,10 +19,10 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public DreadedSweats() : base(Settings.ModSettings.RandomEvents.DreadedSweatsData)
 		{
-			minMoraleLoss = MCM_MenuConfig_A_M.Instance.DS_minMoraleLoss;
-			maxMoraleLoss = MCM_MenuConfig_A_M.Instance.DS_maxMoraleLoss;
-			minvictim = MCM_MenuConfig_A_M.Instance.DS_minvictim;
-			maxvictim = MCM_MenuConfig_A_M.Instance.DS_maxvictim;
+			minMoraleLoss = MCM_MenuConfig_A_F.Instance.DS_minMoraleLoss;
+			maxMoraleLoss = MCM_MenuConfig_A_F.Instance.DS_maxMoraleLoss;
+			minvictim = MCM_MenuConfig_A_F.Instance.DS_minvictim;
+			maxvictim = MCM_MenuConfig_A_F.Instance.DS_maxvictim;
 
 		}
 
@@ -32,19 +32,19 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_M.Instance.DS_Disable == false && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10;
+			return MCM_MenuConfig_A_F.Instance.DS_Disable == false && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10;
 		}
 
 		public override void StartEvent()
 		{
 
-      		var partysize = MobileParty.MainParty.MemberRoster.TotalHealthyCount;
+      		var partySize = MobileParty.MainParty.MemberRoster.TotalHealthyCount;
             
 			var moraleLoss = MBRandom.RandomInt(minMoraleLoss, maxMoraleLoss);
 			
 			var victims = MBRandom.RandomInt(minvictim, maxvictim);
 			
-			var totalvictims = partysize / 10 + victims;
+			var totalVictims = partySize / 10 + victims;
 			
 			Hero.MainHero.AddSkillXp(DefaultSkills.Medicine, 5);
 			
@@ -53,7 +53,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			MobileParty.MainParty.RecentEventsMorale -= moraleLoss;
 			MobileParty.MainParty.MoraleExplained.Add(-moraleLoss);
 			
-			MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(totalvictims);
+			MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(totalVictims);
 
 			
 			var eventTitle2 = new TextObject("{=DreadedSweats_Title}The Dreaded Sweat").ToString();
@@ -71,7 +71,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 			var eventMsg1 = new TextObject(
 				"{=DreadedSweats_Event_Msg_1}{totalvictims} troops have the Dreaded Sweats!")
-				.SetTextVariable("totalvictims", totalvictims)
+				.SetTextVariable("totalvictims", totalVictims)
 				.ToString();
 				
 			InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
@@ -100,11 +100,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public DreadedSweatsData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
 		{
-
-
-
-
-	}
+		}
 
 		public override BaseEvent GetBaseEvent()
 		{

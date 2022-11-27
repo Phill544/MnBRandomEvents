@@ -145,7 +145,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
 
 
-            var builder = BaseSettingsBuilder.Create("RandomEvents4","4. Random Events - Chances")!
+            var builder = BaseSettingsBuilder.Create("RandomEvents5","5. Random Events - Chances")!
                 .SetFormat("xml")
                 .SetFolderName(RandomEventsSubmodule.FolderName)
                 .SetSubFolder(RandomEventsSubmodule.ModName)

@@ -30,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_M.Instance.AI_Disable == false && Clan.PlayerClan.Kingdom != null && MobileParty.MainParty.Army == null && Clan.PlayerClan.Kingdom.Armies != null;
+			return MCM_MenuConfig_A_F.Instance.AI_Disable == false && Clan.PlayerClan.Kingdom != null && MobileParty.MainParty.Army == null && Clan.PlayerClan.Kingdom.Armies != null;
 		}
 
 		public override void StartEvent()
@@ -51,7 +51,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			var LeaderIsFemale = ArmyLeader.IsFemale;
 			var LeaderGender = LeaderIsFemale ? "female" : "male";
 			var gender = GenderAssignment.GetTheGenderAssignment(LeaderGender, false, "adjective");
-			var playername = Hero.MainHero.Name;
+			var playerName = Hero.MainHero.Name;
 
 			var settlements = Settlement.FindAll(s => s.IsTown || s.IsCastle || s.IsVillage).ToList();
 			var closestSettlement = settlements.MinBy(s => ArmyLeader.GetPosition().DistanceSquared(s.GetPosition()));
@@ -62,7 +62,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 				.SetTextVariable("ArmyLeader", ArmyLeaderName)
 				.SetTextVariable("settlement", closestSettlement.Name)
 				.SetTextVariable("gender", gender)
-				.SetTextVariable("player", playername)
+				.SetTextVariable("player", playerName)
 				.ToString();
 				
 			var eventButtonText = new TextObject("{=ArmyInvite_Event_Button_Text}Done").ToString();
