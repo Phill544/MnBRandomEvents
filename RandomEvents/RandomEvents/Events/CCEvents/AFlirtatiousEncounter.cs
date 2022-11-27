@@ -121,7 +121,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     .ToString();
 
                 var eventOptionBText = new TextObject(
-                        "{=AFlirtatiousEncounter_Event_Choice_2}When she gets over to you the two of you starts talking. " +
+                        "{=AFlirtatiousEncounter_Event_Choice_2}When she gets over to you the two of you start talking. " +
                         "You offer to buy her a drink which she accepts. As the evening progresses the two of you get " +
                         "more and more drunk. You manage to learn that her name is {name} and she's {age} years old. " +
                         "Eventually you are both so drunk that you are thrown out of the bar.\n\nBoth of you giggle as " +
@@ -130,25 +130,25 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         "before you go your separate ways. After a few seconds you hear your name being called. " +
                         "“{heroName} wait!” You turn around and see {name} running back to you. She stops just a few " +
                         "inches from you face and gives you a deep and tender kiss on the lips. “That was for a lovely " +
-                        "evening” she said. You kiss her back before saying you final goodbye for the night.")
+                        "evening” she said. You kiss her back before saying your final goodbye for the night.")
                     .SetTextVariable("name", target.FirstName)
                     .SetTextVariable("age", (int)Math.Round(target.Age))
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
 
                 var eventOptionCText = new TextObject(
-                        "{=AFlirtatiousEncounter_Event_Choice_3}When she gets over to you the two of you starts talking. " +
+                        "{=AFlirtatiousEncounter_Event_Choice_3}When she gets over to you the two of you start talking. " +
                         "You tell her that you don't often get noticed by such beautiful women. She says it's not often " +
-                        "she find such handsome men in town. With the tone being set for the event the two of you " +
-                        "continue to talk (and naturally to hit on each other as well...) She tells you that her name " +
+                        "she finds such handsome men in town. With the tone being set for the evening the two of you " +
+                        "continue to talk (and naturally hit on each other as well...) She tells you that her name " +
                         "is {name} and she's {age} years old. After a few minutes the two of you move away from the bar " +
                         "and go somewhere a bit more comfortable. There you both continue your flirtatious behaviour. It " +
                         "does not take long before the two of you start kissing each other.\n\n You kiss her on the neck, " +
                         "on the cheeks, on the lips and so on. She whispers to you “I know a more private place...” with " +
-                        "fire in her eyes. Wanna head there she asks. You tell her to lead the way. She takes your hand " +
+                        "fire in her eyes. “Wanna head there?” she asks. You tell her to lead the way. She takes your hand " +
                         "and leads you out into the street. After a few minutes of walking you arrive at what is clearly " +
-                        "{name}'s home in {currentSettlement}. As you enter her house she turns to you and start kissing " +
-                        "you passionately again with more lust that you can ever remember. After just a few seconds all " +
+                        "{name}'s home in {currentSettlement}. As you enter her house she turns to you and starts kissing " +
+                        "you passionately again with more lust than you can ever remember. After just a few seconds all " +
                         "your clothes have been removed and you make your way towards {name}'s bed. \n\nThe rest of the " +
                         "night fades out in ecstasy.")
                     .SetTextVariable("name", target.FirstName)
@@ -160,7 +160,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         "{=AFlirtatiousEncounter_Event_Choice_4}You cannot help but be a little annoyed as you'd rather " +
                         "drink in peace. When she gets over to you she introduces herself as {name}. It does not take " +
                         "long for you to have insulted her enough that she leaves you alone. You may have hurt her " +
-                        "feelings but at least  you are able to enjoy the night alone. A few hours later as you are " +
+                        "feelings but at least you are able to enjoy the night alone. A few hours later as you are " +
                         "about to leave you come across {name} again. You tell her that you're sorry for what you said " +
                         "and you didn't mean it as you just wanted to be left alone. She somehow manages to politely " +
                         "and kindly tell you to F**k off.")
