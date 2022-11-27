@@ -102,7 +102,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption1 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text1}While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{scout} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -133,7 +133,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle2 = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption2 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your quartermaster, {quartermaster}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text2}While travelling near {closestsettlement} your quartermaster, {quartermaster}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{quartermaster} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -163,7 +163,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle3 = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption3 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your surgeon, {surgeon}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text3}While travelling near {closestsettlement} your surgeon, {surgeon}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{surgeon} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -193,7 +193,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle4 = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption4 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your engineer, {engineer}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text4}While travelling near {closestsettlement} your engineer, {engineer}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{engineer} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -225,7 +225,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle2 = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption2 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your quartermaster, {quartermaster}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text2}While travelling near {closestsettlement} your quartermaster, {quartermaster}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{quartermaster} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -255,7 +255,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle3 = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption3 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your surgeon, {surgeon}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Tex3t}While travelling near {closestsettlement} your surgeon, {surgeon}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{surgeon} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -283,7 +283,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle4 = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption4 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your engineer, {engineer}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text4}While travelling near {closestsettlement} your engineer, {engineer}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{engineer} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -313,7 +313,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption1 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text1}While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{scout} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -347,7 +347,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle3 = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption3 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your surgeon, {surgeon}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text3}While travelling near {closestsettlement} your surgeon, {surgeon}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{surgeon} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -376,7 +376,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle4 = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption4 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your engineer, {engineer}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text4}While travelling near {closestsettlement} your engineer, {engineer}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{engineer} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -404,7 +404,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption1 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text1}While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{scout} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -433,7 +433,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle2 = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption2 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your quartermaster, {quartermaster}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text2}While travelling near {closestsettlement} your quartermaster, {quartermaster}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{quartermaster} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -466,7 +466,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle4 = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption4 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your engineer, {engineer}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text4}While travelling near {closestsettlement} your engineer, {engineer}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{engineer} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -494,8 +494,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 					var eventTitle = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
-					var eventOption1 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+					var eventOption1 = new TextObject("{=CompanionAdmire_Event_Text1}While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{scout} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -524,7 +523,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle2 = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption2 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your quartermaster, {quartermaster}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text2}While travelling near {closestsettlement} your quartermaster, {quartermaster}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{quartermaster} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
@@ -553,7 +552,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var eventTitle3 = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
 					var eventOption3 = new TextObject(
-							"{=CompanionAdmire_Event_Text}While travelling near {closestsettlement} your surgeon, {surgeon}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
+							"{=CompanionAdmire_Event_Text3}While travelling near {closestsettlement} your surgeon, {surgeon}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards" +
 							" to the party and its future. \n\n{surgeon} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor" +
 							" to the {clan} clan in any way {gender} can.")
 						.SetTextVariable("closestsettlement", closestSettlement)
