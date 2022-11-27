@@ -284,20 +284,20 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         {
             
             Instance.CHANCES_FirstRunDone = true;
-            Instance.A_Flirtatious_Encounter_Chance = 50.0f;
+            Instance.A_Flirtatious_Encounter_Chance = 60.0f;
             Instance.Ahead_Of_Time_Chance = 50.0f;
             Instance.Army_Games_Chance = 60.0f;
             Instance.ArmyInvite_Chance = 60.0f;
             Instance.Bandit_Ambush_Chance = 50.0f;
             Instance.Bee_Kind_Chance = 50.0f;
             Instance.Bet_Money_Chance = 50.0f;
-            Instance.Beggar_Begging_Chance = 50.0f;
+            Instance.Beggar_Begging_Chance = 60.0f;
             Instance.Bird_Songs_Chance = 50.0f;
             Instance.Birthday_Party_Chance = 50.0f;
             Instance.Bottoms_Up_Chance = 50.0f;
             Instance.Bunch_Of_Prisoners_Chance = 50.0f;
             Instance.Bumper_Crop_Chance = 50.0f;
-            Instance.Chatting_Commanders_Chance = 50.0f;
+            Instance.Chatting_Commanders_Chance = 60.0f;
             Instance.Courier_Chance = 50.0f;
             Instance.Companion_Admire_Chance = 20.0f;
             Instance.Diseased_City_Chance = 50.0f;
@@ -305,7 +305,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Dysentery_Chance = 35.0f;
             Instance.Eager_Troops_Chance = 50.0f;
             Instance.Exotic_Drinks_Chance = 50.0f;
-            Instance.Fallen_Soldier_Family_Chance = 50.0f;
+            Instance.Fallen_Soldier_Family_Chance = 60.0f;
             Instance.Fantastic_Fighters_Chance = 50.0f;
             Instance.Fishing_Spot_Chance = 50.0f;
             Instance.Food_Fight_Chance = 50.0f;
@@ -325,7 +325,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Prisoner_Transfer_Chance = 50.0f;
             Instance.Red_Moon_Chance = 25.0f;
             Instance.Refugees_Chance = 30.0f;
-            Instance.Robbery_Chance = 50.0f;
+            Instance.Robbery_Chance = 60.0f;
             Instance.Runaway_Son_Chance = 50.0f;
             Instance.Secret_Singer_Chance = 50.0f;
             Instance.Speedy_Recovery_Chance = 50.0f;
