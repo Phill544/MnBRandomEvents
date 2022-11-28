@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		private readonly int maxGold;
 
 
-		public BottomsUp() : base(Settings.ModSettings.RandomEvents.BirdSongsData)
+		public BottomsUp() : base(Settings.ModSettings.RandomEvents.BottomsUpData)
 		{
 
 			minMoraleGain = MCM_MenuConfig_A_F.Instance.BU_minMoraleGain;

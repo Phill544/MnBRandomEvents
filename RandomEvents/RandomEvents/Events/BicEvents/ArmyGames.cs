@@ -17,7 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		private readonly int maxMoraleGain;
 
 
-		public ArmyGames() : base(ModSettings.RandomEvents.ChattingCommandersData)
+		public ArmyGames() : base(ModSettings.RandomEvents.ArmyGamesData)
 		{
 			cohesionIncrease = MCM_MenuConfig_A_F.Instance.AG_CohesionGain;
 			minMoraleGain = MCM_MenuConfig_A_F.Instance.AG_minMoraleGain;
