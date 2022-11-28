@@ -214,7 +214,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public bool FF_Disable { get; private set; }
         public int FF_MinRenownGain { get; private set; }
         public int FF_MaxRenownGain { get; private set; }
-        
+
+        #endregion
+
+        #region Feast - Variables
+        public bool FE_Disable { get; private set; }
+
         #endregion
 
         #region Fishing Spot - Variables
@@ -567,7 +572,14 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var ff3_hint = new TextObject("{=mcm_ff3_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
-            
+
+            #region Feast - Strings
+            var fe_heading = new TextObject("{=mcm_fe_heading}Feast").ToString();
+            var fe1_text = new TextObject("{=mcm_fe3_text}1. Deactivate event").ToString();
+            var fe1_hint = new TextObject("{=mcm_fe3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+
+            #endregion
+
             #region Fishing Spot - Strings
 
             var fs_heading = new TextObject("{=mcm_fs_heading}Fishing Spot").ToString();
@@ -946,9 +958,17 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                     )
 
                 #endregion
-                
+
+                #region Feast - Builder
+
+                .CreateGroup(fe_heading, groupBuilder => groupBuilder
+                .AddBool("FE1", fe1_text, new ProxyRef<bool>(() => FF_Disable, o => FF_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(fe1_hint))
+                    )
+                #endregion
+
                 #region Fishing Spot - Builder
-                
+
                 .CreateGroup(fs_heading, groupBuilder => groupBuilder
                     .AddInteger("FS1", fs1_text,2,15, new ProxyRef<int>(() => FS_MinSoldiersToGo, o => FS_MinSoldiersToGo = o), integerBuilder => integerBuilder
                         .SetHintText(fs1_hint))
@@ -1196,9 +1216,15 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.FF_MaxRenownGain = 75;
 
             #endregion
-            
+
+            #region Feast
+
+            Instance.FE_Disable = false;
+
+            #endregion
+
             #region Fishing Spot
-            
+
             Instance.FS_Disable = false;
             Instance.FS_MinSoldiersToGo = 3;
             Instance.FS_MaxSoldiersToGo = 12;
