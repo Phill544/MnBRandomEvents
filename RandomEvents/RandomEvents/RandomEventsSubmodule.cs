@@ -30,12 +30,12 @@ namespace CryingBuffalo.RandomEvents
 
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
-            MCM_MenuConfig_A_M.Instance.Settings();
-            MCM_MenuConfig_N_Z.Instance.Settings();
+            MCM_MenuConfig_A_F.Instance.Settings();
+            MCM_MenuConfig_G_O.Instance.Settings();
+            MCM_MenuConfig_P_Z.Instance.Settings();
             MCM_MenuConfig_Chances.Instance.Settings();
             MCM_ConfigMenu_General.Instance.Settings();
-
-            ModSettings.LoadGeneralSettings();
+            
             ModSettings.LoadRandomEventSettings();
             
             //Many mods use this. Nice way to tell if a mod is loaded correctly

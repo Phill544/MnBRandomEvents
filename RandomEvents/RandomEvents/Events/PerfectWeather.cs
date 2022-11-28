@@ -16,8 +16,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public PerfectWeather() : base(ModSettings.RandomEvents.PerfectWeatherData)
 		{
-			minMoraleGain = MCM_MenuConfig_N_Z.Instance.PW_MinMoraleGain;
-			maxMoraleGain = MCM_MenuConfig_N_Z.Instance.PW_MaxMoraleGain;
+			minMoraleGain = MCM_MenuConfig_P_Z.Instance.PW_MinMoraleGain;
+			maxMoraleGain = MCM_MenuConfig_P_Z.Instance.PW_MaxMoraleGain;
 		}
 
 		public override void CancelEvent()
@@ -26,7 +26,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_N_Z.Instance.PW_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_P_Z.Instance.PW_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

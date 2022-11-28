@@ -21,10 +21,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public Robbery() : base(ModSettings.RandomEvents.RobberyData)
         {
-            minGoldLost = MCM_MenuConfig_N_Z.Instance.RO_MinGoldLost;
-            maxGoldLost = MCM_MenuConfig_N_Z.Instance.RO_MaxGoldLost;
-            minRenownLost = MCM_MenuConfig_N_Z.Instance.RO_MinRenownLost;
-            maxRenownLost = MCM_MenuConfig_N_Z.Instance.RO_MaxRenownLost;
+            minGoldLost = MCM_MenuConfig_P_Z.Instance.RO_MinGoldLost;
+            maxGoldLost = MCM_MenuConfig_P_Z.Instance.RO_MaxGoldLost;
+            minRenownLost = MCM_MenuConfig_P_Z.Instance.RO_MinRenownLost;
+            maxRenownLost = MCM_MenuConfig_P_Z.Instance.RO_MaxRenownLost;
         }
 
         public override void CancelEvent()
@@ -39,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var notables = Settlement.CurrentSettlement.Notables.ToList();
             var gangLeaders = notables.Where(character => character.IsGangLeader).ToList();
 
-            return MCM_MenuConfig_N_Z.Instance.RO_Disable == false && gangLeaders.Count != 0 && CampaignTime.Now.IsNightTime;
+            return MCM_MenuConfig_P_Z.Instance.RO_Disable == false && gangLeaders.Count != 0 && CampaignTime.Now.IsNightTime;
         }
 
         public override void StartEvent()

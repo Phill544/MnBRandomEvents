@@ -32,12 +32,12 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
         public Refugees() : base(Settings.ModSettings.RandomEvents.RefugeesData)
         {
-            minSoldiers = MCM_MenuConfig_N_Z.Instance.RF_minSoldiers;
-            maxSoldiers = MCM_MenuConfig_N_Z.Instance.RF_maxSoldiers;
-            minFood = MCM_MenuConfig_N_Z.Instance.RF_minFood;
-            maxFood = MCM_MenuConfig_N_Z.Instance.RF_maxFood;
-            minCaptive = MCM_MenuConfig_N_Z.Instance.RF_minCaptive;
-            maxCaptive = MCM_MenuConfig_N_Z.Instance.RF_maxCaptive;
+            minSoldiers = MCM_MenuConfig_P_Z.Instance.RF_minSoldiers;
+            maxSoldiers = MCM_MenuConfig_P_Z.Instance.RF_maxSoldiers;
+            minFood = MCM_MenuConfig_P_Z.Instance.RF_minFood;
+            maxFood = MCM_MenuConfig_P_Z.Instance.RF_maxFood;
+            minCaptive = MCM_MenuConfig_P_Z.Instance.RF_minCaptive;
+            maxCaptive = MCM_MenuConfig_P_Z.Instance.RF_maxCaptive;
         }
 
         public override void CancelEvent()
@@ -46,7 +46,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
         public override bool CanExecuteEvent()
         {
-            return MobileParty.MainParty.CurrentSettlement == null && MCM_MenuConfig_N_Z.Instance.RF_Disable == false;
+            return MobileParty.MainParty.CurrentSettlement == null && MCM_MenuConfig_P_Z.Instance.RF_Disable == false;
         }
 
         public override void StartEvent()
@@ -61,7 +61,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty);
             
-            var cultureclass = closestSettlement.Culture.ToString();
+            var cultureClass = closestSettlement.Culture.ToString();
             
 
 
@@ -289,16 +289,16 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                         
                         foreach (var characterObject in CharacterObject.All)
                         {
-                            if (characterObject.StringId.Contains("recruit") && !characterObject.StringId.Contains("vigla") && characterObject.Culture.ToString() == cultureclass ||
+                            if (characterObject.StringId.Contains("recruit") && !characterObject.StringId.Contains("vigla") && characterObject.Culture.ToString() == cultureClass ||
                                 (characterObject.StringId.Contains("footman") && !characterObject.StringId.Contains("vlandia") && !characterObject.StringId.Contains("aserai") 
-                                 && characterObject.Culture.ToString() == cultureclass) || (characterObject.StringId.Contains("volunteer")
-                                    && (characterObject.StringId.Contains("battanian") && characterObject.Culture.ToString() == cultureclass)))
+                                 && characterObject.Culture.ToString() == cultureClass) || (characterObject.StringId.Contains("volunteer")
+                                    && (characterObject.StringId.Contains("battanian") && characterObject.Culture.ToString() == cultureClass)))
                             {
                                 troopRoster.AddToCounts(characterObject, soldiers);
                             }
                         }                      
 
-                        PartyScreenManager.OpenScreenAsReceiveTroops(troopRoster, leftPartyName: new TextObject("{cultureclass} Refugees").SetTextVariable("cultureclass", cultureclass));
+                        PartyScreenManager.OpenScreenAsReceiveTroops(troopRoster, leftPartyName: new TextObject("{cultureclass} Refugees").SetTextVariable("cultureclass", cultureClass));
 
                         InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
                             
@@ -322,9 +322,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                             foreach (var characterObject in CharacterObject.All)
                             {
                                 if (characterObject.StringId.Contains("recruit") && !characterObject.StringId.Contains("vigla") 
-                                    && characterObject.Culture.ToString() == cultureclass || (characterObject.StringId.Contains("footman") && !characterObject.StringId.Contains("vlandia")
-                                        && !characterObject.StringId.Contains("aserai") && characterObject.Culture.ToString() == cultureclass) || (characterObject.StringId.Contains("volunteer") 
-                                        && (characterObject.StringId.Contains("battanian") && characterObject.Culture.ToString() == cultureclass)))
+                                    && characterObject.Culture.ToString() == cultureClass || (characterObject.StringId.Contains("footman") && !characterObject.StringId.Contains("vlandia")
+                                        && !characterObject.StringId.Contains("aserai") && characterObject.Culture.ToString() == cultureClass) || (characterObject.StringId.Contains("volunteer") 
+                                        && (characterObject.StringId.Contains("battanian") && characterObject.Culture.ToString() == cultureClass)))
                                 {
                                     troopRoster2.AddToCounts(characterObject, captives);
                                 }
@@ -332,7 +332,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
                             var emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
 
-                            PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Refugees").SetTextVariable("cultureclass", cultureclass), 20);
+                            PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Refugees").SetTextVariable("cultureclass", cultureClass), 20);
 
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_MED_Outcome));
 

@@ -20,8 +20,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public BunchOfPrisoners() : base(ModSettings.RandomEvents.BunchOfPrisonersData)
 		{
-			minPrisonerGain = MCM_MenuConfig_A_M.Instance.BoP_MinPrisonerGain;
-			maxPrisonerGain = MCM_MenuConfig_A_M.Instance.BoP_MaxPrisonerGain;
+			minPrisonerGain = MCM_MenuConfig_A_F.Instance.BoP_MinPrisonerGain;
+			maxPrisonerGain = MCM_MenuConfig_A_F.Instance.BoP_MaxPrisonerGain;
 		}
 
 		public override void CancelEvent()
@@ -30,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_M.Instance.BoP_Disable == false && Hero.MainHero.Clan.Settlements.Any();
+			return MCM_MenuConfig_A_F.Instance.BoP_Disable == false && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()

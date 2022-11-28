@@ -13,17 +13,17 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 	{
 		private readonly int minMoraleLoss;
 		private readonly int maxMoraleLoss;
-		private readonly int minvictim;
-        private readonly int maxvictim;
+		private readonly int minVictim;
+        private readonly int maxVictim;
 
         
 
 		public Dysentery() : base(Settings.ModSettings.RandomEvents.DysenteryData)
 		{
-			minMoraleLoss = MCM_MenuConfig_A_M.Instance.DY_minMoraleLoss;
-			maxMoraleLoss = MCM_MenuConfig_A_M.Instance.DY_maxMoraleLoss;
-			minvictim = MCM_MenuConfig_A_M.Instance.DY_minvictim;
-			maxvictim = MCM_MenuConfig_A_M.Instance.DY_maxvictim;
+			minMoraleLoss = MCM_MenuConfig_A_F.Instance.DY_minMoraleLoss;
+			maxMoraleLoss = MCM_MenuConfig_A_F.Instance.DY_maxMoraleLoss;
+			minVictim = MCM_MenuConfig_A_F.Instance.DY_minVictim;
+			maxVictim = MCM_MenuConfig_A_F.Instance.DY_maxVictim;
 		}
 
 		public override void CancelEvent()
@@ -32,7 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_M.Instance.DY_Disable == false && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10 && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_A_F.Instance.DY_Disable == false && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10 && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
@@ -42,13 +42,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 
-			var partysize = MobileParty.MainParty.MemberRoster.TotalHealthyCount;
+			var partySize = MobileParty.MainParty.MemberRoster.TotalHealthyCount;
 			
 			var moraleLoss = MBRandom.RandomInt(minMoraleLoss, maxMoraleLoss);
 			
-			var victims = MBRandom.RandomInt(minvictim, maxvictim);
+			var victims = MBRandom.RandomInt(minVictim, maxVictim);
 			
-			var totalvictims = partysize / 10 + victims;
+			var totalvictims = partySize / 10 + victims;
 			
 			Hero.MainHero.AddSkillXp(DefaultSkills.Medicine, 5);
 			

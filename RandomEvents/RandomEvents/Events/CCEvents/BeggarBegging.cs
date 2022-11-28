@@ -21,10 +21,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public BeggarBegging() : base(ModSettings.RandomEvents.BeggarBeggingData)
         {
-            minGoldToGive = MCM_MenuConfig_A_M.Instance.BB_MinGoldToBeggar;
-            maxGoldToGive = MCM_MenuConfig_A_M.Instance.BB_MaxGoldToBeggar;
-            minRenownGain = MCM_MenuConfig_A_M.Instance.BB_MinRenownGain;
-            maxRenownGain = MCM_MenuConfig_A_M.Instance.BB_MaxRenownGain;
+            minGoldToGive = MCM_MenuConfig_A_F.Instance.BB_MinGoldToBeggar;
+            maxGoldToGive = MCM_MenuConfig_A_F.Instance.BB_MaxGoldToBeggar;
+            minRenownGain = MCM_MenuConfig_A_F.Instance.BB_MinRenownGain;
+            maxRenownGain = MCM_MenuConfig_A_F.Instance.BB_MaxRenownGain;
     
         }
 
@@ -35,7 +35,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
 
-            return MCM_MenuConfig_A_M.Instance.BB_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
+            return MCM_MenuConfig_A_F.Instance.BB_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
         }
 
         public override void StartEvent()

@@ -15,6 +15,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public float A_Flirtatious_Encounter_Chance{ get; private set; }
         public float Ahead_Of_Time_Chance{ get; private set; }
         public float Army_Games_Chance { get; private set; }
+        public float ArmyInvite_Chance { get; private set; }
         public float Bandit_Ambush_Chance{ get; private set; }
         public float Bee_Kind_Chance{ get; private set; }
         public float Bet_Money_Chance{ get; private set; }
@@ -34,6 +35,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public float Exotic_Drinks_Chance{ get; private set; }
         public float Fallen_Soldier_Family_Chance{ get; private set; }
         public float Fantastic_Fighters_Chance{ get; private set; }
+        public float Feast_Chance { get; private set; }
         public float Fishing_Spot_Chance{ get; private set; }
         public float Food_Fight_Chance{ get; private set; }
         public float Granary_Rats_Chance{ get; private set; }
@@ -138,12 +140,14 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv52_text = new TextObject("{=mcm_adv52_text}Travelling Merchant").ToString();
             var adv53_text = new TextObject("{=mcm_adv53_text}Army Games").ToString();
             var adv54_text = new TextObject("{=mcm_adv54_text}Companion Admire").ToString();
+            var adv55_text = new TextObject("{=mcm_adv55_text}Army Invite").ToString();
+            var adv56_text = new TextObject("{=mcm_adv56_text}Feast").ToString();
 
             #endregion
 
 
 
-            var builder = BaseSettingsBuilder.Create("RandomEvents4","4. Random Events - Chances")!
+            var builder = BaseSettingsBuilder.Create("RandomEvents5","5. Random Events - Chances")!
                 .SetFormat("xml")
                 .SetFolderName(RandomEventsSubmodule.FolderName)
                 .SetSubFolder(RandomEventsSubmodule.ModName)
@@ -258,8 +262,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV53", adv53_text,5, 100, new ProxyRef<float>(() => Army_Games_Chance, o => Army_Games_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV54", adv53_text,5, 100, new ProxyRef<float>(() => Companion_Admire_Chance, o => Companion_Admire_Chance = o), floatBuilder => floatBuilder
+                        .AddFloatingInteger ("ADV54", adv54_text,5, 100, new ProxyRef<float>(() => Companion_Admire_Chance, o => Companion_Admire_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
+                        .AddFloatingInteger ("ADV55", adv55_text, 5, 100, new ProxyRef<float>(() => ArmyInvite_Chance, o => ArmyInvite_Chance = o), floatBuilder => floatBuilder
+                            .SetHintText(adv_hint))
+                        .AddFloatingInteger ("ADV56", adv56_text, 5, 100, new ProxyRef<float>(() => Feast_Chance, o => Feast_Chance = o), floatBuilder => floatBuilder
+                           .SetHintText(adv_hint))
 
                 #endregion
 
@@ -280,19 +288,20 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         {
             
             Instance.CHANCES_FirstRunDone = true;
-            Instance.A_Flirtatious_Encounter_Chance = 50.0f;
+            Instance.A_Flirtatious_Encounter_Chance = 60.0f;
             Instance.Ahead_Of_Time_Chance = 50.0f;
             Instance.Army_Games_Chance = 60.0f;
+            Instance.ArmyInvite_Chance = 60.0f;
             Instance.Bandit_Ambush_Chance = 50.0f;
             Instance.Bee_Kind_Chance = 50.0f;
             Instance.Bet_Money_Chance = 50.0f;
-            Instance.Beggar_Begging_Chance = 50.0f;
+            Instance.Beggar_Begging_Chance = 60.0f;
             Instance.Bird_Songs_Chance = 50.0f;
             Instance.Birthday_Party_Chance = 50.0f;
             Instance.Bottoms_Up_Chance = 50.0f;
             Instance.Bunch_Of_Prisoners_Chance = 50.0f;
             Instance.Bumper_Crop_Chance = 50.0f;
-            Instance.Chatting_Commanders_Chance = 50.0f;
+            Instance.Chatting_Commanders_Chance = 60.0f;
             Instance.Courier_Chance = 50.0f;
             Instance.Companion_Admire_Chance = 20.0f;
             Instance.Diseased_City_Chance = 50.0f;
@@ -300,8 +309,9 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Dysentery_Chance = 35.0f;
             Instance.Eager_Troops_Chance = 50.0f;
             Instance.Exotic_Drinks_Chance = 50.0f;
-            Instance.Fallen_Soldier_Family_Chance = 50.0f;
+            Instance.Fallen_Soldier_Family_Chance = 60.0f;
             Instance.Fantastic_Fighters_Chance = 50.0f;
+            Instance.Feast_Chance = 60.0f;
             Instance.Fishing_Spot_Chance = 50.0f;
             Instance.Food_Fight_Chance = 50.0f;
             Instance.Granary_Rats_Chance = 50.0f;
@@ -320,7 +330,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Prisoner_Transfer_Chance = 50.0f;
             Instance.Red_Moon_Chance = 25.0f;
             Instance.Refugees_Chance = 30.0f;
-            Instance.Robbery_Chance = 50.0f;
+            Instance.Robbery_Chance = 60.0f;
             Instance.Runaway_Son_Chance = 50.0f;
             Instance.Secret_Singer_Chance = 50.0f;
             Instance.Speedy_Recovery_Chance = 50.0f;
