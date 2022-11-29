@@ -175,7 +175,7 @@ namespace CryingBuffalo.RandomEvents.Settings
         public FeastData FeastData { get; } = new FeastData("Feast", MCM_MenuConfig_Chances.Instance.Feast_Chance);
         
         
-        public TravellersData TravellersData { get; } = new TravellersData("Travellers", 1024);
+        public TravellersData TravellersData { get; } = new TravellersData("Travellers", MCM_MenuConfig_Chances.Instance.Travellers_Chance);
         #endregion
     }
 }

@@ -34,13 +34,13 @@
     <string id="AFlirtatiousEncounter_Event_Msg_3" text="Relationship between {name} and {heroName}is now {newRelationship}." />
     <string id="AFlirtatiousEncounter_Event_Msg_4" text="Relationship between {name} and {heroName}is now {newRelationship}." />
 
-	
-	
-	    <!--ArmyGames Event-->
+
+
+    <!--ArmyGames Event-->
     <string id="ArmyGames_Title" text="Army Games" />
     <string id="ArmyGames_Event_Desc" text="What started as a small competition has evolved itself into a full blown tournament. {leader} has gathered all of the parties in this army for competitions to see who is the ultimate champion team. The men haven't had this much fun in quite a long time, this will surely boost morale and cohesion." />
     <string id="ArmyGames_Event_Button_Text_1" text="Done" />
-	
+
 
 
     <!--BirthdayParty Event-->
@@ -70,7 +70,7 @@
     <string id="BirthdayParty_Event_Msg_1" text="{heroName} gave away {goldGiven} to the girl and gained {renownGain} renown for slaying the bandits." />
     <string id="BirthdayParty_Event_Msg_2" text="{heroName} gave away {goldGiven} to the girl." />
     <string id="BirthdayParty_Event_Msg_3" text="{heroName} looted {goldLooted} from the birthday party." />
-	
+
 
 
     <!--BeggarBegging Event-->
@@ -262,9 +262,9 @@
     <string id="PrisonerTransfer_Event_Msg_1" text="{heroName} bought {prisonerForTransfer} prisoners for {totalGold} gold." />
     <string id="PrisonerTransfer_Event_Msg_2" text="{heroName} is thinking about buying some prisoners." />
     <string id="PrisonerTransfer_Event_Msg_3" text="{heroName} did not buy any prisoners." />
-    
-    
-    
+
+
+
     <!--RedMoon Event-->
     <string id="RedMoon_Title" text="A Coming Apocalypse?" />
     <string id="RedMoon_Event_Desc" text="You are in your tent late one night when you are awoken by your men starting a commotion. Annoyed, you go out and tell them to quiet down but as soon as you step foot outside your tent you see what the commotion is about. The moon has become blood red. Your men are panicking and running around in all directions and proclaiming this to be the end of days. The only question you can ask yourself is what are you going to do about this?" />
@@ -476,7 +476,7 @@
     <string id="OldRuins_Event_Choice_3" text="The men want to check the barn so you agree. Once inside you can only see some skeletons from what you can only assume were farm animals. The men scatter and search the barn but they all come up empty handed. You proceed to leave." />
     <string id="OldRuins_Event_Choice_4" text="You all agree to head to the shack. You pry the door open and inside you find a chest with a lock. After fidgeting for a couple of minutes you manage to break the lock. The chest is mostly filled with papers but all the way at the bottom you come across a rather hefty coin purse. You open it and to you amazement it's filled with lots of gold coins. You head back to camp where you split the content of the purse with your men. You found {goldFound} gold and there were {men} men who went with you so {goldFound} / {men} = {goldForYou}." />
     <string id="OldRuins_Event_Choice_5" text="You all agree that you don't want to get wet so you make your way back to camp." />
-    
+
     <!--OldRuins - Log Messages-->
     <string id="OldRuins_Event_Msg_1" text="{heroName} lost {killedMen} men to a collapsing structure." />
     <string id="OldRuins_Event_Msg_2" text="{heroName} received {goldForYou} gold after splitting {goldFound} gold with {men} men." />
@@ -766,7 +766,7 @@
 
     <!--WanderingLivestock - Plural-->
     <string id="WanderingLivestock_Event_Plural_End" text="s" />
-    
+
     <!-- The ending of the plural form of the language your are translating to, eg cow, cows -->
     <string id="WanderingLivestock_Event_Cow_Text" text=", and {cowCount} cow{cowPlural}." />
 
@@ -809,7 +809,7 @@
     <!--LightsInTheSkies - Log Messages-->
     <string id="LightsInTheSkies_Event_Msg_1" text="{heroName} had a strange experience one night near {closestSettlement}." />
 
-    
+
     <!--BirdSong Event-->
     <string id="BirdSongs_Title" text="Bird Songs" />
     <string id="BirdSongs_Event_Text" text="This day has been blessed by the beautiful melodies of birds singing songs. Silence falls over your ranks as the relaxing sounds of nature's choir brings a sense of joy to your men. This will surely boost their morale." />
@@ -839,22 +839,22 @@
     <string id="BottomsUp_Event_Msg_1" text="You won! Earning {gold} gold!" />
 
 
-    
+
     <!--Courier Event-->
     <string id="Courier_Title" text="A Courier Arrives" />
     <string id="Courier_Event_Text" text="A courier has arrived with a handful of letters for {heroName}'s party.  The men seem quite excited, at least those who know how to read." />
     <string id="Courier_Event_Button_Text" text="Accept" />
-    
 
-    
+
+
     <!--Dysentery Event-->
     <string id="Dysentery_Title" text="Dysentery" />
     <string id="Dysentery_Event_Text" text="An illness of the stomach has taken hold of your troops. You inspect the food reserves but there are no signs of rot or spoil, perhaps it has come from a nearby creek? Or rather a divine sign of retribution? Regardless, the vile smell and debilitating condition surely call for worry." />
     <string id="Dysentery_Event_Button_Text" text="Done" />
     <string id="Dysentery_Event_Msg_1" text="{totalvictims} troops have dysentery!" />
 
-    
-    
+
+
     <!--DreadedSweats Event-->
     <string id="DreadedSweats_Title" text="The Dreaded Sweat" />
     <string id="DreadedSweats_Event_Text" text="There has been an outbreak of some sort of illness among the troops. Fever, debilitating aches and pains, a few of the men can barely stand. All the symptoms point towards this being what many call 'the Dreaded Sweats'.  You order your men to wash up in the creak before moving out, hopefully this won't become something too serious." />
@@ -926,38 +926,72 @@
     <string id="Refugees_Event_Msg_2" text="You have recruited refugees." />
     <string id="Refugees_Event_Msg_3" text="You have taken the refugees prisoner." />
     <string id="Refugees_Event_Msg_4" text="You have ignored the refugees." />
-	
-	<!--Companion Admire-->
-	<string id="CompanionAdmire_Title" text="Companion Admiration" />
-	<string id="CompanionAdmire_Event_Text1" text="While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{scout} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can." />
+
+    <!--Companion Admire-->
+    <string id="CompanionAdmire_Title" text="Companion Admiration" />
+    <string id="CompanionAdmire_Event_Text1" text="While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{scout} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can." />
     <string id="CompanionAdmire_Event_Text2" text="While travelling near {closestsettlement} your quartermaster, {quartermaster}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{quartermaster} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can." />
     <string id="CompanionAdmire_Event_Text3" text="While travelling near {closestsettlement} your surgeon, {surgeon}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{surgeon} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can. " />
-	<string id="CompanionAdmire_Event_Text4" text="While travelling near {closestsettlement} your engineer, {engineer}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{engineer} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can." />
+    <string id="CompanionAdmire_Event_Text4" text="While travelling near {closestsettlement} your engineer, {engineer}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{engineer} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can." />
     <string id="CompanionAdmire_Event_Button_Text" text="Done" />
     <string id="CompanionAdmire_Event_Msg_1" text="Your relationship with {scout) has improved." />
-	<string id="CompanionAdmire_Event_Msg_2" text="Your relationship with {quartermaster) has improved." />
-	<string id="CompanionAdmire_Event_Msg_3" text="Your relationship with {surgeon) has improved." />
-	<string id="CompanionAdmire_Event_Msg_4" text="Your relationship with {engineer) has improved." />
-	
-	<!--Army Invite-->
-	<string id="ArmyInvite_Title" text="Army Invitation" />
-	<string id="ArmyInvite_Event_Text" text="A messenger from {ArmyLeader} has arrived inviting {player} to join {gender} army located near {settlement}." />
-	<string id="ArmyInvite_Event_Button_Text" text="Done" />
-	
+    <string id="CompanionAdmire_Event_Msg_2" text="Your relationship with {quartermaster) has improved." />
+    <string id="CompanionAdmire_Event_Msg_3" text="Your relationship with {surgeon) has improved." />
+    <string id="CompanionAdmire_Event_Msg_4" text="Your relationship with {engineer) has improved." />
+
+    <!--Army Invite-->
+    <string id="ArmyInvite_Title" text="Army Invitation" />
+    <string id="ArmyInvite_Event_Text" text="A messenger from {ArmyLeader} has arrived inviting {player} to join {gender} army located near {settlement}." />
+    <string id="ArmyInvite_Event_Button_Text" text="Done" />
+    
+    
+    <!--Travellers-->
+    <string id="Travellers_Title" text="Travellers" />
+    <string id="Travellers_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="Travellers_Engineering_Appended_Text" text="[Engineering - lvl {engineeringLevel}]" />
+    <string id="Travellers_Roguery_Appended_Text" text="[Roguery - lvl {rogueryLevel}]" />
+    <string id="Travellers_Steward_Appended_Text" text="[Steward - lvl {stewardLevel}]" />
+    <string id="Travellers_Event_Desc" text="Your party is on the move not to far from {closestSettlement} when you come across {familyDemonym} family with a broken waggon. The wheel seems to have come off and rolled down into a small river not to far from you. The family is asking if you can help them by any chance. They explain that they are running from bandits who kept blackmailing them for money and tried to kidnap their two daughters on more than one occasion. They have brought everything they own with them in the hope of starting a new life somewhere. How do you proceed?" />
+    <string id="Travellers_Event_Option_1" text="[Engineering] Offer to repair the waggon" />
+    <string id="Travellers_Event_Option_1_Hover" text="You should be able to fix it. {engineeringAppendedText}" />
+    <string id="Travellers_Event_Option_2" text="[Roguery] Raid them!" />
+    <string id="Travellers_Event_Option_2_Hover" text="Take everything of value {rogueryAppendedText}" />
+    <string id="Travellers_Event_Option_3" text="[Steward] Offer them dinner" />
+    <string id="Travellers_Event_Option_3_Hover" text="While your men load all their belongings into a spare wagon you have {stewardAppendedText}" />
+    <string id="Travellers_Event_Option_4" text="Offer them directions" />
+    <string id="Travellers_Event_Option_4_Hover" text="Give them directions to the nearest settlement" />
+    <string id="Travellers_Event_Option_5" text="Ignore them" />
+    <string id="Travellers_Event_Option_5_Hover" text="This isn't your problem" />
+    <string id="Travellers_Event_Button_Text_1" text="Choose" />
+    <string id="Travellers_Event_Button_Text_2" text="Done" />
+    <string id="Travellers_Event_Choice_1" text="You take a look at the damage to the wagon and you quickly confirm you suspicion that you are able to fix this with relative ease. Your tell you men to fetch some tools from the back of the party and you order one man down into the river to fetch the wheel. You tell the family to sit in the shade beneath a giant oak tree while the men fetches something to drink and some snacks for the two children.\n\nYou waste no time getting to work and with the assistance of a few men you are able to quickly repair the wagon and put it back in working order. You head over to the family to inform them that they may now head towards their destination again. The man doesn't know how to thank you so you inform him that no thank you are necessary. You help the family load up their wagon again and you give them directions to {closestSettlement}, which is the closest place the wagon can get a proper repair. The man says he will tell stories of you when he arrives at his destination. You assure him that it won't be necessary but you don't think he'll listen." />
+    <string id="Travellers_Event_Choice_2" text="You order your men to take them family away from the wagon but not to hurt them in any way as there are young children with them. The father attempts to resist but he is quickly overpowered by a few men who binds his hands. His wife begs him to just comply with what we are saying and he reluctantly agrees.\n\nYour men starts to empty the wagon and look for anything valuable, but you are disappointed when your can't find anything worthwhile. You take the mother aside and tells her to her dismay that if she doesn't give up all the valuables they have, you will kill her husband, sell the children into slavery and keep her for company. Of course you don't mean this, but the important thing is that she thinks you do.\nShe quickly tell you where to find their valuable possessions. After sometime you managed to steal {stolenGold} gold from them. Once you are done with everything you free the woman and tell her that once all your men are out of sight she may release her family. You're not entirely heartless so you give them directions to the nearest settlement where they may find help." />
+    <string id="Travellers_Event_Choice_3" text="You can clearly see that the family is exhausted and probably haven't eaten in a days. You ask them if you can prepare dinner for them. They reluctantly agree as they have only just met you. You order your men to set up a small tent for the family while you personally cook dinner for the family. Your men will take care of the wagon. You and some of your men bring out something to drink for the family and you get to work prepping dinner.\n\nSome time passes and just as the family have finished eating, your men inform you that the wagon is repaired. You help the family load up their wagon and give them directions to the nearest settlement. The mother tells you what an extraordinary man you are." />
+    <string id="Travellers_Event_Choice_4" text="You stop and ask them what happened. You learn that they lost control of their wagon and it ended up in the ditch. You take a look at the wagon to see if you are able to fix it, but it seems to complex for you or any of your men to fix. They ask if they may buy a wagon from your party for 500 gold, but you tell them you will give them one for free as they are in distress and need a hand. You have your men bring fourth a wagon. You, the family and some of your men help to transfer their item to the new wagon\n\nOnce done you give them directions to the nearest settlement. They thank you yet again as you leave." />
+    <string id="Travellers_Event_Choice_5" text="You cannot be bothered by this now so you tell them you cannot help. They try to ask you for directions but you ignore them, but after a few feet you can hear that some of your men have stopped to give them directions to the nearest settlement and some coin." />
+    <string id="Travellers_Event_Msg_1" text="{heroName} was able to fix the stranded family's wagon." />
+    <string id="Travellers_Event_Msg_2" text="{heroName} stole {stolenGold} gold from the stranded family and left them." />
+    <string id="Travellers_Event_Msg_3" text="{heroName} made dinner while the men fixed the wagon." />
+    <string id="Travellers_Event_Msg_4" text="{heroName} gave the stranded family directions to {closestSettlement}." />
+    <string id="Travellers_Event_Msg_5" text="{heroName} ignored the stranded family. At least the men aren't that heartless!" />
+        
+    
+
     <!--Demonyms-->
-    <string id="Demonym_Empire_Noun" text="an imperial" />
-    <string id="Demonym_Vlandia_Noun" text="a vlandian" />
-    <string id="Demonym_Sturgia_Noun" text="a sturgian" />
-    <string id="Demonym_Battania_Noun" text="a battanian" />
-    <string id="Demonym_Aserai_Noun" text="an aserai" />
-    <string id="Demonym_Khuzait_Noun" text="a khuzait" />
-    <string id="Demonym_Empire" text="imperial" />
-    <string id="Demonym_Vlandia" text="vlandian" />
-    <string id="Demonym_Sturgia" text="sturgian" />
-    <string id="Demonym_Battania" text="battanian" />
-    <string id="Demonym_Aserai" text="aserai" />
-    <string id="Demonym_Khuzait" text="khuzait" />
-    <string id="Demonym_Error" text="Error - Could not fetch Demonym" />
+    <string id="Demonym_Empire_Noun" text="an Imperial" />
+    <string id="Demonym_Vlandia_Noun" text="a Vlandian" />
+    <string id="Demonym_Sturgia_Noun" text="a Sturgian" />
+    <string id="Demonym_Battania_Noun" text="a Battanian" />
+    <string id="Demonym_Aserai_Noun" text="an Aserai" />
+    <string id="Demonym_Khuzait_Noun" text="a Khuzait" />
+    <string id="Demonym_Empire" text="Imperial" />
+    <string id="Demonym_Vlandia" text="Vlandian" />
+    <string id="Demonym_Sturgia" text="Sturgian" />
+    <string id="Demonym_Battania" text="Battanian" />
+    <string id="Demonym_Aserai" text="Aserai" />
+    <string id="Demonym_Khuzait" text="Khuzait" />
+    <string id="Demonym_Default_Noun" text="an Imperial" />
+    <string id="Demonym_Default" text="Imperial" />
 
 
 
@@ -978,9 +1012,9 @@
     <string id="gender_female_adjective" text="her" />
     <string id="gender_female_pronoun_cap" text="Hers" />
     <string id="gender_female_pronoun" text="hers" />
-    
-    
-    
+
+
+
     <!--MCM STUFF-->
     <string id="mcm_adv_heading" text="Encounter Chance Settings" />
     <string id="mcm_adv1_hint" text="The chance to see this event will increase the higher the number. Please note that if all events are equal, they will all have the same chance." />
@@ -1036,10 +1070,12 @@
     <string id="mcm_adv49_text" text="Refugees" />
     <string id="mcm_adv50_text" text="Bottoms Up" />
     <string id="mcm_adv51_text" text="Dreaded Sweats" />
-	<string id="mcm_adv52_text" text="Travelling Merchant" />
-	<string id="mcm_adv53_text" text="Army Games" />
-	<string id="mcm_adv54_text" text="Companion Admire" />
-	<string id="mcm_adv55_text" text="Army Invite" />
+    <string id="mcm_adv52_text" text="Travelling Merchant" />
+    <string id="mcm_adv53_text" text="Army Games" />
+    <string id="mcm_adv54_text" text="Companion Admire" />
+    <string id="mcm_adv55_text" text="Army Invite" />
+    <string id="mcm_adv56_text" text="Feast" />
+    <string id="mcm_adv57_text" text="Travellers" />
 
     <string id="mcm_gs_heading" text="1. General Settings" />
     <string id="mcm_gs1_text" text="1. Initial Setup" />
@@ -1053,7 +1089,12 @@
     <string id="mcm_gs5_text" text="5. Max minutes between events" />
     <string id="mcm_gs5_hint" text="Maximum amount of minutes in between events." />
     <string id="mcm_gs6_text" text="6. General Level XP Multiplier " />
-    <string id="mcm_gs6_hint" text="The number used to define the XP multiplier. Higher number means higher XP." />   
+    <string id="mcm_gs6_hint" text="The number used to define the XP multiplier. Higher number means higher XP." />
+    <string id="mcm_gs7_text" text="7. Disable Supernatural Events" />
+    <string id="mcm_gs7_hint" text="Check this if you want to disable all supernatural events. This is mostly to keep the game as canon as possible." />
+    <string id="mcm_gs8_text" text="8. Disable Skill Checks" />
+    <string id="mcm_gs8_hint" text="Some events have skill checks that open up new options. This disables that and makes all options available." />
+
     <string id="mcm_afe_heading" text="A Flirtatious Encounter" />
     <string id="mcm_afe1_text" text="1. Min Age" />
     <string id="mcm_afe1_hint" text="The minimum age the target must be." />
@@ -1064,22 +1105,22 @@
     <string id="mcm_afe4_text" text="4. Max Relationship Gain" />
     <string id="mcm_afe4_hint" text="The maximum amount of relationship increase." />
     <string id="mcm_afe5_text" text="5. Deactivate event" />
-    <string id="mcm_afe5_hint" text="If you dont want this event to show up you can deactivate it." />
-	<string id="mcm_ag_heading" text="Army Games" />
-	<string id="mcm_ag1_text" text="1. Crop % gain" />
-	<string id="mcm_ag1_hint" text="The amount of % the cohesion is increased." />
-	<string id="mcm_ag2_text" text="2. Min amount of morale gain" />
-	<string id="mcm_ag2_hint" text="The minimum amount of morale the party gains." />
-	<string id="mcm_ag3_text" text="3. Max amount of morale gain" />
-	<string id="mcm_ag3_hint" text="The maximum amount of morale the party gains." />
-	<string id="mcm_ag4_text" text="4. Deactivate event" />
-	<string id="mcm_ag4_hint" text="If you dont want this event to show up you can deactivate it." />	
-	<string id="mcm_ai_heading" text="Army Invite" />
-	<string id="mcm_ai1_text" text="1. Deactivate event" />
-	<string id="mcm_ai1_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_afe5_hint" text="If you don't want this event to show up you can deactivate it." />
+    <string id="mcm_ag_heading" text="Army Games" />
+    <string id="mcm_ag1_text" text="1. Crop % gain" />
+    <string id="mcm_ag1_hint" text="The amount of % the cohesion is increased." />
+    <string id="mcm_ag2_text" text="2. Min amount of morale gain" />
+    <string id="mcm_ag2_hint" text="The minimum amount of morale the party gains." />
+    <string id="mcm_ag3_text" text="3. Max amount of morale gain" />
+    <string id="mcm_ag3_hint" text="The maximum amount of morale the party gains." />
+    <string id="mcm_ag4_text" text="4. Deactivate event" />
+    <string id="mcm_ag4_hint" text="If you don't want this event to show up you can deactivate it." />
+    <string id="mcm_ai_heading" text="Army Invite" />
+    <string id="mcm_ai1_text" text="1. Deactivate event" />
+    <string id="mcm_ai1_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_aot_heading" text="Ahead of Time" />
     <string id="mcm_aot1_text" text="1. Deactivate event" />
-    <string id="mcm_aot1_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_aot1_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_ba_heading" text="Bandit Ambush" />
     <string id="mcm_ba1_text" text="1. Min % gold loss" />
     <string id="mcm_ba1_hint" text="The minimum amount of gold loss that can occur from this event." />
@@ -1090,7 +1131,7 @@
     <string id="mcm_ba4_text" text="4. Max amount of bandits" />
     <string id="mcm_ba4_hint" text="Maximum amount of bandits to spawn." />
     <string id="mcm_ba5_text" text="5. Deactivate event" />
-    <string id="mcm_ba5_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ba5_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_bk_heading" text="Bee Kind" />
     <string id="mcm_bk1_text" text="1. Damage to inflict" />
     <string id="mcm_bk1_hint" text="The amount of damage the player gets." />
@@ -1099,12 +1140,12 @@
     <string id="mcm_bk3_text" text="3. Additional damage" />
     <string id="mcm_bk3_hint" text="The amount of additional damage the player gets if they fail to react." />
     <string id="mcm_bk4_text" text="4. Deactivate event" />
-    <string id="mcm_bk4_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bk4_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_bm_heading" text="Bet Money" />
     <string id="mcm_bm1_text" text="1. Percent of money to bet" />
     <string id="mcm_bm1_hint" text="The amount of money in percent to bet." />
     <string id="mcm_bm2_text" text="2. Deactivate event" />
-    <string id="mcm_bm2_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bm2_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_bb_heading" text="Beggar Begging" />
     <string id="mcm_bb1_text" text="1. Min gold to give" />
     <string id="mcm_bb1_hint" text="Minimum amount of gold to give to the beggar." />
@@ -1115,14 +1156,14 @@
     <string id="mcm_bb4_text" text="4. Max renown gained." />
     <string id="mcm_bb4_hint" text="Maximum amount of renown to gain." />
     <string id="mcm_bb5_text" text="5. Deactivate event" />
-    <string id="mcm_bb5_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bb5_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_bs_heading" text="BirdSong" />
     <string id="mcm_bs1_text" text="1. Min amount of morale gain" />
     <string id="mcm_bs1_hint" text="The minimum amount of morale the party gains." />
     <string id="mcm_bs2_text" text="2. Max amount of morale gain" />
     <string id="mcm_bs2_hint" text="The maximum amount of morale the party gains." />
     <string id="mcm_bs3_text" text="3. Deactivate event" />
-    <string id="mcm_bs3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bs3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_bp_heading" text="Birthday Party" />
     <string id="mcm_bp1_text" text="1. Min Attending" />
     <string id="mcm_bp1_hint" text="Minimum amount of guests attending." />
@@ -1153,7 +1194,7 @@
     <string id="mcm_bp14_text" text="14. Max gold to loot" />
     <string id="mcm_bp14_hint" text="Minimum amount of gold you can loot from the party." />
     <string id="mcm_bp15_text" text="15. Deactivate event" />
-    <string id="mcm_bp15_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bp15_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_bu_heading" text="Bottoms Up" />
     <string id="mcm_bu_text" text="1.Min Morale Gain" />
     <string id="mcm_bu_text" text="The minimum morale gain." />
@@ -1164,31 +1205,31 @@
     <string id="mcm_bu_text" text="4.Max gold" />
     <string id="mcm_bu_text" text="The maximum gold reward." />
     <string id="mcm_bu_text" text="3. Deactivate event" />
-    <string id="mcm_bu_text" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bu_text" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_bc_heading" text="Bumper Crop" />
     <string id="mcm_bc1_text" text="1. Crop % gain" />
     <string id="mcm_bc1_hint" text="The amount of % the crop yield is increased." />
     <string id="mcm_bc2_text" text="2. Deactivate event" />
-    <string id="mcm_bc2_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bc2_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_bop_heading" text="Bumper Crop" />
     <string id="mcm_bop1_text" text="1. Min amount of prisoners" />
     <string id="mcm_bop1_hint" text="The minimum amount of prisoners the settlement gains." />
     <string id="mcm_bop2_text" text="2. Max amount of prisoners" />
     <string id="mcm_bop2_hint" text="The maximum amount of prisoners the settlement gains." />
     <string id="mcm_bop3_text" text="3. Deactivate event" />
-    <string id="mcm_bop3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bop3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_cc_heading" text="Chatting Commanders" />
     <string id="mcm_cc1_text" text="1. Crop % gain" />
     <string id="mcm_cc1_hint" text="The amount of % the cohesion is increased." />
     <string id="mcm_cc2_text" text="2. Deactivate event" />
-    <string id="mcm_cc2_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_cc2_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_cr_heading" text="Courier" />
     <string id="mcm_bu_text" text="1.Min Morale Gain" />
     <string id="mcm_bu_text" text="The minimum morale gain." />
     <string id="mcm_bu_text" text="2.Max Morale Gain" />
     <string id="mcm_bu_text" text="The maximum morale gain." />
     <string id="mcm_bu_text" text="3. Deactivate event" />
-    <string id="mcm_bu_text" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bu_text" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_dc_heading" text="Diseased City" />
     <string id="mcm_dc1_text" text="1. Base Success Chance" />
     <string id="mcm_dc1_hint" text="The base success chance that this event will have a positive outcome." />
@@ -1197,7 +1238,7 @@
     <string id="mcm_dc4_text" text="4. Percentage Lost" />
     <string id="mcm_dc4_hint" text="The amount of men lost at the stricken settlement." />
     <string id="mcm_dc5_text" text="5. Deactivate event" />
-    <string id="mcm_dc5_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_dc5_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_ds_heading" text="Dreaded Sweats" />
     <string id="mcm_ds_text" text="1.Min Morale Loss" />
     <string id="mcm_ds_text" text="The minimum morale loss." />
@@ -1208,7 +1249,7 @@
     <string id="mcm_ds_text" text="4.Max victims" />
     <string id="mcm_ds_text" text="The maximum amount of victims." />
     <string id="mcm_ds_text" text="3. Deactivate event" />
-    <string id="mcm_ds_text" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ds_text" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_dy_heading" text="Dysentery" />
     <string id="mcm_dy_text" text="1.Min Morale Loss" />
     <string id="mcm_dy_text" text="The minimum morale loss." />
@@ -1219,21 +1260,21 @@
     <string id="mcm_dy_text" text="4.Max victims" />
     <string id="mcm_dy_text" text="The maximum amount of victims." />
     <string id="mcm_dy_text" text="3. Deactivate event" />
-    <string id="mcm_dy_text" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_dy_text" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_et_heading" text="Eager Troops" />
     <string id="mcm_et1_text" text="1. Min Troops Gained" />
     <string id="mcm_et1_hint" text="Minimum amount of troops gained." />
     <string id="mcm_et2_text" text="2. Max Troops Gained" />
     <string id="mcm_et2_hint" text="Maximum amount of troops gained." />
     <string id="mcm_et3_text" text="3. Deactivate event" />
-    <string id="mcm_et3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_et3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_ed_heading" text="Exotic Drinks" />
     <string id="mcm_ed1_text" text="1. Min Price" />
     <string id="mcm_ed1_hint" text="Minimum price for the drink." />
     <string id="mcm_ed2_text" text="2. Max Price" />
     <string id="mcm_ed2_hint" text="Maximum price for the drink." />
     <string id="mcm_ed3_text" text="3. Deactivate event" />
-    <string id="mcm_ed3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ed3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_fsf_heading" text="Fallen Soldier Family" />
     <string id="mcm_fsf1_text" text="1. Min Compensation" />
     <string id="mcm_fsf1_hint" text="Minimum amount compensation to the family." />
@@ -1244,14 +1285,14 @@
     <string id="mcm_fsf4_text" text="4. Max Loot" />
     <string id="mcm_fsf4_hint" text="Maximum amount of gold looted." />
     <string id="mcm_fsf5_text" text="5. Deactivate event" />
-    <string id="mcm_fsf5_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_fsf5_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_ff_heading" text="Fantastic Fighters" />
     <string id="mcm_ff1_text" text="1. Min Renown Gained" />
     <string id="mcm_ff1_hint" text="Minimum amount of renown gained." />
     <string id="mcm_ff2_text" text="2. Max Renown Gained" />
     <string id="mcm_ff2_hint" text="Maximum amount of renown gained." />
     <string id="mcm_ff3_text" text="3. Deactivate event" />
-    <string id="mcm_ff3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ff3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_fs_heading" text="Fishing Spot" />
     <string id="mcm_fs1_text" text="1. Min Soldiers" />
     <string id="mcm_fs1_hint" text="Minimum soldiers to go fishing." />
@@ -1264,7 +1305,7 @@
     <string id="mcm_fs5_text" text="5. Max Morale Gained" />
     <string id="mcm_fs5_hint" text="Maximum amount of morale gained." />
     <string id="mcm_fs6_text" text="6. Deactivate event" />
-    <string id="mcm_fs6_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_fs6_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_fof_heading" text="Food Fight" />
     <string id="mcm_fof1_text" text="1. Min Soldiers" />
     <string id="mcm_fof1_hint" text="Minimum soldiers to go fishing." />
@@ -1275,21 +1316,21 @@
     <string id="mcm_fof4_text" text="4. Min Morale Gained" />
     <string id="mcm_fof4_hint" text="Minimum amount of morale gained." />
     <string id="mcm_fof5_text" text="5. Deactivate event" />
-    <string id="mcm_fof5_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_fof5_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_gr_heading" text="Bee Kind" />
     <string id="mcm_gr1_text" text="1. Min Food loss percent" />
     <string id="mcm_gr1_hint" text="Minimum amount of food lost during this event." />
     <string id="mcm_gr2_text" text="2. Max Food loss percent" />
     <string id="mcm_gr2_hint" text="Maximum amount of food lost during this event." />
     <string id="mcm_gr3_text" text="3. Deactivate event" />
-    <string id="mcm_gr3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_gr3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_hs_heading" text="Hot Springs" />
     <string id="mcm_hs1_text" text="1. Min Morale Gain" />
     <string id="mcm_hs1_hint" text="Minimum amount of morale gained during this event." />
     <string id="mcm_hs2_text" text="2. Max Morale Gain" />
     <string id="mcm_hs2_hint" text="Maximum amount morale gained lost during this event." />
     <string id="mcm_hs3_text" text="3. Deactivate event" />
-    <string id="mcm_hs3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_hs3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_ht_heading" text="Hunting Trip" />
     <string id="mcm_ht1_text" text="1. Min Soldiers" />
     <string id="mcm_ht1_hint" text="Minimum soldiers to go hunting." />
@@ -1306,10 +1347,10 @@
     <string id="mcm_ht7_text" text="7. Max Yield Multiplier" />
     <string id="mcm_ht7_hint" text="The amount of prey you catch is multiplied by this to get meat resources." />
     <string id="mcm_ht8_text" text="8. Deactivate event" />
-    <string id="mcm_ht8_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ht8_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_lits_heading" text="Lights in the Skies" />
     <string id="mcm_lits1_text" text="1. Deactivate event" />
-    <string id="mcm_lits1_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_lits1_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_ls_heading" text="Logging Site" />
     <string id="mcm_ls1_text" text="1. Min Soldiers" />
     <string id="mcm_ls1_hint" text="Minimum soldiers to go logging." />
@@ -1324,7 +1365,7 @@
     <string id="mcm_ls6_text" text="6. Max Yield Multiplier" />
     <string id="mcm_ls6_hint" text="The amount of trees you chop is multiplied by this to get hardwood resources." />
     <string id="mcm_ls7_text" text="7. Deactivate event" />
-    <string id="mcm_ls7_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ls7_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_lu_heading" text="Look Up" />
     <string id="mcm_lu1_text" text="1. Tree Shake Chance" />
     <string id="mcm_lu1_hint" text="The chance player will successfully shake the gold out of the tree." />
@@ -1339,7 +1380,7 @@
     <string id="mcm_lu6_text" text="6. Max Gold Gained" />
     <string id="mcm_lu6_hint" text="Maximum amount of gold gained from this event" />
     <string id="mcm_lu7_text" text="7. Deactivate event" />
-    <string id="mcm_lu7_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_lu7_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_mg_heading" text="Mass Grave" />
     <string id="mcm_mg1_text" text="1. Min Soldiers" />
     <string id="mcm_mg1_hint" text="The minimum amount of men who will make the discovery." />
@@ -1354,17 +1395,17 @@
     <string id="mcm_mg6_text" text="6. Max Base Morale Loss" />
     <string id="mcm_mg6_hint" text="Maximum amount of morale that can be lost." />
     <string id="mcm_mg7_text" text="7. Deactivate event" />
-    <string id="mcm_mg7_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_mg7_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_mo_heading" text="Momentum" />
     <string id="mcm_mo1_text" text="1. Deactivate event" />
-    <string id="mcm_mo1_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_mo1_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_notw_heading" text="Not of this World" />
     <string id="mcm_notw1_text" text="1. Min Soldiers To Disappear" />
     <string id="mcm_notw1_hint" text="The minimum amount of men who will disappear." />
     <string id="mcm_notw2_text" text="2. Max Soldiers To Disappear" />
     <string id="mcm_notw2_hint" text="The maximum amount of men who will disappear." />
     <string id="mcm_notw3_text" text="3. Deactivate event" />
-    <string id="mcm_notw3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_notw3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_or_heading" text="Old Ruins" />
     <string id="mcm_or1_text" text="1. Min Soldiers" />
     <string id="mcm_or1_hint" text="The minimum amount of men who come with you." />
@@ -1377,22 +1418,22 @@
     <string id="mcm_or5_text" text="5. Max Gold Found" />
     <string id="mcm_or5_hint" text="The maximum amount of gold to be found." />
     <string id="mcm_or6_text" text="6. Deactivate event" />
-    <string id="mcm_or6_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_or6_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_pc_heading" text="Passing Comet" />
     <string id="mcm_pc1_text" text="1. Deactivate event" />
-    <string id="mcm_pc1_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_pc1_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_pw_heading" text="Perfect Weather" />
     <string id="mcm_pw1_text" text="1. Min Morale Gain" />
     <string id="mcm_pw1_hint" text="Minimum amount of morale gained during this event." />
     <string id="mcm_pw2_text" text="2. Max Morale Gain" />
     <string id="mcm_pw2_hint" text="Maximum amount morale gained lost during this event." />
     <string id="mcm_pw3_text" text="3. Deactivate event" />
-    <string id="mcm_pw3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_pw3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_pr_heading" text="Prisoner Rebellion" />
     <string id="mcm_pr1_text" text="1. Min Prisoners" />
     <string id="mcm_pr1_hint" text="Minimum amount of prisoners needed for the event to trigger." />
     <string id="mcm_pr2_text" text="2. Deactivate event" />
-    <string id="mcm_pr2_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_pr2_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_pt_heading" text="Prisoner Transfer" />
     <string id="mcm_pt1_text" text="1. Min Prisoners" />
     <string id="mcm_pt1_hint" text="Minimum amount of prisoners to transfer." />
@@ -1403,7 +1444,7 @@
     <string id="mcm_pt4_text" text="4. Max Price for each prisoner" />
     <string id="mcm_pt4_hint" text="Maximum price for each prisoner." />
     <string id="mcm_pt5_text" text="5. Deactivate event" />
-    <string id="mcm_pt5_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_pt5_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_rm_heading" text="Prisoner Rebellion" />
     <string id="mcm_rm1_text" text="1. Min Gold Lost" />
     <string id="mcm_rm1_hint" text="Minimum amount of gold that can be lost during this event." />
@@ -1414,7 +1455,7 @@
     <string id="mcm_rm4_text" text="4. Max Men Lost" />
     <string id="mcm_rm4_hint" text="Maximum amount of gold that can be lost during this event." />
     <string id="mcm_rm5_text" text="5. Deactivate event" />
-    <string id="mcm_rm5_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_rm5_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_rf_heading" text="Refugees" />
     <string id="mcm_rf_text" text="1.Min Soldiers" />
     <string id="mcm_rf_text" text="The minimum amount of recruits." />
@@ -1429,7 +1470,7 @@
     <string id="mcm_rf_text" text="6.Max Captives" />
     <string id="mcm_rf_text" text="The maximum amount of Captives." />
     <string id="mcm_rf_text" text="7. Deactivate event" />
-    <string id="mcm_rf_text" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_rf_text" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_ro_heading" text="Robbery" />
     <string id="mcm_ro1_text" text="1. Min Gold Lost" />
     <string id="mcm_ro1_hint" text="Minimum amount of gold that can be lost during this event." />
@@ -1440,35 +1481,35 @@
     <string id="mcm_ro4_text" text="4. Max Renown Lost" />
     <string id="mcm_ro4_hint" text="Maximum amount of renown that can be lost during this event." />
     <string id="mcm_ro5_text" text="5. Deactivate event" />
-    <string id="mcm_ro5_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ro5_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_rs_heading" text="Runaway Son" />
     <string id="mcm_rs1_text" text="1. Min Gold Gained" />
     <string id="mcm_rs1_hint" text="Minimum amount of gold that can gained during this event." />
     <string id="mcm_rs2_text" text="2. Max Gold Gain" />
     <string id="mcm_rs2_hint" text="Maximum amount of gold that can gained during this event." />
     <string id="mcm_rs3_text" text="3. Deactivate event" />
-    <string id="mcm_rs3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_rs3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_ss_heading" text="Secret Singer" />
     <string id="mcm_ss1_text" text="1. Min Morale Gained" />
     <string id="mcm_ss1_hint" text="Minimum amount of morale that can gained during this event." />
     <string id="mcm_ss2_text" text="2. Max Morale Gain" />
     <string id="mcm_ss2_hint" text="Maximum amount of morale that can gained during this event." />
     <string id="mcm_ss3_text" text="3. Deactivate event" />
-    <string id="mcm_ss3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ss3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_sr_heading" text="Speedy Recovery" />
     <string id="mcm_sr1_text" text="1. Min Men To Heal" />
     <string id="mcm_sr1_hint" text="Minimum amount of men that can be healed during this event." />
     <string id="mcm_sr2_text" text="2. Max Men To Heal" />
     <string id="mcm_sr2_hint" text="Maximum amount of of men that can be healed during this event." />
     <string id="mcm_sr3_text" text="3. Deactivate event" />
-    <string id="mcm_sr3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_sr3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_sd_heading" text="Successful Deeds" />
     <string id="mcm_sd1_text" text="1. Min Influence Gained" />
     <string id="mcm_sd1_hint" text="Minimum amount of influence that can be gained during this event." />
     <string id="mcm_sd2_text" text="2. Max Influence Gained" />
     <string id="mcm_sd2_hint" text="Maximum amount of of influence that can be gained during this event." />
     <string id="mcm_sd3_text" text="3. Deactivate event" />
-    <string id="mcm_sd3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_sd3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_sus_heading" text="Sudden Storm" />
     <string id="mcm_sus1_text" text="1. Min Horses Killed" />
     <string id="mcm_sus1_hint" text="Minimum amount of horses killed during this event." />
@@ -1487,22 +1528,35 @@
     <string id="mcm_sus8_text" text="8. Max Meat Multiplier" />
     <string id="mcm_sus8_hint" text="Maximum meat multiplier used to calculate the amount of meat yielded during this event." />
     <string id="mcm_sus9_text" text="9. Deactivate event" />
-    <string id="mcm_sus9_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_sus9_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_se_heading" text="Supernatural Encounter" />
     <string id="mcm_se1_text" text="1. Deactivate event" />
-    <string id="mcm_se1_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_se1_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_tp_heading" text="Target Practice" />
     <string id="mcm_tp1_text" text="1. Min Soldiers" />
     <string id="mcm_tp2_text" text="2. % Difference Of Current Troop" />
     <string id="mcm_tp3_text" text="3. Deactivate event" />
-    <string id="mcm_tp3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_tp3_hint" text="If you don't want this event to show up you can deactivate it." />
+    <string id="mcm_tr_heading" text="Travellers" />
+    <string id="mcm_tr1_text" text="1. Min Gold" />
+    <string id="mcm_tr1_hint" text="Minimum amount of gold you can get out of this event." />
+    <string id="mcm_tr2_text" text="2. Max Gold" />
+    <string id="mcm_tr2_hint" text="Maximum amount of gold you can get out of this event." />
+    <string id="mcm_tr3_text" text="3. Min Engineering Level" />
+    <string id="mcm_tr3_hint" text="Lowest level to unlock the engineering option." />
+    <string id="mcm_tr4_text" text="4. Min Roguery Level" />
+    <string id="mcm_tr4_hint" text="Lowest level to unlock the roguery option." />
+    <string id="mcm_tr5_text" text="5. Min Steward Level" />
+    <string id="mcm_tr5_hint" text="Lowest level to unlock the steward option." />
+    <string id="mcm_tr6_text" text="6. Deactivate event" />
+    <string id="mcm_tr6_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_tm_heading" text="Travelling Merchant" />
     <string id="mcm_tm1_text" text="1. Min Loot" />
     <string id="mcm_tm1_hint" text="Minimum Amount of Loot" />
     <string id="mcm_tm2_text" text="2. Max Loot" />
     <string id="mcm_tm2_hint" text="Maximum Amount of Loot" />
     <string id="mcm_tm3_text" text="3. Deactivate event" />
-    <string id="mcm_tm3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_tm3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_uw_heading" text="Unexpected Wedding" />
     <string id="mcm_uw1_text" text="1. Min Gold To Give" />
     <string id="mcm_uw1_hint" text="Minimum amount of gold you give as a gift." />
@@ -1519,27 +1573,27 @@
     <string id="mcm_uw7_text" text="7. Max Gold To Raid" />
     <string id="mcm_uw7_hint" text="Maximum amount of gold that can be raided during this event." />
     <string id="mcm_uw8_text" text="8. Deactivate event" />
-    <string id="mcm_uw8_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_uw8_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_uc_heading" text="Undercooked" />
     <string id="mcm_uc1_text" text="1. Min Soldiers To Injure" />
     <string id="mcm_uc1_hint" text="The minimum amount of soldiers to get injured during this event." />
     <string id="mcm_uc2_text" text="2. Max Soldiers To Injure" />
     <string id="mcm_uc2_hint" text="The maximum amount of soldiers to get injured during this event." />
     <string id="mcm_uc3_text" text="3. Deactivate event" />
-    <string id="mcm_uc3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_uc3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_vg_heading" text="Violated Girl" />
     <string id="mcm_vg1_text" text="1. Min Gold Compensation" />
     <string id="mcm_vg1_hint" text="The minimum amount of compensation the girl gets during this event." />
     <string id="mcm_vg2_text" text="2. Max Gold Compensation" />
     <string id="mcm_vg2_hint" text="The maximum amount of compensation the girl gets during this event." />
     <string id="mcm_vg3_text" text="3. Deactivate event" />
-    <string id="mcm_vg3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_vg3_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_wl_heading" text="Wandering Livestock" />
     <string id="mcm_wl1_text" text="1. Min Food" />
     <string id="mcm_wl1_hint" text="The minimum amount of food to get during this event." />
     <string id="mcm_wl2_text" text="2. Max Food" />
     <string id="mcm_wl2_hint" text="The maximum amount of food to get during this event." />
     <string id="mcm_wl3_text" text="3. Deactivate event" />
-    <string id="mcm_wl3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_wl3_hint" text="If you don't want this event to show up you can deactivate it." />
   </strings>
 </base>

@@ -201,7 +201,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var eventOptionEText = new TextObject(
                     "{=Travellers_Event_Choice_5}You cannot be bothered by this now so you tell them you cannot help. They try to ask you for directions but you ignore them, but after a few feet you can hear that some of " +
-                    "your men have stopped to give them directions to the nearest settlement and some coin. ")
+                    "your men have stopped to give them directions to the nearest settlement and some coin.")
                 .ToString();
             
             
@@ -228,7 +228,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg5 =new TextObject(
-                    "{=Travellers_Event_Msg_5}Ignored the stranded family. At least the men aren't that heartless!")
+                    "{=Travellers_Event_Msg_5}{heroName} ignored the stranded family. At least the men aren't that heartless!")
+                .SetTextVariable("heroName", heroName)
                 .ToString();
 
             var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null, elements =>
