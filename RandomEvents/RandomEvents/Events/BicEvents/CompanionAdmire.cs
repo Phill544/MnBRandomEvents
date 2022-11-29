@@ -307,8 +307,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var CompanionGender = CompanionIsFemale ? "female" : "male";
 					var gender = GenderAssignment.GetTheGenderAssignment(CompanionGender, false, "subjective");
 
-					var scoutrelation = Hero.MainHero.GetRelation(MobileParty.MainParty.EffectiveScout);
-					Hero.MainHero.SetPersonalRelation(MobileParty.MainParty.EffectiveScout, scoutrelation + 15);
+					var scoutRelation = Hero.MainHero.GetRelation(MobileParty.MainParty.EffectiveScout);
+					Hero.MainHero.SetPersonalRelation(MobileParty.MainParty.EffectiveScout, scoutRelation + 15);
 
 					var eventTitle = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
@@ -398,8 +398,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var CompanionGender = CompanionIsFemale ? "female" : "male";
 					var gender = GenderAssignment.GetTheGenderAssignment(CompanionGender, false, "subjective");
 
-					var scoutrelation = Hero.MainHero.GetRelation(MobileParty.MainParty.EffectiveScout);
-					Hero.MainHero.SetPersonalRelation(MobileParty.MainParty.EffectiveScout, scoutrelation + 15);
+					var scoutRelation = Hero.MainHero.GetRelation(MobileParty.MainParty.EffectiveScout);
+					Hero.MainHero.SetPersonalRelation(MobileParty.MainParty.EffectiveScout, scoutRelation + 15);
 
 					var eventTitle = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 
@@ -489,8 +489,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					var CompanionGender = CompanionIsFemale ? "female" : "male";
 					var gender = GenderAssignment.GetTheGenderAssignment(CompanionGender, false, "subjective");
 
-					var scoutrelation = Hero.MainHero.GetRelation(MobileParty.MainParty.EffectiveScout);
-					Hero.MainHero.SetPersonalRelation(MobileParty.MainParty.EffectiveScout, scoutrelation + 15);
+					var scoutRelation = Hero.MainHero.GetRelation(MobileParty.MainParty.EffectiveScout);
+					Hero.MainHero.SetPersonalRelation(MobileParty.MainParty.EffectiveScout, scoutRelation + 15);
 
 					var eventTitle = new TextObject("{=CompanionAdmire_Title}Companion Admiration").ToString();
 

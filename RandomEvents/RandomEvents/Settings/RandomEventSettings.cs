@@ -161,14 +161,21 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         
         public DreadedSweatsData DreadedSweatsData { get; } = new DreadedSweatsData("DreadedSweats", MCM_MenuConfig_Chances.Instance.Dreaded_Sweats_Chance);
+        
 
         public ArmyGamesData ArmyGamesData { get; } = new ArmyGamesData("ArmyGames", MCM_MenuConfig_Chances.Instance.Army_Games_Chance);
 
+        
         public CompanionAdmireData CompanionAdmireData { get; } = new CompanionAdmireData("CompanionAdmire", MCM_MenuConfig_Chances.Instance.Companion_Admire_Chance); 
+        
 
         public ArmyInviteData ArmyInviteData { get; } = new ArmyInviteData("ArmyInvite", MCM_MenuConfig_Chances.Instance.ArmyInvite_Chance);
+        
 
         public FeastData FeastData { get; } = new FeastData("Feast", MCM_MenuConfig_Chances.Instance.Feast_Chance);
+        
+        
+        public TravellersData TravellersData { get; } = new TravellersData("Travellers", 1024);
         #endregion
     }
 }
