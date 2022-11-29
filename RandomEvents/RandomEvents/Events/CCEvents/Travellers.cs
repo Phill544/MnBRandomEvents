@@ -15,9 +15,19 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class Travellers : BaseEvent
     {
+        private readonly int minGoldStolen;
+        private readonly int maxGoldStolen;
+        private readonly int minEngineeringLevel;
+        private readonly int minRogueryLevel;
+        private readonly int minStewardLevel;
 
         public Travellers() : base(ModSettings.RandomEvents.TravellersData)
         {
+            minGoldStolen = MCM_MenuConfig_P_Z.Instance.TR_minGoldStolen;
+            maxGoldStolen = MCM_MenuConfig_P_Z.Instance.TR_maxGoldStolen;
+            minEngineeringLevel = MCM_MenuConfig_P_Z.Instance.TR_engineeringLevel;
+            minRogueryLevel = MCM_MenuConfig_P_Z.Instance.TR_rogueryLevel;
+            minStewardLevel = MCM_MenuConfig_P_Z.Instance.TR_stewardLevel;
         }
 
         public override void CancelEvent()
@@ -26,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return true;
+            return MCM_MenuConfig_P_Z.Instance.TR_Disable == false && CurrentTimeOfDay.IsEvening && CurrentTimeOfDay.IsMidday && CurrentTimeOfDay.IsMorning;
         }
 
         public override void StartEvent()
@@ -50,26 +60,58 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
 
-            var stolenGold = MBRandom.RandomInt(2500, 10000);
+            var stolenGold = MBRandom.RandomInt(minGoldStolen, maxGoldStolen);
 
             var canRepairWagon = false;
             var canRaidWagon = false;
             var canOfferDinner = false;
-            
-            if (engineeringLevel >= 75)
+
+            var engineeringAppendedText = "";
+            var rogueryAppendedText = "";
+            var stewardAppendedText = "";
+
+            if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
             {
+                
                 canRepairWagon = true;
-            }
-
-            if (rogueryLevel >= 125)
-            {
                 canRaidWagon = true;
-            }
-
-            if (stewardLevel >= 100)
-            {
                 canOfferDinner = true;
+                
+                engineeringAppendedText = new TextObject("{=Travellers_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
+                rogueryAppendedText = new TextObject("{=Travellers_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
+                stewardAppendedText = new TextObject("{=Travellers_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
+                
             }
+            else
+            {
+                if (engineeringLevel >= minEngineeringLevel)
+                {
+                    canRepairWagon = true;
+                    
+                    engineeringAppendedText = new TextObject("{=Travellers_Engineering_Appended_Text}[Engineering - lvl {engineeringLevel}]")
+                        .SetTextVariable("engineeringLevel", engineeringLevel)
+                        .ToString();
+                }
+
+                if (rogueryLevel >= minRogueryLevel)
+                {
+                    canRaidWagon = true;
+                    
+                    rogueryAppendedText = new TextObject("{=Travellers_Roguery_Appended_Text}[Roguery - lvl {rogueryLevel}]")
+                        .SetTextVariable("rogueryLevel", rogueryLevel)
+                        .ToString();
+                }
+
+                if (stewardLevel >= minStewardLevel)
+                {
+                    canOfferDinner = true;
+                    
+                    stewardAppendedText = new TextObject("{=Travellers_Steward_Appended_Text}[Steward - lvl {stewardLevel}]")
+                        .SetTextVariable("stewardLevel", stewardLevel)
+                        .ToString();
+                }
+            }
+            
 
             var eventDescription = new TextObject(
                     "{=Travellers_Event_Desc}Your party is on the move not to far from {closestSettlement} when you come across {familyDemonym} family with a broken waggon. The wheel seems to have come off and " +
@@ -81,18 +123,18 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
 
             var eventOption1 = new TextObject("{=Travellers_Event_Option_1}[Engineering] Offer to repair the waggon").ToString();
-            var eventOption1Hover = new TextObject("{=Travellers_Event_Option_1_Hover}You should be able to fix it. [Engineering - lvl {engineeringLevel}]")
-                .SetTextVariable("engineeringLevel", engineeringLevel)
+            var eventOption1Hover = new TextObject("{=Travellers_Event_Option_1_Hover}You should be able to fix it. {engineeringAppendedText}")
+                .SetTextVariable("engineeringAppendedText", engineeringAppendedText)
                 .ToString();
 
             var eventOption2 = new TextObject("{=Travellers_Event_Option_2}[Roguery] Raid them!").ToString();
-            var eventOption2Hover = new TextObject("{=Travellers_Event_Option_2_Hover}Take everything of value [Roguery - lvl {rogueryLevel}]")
-                .SetTextVariable("rogueryLevel", rogueryLevel)
+            var eventOption2Hover = new TextObject("{=Travellers_Event_Option_2_Hover}Take everything of value {rogueryAppendedText}")
+                .SetTextVariable("rogueryAppendedText", rogueryAppendedText)
                 .ToString();
 
             var eventOption3 = new TextObject("{=Travellers_Event_Option_3}[Steward] Offer them dinner").ToString();
-            var eventOption3Hover = new TextObject("{=Travellers_Event_Option_3_Hover}While your men load all their belongings into a spare wagon you have [Steward - lvl {stewardLevel}]")
-                .SetTextVariable("stewardLevel", stewardLevel)
+            var eventOption3Hover = new TextObject("{=Travellers_Event_Option_3_Hover}While your men load all their belongings into a spare wagon you have {stewardAppendedText}")
+                .SetTextVariable("stewardAppendedText", stewardAppendedText)
                 .ToString();
 
             var eventOption4 = new TextObject("{=Travellers_Event_Option_4}Offer them directions").ToString();

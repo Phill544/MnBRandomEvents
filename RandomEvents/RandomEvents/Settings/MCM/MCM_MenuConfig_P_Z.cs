@@ -145,6 +145,17 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
         #endregion
         
+        #region Travellers - Variables
+
+        public bool TR_Disable { get; private set; }
+        public int TR_minGoldStolen { get; private set; }
+        public int TR_maxGoldStolen { get; private set; }
+        public int TR_engineeringLevel { get; private set; }
+        public int TR_rogueryLevel { get; private set; }
+        public int TR_stewardLevel { get; private set; }
+
+        #endregion
+        
         #region Unexcpected Wedding - Variables
         
         public bool UW_Disable { get; private set; }
@@ -395,6 +406,24 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var tm2_hint = new TextObject("{=mcm_tm2_hint}Maximum Amount of Loot").ToString();
             var tm3_text = new TextObject("{=mcm_tm3_text}3. Deactivate event").ToString();
             var tm3_hint = new TextObject("{=mcm_tm3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+
+            #endregion
+            
+            #region Travellers - Strings
+
+            var tr_heading = new TextObject("{=mcm_tr_heading}Travellers").ToString();
+            var tr1_text = new TextObject("{=mcm_tr1_text}1. Min Gold").ToString();
+            var tr1_hint = new TextObject("{=mcm_tr1_hint}Minimum amount of gold you can get out of this event.").ToString();
+            var tr2_text = new TextObject("{=mcm_tr2_text}2. Max Gold").ToString();
+            var tr2_hint = new TextObject("{=mcm_tr2_hint}Maximum amount of gold you can get out of this event.").ToString();
+            var tr3_text = new TextObject("{=mcm_tr3_text}3. Min Engineering Level").ToString();
+            var tr3_hint = new TextObject("{=mcm_tr3_hint}Lowest level to unlock the engineering option.").ToString();
+            var tr4_text = new TextObject("{=mcm_tr4_text}4. Min Roguery Level").ToString();
+            var tr4_hint = new TextObject("{=mcm_tr4_hint}Lowest level to unlock the roguery option.").ToString();
+            var tr5_text = new TextObject("{=mcm_tr5_text}5. Min Steward Level").ToString();
+            var tr5_hint = new TextObject("{=mcm_tr5_hint}Lowest level to unlock the steward option.").ToString();
+            var tr6_text = new TextObject("{=mcm_tr6_text}6. Deactivate event").ToString();
+            var tr6_hint = new TextObject("{=mcm_tr6_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
             
@@ -685,6 +714,25 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
                 #endregion
                 
+                #region Travellers - Builder
+
+                .CreateGroup(tr_heading, groupBuilder => groupBuilder
+                    .AddInteger("TR1", tr1_text, 500, 12500, new ProxyRef<int>(() => TR_minGoldStolen, o => TR_minGoldStolen = o), integerBuilder => integerBuilder
+                        .SetHintText(tr1_hint))
+                    .AddInteger("TR2", tr2_text, 500, 12500, new ProxyRef<int>(() => TR_maxGoldStolen, o => TR_maxGoldStolen = o), integerBuilder => integerBuilder
+                        .SetHintText(tr2_hint))
+                    .AddInteger("TR3", tr3_text, 25, 275, new ProxyRef<int>(() => TR_engineeringLevel, o => TR_engineeringLevel = o), integerBuilder => integerBuilder
+                        .SetHintText(tr3_hint))
+                    .AddInteger("TR4", tr4_text, 25, 275, new ProxyRef<int>(() => TR_rogueryLevel, o => TR_rogueryLevel = o), integerBuilder => integerBuilder
+                        .SetHintText(tr4_hint))
+                    .AddInteger("TR5", tr5_text, 25, 275, new ProxyRef<int>(() => TR_stewardLevel, o => TR_stewardLevel = o), integerBuilder => integerBuilder
+                        .SetHintText(tr5_hint))
+                    .AddBool("TR6", tr6_text, new ProxyRef<bool>(() => TR_Disable, o => TR_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(tr6_hint))
+                )
+
+                #endregion
+                
                 #region Unexpected Wedding - Builder
                 
                 .CreateGroup(uw_heading, groupBuilder => groupBuilder
@@ -895,6 +943,17 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.TM_Disable = false;
             Instance.TM_minloot = 1000;
             Instance.TM_maxloot = 6000;
+
+            #endregion
+            
+            #region Travellers
+
+            Instance.TR_Disable = false;
+            Instance.TR_minGoldStolen = 2500;
+            Instance.TR_maxGoldStolen = 10000;
+            Instance.TR_engineeringLevel = 75;
+            Instance.TR_rogueryLevel = 125;
+            Instance.TR_stewardLevel = 100;
 
             #endregion
 
