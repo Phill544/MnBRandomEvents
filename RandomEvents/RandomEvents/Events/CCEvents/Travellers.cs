@@ -36,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_P_Z.Instance.TR_Disable == false && CurrentTimeOfDay.IsEvening && CurrentTimeOfDay.IsMidday && CurrentTimeOfDay.IsMorning;
+            return MCM_MenuConfig_P_Z.Instance.TR_Disable == false && (CurrentTimeOfDay.IsEvening || CurrentTimeOfDay.IsMidday || CurrentTimeOfDay.IsMorning);
         }
 
         public override void StartEvent()
