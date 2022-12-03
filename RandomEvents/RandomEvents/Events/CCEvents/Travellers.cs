@@ -123,12 +123,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
 
             var eventOption1 = new TextObject("{=Travellers_Event_Option_1}[Engineering] Offer to repair the waggon").ToString();
-            var eventOption1Hover = new TextObject("{=Travellers_Event_Option_1_Hover}You should be able to fix it. {engineeringAppendedText}")
+            var eventOption1Hover = new TextObject("{=Travellers_Event_Option_1_Hover}You should be able to fix it.\n{engineeringAppendedText}")
                 .SetTextVariable("engineeringAppendedText", engineeringAppendedText)
                 .ToString();
 
             var eventOption2 = new TextObject("{=Travellers_Event_Option_2}[Roguery] Raid them!").ToString();
-            var eventOption2Hover = new TextObject("{=Travellers_Event_Option_2_Hover}Take everything of value {rogueryAppendedText}")
+            var eventOption2Hover = new TextObject("{=Travellers_Event_Option_2_Hover}Take everything of value\n{rogueryAppendedText}")
                 .SetTextVariable("rogueryAppendedText", rogueryAppendedText)
                 .ToString();
 

@@ -3,7 +3,6 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 using CryingBuffalo.RandomEvents.Helpers;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;

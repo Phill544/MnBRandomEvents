@@ -28,6 +28,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int maxRenownGain;
         private readonly int minGoldLooted;
         private readonly int maxGoldLooted;
+        private readonly int minRogueryLevel;
 
         public BirthdayParty() : base(ModSettings.RandomEvents.BirthdayPartyData)
         {
@@ -45,6 +46,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             maxRenownGain = MCM_MenuConfig_A_F.Instance.BP_MaxRenownGain;
             minGoldLooted = MCM_MenuConfig_A_F.Instance.BP_MinGoldLooted;
             maxGoldLooted = MCM_MenuConfig_A_F.Instance.BP_MaxGoldLooted;
+            minRogueryLevel = MCM_MenuConfig_A_F.Instance.BP_MinRogueryLevel;
         }
 
         public override void CancelEvent()
@@ -72,9 +74,35 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var goldGiven = MBRandom.RandomInt(minGoldGiven, maxGoldGiven);
             var renownGain = MBRandom.RandomInt(minRenownGain, maxRenownGain);
             var goldLooted = MBRandom.RandomInt(minGoldLooted, maxGoldLooted);
+            
+            var rogueryLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Roguery);
 
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
             
+            var canRaidWedding = false;
+
+            var rogueryAppendedText = "";
+
+            if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
+            {
+                
+                canRaidWedding = true;
+                rogueryAppendedText = new TextObject("{=BirthdayParty_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
+
+            }
+            else
+            {
+                if (rogueryLevel >= minRogueryLevel)
+                {
+                    canRaidWedding = true;
+                    
+                    rogueryAppendedText = new TextObject("{=BirthdayParty_Roguery_Appended_Text}[Roguery - lvl {rogueryLevel}]")
+                        .SetTextVariable("rogueryLevel", rogueryLevel)
+                        .ToString();
+                }
+            }
+
+
             var eventTitle = new TextObject("{=BirthdayParty_Title}The Birthday Party!").ToString();
 
             var eventDescription = new TextObject(
@@ -90,22 +118,26 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var eventOption2 = new TextObject("{=BirthdayParty_Event_Option_2}Give the girls some gold").ToString();
             var eventOption2Hover = new TextObject("{=BirthdayParty_Event_Option_2_Hover}You don't have time to stay but you can still be nice, right?").ToString();
+
+            var eventOption3 = new TextObject("{=BirthdayParty_Event_Option_3}Raid the party").ToString();
+            var eventOption3Hover = new TextObject("{=BirthdayParty_Event_Option_3_Hover}Have some fun.\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
             
-            var eventOption3 = new TextObject("{=BirthdayParty_Event_Option_3}Leave").ToString();
-            var eventOption3Hover = new TextObject("{=BirthdayParty_Event_Option_3_Hover}Don't have time").ToString();
-            
-            var eventOption4 = new TextObject("{=BirthdayParty_Event_Option_4}Raid the party").ToString();
-            var eventOption4Hover = new TextObject("{=BirthdayParty_Event_Option_4_Hover}Have some fun").ToString();
+            var eventOption4 = new TextObject("{=BirthdayParty_Event_Option_4}Leave").ToString();
+            var eventOption4Hover = new TextObject("{=BirthdayParty_Event_Option_4_Hover}Don't have time").ToString();
 
             var eventButtonText = new TextObject("{=BirthdayParty_Event_Button_Text}Okay").ToString();
             
-            var inquiryElements = new List<InquiryElement>
+            var inquiryElements = new List<InquiryElement>();
+            
+            inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover));
+            inquiryElements.Add(new InquiryElement("b", eventOption2, null, true, eventOption2Hover));
+            
+            if (canRaidWedding)
             {
-                new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
-                new InquiryElement("b", eventOption2, null, true, eventOption2Hover),
-                new InquiryElement("c", eventOption3, null, true, eventOption3Hover),
-                new InquiryElement("d", eventOption4, null, true, eventOption4Hover)
-            };
+                inquiryElements.Add(new InquiryElement("c", eventOption3, null, true, eventOption3Hover));
+            }
+            
+            inquiryElements.Add(new InquiryElement("d", eventOption4, null, true, eventOption4Hover));
 
             var eventOptionAText = new TextObject(
                 "{=BirthdayParty_Event_Choice_1}You and {yourMenAttending} of your men decide to stay for the party " +

@@ -39,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var notables = Settlement.CurrentSettlement.Notables.ToList();
             var gangLeaders = notables.Where(character => character.IsGangLeader).ToList();
 
-            return MCM_MenuConfig_P_Z.Instance.RO_Disable == false && gangLeaders.Count != 0 && CampaignTime.Now.IsNightTime;
+            return MCM_MenuConfig_P_Z.Instance.RO_Disable == false && gangLeaders.Count != 0 && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()

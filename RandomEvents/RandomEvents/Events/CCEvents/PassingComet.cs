@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
-using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -22,7 +22,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_P_Z.Instance.PC_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CampaignTime.Now.IsNightTime;
+			return MCM_MenuConfig_P_Z.Instance.PC_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
 		}
 
 		public override void StartEvent()

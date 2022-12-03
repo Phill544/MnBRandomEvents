@@ -106,6 +106,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public int BP_MaxRenownGain{ get; private set; }
         public int BP_MinGoldLooted{ get; private set; }
         public int BP_MaxGoldLooted{ get; private set; }
+        public int BP_MinRogueryLevel{ get; private set; }
         
         #endregion
         
@@ -400,8 +401,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var bp13_hint = new TextObject("{=mcm_bp13_hint}Minimum amount of gold you can loot from the party.").ToString();
             var bp14_text = new TextObject("{=mcm_bp14_text}14. Max gold to loot").ToString();
             var bp14_hint = new TextObject("{=mcm_bp14_hint}Minimum amount of gold you can loot from the party.").ToString();
-            var bp15_text = new TextObject("{=mcm_bp15_text}15. Deactivate event").ToString();
-            var bp15_hint = new TextObject("{=mcm_bp15_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var bp15_text = new TextObject("{=mcm_bp15_text}15. Min Roguery Level").ToString();
+            var bp15_hint = new TextObject("{=mcm_bp15_hint}Lowest level to unlock the roguery option.").ToString();
+            var bp16_text = new TextObject("{=mcm_bp16_text}16. Deactivate event").ToString();
+            var bp16_hint = new TextObject("{=mcm_bp16_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -776,8 +779,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                     .SetHintText(bp13_hint))
                 .AddInteger("BP14", bp14_text,250,6500, new ProxyRef<int>(() => BP_MaxGoldLooted, o => BP_MaxGoldLooted = o), integerBuilder => integerBuilder
                     .SetHintText(bp14_hint))
-                .AddBool("BP15", bp15_text, new ProxyRef<bool>(() => BP_Disable, o => BP_Disable = o), boolBuilder => boolBuilder
+                .AddInteger("BP15", bp15_text,25,275, new ProxyRef<int>(() => BP_MinRogueryLevel, o => BP_MinRogueryLevel = o), integerBuilder => integerBuilder
                     .SetHintText(bp15_hint))
+                .AddBool("BP16", bp16_text, new ProxyRef<bool>(() => BP_Disable, o => BP_Disable = o), boolBuilder => boolBuilder
+                    .SetHintText(bp16_hint))
                 )
                 #endregion
                 
@@ -1112,6 +1117,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.BP_MaxRenownGain = 30;
             Instance.BP_MinGoldLooted = 500;
             Instance.BP_MaxGoldLooted = 1500;
+            Instance.BP_MinRogueryLevel = 125;
 
             #endregion
 
