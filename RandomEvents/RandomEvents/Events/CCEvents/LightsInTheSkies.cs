@@ -124,7 +124,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventTextUnknown, true, false, eventButtonText1, null, null, null), true);
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText5, true, false, eventButtonText2, null, null, null), true);
 
-            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
 
             MobileParty.MainParty.SetIsDisorganized(true);
 

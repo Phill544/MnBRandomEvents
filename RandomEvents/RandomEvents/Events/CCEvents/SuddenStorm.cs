@@ -221,7 +221,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menDied, false);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                                 break;
                             case "b":
                                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
@@ -230,7 +230,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menDied, false);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                                 break;
                             case "c":
                                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null, null), true);
@@ -238,7 +238,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 MobileParty.MainParty.ItemRoster.AddToCounts(meat, meatFromHorse);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                                 
                                 break;
                             case "d":
@@ -248,7 +248,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menDied, false);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
+                                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                                 
                                 break;
                             default:

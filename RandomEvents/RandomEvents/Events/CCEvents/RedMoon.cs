@@ -161,7 +161,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             
                             Hero.MainHero.ChangeHeroGold(-goldLostToReligion);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             break;
                         case "b":
@@ -170,7 +170,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             Hero.MainHero.ChangeHeroGold(-goldLostToReligion);
                             MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menLostToReligion, false);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             break;
                         case "c":
@@ -178,7 +178,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             
                             MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menLostToReligion, false);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                             
                             break;
                         case "d":
@@ -187,7 +187,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             Hero.MainHero.ChangeHeroGold(-goldLostToReligion);
                             MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menLostToReligion, false);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                             
                             break;
                         default:

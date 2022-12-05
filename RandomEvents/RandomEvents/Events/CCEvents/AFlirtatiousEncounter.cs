@@ -19,6 +19,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int maxWomanAge;
         private readonly float minRelationshipIncrease;
         private readonly float maxRelationshipIncrease;
+        private readonly int minCharmLevel;
 
         public AFlirtatiousEncounter() : base(ModSettings.RandomEvents.AFlirtatiousEncounterData)
         {
@@ -26,6 +27,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             maxWomanAge = MCM_MenuConfig_A_F.Instance.AFE_maxWomanAge;
             minRelationshipIncrease = MCM_MenuConfig_A_F.Instance.AFE_minRelationshipIncrease;
             maxRelationshipIncrease = MCM_MenuConfig_A_F.Instance.AFE_maxRelationshipIncrease;
+            minCharmLevel = MCM_MenuConfig_A_F.Instance.AFE_charmSkillLevel;
         }
 
         public override void CancelEvent()
@@ -66,7 +68,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                      ).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
             
             
-
             if (randomHero != null)
             {
 
@@ -99,11 +100,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 }
                 else
                 {
-                    if (charmLevel >= 100)
+                    if (charmLevel >= minCharmLevel)
                     {
                         canCharmTarget = true;
                     
-                        charmAppendedText = new TextObject("{=AFlirtatiousEncounter_Roguery_Appended_Text}[AFlirtatiousEncounter - lvl {charmLevel}]")
+                        charmAppendedText = new TextObject("{=AFlirtatiousEncounter_Roguery_Appended_Text}[Charm - lvl {charmLevel}]")
                             .SetTextVariable("charmLevel", charmLevel)
                             .ToString();
                     }

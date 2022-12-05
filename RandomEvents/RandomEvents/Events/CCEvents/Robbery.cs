@@ -224,23 +224,23 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 
                 Clan.PlayerClan.Renown = clanRenown - renownLost;
                 Hero.MainHero.ChangeHeroGold(-goldLost);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
             }
             else if (convincedThugs)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText_Convinced_Outcome, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_MED_Outcome));
             }
             else if (charmedThugs)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText_Charmed_Outcome, true, false, eventButtonText, null, null, null), true);
                 Hero.MainHero.ChangeHeroGold(-100);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_MED_Outcome));
             }
             else if (intimidatedThugs)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText_Intimidated_Outcome, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_MED_Outcome));
             }
             else if (gangLeaderGoodRelation)
             {

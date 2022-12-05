@@ -130,7 +130,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 150);
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(goldLooted);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_EVIL_Outcome));
                             
                             
                             break;

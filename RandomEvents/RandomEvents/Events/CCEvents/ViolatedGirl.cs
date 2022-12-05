@@ -57,31 +57,77 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "She claims that while you were in the previous town she was violated by one of your men. What do you do?")
                 .SetTextVariable("closestSettlement", closestSettlement)
                 .ToString();
+
+            var heroRogueryLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Roguery);
             
-            var eventOption1 = new TextObject("{=ViolatedGirl_Event_Option_1}Find the man").ToString();
+            var canKillWoman = false;
+            var canViolateWoman = false;
+            
+            var rogueryAppendedText = "";
+            
+            if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
+            {
+                
+                canKillWoman = true;
+                canViolateWoman = true;
+                
+                rogueryAppendedText = new TextObject("{=ViolatedGirl_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
+
+            }
+            else
+            {
+                if (heroRogueryLevel >= 125)
+                {
+                    canKillWoman = true;
+                    
+                    rogueryAppendedText = new TextObject("{=ViolatedGirl_Engineering_Appended_Text}[Roguery - lvl {rogueryLevel}]")
+                        .SetTextVariable("rogueryLevel", heroRogueryLevel)
+                        .ToString();
+                }
+
+                if (heroRogueryLevel >= 225)
+                {
+                    canViolateWoman = true;
+                    
+                    rogueryAppendedText = new TextObject("{=ViolatedGirl_Roguery_Appended_Text}[Roguery - lvl {rogueryLevel}]")
+                        .SetTextVariable("rogueryLevel", heroRogueryLevel)
+                        .ToString();
+                }
+            }
+            var eventOption1 = new TextObject("{=ViolatedGirl_Event_Option_1}Find the culprit").ToString();
             var eventOption1Hover = new TextObject("{=ViolatedGirl_Event_Option_1_Hover}This is unacceptable behaviour!").ToString();
             
             var eventOption2 = new TextObject("{=ViolatedGirl_Event_Option_2}Ask how much to keep this quiet?").ToString();
-            var eventOption2Hover = new TextObject("{=ViolatedGirl_Event_Option_2_Hover}Everyone has a price").ToString();
+            var eventOption2Hover = new TextObject("{=ViolatedGirl_Event_Option_2_Hover}Everyone has a price.").ToString();
             
             var eventOption3 = new TextObject("{=ViolatedGirl_Event_Option_3}Tell her to leave").ToString();
-            var eventOption3Hover = new TextObject("{=ViolatedGirl_Event_Option_3_Hover}Leave NOW").ToString();
+            var eventOption3Hover = new TextObject("{=ViolatedGirl_Event_Option_3_Hover}Leave... NOW!").ToString();
             
             var eventOption4 = new TextObject("{=ViolatedGirl_Event_Option_4}Kill her").ToString();
-            var eventOption4Hover = new TextObject("{=ViolatedGirl_Event_Option_4_Hover}She is too dangerous to be left alive").ToString();
+            var eventOption4Hover = new TextObject("{=ViolatedGirl_Event_Option_4_Hover}She is too dangerous to be left alive.\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
+            
+            var eventOption5 = new TextObject("{=ViolatedGirl_Event_Option_5}Violate her yourself").ToString();
+            var eventOption5Hover = new TextObject("{=ViolatedGirl_Event_Option_5_Hover}Teach her to be quiet next time.\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
             
             var eventButtonText1 = new TextObject("{=ViolatedGirl_Event_Button_Text_1}Okay").ToString();
             var eventButtonText2 = new TextObject("{=ViolatedGirl_Event_Button_Text_2}Done").ToString();
             
-
-            var inquiryElements = new List<InquiryElement>
-            {
-                new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
-                new InquiryElement("b", eventOption2, null, true, eventOption2Hover),
-                new InquiryElement("c", eventOption3, null, true, eventOption3Hover),
-                new InquiryElement("d", eventOption4, null, true, eventOption4Hover)
-            };
+            var inquiryElements = new List<InquiryElement>();
             
+            inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover));
+            inquiryElements.Add(new InquiryElement("b", eventOption2, null, true, eventOption2Hover));
+            inquiryElements.Add(new InquiryElement("c", eventOption3, null, true, eventOption3Hover));
+            
+            if (canKillWoman)
+            {
+                inquiryElements.Add(new InquiryElement("d", eventOption4, null, true, eventOption4Hover));
+            }
+
+            if (canViolateWoman)
+            {
+                inquiryElements.Add(new InquiryElement("e", eventOption5, null, true, eventOption5Hover));
+            }
+
             var eventOptionAText = new TextObject(
                     "{=ViolatedGirl_Event_Choice_1}You tell her that this sort of behaviour is unacceptable. You order all your men to attention as you and the girl search for the man. " +
                     "She finally stops and points to one of your men. You order him to you.\n You ask him if her story is true and he confirms that it is. You immediately punch him in the " +
@@ -114,19 +160,39 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "and dig a shallow grave. You bury the girl and return to camp. The men inform you that the cleanup is done. No one will ever know what transpired here today.")
                 .ToString();
             
+            var eventOptionEText = new TextObject(
+                    "{=ViolatedGirl_Event_Choice_5}You grab her by her hair and pull out you trusty dagger. You start cutting away layers of clothes on the girl until she has nothing on her. You tell her that " +
+                    "if she wants to live beyond today she will do as you tell her. She nods in agreement. You guide her to your bed where you push her down and have your way with her.\n\nAfter a few hours " +
+                    "you lie in the bed next to her. She has fallen asleep in your bed, probably exhausted from the ordeal. You wake her up and tells her to get out of here but not before warning her about the " +
+                    "consequences of telling anyone what happened. You hand her a piece of and old sack that she can use to cover herself and once she has it on, you have a few of your men throw her out of the camp. " +
+                    "She better hope not to cross your path again!")
+                .ToString();
+            
             var eventMsg1 =new TextObject(
-                    "{=ViolatedGirl_Event_Msg_1}You gave the girl {compensation} gold and had the perpetrator sent to the dungeons of {closestCity}.")
+                    "{=ViolatedGirl_Event_Msg_1}{heroName} gave the girl {compensation} gold and had the perpetrator sent to the dungeons of {closestCity}.")
+                .SetTextVariable("heroName", heroName)
                 .SetTextVariable("compensation", compensation)
                 .SetTextVariable("closestCity", closestCity)
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=ViolatedGirl_Event_Msg_2}You bought the girls silence for {totalCompensation} gold.")
+                    "{=ViolatedGirl_Event_Msg_2}{heroName} bought the girl's silence for {totalCompensation} gold.")
+                .SetTextVariable("heroName", heroName)
                 .SetTextVariable("totalCompensation", totalCompensation)
                 .ToString();
             
             var eventMsg3 =new TextObject(
-                    "{=ViolatedGirl_Event_Msg_3}There are rumors that {heroName} killed someone to keep a secret.")
+                    "{=ViolatedGirl_Event_Msg_3}{heroName} didn't buy the girl's story.")
+                .SetTextVariable("heroName", heroName)
+                .ToString();
+            
+            var eventMsg4 =new TextObject(
+                    "{=ViolatedGirl_Event_Msg_4}There are rumors that {heroName} killed a young girl to keep a secret.")
+                .SetTextVariable("heroName", heroName)
+                .ToString();
+            
+            var eventMsg5 =new TextObject(
+                    "{=ViolatedGirl_Event_Msg_5}There are rumors that {heroName} has done something unforgivable.")
                 .SetTextVariable("heroName", heroName)
                 .ToString();
 
@@ -139,21 +205,26 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "a":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-compensation);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                             break;
                         case "b":
                         {
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-totalCompensation);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                             break;
                         }
                         case "c":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null, null), true);
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                             break;
                         case "d":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
+                            break;
+                        case "e":
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionEText, true, false, eventButtonText2, null, null, null), true);
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg5, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             break;
                         default:
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
