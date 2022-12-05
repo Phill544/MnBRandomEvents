@@ -208,6 +208,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public int FSF_MaxFamilyCompensation { get; private set; }
         public int FSF_MinGoldLooted { get; private set; }
         public int FSF_MaxGoldLooted { get; private set; }
+        public int FSF_MinRogueryLevel { get; private set; }
 
         #endregion
         
@@ -439,7 +440,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             
             #region Bunch of Prisoners - Strings
             
-            var bop_heading = new TextObject("{=mcm_bop_heading}Bumper Crop").ToString();
+            var bop_heading = new TextObject("{=mcm_bop_heading}Bunch of Prisoners").ToString();
             var bop1_text = new TextObject("{=mcm_bop1_text}1. Min amount of prisoners").ToString();
             var bop1_hint = new TextObject("{=mcm_bop1_hint}The minimum amount of prisoners the settlement gains.").ToString();
             var bop2_text = new TextObject("{=mcm_bop2_text}2. Max amount of prisoners").ToString();
@@ -562,8 +563,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var fsf3_hint = new TextObject("{=mcm_fsf3_hint}Minimum amount of gold looted.").ToString();
             var fsf4_text = new TextObject("{=mcm_fsf4_text}4. Max Loot").ToString();
             var fsf4_hint = new TextObject("{=mcm_fsf4_hint}Maximum amount of gold looted.").ToString();
-            var fsf5_text = new TextObject("{=mcm_fsf5_text}5. Deactivate event").ToString();
-            var fsf5_hint = new TextObject("{=mcm_fsf5_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var fsf5_text = new TextObject("{=mcm_fsf5_text}5. Min Roguery Level").ToString();
+            var fsf5_hint = new TextObject("{=mcm_fsf5_hint}Lowest level to unlock the roguery option.").ToString();
+            var fsf6_text = new TextObject("{=mcm_fsf6_text}6. Deactivate event").ToString();
+            var fsf6_hint = new TextObject("{=mcm_fsf6_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -594,7 +597,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var fs2_text = new TextObject("{=mcm_fs2_text}2. Max Soldiers").ToString();
             var fs2_hint = new TextObject("{=mcm_fs2_hint}Maximum soldiers to go fishing.").ToString();
             var fs3_text = new TextObject("{=mcm_fs3_text}3. Max Fish Catch").ToString();
-            var fs3_hint = new TextObject("{=mcm_fs3_hint}Minimum amount of fish to catch.").ToString();
+            var fs3_hint = new TextObject("{=mcm_fs3_hint}Maximum amount of fish to catch.").ToString();
             var fs4_text = new TextObject("{=mcm_fs4_text}4. Min Morale Gained").ToString();
             var fs4_hint = new TextObject("{=mcm_fs4_hint}Minimum amount of morale gained.").ToString();
             var fs5_text = new TextObject("{=mcm_fs5_text}5. Max Morale Gained").ToString();
@@ -607,14 +610,14 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             #region Food Fight - Strings
 
             var fof_heading = new TextObject("{=mcm_fof_heading}Food Fight").ToString();
-            var fof1_text = new TextObject("{=mcm_fof1_text}1. Min Soldiers").ToString();
-            var fof1_hint = new TextObject("{=mcm_fof1_hint}Minimum soldiers to go fishing.").ToString();
-            var fof2_text = new TextObject("{=mcm_fof2_text}2. Max Soldiers").ToString();
-            var fof2_hint = new TextObject("{=mcm_fof2_hint}Maximum soldiers to go fishing.").ToString();
-            var fof3_text = new TextObject("{=mcm_fof3_text}3. Max Fish Catch").ToString();
-            var fof3_hint = new TextObject("{=mcm_fof3_hint}Minimum amount of fish to catch.").ToString();
-            var fof4_text = new TextObject("{=mcm_fof4_text}4. Min Morale Gained").ToString();
-            var fof4_hint = new TextObject("{=mcm_fof4_hint}Minimum amount of morale gained.").ToString();
+            var fof1_text = new TextObject("{=mcm_fof1_text}1. Min Food Loss").ToString();
+            var fof1_hint = new TextObject("{=mcm_fof1_hint}Minimum amount of food loss").ToString();
+            var fof2_text = new TextObject("{=mcm_fof2_text}2. Max Food Loss").ToString();
+            var fof2_hint = new TextObject("{=mcm_fof2_hint}Maximum amount of food loss.").ToString();
+            var fof3_text = new TextObject("{=mcm_fof3_text}3. Min Morale Loss").ToString();
+            var fof3_hint = new TextObject("{=mcm_fof3_hint}Minimum amount of morale lost.").ToString();
+            var fof4_text = new TextObject("{=mcm_fof4_text}4. Max Morale Loss").ToString();
+            var fof4_hint = new TextObject("{=mcm_fof4_hint}Maximum amount of morale lost.").ToString();
             var fof5_text = new TextObject("{=mcm_fof5_text}5. Deactivate event").ToString();
             var fof5_hint = new TextObject("{=mcm_fof5_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
@@ -950,8 +953,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(fsf3_hint))
                         .AddInteger("FSF4", fsf4_text,500,1500, new ProxyRef<int>(() => FSF_MaxGoldLooted, o => FSF_MaxGoldLooted = o), integerBuilder => integerBuilder
                             .SetHintText(fsf4_hint))
-                        .AddBool("FSF5", fsf5_text, new ProxyRef<bool>(() => FSF_Disable, o => FSF_Disable = o), boolBuilder => boolBuilder
+                        .AddInteger("FSF5", fsf5_text,25,275, new ProxyRef<int>(() => FSF_MinRogueryLevel, o => FSF_MinRogueryLevel = o), integerBuilder => integerBuilder
                             .SetHintText(fsf5_hint))
+                        .AddBool("FSF6", fsf6_text, new ProxyRef<bool>(() => FSF_Disable, o => FSF_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(fsf6_hint))
                     )
 
                 #endregion
@@ -1218,6 +1223,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.FSF_MaxFamilyCompensation = 1750;
             Instance.FSF_MinGoldLooted = 750;
             Instance.FSF_MaxGoldLooted = 1500;
+            Instance.FSF_MinRogueryLevel = 125;
 
             #endregion
             

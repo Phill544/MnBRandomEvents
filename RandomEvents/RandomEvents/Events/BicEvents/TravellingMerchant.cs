@@ -19,8 +19,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public TravellingMerchant() : base(Settings.ModSettings.RandomEvents.TravellingMerchantData)
 		{
-			minLoot = MCM_MenuConfig_P_Z.Instance.TM_minloot;
-			maxLoot = MCM_MenuConfig_P_Z.Instance.TM_maxloot;
+			minLoot = MCM_MenuConfig_P_Z.Instance.TM_minLoot;
+			maxLoot = MCM_MenuConfig_P_Z.Instance.TM_maxLoot;
 
 		}
 		public override void CancelEvent()

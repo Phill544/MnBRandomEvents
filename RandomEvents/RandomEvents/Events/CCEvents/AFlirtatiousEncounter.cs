@@ -126,7 +126,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 var eventOption2 = new TextObject("{=AFlirtatiousEncounter_Event_Option_2}Buy her a drink").ToString();
                 var eventOption2Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_2_Hover}Always a gentleman.").ToString();
 
-                var eventOption3 = new TextObject("{=AFlirtatiousEncounter_Event_Option_3}Hit on her").ToString();
+                var eventOption3 = new TextObject("{=AFlirtatiousEncounter_Event_Option_3}[Charm] Hit on her").ToString();
                 var eventOption3Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_3_Hover}She's cute!\n{charmAppendedText}").SetTextVariable("charmAppendedText", charmAppendedText).ToString();
 
                 var eventOption4 = new TextObject("{=AFlirtatiousEncounter_Event_Option_4}Be an ass").ToString();

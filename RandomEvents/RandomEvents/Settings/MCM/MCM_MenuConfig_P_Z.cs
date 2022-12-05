@@ -82,6 +82,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public bool RS_Disable { get; private set; }
         public int RS_MinGoldGained { get; private set; }
         public int RS_MaxGoldGained { get; private set; }
+        public int RS_minRogueryLevel { get; private set; }
         
         #endregion
         
@@ -140,8 +141,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         #region Travelling Merchant - Variables
 
         public bool TM_Disable { get; private set; }
-        public int TM_minloot { get; private set; }
-        public int TM_maxloot { get; private set; }
+        public int TM_minLoot { get; private set; }
+        public int TM_maxLoot { get; private set; }
 
         #endregion
         
@@ -166,6 +167,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public int UW_EmbarrassedSoliderMaxGold { get; private set; }
         public int UW_MinGoldRaided { get; private set; }
         public int UW_MaxGoldRaided { get; private set; }
+        public int UW_MinRogueryLevel { get; private set; }
         
         #endregion
         
@@ -182,6 +184,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public bool VG_Disable { get; private set; }
         public int VG_MinCompensation { get; private set; }
         public int VG_MaxCompensation { get; private set; }
+        public int VG_MinRogueryLevel { get; private set; }
         
         #endregion
         
@@ -242,7 +245,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var pt_heading = new TextObject("{=mcm_pt_heading}Prisoner Transfer").ToString();
             var pt1_text = new TextObject("{=mcm_pt1_text}1. Min Prisoners").ToString();
             var pt1_hint = new TextObject("{=mcm_pt1_hint}Minimum amount of prisoners to transfer.").ToString();
-            var pt2_text = new TextObject("{=mcm_pt2_text}2. Min Prisoners").ToString();
+            var pt2_text = new TextObject("{=mcm_pt2_text}2. Max Prisoners").ToString();
             var pt2_hint = new TextObject("{=mcm_pt2_hint}Maximum amount of prisoners to transfer.").ToString();
             var pt3_text = new TextObject("{=mcm_pt3_text}3. Min Price for each prisoner").ToString();
             var pt3_hint = new TextObject("{=mcm_pt3_hint}Minimum price for each prisoner.").ToString();
@@ -255,7 +258,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             
             #region Red Moon - Strings
             
-            var rm_heading = new TextObject("{=mcm_rm_heading}Prisoner Rebellion").ToString();
+            var rm_heading = new TextObject("{=mcm_rm_heading}Red Moon").ToString();
             var rm1_text = new TextObject("{=mcm_rm1_text}1. Min Gold Lost").ToString();
             var rm1_hint = new TextObject("{=mcm_rm1_hint}Minimum amount of gold that can be lost during this event.").ToString();
             var rm2_text = new TextObject("{=mcm_rm2_text}2. Max Gold Lost").ToString();
@@ -312,8 +315,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var rs1_hint = new TextObject("{=mcm_rs1_hint}Minimum amount of gold that can gained during this event.").ToString();
             var rs2_text = new TextObject("{=mcm_rs2_text}2. Max Gold Gain").ToString();
             var rs2_hint = new TextObject("{=mcm_rs2_hint}Maximum amount of gold that can gained during this event.").ToString();
-            var rs3_text = new TextObject("{=mcm_rs3_text}3. Deactivate event").ToString();
-            var rs3_hint = new TextObject("{=mcm_rs3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var rs3_text = new TextObject("{=mcm_rs3_text}3. Min Roguery Level").ToString();
+            var rs3_hint = new TextObject("{=mcm_rs3_hint}Lowest level to unlock the roguery option.").ToString();
+            var rs4_text = new TextObject("{=mcm_rs4_text}4. Deactivate event").ToString();
+            var rs4_hint = new TextObject("{=mcm_rs4_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -444,8 +449,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var uw6_hint = new TextObject("{=mcm_uw6_hint}Minimum amount of of gold that can be raided during this event.").ToString();
             var uw7_text = new TextObject("{=mcm_uw7_text}7. Max Gold To Raid").ToString();
             var uw7_hint = new TextObject("{=mcm_uw7_hint}Maximum amount of gold that can be raided during this event.").ToString();
-            var uw8_text = new TextObject("{=mcm_uw8_text}8. Deactivate event").ToString();
-            var uw8_hint = new TextObject("{=mcm_uw8_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var uw8_text = new TextObject("{=mcm_uw8_text}8. Min Roguery Level").ToString();
+            var uw8_hint = new TextObject("{=mcm_uw8_hint}Lowest level to unlock the roguery option.").ToString();
+            var uw9_text = new TextObject("{=mcm_uw9_text}9. Deactivate event").ToString();
+            var uw9_hint = new TextObject("{=mcm_uw9_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -468,8 +475,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var vg1_hint = new TextObject("{=mcm_vg1_hint}The minimum amount of compensation the girl gets during this event.").ToString();
             var vg2_text = new TextObject("{=mcm_vg2_text}2. Max Gold Compensation").ToString();
             var vg2_hint = new TextObject("{=mcm_vg2_hint}The maximum amount of compensation the girl gets during this event.").ToString();
-            var vg3_text = new TextObject("{=mcm_vg3_text}3. Deactivate event").ToString();
-            var vg3_hint = new TextObject("{=mcm_vg3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var vg3_text = new TextObject("{=mcm_vg3_text}3.Min Roguery Level").ToString();
+            var vg3_hint = new TextObject("{=mcm_vg3_hint}Lowest level to unlock the roguery option.").ToString();
+            var vg4_text = new TextObject("{=mcm_vg4_text}4. Deactivate event").ToString();
+            var vg4_hint = new TextObject("{=mcm_vg4_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -609,8 +618,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(rs1_hint))
                         .AddInteger("RS2", rs2_text,5,250, new ProxyRef<int>(() => RS_MaxGoldGained, o => RS_MaxGoldGained = o), integerBuilder => integerBuilder
                             .SetHintText(rs2_hint))
-                        .AddBool("RS3", rs3_text, new ProxyRef<bool>(() => RS_Disable, o => RS_Disable = o), boolBuilder => boolBuilder
+                        .AddInteger("RS3", rs3_text,25,275, new ProxyRef<int>(() => RS_minRogueryLevel, o => RS_minRogueryLevel = o), integerBuilder => integerBuilder
                             .SetHintText(rs3_hint))
+                        .AddBool("RS4", rs4_text, new ProxyRef<bool>(() => RS_Disable, o => RS_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(rs4_hint))
                     )
                     
                 #endregion
@@ -704,9 +715,9 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                 #region Travelling Merchant - Builder
 
                 .CreateGroup(tm_heading, groupBuilder => groupBuilder
-                    .AddInteger("TM1", tm1_text, 1, 3500, new ProxyRef<int>(() => TM_minloot, o => TM_minloot = o), integerBuilder => integerBuilder
+                    .AddInteger("TM1", tm1_text, 1, 3500, new ProxyRef<int>(() => TM_minLoot, o => TM_minLoot = o), integerBuilder => integerBuilder
                         .SetHintText(tm1_hint))
-                    .AddInteger("TM2", tm2_text, 1, 20000, new ProxyRef<int>(() => TM_maxloot, o => TM_maxloot = o), integerBuilder => integerBuilder
+                    .AddInteger("TM2", tm2_text, 1, 20000, new ProxyRef<int>(() => TM_maxLoot, o => TM_maxLoot = o), integerBuilder => integerBuilder
                         .SetHintText(tm2_hint))
                     .AddBool("TM3", tm3_text, new ProxyRef<bool>(() => TM_Disable, o => TM_Disable = o), boolBuilder => boolBuilder
                         .SetHintText(tm3_hint))
@@ -750,8 +761,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(uw6_hint))
                         .AddInteger("UW7", uw7_text,250,1500, new ProxyRef<int>(() => UW_MaxGoldRaided, o => UW_MaxGoldRaided = o), integerBuilder => integerBuilder
                             .SetHintText(uw7_hint))
-                        .AddBool("UW8", uw8_text, new ProxyRef<bool>(() => UW_Disable, o => UW_Disable = o), boolBuilder => boolBuilder
+                        .AddInteger("UW8", uw8_text,25,275, new ProxyRef<int>(() => UW_MinRogueryLevel, o => UW_MinRogueryLevel = o), integerBuilder => integerBuilder
                             .SetHintText(uw8_hint))
+                        .AddBool("UW9", uw9_text, new ProxyRef<bool>(() => UW_Disable, o => UW_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(uw9_hint))
                     )
                             
                 #endregion
@@ -777,8 +790,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(vg1_hint))
                         .AddInteger("VG2", vg2_text,250,7500, new ProxyRef<int>(() => VG_MaxCompensation, o => VG_MaxCompensation = o), integerBuilder => integerBuilder
                             .SetHintText(vg2_hint))
-                        .AddBool("VG3", vg3_text, new ProxyRef<bool>(() => VG_Disable, o => VG_Disable = o), boolBuilder => boolBuilder
+                        .AddInteger("VG3", vg3_text,25,275, new ProxyRef<int>(() => VG_MinRogueryLevel, o => VG_MinRogueryLevel = o), integerBuilder => integerBuilder
                             .SetHintText(vg3_hint))
+                        .AddBool("VG4", vg4_text, new ProxyRef<bool>(() => VG_Disable, o => VG_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(vg4_hint))
                     )
                 
 
@@ -883,6 +898,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.RS_Disable = false;
             Instance.RS_MinGoldGained = 50;
             Instance.RS_MaxGoldGained = 150;
+            Instance.RS_minRogueryLevel = 125;
 
             #endregion
             
@@ -941,8 +957,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             #region Travelling Merchant
 
             Instance.TM_Disable = false;
-            Instance.TM_minloot = 1000;
-            Instance.TM_maxloot = 6000;
+            Instance.TM_minLoot = 1000;
+            Instance.TM_maxLoot = 6000;
 
             #endregion
             
@@ -967,6 +983,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.UW_EmbarrassedSoliderMaxGold = 150;
             Instance.UW_MinGoldRaided = 500;
             Instance.UW_MaxGoldRaided = 1250;
+            Instance.UW_MinRogueryLevel = 125;
 
             #endregion
             
@@ -983,6 +1000,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.VG_Disable = false;
             Instance.VG_MinCompensation = 2000;
             Instance.VG_MaxCompensation = 5000;
+            Instance.VG_MinRogueryLevel = 125;
 
             #endregion
             

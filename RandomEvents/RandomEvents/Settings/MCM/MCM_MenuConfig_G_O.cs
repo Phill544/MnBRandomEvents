@@ -160,7 +160,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var ht2_text = new TextObject("{=mcm_ht2_text}2. Max Soldiers").ToString();
             var ht2_hint = new TextObject("{=mcm_ht2_hint}Maximum soldiers to go hunting.").ToString();
             var ht3_text = new TextObject("{=mcm_ht3_text}3. Max Catch").ToString();
-            var ht3_hint = new TextObject("{=mcm_ht3_hint}Minimum amount of prey to catch.").ToString();
+            var ht3_hint = new TextObject("{=mcm_ht3_hint}Maximum amount of prey to catch.").ToString();
             var ht4_text = new TextObject("{=mcm_ht4_text}4. Min Morale Gained").ToString();
             var ht4_hint = new TextObject("{=mcm_ht4_hint}Minimum amount of morale gained.").ToString();
             var ht5_text = new TextObject("{=mcm_ht5_text}5. Max Morale Gained").ToString();

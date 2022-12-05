@@ -119,7 +119,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption2 = new TextObject("{=BirthdayParty_Event_Option_2}Give the girls some gold").ToString();
             var eventOption2Hover = new TextObject("{=BirthdayParty_Event_Option_2_Hover}You don't have time to stay but you can still be nice, right?").ToString();
 
-            var eventOption3 = new TextObject("{=BirthdayParty_Event_Option_3}Raid the party").ToString();
+            var eventOption3 = new TextObject("{=BirthdayParty_Event_Option_3}[Roguery] Raid the party").ToString();
             var eventOption3Hover = new TextObject("{=BirthdayParty_Event_Option_3_Hover}Have some fun.\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
             
             var eventOption4 = new TextObject("{=BirthdayParty_Event_Option_4}Leave").ToString();

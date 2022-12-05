@@ -16,11 +16,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
     {
         private readonly int minGoldCompensation;
         private readonly int maxGoldCompensation;
+        private readonly int minRogueryLevel;
 
         public ViolatedGirl() : base(ModSettings.RandomEvents.ViolatedGirlData)
         {
             minGoldCompensation = MCM_MenuConfig_P_Z.Instance.VG_MinCompensation;
             maxGoldCompensation = MCM_MenuConfig_P_Z.Instance.VG_MaxCompensation;
+            minRogueryLevel = MCM_MenuConfig_P_Z.Instance.VG_MinRogueryLevel;
         }
 
         public override void CancelEvent()
@@ -76,7 +78,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             }
             else
             {
-                if (heroRogueryLevel >= 125)
+                if (heroRogueryLevel >= minRogueryLevel)
                 {
                     canKillWoman = true;
                     
@@ -103,10 +105,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption3 = new TextObject("{=ViolatedGirl_Event_Option_3}Tell her to leave").ToString();
             var eventOption3Hover = new TextObject("{=ViolatedGirl_Event_Option_3_Hover}Leave... NOW!").ToString();
             
-            var eventOption4 = new TextObject("{=ViolatedGirl_Event_Option_4}Kill her").ToString();
+            var eventOption4 = new TextObject("{=ViolatedGirl_Event_Option_4}[Roguery] Kill her").ToString();
             var eventOption4Hover = new TextObject("{=ViolatedGirl_Event_Option_4_Hover}She is too dangerous to be left alive.\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
             
-            var eventOption5 = new TextObject("{=ViolatedGirl_Event_Option_5}Violate her yourself").ToString();
+            var eventOption5 = new TextObject("{=ViolatedGirl_Event_Option_5}[Roguery] Violate her yourself").ToString();
             var eventOption5Hover = new TextObject("{=ViolatedGirl_Event_Option_5_Hover}Teach her to be quiet next time.\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
             
             var eventButtonText1 = new TextObject("{=ViolatedGirl_Event_Button_Text_1}Okay").ToString();
@@ -205,7 +207,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "a":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-compensation);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_MED_Outcome));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                             break;
                         case "b":
                         {
@@ -224,7 +226,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             break;
                         case "e":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionEText, true, false, eventButtonText2, null, null, null), true);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg5, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg5, RandomEventsSubmodule.Msg_Color_EVIL_Outcome));
                             break;
                         default:
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");

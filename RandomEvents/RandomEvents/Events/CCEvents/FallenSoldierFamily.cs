@@ -17,6 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int maxFamilyCompensation;
         private readonly int minGoldLooted;
         private readonly int maxGoldLooted;
+        private readonly int minRogueryLevel;
 
         public FallenSoldierFamily() : base(ModSettings.RandomEvents.FallenSoldierFamilyData)
         {
@@ -24,6 +25,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             maxFamilyCompensation = MCM_MenuConfig_A_F.Instance.FSF_MaxFamilyCompensation;
             minGoldLooted = MCM_MenuConfig_A_F.Instance.FSF_MinGoldLooted;
             maxGoldLooted = MCM_MenuConfig_A_F.Instance.FSF_MaxGoldLooted;
+            minRogueryLevel = MCM_MenuConfig_A_F.Instance.FSF_MinRogueryLevel;
         }
 
         public override void CancelEvent()
@@ -61,7 +63,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             }
             else
             {
-                if (roguerySkill >= 125)
+                if (roguerySkill >= minRogueryLevel)
                 {
                     plotEvil = true;
                     

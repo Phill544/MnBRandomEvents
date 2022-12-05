@@ -43,7 +43,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 			
-			var eventTitle = new TextObject("{=RedMoon_Title}A Coming Apocalypse?").ToString();
+			var eventTitle = new TextObject("{=RedMoon_Title}The Red Moon").ToString();
 
 			var heroName = Hero.MainHero.FirstName;
 

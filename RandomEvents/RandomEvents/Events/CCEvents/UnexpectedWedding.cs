@@ -21,6 +21,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int embarrassedSoliderMaxGold;
         private readonly int minGoldRaided;
         private readonly int maxGoldRaided;
+        private readonly int minRogueryLevel;
 
         public UnexpectedWedding() : base(ModSettings.RandomEvents.UnexpectedWeddingData)
         {
@@ -31,6 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             embarrassedSoliderMaxGold = MCM_MenuConfig_P_Z.Instance.UW_EmbarrassedSoliderMaxGold;
             minGoldRaided = MCM_MenuConfig_P_Z.Instance.UW_MinGoldRaided;
             maxGoldRaided = MCM_MenuConfig_P_Z.Instance.UW_MaxGoldRaided;
+            minRogueryLevel = MCM_MenuConfig_P_Z.Instance.UW_MinRogueryLevel;
         }
 
         public override void CancelEvent()
@@ -53,6 +55,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var goldToDonate = MBRandom.RandomInt(minGoldToDonate, maxGoldToDonate);
             
+            var heroName = Hero.MainHero.FirstName;
+            
             var peopleInWedding = MBRandom.RandomInt(minPeopleInWedding, maxPeopleInWedding);
             
             var partyFood = MobileParty.MainParty.TotalFoodAtInventory;
@@ -63,6 +67,29 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
             
+            var rogueryLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Roguery);
+
+            var canRaidWedding = false;
+            var rogueryAppendedText = "";
+
+            if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
+            {
+                canRaidWedding = true;
+                rogueryAppendedText = new TextObject("{=UnexpectedWedding_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
+                
+            }
+            else
+            {
+                if (rogueryLevel >= minRogueryLevel)
+                {
+                    canRaidWedding = true;
+                    rogueryAppendedText = new TextObject("{=UnexpectedWedding_Roguery_Appended_Text}[Roguery - lvl {rogueryLevel}]")
+                        .SetTextVariable("rogueryLevel", rogueryLevel)
+                        .ToString();
+                }
+                
+            }
+
             var eventDescription = new TextObject(
                     "{=UnexpectedWedding_Event_Desc}You and your party are traveling in the vicinity of {closestSettlement} when you stumble across {peopleInWedding} people in a wedding taking place. " +
                     "The guests invite you over to celebrate this momentous event with them.")
@@ -82,21 +109,22 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption4 = new TextObject("{=UnexpectedWedding_Event_Option_4}Leave").ToString();
             var eventOption4Hover = new TextObject("{=UnexpectedWedding_Event_Option_4_Hover}Not interested").ToString();
             
-            var eventOption5 = new TextObject("{=UnexpectedWedding_Event_Option_5}Raid the wedding").ToString();
-            var eventOption5Hover = new TextObject("{=UnexpectedWedding_Event_Option_5_Hover}You could do with some gold").ToString();
+            var eventOption5 = new TextObject("{=UnexpectedWedding_Event_Option_5}[Roguery] Raid the wedding").ToString();
+            var eventOption5Hover = new TextObject("{=UnexpectedWedding_Event_Option_5_Hover}You could do with some gold\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
             
             var eventButtonText1 = new TextObject("{=UnexpectedWedding_Event_Button_Text_1}Okay").ToString();
             var eventButtonText2 = new TextObject("{=UnexpectedWedding_Event_Button_Text_2}Done").ToString();
-            
-            var inquiryElements = new List<InquiryElement>
+
+            var inquiryElements = new List<InquiryElement>();
+            inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover));
+            inquiryElements.Add(new InquiryElement("b", eventOption2, null, true, eventOption2Hover));
+            inquiryElements.Add(new InquiryElement("c", eventOption3, null, true, eventOption3Hover));
+            inquiryElements.Add(new InquiryElement("d", eventOption4, null, true, eventOption4Hover));
+            if (canRaidWedding)
             {
-                new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
-                new InquiryElement("b", eventOption2, null, true, eventOption2Hover),
-                new InquiryElement("c", eventOption3, null, true, eventOption3Hover),
-                new InquiryElement("d", eventOption4, null, true, eventOption4Hover),
-                new InquiryElement("e", eventOption5, null, true, eventOption5Hover)
-            };
-            
+                inquiryElements.Add(new InquiryElement("e", eventOption5, null, true, eventOption5Hover));
+            }
+
             var eventOptionAText = new TextObject(
                     "{=UnexpectedWedding_Event_Choice_1}You congratulate the couple and you and your men scrape together {goldToDonate} gold and give it as a gift. Your party then spends the evening having fun!")
                 .SetTextVariable("goldToDonate", goldToDonate)
@@ -131,22 +159,26 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg1 =new TextObject(
-                    "{=UnexpectedWedding_Event_Msg_1}You gave the newlyweds {goldToDonate} gold.")
+                    "{=UnexpectedWedding_Event_Msg_1}{heroName} gave the newlyweds {goldToDonate} gold.")
+                .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldToDonate", goldToDonate)
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=UnexpectedWedding_Event_Msg_2}You made the soldier who embarrassed you give the newlyweds {embarrassedSoliderGold} gold.")
+                    "{=UnexpectedWedding_Event_Msg_2}{heroName} made the soldier who embarrassed you give the newlyweds {embarrassedSoliderGold} gold.")
+                .SetTextVariable("heroName", heroName)
                 .SetTextVariable("embarrassedSoliderGold", embarrassedSoliderGold)
                 .ToString();
             
             var eventMsg3 =new TextObject(
-                    "{=UnexpectedWedding_Event_Msg_3}You gave the newlyweds {goldToDonate} gold.")
+                    "{=UnexpectedWedding_Event_Msg_3}{heroName} gave the newlyweds {goldToDonate} gold.")
+                .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldToDonate", goldToDonate)
                 .ToString();
             
             var eventMsg4 =new TextObject(
-                    "{=UnexpectedWedding_Event_Msg_4}You stole {raidedGold} gold from the wedding.")
+                    "{=UnexpectedWedding_Event_Msg_4}{heroName} stole {raidedGold} gold from the wedding.")
+                .SetTextVariable("heroName", heroName)
                 .SetTextVariable("raidedGold", raidedGold)
                 .ToString();
 

@@ -131,7 +131,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv43_text = new TextObject("{=mcm_adv43_text}Prisoner Transfer").ToString();
             var adv44_text = new TextObject("{=mcm_adv44_text}Robbery").ToString();
             var adv45_text = new TextObject("{=mcm_adv45_text}Lights in the Skies").ToString();
-            
             var adv46_text = new TextObject("{=mcm_adv46_text}Bird Songs").ToString();
             var adv47_text = new TextObject("{=mcm_adv47_text}Courier").ToString();
             var adv48_text = new TextObject("{=mcm_adv48_text}Dysentery").ToString();
@@ -339,7 +338,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Secret_Singer_Chance = 50.0f;
             Instance.Speedy_Recovery_Chance = 50.0f;
             Instance.Successful_Deeds_Chance = 50.0f;
-            Instance.Supernatural_Encounter_Chance = 50.0f;
+            Instance.Supernatural_Encounter_Chance = 10.0f;
             Instance.Target_Practice_Chance = 50.0f;
             Instance.Travelling_Merchant_Chance = 30.0f;
             Instance.Travellers_Chance = 50.0f;
