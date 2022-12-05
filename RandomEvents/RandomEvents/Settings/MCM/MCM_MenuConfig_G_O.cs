@@ -108,7 +108,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public bool OR_Disable { get; private set; }
         public int OR_MinSoldiers { get; private set; }
         public int OR_MaxSoldiers { get; private set; }
-        public float OR_MenToKill { get; private set; }
+        public int OR_MaxMenToKill { get; private set; }
         public int OR_MinGoldFound { get; private set; }
         public int OR_MaxGoldFound { get; private set; }
         
@@ -269,8 +269,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var or1_hint = new TextObject("{=mcm_or1_hint}The minimum amount of men who come with you.").ToString();
             var or2_text = new TextObject("{=mcm_or2_text}2. Max Soldiers").ToString();
             var or2_hint = new TextObject("{=mcm_or2_hint}The maximum amount of men who come with you.").ToString();
-            var or3_text = new TextObject("{=mcm_or3_text}3. Men Who Will Die").ToString();
-            var or3_hint = new TextObject("{=mcm_or3_hint}The % of men who will die in this event if the circumstances align.").ToString();
+            var or3_text = new TextObject("{=mcm_or3_text}3. Max Men Who Will Die").ToString();
+            var or3_hint = new TextObject("{=mcm_or3_hint}The maximum amount of men who will die in this event if the circumstances align.").ToString();
             var or4_text = new TextObject("{=mcm_or4_text}4. Min Gold Found").ToString();
             var or4_hint = new TextObject("{=mcm_or4_hint}The minimum amount of gold to be found.").ToString();
             var or5_text = new TextObject("{=mcm_or5_text}5. Max Gold Found").ToString();
@@ -443,7 +443,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(or1_hint))
                         .AddInteger("OR2", or2_text,5,15, new ProxyRef<int>(() => OR_MaxSoldiers, o => OR_MaxSoldiers = o), integerBuilder => integerBuilder
                             .SetHintText(or2_hint))
-                        .AddFloatingInteger("OR3", or3_text,20,90, new ProxyRef<float>(() => OR_MenToKill, o => OR_MenToKill = o), floatBuilder => floatBuilder
+                        .AddInteger("OR3", or3_text,5,15, new ProxyRef<int>(() => OR_MaxMenToKill, o => OR_MaxMenToKill = o), integerBuilder => integerBuilder
                             .SetHintText(or3_hint))
                         .AddInteger("OR4", or4_text,100,5000, new ProxyRef<int>(() => OR_MinGoldFound, o => OR_MinGoldFound = o), integerBuilder => integerBuilder
                             .SetHintText(or4_hint))
@@ -556,7 +556,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.OR_Disable = false;
             Instance.OR_MinSoldiers = 6;
             Instance.OR_MaxSoldiers = 12;
-            Instance.OR_MenToKill = 70.0f;
+            Instance.OR_MaxMenToKill = 10;
             Instance.OR_MinGoldFound = 250;
             Instance.OR_MaxGoldFound = 5000;
 

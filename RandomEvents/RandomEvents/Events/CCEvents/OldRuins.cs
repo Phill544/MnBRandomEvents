@@ -16,7 +16,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
     {
         private readonly int minMen;
         private readonly int maxMen;
-        private readonly float menToKill;
+        private readonly int maxMenToKill;
         private readonly int minGoldFound;
         private readonly int maxGoldFound;
 
@@ -24,7 +24,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             minMen = MCM_MenuConfig_G_O.Instance.OR_MinSoldiers;
             maxMen = MCM_MenuConfig_G_O.Instance.OR_MaxSoldiers;
-            menToKill = MCM_MenuConfig_G_O.Instance.OR_MenToKill;
+            maxMenToKill = MCM_MenuConfig_G_O.Instance.OR_MaxMenToKill;
             minGoldFound = MCM_MenuConfig_G_O.Instance.OR_MinGoldFound;
             maxGoldFound = MCM_MenuConfig_G_O.Instance.OR_MaxGoldFound;
         }
@@ -51,7 +51,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var manCount  = MBRandom.RandomInt(minMen, maxMen);
 
-            var killedMen = (int)Math.Floor(manCount * menToKill);
+            var killedMen = MBRandom.RandomInt(1, maxMenToKill);
 
             var goldFound = MBRandom.RandomInt(minGoldFound, maxGoldFound);
 
