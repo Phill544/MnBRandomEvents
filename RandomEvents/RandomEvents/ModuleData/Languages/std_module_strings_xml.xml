@@ -1043,7 +1043,7 @@
 	<!-- Neutral Relation -->
 	<string id="Feast_Event_Description1n" text="You arrive at your keep in {settlement} where {title} {targetLord} is waiting. Introductions are made and civil norms are met as per tradition before finally taking a seat at the table. {targetLord} admires your work here in {settlement}, noting the acceptable condition of the keep, and gives thanks for allowing {gender} to stay in such a fine area. A few minutes pass and small talk turns to laughter as you both discuss recent engagements and share stories of your travels. \n \n As the food finally arrives the both of you dig in." />
 	<string id="Feast_Event_Description2n" text="After an enjoyable meal {targetLord} requests a new bottle of wine for the two of you to wash it all down. You signal a servant to bring a bottle from the cellar. {targetLord} begins questioning your stance on the current political climate, you answer vaguely as to not stir up any controversy. Playing off of {targetLord}'s ideals more than your own. Between the civil discourse lay harmless jokes of noble affiars, you both share a laugh and continue drinking wine." />
-	<string id="Feast_Event_Description3n" text="As the feast goes on it seems there is quite a sense of attraction. Perhaps it's the wine, or perhaps you've looked at {targetLord} this way, regardless.. You notice a beauty in {genderOBJ} you haven't been aware of before, something about {gender} eyes are pulling you in. As you smile {gender} eyes meet yours and {genderSUB} gives you a little wink. You both know what is happening here.." />
+	<string id="Feast_Event_Description3n" text="As the feast goes on it seems there is quite a sense of attraction. Perhaps it's the wine, or perhaps you've never looked at {targetLord} this way, regardless.. You notice a beauty in {genderOBJ} you haven't been aware of before, something about {gender} eyes are pulling you in. As you smile {gender} eyes meet yours and {genderSUB} gives you a little wink. You both know what is happening here.." />
 	<string id="Feast_Event_Description4n" text="You stand from your chair and offer your hand to {title} {targetLord}, {genderSUB} accepts and raises as well. The both of you walk into the other room and aren't seen again for a couple hours.." />
 	<string id="Feast_Event_Description5n" text="Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to go your separate ways, for now.. {title} {targetLord} looks quite pleased with the feast, and hopes to stay in {settlement} for a while." />
 	<string id="Feast_Event_Option_2n_Hover" text="Show {gender} around.. \n[Charm - lvl 210]" />
@@ -1081,7 +1081,15 @@
 	<string id="Feast_Event_Description5b" text="[Bad Relation] Amidst the dreadful debate, you signal one of your men to bring a bottle of wine from your personal supply and make a scene. As the wine arrives your he trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing." />
 	<string id="Feast_Event_Description6b" text="[Bad Relation] After what feels like an eternity of political discourse, you decide it's time to call this feast to an end. {title} {targetLord} seems quite displeased with your lack of support and hopes your stay in {settlement} comes to an end as quickly as possible." />
 	<string id="Feast_Event_DescriptionEndFeast7b" text="[Bad Relation] After finishing your meals you declare this feast come to an end. {title} {targetLord} seems displeased by your lack of support and wishes your stay in {settlement} comes to an end as quickly as possible." />
-
+<<<<<<< Updated upstream
+=======
+		<!-- Event Msg -->
+	<string id="Feast_Event_Msg_Charm1" text="You charm {targetLord}." />
+	<string id="Feast_Event_Msg_Charm2" text="You and {targetLord} have a great time." />
+	<string id="Feast_Event_Msg_End" text="The feast has ended." />
+	<string id="Feast_Event_Msg_Rogue" text="You steal the coin purse." />
+	
+>>>>>>> Stashed changes
 
     <!--Demonyms-->
     <string id="Demonym_Empire_Noun" text="an Imperial" />
