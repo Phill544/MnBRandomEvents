@@ -110,7 +110,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain - 5;
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
             }
             else if (goldToGive > 15 && goldToGive <= 35)
             {
@@ -119,7 +119,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain - 2;
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_POS_Outcome));
             }
             else if (goldToGive > 35 && goldToGive <= maxGoldToGive)
             {
@@ -128,7 +128,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 Hero.MainHero.ChangeHeroGold(-goldToGive);
                 Hero.MainHero.Clan.Renown += renownGain;
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_POS_Outcome));
             }
             
             StopEvent();

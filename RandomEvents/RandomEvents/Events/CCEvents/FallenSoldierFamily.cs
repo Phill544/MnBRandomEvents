@@ -46,6 +46,32 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var currentSettlement = MobileParty.MainParty.CurrentSettlement.Name;
             
+            var roguerySkill = Hero.MainHero.GetSkillValue(DefaultSkills.Roguery);
+            
+            var plotEvil = false;
+            
+            var rogueryAppendedText = "";
+            
+            if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
+            {
+                
+                plotEvil = true;
+                rogueryAppendedText = new TextObject("{=FallenSoldier_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
+
+            }
+            else
+            {
+                if (roguerySkill >= 125)
+                {
+                    plotEvil = true;
+                    
+                    rogueryAppendedText = new TextObject("{=FallenSoldier_Roguery_Appended_Text}[Roguery - lvl {roguerySkill}]")
+                        .SetTextVariable("charmLevel", roguerySkill)
+                        .ToString();
+                }
+            }
+            
+            
             var familyCompensation = MBRandom.RandomInt(minFamilyCompensation, maxFamilyCompensation);
             var goldLooted = MBRandom.RandomInt(minGoldLooted, maxGoldLooted);
             
@@ -67,19 +93,22 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption3 = new TextObject("{=FallenSoldier_Event_Option_3}Leave").ToString();
             var eventOption3Hover = new TextObject("{=FallenSoldier_Event_Option_3_Hover}You have a headache so you leave").ToString();
             
-            var eventOption4 = new TextObject("{=FallenSoldier_Event_Option_4}Plot something malicious").ToString();
-            var eventOption4Hover = new TextObject("{=FallenSoldier_Event_Option_4_Hover}The audacity!").ToString();
+            var eventOption4 = new TextObject("{=FallenSoldier_Event_Option_4}[Roguery]Trick them").ToString();
+            var eventOption4Hover = new TextObject("{=FallenSoldier_Event_Option_4_Hover}{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
             
             var eventButtonText1 = new TextObject("{=FallenSoldier_Event_Button_Text_1}Okay").ToString();
             var eventButtonText2 = new TextObject("{=FallenSoldier_Event_Button_Text_2}Done").ToString();
 
-            var inquiryElements = new List<InquiryElement>
+            var inquiryElements = new List<InquiryElement>();
+            
+            inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover));
+            inquiryElements.Add(new InquiryElement("b", eventOption2, null, true, eventOption2Hover));
+            inquiryElements.Add(new InquiryElement("c", eventOption3, null, true, eventOption3Hover));
+            if (plotEvil)
             {
-                new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
-                new InquiryElement("b", eventOption2, null, true, eventOption2Hover),
-                new InquiryElement("c", eventOption3, null, true, eventOption3Hover),
-                new InquiryElement("d", eventOption4, null, true, eventOption4Hover)
-            };
+                inquiryElements.Add(new InquiryElement("d", eventOption4, null, true, eventOption4Hover));
+            }
+            
             
             var eventOptionAText = new TextObject(
                     "{=FallenSoldier_Event_Choice_1}You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. " +
@@ -117,7 +146,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg1 =new TextObject(
-                    "{=FallenSoldier_Event_Msg_1}{heroName} gives the family {familyCompensation} gold in compensation.")
+                    "{=FallenSoldier_Event_Msg_1}{heroName} gave the family {familyCompensation} gold in compensation.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("familyCompensation", familyCompensation)
                 .ToString();
@@ -138,7 +167,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(
                                 new InquiryData(eventTitle,eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-familyCompensation);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                             break;
                         case "b":
                         {
@@ -153,7 +182,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "d":
                             InformationManager.ShowInquiry(
                                 new InquiryData(eventTitle,eventOptionDText, true, false, eventButtonText2, null, null, null), true);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_EVIL_Outcome));
                             break;
                         default:
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");

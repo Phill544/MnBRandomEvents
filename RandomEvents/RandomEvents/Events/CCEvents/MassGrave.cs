@@ -144,7 +144,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MobileParty.MainParty.RecentEventsMorale -= baseMoraleLoss - 2;
                             MobileParty.MainParty.MoraleExplained.Add(-baseMoraleLoss - 2);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             break;
                         case "b":
@@ -153,7 +153,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MobileParty.MainParty.RecentEventsMorale -= baseMoraleLoss - 3;
                             MobileParty.MainParty.MoraleExplained.Add(-baseMoraleLoss - 3);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             break;
                         case "c":
@@ -162,7 +162,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MobileParty.MainParty.RecentEventsMorale -= baseMoraleLoss - 4;
                             MobileParty.MainParty.MoraleExplained.Add(-baseMoraleLoss - 4);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             break;
                         case "d":
@@ -171,7 +171,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MobileParty.MainParty.RecentEventsMorale -= baseMoraleLoss - 5;
                             MobileParty.MainParty.MoraleExplained.Add(-baseMoraleLoss - 5);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             break;
                         default:

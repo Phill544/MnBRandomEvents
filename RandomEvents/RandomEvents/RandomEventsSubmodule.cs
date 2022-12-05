@@ -21,8 +21,11 @@ namespace CryingBuffalo.RandomEvents
         //Yellow
         public static readonly Color Msg_Color_MED_Outcome = Color.FromUint(13937677);
         
-        //Red
-        public static readonly Color Msg_Color_NEG_Outcome = Color.FromUint(11549230);
+        //Orange
+        public static readonly Color Msg_Color_NEG_Outcome = Color.FromUint(15092249);
+        
+        //Evil
+        public static readonly Color Msg_Color_EVIL_Outcome = Color.FromUint(13840175);
         
         //MCM Base Settings
         public const string FolderName = "RandomEvents";

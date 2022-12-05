@@ -21,6 +21,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public int AFE_maxWomanAge { get; private set; }
         public float AFE_minRelationshipIncrease { get; private set; }
         public float AFE_maxRelationshipIncrease { get; private set; }
+        public int AFE_charmSkillLevel { get; private set; }
 
         #endregion
 
@@ -269,8 +270,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var afe3_hint = new TextObject("{=mcm_afe3_hint}The minimum amount of relationship increase.").ToString();
             var afe4_text = new TextObject("{=mcm_afe4_text}4. Max Relationship Gain").ToString();
             var afe4_hint = new TextObject("{=mcm_afe4_hint}The maximum amount of relationship increase.").ToString();
-            var afe5_text = new TextObject("{=mcm_afe5_text}5. Deactivate event").ToString();
-            var afe5_hint = new TextObject("{=mcm_afe5_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var afe5_text = new TextObject("{=mcm_afe5_text}5. Min Charm Level").ToString();
+            var afe5_hint = new TextObject("{=mcm_afe5_hint}Lowest level to unlock the charm option.").ToString();
+            var afe6_text = new TextObject("{=mcm_afe6_text}6. Deactivate event").ToString();
+            var afe6_hint = new TextObject("{=mcm_afe6_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
 
@@ -639,8 +642,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                         .SetHintText(afe3_hint))
                     .AddFloatingInteger("AFE4", afe4_text,3,65, new ProxyRef<float>(() => AFE_maxRelationshipIncrease, o => AFE_maxRelationshipIncrease = o), floatBuilder => floatBuilder
                         .SetHintText(afe4_hint))
-                    .AddBool("AFE7", afe5_text, new ProxyRef<bool>(() => AFE_Disable, o => AFE_Disable = o), boolBuilder => boolBuilder
+                    .AddInteger("AFE5", afe5_text, 25, 275, new ProxyRef<int>(() => AFE_charmSkillLevel, o => AFE_charmSkillLevel = o), integerBuilder => integerBuilder
                         .SetHintText(afe5_hint))
+                    .AddBool("AFE6", afe6_text, new ProxyRef<bool>(() => AFE_Disable, o => AFE_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(afe6_hint))
                 )
 
             #endregion
@@ -1034,6 +1039,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.AFE_maxWomanAge = 45;
             Instance.AFE_minRelationshipIncrease = 15.0f;
             Instance.AFE_maxRelationshipIncrease = 50.0f;
+            Instance.AFE_charmSkillLevel = 100;
 
             #endregion
 

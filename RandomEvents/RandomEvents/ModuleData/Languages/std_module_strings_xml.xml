@@ -105,6 +105,10 @@
     <string id="FallenSoldier_Title" text="Family of a fallen soldier" />
     <string id="FallenSoldier_Event_Desc" text="As you are having a drink at the local tavern in {currentSettlement}, you are approached by 3 individuals. It's a woman and two young boys. They ask if they can talk to you. They explain that they are the family of a soldier who died under your command. They are here requesting compensation for his death as they are in desperate need of gold to be able to keep their farm. What do you do?" />
 
+    <!--FallenSoldier - Skill Check-->
+    <string id="FallenSoldier_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="FallenSoldier_Roguery_Appended_Text" text="[Roguery - lvl {roguerySkill}]" />
+    
     <!--FallenSoldier - Event Choices-->
     <string id="FallenSoldier_Event_Option_1" text="Offer them compensation" />
     <string id="FallenSoldier_Event_Option_1_Hover" text="They should be compensated" />
@@ -112,8 +116,8 @@
     <string id="FallenSoldier_Event_Option_2_Hover" text="Not my problem!" />
     <string id="FallenSoldier_Event_Option_3" text="Leave" />
     <string id="FallenSoldier_Event_Option_3_Hover" text="You have a headache so you leave" />
-    <string id="FallenSoldier_Event_Option_4" text="Plot something malicious" />
-    <string id="FallenSoldier_Event_Option_4_Hover" text="The audacity!" />
+    <string id="FallenSoldier_Event_Option_4" text="Trick them" />
+    <string id="FallenSoldier_Event_Option_4_Hover" text="{rogueryAppendedText}" />
 
     <!--FallenSoldier - Event Button-->
     <string id="FallenSoldier_Event_Button_Text_1" text="Okay" />
@@ -126,7 +130,7 @@
     <string id="FallenSoldier_Event_Choice_4" text="You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. The soldier in question was executed by your hands as it was discovered he was a traitor.\n You ask them where their farm is and you tell them you will be there tomorrow. You then excuse yourself and leave. \n \n The following day you and your men arrive at the farm but you have no intention to pay them. Instead you order your men to burn the farm to the ground and kill the owners.\n  You watch as your men execute your orders. You see them dragging the family outside with their hands bound behind their backs. You see you men exit the farmhouse with some valuables. You watch as the farmhouse burns and you witness your men executing all of the family.\n Once they are done you order your men back and you ride back to your main party. \n \nBack at camp your men told you they looted {goldLooted} gold from the house." />
 
     <!--FallenSoldier - Log Messages-->
-    <string id="FallenSoldier_Event_Msg_1" text="{heroName} gives the family {familyCompensation} gold in compensation." />
+    <string id="FallenSoldier_Event_Msg_1" text="{heroName} gave the family {familyCompensation} gold in compensation." />
     <string id="FallenSoldier_Event_Msg_2" text="{heroName}'s party looted {goldLooted} gold from the farmhouse." />
 
 
@@ -431,14 +435,16 @@
     <string id="ViolatedGirl_Event_Desc" text="As your party is resting near {closestSettlement}, you are approached by a young girl. She asks to speak to you privately. You invite her into your tent to listen to what she has to say. She claims that while you were in the previous town she was violated by one of your men. What do you do?" />
 
     <!--ViolatedGirl - Event Choices-->
-    <string id="ViolatedGirl_Event_Option_1" text="Find the man" />
+    <string id="ViolatedGirl_Event_Option_1" text="Find the culprit" />
     <string id="ViolatedGirl_Event_Option_1_Hover" text="This is unacceptable behaviour!" />
     <string id="ViolatedGirl_Event_Option_2" text="Ask how much to keep this quiet?" />
-    <string id="ViolatedGirl_Event_Option_2_Hover" text="Everyone has a price" />
+    <string id="ViolatedGirl_Event_Option_2_Hover" text="Everyone has a price." />
     <string id="ViolatedGirl_Event_Option_3" text="Tell her to leave" />
-    <string id="ViolatedGirl_Event_Option_3_Hover" text="ILeave NOW" />
+    <string id="ViolatedGirl_Event_Option_3_Hover" text="Leave... NOW!" />
     <string id="ViolatedGirl_Event_Option_4" text="Kill her" />
-    <string id="ViolatedGirl_Event_Option_4_Hover" text="She is too dangerous to be left alive" />
+    <string id="ViolatedGirl_Event_Option_4_Hover" text="She is too dangerous to be left alive.\n{rogueryAppendedText}" />
+    <string id="ViolatedGirl_Event_Option_5" text="Violate her yourself" />
+    <string id="ViolatedGirl_Event_Option_5_Hover" text="Teach her to be quiet next time.\n{rogueryAppendedText}" />
 
     <!--ViolatedGirl - Event Button-->
     <string id="ViolatedGirl_Event_Button_Text_1" text="Okay" />
@@ -449,11 +455,14 @@
     <string id="ViolatedGirl_Event_Choice_2" text="You listen to the girl's story. You do believe her but you cannot risk this news damaging the morale of the men. You ask her how much gold it would take to keep this quiet.\n The girl says she doesn't have a lot of gold as she is tending to her sick father at home. She says a sum of {goldToCompensate} gold would be enough to help her father and forget about this incident.\n You agree to pay her the requested amount plus 300 additional gold as a sign of goodwill. The girl then promptly leaves your camp. \n \nAll in all this event has cost you {totalCompensation} gold." />
     <string id="ViolatedGirl_Event_Choice_3" text="You tell her you don't buy her story and even if you did you can't take her word for it. You have three guards escort her from the camp. The girl leaves but not before she screams a few profanities your way." />
     <string id="ViolatedGirl_Event_Choice_4" text="You know that if this gets out you are in trouble. You offer the girl a glass of wine which she accepts. While she has her back to you, you pull out your dagger and in one swift move you have cut her throat.\n It doesn't take long for her to bleed out. Once she does you call on 5 of your most trusted men to help you with the cleanup. You personally put her body in a sheet of linen and put her on your horse.\n Your ride away from camp for a few minutes until you stop and dig a shallow grave. You bury the girl and return to camp. The men inform you that the cleanup is done. No one will ever know what transpired here today." />
+    <string id="ViolatedGirl_Event_Choice_5" text="You grab her by her hair and pull out you trusty dagger. You start cutting away layers of clothes on the girl until she has nothing on her. You tell her that if she wants to live beyond today she will do as you tell her. She nods in agreement. You guide her to your bed where you push her down and have your way with her.\n\nAfter a few hours you lie in the bed next to her. She has fallen asleep in your bed, probably exhausted from the ordeal. You wake her up and tells her to get out of here but not before warning her about the consequences of telling anyone what happened. You hand her a piece of and old sack that she can use to cover herself and once she has it on, you have  a few of your men throw her out of the camp. She better hope not to cross your path again!" />
 
     <!--ViolatedGirl - Log Messages-->
-    <string id="ViolatedGirl_Event_Msg_1" text="You gave the girl {compensation} gold and had the perpetrator sent to the dungeons of {closestCity}." />
-    <string id="ViolatedGirl_Event_Msg_2" text="You bought the girls silence for {totalCompensation} gold." />
-    <string id="ViolatedGirl_Event_Msg_3" text="There are rumors that {heroName} killed someone to keep a secret." />
+    <string id="ViolatedGirl_Event_Msg_1" text="{heroName} gave the girl {compensation} gold and had the perpetrator sent to the dungeons of {closestCity}." />
+    <string id="ViolatedGirl_Event_Msg_2" text="{heroName} bought the girl's silence for {totalCompensation} gold." />
+    <string id="ViolatedGirl_Event_Msg_3" text="{heroName} didn't buy the girl's story." />
+    <string id="ViolatedGirl_Event_Msg_4" text="There are rumors that {heroName} killed a young girl to keep a secret." />
+    <string id="ViolatedGirl_Event_Msg_5" text="There are rumors that {heroName} has done something unforgivable." />
 
 
 
@@ -1317,7 +1326,7 @@
     <string id="mcm_bc1_hint" text="The amount of % the crop yield is increased." />
     <string id="mcm_bc2_text" text="2. Deactivate event" />
     <string id="mcm_bc2_hint" text="If you don't want this event to show up you can deactivate it." />
-    <string id="mcm_bop_heading" text="Bumper Crop" />
+    <string id="mcm_bop_heading" text="Bunch of Prisoners" />
     <string id="mcm_bop1_text" text="1. Min amount of prisoners" />
     <string id="mcm_bop1_hint" text="The minimum amount of prisoners the settlement gains." />
     <string id="mcm_bop2_text" text="2. Max amount of prisoners" />
@@ -1413,17 +1422,17 @@
     <string id="mcm_fs6_text" text="6. Deactivate event" />
     <string id="mcm_fs6_hint" text="If you don't want this event to show up you can deactivate it." />
     <string id="mcm_fof_heading" text="Food Fight" />
-    <string id="mcm_fof1_text" text="1. Min Soldiers" />
-    <string id="mcm_fof1_hint" text="Minimum soldiers to go fishing." />
-    <string id="mcm_fof2_text" text="2. Max Soldiers" />
-    <string id="mcm_fof2_hint" text="Maximum soldiers to go fishing." />
-    <string id="mcm_fof3_text" text="3. Max Fish Catch" />
-    <string id="mcm_fof3_hint" text="Minimum amount of fish to catch." />
-    <string id="mcm_fof4_text" text="4. Min Morale Gained" />
-    <string id="mcm_fof4_hint" text="Minimum amount of morale gained." />
+    <string id="mcm_fof1_text" text="1. Min Food Loss" />
+    <string id="mcm_fof1_hint" text="Minimum amount of food loss." />
+    <string id="mcm_fof2_text" text="2. Max Food Loss" />
+    <string id="mcm_fof2_hint" text="Maximum amount of food loss." />
+    <string id="mcm_fof3_text" text="3. Min Morale Loss" />
+    <string id="mcm_fof3_hint" text="Minimum amount of morale loss." />
+    <string id="mcm_fof4_text" text="4. Max Morale Loss" />
+    <string id="mcm_fof4_hint" text="Maximum amount of morale loss." />
     <string id="mcm_fof5_text" text="5. Deactivate event" />
     <string id="mcm_fof5_hint" text="If you don't want this event to show up you can deactivate it." />
-    <string id="mcm_gr_heading" text="Bee Kind" />
+    <string id="mcm_gr_heading" text="Granary Rats" />
     <string id="mcm_gr1_text" text="1. Min Food loss percent" />
     <string id="mcm_gr1_hint" text="Minimum amount of food lost during this event." />
     <string id="mcm_gr2_text" text="2. Max Food loss percent" />
@@ -1443,7 +1452,7 @@
     <string id="mcm_ht2_text" text="2. Max Soldiers" />
     <string id="mcm_ht2_hint" text="Maximum soldiers to go hunting." />
     <string id="mcm_ht3_text" text="3. Max Catch" />
-    <string id="mcm_ht3_hint" text="Minimum amount of prey to catch." />
+    <string id="mcm_ht3_hint" text="Maximum amount of prey to catch." />
     <string id="mcm_ht4_text" text="4. Min Morale Gained" />
     <string id="mcm_ht4_hint" text="Minimum amount of morale gained." />
     <string id="mcm_ht5_text" text="5. Max Morale Gained" />
@@ -1543,7 +1552,7 @@
     <string id="mcm_pt_heading" text="Prisoner Transfer" />
     <string id="mcm_pt1_text" text="1. Min Prisoners" />
     <string id="mcm_pt1_hint" text="Minimum amount of prisoners to transfer." />
-    <string id="mcm_pt2_text" text="2. Min Prisoners" />
+    <string id="mcm_pt2_text" text="2. Max Prisoners" />
     <string id="mcm_pt2_hint" text="Maximum amount of prisoners to transfer." />
     <string id="mcm_pt3_text" text="3. Min Price for each prisoner" />
     <string id="mcm_pt3_hint" text="Minimum price for each prisoner." />
@@ -1551,7 +1560,7 @@
     <string id="mcm_pt4_hint" text="Maximum price for each prisoner." />
     <string id="mcm_pt5_text" text="5. Deactivate event" />
     <string id="mcm_pt5_hint" text="If you don't want this event to show up you can deactivate it." />
-    <string id="mcm_rm_heading" text="Prisoner Rebellion" />
+    <string id="mcm_rm_heading" text="Red Moon" />
     <string id="mcm_rm1_text" text="1. Min Gold Lost" />
     <string id="mcm_rm1_hint" text="Minimum amount of gold that can be lost during this event." />
     <string id="mcm_rm2_text" text="2. Max Gold Lost" />
