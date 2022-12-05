@@ -32,9 +32,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		{
 			if (Settlement.CurrentSettlement == null)
 				return false;
-			Hero randomhero = Campaign.Current.AliveHeroes.Where(h => { return h.CurrentSettlement == Settlement.CurrentSettlement && h.IsLord && h != Hero.MainHero.Spouse && h.Clan != Clan.PlayerClan ; }).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
+			var randomHero = Campaign.Current.AliveHeroes.Where(h => h.CurrentSettlement == Settlement.CurrentSettlement && h.IsLord && h != Hero.MainHero.Spouse && h.Clan != Clan.PlayerClan).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
 
-			return MCM_MenuConfig_A_F.Instance.FE_Disable == false && randomhero != null && Clan.PlayerClan.Renown >= 500;
+			return MCM_MenuConfig_A_F.Instance.FE_Disable == false && randomHero != null && Clan.PlayerClan.Renown >= 500;
 		}
 
 		public override void StartEvent()
@@ -81,13 +81,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 			#region Find Lord/Lady
 
-			Hero randomhero = Campaign.Current.AliveHeroes.Where(h => { return h.CurrentSettlement == Settlement.CurrentSettlement && h.IsLord && h != Hero.MainHero.Spouse && h.Clan != Clan.PlayerClan; }).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
+			var randomHero = Campaign.Current.AliveHeroes.Where(h => h.CurrentSettlement == Settlement.CurrentSettlement && h.IsLord && h != Hero.MainHero.Spouse && h.Clan != Clan.PlayerClan).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
 
-			var targetLord = randomhero;
+			var targetLord = randomHero;
 			var player = Hero.MainHero;
-			var playerName = Hero.MainHero?.Name;
+			var playerName = Hero.MainHero.Name;
 
-			var targetLordIsFemale = targetLord.IsFemale;
+			var targetLordIsFemale = targetLord != null && targetLord.IsFemale;
 			var targetLordGender = targetLordIsFemale ? "female" : "male";
 			var playerIsFemale = player.IsFemale;
 			var playerGender = playerIsFemale ? "female" : "male";
@@ -95,8 +95,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			var targetLordGenderSubjective = GenderAssignment.GetTheGenderAssignment(targetLordGender, false, "subjective");
 			var targetLordGenderSubjectiveCAP = GenderAssignment.GetTheGenderAssignment(targetLordGender, true, "subjective");
 			var targetLordGenderObjective = GenderAssignment.GetTheGenderAssignment(targetLordGender, false, "objective");
-			string targetLordGenderTitle = GenderAssignment.GetTheGenderAssignment(targetLordGender, true, "title");
-			string playerTitle = GenderAssignment.GetTheGenderAssignment(playerGender, true, "title");
+			var targetLordGenderTitle = GenderAssignment.GetTheGenderAssignment(targetLordGender, true, "title");
+			var playerTitle = GenderAssignment.GetTheGenderAssignment(playerGender, true, "title");
 			var playerGenderSubjective = GenderAssignment.GetTheGenderAssignment(playerGender, false, "subjective");
 			#endregion
 
@@ -108,12 +108,12 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			#endregion
 
 			var relation = Hero.MainHero.GetRelation(targetLord);
-			var targetClan = targetLord.Clan;
 
 			var eventTitle = new TextObject("{=Feast_Title}Feast Invitation").ToString();
 			
 			var eventDescription1 = new TextObject("{=Feast_Event_Description1}While in {settlement} you are approached by an envoy from {title} {targetLord} requesting your presence for a feast.")
-				.SetTextVariable("targetLord", targetLord?.Name)
+				// ReSharper disable once PossibleNullReferenceException
+				.SetTextVariable("targetLord", targetLord.Name)
 				.SetTextVariable("settlement", currentSettlement)
 				.SetTextVariable("gender", targetLordGenderObjective)
 				.SetTextVariable("title", targetLordGenderTitle)
@@ -155,7 +155,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 									" finally taking a seat at the table, the sweet smell from the other room heightens your appetite. {targetLord} compliments your work here in {settlement}, noting the pristine condition of the keep, and gives thanks for " +
 									"allowing {gender} to stay in such a fine area. A few minutes pass and small talk soon turns to laughter as you both discuss recent engagements and share grand stories matched only by that of" +
 									" myths and legends. \n \n As the food finally arrives no time is wasted - both of you dig in to what can only be described as a meal fit for a king. ")
-								.SetTextVariable("targetLord", targetLord?.Name)
+								.SetTextVariable("targetLord", targetLord.Name)
 								.SetTextVariable("settlement", currentSettlement)
 								.SetTextVariable("gender", targetLordGenderObjective)
 								.SetTextVariable("title", targetLordGenderTitle)
@@ -193,7 +193,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											var eventDescription1b = new TextObject("{=Feast_Event_Description1b}[Good Relation] After such a fantastic meal {targetLord} requests a new bottle of wine for the two of you to wash it all down. You signal" +
 												" a servant to bring a bottle of your finest, as the occasion calls for nothing less. {targetLord} recalls {gender} most recent experience at the arena when {gender} friend drank so much they fell over the" +
 												" wall and straight into the pit. But instead of crawling out, they decided to join in the fight! You both laugh hysterically, sharing nostalgic memories of times not forgotten.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.SetTextVariable("gender", targetLordGenderAdjective)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
@@ -223,9 +223,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.ToString();
 
 											var inquiryElements3 = new List<InquiryElement>();
-											if (charmedNoble == true)
+											if (charmedNoble)
 											{
-												if (diffGender == true)
+												if (diffGender)
 												{
 													inquiryElements3.Add(new InquiryElement("a", eventOption3b, null, true, eventOption3bHover));
 												}
@@ -234,7 +234,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 													inquiryElements3.Add(new InquiryElement("b", eventOption4b, null, true, eventOption4bHover));
 												}
 											}
-											if (theftSuccess == true)
+											if (theftSuccess)
 											{
 												inquiryElements3.Add(new InquiryElement("c", eventOption5b, null, true, eventOption5bHover));
 											}
@@ -254,7 +254,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription1c = new TextObject("{=Feast_Event_Description1c}[Good Relation] Needless to say, the wine has made its way through the both of you and it seems there is quite a sense of attraction." +
 																" You notice a beauty in {targetLord} you haven't been aware of before, something about {gender} eyes are pulling you in. As you smile {gender} eyes meet yours and {genderSUB} gives you a little" +
 																" wink. You both know what is happening here..")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("gender", targetLordGenderAdjective)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.ToString();
@@ -264,7 +264,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgCharm1 = new TextObject(
 																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1, RandomEventsSubmodule.Msg_Color));
 
@@ -279,7 +279,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventOption2cHover = new TextObject("{=Feast_Event_Option_2c_Hover}Let's not get carried away..").ToString();
                                                      
                                                             var inquiryElements4 = new List<InquiryElement>();
-															if (charmedNoble2 == true)
+															if (charmedNoble2)
 															{
 																inquiryElements4.Add(new InquiryElement("a", eventOption1c, null, true, eventOption1cHover)); 
 															}
@@ -296,7 +296,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                                                                         #region Hook Up
                                                                             var eventDescription1d = new TextObject("{=Feast_Event_Description1d}[Good Relation] You stand from your chair and offer your hand to {title} {targetLord}, {genderSUB} accepts and raises as well." +
 																				" The both of you walk into the other room and aren't seen again for a couple hours..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
@@ -305,7 +305,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 50);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -321,7 +321,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription1e = new TextObject("{=Feast_Event_Description1e}[Good Relation] Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to" +
 																				" go your separate ways, for now.. {title} {targetLord} thanks you for such an exquisite meal and looks forward to staying in {settlement} for a while longer.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
@@ -330,7 +330,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -358,7 +358,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription1r = new TextObject("{=Feast_Event_Description1r}[Good Relation] A few more minutes of joyful talk go by and you recall {title} {targetLord}'s recent political feats. Claiming word of such events have made their" +
 																" way all the way here to the halls of {settlement}. {genderSUBCAP} looks at you with a gleeful smile like that of a small child, then erupts once again into wine induced laughter as {genderSUB} proceeds to tell you all about the " +
 																"event in great detail.  Starting from the very beginning, of course..")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.SetTextVariable("genderSUBCAP", targetLordGenderSubjectiveCAP)
 															.SetTextVariable("title", targetLordGenderTitle)
@@ -368,7 +368,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
 															var eventMsgCharm1a = new TextObject(
 																"{=Feast_Event_Msg_Charm1}You boast {targetLord}.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1a, RandomEventsSubmodule.Msg_Color));
 
@@ -399,7 +399,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription2r = new TextObject("{=Feast_Event_Description2r}[Good Relation] After finishing yet another round of cheerful story telling, you insist on the two of you continuing this epic feast in a more lively" +
 																				" fashion. {targetLord} says a few of {gender} friends are probably at the tavern and would love to meet you. The two of you head to the tavern and aren't seen again for a couple hours..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("gender", targetLordGenderAdjective)
 																			.SetTextVariable("title", targetLordGenderTitle)
@@ -409,7 +409,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -425,7 +425,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			var eventDescription3r = new TextObject("{=Feast_Event_Description3r}[Good Relation] After finishing yet another round of cheerful story telling, {title} {targetLord} offers to make a toast in your honor, to which you accept. " +
 																				"\n \n “To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n {targetLord} then thanks you for such an exquisite meal and looks forward to staying in {settlement} " +
 																				"for a while longer. And with that, the feast comes to and end..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.SetTextVariable("Ptitle", playerTitle)
@@ -438,7 +438,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -464,7 +464,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription1rr = new TextObject("{=Feast_Event_Description1r}[Good Relation] Amidst the joyful laughter, you signal one of your servants to bring more wine and make a scene. As the wine arrives your" +
 																" servant trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the " +
 																"still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
@@ -507,7 +507,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription2r = new TextObject("{=Feast_Event_Description2r}[Good Relation] After finishing yet another round of cheerful story telling, you insist on the two of you continuing this epic feast in a more lively" +
 																				" fashion. {targetLord} says a few of {gender} friends are probably at the tavern and would love to meet you. The two of you head to the tavern and aren't seen again for a couple hours..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("gender", targetLordGenderAdjective)
 																			.SetTextVariable("title", targetLordGenderTitle)
@@ -517,7 +517,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -534,7 +534,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			var eventDescription3r = new TextObject("{=Feast_Event_Description3r}[Good Relation] After finishing yet another round of cheerful story telling, {title} {targetLord} offers to make a toast in your honor, to which you accept. " +
 																				"\n \n “To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n {targetLord} then thanks you for such an exquisite meal and looks forward to staying in {settlement} " +
 																				"for a while longer. And with that, the feast comes to and end..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.SetTextVariable("Ptitle", playerTitle)
@@ -546,7 +546,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -573,7 +573,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription3r = new TextObject("{=Feast_Event_Description3r}[Good Relation] As the laughter quiets down, {title} {targetLord} offers to make a toast in your honor, to which you accept. " +
 																"\n \n “To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n {targetLord} then thanks you for such an exquisite meal and looks forward to staying in {settlement} " +
 																"for a while longer. And with that, the feast comes to and end..")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("settlement", currentSettlement)
 															.SetTextVariable("title", targetLordGenderTitle)
 															.SetTextVariable("Ptitle", playerTitle)
@@ -585,7 +585,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgEnd = new TextObject(
 																"{=Feast_Event_Msg_End}The feast has ended.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -610,7 +610,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											var eventDescriptionEndFeast1 = new TextObject("{=Feast_Event_DescriptionEndFeast}[Good Relation] After finishing your meals {title} {targetLord} offers to make a toast in your honor, to which you accept. \n \n" +
 												"“To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n And with that, the feast comes to an end.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.SetTextVariable("settlement", currentSettlement)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.SetTextVariable("Ptitle", playerTitle)
@@ -623,7 +623,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 											var eventMsgEnd = new TextObject(
 												"{=Feast_Event_Msg_End}The feast has ended.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.ToString();
 											InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -650,7 +650,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 									" finally taking a seat at the table. {targetLord} makes a snarky remark regarding your work here in {settlement}, noting the poor condition of the keep, and gives a shallow thanks for " +
 									"allowing {gender} to stay in such a 'fine' area. A few minutes pass and small talk builds tension as {targetLord} begins questioning your support of current political affairs. It is obvious {genderSUB} merely wishes to extort" +
 									" some degree of support from you, which would explain this invitation..")
-								.SetTextVariable("targetLord", targetLord?.Name)
+								.SetTextVariable("targetLord", targetLord.Name)
 								.SetTextVariable("settlement", currentSettlement)
 								.SetTextVariable("gender", targetLordGenderObjective)
 								.SetTextVariable("genderSUB", targetLordGenderSubjective)
@@ -689,7 +689,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											var eventDescription2u = new TextObject("{=Feast_Event_Description2u}[Bad Relation] After an agonizing meal {targetLord} requests a new bottle of wine for the two of you to wash it all down. You signal" +
 												" a servant to bring a bottle, specifying 'nothing fancy'. {targetLord} continues questioning your stance on the current political climate, hoping to reach some sort of agreement on the issues. You " +
 												"keep a neutral tone and blank stare while also nodding in agreeance as though to keep the discussion civil.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.SetTextVariable("gender", targetLordGenderAdjective)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
@@ -716,9 +716,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.ToString();
 
 											var inquiryElements3 = new List<InquiryElement>();
-											if (charmedNoble == true)
+											if (charmedNoble)
 											{
-												if (diffGender == true)
+												if (diffGender)
 												{
 													inquiryElements3.Add(new InquiryElement("a", eventOption3b, null, true, eventOption3bHover));
 												}
@@ -727,7 +727,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 													inquiryElements3.Add(new InquiryElement("b", eventOption4b, null, true, eventOption4bHover));
 												}
 											}
-											if (theftSuccess == true)
+											if (theftSuccess)
 											{
 												inquiryElements3.Add(new InquiryElement("c", eventOption5b, null, true, eventOption5bHover));
 											}
@@ -744,10 +744,10 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 														#region Charm Diff Sex
 														case "a":// CHARM different sex
 
-															var eventDescription3u = new TextObject("{=Feast_Event_Description3u}[Bad Relation] Depsite the fact you both seem to despise one another, it seems there is quite a sense of attraction." +
+															var eventDescription3u = new TextObject("{=Feast_Event_Description3u}[Bad Relation] Despite the fact you both seem to despise one another, it seems there is quite a sense of attraction." +
 																" Perhaps it's the wine, or perhaps you've had a long day, regardless.. You notice a beauty in {targetLord} you haven't been aware of before, something about {gender} eyes are " +
 																"pulling you in. As you smile {gender} eyes meet yours and {genderSUB} gives you a little wink. You both know what is happening here..")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("gender", targetLordGenderAdjective)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.ToString();
@@ -756,7 +756,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgCharm1 = new TextObject(
 																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1, RandomEventsSubmodule.Msg_Color));
 
@@ -771,7 +771,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventOption2cHover = new TextObject("{=Feast_Event_Option_2c_Hover}Let's not get carried away..").ToString();
 
 															var inquiryElements4 = new List<InquiryElement>();
-															if (charmedNoble3 == true)
+															if (charmedNoble3)
 															{
 																inquiryElements4.Add(new InquiryElement("a", eventOption2uc, null, true, eventOption2ucHover));
 															}
@@ -788,7 +788,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription4u = new TextObject("{=Feast_Event_Description4u}[Bad Relation] You stand from your chair and offer your hand to {title} {targetLord}, {genderSUB} accepts and raises as well." +
 																				" The both of you walk into the other room and aren't seen again for a couple hours..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
@@ -797,7 +797,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 50);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -813,7 +813,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription5u = new TextObject("{=Feast_Event_Description5u}[Bad Relation] Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to" +
 																				" go your separate ways, for now.. {title} {targetLord} looks quite displeased with the feast, and hopes to leave {settlement} as quickly as possible.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
@@ -822,7 +822,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -849,7 +849,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 															var eventDescription1ru = new TextObject("{=Feast_Event_Description1ru}[Bad Relation] After what seems like an eternity of interrogation, you decide to play along and admit to {targetLord} that you believe" +
 																" {genderADJ} plan is actually quite brilliant. Stating you didn't wish to state this before only because you were quite jealous that you hadn't thought of it first.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
 															.SetTextVariable("title", targetLordGenderTitle)
 															.SetTextVariable("settlement", currentSettlement)
@@ -859,7 +859,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgCharm1a = new TextObject(
 																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1a, RandomEventsSubmodule.Msg_Color));
 
@@ -890,7 +890,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			var eventDescription2ru = new TextObject("{=Feast_Event_Description2ru}[Bad Relation] A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses" +
 																				" that had {genderSUB} known you felt this way perhaps you could be friends. You offer to show {genderOBJ} around {settlement} while discussing further {targetLord}'s political agenda. To which" +
 																				" {genderSUB} accepts.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("genderOBJ", targetLordGenderObjective)
 																			.SetTextVariable("gender", targetLordGenderAdjective)
@@ -902,7 +902,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -918,7 +918,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription3ru = new TextObject("{=Feast_Event_Description3ru}[Bad Relation] A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses" +
 																				" that had {genderSUB} known you felt this way perhaps you could be friends. On that note you declare the feast is finished, giving {targetLord} a formal farewell before leaving the keep.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("genderOBJ", targetLordGenderObjective)
 																			.SetTextVariable("gender", targetLordGenderAdjective)
@@ -930,7 +930,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgCharm2a = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2a, RandomEventsSubmodule.Msg_Color));
 
@@ -955,7 +955,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription1rq = new TextObject("{=Feast_Event_Description1rq}[Bad Relation] Amidst the dreadful debate, you signal one of your servants to bring more wine and make a scene. As the wine arrives your" +
 																" servant trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the " +
 																"still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
 															.ToString();
@@ -993,7 +993,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription2rq = new TextObject("{=Feast_Event_Description2rq}[Bad Relation] A few minutes of careful word choice leads you to hint at the idea of supporting {targetLord} in {genderADJ} political agenda." +
 																				" Although you think it's foolish, you just wish {genderSUB} would quiet down a bit. The feast continues for another couple hours until all the cheap wine has been drank.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderADJ", targetLordGenderAdjective)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.ToString();
@@ -1002,7 +1002,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
 																			var eventMsgCharm2a = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2a, RandomEventsSubmodule.Msg_Color));
 
@@ -1018,7 +1018,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription3rq = new TextObject("{=Feast_Event_Description3rq}[Bad Relation] A few minutes of careful word choice leads to {title} {targetLord} feeling quite impressed by your position. Finally, the cheap wine" +
 																				" has come to an end and on that note you declare the feast is finished, giving {targetLord} a formal farewell before leaving the keep.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
@@ -1026,7 +1026,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -1052,7 +1052,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 															var eventDescription4rq = new TextObject("{=Feast_Event_Description4rq}[Bad Relation] After what feels like an eternity of political discourse, you decide it's time to call this feast to an end. {title} {targetLord} seems" +
 																" quite displeased with your lack of support and hopes to leave {settlement} as quickly as possible.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("settlement", currentSettlement)
 															.SetTextVariable("title", targetLordGenderTitle)
 															.ToString();
@@ -1085,7 +1085,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											var eventDescriptionEndFeast2 = new TextObject("{=Feast_Event_DescriptionEndFeast2}[Bad Relation] After finishing your meals you declare this feast come to an end. {title} {targetLord} seems displeased by your lack" +
 												" of support and wishes to leave {settlement} as quickly as possible.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.SetTextVariable("settlement", currentSettlement)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
@@ -1095,7 +1095,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
 											var eventMsgEnd = new TextObject(
 												"{=Feast_Event_Msg_End}The feast has ended.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.ToString();
 											InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -1122,7 +1122,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								" finally taking a seat at the table. {targetLord} admires your work here in {settlement}, noting the acceptable condition of the keep, and gives thanks for " +
 								"allowing {gender} to stay in such a fine area. A few minutes pass and small talk turns to laughter as you both discuss recent engagements and share stories of your travels. \n \n" +
 								"As the food finally arrives the both of you dig in.")
-								.SetTextVariable("targetLord", targetLord?.Name)
+								.SetTextVariable("targetLord", targetLord.Name)
 								.SetTextVariable("settlement", currentSettlement)
 								.SetTextVariable("gender", targetLordGenderObjective)
 								.SetTextVariable("genderSUB", targetLordGenderSubjective)
@@ -1159,8 +1159,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											var eventDescription2n = new TextObject("{=Feast_Event_Description2n}After an enjoyable meal {targetLord} requests a new bottle of wine for the two of you to wash it all down. You signal" +
 												" a servant to bring a bottle from the cellar. {targetLord} begins questioning your stance on the current political climate, you answer vaguely as to not stir up any controversy. Playing off" +
-												" of {targetLord}'s ideals more than your own. Between the civil discourse lay harmless jokes of noble affiars, you both share a laugh and continue drinking wine.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+												" of {targetLord}'s ideals more than your own. Between the civil discourse lay harmless jokes of noble affairs, you both share a laugh and continue drinking wine.")
+											.SetTextVariable("targetLord", targetLord.Name)
 											.SetTextVariable("gender", targetLordGenderAdjective)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
@@ -1187,9 +1187,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.ToString();
 
 											var inquiryElements3 = new List<InquiryElement>();
-											if (charmedNoble == true)
+											if (charmedNoble)
 											{
-												if (diffGender == true)
+												if (diffGender)
 												{
 													inquiryElements3.Add(new InquiryElement("a", eventOption3b, null, true, eventOption3bHover));
 												}
@@ -1198,7 +1198,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 													inquiryElements3.Add(new InquiryElement("b", eventOption4b, null, true, eventOption4bHover));
 												}
 											}
-											if (theftSuccess == true)
+											if (theftSuccess)
 											{
 												inquiryElements3.Add(new InquiryElement("c", eventOption5b, null, true, eventOption5bHover));
 											}
@@ -1218,7 +1218,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription3n = new TextObject("{=Feast_Event_Description3n}As the feast goes on it seems there is quite a sense of attraction." +
 																" Perhaps it's the wine, or perhaps you've never looked at {targetLord} this way, regardless.. You notice a beauty in {genderOBJ} you haven't been aware of before, something about {gender} eyes are " +
 																"pulling you in. As you smile {gender} eyes meet yours and {genderSUB} gives you a little wink. You both know what is happening here..")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("gender", targetLordGenderAdjective)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
@@ -1228,7 +1228,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgCharm1 = new TextObject(
 																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1, RandomEventsSubmodule.Msg_Color));
 
@@ -1243,7 +1243,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventOption2cHover = new TextObject("{=Feast_Event_Option_2c_Hover}Let's not get carried away..").ToString();
 
 															var inquiryElements4 = new List<InquiryElement>();
-															if (charmedNoble4 == true)
+															if (charmedNoble4)
 															{
 																inquiryElements4.Add(new InquiryElement("a", eventOption2uc, null, true, eventOption2nHover));
 															}
@@ -1260,7 +1260,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription4n = new TextObject("{=Feast_Event_Description4n}You stand from your chair and offer your hand to {title} {targetLord}, {genderSUB} accepts and raises as well." +
 																				" The both of you walk into the other room and aren't seen again for a couple hours..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
@@ -1269,7 +1269,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 50);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -1285,7 +1285,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription5n = new TextObject("{=Feast_Event_Description5n}Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to" +
 																				" go your separate ways, for now.. {title} {targetLord} looks quite pleased with the feast, and hopes to stay in {settlement} for a while.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
@@ -1294,7 +1294,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -1322,7 +1322,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription1rn = new TextObject("{=Feast_Event_Description1rn}After a few laughs {title} {targetLord} requests another glass of wine, you accept another as well. With the mood set you recall the news of " +
 																"{targetLord}'s recent achievements, noting there has been quite a lot of talk lately in regards. {genderSUBCAP} can't help but blush, trying to play it off as if it's no big deal. Needless to say {genderSUB} finds " +
 																"great pleasure in knowing {genderADJ} name has spread throughout the land.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.SetTextVariable("genderSUBCAP", targetLordGenderSubjectiveCAP)
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
@@ -1333,7 +1333,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
 															var eventMsgCharm2 = new TextObject(
 																"{=Feast_Event_Msg_Charm1}You charm {targetLord}")
-																.SetTextVariable("targetLord", targetLord?.Name)
+																.SetTextVariable("targetLord", targetLord.Name)
 																.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -1364,7 +1364,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			var eventDescription2rn = new TextObject("{=Feast_Event_Description2rn}A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses" +
 																				" that your name has also been making its way around the noble tables. You smile and this civil discourse continues for a few hours until the wine runs dry. You offer to take {targetLord} around " +
 																				"{settlement} for a full tour, to which they accept.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.SetTextVariable("settlement", currentSettlement)
@@ -1378,7 +1378,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -1394,7 +1394,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription3rn = new TextObject("{=Feast_Event_Description3rn}A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses" +
 																				" that your name has also been making its way around the noble tables. With that, you declare the feast finished, to which {title} {targetLord} gives a formal farewell before leaving the keep.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("genderOBJ", targetLordGenderObjective)
 																			.SetTextVariable("gender", targetLordGenderAdjective)
@@ -1406,7 +1406,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -1431,7 +1431,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription1rm = new TextObject("{=Feast_Event_Description1rm}With the mood set, you signal one of your servants to bring more wine and make a scene. As the wine arrives your" +
 																" servant trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the " +
 																"still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
 															.ToString();
@@ -1470,7 +1470,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			var eventDescription2rm = new TextObject("{=Feast_Event_Description2rm}After cleaning the wine you offer {targetLord} another glass and the two of you continue talking about all sorts of interesting " +
 																				"topics ranging from politics, to war, to the arena. You even manage to learn a thing or two in regards to stewardship. With the wine running low you offer to take {title} {targetLord} on a tour of {settlement}," +
 																				"to which {genderSUB} accepts.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.ToString();
 
@@ -1479,7 +1479,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Steward, 50);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -1495,7 +1495,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription3rm = new TextObject("{=Feast_Event_Description3rm}A few minutes of careful word choice leads to {title} {targetLord} feeling quite impressed by your position. Finally, the cheap wine" +
 																				" has come to an end and on that note you declare the feast is finished, giving {targetLord} a formal farewell before leaving the keep.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
@@ -1503,7 +1503,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -1529,7 +1529,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 															var eventDescription4rm = new TextObject("{=Feast_Event_Description4rm}As the wine comes to an end, you decide it's time to call this feast to a close. {title} {targetLord} seems" +
 																" quite pleased with your excellent meal and hopes to stay in {settlement} for a while.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("settlement", currentSettlement)
 															.SetTextVariable("title", targetLordGenderTitle)
 															.ToString();
@@ -1538,7 +1538,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgEnd = new TextObject(
 																"{=Feast_Event_Msg_End}The feast has ended.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -1563,7 +1563,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											var eventDescriptionEndFeast3 = new TextObject("{=Feast_Event_DescriptionEndFeast3}After finishing your meals you declare this feast come to an end. {title} {targetLord} seems pleased by your acceptable" +
 												" wine and wishes to stay in {settlement} for a while.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.SetTextVariable("settlement", currentSettlement)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
@@ -1572,7 +1572,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 											var eventMsgEnd = new TextObject(
 												"{=Feast_Event_Msg_End}The feast has ended.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.ToString();
 											InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -1605,7 +1605,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								var eventDescription1v = new TextObject("{=Feast_Event_Description1v}[Good Relation] You arrive at the keep in {settlement} where {title} {targetLord} is waiting. Introductions are made and civil norms are met as per tradition before" +
 									" finally taking a seat at the table, the sweet smell from the other room heightens your appetite. A few minutes pass and small talk soon turns to laughter as you both discuss recent engagements and share grand stories matched only by that of" +
 									" myths and legends. \n \n As the food finally arrives no time is wasted - both of you dig in to what can only be described as a meal fit for a king.")
-								.SetTextVariable("targetLord", targetLord?.Name)
+								.SetTextVariable("targetLord", targetLord.Name)
 								.SetTextVariable("settlement", currentSettlement)
 								.SetTextVariable("gender", targetLordGenderObjective)
 								.SetTextVariable("title", targetLordGenderTitle)
@@ -1643,7 +1643,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											var eventDescription2v = new TextObject("{=Feast_Event_Description2v}[Good Relation] After such a fantastic meal {targetLord} signals to a servant a new bottle of their finest wine for the two of you to wash it all down" +
 												", as the occasion calls for nothing less. {targetLord} recalls {gender} most recent experience at the arena when {gender} friend drank so much they fell over the" +
 												" wall and straight into the pit. But instead of crawling out, they decided to join in the fight! You both laugh hysterically, sharing nostalgic memories of times not forgotten.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.SetTextVariable("gender", targetLordGenderAdjective)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
@@ -1670,9 +1670,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.ToString();
 
 											var inquiryElements3 = new List<InquiryElement>();
-											if (charmedNoble == true)
+											if (charmedNoble)
 											{
-												if (diffGender == true)
+												if (diffGender)
 												{
 													inquiryElements3.Add(new InquiryElement("a", eventOption3b, null, true, eventOption3bHover));
 												}
@@ -1681,7 +1681,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 													inquiryElements3.Add(new InquiryElement("b", eventOption4b, null, true, eventOption4bHover));
 												}
 											}
-											if (theftSuccess == true)
+											if (theftSuccess)
 											{
 												inquiryElements3.Add(new InquiryElement("c", eventOption5b, null, true, eventOption5bHover));
 											}
@@ -1701,7 +1701,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription1c = new TextObject("{=Feast_Event_Description1c}[Good Relation] Needless to say, the wine has made its way through the both of you and it seems there is quite a sense of attraction." +
 																" You notice a beauty in {targetLord} you haven't been aware of before, something about {gender} eyes are pulling you in. As you smile {gender} eyes meet yours and {genderSUB} gives you a little" +
 																" wink. You both know what is happening here..")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("gender", targetLordGenderAdjective)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.ToString();
@@ -1710,7 +1710,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgCharm1 = new TextObject(
 																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1, RandomEventsSubmodule.Msg_Color));
 
@@ -1725,7 +1725,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventOption2cHover = new TextObject("{=Feast_Event_Option_2c_Hover}Let's not get carried away..").ToString();
 
 															var inquiryElements4 = new List<InquiryElement>();
-															if (charmedNoble2 == true)
+															if (charmedNoble2)
 															{
 																inquiryElements4.Add(new InquiryElement("a", eventOption1c, null, true, eventOption1cHover));
 															}
@@ -1742,7 +1742,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription1d = new TextObject("{=Feast_Event_Description1d}[Good Relation] You stand from your chair and offer your hand to {title} {targetLord}, {genderSUB} accepts and raises as well." +
 																				" The both of you walk into the other room and aren't seen again for a couple hours..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
@@ -1751,7 +1751,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 50);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -1768,7 +1768,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription3v = new TextObject("{=Feast_Event_Description3v}[Good Relation] Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to" +
 																				" go your separate ways, for now.. {title} {targetLord} thanks you for joining them in such an exquisite meal and looks forward to seeing you in {settlement} at a later time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
@@ -1777,7 +1777,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -1804,7 +1804,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription4v = new TextObject("{=Feast_Event_Description4v}[Good Relation] A few more minutes of joyful talk go by and you recall {title} {targetLord}'s recent political feats. Claiming word of such events have made their" +
 																" way all the way to the farthest corners of Calradia. {genderSUBCAP} looks at you with a gleeful smile like that of a small child, then erupts once again into wine induced laughter as {genderSUB} proceeds to tell you all about the " +
 																"event in great detail.  Starting from the very beginning, of course..")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.SetTextVariable("genderSUBCAP", targetLordGenderSubjectiveCAP)
 															.SetTextVariable("title", targetLordGenderTitle)
@@ -1815,7 +1815,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgCharm1a = new TextObject(
 																"{=Feast_Event_Msg_Charm1}You boast {targetLord}.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1a, RandomEventsSubmodule.Msg_Color));
 
@@ -1846,7 +1846,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription2r = new TextObject("{=Feast_Event_Description2r}[Good Relation] After finishing yet another round of cheerful story telling, you insist on the two of you continuing this epic feast in a more lively" +
 																				" fashion. {targetLord} says a few of {gender} friends are probably at the tavern and would love to meet you. The two of you head to the tavern and aren't seen again for a couple hours..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("gender", targetLordGenderAdjective)
 																			.SetTextVariable("title", targetLordGenderTitle)
@@ -1856,7 +1856,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -1873,7 +1873,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			var eventDescription5v = new TextObject("{=Feast_Event_Description5v}[Good Relation] After finishing yet another round of cheerful story telling, {title} {targetLord} offers to make a toast in your honor, to which you accept. " +
 																				"\n \n “To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n {targetLord} then thanks you for joining them in such an exquisite meal and looks forward to seeing you in {settlement} " +
 																				"at a later time. And with that, the feast comes to and end..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.SetTextVariable("Ptitle", playerTitle)
@@ -1885,7 +1885,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -1910,7 +1910,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription6v = new TextObject("{=Feast_Event_Description6v}[Good Relation] Amidst the joyful laughter, you signal one of your men to bring a bottle of your own wine and make a scene. As the wine arrives" +
 																" he trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the " +
 																"still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
@@ -1953,7 +1953,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription2r = new TextObject("{=Feast_Event_Description2r}[Good Relation] After finishing yet another round of cheerful story telling, you insist on the two of you continuing this epic feast in a more lively" +
 																				" fashion. {targetLord} says a few of {gender} friends are probably at the tavern and would love to meet you. The two of you head to the tavern and aren't seen again for a couple hours..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("gender", targetLordGenderAdjective)
 																			.SetTextVariable("title", targetLordGenderTitle)
@@ -1964,7 +1964,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -1981,7 +1981,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			var eventDescription7v = new TextObject("{=Feast_Event_Description7v}[Good Relation] After finishing yet another round of cheerful story telling, {title} {targetLord} offers to make a toast in your honor, to which you accept. " +
 																				"\n \n “To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n {targetLord} then thanks you for joining them in such an exquisite meal and looks forward to seeing you in {settlement} " +
 																				"at a later time. And with that, the feast comes to and end..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.SetTextVariable("Ptitle", playerTitle)
@@ -1993,7 +1993,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -2020,7 +2020,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription8v = new TextObject("{=Feast_Event_Description7v}[Good Relation] After finishing yet another round of cheerful story telling, {title} {targetLord} offers to make a toast in your honor, to which you accept. " +
 																"\n \n “To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n {targetLord} then thanks you for joining them in such an exquisite meal and looks forward to seeing you in {settlement} " +
 																"at a later time. And with that, the feast comes to and end..")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("settlement", currentSettlement)
 															.SetTextVariable("title", targetLordGenderTitle)
 															.SetTextVariable("Ptitle", playerTitle)
@@ -2032,7 +2032,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgEnd = new TextObject(
 																"{=Feast_Event_Msg_End}The feast has ended.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -2057,7 +2057,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											var eventDescriptionEndFeast1 = new TextObject("{=Feast_Event_DescriptionEndFeast}[Good Relation] After finishing your meals {title} {targetLord} offers to make a toast in your honor, to which you accept. \n \n" +
 												"“To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n And with that, the feast comes to an end.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.SetTextVariable("settlement", currentSettlement)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.SetTextVariable("Ptitle", playerTitle)
@@ -2070,7 +2070,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 											var eventMsgEnd = new TextObject(
 												"{=Feast_Event_Msg_End}The feast has ended.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.ToString();
 											InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -2097,7 +2097,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 									" finally taking a seat at the table. {targetLord} makes a snarky remark regarding your attire, and gives a shallow thanks for " +
 									"joining {gender} for this occasion. A few minutes pass and small talk builds tension as {targetLord} begins questioning your support of current political affairs. It is obvious {genderSUB} merely wishes to extort" +
 									" some degree of support from you, which would explain this invitation..")
-								.SetTextVariable("targetLord", targetLord?.Name)
+								.SetTextVariable("targetLord", targetLord.Name)
 								.SetTextVariable("settlement", currentSettlement)
 								.SetTextVariable("gender", targetLordGenderObjective)
 								.SetTextVariable("genderSUB", targetLordGenderSubjective)
@@ -2139,7 +2139,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											var eventDescription2b = new TextObject("{=Feast_Event_Description2b}[Bad Relation] After an agonizing meal {targetLord} signals a servant to bring a new bottle of wine for the two of you to wash it all down," +
 												" specifying not to bring anything 'too fancy'. {targetLord} continues questioning your stance on the current political climate, hoping to reach some sort of agreement on the issues. You " +
 												"keep a neutral tone and blank stare while also nodding in agreeance as though to keep the discussion civil.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.SetTextVariable("gender", targetLordGenderAdjective)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
@@ -2165,9 +2165,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.ToString();
 
 											var inquiryElements3 = new List<InquiryElement>();
-											if (charmedNoble == true)
+											if (charmedNoble)
 											{
-												if (diffGender == true)
+												if (diffGender)
 												{
 													inquiryElements3.Add(new InquiryElement("a", eventOption3b, null, true, eventOption3bHover));
 												}
@@ -2176,7 +2176,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 													inquiryElements3.Add(new InquiryElement("b", eventOption4b, null, true, eventOption4bHover));
 												}
 											}
-											if (theftSuccess == true)
+											if (theftSuccess)
 											{
 												inquiryElements3.Add(new InquiryElement("c", eventOption5b, null, true, eventOption5bHover));
 											}
@@ -2193,10 +2193,10 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 														#region Charm Diff Sex
 														case "a":// CHARM different sex
 
-															var eventDescription3u = new TextObject("{=Feast_Event_Description3u}[Bad Relation] Depsite the fact you both seem to despise one another, it seems there is quite a sense of attraction." +
+															var eventDescription3u = new TextObject("{=Feast_Event_Description3u}[Bad Relation] Despite the fact you both seem to despise one another, it seems there is quite a sense of attraction." +
 																" Perhaps it's the wine, or perhaps you've had a long day, regardless.. You notice a beauty in {targetLord} you haven't been aware of before, something about {gender} eyes are " +
 																"pulling you in. As you smile {gender} eyes meet yours and {genderSUB} gives you a little wink. You both know what is happening here..")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("gender", targetLordGenderAdjective)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.ToString();
@@ -2205,7 +2205,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgCharm1 = new TextObject(
 																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1, RandomEventsSubmodule.Msg_Color));
 
@@ -2220,7 +2220,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventOption2cHover = new TextObject("{=Feast_Event_Option_2c_Hover}Let's not get carried away..").ToString();
 
 															var inquiryElements4 = new List<InquiryElement>();
-															if (charmedNoble3 == true)
+															if (charmedNoble3)
 															{
 																inquiryElements4.Add(new InquiryElement("a", eventOption2uc, null, true, eventOption2ucHover));
 															}
@@ -2237,7 +2237,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription4u = new TextObject("{=Feast_Event_Description4u}[Bad Relation] You stand from your chair and offer your hand to {title} {targetLord}, {genderSUB} accepts and raises as well." +
 																				" The both of you walk into the other room and aren't seen again for a couple hours..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
@@ -2256,7 +2256,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription3b = new TextObject("{=Feast_Event_Description3b}[Bad Relation] Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to" +
 																				" go your separate ways, for now.. {title} {targetLord} looks quite displeased with the feast, and hopes your stay in {settlement} ends with haste.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
@@ -2285,7 +2285,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 															var eventDescription1ru = new TextObject("{=Feast_Event_Description1ru}[Bad Relation] After what seems like an eternity of interrogation, you decide to play along and admit to {targetLord} that you believe" +
 																" {genderADJ} plan is actually quite brilliant. Stating you didn't wish to state this before only because you were quite jealous that you hadn't thought of it first.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
 															.SetTextVariable("title", targetLordGenderTitle)
 															.SetTextVariable("settlement", currentSettlement)
@@ -2295,7 +2295,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgCharm1a = new TextObject(
 																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1a, RandomEventsSubmodule.Msg_Color));
 
@@ -2326,7 +2326,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			var eventDescription4b = new TextObject("{=Feast_Event_Description4b}[Bad Relation] A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses" +
 																				" that had {genderSUB} known you felt this way perhaps you could be friends. You ask {targetLord} to show you around {settlement} while discussing further {targetLord}'s political agenda. To which" +
 																				" {genderSUB} accepts.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("genderOBJ", targetLordGenderObjective)
 																			.SetTextVariable("gender", targetLordGenderAdjective)
@@ -2348,7 +2348,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription3ru = new TextObject("{=Feast_Event_Description3ru}[Bad Relation] A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses" +
 																				" that had {genderSUB} known you felt this way perhaps you could be friends. On that note you declare the feast is finished, giving {targetLord} a formal farewell before leaving the keep.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("genderOBJ", targetLordGenderObjective)
 																			.SetTextVariable("gender", targetLordGenderAdjective)
@@ -2377,7 +2377,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription5b = new TextObject("{=Feast_Event_Description5b}[Bad Relation] Amidst the dreadful debate, you signal one of your men to bring a bottle of wine from your personal supply and make a scene. As the wine arrives your" +
 																" he trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the " +
 																"still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
 															.ToString();
@@ -2415,7 +2415,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription2rq = new TextObject("{=Feast_Event_Description2ru}[Bad Relation] A few minutes of careful word choice leads you to hint at the idea of supporting {targetLord} in {genderADJ} political agenda." +
 																				" Although you think it's foolish, you just wish {genderSUB} would quiet down a bit. The feast continues for another couple hours until all the cheap wine has been drank.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderADJ", targetLordGenderAdjective)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.ToString();
@@ -2434,7 +2434,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription3rq = new TextObject("{=Feast_Event_Description3rq}[Bad Relation] A few minutes of careful word choice leads to {title} {targetLord} feeling quite impressed by your position. Finally, the cheap wine" +
 																				" has come to an end and on that note you declare the feast is finished, giving {targetLord} a formal farewell before leaving the keep.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
@@ -2462,7 +2462,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 															var eventDescription6b = new TextObject("{=Feast_Event_Description6b}[Bad Relation] After what feels like an eternity of political discourse, you decide it's time to call this feast to an end. {title} {targetLord} seems" +
 																" quite displeased with your lack of support and hopes your stay in {settlement} comes to an end as quickly as possible.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("settlement", currentSettlement)
 															.SetTextVariable("title", targetLordGenderTitle)
 															.ToString();
@@ -2490,7 +2490,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											var eventDescriptionEndFeast7b = new TextObject("{=Feast_Event_DescriptionEndFeast7b}[Bad Relation] After finishing your meals you declare this feast come to an end. {title} {targetLord} seems displeased by your lack" +
 												" of support and wishes your stay in {settlement} comes to an end as quickly as possible.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.SetTextVariable("settlement", currentSettlement)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
@@ -2499,7 +2499,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 											var eventMsgEnd = new TextObject(
 												"{=Feast_Event_Msg_End}The feast has ended.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.ToString();
 											InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -2526,7 +2526,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								" finally taking a seat at the table. {targetLord} admires your attire, noting your acceptable presentation, and gives thanks for " +
 								"joining {gender} for such a fine feast. A few minutes pass and small talk turns to laughter as you both discuss recent engagements and share stories of your travels. \n \n" +
 								"As the food finally arrives the both of you dig in.")
-								.SetTextVariable("targetLord", targetLord?.Name)
+								.SetTextVariable("targetLord", targetLord.Name)
 								.SetTextVariable("settlement", currentSettlement)
 								.SetTextVariable("gender", targetLordGenderObjective)
 								.SetTextVariable("genderSUB", targetLordGenderSubjective)
@@ -2566,8 +2566,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											var eventDescription2i = new TextObject("{=Feast_Event_Description2i}After an enjoyable meal {targetLord} requests a new bottle of wine for the two of you to wash it all down." +
 												" {targetLord} begins questioning your stance on the current political climate, you answer vaguely as to not stir up any controversy. Playing off" +
-												" of {targetLord}'s ideals more than your own. Between the civil discourse lay harmless jokes of noble affiars, you both share a laugh and continue drinking wine.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+												" of {targetLord}'s ideals more than your own. Between the civil discourse lay harmless jokes of noble affairs, you both share a laugh and continue drinking wine.")
+											.SetTextVariable("targetLord", targetLord.Name)
 											.SetTextVariable("gender", targetLordGenderAdjective)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
@@ -2594,9 +2594,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.ToString();
 
 											var inquiryElements3 = new List<InquiryElement>();
-											if (charmedNoble == true)
+											if (charmedNoble)
 											{
-												if (diffGender == true)
+												if (diffGender)
 												{
 													inquiryElements3.Add(new InquiryElement("a", eventOption3b, null, true, eventOption3bHover));
 												}
@@ -2605,7 +2605,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 													inquiryElements3.Add(new InquiryElement("b", eventOption4b, null, true, eventOption4bHover));
 												}
 											}
-											if (theftSuccess == true)
+											if (theftSuccess)
 											{
 												inquiryElements3.Add(new InquiryElement("c", eventOption5b, null, true, eventOption5bHover));
 											}
@@ -2625,7 +2625,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription3n = new TextObject("{=Feast_Event_Description3n}As the feast goes on it seems there is quite a sense of attraction." +
 																" Perhaps it's the wine, or perhaps you've looked at {targetLord} this way, regardless.. You notice a beauty in {genderOBJ} you haven't been aware of before, something about {gender} eyes are " +
 																"pulling you in. As you smile {gender} eyes meet yours and {genderSUB} gives you a little wink. You both know what is happening here..")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("gender", targetLordGenderAdjective)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
@@ -2635,7 +2635,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgCharm1 = new TextObject(
 																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1, RandomEventsSubmodule.Msg_Color));
 
@@ -2650,7 +2650,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventOption2cHover = new TextObject("{=Feast_Event_Option_2c_Hover}Let's not get carried away..").ToString();
 
 															var inquiryElements4 = new List<InquiryElement>();
-															if (charmedNoble4 == true)
+															if (charmedNoble4)
 															{
 																inquiryElements4.Add(new InquiryElement("a", eventOption2uc, null, true, eventOption2nHover));
 															}
@@ -2667,7 +2667,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription4n = new TextObject("{=Feast_Event_Description4n}You stand from your chair and offer your hand to {title} {targetLord}, {genderSUB} accepts and raises as well." +
 																				" The both of you walk into the other room and aren't seen again for a couple hours..")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
@@ -2676,7 +2676,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 50);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -2692,7 +2692,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription3i = new TextObject("{=Feast_Event_Description3i}Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to" +
 																				" go your separate ways, for now.. {title} {targetLord} looks quite pleased with the feast, and hopes to see you again in {settlement} soon.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
@@ -2701,7 +2701,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -2729,7 +2729,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription1rn = new TextObject("{=Feast_Event_Description1rn}After a few laughs {title} {targetLord} requests another glass of wine, you accept another as well. With the mood set you recall the news of " +
 																"{targetLord}'s recent achievements, noting there has been quite a lot of talk lately in regards. {genderSUBCAP} can't help but blush, trying to play it off as if it's no big deal. Needless to say {genderSUB} finds " +
 																"great pleasure in knowing {genderADJ} name has spread throughout the land.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.SetTextVariable("genderSUBCAP", targetLordGenderSubjectiveCAP)
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
@@ -2741,7 +2741,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgCharm1a = new TextObject(
 																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1a, RandomEventsSubmodule.Msg_Color));
 
@@ -2772,7 +2772,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			var eventDescription4i = new TextObject("{=Feast_Event_Description4i}A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses" +
 																				" that your name has also been making its way around the noble tables. You smile and this civil discourse continues for a few hours until the wine runs dry. {targetLord} offers to take you around " +
 																				"{settlement} for a full tour, to which you accept.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.SetTextVariable("settlement", currentSettlement)
@@ -2783,7 +2783,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -2799,7 +2799,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription3rn = new TextObject("{=Feast_Event_Description3rn}A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses" +
 																				" that your name has also been making its way around the noble tables. With that, you declare the feast finished, to which {title} {targetLord} gives a formal farewell before leaving the keep.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.SetTextVariable("genderOBJ", targetLordGenderObjective)
 																			.SetTextVariable("gender", targetLordGenderAdjective)
@@ -2811,7 +2811,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -2836,7 +2836,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															var eventDescription5i = new TextObject("{=Feast_Event_Description5i}With the mood set, you signal one of your men to bring more wine from your personal supply and make a scene. As the wine arrives" +
 																" he trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the " +
 																"still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
 															.ToString();
@@ -2875,7 +2875,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			var eventDescription6i = new TextObject("{=Feast_Event_Description6i}After cleaning the wine you offer {targetLord} another glass and the two of you continue talking about all sorts of interesting " +
 																				"topics ranging from politics, to war, to the arena. You even manage to learn a thing or two in regards to stewardship. With the wine running {targetLord} offer to take you on a tour of {settlement}," +
 																				"to which you accept.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.ToString();
 
@@ -2884,7 +2884,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Steward, 50);
 																			var eventMsgCharm2 = new TextObject(
 																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
@@ -2900,7 +2900,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 																			var eventDescription3rm = new TextObject("{=Feast_Event_Description3rm}[Bad Relation] A few minutes of careful word choice leads to {title} {targetLord} feeling quite impressed by your position. Finally, the cheap wine" +
 																				" has come to an end and on that note you declare the feast is finished, giving {targetLord} a formal farewell before leaving the keep.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
@@ -2908,7 +2908,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 																			var eventMsgEnd = new TextObject(
 																				"{=Feast_Event_Msg_End}The feast has ended.")
-																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.SetTextVariable("targetLord", targetLord.Name)
 																			.ToString();
 																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -2934,7 +2934,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 															var eventDescription7i = new TextObject("{=Feast_Event_Description7i}As the wine comes to an end, you decide it's time to call this feast to a close. {title} {targetLord} seems" +
 																" quite pleased with your excellent company and hopes to see you again in {settlement} soon.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.SetTextVariable("settlement", currentSettlement)
 															.SetTextVariable("title", targetLordGenderTitle)
 															.ToString();
@@ -2943,7 +2943,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 															var eventMsgEnd = new TextObject(
 																"{=Feast_Event_Msg_End}The feast has ended.")
-															.SetTextVariable("targetLord", targetLord?.Name)
+															.SetTextVariable("targetLord", targetLord.Name)
 															.ToString();
 															InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
@@ -2968,7 +2968,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											var eventDescriptionEndFeast8i = new TextObject("{=Feast_Event_DescriptionEndFeast8i}After finishing your meals you declare this feast come to an end. {title} {targetLord} seems pleased by your " +
 												"company and wishes to see you again in {settlement} soon.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.SetTextVariable("settlement", currentSettlement)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
@@ -2977,7 +2977,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
 											var eventMsgEnd = new TextObject(
 												"{=Feast_Event_Msg_End}The feast has ended.")
-											.SetTextVariable("targetLord", targetLord?.Name)
+											.SetTextVariable("targetLord", targetLord.Name)
 											.ToString();
 											InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
