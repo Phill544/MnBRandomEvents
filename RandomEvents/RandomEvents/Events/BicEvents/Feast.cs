@@ -9,12 +9,12 @@ using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem.Settlements;
 using System.Linq;
 using System.Collections.Generic;
+using TaleWorlds.CampaignSystem.Actions;
 
 namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class Feast : BaseEvent
 	{
-
 
         
 
@@ -34,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 				return false;
 			Hero randomhero = Campaign.Current.AliveHeroes.Where(h => { return h.CurrentSettlement == Settlement.CurrentSettlement && h.IsLord && h != Hero.MainHero.Spouse && h.Clan != Clan.PlayerClan ; }).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
 
-			return  randomhero != null && Clan.PlayerClan.Renown >= 500;
+			return MCM_MenuConfig_A_F.Instance.FE_Disable == false && randomhero != null && Clan.PlayerClan.Renown >= 500;
 		}
 
 		public override void StartEvent()
@@ -75,7 +75,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
             }
 			if (charmSkill >= 210)
 			{
-				charmedNoble3 = true;
+				charmedNoble4 = true;
 			}
 			#endregion
 
@@ -108,6 +108,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			#endregion
 
 			var relation = Hero.MainHero.GetRelation(targetLord);
+			var targetClan = targetLord.Clan;
 
 			var eventTitle = new TextObject("{=Feast_Title}Feast Invitation").ToString();
 			
@@ -197,7 +198,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
 
-                                            #region Inquiry Elements 3
+											ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 2);
+											//var eventMsg1 = new TextObject(
+											//	"{=Feast_Event_Msg_1}Your relation has improved.").ToString();
+											//InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+
+											#region Inquiry Elements 3
 											//option D ---- End ----
 											var eventOption2b = new TextObject("{=Feast_Event_Option_2b}Finish Feast").ToString();
 											var eventOption2bHover = new TextObject("{=Feast_Event_Option_2b_Hover}Time to finish up").ToString();
@@ -252,9 +259,18 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.ToString();
 
-                                                            #region Inquiry Elements
-                                                            //option A ---- Hook up ----
-                                                            var eventOption1c = new TextObject("{=Feast_Event_Option_1c}[Charm] Go somewhere private").ToString();
+
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgCharm1 = new TextObject(
+																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1, RandomEventsSubmodule.Msg_Color));
+
+															#region Inquiry Elements
+															//option A ---- Hook up ----
+															var eventOption1c = new TextObject("{=Feast_Event_Option_1c}[Charm] Go somewhere private").ToString();
 															var eventOption1cHover = new TextObject("{=Feast_Event_Option_1c_Hover}Show {gender} around.. \n[Charm - lvl 150]")
 															.SetTextVariable("gender", targetLordGenderObjective)
 															.ToString();
@@ -285,6 +301,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 15);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 50);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription1d, true, false, eventButtonText2, null, null, null), true);
 
@@ -303,6 +326,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription1e, true, false, eventButtonText2, null, null, null), true);
 
@@ -334,6 +364,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("title", targetLordGenderTitle)
 															.SetTextVariable("settlement", currentSettlement)
 															.ToString();
+
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
+															var eventMsgCharm1a = new TextObject(
+																"{=Feast_Event_Msg_Charm1}You boast {targetLord}.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1a, RandomEventsSubmodule.Msg_Color));
 
 															#region Inquiry Elements
 															//option A ---- Continue ----
@@ -368,10 +405,17 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
+
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription2r, true, false, eventButtonText2, null, null, null), true);
-
 																			StopEvent();
-
+																			
 																			break;
                                                                         #endregion
 
@@ -388,6 +432,16 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("player", playerName)
 																			.SetTextVariable("playerSUB", playerGenderSubjective)
 																			.ToString();
+
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
+
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription3r, true, false, eventButtonText2, null, null, null), true);
 
@@ -418,6 +472,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("title", targetLordGenderTitle)
 															.SetTextVariable("settlement", currentSettlement)
 															.ToString();
+
+															var MoneyStole = MBRandom.RandomInt(1000 , 5000);
+															Hero.MainHero.ChangeHeroGold(+MoneyStole);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 50);
+															var eventMsgRogue = new TextObject(
+																"{=Feast_Event_Msg_Rogue}You steal the coin purse.").ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgRogue, RandomEventsSubmodule.Msg_Color));
 
 															#region Inquiry Elements
 															//option A ---- Continue ----
@@ -452,6 +513,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 4);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
+
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription2r, true, false, eventButtonText2, null, null, null), true);
 
 																			StopEvent();
@@ -472,6 +541,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("player", playerName)
 																			.SetTextVariable("playerSUB", playerGenderSubjective)
 																			.ToString();
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 3);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription3r, true, false, eventButtonText2, null, null, null), true);
 
@@ -504,6 +581,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("playerSUB", playerGenderSubjective)
 															.ToString();
 
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 3);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgEnd = new TextObject(
+																"{=Feast_Event_Msg_End}The feast has ended.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 															InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription3r, true, false, eventButtonText2, null, null, null), true);
 
@@ -535,6 +619,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											.ToString();
 
+											ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+											var eventMsgEnd = new TextObject(
+												"{=Feast_Event_Msg_End}The feast has ended.")
+											.SetTextVariable("targetLord", targetLord?.Name)
+											.ToString();
+											InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 											InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescriptionEndFeast1, true, false, eventButtonText2, null, null, null), true);
 
@@ -603,6 +694,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
 
+											ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 2);
+
 											#region Inquiry Elements 3
 											//option D ---- End ----
 											var eventOption2b = new TextObject("{=Feast_Event_Option_2b}Finish Feast").ToString();
@@ -658,6 +752,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.ToString();
 
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgCharm1 = new TextObject(
+																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1, RandomEventsSubmodule.Msg_Color));
+
 															#region Inquiry Elements
 															//option A ---- Hook up ----
 															var eventOption2uc = new TextObject("{=Feast_Event_Option_1c}[Charm] Go somewhere private").ToString();
@@ -691,6 +793,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 50);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription4u, true, false, eventButtonText2, null, null, null), true);
 
@@ -709,6 +818,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription5u, true, false, eventButtonText2, null, null, null), true);
 
@@ -738,6 +854,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("title", targetLordGenderTitle)
 															.SetTextVariable("settlement", currentSettlement)
 															.ToString();
+
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgCharm1a = new TextObject(
+																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1a, RandomEventsSubmodule.Msg_Color));
 
 															#region Inquiry Elements
 															//option A ---- Continue ----
@@ -774,6 +898,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("settlement", currentSettlement)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
+
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription2ru, true, false, eventButtonText2, null, null, null), true);
 
 																			StopEvent();
@@ -793,6 +925,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.ToString();
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgCharm2a = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2a, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription3ru, true, false, eventButtonText2, null, null, null), true);
 
@@ -819,6 +959,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
 															.ToString();
+
+															var MoneyStole = MBRandom.RandomInt(1000, 5000);
+															Hero.MainHero.ChangeHeroGold(+MoneyStole);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 50);
+															var eventMsgRogue = new TextObject(
+																"{=Feast_Event_Msg_Rogue}You steal the coin purse.").ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgRogue, RandomEventsSubmodule.Msg_Color));
 
 															#region Inquiry Elements
 															//option A ---- Continue ----
@@ -851,6 +998,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
+																			var eventMsgCharm2a = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2a, RandomEventsSubmodule.Msg_Color));
+
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription2rq, true, false, eventButtonText2, null, null, null), true);
 
 																			StopEvent();
@@ -866,6 +1021,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("targetLord", targetLord?.Name)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription3rq, true, false, eventButtonText2, null, null, null), true);
 
@@ -894,6 +1057,12 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("title", targetLordGenderTitle)
 															.ToString();
 
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
+
+															var eventMsgEnd = new TextObject(
+															"{=Feast_Event_Msg_End}The feast has ended.").ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 															InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription4rq, true, false, eventButtonText2, null, null, null), true);
 
@@ -921,6 +1090,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
 
+											//Hero.MainHero.SetPersonalRelation(targetLord, +1);
+											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+											ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+											var eventMsgEnd = new TextObject(
+												"{=Feast_Event_Msg_End}The feast has ended.")
+											.SetTextVariable("targetLord", targetLord?.Name)
+											.ToString();
+											InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 											InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescriptionEndFeast2, true, false, eventButtonText2, null, null, null), true);
 
@@ -988,6 +1165,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
 
+											Hero.MainHero.SetPersonalRelation(targetLord, +1);
+											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 2);
+
 											#region Inquiry Elements 3
 											//option D ---- End ----
 											var eventOption2b = new TextObject("{=Feast_Event_Option_2b}Finish Feast").ToString();
@@ -1036,13 +1216,21 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 														case "a":// CHARM different sex
 
 															var eventDescription3n = new TextObject("{=Feast_Event_Description3n}As the feast goes on it seems there is quite a sense of attraction." +
-																" Perhaps it's the wine, or perhaps you've looked at {targetLord} this way, regardless.. You notice a beauty in {genderOBJ} you haven't been aware of before, something about {gender} eyes are " +
+																" Perhaps it's the wine, or perhaps you've never looked at {targetLord} this way, regardless.. You notice a beauty in {genderOBJ} you haven't been aware of before, something about {gender} eyes are " +
 																"pulling you in. As you smile {gender} eyes meet yours and {genderSUB} gives you a little wink. You both know what is happening here..")
 															.SetTextVariable("targetLord", targetLord?.Name)
 															.SetTextVariable("gender", targetLordGenderAdjective)
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
 															.ToString();
+
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgCharm1 = new TextObject(
+																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1, RandomEventsSubmodule.Msg_Color));
 
 															#region Inquiry Elements
 															//option A ---- Hook up ----
@@ -1077,6 +1265,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 10);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 50);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription4n, true, false, eventButtonText2, null, null, null), true);
 
@@ -1095,6 +1290,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription5n, true, false, eventButtonText2, null, null, null), true);
 
@@ -1127,6 +1329,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("title", targetLordGenderTitle)
 															.SetTextVariable("settlement", currentSettlement)
 															.ToString();
+
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
+															var eventMsgCharm2 = new TextObject(
+																"{=Feast_Event_Msg_Charm1}You charm {targetLord}")
+																.SetTextVariable("targetLord", targetLord?.Name)
+																.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
 															#region Inquiry Elements
 															//option A ---- Continue ----
@@ -1161,6 +1370,18 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("settlement", currentSettlement)
 																			.ToString();
 
+																			//var currentRelationship = targetLord.GetRelation(Hero.MainHero);
+																			//var newRelationship = (currentRelationship + 5);
+																			//CharacterRelationManager.SetHeroRelation(targetLord, Hero.MainHero, newRelationship);
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
+
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription2rn, true, false, eventButtonText2, null, null, null), true);
 
 																			StopEvent();
@@ -1180,6 +1401,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.ToString();
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription3rn, true, false, eventButtonText2, null, null, null), true);
 
@@ -1206,6 +1435,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
 															.ToString();
+
+															var MoneyStole = MBRandom.RandomInt(1000, 5000);
+															Hero.MainHero.ChangeHeroGold(+MoneyStole);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 50);
+															var eventMsgRogue = new TextObject(
+																"{=Feast_Event_Msg_Rogue}You steal the coin purse.").ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgRogue, RandomEventsSubmodule.Msg_Color));
 
 															#region Inquiry Elements
 															//option A ---- Continue ----
@@ -1238,6 +1474,15 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Steward, 50);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
+
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription2rm, true, false, eventButtonText2, null, null, null), true);
 
 																			StopEvent();
@@ -1253,6 +1498,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("targetLord", targetLord?.Name)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription3rm, true, false, eventButtonText2, null, null, null), true);
 
@@ -1281,6 +1534,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("title", targetLordGenderTitle)
 															.ToString();
 
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgEnd = new TextObject(
+																"{=Feast_Event_Msg_End}The feast has ended.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 															InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription4rm, true, false, eventButtonText2, null, null, null), true);
 
@@ -1308,6 +1568,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
 
+											ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+											var eventMsgEnd = new TextObject(
+												"{=Feast_Event_Msg_End}The feast has ended.")
+											.SetTextVariable("targetLord", targetLord?.Name)
+											.ToString();
+											InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 											InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescriptionEndFeast3, true, false, eventButtonText2, null, null, null), true);
 
@@ -1324,14 +1591,12 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 							}
 							#endregion
 
-
-
 						}
 						#endregion
 
 						#region Player NOT Settlement
 						//If Player Owns Settlement _____________________________
-						if (Settlement.CurrentSettlement.Owner == Hero.MainHero)
+						if (Settlement.CurrentSettlement.Owner != Hero.MainHero)
 						{
 
 							#region Good Relation
@@ -1382,6 +1647,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.SetTextVariable("gender", targetLordGenderAdjective)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
+
+											ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 2);
 
 											#region Inquiry Elements 3
 											//option D ---- End ----
@@ -1438,6 +1706,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.ToString();
 
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgCharm1 = new TextObject(
+																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1, RandomEventsSubmodule.Msg_Color));
+
 															#region Inquiry Elements
 															//option A ---- Hook up ----
 															var eventOption1c = new TextObject("{=Feast_Event_Option_1c}[Charm] Go somewhere private").ToString();
@@ -1471,6 +1747,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 10);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 50);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
+
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription1d, true, false, eventButtonText2, null, null, null), true);
 
@@ -1489,6 +1773,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription3v, true, false, eventButtonText2, null, null, null), true);
 
@@ -1519,6 +1810,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("title", targetLordGenderTitle)
 															.SetTextVariable("settlement", currentSettlement)
 															.ToString();
+
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgCharm1a = new TextObject(
+																"{=Feast_Event_Msg_Charm1}You boast {targetLord}.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1a, RandomEventsSubmodule.Msg_Color));
 
 															#region Inquiry Elements
 															//option A ---- Continue ----
@@ -1553,6 +1852,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 3);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
+
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription2r, true, false, eventButtonText2, null, null, null), true);
 
 																			StopEvent();
@@ -1573,6 +1880,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("player", playerName)
 																			.SetTextVariable("playerSUB", playerGenderSubjective)
 																			.ToString();
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription5v, true, false, eventButtonText2, null, null, null), true);
 
@@ -1603,6 +1918,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("title", targetLordGenderTitle)
 															.SetTextVariable("settlement", currentSettlement)
 															.ToString();
+
+															var MoneyStole = MBRandom.RandomInt(1000, 5000);
+															Hero.MainHero.ChangeHeroGold(+MoneyStole);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 50);
+															var eventMsgRogue = new TextObject(
+																"{=Feast_Event_Msg_Rogue}You steal the coin purse.").ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgRogue, RandomEventsSubmodule.Msg_Color));
 
 															#region Inquiry Elements
 															//option A ---- Continue ----
@@ -1637,6 +1959,15 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 3);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
+
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription2r, true, false, eventButtonText2, null, null, null), true);
 
 																			StopEvent();
@@ -1657,6 +1988,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("player", playerName)
 																			.SetTextVariable("playerSUB", playerGenderSubjective)
 																			.ToString();
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription7v, true, false, eventButtonText2, null, null, null), true);
 
@@ -1689,6 +2028,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("playerSUB", playerGenderSubjective)
 															.ToString();
 
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 3);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgEnd = new TextObject(
+																"{=Feast_Event_Msg_End}The feast has ended.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 															InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription8v, true, false, eventButtonText2, null, null, null), true);
 
@@ -1720,6 +2066,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											.ToString();
 
+											ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+											var eventMsgEnd = new TextObject(
+												"{=Feast_Event_Msg_End}The feast has ended.")
+											.SetTextVariable("targetLord", targetLord?.Name)
+											.ToString();
+											InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 											InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescriptionEndFeast1, true, false, eventButtonText2, null, null, null), true);
 
@@ -1750,6 +2103,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								.SetTextVariable("genderSUB", targetLordGenderSubjective)
 								.SetTextVariable("title", targetLordGenderTitle)
 								.ToString();
+
+								
+								Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 2);
 
 
 								#region Inquiry Elements 2
@@ -1787,6 +2143,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.SetTextVariable("gender", targetLordGenderAdjective)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
+
+											ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
 
 											#region Inquiry Elements 3
 											//option D ---- End ----
@@ -1843,6 +2201,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("genderSUB", targetLordGenderSubjective)
 															.ToString();
 
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgCharm1 = new TextObject(
+																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1, RandomEventsSubmodule.Msg_Color));
+
 															#region Inquiry Elements
 															//option A ---- Hook up ----
 															var eventOption2uc = new TextObject("{=Feast_Event_Option_2uc}[Charm] Go somewhere private").ToString();
@@ -1876,6 +2242,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription4u, true, false, eventButtonText2, null, null, null), true);
 
@@ -1924,6 +2291,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("settlement", currentSettlement)
 															.ToString();
 
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgCharm1a = new TextObject(
+																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1a, RandomEventsSubmodule.Msg_Color));
+
 															#region Inquiry Elements
 															//option A ---- Continue ----
 															var eventOption1ru = new TextObject("{=Feast_Event_Option_1r}Continue Feast").ToString();
@@ -1958,6 +2333,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.ToString();
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription4b, true, false, eventButtonText2, null, null, null), true);
 
@@ -2005,6 +2382,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
 															.ToString();
 
+															var MoneyStole = MBRandom.RandomInt(1000, 5000);
+															Hero.MainHero.ChangeHeroGold(+MoneyStole);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 50);
+															var eventMsgRogue = new TextObject(
+																"{=Feast_Event_Msg_Rogue}You steal the coin purse.").ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgRogue, RandomEventsSubmodule.Msg_Color));
+
 															#region Inquiry Elements
 															//option A ---- Continue ----
 															var eventOption1rq = new TextObject("{=Feast_Event_Option_1r}Continue Feast").ToString();
@@ -2036,6 +2420,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription2rq, true, false, eventButtonText2, null, null, null), true);
 
 																			StopEvent();
@@ -2051,6 +2437,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("targetLord", targetLord?.Name)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription3rq, true, false, eventButtonText2, null, null, null), true);
 
@@ -2079,6 +2467,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("title", targetLordGenderTitle)
 															.ToString();
 
+															
 
 															InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription6b, true, false, eventButtonText2, null, null, null), true);
 
@@ -2106,6 +2495,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
 
+											Hero.MainHero.SetPersonalRelation(targetLord, +1);
+											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+											var eventMsgEnd = new TextObject(
+												"{=Feast_Event_Msg_End}The feast has ended.")
+											.SetTextVariable("targetLord", targetLord?.Name)
+											.ToString();
+											InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 											InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescriptionEndFeast7b, true, false, eventButtonText2, null, null, null), true);
 
@@ -2136,6 +2532,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								.SetTextVariable("genderSUB", targetLordGenderSubjective)
 								.SetTextVariable("title", targetLordGenderTitle)
 								.ToString();
+
+								
+								Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 2);
 
 								#region Inquiry Elements 2
 								//option A ---- Continue ----
@@ -2172,6 +2571,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.SetTextVariable("gender", targetLordGenderAdjective)
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
+
+											ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 2);
 
 											#region Inquiry Elements 3
 											//option D ---- End ----
@@ -2229,6 +2631,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
 															.ToString();
 
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 5);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgCharm1 = new TextObject(
+																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1, RandomEventsSubmodule.Msg_Color));
+
 															#region Inquiry Elements
 															//option A ---- Hook up ----
 															var eventOption2uc = new TextObject("{=Feast_Event_Option_2uc}[Charm] Go somewhere private").ToString();
@@ -2262,6 +2672,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 10);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 50);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription4n, true, false, eventButtonText2, null, null, null), true);
 
@@ -2280,6 +2697,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription3i, true, false, eventButtonText2, null, null, null), true);
 
@@ -2312,6 +2736,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("title", targetLordGenderTitle)
 															.SetTextVariable("settlement", currentSettlement)
 															.ToString();
+
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 3);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgCharm1a = new TextObject(
+																"{=Feast_Event_Msg_Charm1}You charm {targetLord}.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm1a, RandomEventsSubmodule.Msg_Color));
 
 															#region Inquiry Elements
 															//option A ---- Continue ----
@@ -2346,6 +2778,15 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("settlement", currentSettlement)
 																			.ToString();
 
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
+
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription4i, true, false, eventButtonText2, null, null, null), true);
 
 																			StopEvent();
@@ -2365,6 +2806,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.SetTextVariable("settlement", currentSettlement)
 																			.ToString();
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription3rn, true, false, eventButtonText2, null, null, null), true);
 
@@ -2391,6 +2840,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("genderADJ", targetLordGenderAdjective)
 															.SetTextVariable("genderOBJ", targetLordGenderObjective)
 															.ToString();
+
+															var MoneyStole = MBRandom.RandomInt(1000, 5000);
+															Hero.MainHero.ChangeHeroGold(+MoneyStole);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 50);
+															var eventMsgRogue = new TextObject(
+																"{=Feast_Event_Msg_Rogue}You steal the coin purse.").ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgRogue, RandomEventsSubmodule.Msg_Color));
 
 															#region Inquiry Elements
 															//option A ---- Continue ----
@@ -2423,6 +2879,15 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("genderSUB", targetLordGenderSubjective)
 																			.ToString();
 
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 3);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 20);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Steward, 50);
+																			var eventMsgCharm2 = new TextObject(
+																				"{=Feast_Event_Msg_Charm2}You and {targetLord} have a great time.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgCharm2, RandomEventsSubmodule.Msg_Color));
+
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription6i, true, false, eventButtonText2, null, null, null), true);
 
 																			StopEvent();
@@ -2438,6 +2903,14 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			.SetTextVariable("targetLord", targetLord?.Name)
 																			.SetTextVariable("title", targetLordGenderTitle)
 																			.ToString();
+
+																			ChangeRelationAction.ApplyPlayerRelation(targetLord, 1);
+																			Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+																			var eventMsgEnd = new TextObject(
+																				"{=Feast_Event_Msg_End}The feast has ended.")
+																			.SetTextVariable("targetLord", targetLord?.Name)
+																			.ToString();
+																			InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 																			InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription3rm, true, false, eventButtonText2, null, null, null), true);
 
@@ -2466,6 +2939,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															.SetTextVariable("title", targetLordGenderTitle)
 															.ToString();
 
+															ChangeRelationAction.ApplyPlayerRelation(targetLord, 2);
+															Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+															var eventMsgEnd = new TextObject(
+																"{=Feast_Event_Msg_End}The feast has ended.")
+															.SetTextVariable("targetLord", targetLord?.Name)
+															.ToString();
+															InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 															InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescription7i, true, false, eventButtonText2, null, null, null), true);
 
@@ -2493,6 +2973,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											.SetTextVariable("title", targetLordGenderTitle)
 											.ToString();
 
+											Hero.MainHero.SetPersonalRelation(targetLord, +1);
+											Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 10);
+											var eventMsgEnd = new TextObject(
+												"{=Feast_Event_Msg_End}The feast has ended.")
+											.SetTextVariable("targetLord", targetLord?.Name)
+											.ToString();
+											InformationManager.DisplayMessage(new InformationMessage(eventMsgEnd, RandomEventsSubmodule.Msg_Color));
 
 											InformationManager.ShowInquiry(new InquiryData(eventTitle, eventDescriptionEndFeast8i, true, false, eventButtonText2, null, null, null), true);
 
@@ -2508,8 +2995,6 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								StopEvent();
 							}
 							#endregion
-
-
 
 						}
 						#endregion
