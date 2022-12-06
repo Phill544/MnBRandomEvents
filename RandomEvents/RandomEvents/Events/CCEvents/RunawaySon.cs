@@ -122,7 +122,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var eventOptionDText = new TextObject(
                     "{=RunawaySon_Event_Choice_4}You laugh as you hear his plea and your men soon join in on the laughter. You approach the man and thrust a " +
-                    "dagger into his stomach. You watch him fall to the ground in a pool of blood, screaming in pain.\n " +
+                    "dagger into his stomach. You watch him fall to the ground in a pool of blood, screaming in pain.\n" +
                     "You kneel down beside him and watch as the light soon leaves his eyes and he dies from his injury. " +
                     "You and some men decide to cut him open and hang his body from a tree as a warning but not before looting his body for {goldLooted} gold.")
                 .SetTextVariable("goldLooted",goldLooted)

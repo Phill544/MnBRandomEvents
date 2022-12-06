@@ -54,7 +54,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var fish = MBObjectManager.Instance.GetObject<ItemObject>("fish");
             
             var eventDescription = new TextObject(
-                    "{=FishingSpot_Event_Desc}While camping, {soldiersGoneFishing} of your men decide they want to go to the lake just outside the camp to try and catch some fish.\n " +
+                    "{=FishingSpot_Event_Desc}While camping, {soldiersGoneFishing} of your men decide they want to go to the lake just outside the camp to try and catch some fish.\n" +
                     "You could always use the additional resources and it would be a great morale booster for the party if they catch some. You tell them to be back before nightfall.")
                 .SetTextVariable("soldiersGoneFishing", soldiersGoneFishing)
                 .ToString();

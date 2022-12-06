@@ -101,7 +101,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     " and have your men scatter to search for anything interesting. You decide to check the living room." +
                     " Nothing special here except bugs and spiders. You head back out to make sure your horses are" +
                     " still there. As you head out of the building you hear the deafening sound of the entire building" +
-                    " collapsing behind you. \n\nConfused you start to call out the names of your men but no one" +
+                    " collapsing behind you.\n\nConfused you start to call out the names of your men but no one" +
                     " responds. You return to the main party and gathers some additional soldiers to help retrieve" +
                     " them men trapped. Sadly only 2 of them survived and the {killedMen} others perished from being crushed.")
                 .SetTextVariable("killedMen", killedMen)

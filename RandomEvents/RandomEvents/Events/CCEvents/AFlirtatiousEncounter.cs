@@ -200,7 +200,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         "feelings but at least you are able to enjoy the night alone. A few hours later as you are " +
                         "about to leave you come across {name} again. You tell her that you're sorry for what you said " +
                         "and you didn't mean it as you just wanted to be left alone. She somehow manages to politely " +
-                        "and kindly tell you to F**k off.")
+                        "and kindly tell you to f**k off.")
                     .SetTextVariable("name", target.FirstName)
                     .SetTextVariable("age", (int)Math.Round(target.Age))
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())

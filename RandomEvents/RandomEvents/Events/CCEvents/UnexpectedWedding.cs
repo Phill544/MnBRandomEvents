@@ -154,7 +154,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "{=UnexpectedWedding_Event_Choice_5}You have your men surround the area while you go and talk to the guests. You have all guests empty their pockets and give you anything valuable. " + 
                     "Some guests resist but after a few threatening gestures from your men they too fall in line. After you have stolen {raidedGold} gold and anything of value from the wedding, " +
                     "you order your men to trash the entire area. Your men do so without blinking an eye. You see the bride crying while being comforted by some guests. You can see the " +
-                    "hate in the groom's eyes. He will undoubtedly remember you.\n \n After you have personally made sure that you have thoroughly ruined this once joyful moment, you order your men to leave.")
+                    "hate in the groom's eyes. He will undoubtedly remember you.\n\nAfter you have personally made sure that you have thoroughly ruined this once joyful moment, you order your men to leave.")
                 .SetTextVariable("raidedGold", raidedGold)
                 .ToString();
             

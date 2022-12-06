@@ -6,7 +6,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
     {
         /// <param name="Gender">String - Valid inputs are <c>male</c> and <c>female</c></param>
         /// <param name="Capitalize">Bool - Set to true if you want the function to return the assignment in capitalized format</param>
-        /// <param name="Case">String - Valid inputs are <c>subjective</c>, <c>objective</c>, <c>adjective</c> and <c>pronoun</c></param>
+        /// <param name="Case">String - Valid inputs are <c>subjective</c>, <c>objective</c>, <c>adjective</c>, <c>pronoun</c> and <c>lord</c></param>
         ///<returns>
         /// A string with the gender assignment
         /// </returns>

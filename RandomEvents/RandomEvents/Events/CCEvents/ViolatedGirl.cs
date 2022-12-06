@@ -132,9 +132,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var eventOptionAText = new TextObject(
                     "{=ViolatedGirl_Event_Choice_1}You tell her that this sort of behaviour is unacceptable. You order all your men to attention as you and the girl search for the man. " +
-                    "She finally stops and points to one of your men. You order him to you.\n You ask him if her story is true and he confirms that it is. You immediately punch him in the " +
+                    "She finally stops and points to one of your men. You order him to you.\nYou ask him if her story is true and he confirms that it is. You immediately punch him in the " +
                     "face so hard that he falls on his back. You strip him of his rank on the spot and have some men take him in chains.\nYou ask the girl what she wants to do with him. " +
-                    "She wants him to pay for his misdeed so you have 5 of your men escort him to {closestCity} where he will face justice. \nYou also give the girl {compensation} gold as " +
+                    "She wants him to pay for his misdeed so you have 5 of your men escort him to {closestCity} where he will face justice.\nYou also give the girl {compensation} gold as " +
                     "an apology from you personally. The girl thank you for believing her and appreciate your swift action.")
                 .SetTextVariable("closestCity", closestCity)
                 .SetTextVariable("compensation", compensation)
@@ -142,9 +142,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var eventOptionBText = new TextObject(
                     "{=ViolatedGirl_Event_Choice_2}You listen to the girl's story. You do believe her but you cannot risk this news damaging the morale of the men. You ask her how much gold " +
-                    "it would take to keep this quiet.\n The girl says she doesn't have a lot of gold as she is tending to her sick father at home. She says a sum of {goldToCompensate} gold " +
-                    "would be enough to help her father and forget about this incident.\n You agree to pay her the requested amount plus 300 additional gold as a sign of goodwill. " +
-                    "The girl then promptly leaves your camp. \n \nAll in all this event has cost you {totalCompensation} gold.")
+                    "it would take to keep this quiet.\nThe girl says she doesn't have a lot of gold as she is tending to her sick father at home. She says a sum of {goldToCompensate} gold " +
+                    "would be enough to help her father and forget about this incident.\nYou agree to pay her the requested amount plus 300 additional gold as a sign of goodwill. " +
+                    "The girl then promptly leaves your camp.\n\nAll in all this event has cost you {totalCompensation} gold.")
                 .SetTextVariable("goldToCompensate", goldToCompensate)
                 .SetTextVariable("totalCompensation", totalCompensation)
                 .ToString();
@@ -157,8 +157,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var eventOptionDText = new TextObject(
                     "{=ViolatedGirl_Event_Choice_4}You know that if this gets out you are in trouble. You offer the girl a glass of wine which she accepts. While she has her back to you, " +
-                    "you pull out your dagger and in one swift move you have cut her throat.\n It doesn't take long for her to bleed out. Once she does you call on 5 of your most trusted " +
-                    "men to help you with the cleanup. You personally put her body in a sheet of linen and put her on your horse.\n Your ride away from camp for a few minutes until you stop " +
+                    "you pull out your dagger and in one swift move you have cut her throat.\nIt doesn't take long for her to bleed out. Once she does you call on 5 of your most trusted " +
+                    "men to help you with the cleanup. You personally put her body in a sheet of linen and put her on your horse.\nYour ride away from camp for a few minutes until you stop " +
                     "and dig a shallow grave. You bury the girl and return to camp. The men inform you that the cleanup is done. No one will ever know what transpired here today.")
                 .ToString();
             

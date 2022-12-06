@@ -64,7 +64,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var hides = MBObjectManager.Instance.GetObject<ItemObject>("hides");
             
             var eventDescription = new TextObject(
-                    "{=HuntingTrip_Event_Desc}While camping, {soldiersGoneHunting} of your men decide they want to go into the forest just west of camp to try hunting.\n " +
+                    "{=HuntingTrip_Event_Desc}While camping, {soldiersGoneHunting} of your men decide they want to go into the forest just west of camp to try hunting.\n" +
                     "You could use the additional resources and it would be a great morale booster for the party if they catch some. You tell them to be back before nightfall.")
                 .SetTextVariable("soldiersGoneHunting", soldiersGoneHunting)
                 .ToString();
@@ -103,21 +103,21 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=HuntingTrip_Event_Msg_2}The hunt yielded {animalsCaught} hides and {yieldedMeatResources} pieces of meat.\n Morale was raised by {moraleGained}.")
+                    "{=HuntingTrip_Event_Msg_2}The hunt yielded {animalsCaught} hides and {yieldedMeatResources} pieces of meat.\nMorale was raised by {moraleGained}.")
                 .SetTextVariable("animalsCaught", animalsCaught)
                 .SetTextVariable("yieldedMeatResources", yieldedMeatResources)
                 .SetTextVariable("moraleGained", moraleGained - 2)
                 .ToString();
             
             var eventMsg3 =new TextObject(
-                    "{=HuntingTrip_Event_Msg_3}The hunt yielded {animalsCaught} hides and {yieldedMeatResources} pieces of meat.\n Morale was raised by {moraleGained}.")
+                    "{=HuntingTrip_Event_Msg_3}The hunt yielded {animalsCaught} hides and {yieldedMeatResources} pieces of meat.\nMorale was raised by {moraleGained}.")
                 .SetTextVariable("animalsCaught", animalsCaught)
                 .SetTextVariable("yieldedMeatResources", yieldedMeatResources)
                 .SetTextVariable("moraleGained", moraleGained - 1)
                 .ToString();
             
             var eventMsg4 =new TextObject(
-                    "{=HuntingTrip_Event_Msg_4}The hunt yielded {animalsCaught} hides and {yieldedMeatResources} pieces of meat.\n Morale was raised by {moraleGained}.")
+                    "{=HuntingTrip_Event_Msg_4}The hunt yielded {animalsCaught} hides and {yieldedMeatResources} pieces of meat.\nMorale was raised by {moraleGained}.")
                 .SetTextVariable("animalsCaught", animalsCaught)
                 .SetTextVariable("yieldedMeatResources", yieldedMeatResources)
                 .SetTextVariable("moraleGained", moraleGained)

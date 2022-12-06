@@ -84,7 +84,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 			};
 			
 			var eventOptionAText = new TextObject(
-                    "{=RedMoon_Event_Choice_1}You fall to your knees and start praying to the gods. Several of your men join you in prayer. \n \n" +
+                    "{=RedMoon_Event_Choice_1}You fall to your knees and start praying to the gods. Several of your men join you in prayer.\n\n" +
                     "After praying for almost 10 minutes you realize that this won't help. You order your men to give you {goldLostToReligion} gold that you will rush to the " +
                     "nearest chapel. Hopefully the priests can help you. You mount your steed and ride of. You ride like a madman towards {closestSettlement} as you know the " +
                     "settlement has a place of worship. As your steed jumps over a fence you fall off and black out.\n" +
@@ -97,7 +97,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "{=RedMoon_Event_Choice_2}You call your men to you. Many are panicking and you see genuine fear in " +
                     "their faces. You tell them to stop and calm down but to no avail. They start running around like " +
                     "headless chickens again. You decide not to waste your time and let the fanatics do what they want. " +
-                    "You decide to retire to your tent.\n \nWhen you wake up the following morning you learn that " +
+                    "You decide to retire to your tent.\n\nWhen you wake up the following morning you learn that " +
                     "{menLostToReligion} of your men left your party in the direction of {closestSettlement}. They also " +
                     "inform you they took {goldLostToReligion} gold from the treasury as an offering to the church. At " +
                     "least the fanatics are gone!")
@@ -116,8 +116,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventOptionDText = new TextObject(
-                    "{=RedMoon_Event_Choice_4}Nope...\n \nYou turn around and go back into your tent, straight to " +
-                    "sleep.\n \nWhen you wake up the following morning you learn that {menLostToReligion} of your men " +
+                    "{=RedMoon_Event_Choice_4}Nope...\n\nYou turn around and go back into your tent, straight to " +
+                    "sleep.\n\nWhen you wake up the following morning you learn that {menLostToReligion} of your men " +
                     "left your party in the direction of {closestSettlement}. They also inform you they took " +
                     "{goldLostToReligion} gold from the treasury as an offering to the church. At least the fanatics " +
                     "are gone!")

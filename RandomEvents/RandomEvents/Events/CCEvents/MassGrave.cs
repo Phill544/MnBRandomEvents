@@ -91,7 +91,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOptionAText = new TextObject(
                     "{=MassGrave_Event_Choice_1}You order two of your men to go back to camp and fetch shovels, linen and more men while you and the others start to remove the bodies from the grave. " +
                     "You lay the bodies next to each other in neat lines. Whenever there is a child brought up from the grave you feel a great sadness and you cannot help hold back a few tears. Several of your " +
-                    "men weep as well and you feel the mood is very dark. \nYour men return with the requested supplies and additional men. Some start to dig graves while others wrap bodies in linen. " +
+                    "men weep as well and you feel the mood is very dark.\nYour men return with the requested supplies and additional men. Some start to dig graves while others wrap bodies in linen. " +
                     "In total you pull {bodiesInGrave} bodies from the mass grave. After spending several hours digging and burying you are finally done just before nightfall. " +
                     "You and your men return to camp and decided to sit around the campfire discussing your feelings after the today's events.")
                 .SetTextVariable("bodiesInGrave", bodiesInGrave)

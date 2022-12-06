@@ -114,10 +114,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var eventOptionAText = new TextObject(
                     "{=FallenSoldier_Event_Choice_1}You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. " +
-                    "The soldier in question was executed by your hands as it was discovered he was a traitor. \n The question you ask yourself now is if his entire family should suffer from his mistake. " +
+                    "The soldier in question was executed by your hands as it was discovered he was a traitor.\nThe question you ask yourself now is if his entire family should suffer from his mistake. " +
                     "They have spoken so warmly about him that you don't want to tell them the truth about how he died so you make up a heroic story.\n" +
-                    "Even though the family have no right for compensation, you agree to pay them {familyCompensation} gold in compensation so they can keep their family farm.\n \n" +
-                    "After you have handed over they gold to them and they have left, you cannot help but wonder if you did the right thing keeping the mother in the dark about her son's true nature.\n \n" +
+                    "Even though the family have no right for compensation, you agree to pay them {familyCompensation} gold in compensation so they can keep their family farm.\n\n" +
+                    "After you have handed over they gold to them and they have left, you cannot help but wonder if you did the right thing keeping the mother in the dark about her son's true nature.\n\n" +
                     "You end up drinking the night away.")
                 .SetTextVariable("familyCompensation", familyCompensation)
                 .ToString();
@@ -136,13 +136,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOptionDText = new TextObject(
                     "{=FallenSoldier_Event_Choice_4}You ask for the name and rank of the man who died. When she tells " +
                     "you his name you do remember him and how he died. The soldier in question was executed by your hands " +
-                    "as it was discovered he was a traitor.\n You ask them where their farm is and you tell them you will " +
-                    "be there tomorrow. You then excuse yourself and leave. \n \n The following day you and your men arrive " +
+                    "as it was discovered he was a traitor.\nYou ask them where their farm is and you tell them you will " +
+                    "be there tomorrow. You then excuse yourself and leave.\n\nThe following day you and your men arrive " +
                     "at the farm but you have no intention to pay them. Instead you order your men to burn the farm to the " +
-                    "ground and kill the owners.\n  You watch as your men execute your orders. You see them dragging the " +
+                    "ground and kill the owners.\nYou watch as your men execute your orders. You see them dragging the " +
                     "family outside with their hands bound behind their backs. You see you men exit the farmhouse with some " +
-                    "valuables. You watch as the farmhouse burns and you witness your men executing all of the family.\n Once " +
-                    "they are done you order your men back and you ride back to your main party. \n \nBack at camp your men " +
+                    "valuables. You watch as the farmhouse burns and you witness your men executing all of the family.\nOnce " +
+                    "they are done you order your men back and you ride back to your main party.\n\nBack at camp your men " +
                     "told you they looted {goldLooted} gold from the house.")
                 .SetTextVariable("goldLooted", goldLooted)
                 .ToString();
@@ -154,7 +154,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=FallenSoldier_Event_Msg_2}{heroName}'s party looted {goldLooted} gold from the farmhouse.")
+                    "{=FallenSoldier_Event_Msg_2}{heroName} denied the family compensation.")
+                .SetTextVariable("heroName", heroName)
+                .ToString();
+            
+            var eventMsg3 =new TextObject(
+                    "{=FallenSoldier_Event_Msg_3}{heroName}'s party looted {goldLooted} gold from the farmhouse.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldLooted", goldLooted)
                 .ToString();
@@ -175,6 +180,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         {
                             InformationManager.ShowInquiry(
                                 new InquiryData(eventTitle,eventOptionBText, true, false, eventButtonText2, null, null, null), true);
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             break;
                         }
                         case "c":
@@ -184,7 +190,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "d":
                             InformationManager.ShowInquiry(
                                 new InquiryData(eventTitle,eventOptionDText, true, false, eventButtonText2, null, null, null), true);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_EVIL_Outcome));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_EVIL_Outcome));
                             break;
                         default:
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");

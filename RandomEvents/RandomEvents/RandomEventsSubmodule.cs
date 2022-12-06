@@ -11,7 +11,9 @@ namespace CryingBuffalo.RandomEvents
 {
     public class RandomEventsSubmodule : MBSubModuleBase
     {
-        public static readonly Color Ini_Color = Color.FromUint(7194750);
+        //Mod Loaded Color
+        private static readonly Color Ini_Color = Color.FromUint(7194750);
+        
         public static readonly Color Dbg_Color = Color.FromUint(16005134);
         public static readonly Color Msg_Color = Color.FromUint(11846692);
         

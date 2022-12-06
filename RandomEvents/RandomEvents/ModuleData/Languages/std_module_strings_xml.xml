@@ -159,7 +159,8 @@
 
     <!--FallenSoldier - Log Messages-->
     <string id="FallenSoldier_Event_Msg_1" text="{heroName} gave the family {familyCompensation} gold in compensation." />
-    <string id="FallenSoldier_Event_Msg_2" text="{heroName}'s party looted {goldLooted} gold from the farmhouse." />
+    <string id="FallenSoldier_Event_Msg_2" text="{heroName} denied the family compensation." />
+    <string id="FallenSoldier_Event_Msg_3" text="{heroName}'s party looted {goldLooted} gold from the farmhouse." />
 
 
 

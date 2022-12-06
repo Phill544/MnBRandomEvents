@@ -39,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 					"{=PassingComet_Event_Text}You and some of your men are standing in a field at night gazing up at a" +
 					" comet. It is one of the most beautiful sights you have ever seen. You cannot help wondering what " +
 					"it really is. You have always been fascinated by the stars and night sky. Most people believe it's " +
-					"the gods looking down on us, but you think otherwise.\n \nYou have often wondered if the stars " +
+					"the gods looking down on us, but you think otherwise.\n\nYou have often wondered if the stars " +
 					"are the same thing as the Sun just much further away... Or perhaps they're angels of our fallen " +
 					"ancestors watching over us. You have never shared these thoughts with anyone as most would think " +
 					"you to be crazy. At least for now you can be fascinated by the amazing comet passing by. You and a " +

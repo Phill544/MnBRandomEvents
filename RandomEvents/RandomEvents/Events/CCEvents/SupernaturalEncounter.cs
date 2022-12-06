@@ -65,7 +65,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var eventOptionAText = new TextObject(
                     "{=SupernaturalEncounter_Event_Choice_1}You follow the apparition. A few men who also have seen the spectacle joins in following her.\n The apparition stops under a lone tree in a meadow and disappears. " +
-                    "You and your men stare at each other in disbelief.\n \n You and your men go back to the main camp and discuss what should be done.\n After some deliberation, " +
+                    "You and your men stare at each other in disbelief.\n\n You and your men go back to the main camp and discuss what should be done.\n After some deliberation, " +
                     "you come to the conclusion that you go back and dig at the site she disappeared to see if you find anything.\n After digging for about 30 minutes you come across a single skeleton.\n " +
                     "This must be her! You and your men respectfully gather up the bones and gives them a proper burial.\n Hopefully her restless spirit will finally have peace.")
                 .ToString();
