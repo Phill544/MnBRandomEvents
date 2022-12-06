@@ -90,7 +90,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv3_text = new TextObject("{=mcm_adv3_text}Bandit Ambush").ToString();
             var adv4_text = new TextObject("{=mcm_adv4_text}Bee Kind").ToString();
             var adv5_text = new TextObject("{=mcm_adv5_text}Bet Money").ToString();
-            var adv6_text = new TextObject("{=mcm_adv6_text}Beggar Begging").ToString();
+            var adv6_text = new TextObject("{=mcm_adv6_text}Beggar").ToString();
             var adv7_text = new TextObject("{=mcm_adv7_text}Birthday Party").ToString();
             var adv8_text = new TextObject("{=mcm_adv8_text}Bumper Crop").ToString();
             var adv9_text = new TextObject("{=mcm_adv9_text}Bunch of Prisoners").ToString();

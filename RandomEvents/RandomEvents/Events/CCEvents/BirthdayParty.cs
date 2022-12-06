@@ -107,7 +107,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var eventDescription = new TextObject(
                 "{=BirthdayParty_Event_Desc}As you and your party are traveling in the vicinity of {closestSettlement}, you come across {peopleAttending} " +
-                "people in what seems to be a birthday party for a young girl. A couple of the guests invite you to join them in celebrating the girls {birthdayAge} " +
+                "people in what seems to be a birthday party for a young girl. A couple of the guests invite you to join them in celebrating the girl's {birthdayAge}th " +
                 "birthday! What should you do?")
                 .SetTextVariable("closestSettlement", closestSettlement)
                 .SetTextVariable("peopleAttending", peopleAttending)
@@ -119,11 +119,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption2 = new TextObject("{=BirthdayParty_Event_Option_2}Give the girls some gold").ToString();
             var eventOption2Hover = new TextObject("{=BirthdayParty_Event_Option_2_Hover}You don't have time to stay but you can still be nice, right?").ToString();
 
-            var eventOption3 = new TextObject("{=BirthdayParty_Event_Option_3}[Roguery] Raid the party").ToString();
-            var eventOption3Hover = new TextObject("{=BirthdayParty_Event_Option_3_Hover}Have some fun.\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
+            var eventOption3 = new TextObject("{=BirthdayParty_Event_Option_3}Leave").ToString();
+            var eventOption3Hover = new TextObject("{=BirthdayParty_Event_Option_3_Hover}Don't have time").ToString();
             
-            var eventOption4 = new TextObject("{=BirthdayParty_Event_Option_4}Leave").ToString();
-            var eventOption4Hover = new TextObject("{=BirthdayParty_Event_Option_4_Hover}Don't have time").ToString();
+            var eventOption4 = new TextObject("{=BirthdayParty_Event_Option_4}[Roguery] Raid the party").ToString();
+            var eventOption4Hover = new TextObject("{=BirthdayParty_Event_Option_4_Hover}Have some fun.\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
 
             var eventButtonText = new TextObject("{=BirthdayParty_Event_Button_Text}Okay").ToString();
             
@@ -131,13 +131,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover));
             inquiryElements.Add(new InquiryElement("b", eventOption2, null, true, eventOption2Hover));
+            inquiryElements.Add(new InquiryElement("c", eventOption3, null, true, eventOption3Hover));
             
             if (canRaidWedding)
             {
-                inquiryElements.Add(new InquiryElement("c", eventOption3, null, true, eventOption3Hover));
+                inquiryElements.Add(new InquiryElement("d", eventOption4, null, true, eventOption4Hover));
             }
             
-            inquiryElements.Add(new InquiryElement("d", eventOption4, null, true, eventOption4Hover));
 
             var eventOptionAText = new TextObject(
                 "{=BirthdayParty_Event_Choice_1}You and {yourMenAttending} of your men decide to stay for the party " +

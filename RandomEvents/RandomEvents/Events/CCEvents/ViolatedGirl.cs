@@ -166,7 +166,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "{=ViolatedGirl_Event_Choice_5}You grab her by her hair and pull out you trusty dagger. You start cutting away layers of clothes on the girl until she has nothing on her. You tell her that " +
                     "if she wants to live beyond today she will do as you tell her. She nods in agreement. You guide her to your bed where you push her down and have your way with her.\n\nAfter a few hours " +
                     "you lie in the bed next to her. She has fallen asleep in your bed, probably exhausted from the ordeal. You wake her up and tells her to get out of here but not before warning her about the " +
-                    "consequences of telling anyone what happened. You hand her a piece of and old sack that she can use to cover herself and once she has it on, you have a few of your men throw her out of the camp. " +
+                    "consequences of telling anyone what happened. You hand her a piece of an old sack that she can use to cover herself and once she has it on, you have a few of your men throw her out of the camp. " +
                     "She better hope not to cross your path again!")
                 .ToString();
             

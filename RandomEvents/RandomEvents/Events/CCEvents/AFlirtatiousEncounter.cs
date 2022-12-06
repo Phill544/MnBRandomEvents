@@ -104,7 +104,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     {
                         canCharmTarget = true;
                     
-                        charmAppendedText = new TextObject("{=AFlirtatiousEncounter_Roguery_Appended_Text}[Charm - lvl {charmLevel}]")
+                        charmAppendedText = new TextObject("{=AFlirtatiousEncounter_Charm_Appended_Text}[Charm - lvl {charmLevel}]")
                             .SetTextVariable("charmLevel", charmLevel)
                             .ToString();
                     }

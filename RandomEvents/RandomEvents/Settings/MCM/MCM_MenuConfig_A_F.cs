@@ -75,11 +75,9 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         #region Beggar Begging - Variables
         
         public bool BB_Disable { get; private set; }
-        public int BB_MinGoldToBeggar { get; private set; }
-        public int BB_MaxGoldToBeggar { get; private set; }
-        public int BB_MinRenownGain { get; private set; }
-        public int BB_MaxRenownGain { get; private set; }
-        
+        public int BB_minStewardLevel { get; private set; }
+        public int BB_minRogueryLevel { get; private set; }
+
         #endregion
 
         #region BirdSongs - Variables
@@ -348,17 +346,13 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             
             #region Beggar Begging - Strings
             
-            var bb_heading = new TextObject("{=mcm_bb_heading}Beggar Begging").ToString();
-            var bb1_text = new TextObject("{=mcm_bb1_text}1. Min gold to give").ToString();
-            var bb1_hint = new TextObject("{=mcm_bb1_hint}Minimum amount of gold to give to the beggar.").ToString();
-            var bb2_text = new TextObject("{=mcm_bb2_text}2. Max gold to give").ToString();
-            var bb2_hint = new TextObject("{=mcm_bb2_hint}Maximum amount of gold to give to the beggar.").ToString();
-            var bb3_text = new TextObject("{=mcm_bb3_text}3. Min renown gained").ToString();
-            var bb3_hint = new TextObject("{=mcm_bb3_hint}Minimum amount of renown to gain.").ToString();
-            var bb4_text = new TextObject("{=mcm_bb4_text}4. Max renown gained.").ToString();
-            var bb4_hint = new TextObject("{=mcm_bb4_hint}Maximum amount of renown to gain.").ToString();
-            var bb5_text = new TextObject("{=mcm_bb5_text}5. Deactivate event").ToString();
-            var bb5_hint = new TextObject("{=mcm_bb5_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var bb_heading = new TextObject("{=mcm_bb_heading}Beggar").ToString();
+            var bb1_text = new TextObject("{=mcm_bb1_text}1. Min Steward Level").ToString();
+            var bb1_hint = new TextObject("{=mcm_bb1_hint}Lowest level to unlock the steward option.").ToString();
+            var bb2_text = new TextObject("{=mcm_bb2_text}2. Min Roguery Level").ToString();
+            var bb2_hint = new TextObject("{=mcm_bb2_hint}Lowest level to unlock the roguery option.").ToString();
+            var bb3_text = new TextObject("{=mcm_bb3_text}3. Deactivate event").ToString();
+            var bb3_hint = new TextObject("{=mcm_bb3_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -730,16 +724,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                 #region Beggar Begging - Builder
                 
                 .CreateGroup(bb_heading, groupBuilder => groupBuilder
-                .AddInteger("BB1", bb1_text,2,50, new ProxyRef<int>(() => BB_MinGoldToBeggar, o => BB_MinGoldToBeggar = o), integerBuilder => integerBuilder
+                .AddInteger("BB1", bb1_text,25,275, new ProxyRef<int>(() => BB_minStewardLevel, o => BB_minStewardLevel = o), integerBuilder => integerBuilder
                     .SetHintText(bb1_hint))
-                .AddInteger("BB2", bb2_text,2,50, new ProxyRef<int>(() => BB_MaxGoldToBeggar, o => BB_MaxGoldToBeggar = o), integerBuilder => integerBuilder
+                .AddInteger("BB2", bb2_text,25,275, new ProxyRef<int>(() => BB_minRogueryLevel, o => BB_minRogueryLevel = o), integerBuilder => integerBuilder
                     .SetHintText(bb2_hint))
-                .AddInteger("BB3", bb3_text,5,20, new ProxyRef<int>(() => BB_MinRenownGain, o => BB_MinRenownGain = o), integerBuilder => integerBuilder
+                .AddBool("BB3", bb3_text, new ProxyRef<bool>(() => BB_Disable, o => BB_Disable = o), boolBuilder => boolBuilder
                     .SetHintText(bb3_hint))
-                .AddInteger("BB4", bb4_text,5,20, new ProxyRef<int>(() => BB_MaxRenownGain, o => BB_MaxRenownGain = o), integerBuilder => integerBuilder
-                    .SetHintText(bb4_hint))
-                .AddBool("BB5", bb5_text, new ProxyRef<bool>(() => BB_Disable, o => BB_Disable = o), boolBuilder => boolBuilder
-                    .SetHintText(bb5_hint))
                 )
                 
                 #endregion
@@ -1097,10 +1087,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             
             #region Beggar Begging
             
-            Instance.BB_MinGoldToBeggar = 25;
-            Instance.BB_MaxGoldToBeggar = 75;
-            Instance.BB_MinRenownGain = 10;
-            Instance.BB_MaxRenownGain = 20;
+            Instance.BB_minStewardLevel = 50;
+            Instance.BB_minRogueryLevel = 125;
             Instance.BB_Disable = false;
 
             #endregion

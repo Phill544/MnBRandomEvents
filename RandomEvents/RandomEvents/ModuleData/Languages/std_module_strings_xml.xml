@@ -19,7 +19,7 @@
     <string id="AFlirtatiousEncounter_Event_Option_4_Hover" text="Seriously?" />
 
     <!--AFlirtatiousEncounter - Skill Check-->
-    <string id="AFlirtatiousEncounter_Roguery_Appended_Text" text="[Charm - lvl {charmLevel}]" />
+    <string id="AFlirtatiousEncounter_Charm_Appended_Text" text="[Charm - lvl {charmLevel}]" />
     <string id="AFlirtatiousEncounter_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
 
     <!--AFlirtatiousEncounter - Event Buttons-->
@@ -62,8 +62,8 @@
     <string id="BirthdayParty_Event_Option_4_Hover" text="Don't have time" />
     
     <!--Skill Check-->
-    <string id="BirthdayParty_Roguery_Appended_Text" text="**Skill checks are disabled**" />
-    <string id="BirthdayParty_Skill_Check_Disable_Appended_Text" text="[Roguery - lvl {rogueryLevel}]" />
+    <string id="BirthdayParty_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="BirthdayParty_Roguery_Appended_Text" text="[Roguery - lvl {rogueryLevel}]" />
 
     <!--BirthdayParty - Event Button-->
     <string id="BirthdayParty_Event_Button_Text" text="Okay" />
@@ -82,22 +82,50 @@
 
 
     <!--BeggarBegging Event-->
-    <string id="BeggarBegging_Title" text="Spare a coin" />
-    <string id="BeggarBegging_Event_Desc" text="AWhile you are relaxing in {currentSettlement} you are approached by a beggar who asks if you can spare any gold. You check your pockets to see if you have anything to spare." />
+    <string id="BeggarBegging_Title" text="Beggar" />
+    <string id="BeggarBegging_Event_Desc" text="While you are relaxing in {currentSettlement} you are approached by a {beggarAge} {beggarGender} beggar who asks if you can spare any gold. You wonder what you should do." />
 
-    <!--BeggarBegging - Event Outcomes-->
-    <string id="BeggarBegging_Outcome_1" text="You inform the beggar that you currently don't have any gold on you. The beggar thanks you for your time and leaves." />
-    <string id="BeggarBegging_Outcome_2" text="You hand over {goldToGive} gold to the beggar. He thanks you and move on." />
-    <string id="BeggarBegging_Outcome_3" text="You hand over {goldToGive} gold to the beggar. He shakes your hand and kisses it. He is truly thankful." />
-    <string id="BeggarBegging_Outcome_4" text="You hand over {goldToGive} gold to the beggar. He drops to his knees and kisses your shoes. You tell him to get himself some food." />
+    <!--BeggarBegging - Event Choices-->
+    <string id="BeggarBegging_Event_Option_1" text="Give {genderAssignmentObjective} nothing" />
+    <string id="BeggarBegging_Event_Option_1_Hover" text="Filthy beggar!" />
+    <string id="BeggarBegging_Event_Option_2" text="Give {genderAssignmentObjective} 5 gold" />
+    <string id="BeggarBegging_Event_Option_2_Hover" text="It's something." />
+    <string id="BeggarBegging_Event_Option_3" text="[Steward] Give {genderAssignmentObjective} 100 gold" />
+    <string id="BeggarBegging_Event_Option_3_Hover" text="You can spare it.\n{stewardAppendedText}" />
+    <string id="BeggarBegging_Event_Option_4" text="[Steward] Give {genderAssignmentObjective} a warm meal" />
+    <string id="BeggarBegging_Event_Option_4_Hover" text="Take them to the tavern.\n{stewardAppendedText}" />
+    <string id="BeggarBegging_Event_Option_5" text="[Roguery] Kill {genderAssignmentObjective}" />
+    <string id="BeggarBegging_Event_Option_5_Hover" text="You really hate beggars!\n{rogueryAppendedText}" />
+    
+    <!--BeggarBegging - Dynamic Content -->
+    <string id="BeggarBegging_Beggar_Gender_Male" text="male" />
+    <string id="BeggarBegging_Beggar_Gender_Female" text="female" />
+    <string id="BeggarBegging_Beggar_Age_Young" text="a young" />
+    <string id="BeggarBegging_Beggar_Age_Middle" text="a middle-aged" />
+    <string id="BeggarBegging_Beggar_Age_Old" text="an old" />
+
+    <!--BeggarBegging - Skill Check-->
+    <string id="BeggarBegging_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="BeggarBegging_Steward_Appended_Text" text="[Steward - lvl {stewardLevel}]" />
+    <string id="BeggarBegging_Roguery_Appended_Text" text="[Roguery - lvl {rogueryLevel}]" />
 
     <!--BeggarBegging - Event Button-->
-    <string id="BeggarBegging_Event_Button_Text" text="Continue" />
+    <string id="BeggarBegging_Event_Button_Text_1" text="Choose" />
+    <string id="BeggarBegging_Event_Button_Text_2" text="Done" />
 
+    <!--BeggarBegging - Events-->
+    <string id="BeggarBegging_Event_Choice_1" text="You tell {genderAssignmentObjective} to f**ck off and that you don't have any gold to spare. {genderAssignmentSubjectiveCap} apologises for troubling you and wishes you a good day. You watch as {genderAssignmentSubjective} disappears into the crowd in search of gold." />
+    <string id="BeggarBegging_Event_Choice_2" text="You hand {genderAssignmentObjective} 5 gold from your pocket. {genderAssignmentSubjectiveCap} shakes you hand and thanks you for this humble gift and wishes you a blessed day. You watch as {genderAssignmentSubjective} disappears into the crowd in search of more gold." />
+    <string id="BeggarBegging_Event_Choice_3" text="You are feeling generous today so you hand {genderAssignmentObjective} 100 gold. {genderAssignmentSubjectiveCap} says {genderAssignmentSubjective} can't accept this, but you assure {genderAssignmentObjective} that it's okay and that you have more than enough for yourself. {genderAssignmentSubjectiveCap} begins to cry as you wrap {genderAssignmentObjective} in a hug and comforts {genderAssignmentObjective}. {genderAssignmentSubjectiveCap} tells you that {genderAssignmentSubjective} now has enough for a warm meal and a bed for a couple of days. Something {genderAssignmentSubjective} has not had for many days. {genderAssignmentSubjectiveCap} thanks you yet again before disappearing towards the tavern to get som warm food." />
+    <string id="BeggarBegging_Event_Choice_4" text="You are feeling generous today so you tell {genderAssignmentObjective} that if {genderAssignmentSubjective} wants to you will take {genderAssignmentObjective} to the tavern and buy {genderAssignmentObjective} some food and something to drink instead of giving gold. {genderAssignmentSubjectiveCap} accepts you proposal and the two of you make your way towards the tavern.\n\nOnce there you are immediately told by the owner that beggars aren't welcome. You then proceed to tell the owner that {genderAssignmentSubjective} is with you. The owner nods in agreement. Once seated you order som hot food and a large drink for yourself and the beggar. As you sit there the two of you naturally begin to chat about various subjects. You learn {genderAssignmentSubjective} story and why {genderAssignmentSubjective} is in the situation {genderAssignmentSubjective}'s currently in. After a few minutes you must depart as you have other matters to attend to. The two of you say your goodbyes and you tell the owner that the beggar is to be allowed to finish {genderAssignmentObjective} meal and you will pay so {genderAssignmentSubjective} will have one night to sleep. The owner agrees and you leave." />
+    <string id="BeggarBegging_Event_Choice_5" text="You tell {genderAssignmentObjective} that if {genderAssignmentSubjective} follows you, you will give {genderAssignmentObjective} 150 gold. {genderAssignmentSubjectiveCap} looks at you suspiciously but ultimately goes with you. You guide {genderAssignmentObjective} into a alley where you make sure that there is no one around. You then proceed to knock the beggar down with one punch. {genderAssignmentSubjectiveCap} falls to the ground and cover {genderAssignmentObjective} head. You punch, kick, drag and push {genderAssignmentObjective} around the alley for a few minutes. When you finally stop {genderAssignmentSubjective} is finally dead.\n\nYou turn to leave but 5 guards approaches you and ask what is going on. You tell the guards the truth. That you don't want filthy beggars in your town and you then order your guards to dispose of the body. The guards reluctantly agrees and lifts the body over the shoulder. You emerge from the alley feeling the rush of just killing an innocent person." />
+    
     <!--BeggarBegging - Log Messages-->
-    <string id="BeggarBegging_Event_Msg_1" text="{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown." />
-    <string id="BeggarBegging_Event_Msg_2" text="{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown." />
-    <string id="BeggarBegging_Event_Msg_3" text="{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown." />
+    <string id="BeggarBegging_Event_Msg_1" text="{heroName} told a beggar to f**k off." />
+    <string id="BeggarBegging_Event_Msg_2" text="{heroName} gave the beggar 5 gold." />
+    <string id="BeggarBegging_Event_Msg_3" text="{heroName} gave the beggar 100 gold." />
+    <string id="BeggarBegging_Event_Msg_4" text="{heroName} took the beggar to get some food." />
+    <string id="BeggarBegging_Event_Msg_5" text="{heroName} killed an innocent beggar." />
 
 
 
@@ -465,7 +493,7 @@
     <string id="ViolatedGirl_Event_Choice_2" text="You listen to the girl's story. You do believe her but you cannot risk this news damaging the morale of the men. You ask her how much gold it would take to keep this quiet.\n The girl says she doesn't have a lot of gold as she is tending to her sick father at home. She says a sum of {goldToCompensate} gold would be enough to help her father and forget about this incident.\n You agree to pay her the requested amount plus 300 additional gold as a sign of goodwill. The girl then promptly leaves your camp. \n \nAll in all this event has cost you {totalCompensation} gold." />
     <string id="ViolatedGirl_Event_Choice_3" text="You tell her you don't buy her story and even if you did you can't take her word for it. You have three guards escort her from the camp. The girl leaves but not before she screams a few profanities your way." />
     <string id="ViolatedGirl_Event_Choice_4" text="You know that if this gets out you are in trouble. You offer the girl a glass of wine which she accepts. While she has her back to you, you pull out your dagger and in one swift move you have cut her throat.\n It doesn't take long for her to bleed out. Once she does you call on 5 of your most trusted men to help you with the cleanup. You personally put her body in a sheet of linen and put her on your horse.\n Your ride away from camp for a few minutes until you stop and dig a shallow grave. You bury the girl and return to camp. The men inform you that the cleanup is done. No one will ever know what transpired here today." />
-    <string id="ViolatedGirl_Event_Choice_5" text="You grab her by her hair and pull out you trusty dagger. You start cutting away layers of clothes on the girl until she has nothing on her. You tell her that if she wants to live beyond today she will do as you tell her. She nods in agreement. You guide her to your bed where you push her down and have your way with her.\n\nAfter a few hours you lie in the bed next to her. She has fallen asleep in your bed, probably exhausted from the ordeal. You wake her up and tells her to get out of here but not before warning her about the consequences of telling anyone what happened. You hand her a piece of and old sack that she can use to cover herself and once she has it on, you have  a few of your men throw her out of the camp. She better hope not to cross your path again!" />
+    <string id="ViolatedGirl_Event_Choice_5" text="You grab her by her hair and pull out you trusty dagger. You start cutting away layers of clothes on the girl until she has nothing on her. You tell her that if she wants to live beyond today she will do as you tell her. She nods in agreement. You guide her to your bed where you push her down and have your way with her.\n\nAfter a few hours you lie in the bed next to her. She has fallen asleep in your bed, probably exhausted from the ordeal. You wake her up and tells her to get out of here but not before warning her about the consequences of telling anyone what happened. You hand her a piece of an old sack that she can use to cover herself and once she has it on, you have  a few of your men throw her out of the camp. She better hope not to cross your path again!" />
 
     <!--ViolatedGirl - Log Messages-->
     <string id="ViolatedGirl_Event_Msg_1" text="{heroName} gave the girl {compensation} gold and had the perpetrator sent to the dungeons of {closestCity}." />

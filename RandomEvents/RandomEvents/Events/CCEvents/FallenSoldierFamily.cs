@@ -95,7 +95,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption3 = new TextObject("{=FallenSoldier_Event_Option_3}Leave").ToString();
             var eventOption3Hover = new TextObject("{=FallenSoldier_Event_Option_3_Hover}You have a headache so you leave").ToString();
             
-            var eventOption4 = new TextObject("{=FallenSoldier_Event_Option_4}[Roguery]Trick them").ToString();
+            var eventOption4 = new TextObject("{=FallenSoldier_Event_Option_4}[Roguery] Trick them").ToString();
             var eventOption4Hover = new TextObject("{=FallenSoldier_Event_Option_4_Hover}{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
             
             var eventButtonText1 = new TextObject("{=FallenSoldier_Event_Button_Text_1}Okay").ToString();
