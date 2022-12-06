@@ -44,8 +44,8 @@ namespace CryingBuffalo.RandomEvents.Helpers
                                 break;
                             case "title":
                                 Pronoun = Capitalize
-                                    ? new TextObject("{=gender_male_pronoun_cap}Lord").ToString()
-                                    : new TextObject("{=gender_male_pronoun}lord").ToString();
+                                    ? new TextObject("{=gender_male_title_cap}Lord").ToString()
+                                    : new TextObject("{=gender_male_title}lord").ToString();
                                 break;
                     }
 
@@ -75,8 +75,8 @@ namespace CryingBuffalo.RandomEvents.Helpers
                                 break;
                             case "title":
                                 Pronoun = Capitalize
-                                    ? new TextObject("{=gender_male_pronoun_cap}Lady").ToString()
-                                    : new TextObject("{=gender_male_pronoun}lady").ToString();
+                                    ? new TextObject("{=gender_female_title_cap}Lady").ToString()
+                                    : new TextObject("{=gender_female_title}lady").ToString();
                             break;
                     }
 

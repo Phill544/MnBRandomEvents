@@ -1134,6 +1134,8 @@
     <string id="gender_male_adjective" text="his" />
     <string id="gender_male_pronoun_cap" text="His" />
     <string id="gender_male_pronoun" text="his" />
+    <string id="gender_male_title_cap" text="Lord" />
+    <string id="gender_male_title" text="lord" />
     <string id="gender_female_subjective_cap" text="She" />
     <string id="gender_female_subjective" text="she" />
     <string id="gender_female_objective_cap" text="Her" />
@@ -1142,6 +1144,8 @@
     <string id="gender_female_adjective" text="her" />
     <string id="gender_female_pronoun_cap" text="Hers" />
     <string id="gender_female_pronoun" text="hers" />
+    <string id="gender_female_title_cap" text="Lady" />
+    <string id="gender_female_title" text="lady" />
 
 
 
