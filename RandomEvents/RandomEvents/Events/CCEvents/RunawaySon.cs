@@ -69,8 +69,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 {
                     canKill = true;
                     
-                    rogueryAppendedText = new TextObject("{=RunawaySon_Roguery_Appended_Text}[Roguery - lvl {rogueryLevel}]")
-                        .SetTextVariable("rogueryLevel", heroRogueryLevel)
+                    rogueryAppendedText = new TextObject("{=RunawaySon_Roguery_Appended_Text}[Roguery - lvl {minRogueryLevel}]")
+                        .SetTextVariable("minRogueryLevel", minRogueryLevel)
                         .ToString();
                 }
             }

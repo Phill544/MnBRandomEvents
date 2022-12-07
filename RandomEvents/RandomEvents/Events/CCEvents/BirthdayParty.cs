@@ -96,8 +96,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 {
                     canRaidWedding = true;
                     
-                    rogueryAppendedText = new TextObject("{=BirthdayParty_Roguery_Appended_Text}[Roguery - lvl {rogueryLevel}]")
-                        .SetTextVariable("rogueryLevel", rogueryLevel)
+                    rogueryAppendedText = new TextObject("{=BirthdayParty_Roguery_Appended_Text}[Roguery - lvl {minRogueryLevel}]")
+                        .SetTextVariable("minRogueryLevel", minRogueryLevel)
                         .ToString();
                 }
             }

@@ -67,8 +67,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 {
                     plotEvil = true;
                     
-                    rogueryAppendedText = new TextObject("{=FallenSoldier_Roguery_Appended_Text}[Roguery - lvl {roguerySkill}]")
-                        .SetTextVariable("charmLevel", roguerySkill)
+                    rogueryAppendedText = new TextObject("{=FallenSoldier_Roguery_Appended_Text}[Roguery - lvl {minRogueryLevel}]")
+                        .SetTextVariable("minRogueryLevel", minRogueryLevel)
                         .ToString();
                 }
             }

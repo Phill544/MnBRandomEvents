@@ -82,8 +82,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 {
                     canKillWoman = true;
                     
-                    rogueryAppendedText = new TextObject("{=ViolatedGirl_Engineering_Appended_Text}[Roguery - lvl {rogueryLevel}]")
-                        .SetTextVariable("rogueryLevel", heroRogueryLevel)
+                    rogueryAppendedText = new TextObject("{=ViolatedGirl_Roguery_Appended_Text_1}[Roguery - lvl {minRogueryLevel}]")
+                        .SetTextVariable("minRogueryLevel", minRogueryLevel)
                         .ToString();
                 }
 
@@ -91,8 +91,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 {
                     canViolateWoman = true;
                     
-                    rogueryAppendedText = new TextObject("{=ViolatedGirl_Roguery_Appended_Text}[Roguery - lvl {rogueryLevel}]")
-                        .SetTextVariable("rogueryLevel", heroRogueryLevel)
+                    rogueryAppendedText = new TextObject("{=ViolatedGirl_Roguery_Appended_Text_2}[Roguery - lvl 225]")
                         .ToString();
                 }
             }

@@ -83,8 +83,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 {
                     canGiveMoreGold = true;
                     
-                    stewardAppendedText = new TextObject("{=BeggarBegging_Steward_Appended_Text}[Steward - lvl {stewardLevel}]")
-                        .SetTextVariable("stewardLevel", stewardLevel)
+                    stewardAppendedText = new TextObject("{=BeggarBegging_Steward_Appended_Text}[Steward - lvl {minStewardLevel}]")
+                        .SetTextVariable("minStewardLevel", minStewardLevel)
                         .ToString();
                 }
                 if (stewardLevel >= minStewardLevel + 50)
@@ -92,16 +92,16 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     canOfferFood = true;
 
                     stewardAppendedText =
-                        new TextObject("{=BeggarBegging_Steward_Appended_Text}[Steward - lvl {stewardLevel}]")
-                            .SetTextVariable("stewardLevel", stewardLevel)
+                        new TextObject("{=BeggarBegging_Steward_Appended_Text}[Steward - lvl {minStewardLevel}]")
+                            .SetTextVariable("minStewardLevel", minStewardLevel + 50)
                             .ToString();
                 }
                 if (rogueryLevel >= minRogueryLevel && ownedSettlement)
                 {
                     canKillBeggar = true;
                     
-                    rogueryAppendedText = new TextObject("{=BeggarBegging_Roguery_Appended_Text}[Roguery - lvl {rogueryLevel}]")
-                        .SetTextVariable("rogueryLevel", rogueryLevel)
+                    rogueryAppendedText = new TextObject("{=BeggarBegging_Roguery_Appended_Text}[Roguery - lvl {minRogueryLevel}]")
+                        .SetTextVariable("minRogueryLevel", minRogueryLevel)
                         .ToString();
                 }
             }

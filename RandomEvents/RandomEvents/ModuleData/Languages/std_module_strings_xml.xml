@@ -19,7 +19,7 @@
     <string id="AFlirtatiousEncounter_Event_Option_4_Hover" text="Seriously?" />
 
     <!--AFlirtatiousEncounter - Skill Check-->
-    <string id="AFlirtatiousEncounter_Charm_Appended_Text" text="[Charm - lvl {charmLevel}]" />
+    <string id="AFlirtatiousEncounter_Charm_Appended_Text" text="[Charm - lvl {minCharmLevel}]" />
     <string id="AFlirtatiousEncounter_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
 
     <!--AFlirtatiousEncounter - Event Buttons-->
@@ -63,7 +63,7 @@
     
     <!--Skill Check-->
     <string id="BirthdayParty_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
-    <string id="BirthdayParty_Roguery_Appended_Text" text="[Roguery - lvl {rogueryLevel}]" />
+    <string id="BirthdayParty_Roguery_Appended_Text" text="[Roguery - lvl {minRogueryLevel}]" />
 
     <!--BirthdayParty - Event Button-->
     <string id="BirthdayParty_Event_Button_Text" text="Okay" />
@@ -106,8 +106,8 @@
 
     <!--BeggarBegging - Skill Check-->
     <string id="BeggarBegging_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
-    <string id="BeggarBegging_Steward_Appended_Text" text="[Steward - lvl {stewardLevel}]" />
-    <string id="BeggarBegging_Roguery_Appended_Text" text="[Roguery - lvl {rogueryLevel}]" />
+    <string id="BeggarBegging_Steward_Appended_Text" text="[Steward - lvl {minStewardLevel}]" />
+    <string id="BeggarBegging_Roguery_Appended_Text" text="[Roguery - lvl {minRogueryLevel}]" />
 
     <!--BeggarBegging - Event Button-->
     <string id="BeggarBegging_Event_Button_Text_1" text="Choose" />
@@ -135,7 +135,7 @@
 
     <!--FallenSoldier - Skill Check-->
     <string id="FallenSoldier_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
-    <string id="FallenSoldier_Roguery_Appended_Text" text="[Roguery - lvl {roguerySkill}]" />
+    <string id="FallenSoldier_Roguery_Appended_Text" text="[Roguery - lvl {minRogueryLevel}]" />
     
     <!--FallenSoldier - Event Choices-->
     <string id="FallenSoldier_Event_Option_1" text="Offer them compensation" />
@@ -354,7 +354,7 @@
 
     <!--Skill Check-->
     <string id="RunawaySon_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
-    <string id="RunawaySon_Roguery_Appended_Text" text="[Roguery - lvl {rogueryLevel}]" />
+    <string id="RunawaySon_Roguery_Appended_Text" text="[Roguery - lvl {minRogueryLevel}]" />
 
     <!--RunawaySon - Event Buttons-->
     <string id="RunawaySon_Event_Button_Text_1" text="Okay" />
@@ -447,7 +447,7 @@
 
     <!--Skill Check-->
     <string id="UnexpectedWedding_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
-    <string id="UnexpectedWedding_Roguery_Appended_Text" text="[Roguery - lvl {rogueryLevel}]" />
+    <string id="UnexpectedWedding_Roguery_Appended_Text" text="[Roguery - lvl {minRogueryLevel}]" />
 
     <!--UnexpectedWedding - Event Button-->
     <string id="UnexpectedWedding_Event_Button_Text_1" text="Okay" />
@@ -484,6 +484,12 @@
     <string id="ViolatedGirl_Event_Option_4_Hover" text="She is too dangerous to be left alive.\n{rogueryAppendedText}" />
     <string id="ViolatedGirl_Event_Option_5" text="[Roguery] Violate her yourself" />
     <string id="ViolatedGirl_Event_Option_5_Hover" text="Teach her to be quiet next time.\n{rogueryAppendedText}" />
+
+    <!--ViolatedGirl - Skill Checks-->
+    <string id="ViolatedGirl_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="ViolatedGirl_Roguery_Appended_Text_1" text="[Roguery - lvl {minRogueryLevel}]" />
+    <string id="ViolatedGirl_Roguery_Appended_Text_2" text="[Roguery - lvl 225]" />
+    
 
     <!--ViolatedGirl - Event Button-->
     <string id="ViolatedGirl_Event_Button_Text_1" text="Okay" />
@@ -1004,9 +1010,9 @@
     <!--Travellers-->
     <string id="Travellers_Title" text="Travellers" />
     <string id="Travellers_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
-    <string id="Travellers_Engineering_Appended_Text" text="[Engineering - lvl {engineeringLevel}]" />
-    <string id="Travellers_Roguery_Appended_Text" text="[Roguery - lvl {rogueryLevel}]" />
-    <string id="Travellers_Steward_Appended_Text" text="[Steward - lvl {stewardLevel}]" />
+    <string id="Travellers_Engineering_Appended_Text" text="[Engineering - lvl {minEngineeringLevel}]" />
+    <string id="Travellers_Roguery_Appended_Text" text="[Roguery - lvl {minCharmLevel}]" />
+    <string id="Travellers_Steward_Appended_Text" text="[Steward - lvl {minStewardLevel}]" />
     <string id="Travellers_Event_Desc" text="Your party is on the move not to far from {closestSettlement} when you come across {familyDemonym} family with a broken waggon. The wheel seems to have come off and rolled down into a small river not to far from you. The family is asking if you can help them by any chance. They explain that they are running from bandits who kept blackmailing them for money and tried to kidnap their two daughters on more than one occasion. They have brought everything they own with them in the hope of starting a new life somewhere. How do you proceed?" />
     <string id="Travellers_Event_Option_1" text="[Engineering] Offer to repair the waggon" />
     <string id="Travellers_Event_Option_1_Hover" text="You should be able to fix it. {engineeringAppendedText}" />

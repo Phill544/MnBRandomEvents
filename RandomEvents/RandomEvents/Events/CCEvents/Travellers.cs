@@ -88,8 +88,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 {
                     canRepairWagon = true;
                     
-                    engineeringAppendedText = new TextObject("{=Travellers_Engineering_Appended_Text}[Engineering - lvl {engineeringLevel}]")
-                        .SetTextVariable("engineeringLevel", engineeringLevel)
+                    engineeringAppendedText = new TextObject("{=Travellers_Engineering_Appended_Text}[Engineering - lvl {minEngineeringLevel}]")
+                        .SetTextVariable("minEngineeringLevel", minEngineeringLevel)
                         .ToString();
                 }
 
@@ -97,8 +97,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 {
                     canRaidWagon = true;
                     
-                    rogueryAppendedText = new TextObject("{=Travellers_Roguery_Appended_Text}[Roguery - lvl {rogueryLevel}]")
-                        .SetTextVariable("rogueryLevel", rogueryLevel)
+                    rogueryAppendedText = new TextObject("{=Travellers_Roguery_Appended_Text}[Roguery - lvl {minRogueryLevel}]")
+                        .SetTextVariable("minRogueryLevel", minRogueryLevel)
                         .ToString();
                 }
 
@@ -106,8 +106,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 {
                     canOfferDinner = true;
                     
-                    stewardAppendedText = new TextObject("{=Travellers_Steward_Appended_Text}[Steward - lvl {stewardLevel}]")
-                        .SetTextVariable("stewardLevel", stewardLevel)
+                    stewardAppendedText = new TextObject("{=Travellers_Steward_Appended_Text}[Steward - lvl {minStewardLevel}]")
+                        .SetTextVariable("minStewardLevel", minStewardLevel)
                         .ToString();
                 }
             }
