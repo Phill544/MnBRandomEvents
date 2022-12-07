@@ -173,6 +173,14 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
         #endregion
         
+        #region Duel - Variables
+
+        public bool DU_Disable { get; private set; }
+        public int DU_minTwoHandedLevel { get; private set; }
+        public int DU_minRogueryLevel { get; private set; }
+
+        #endregion
+        
         #region Dysentery - Variables
 
         public bool DY_Disable { get; private set; }
@@ -409,16 +417,16 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             #region Bottoms Up - Strings
             
             var bu_heading = new TextObject("{=mcm_bu_heading}Bottoms Up").ToString();
-            var bu1_text = new TextObject("{=mcm_bu_text}1.Min Morale Gain").ToString();
-            var bu1_hint = new TextObject("{=mcm_bu_text}The minimum morale gain.").ToString();
-            var bu2_text = new TextObject("{=mcm_bu_text}2.Max Morale Gain").ToString();
-            var bu2_hint = new TextObject("{=mcm_bu_text}The maximum morale gain.").ToString();
-            var bu3_text = new TextObject("{=mcm_bu_text}3.Min gold").ToString();
-            var bu3_hint = new TextObject("{=mcm_bu_text}The minimum gold reward.").ToString();
-            var bu4_text = new TextObject("{=mcm_bu_text}4.Max gold").ToString();
-            var bu4_hint = new TextObject("{=mcm_bu_text}The maximum gold reward.").ToString();
-            var bu5_text = new TextObject("{=mcm_bu_text}3. Deactivate event").ToString();
-            var bu5_hint = new TextObject("{=mcm_bu_text}If you dont want this event to show up you can deactivate it.").ToString();
+            var bu1_text = new TextObject("{=mcm_bu1_text}1.Min Morale Gain").ToString();
+            var bu1_hint = new TextObject("{=mcm_bu1_hint}The minimum morale gain.").ToString();
+            var bu2_text = new TextObject("{=mcm_bu2_text}2.Max Morale Gain").ToString();
+            var bu2_hint = new TextObject("{=mcm_bu2_hint}The maximum morale gain.").ToString();
+            var bu3_text = new TextObject("{=mcm_bu3_text}3.Min gold").ToString();
+            var bu3_hint = new TextObject("{=mcm_bu3_hint}The minimum gold reward.").ToString();
+            var bu4_text = new TextObject("{=mcm_bu4_text}4.Max gold").ToString();
+            var bu4_hint = new TextObject("{=mcm_bu4_hint}The maximum gold reward.").ToString();
+            var bu5_text = new TextObject("{=mcm_bu5_text}5. Deactivate event").ToString();
+            var bu5_hint = new TextObject("{=mcm_bu5_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -457,20 +465,20 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             #region Companion Admire - Strings
 
             var ca_heading = new TextObject("{=mcm_ca_heading}Companion Admire").ToString();
-            var ca1_text = new TextObject("{=mcm_ca_text}1. Deactivate event").ToString();
-            var ca1_hint = new TextObject("{=mcm_ca_text}If you dont want this event to show up you can deactivate it.").ToString();
+            var ca1_text = new TextObject("{=mcm_ca1_text}1. Deactivate event").ToString();
+            var ca1_hint = new TextObject("{=mcm_ca1_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
 
             #region Courier - Strings
 
             var cr_heading = new TextObject("{=mcm_cr_heading}Courier").ToString();
-            var cr1_text = new TextObject("{=mcm_bu_text}1.Min Morale Gain").ToString();
-            var cr1_hint = new TextObject("{=mcm_bu_text}The minimum morale gain.").ToString();
-            var cr2_text = new TextObject("{=mcm_bu_text}2.Max Morale Gain").ToString();
-            var cr2_hint = new TextObject("{=mcm_bu_text}The maximum morale gain.").ToString();
-            var cr3_text = new TextObject("{=mcm_bu_text}3. Deactivate event").ToString();
-            var cr3_hint = new TextObject("{=mcm_bu_text}If you dont want this event to show up you can deactivate it.").ToString();
+            var cr1_text = new TextObject("{=mcm_cr1_text}1.Min Morale Gain").ToString();
+            var cr1_hint = new TextObject("{=mcm_cr1_hint}The minimum morale gain.").ToString();
+            var cr2_text = new TextObject("{=mcm_cr2_text}2.Max Morale Gain").ToString();
+            var cr2_hint = new TextObject("{=mcm_cr2_hint}The maximum morale gain.").ToString();
+            var cr3_text = new TextObject("{=mcm_cr3_text}3. Deactivate event").ToString();
+            var cr3_hint = new TextObject("{=mcm_cr3_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
 
@@ -504,6 +512,18 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var ds5_text = new TextObject("{=mcm_ds_text}3. Deactivate event").ToString();
             var ds5_hint = new TextObject("{=mcm_ds_text}If you dont want this event to show up you can deactivate it.").ToString();
             
+            #endregion
+            
+            #region Duel - Strings
+
+            var du_heading = new TextObject("{=mcm_du_heading}Duel").ToString();
+            var du1_text = new TextObject("{=mcm_du_text}1. Min Roguery Level").ToString();
+            var du1_hint = new TextObject("{=mcm_du_text}Lowest level to unlock the roguery option.").ToString();
+            var du2_text = new TextObject("{=mcm_du_text}2. Min Two-Handed Level").ToString();
+            var du2_hint = new TextObject("{=mcm_du_text}Lowest level to unlock the two handed option.").ToString();
+            var du3_text = new TextObject("{=mcm_du_text}3. Deactivate event").ToString();
+            var du3_hint = new TextObject("{=mcm_du_text}If you dont want this event to show up you can deactivate it.").ToString();
+
             #endregion
             
             #region Dysentery - Strings
@@ -626,7 +646,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                 .SetFolderName(RandomEventsSubmodule.FolderName)
                 .SetSubFolder(RandomEventsSubmodule.ModName)
                 
-           #region Builder Modules
+                #region Builder Modules
 
                 #region A Flirtatious Encounter - Builder
                 
@@ -889,6 +909,18 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
                 #endregion
                 
+                #region Duel - Builder
+
+                .CreateGroup(du_heading, groupBuilder => groupBuilder
+                    .AddInteger("DU1", du1_text, 25, 275, new ProxyRef<int>(() => DU_minRogueryLevel, o => DU_minRogueryLevel = o), integerBuilder => integerBuilder
+                        .SetHintText(du1_hint))
+                    .AddInteger("DU2", du2_text, 25, 275, new ProxyRef<int>(() => DU_minTwoHandedLevel, o => DU_minTwoHandedLevel = o), integerBuilder => integerBuilder
+                        .SetHintText(du2_hint))
+                    .AddBool("DU3", du3_text, new ProxyRef<bool>(() => DU_Disable, o => DU_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(du3_hint))
+                )
+                #endregion
+                
                 #region Dysentery - Builder
                 
                 .CreateGroup(dy_heading, groupBuilder => groupBuilder
@@ -1004,11 +1036,9 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(fof4_hint))
                         .AddBool("FoF5", fof5_text, new ProxyRef<bool>(() => FoF_Disable, o => FoF_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(fof5_hint))
-                    
-                    
-                    #endregion
-
-                    #endregion
+                #endregion
+                
+                #endregion
                 );
 
 
@@ -1178,6 +1208,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.DS_maxMoraleLoss = 25;
             Instance.DS_minvictim = 3;
             Instance.DS_maxvictim = 6;
+            #endregion
+            
+            #region Duel
+            Instance.DU_Disable = false;
+            Instance.DU_minRogueryLevel = 125;
+            Instance.DU_minTwoHandedLevel = 100;
             #endregion
 
             #region Dysentery

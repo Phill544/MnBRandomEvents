@@ -275,20 +275,20 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             #region Refugees - Strings
             
             var rf_heading = new TextObject("{=mcm_rf_heading}Refugees").ToString();
-            var rf1_text = new TextObject("{=mcm_rf_text}1.Min Soldiers").ToString();
-            var rf1_hint = new TextObject("{=mcm_rf_text}The minimum amount of recruits.").ToString();
-            var rf2_text = new TextObject("{=mcm_rf_text}2.Max Soldiers").ToString();
-            var rf2_hint = new TextObject("{=mcm_rf_text}The maximum amount of recruits.").ToString();
-            var rf3_text = new TextObject("{=mcm_rf_text}3.Min Food").ToString();
-            var rf3_hint = new TextObject("{=mcm_rf_text}The minimum amount of Food.").ToString();
-            var rf4_text = new TextObject("{=mcm_rf_text}4.Max Food").ToString();
-            var rf4_hint = new TextObject("{=mcm_rf_text}The maximum amount of Food.").ToString();
-            var rf5_text = new TextObject("{=mcm_rf_text}5.Min Captives").ToString();
-            var rf5_hint = new TextObject("{=mcm_rf_text}The minimum amount of Captives.").ToString();
-            var rf6_text = new TextObject("{=mcm_rf_text}6.Max Captives").ToString();
-            var rf6_hint = new TextObject("{=mcm_rf_text}The maximum amount of Captives.").ToString();
-            var rf7_text = new TextObject("{=mcm_rf_text}7. Deactivate event").ToString();
-            var rf7_hint = new TextObject("{=mcm_rf_text}If you dont want this event to show up you can deactivate it.").ToString();
+            var rf1_text = new TextObject("{=mcm_rf1_text}1.Min Soldiers").ToString();
+            var rf1_hint = new TextObject("{=mcm_rf1_hint}The minimum amount of recruits.").ToString();
+            var rf2_text = new TextObject("{=mcm_rf2_text}2.Max Soldiers").ToString();
+            var rf2_hint = new TextObject("{=mcm_rf2_hint}The maximum amount of recruits.").ToString();
+            var rf3_text = new TextObject("{=mcm_rf3_text}3.Min Food").ToString();
+            var rf3_hint = new TextObject("{=mcm_rf3_hint}The minimum amount of Food.").ToString();
+            var rf4_text = new TextObject("{=mcm_rf4_text}4.Max Food").ToString();
+            var rf4_hint = new TextObject("{=mcm_rf4_hint}The maximum amount of Food.").ToString();
+            var rf5_text = new TextObject("{=mcm_rf5_text}5.Min Captives").ToString();
+            var rf5_hint = new TextObject("{=mcm_rf5_hint}The minimum amount of Captives.").ToString();
+            var rf6_text = new TextObject("{=mcm_rf6_text}6.Max Captives").ToString();
+            var rf6_hint = new TextObject("{=mcm_rf6_hint}The maximum amount of Captives.").ToString();
+            var rf7_text = new TextObject("{=mcm_rf7_text}7. Deactivate event").ToString();
+            var rf7_hint = new TextObject("{=mcm_rf7_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
             

@@ -1369,16 +1369,16 @@
     <string id="mcm_bp16_text" text="16. Deactivate event" />
     <string id="mcm_bp16_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_bu_heading" text="Bottoms Up" />
-    <string id="mcm_bu_text" text="1.Min Morale Gain" />
-    <string id="mcm_bu_text" text="The minimum morale gain." />
-    <string id="mcm_bu_text" text="2.Max Morale Gain" />
-    <string id="mcm_bu_text" text="The maximum morale gain." />
-    <string id="mcm_bu_text" text="3.Min gold" />
-    <string id="mcm_bu_text" text="The minimum gold reward." />
-    <string id="mcm_bu_text" text="4.Max gold" />
-    <string id="mcm_bu_text" text="The maximum gold reward." />
-    <string id="mcm_bu_text" text="3. Deactivate event" />
-    <string id="mcm_bu_text" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bu1_text" text="1.Min Morale Gain" />
+    <string id="mcm_bu1_hint" text="The minimum morale gain." />
+    <string id="mcm_bu2_text" text="2.Max Morale Gain" />
+    <string id="mcm_bu2_hint" text="The maximum morale gain." />
+    <string id="mcm_bu3_text" text="3.Min gold" />
+    <string id="mcm_bu3_hint" text="The minimum gold reward." />
+    <string id="mcm_bu4_text" text="4.Max gold" />
+    <string id="mcm_bu4_hint" text="The maximum gold reward." />
+    <string id="mcm_bu5_text" text="5. Deactivate event" />
+    <string id="mcm_bu5_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_bc_heading" text="Bumper Crop" />
     <string id="mcm_bc1_text" text="1. Crop % gain" />
     <string id="mcm_bc1_hint" text="The amount of % the crop yield is increased." />
@@ -1397,15 +1397,15 @@
     <string id="mcm_cc2_text" text="2. Deactivate event" />
     <string id="mcm_cc2_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_ca_heading" text="Companion Admire" />
-    <string id="mcm_ca_text" text="1. Deactivate event" />
-    <string id="mcm_ca_text" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ca1_text" text="1. Deactivate event" />
+    <string id="mcm_ca1_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_cr_heading" text="Courier" />
-    <string id="mcm_bu_text" text="1.Min Morale Gain" />
-    <string id="mcm_bu_text" text="The minimum morale gain." />
-    <string id="mcm_bu_text" text="2.Max Morale Gain" />
-    <string id="mcm_bu_text" text="The maximum morale gain." />
-    <string id="mcm_bu_text" text="3. Deactivate event" />
-    <string id="mcm_bu_text" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_cr1_text" text="1.Min Morale Gain" />
+    <string id="mcm_cr1_hint" text="The minimum morale gain." />
+    <string id="mcm_cr2_text" text="2.Max Morale Gain" />
+    <string id="mcm_cr2_hint" text="The maximum morale gain." />
+    <string id="mcm_cr3_text" text="3. Deactivate event" />
+    <string id="mcm_cr3_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_dc_heading" text="Diseased City" />
     <string id="mcm_dc1_text" text="1. Base Success Chance" />
     <string id="mcm_dc1_hint" text="The base success chance that this event will have a positive outcome." />
@@ -1640,20 +1640,20 @@
     <string id="mcm_rm5_text" text="5. Deactivate event" />
     <string id="mcm_rm5_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_rf_heading" text="Refugees" />
-    <string id="mcm_rf_text" text="1.Min Soldiers" />
-    <string id="mcm_rf_text" text="The minimum amount of recruits." />
-    <string id="mcm_rf_text" text="2.Max Soldiers" />
-    <string id="mcm_rf_text" text="The maximum amount of recruits." />
-    <string id="mcm_rf_text" text="3.Min Food" />
-    <string id="mcm_rf_text" text="The minimum amount of Food." />
-    <string id="mcm_rf_text" text="4.Max Food" />
-    <string id="mcm_rf_text" text="The maximum amount of Food." />
-    <string id="mcm_rf_text" text="5.Min Captives" />
-    <string id="mcm_rf_text" text="The minimum amount of Captives." />
-    <string id="mcm_rf_text" text="6.Max Captives" />
-    <string id="mcm_rf_text" text="The maximum amount of Captives." />
-    <string id="mcm_rf_text" text="7. Deactivate event" />
-    <string id="mcm_rf_text" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_rf1_text" text="1.Min Soldiers" />
+    <string id="mcm_rf1_hint" text="The minimum amount of recruits." />
+    <string id="mcm_rf2_text" text="2.Max Soldiers" />
+    <string id="mcm_rf2_hint" text="The maximum amount of recruits." />
+    <string id="mcm_rf3_text" text="3.Min Food" />
+    <string id="mcm_rf3_hint" text="The minimum amount of Food." />
+    <string id="mcm_rf4_text" text="4.Max Food" />
+    <string id="mcm_rf4_hint" text="The maximum amount of Food." />
+    <string id="mcm_rf5_text" text="5.Min Captives" />
+    <string id="mcm_rf5_hint" text="The minimum amount of Captives." />
+    <string id="mcm_rf6_text" text="6.Max Captives" />
+    <string id="mcm_rf6_hint" text="The maximum amount of Captives." />
+    <string id="mcm_rf7_text" text="7. Deactivate event" />
+    <string id="mcm_rf7_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_ro_heading" text="Robbery" />
     <string id="mcm_ro1_text" text="1. Min Gold Lost" />
     <string id="mcm_ro1_hint" text="Minimum amount of gold that can be lost during this event." />

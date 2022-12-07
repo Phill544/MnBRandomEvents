@@ -30,6 +30,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public float Courier_Chance { get; private set; }
         public float Diseased_City_Chance{ get; private set; }
         public float Dreaded_Sweats_Chance { get; private set; }
+        public float Duel_Chance { get; private set; }
         public float Dysentery_Chance { get; private set; }
         public float Eager_Troops_Chance{ get; private set; }
         public float Exotic_Drinks_Chance{ get; private set; }
@@ -143,6 +144,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv55_text = new TextObject("{=mcm_adv55_text}Army Invite").ToString();
             var adv56_text = new TextObject("{=mcm_adv56_text}Feast").ToString();
             var adv57_text = new TextObject("{=mcm_adv57_text}Travellers").ToString();
+            var adv58_text = new TextObject("{=mcm_adv58_text}Duel").ToString();
 
             #endregion
 
@@ -271,6 +273,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                            .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV57", adv57_text, 5, 100, new ProxyRef<float>(() => Travellers_Chance, o => Travellers_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
+                        .AddFloatingInteger ("ADV58", adv58_text, 5, 100, new ProxyRef<float>(() => Duel_Chance, o => Duel_Chance = o), floatBuilder => floatBuilder
+                            .SetHintText(adv_hint))
 
                 #endregion
 
@@ -309,6 +313,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Companion_Admire_Chance = 20.0f;
             Instance.Diseased_City_Chance = 50.0f;
             Instance.Dreaded_Sweats_Chance = 35.0f;
+            Instance.Duel_Chance = 35.0f;
             Instance.Dysentery_Chance = 35.0f;
             Instance.Eager_Troops_Chance = 50.0f;
             Instance.Exotic_Drinks_Chance = 50.0f;

@@ -158,8 +158,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption4 = new TextObject("{=BeggarBegging_Event_Option_4}[Steward] Give {genderAssignmentObjective} a warm meal").SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
             var eventOption4Hover = new TextObject("{=BeggarBegging_Event_Option_4_Hover}Take them to the tavern.\n{stewardAppendedText}").SetTextVariable("stewardAppendedText", stewardAppendedText).ToString();
             
-            var eventOption5 = new TextObject("{=BeggarBegging_Event_Option_4}[Roguery] Kill {genderAssignmentObjective}").SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
-            var eventOption5Hover = new TextObject("{=BeggarBegging_Event_Option_4_Hover}You really hate beggars!\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
+            var eventOption5 = new TextObject("{=BeggarBegging_Event_Option_5}[Roguery] Kill {genderAssignmentObjective}").SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
+            var eventOption5Hover = new TextObject("{=BeggarBegging_Event_Option_5_Hover}You really hate beggars!\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
 
 
             var eventButtonText1 = new TextObject("{=BeggarBegging_Event_Button_Text_1}Choose").ToString();

@@ -145,8 +145,10 @@ namespace CryingBuffalo.RandomEvents.Settings
         public RobberyData RobberyData { get; } = new RobberyData("Robbery", MCM_MenuConfig_Chances.Instance.Robbery_Chance);
         
         
-        
         public TravellersData TravellersData { get; } = new TravellersData("Travellers", MCM_MenuConfig_Chances.Instance.Travellers_Chance);
+        
+        
+        public DuelData DuelData { get; } = new DuelData("Duel", MCM_MenuConfig_Chances.Instance.Duel_Chance);
 
         #endregion
         
