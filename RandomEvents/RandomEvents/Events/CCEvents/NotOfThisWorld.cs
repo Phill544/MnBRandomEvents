@@ -3,6 +3,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -17,8 +18,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public NotOfThisWorld() : base(ModSettings.RandomEvents.NotOfThisWorldData)
         {
-            minSoldiersToDisappear = MCM_MenuConfig_N_Z.Instance.NotW_MinSoldiersGone;
-            maxSoldiersToDisappear = MCM_MenuConfig_N_Z.Instance.NotW_MaxSoldiersGone;
+            minSoldiersToDisappear = MCM_MenuConfig_G_O.Instance.NotW_MinSoldiersGone;
+            maxSoldiersToDisappear = MCM_MenuConfig_G_O.Instance.NotW_MaxSoldiersGone;
         }
 
         public override void CancelEvent()
@@ -28,7 +29,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
 
-            return MCM_MenuConfig_N_Z.Instance.NotW_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToDisappear;
+            return MCM_MenuConfig_G_O.Instance.NotW_Disable == false && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToDisappear && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()
@@ -48,11 +49,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var eventPt1 =new TextObject(
                     "{=NotOfThisWorld_Part_1}Your party is currently resting in the vicinity of {closestSettlement} when you observe a strange object descending from the sky and into the nearby forest. " +
-                    "{soldiersInvestigating} of your men decide to go investigate, but you remain at the camp.\n After a few minutes you see an object leaving the forest and head towards the sky at an " +
-                    "unbelievable speed. Eventually only one of your men returns from the forest. He tells you a bizarre story. \n \n" +
+                    "{soldiersInvestigating} of your men decide to go investigate, but you remain at the camp.\nAfter a few minutes you see an object leaving the forest and head towards the sky at an " +
+                    "unbelievable speed. Eventually only one of your men returns from the forest. He tells you a bizarre story.\n\n" +
                     "When your men entered the forest they could see some object amongst the trees. This object was emitting an intense heat. After a few seconds an opening appeared " +
                     "and three small figures in a strange armor got out. One of your men tried to approach the entities, but was hit in the abdomen by a strange glowing arrow that came out of a small " +
-                    "weapon the entities had. The man subsequently dropped dead.\n At this point the survivor hid in some bushes, but he witnessed the events that followed. " +
+                    "weapon the entities had. The man subsequently dropped dead.\nAt this point the survivor hid in some bushes, but he witnessed the events that followed. " +
                     "He told you that the entities proceeded to kill the other {killedSoldiers} soldiers who went to investigate.")
                 .SetTextVariable("closestSettlement", closestSettlement)
                 .SetTextVariable("soldiersInvestigating", soldiersInvestigating)
@@ -64,7 +65,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "They also seemed to load up pieces of the nearby flora as if taking samples for study. After a few minutes the vessel leaves without a sound towards the sky.\n" +
                     "The soldier who returned from this ordeal was a trusted man whom you are inclined to believe. You tell him to go get some food and go to bed. As he is heading towards his " +
                     "tent he suddenly bends over and starts vomiting violently. He then falls to the ground in agony while blood is flowing from all his facial orifices. " +
-                    "You grab a sword and put him out of his misery and order your men to burn his body at once.\n \n" +
+                    "You grab a sword and put him out of his misery and order your men to burn his body at once.\n\n" +
                     "When you return to your tent you are shaking. You try to make a note of this event in your diary but you find yourself too distraught to write anything. " +
                     "You ponder the question of who or what could have killed your men like this. The answer may never be known.")
                 .ToString();
@@ -80,7 +81,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventPt1, true, false, eventButtonText1, null, null, null), true);
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventPt2, true, false, eventButtonText2, null, null, null), true);
             
-            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
             
 
             StopEvent();

@@ -24,12 +24,12 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public LookUp() : base(ModSettings.RandomEvents.LookUpData)
 		{
-			treeShakeChance = MCM_MenuConfig_A_M.Instance.LU_TreeShakeChance;
-			baseRangeChance = MCM_MenuConfig_A_M.Instance.LU_BaseRangeChance;
-			minRangeLevel = MCM_MenuConfig_A_M.Instance.LU_MinRangeLevel;
-			maxRangeLevel = MCM_MenuConfig_A_M.Instance.LU_MaxRangeLevel;
-			minGold = MCM_MenuConfig_A_M.Instance.LU_MinGold;
-			maxGold = MCM_MenuConfig_A_M.Instance.LU_MaxGold;
+			treeShakeChance = MCM_MenuConfig_G_O.Instance.LU_TreeShakeChance;
+			baseRangeChance = MCM_MenuConfig_G_O.Instance.LU_BaseRangeChance;
+			minRangeLevel = MCM_MenuConfig_G_O.Instance.LU_MinRangeLevel;
+			maxRangeLevel = MCM_MenuConfig_G_O.Instance.LU_MaxRangeLevel;
+			minGold = MCM_MenuConfig_G_O.Instance.LU_MinGold;
+			maxGold = MCM_MenuConfig_G_O.Instance.LU_MaxGold;
 		}
 
 		public override void CancelEvent()
@@ -38,7 +38,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_M.Instance.LU_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_G_O.Instance.LU_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

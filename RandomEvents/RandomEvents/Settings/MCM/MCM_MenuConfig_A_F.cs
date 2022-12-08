@@ -6,9 +6,9 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Settings.MCM
 {
-    public class MCM_MenuConfig_A_M : IDisposable
+    public class MCM_MenuConfig_A_F : IDisposable
     {
-        private static MCM_MenuConfig_A_M _instance;
+        private static MCM_MenuConfig_A_F _instance;
 
         private FluentGlobalSettings globalSettings;
 
@@ -21,6 +21,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public int AFE_maxWomanAge { get; private set; }
         public float AFE_minRelationshipIncrease { get; private set; }
         public float AFE_maxRelationshipIncrease { get; private set; }
+        public int AFE_charmSkillLevel { get; private set; }
 
         #endregion
 
@@ -30,6 +31,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public float AG_CohesionGain { get; private set; }
         public int AG_minMoraleGain { get; private set; }
         public int AG_maxMoraleGain { get; private set; }
+
+        #endregion
+
+        #region Army Invite - Variables
+
+        public bool AI_Disable { get; private set; }
 
         #endregion
 
@@ -68,11 +75,9 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         #region Beggar Begging - Variables
         
         public bool BB_Disable { get; private set; }
-        public int BB_MinGoldToBeggar { get; private set; }
-        public int BB_MaxGoldToBeggar { get; private set; }
-        public int BB_MinRenownGain { get; private set; }
-        public int BB_MaxRenownGain { get; private set; }
-        
+        public int BB_minStewardLevel { get; private set; }
+        public int BB_minRogueryLevel { get; private set; }
+
         #endregion
 
         #region BirdSongs - Variables
@@ -100,6 +105,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public int BP_MaxRenownGain{ get; private set; }
         public int BP_MinGoldLooted{ get; private set; }
         public int BP_MaxGoldLooted{ get; private set; }
+        public int BP_MinRogueryLevel{ get; private set; }
         
         #endregion
         
@@ -167,13 +173,21 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
         #endregion
         
+        #region Duel - Variables
+
+        public bool DU_Disable { get; private set; }
+        public int DU_minTwoHandedLevel { get; private set; }
+        public int DU_minRogueryLevel { get; private set; }
+
+        #endregion
+        
         #region Dysentery - Variables
 
         public bool DY_Disable { get; private set; }
         public int DY_minMoraleLoss { get; private set; }
         public int DY_maxMoraleLoss { get; private set; }
-        public int DY_minvictim { get; private set; }
-        public int DY_maxvictim { get; private set; }
+        public int DY_minVictim { get; private set; }
+        public int DY_maxVictim { get; private set; }
 
         #endregion
         
@@ -200,6 +214,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public int FSF_MaxFamilyCompensation { get; private set; }
         public int FSF_MinGoldLooted { get; private set; }
         public int FSF_MaxGoldLooted { get; private set; }
+        public int FSF_MinRogueryLevel { get; private set; }
 
         #endregion
         
@@ -208,7 +223,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public bool FF_Disable { get; private set; }
         public int FF_MinRenownGain { get; private set; }
         public int FF_MaxRenownGain { get; private set; }
-        
+
+        #endregion
+
+        #region Feast - Variables
+        public bool FE_Disable { get; private set; }
+
         #endregion
 
         #region Fishing Spot - Variables
@@ -231,104 +251,23 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public int FoF_MaxMoraleLoss { get; private set; }
 
         #endregion
-        
-        #region Granary Rats - Variables
-        
-        public bool GR_Disable { get; private set; }
-        public float GR_MinFoodLoss { get; private set; }
-        public float GR_MaxFoodLoss { get; private set; }
-        
-        #endregion
-        
-        #region Hot Springs - Variables
-        
-        public bool HS_Disable { get; private set; }
-        public int HS_MinMoraleGain { get; private set; }
-        public int HS_MaxMoraleGain { get; private set; }
-        
-        #endregion
-
-        #region Hunting Trip - Variables
-
-        public bool HT_Disable { get; private set; }
-        public int HT_MinSoldiersToGo { get; private set; }
-        public int HT_MaxSoldiersToGo { get; private set; }
-        public int HT_MaxCatch { get; private set; }
-        public int HT_MinMoraleGain { get; private set; }
-        public int HT_MaxMoraleGain { get; private set; }
-        public int HT_MinYieldMultiplier { get; private set; }
-        public int HT_MaxYieldMultiplier { get; private set; }
-        
-
-        #endregion
-        
-        #region Lights in the Skies - Variables
-
-        public bool LitS_Disable { get; private set; }
-
-        #endregion
-        
-        #region Logging Site - Variables
-
-        public bool LS_Disable { get; private set; }
-        public int LS_MinSoldiersToGo { get; private set; }
-        public int LS_MaxSoldiersToGo { get; private set; }
-        public int LS_MinYield { get; private set; }
-        public int LS_MaxYield { get; private set; }
-        public int LS_MinYieldMultiplier { get; private set; }
-        public int LS_MaxYieldMultiplier { get; private set; }
-        
-
-        #endregion
-        
-        #region Look Up - Variables
-
-        public bool LU_Disable { get; private set; }
-        public float LU_TreeShakeChance { get; private set; }
-        public float LU_BaseRangeChance { get; private set; }
-        public int LU_MinRangeLevel { get; private set; }
-        public int LU_MaxRangeLevel { get; private set; }
-        public int LU_MinGold { get; private set; }
-        public int LU_MaxGold { get; private set; }
-        
-
-        #endregion
-        
-        #region Mass Grave - Variables
-
-        public bool MG_Disable { get; private set; }
-        public int MG_MinSoldiers{ get; private set; }
-        public int MG_MaxSoldiers { get; private set; }
-        public int MG_MinBodies { get; private set; }
-        public int MG_MaxBodies { get; private set; }
-        public int MG_MinBaseMoraleLoss { get; private set; }
-        public int MG_MaxBaseMoraleLoss { get; private set; }
-        
-
-        #endregion
-        
-        #region Momentum - Variables
-
-        public bool MO_Disable { get; private set; }
-
-        #endregion
 
         #endregion
 
 
-        public static MCM_MenuConfig_A_M Instance
+        public static MCM_MenuConfig_A_F Instance
         {
-            get { return _instance ??= new MCM_MenuConfig_A_M(); }
+            get { return _instance ??= new MCM_MenuConfig_A_F(); }
         }
 
         public void Settings()
         {
-            
+
 
             #region Strings
 
             #region A Flirtatious Encounter - Strings
-            
+
             var afe_heading = new TextObject("{=mcm_afe_heading}A Flirtatious Encounter").ToString();
             var afe1_text = new TextObject("{=mcm_afe1_text}1. Min Age").ToString();
             var afe1_hint = new TextObject("{=mcm_afe1_hint}The minimum age the target must be.").ToString();
@@ -338,8 +277,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var afe3_hint = new TextObject("{=mcm_afe3_hint}The minimum amount of relationship increase.").ToString();
             var afe4_text = new TextObject("{=mcm_afe4_text}4. Max Relationship Gain").ToString();
             var afe4_hint = new TextObject("{=mcm_afe4_hint}The maximum amount of relationship increase.").ToString();
-            var afe5_text = new TextObject("{=mcm_afe5_text}5. Deactivate event").ToString();
-            var afe5_hint = new TextObject("{=mcm_afe5_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var afe5_text = new TextObject("{=mcm_afe5_text}5. Min Charm Level").ToString();
+            var afe5_hint = new TextObject("{=mcm_afe5_hint}Lowest level to unlock the charm option.").ToString();
+            var afe6_text = new TextObject("{=mcm_afe6_text}6. Deactivate event").ToString();
+            var afe6_hint = new TextObject("{=mcm_afe6_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
 
@@ -356,6 +297,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var ag4_hint = new TextObject("{=mcm_ag3_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
+
+            #region Army Invite - Strings
+            var ai_heading = new TextObject("{=mcm_ai_heading}Army Invite").ToString();
+            var ai1_text = new TextObject("{=mcm_ai1_text}1. Deactivate event").ToString();
+            var ai1_hint = new TextObject("{=mcm_ai1_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            #endregion 
 
             #region Ahead of Time - Strings
 
@@ -407,17 +354,13 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             
             #region Beggar Begging - Strings
             
-            var bb_heading = new TextObject("{=mcm_bb_heading}Beggar Begging").ToString();
-            var bb1_text = new TextObject("{=mcm_bb1_text}1. Min gold to give").ToString();
-            var bb1_hint = new TextObject("{=mcm_bb1_hint}Minimum amount of gold to give to the beggar.").ToString();
-            var bb2_text = new TextObject("{=mcm_bb2_text}2. Max gold to give").ToString();
-            var bb2_hint = new TextObject("{=mcm_bb2_hint}Maximum amount of gold to give to the beggar.").ToString();
-            var bb3_text = new TextObject("{=mcm_bb3_text}3. Min renown gained").ToString();
-            var bb3_hint = new TextObject("{=mcm_bb3_hint}Minimum amount of renown to gain.").ToString();
-            var bb4_text = new TextObject("{=mcm_bb4_text}4. Max renown gained.").ToString();
-            var bb4_hint = new TextObject("{=mcm_bb4_hint}Maximum amount of renown to gain.").ToString();
-            var bb5_text = new TextObject("{=mcm_bb5_text}5. Deactivate event").ToString();
-            var bb5_hint = new TextObject("{=mcm_bb5_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var bb_heading = new TextObject("{=mcm_bb_heading}Beggar").ToString();
+            var bb1_text = new TextObject("{=mcm_bb1_text}1. Min Steward Level").ToString();
+            var bb1_hint = new TextObject("{=mcm_bb1_hint}Lowest level to unlock the steward option.").ToString();
+            var bb2_text = new TextObject("{=mcm_bb2_text}2. Min Roguery Level").ToString();
+            var bb2_hint = new TextObject("{=mcm_bb2_hint}Lowest level to unlock the roguery option.").ToString();
+            var bb3_text = new TextObject("{=mcm_bb3_text}3. Deactivate event").ToString();
+            var bb3_hint = new TextObject("{=mcm_bb3_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -464,24 +407,26 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var bp13_hint = new TextObject("{=mcm_bp13_hint}Minimum amount of gold you can loot from the party.").ToString();
             var bp14_text = new TextObject("{=mcm_bp14_text}14. Max gold to loot").ToString();
             var bp14_hint = new TextObject("{=mcm_bp14_hint}Minimum amount of gold you can loot from the party.").ToString();
-            var bp15_text = new TextObject("{=mcm_bp15_text}15. Deactivate event").ToString();
-            var bp15_hint = new TextObject("{=mcm_bp15_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var bp15_text = new TextObject("{=mcm_bp15_text}15. Min Roguery Level").ToString();
+            var bp15_hint = new TextObject("{=mcm_bp15_hint}Lowest level to unlock the roguery option.").ToString();
+            var bp16_text = new TextObject("{=mcm_bp16_text}16. Deactivate event").ToString();
+            var bp16_hint = new TextObject("{=mcm_bp16_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
             #region Bottoms Up - Strings
             
             var bu_heading = new TextObject("{=mcm_bu_heading}Bottoms Up").ToString();
-            var bu1_text = new TextObject("{=mcm_bu_text}1.Min Morale Gain").ToString();
-            var bu1_hint = new TextObject("{=mcm_bu_text}The minimum morale gain.").ToString();
-            var bu2_text = new TextObject("{=mcm_bu_text}2.Max Morale Gain").ToString();
-            var bu2_hint = new TextObject("{=mcm_bu_text}The maximum morale gain.").ToString();
-            var bu3_text = new TextObject("{=mcm_bu_text}3.Min gold").ToString();
-            var bu3_hint = new TextObject("{=mcm_bu_text}The minimum gold reward.").ToString();
-            var bu4_text = new TextObject("{=mcm_bu_text}4.Max gold").ToString();
-            var bu4_hint = new TextObject("{=mcm_bu_text}The maximum gold reward.").ToString();
-            var bu5_text = new TextObject("{=mcm_bu_text}3. Deactivate event").ToString();
-            var bu5_hint = new TextObject("{=mcm_bu_text}If you dont want this event to show up you can deactivate it.").ToString();
+            var bu1_text = new TextObject("{=mcm_bu1_text}1.Min Morale Gain").ToString();
+            var bu1_hint = new TextObject("{=mcm_bu1_hint}The minimum morale gain.").ToString();
+            var bu2_text = new TextObject("{=mcm_bu2_text}2.Max Morale Gain").ToString();
+            var bu2_hint = new TextObject("{=mcm_bu2_hint}The maximum morale gain.").ToString();
+            var bu3_text = new TextObject("{=mcm_bu3_text}3.Min gold").ToString();
+            var bu3_hint = new TextObject("{=mcm_bu3_hint}The minimum gold reward.").ToString();
+            var bu4_text = new TextObject("{=mcm_bu4_text}4.Max gold").ToString();
+            var bu4_hint = new TextObject("{=mcm_bu4_hint}The maximum gold reward.").ToString();
+            var bu5_text = new TextObject("{=mcm_bu5_text}5. Deactivate event").ToString();
+            var bu5_hint = new TextObject("{=mcm_bu5_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -497,7 +442,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             
             #region Bunch of Prisoners - Strings
             
-            var bop_heading = new TextObject("{=mcm_bop_heading}Bumper Crop").ToString();
+            var bop_heading = new TextObject("{=mcm_bop_heading}Bunch of Prisoners").ToString();
             var bop1_text = new TextObject("{=mcm_bop1_text}1. Min amount of prisoners").ToString();
             var bop1_hint = new TextObject("{=mcm_bop1_hint}The minimum amount of prisoners the settlement gains.").ToString();
             var bop2_text = new TextObject("{=mcm_bop2_text}2. Max amount of prisoners").ToString();
@@ -520,20 +465,20 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             #region Companion Admire - Strings
 
             var ca_heading = new TextObject("{=mcm_ca_heading}Companion Admire").ToString();
-            var ca1_text = new TextObject("{=mcm_ca_text}1. Deactivate event").ToString();
-            var ca1_hint = new TextObject("{=mcm_ca_text}If you dont want this event to show up you can deactivate it.").ToString();
+            var ca1_text = new TextObject("{=mcm_ca1_text}1. Deactivate event").ToString();
+            var ca1_hint = new TextObject("{=mcm_ca1_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
 
             #region Courier - Strings
 
             var cr_heading = new TextObject("{=mcm_cr_heading}Courier").ToString();
-            var cr1_text = new TextObject("{=mcm_bu_text}1.Min Morale Gain").ToString();
-            var cr1_hint = new TextObject("{=mcm_bu_text}The minimum morale gain.").ToString();
-            var cr2_text = new TextObject("{=mcm_bu_text}2.Max Morale Gain").ToString();
-            var cr2_hint = new TextObject("{=mcm_bu_text}The maximum morale gain.").ToString();
-            var cr3_text = new TextObject("{=mcm_bu_text}3. Deactivate event").ToString();
-            var cr3_hint = new TextObject("{=mcm_bu_text}If you dont want this event to show up you can deactivate it.").ToString();
+            var cr1_text = new TextObject("{=mcm_cr1_text}1.Min Morale Gain").ToString();
+            var cr1_hint = new TextObject("{=mcm_cr1_hint}The minimum morale gain.").ToString();
+            var cr2_text = new TextObject("{=mcm_cr2_text}2.Max Morale Gain").ToString();
+            var cr2_hint = new TextObject("{=mcm_cr2_hint}The maximum morale gain.").ToString();
+            var cr3_text = new TextObject("{=mcm_cr3_text}3. Deactivate event").ToString();
+            var cr3_hint = new TextObject("{=mcm_cr3_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
 
@@ -567,6 +512,18 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var ds5_text = new TextObject("{=mcm_ds_text}3. Deactivate event").ToString();
             var ds5_hint = new TextObject("{=mcm_ds_text}If you dont want this event to show up you can deactivate it.").ToString();
             
+            #endregion
+            
+            #region Duel - Strings
+
+            var du_heading = new TextObject("{=mcm_du_heading}Duel").ToString();
+            var du1_text = new TextObject("{=mcm_du_text}1. Min Roguery Level").ToString();
+            var du1_hint = new TextObject("{=mcm_du_text}Lowest level to unlock the roguery option.").ToString();
+            var du2_text = new TextObject("{=mcm_du_text}2. Min Two-Handed Level").ToString();
+            var du2_hint = new TextObject("{=mcm_du_text}Lowest level to unlock the two handed option.").ToString();
+            var du3_text = new TextObject("{=mcm_du_text}3. Deactivate event").ToString();
+            var du3_hint = new TextObject("{=mcm_du_text}If you dont want this event to show up you can deactivate it.").ToString();
+
             #endregion
             
             #region Dysentery - Strings
@@ -620,8 +577,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var fsf3_hint = new TextObject("{=mcm_fsf3_hint}Minimum amount of gold looted.").ToString();
             var fsf4_text = new TextObject("{=mcm_fsf4_text}4. Max Loot").ToString();
             var fsf4_hint = new TextObject("{=mcm_fsf4_hint}Maximum amount of gold looted.").ToString();
-            var fsf5_text = new TextObject("{=mcm_fsf5_text}5. Deactivate event").ToString();
-            var fsf5_hint = new TextObject("{=mcm_fsf5_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var fsf5_text = new TextObject("{=mcm_fsf5_text}5. Min Roguery Level").ToString();
+            var fsf5_hint = new TextObject("{=mcm_fsf5_hint}Lowest level to unlock the roguery option.").ToString();
+            var fsf6_text = new TextObject("{=mcm_fsf6_text}6. Deactivate event").ToString();
+            var fsf6_hint = new TextObject("{=mcm_fsf6_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -636,7 +595,14 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var ff3_hint = new TextObject("{=mcm_ff3_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
-            
+
+            #region Feast - Strings
+            var fe_heading = new TextObject("{=mcm_fe_heading}Feast").ToString();
+            var fe1_text = new TextObject("{=mcm_fe3_text}1. Deactivate event").ToString();
+            var fe1_hint = new TextObject("{=mcm_fe3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+
+            #endregion
+
             #region Fishing Spot - Strings
 
             var fs_heading = new TextObject("{=mcm_fs_heading}Fishing Spot").ToString();
@@ -645,7 +611,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var fs2_text = new TextObject("{=mcm_fs2_text}2. Max Soldiers").ToString();
             var fs2_hint = new TextObject("{=mcm_fs2_hint}Maximum soldiers to go fishing.").ToString();
             var fs3_text = new TextObject("{=mcm_fs3_text}3. Max Fish Catch").ToString();
-            var fs3_hint = new TextObject("{=mcm_fs3_hint}Minimum amount of fish to catch.").ToString();
+            var fs3_hint = new TextObject("{=mcm_fs3_hint}Maximum amount of fish to catch.").ToString();
             var fs4_text = new TextObject("{=mcm_fs4_text}4. Min Morale Gained").ToString();
             var fs4_hint = new TextObject("{=mcm_fs4_hint}Minimum amount of morale gained.").ToString();
             var fs5_text = new TextObject("{=mcm_fs5_text}5. Max Morale Gained").ToString();
@@ -658,151 +624,29 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             #region Food Fight - Strings
 
             var fof_heading = new TextObject("{=mcm_fof_heading}Food Fight").ToString();
-            var fof1_text = new TextObject("{=mcm_fof1_text}1. Min Soldiers").ToString();
-            var fof1_hint = new TextObject("{=mcm_fof1_hint}Minimum soldiers to go fishing.").ToString();
-            var fof2_text = new TextObject("{=mcm_fof2_text}2. Max Soldiers").ToString();
-            var fof2_hint = new TextObject("{=mcm_fof2_hint}Maximum soldiers to go fishing.").ToString();
-            var fof3_text = new TextObject("{=mcm_fof3_text}3. Max Fish Catch").ToString();
-            var fof3_hint = new TextObject("{=mcm_fof3_hint}Minimum amount of fish to catch.").ToString();
-            var fof4_text = new TextObject("{=mcm_fof4_text}4. Min Morale Gained").ToString();
-            var fof4_hint = new TextObject("{=mcm_fof4_hint}Minimum amount of morale gained.").ToString();
+            var fof1_text = new TextObject("{=mcm_fof1_text}1. Min Food Loss").ToString();
+            var fof1_hint = new TextObject("{=mcm_fof1_hint}Minimum amount of food loss").ToString();
+            var fof2_text = new TextObject("{=mcm_fof2_text}2. Max Food Loss").ToString();
+            var fof2_hint = new TextObject("{=mcm_fof2_hint}Maximum amount of food loss.").ToString();
+            var fof3_text = new TextObject("{=mcm_fof3_text}3. Min Morale Loss").ToString();
+            var fof3_hint = new TextObject("{=mcm_fof3_hint}Minimum amount of morale lost.").ToString();
+            var fof4_text = new TextObject("{=mcm_fof4_text}4. Max Morale Loss").ToString();
+            var fof4_hint = new TextObject("{=mcm_fof4_hint}Maximum amount of morale lost.").ToString();
             var fof5_text = new TextObject("{=mcm_fof5_text}5. Deactivate event").ToString();
             var fof5_hint = new TextObject("{=mcm_fof5_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
             
-            #region Granary Rats - Strings
-            
-            var gr_heading = new TextObject("{=mcm_gr_heading}Bee Kind").ToString();
-            var gr1_text = new TextObject("{=mcm_gr1_text}1. Min Food loss percent").ToString();
-            var gr1_hint = new TextObject("{=mcm_gr1_hint}Minimum amount of food lost during this event.").ToString();
-            var gr2_text = new TextObject("{=mcm_gr2_text}2. Max Food loss percent").ToString();
-            var gr2_hint = new TextObject("{=mcm_gr2_hint}Maximum amount of food lost during this event.").ToString();
-            var gr3_text = new TextObject("{=mcm_gr3_text}3. Deactivate event").ToString();
-            var gr3_hint = new TextObject("{=mcm_gr3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Hot Springs - Strings
-            
-            var hs_heading = new TextObject("{=mcm_hs_heading}Hot Springs").ToString();
-            var hs1_text = new TextObject("{=mcm_hs1_text}1. Min Morale Gain").ToString();
-            var hs1_hint = new TextObject("{=mcm_hs1_hint}Minimum amount of morale gained during this event.").ToString();
-            var hs2_text = new TextObject("{=mcm_hs2_text}2. Max Morale Gain").ToString();
-            var hs2_hint = new TextObject("{=mcm_hs2_hint}Maximum amount morale gained lost during this event.").ToString();
-            var hs3_text = new TextObject("{=mcm_hs3_text}3. Deactivate event").ToString();
-            var hs3_hint = new TextObject("{=mcm_hs3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Hunting Trip - Strings
-
-            var ht_heading = new TextObject("{=mcm_ht_heading}Hunting Trip").ToString();
-            var ht1_text = new TextObject("{=mcm_ht1_text}1. Min Soldiers").ToString();
-            var ht1_hint = new TextObject("{=mcm_ht1_hint}Minimum soldiers to go hunting.").ToString();
-            var ht2_text = new TextObject("{=mcm_ht2_text}2. Max Soldiers").ToString();
-            var ht2_hint = new TextObject("{=mcm_ht2_hint}Maximum soldiers to go hunting.").ToString();
-            var ht3_text = new TextObject("{=mcm_ht3_text}3. Max Catch").ToString();
-            var ht3_hint = new TextObject("{=mcm_ht3_hint}Minimum amount of prey to catch.").ToString();
-            var ht4_text = new TextObject("{=mcm_ht4_text}4. Min Morale Gained").ToString();
-            var ht4_hint = new TextObject("{=mcm_ht4_hint}Minimum amount of morale gained.").ToString();
-            var ht5_text = new TextObject("{=mcm_ht5_text}5. Max Morale Gained").ToString();
-            var ht5_hint = new TextObject("{=mcm_ht5_hint}Maximum amount of morale gained.").ToString();
-            var ht6_text = new TextObject("{=mcm_ht6_text}6. Min Yield Multiplier").ToString();
-            var ht6_hint = new TextObject("{=mcm_ht6_hint}The amount of prey you catch is multiplied by this to get meat resources.").ToString();
-            var ht7_text = new TextObject("{=mcm_ht7_text}7. Max Yield Multiplier").ToString();
-            var ht7_hint = new TextObject("{=mcm_ht7_hint}The amount of prey you catch is multiplied by this to get meat resources.").ToString();
-            var ht8_text = new TextObject("{=mcm_ht8_text}8. Deactivate event").ToString();
-            var ht8_hint = new TextObject("{=mcm_ht8_hint}If you dont want this event to show up you can deactivate it.").ToString();
-
-            #endregion
-            
-            #region Lights in the Sky - Strings
-            
-            var lits_heading = new TextObject("{=mcm_lits_heading}Lights in the Skies").ToString();
-            var lits1_text = new TextObject("{=mcm_lits1_text}1. Deactivate event").ToString();
-            var lits1_hint = new TextObject("{=mcm_lits1_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            
-            #endregion
-            
-            #region Logging Site - Strings
-
-            var ls_heading = new TextObject("{=mcm_ls_heading}Logging Site").ToString();
-            var ls1_text = new TextObject("{=mcm_ls1_text}1. Min Soldiers").ToString();
-            var ls1_hint = new TextObject("{=mcm_ls1_hint}Minimum soldiers to go logging.").ToString();
-            var ls2_text = new TextObject("{=mcm_ls2_text}2. Max Soldiers").ToString();
-            var ls2_hint = new TextObject("{=mcm_ls2_hint}Maximum soldiers to go logging.").ToString();
-            var ls3_text = new TextObject("{=mcm_ls3_text}3. Min Yield").ToString();
-            var ls3_hint = new TextObject("{=mcm_ls3_hint}Minimum amount of trees to chop.").ToString();
-            var ls4_text = new TextObject("{=mcm_ls4_text}4. Max Yield").ToString();
-            var ls4_hint = new TextObject("{=mcm_ls4_hint}Maximum amount of trees to chop").ToString();
-            var ls5_text = new TextObject("{=mcm_ls5_text}5. Min Yield Multiplier").ToString();
-            var ls5_hint = new TextObject("{=mcm_ls5_hint}The amount of trees you chop is multiplied by this to get hardwood resources.").ToString();
-            var ls6_text = new TextObject("{=mcm_ls6_text}6. Max Yield Multiplier").ToString();
-            var ls6_hint = new TextObject("{=mcm_ls6_hint}The amount of trees you chop is multiplied by this to get hardwood resources.").ToString();
-            var ls7_text = new TextObject("{=mcm_ls7_text}7. Deactivate event").ToString();
-            var ls7_hint = new TextObject("{=mcm_ls7_hint}If you dont want this event to show up you can deactivate it.").ToString();
-
-            #endregion
-            
-            #region Look Up - Strings
-
-            var lu_heading = new TextObject("{=mcm_lu_heading}Look Up").ToString();
-            var lu1_text = new TextObject("{=mcm_lu1_text}1. Tree Shake Chance").ToString();
-            var lu1_hint = new TextObject("{=mcm_lu1_hint}The chance player will successfully shake the gold out of the tree.").ToString();
-            var lu2_text = new TextObject("{=mcm_lu2_text}2. Base Range Chance").ToString();
-            var lu2_hint = new TextObject("{=mcm_lu2_hint}The chance player will be able to get gold out of the tree with ranged weapon at minimum skill level").ToString();
-            var lu3_text = new TextObject("{=mcm_lu3_text}3. Min Ranged Level").ToString();
-            var lu3_hint = new TextObject("{=mcm_lu3_hint}Below, the player will always miss.").ToString();
-            var lu4_text = new TextObject("{=mcm_lu4_text}4. Max Ranged Level").ToString();
-            var lu4_hint = new TextObject("{=mcm_lu4_hint}At or above, the player will always succeed.").ToString();
-            var lu5_text = new TextObject("{=mcm_lu5_text}5. Min Gold Gained").ToString();
-            var lu5_hint = new TextObject("{=mcm_lu5_hint}Minimum amount of gold gained from this event.").ToString();
-            var lu6_text = new TextObject("{=mcm_lu6_text}6. Max Gold Gained").ToString();
-            var lu6_hint = new TextObject("{=mcm_lu6_hint}Maximum amount of gold gained from this event").ToString();
-            var lu7_text = new TextObject("{=mcm_lu7_text}7. Deactivate event").ToString();
-            var lu7_hint = new TextObject("{=mcm_lu7_hint}If you dont want this event to show up you can deactivate it.").ToString();
-
-            #endregion
-            
-            #region Mass Grave - Strings
-
-            var mg_heading = new TextObject("{=mcm_mg_heading}Mass Grave").ToString();
-            var mg1_text = new TextObject("{=mcm_mg1_text}1. Min Soldiers").ToString();
-            var mg1_hint = new TextObject("{=mcm_mg1_hint}The minimum amount of men who will make the discovery.").ToString();
-            var mg2_text = new TextObject("{=mcm_mg2_text}2. Max Soldiers").ToString();
-            var mg2_hint = new TextObject("{=mcm_mg2_hint}The maximum amount of men who will make the discovery.").ToString();
-            var mg3_text = new TextObject("{=mcm_mg3_text}3. Min Bodies").ToString();
-            var mg3_hint = new TextObject("{=mcm_mg3_hint}The minimum amount of bodies in the mass grave.").ToString();
-            var mg4_text = new TextObject("{=mcm_mg4_text}4. Max Bodies").ToString();
-            var mg4_hint = new TextObject("{=mcm_mg4_hint}The maximum amount of bodies in the mass grave.").ToString();
-            var mg5_text = new TextObject("{=mcm_mg5_text}5. Min Base Morale Loss").ToString();
-            var mg5_hint = new TextObject("{=mcm_mg5_hint}Minimum amount of morale that can be lost.").ToString();
-            var mg6_text = new TextObject("{=mcm_mg6_text}6. Max Base Morale Loss").ToString();
-            var mg6_hint = new TextObject("{=mcm_mg6_hint}Maximum amount of morale that can be lost.").ToString();
-            var mg7_text = new TextObject("{=mcm_mg7_text}7. Deactivate event").ToString();
-            var mg7_hint = new TextObject("{=mcm_mg7_hint}If you dont want this event to show up you can deactivate it.").ToString();
-
-            #endregion
-            
-            #region Momentum - Strings
-
-            var mo_heading = new TextObject("{=mcm_mo_heading}Momentum").ToString();
-            var mo1_text = new TextObject("{=mcm_mo1_text}1. Deactivate event").ToString();
-            var mo1_hint = new TextObject("{=mcm_mo1_hint}If you dont want this event to show up you can deactivate it.").ToString();
-
-            #endregion
-
             #endregion
             
             
             
-            var builder = BaseSettingsBuilder.Create("RandomEvents1","1. Random Events - A to M")!
+            var builder = BaseSettingsBuilder.Create("RandomEvents1","1. Random Events - A to F")!
                 .SetFormat("xml")
                 .SetFolderName(RandomEventsSubmodule.FolderName)
                 .SetSubFolder(RandomEventsSubmodule.ModName)
                 
-           #region Builder Modules
+                #region Builder Modules
 
                 #region A Flirtatious Encounter - Builder
                 
@@ -815,8 +659,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                         .SetHintText(afe3_hint))
                     .AddFloatingInteger("AFE4", afe4_text,3,65, new ProxyRef<float>(() => AFE_maxRelationshipIncrease, o => AFE_maxRelationshipIncrease = o), floatBuilder => floatBuilder
                         .SetHintText(afe4_hint))
-                    .AddBool("AFE7", afe5_text, new ProxyRef<bool>(() => AFE_Disable, o => AFE_Disable = o), boolBuilder => boolBuilder
+                    .AddInteger("AFE5", afe5_text, 25, 275, new ProxyRef<int>(() => AFE_charmSkillLevel, o => AFE_charmSkillLevel = o), integerBuilder => integerBuilder
                         .SetHintText(afe5_hint))
+                    .AddBool("AFE6", afe6_text, new ProxyRef<bool>(() => AFE_Disable, o => AFE_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(afe6_hint))
                 )
 
             #endregion
@@ -834,6 +680,14 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                         .SetHintText(ag4_hint))
                     )
                 #endregion
+
+                #region Army invite - Builder
+
+               .CreateGroup(ai_heading, groupBuilder => groupBuilder
+               .AddBool("AI1", ai1_text, new ProxyRef<bool>(() => AI_Disable, o => AI_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(ai1_hint))
+               )
+               #endregion
 
                 #region Ahead of Time - Builder
 
@@ -890,16 +744,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                 #region Beggar Begging - Builder
                 
                 .CreateGroup(bb_heading, groupBuilder => groupBuilder
-                .AddInteger("BB1", bb1_text,2,50, new ProxyRef<int>(() => BB_MinGoldToBeggar, o => BB_MinGoldToBeggar = o), integerBuilder => integerBuilder
+                .AddInteger("BB1", bb1_text,25,275, new ProxyRef<int>(() => BB_minStewardLevel, o => BB_minStewardLevel = o), integerBuilder => integerBuilder
                     .SetHintText(bb1_hint))
-                .AddInteger("BB2", bb2_text,2,50, new ProxyRef<int>(() => BB_MaxGoldToBeggar, o => BB_MaxGoldToBeggar = o), integerBuilder => integerBuilder
+                .AddInteger("BB2", bb2_text,25,275, new ProxyRef<int>(() => BB_minRogueryLevel, o => BB_minRogueryLevel = o), integerBuilder => integerBuilder
                     .SetHintText(bb2_hint))
-                .AddInteger("BB3", bb3_text,5,20, new ProxyRef<int>(() => BB_MinRenownGain, o => BB_MinRenownGain = o), integerBuilder => integerBuilder
+                .AddBool("BB3", bb3_text, new ProxyRef<bool>(() => BB_Disable, o => BB_Disable = o), boolBuilder => boolBuilder
                     .SetHintText(bb3_hint))
-                .AddInteger("BB4", bb4_text,5,20, new ProxyRef<int>(() => BB_MaxRenownGain, o => BB_MaxRenownGain = o), integerBuilder => integerBuilder
-                    .SetHintText(bb4_hint))
-                .AddBool("BB5", bb5_text, new ProxyRef<bool>(() => BB_Disable, o => BB_Disable = o), boolBuilder => boolBuilder
-                    .SetHintText(bb5_hint))
                 )
                 
                 #endregion
@@ -947,8 +797,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                     .SetHintText(bp13_hint))
                 .AddInteger("BP14", bp14_text,250,6500, new ProxyRef<int>(() => BP_MaxGoldLooted, o => BP_MaxGoldLooted = o), integerBuilder => integerBuilder
                     .SetHintText(bp14_hint))
-                .AddBool("BP15", bp15_text, new ProxyRef<bool>(() => BP_Disable, o => BP_Disable = o), boolBuilder => boolBuilder
+                .AddInteger("BP15", bp15_text,25,275, new ProxyRef<int>(() => BP_MinRogueryLevel, o => BP_MinRogueryLevel = o), integerBuilder => integerBuilder
                     .SetHintText(bp15_hint))
+                .AddBool("BP16", bp16_text, new ProxyRef<bool>(() => BP_Disable, o => BP_Disable = o), boolBuilder => boolBuilder
+                    .SetHintText(bp16_hint))
                 )
                 #endregion
                 
@@ -1004,7 +856,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                 #region Companion Admire - Builder
 
                  .CreateGroup(ca_heading, groupBuilder => groupBuilder
-                        .AddBool("CA2", ca1_text, new ProxyRef<bool>(() => CA_Disable, o => CA_Disable = o), boolBuilder => boolBuilder
+                        .AddBool("CA1", ca1_text, new ProxyRef<bool>(() => CA_Disable, o => CA_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(ca1_hint))
                  )
 
@@ -1057,6 +909,18 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
                 #endregion
                 
+                #region Duel - Builder
+
+                .CreateGroup(du_heading, groupBuilder => groupBuilder
+                    .AddInteger("DU1", du1_text, 25, 275, new ProxyRef<int>(() => DU_minRogueryLevel, o => DU_minRogueryLevel = o), integerBuilder => integerBuilder
+                        .SetHintText(du1_hint))
+                    .AddInteger("DU2", du2_text, 25, 275, new ProxyRef<int>(() => DU_minTwoHandedLevel, o => DU_minTwoHandedLevel = o), integerBuilder => integerBuilder
+                        .SetHintText(du2_hint))
+                    .AddBool("DU3", du3_text, new ProxyRef<bool>(() => DU_Disable, o => DU_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(du3_hint))
+                )
+                #endregion
+                
                 #region Dysentery - Builder
                 
                 .CreateGroup(dy_heading, groupBuilder => groupBuilder
@@ -1064,9 +928,9 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                         .SetHintText(dy1_hint))
                     .AddInteger("DY2", dy2_text, 1, 30, new ProxyRef<int>(() => DY_maxMoraleLoss, o => DY_maxMoraleLoss = o), integerBuilder => integerBuilder
                         .SetHintText(dy2_hint))
-                    .AddInteger("DY3", dy3_text, 1, 30, new ProxyRef<int>(() => DY_minvictim, o => DY_minvictim = o), integerBuilder => integerBuilder
+                    .AddInteger("DY3", dy3_text, 1, 30, new ProxyRef<int>(() => DY_minVictim, o => DY_minVictim = o), integerBuilder => integerBuilder
                         .SetHintText(dy3_hint))
-                    .AddInteger("DY4", dy4_text, 1, 30, new ProxyRef<int>(() => DY_maxvictim, o => DY_maxvictim = o), integerBuilder => integerBuilder
+                    .AddInteger("DY4", dy4_text, 1, 30, new ProxyRef<int>(() => DY_maxVictim, o => DY_maxVictim = o), integerBuilder => integerBuilder
                         .SetHintText(dy4_hint))
                     .AddBool("DY5", dy5_text, new ProxyRef<bool>(() => DY_Disable, o => DY_Disable = o), boolBuilder => boolBuilder
                         .SetHintText(dy5_hint))
@@ -1111,8 +975,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(fsf3_hint))
                         .AddInteger("FSF4", fsf4_text,500,1500, new ProxyRef<int>(() => FSF_MaxGoldLooted, o => FSF_MaxGoldLooted = o), integerBuilder => integerBuilder
                             .SetHintText(fsf4_hint))
-                        .AddBool("FSF5", fsf5_text, new ProxyRef<bool>(() => FSF_Disable, o => FSF_Disable = o), boolBuilder => boolBuilder
+                        .AddInteger("FSF5", fsf5_text,25,275, new ProxyRef<int>(() => FSF_MinRogueryLevel, o => FSF_MinRogueryLevel = o), integerBuilder => integerBuilder
                             .SetHintText(fsf5_hint))
+                        .AddBool("FSF6", fsf6_text, new ProxyRef<bool>(() => FSF_Disable, o => FSF_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(fsf6_hint))
                     )
 
                 #endregion
@@ -1129,9 +995,17 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                     )
 
                 #endregion
-                
+
+                #region Feast - Builder
+
+                .CreateGroup(fe_heading, groupBuilder => groupBuilder
+                .AddBool("FE1", fe1_text, new ProxyRef<bool>(() => FF_Disable, o => FF_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(fe1_hint))
+                    )
+                #endregion
+
                 #region Fishing Spot - Builder
-                
+
                 .CreateGroup(fs_heading, groupBuilder => groupBuilder
                     .AddInteger("FS1", fs1_text,2,15, new ProxyRef<int>(() => FS_MinSoldiersToGo, o => FS_MinSoldiersToGo = o), integerBuilder => integerBuilder
                         .SetHintText(fs1_hint))
@@ -1162,141 +1036,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(fof4_hint))
                         .AddBool("FoF5", fof5_text, new ProxyRef<bool>(() => FoF_Disable, o => FoF_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(fof5_hint))
-                    )
-                    
-                    #endregion
-                    
-                #region Granary Rats - Builder
-                
-                .CreateGroup(gr_heading, groupBuilder => groupBuilder
-                    .AddFloatingInteger("GR1", gr1_text,0.05f,0.90f, new ProxyRef<float>(() => GR_MinFoodLoss, o => GR_MinFoodLoss = o), floatBuilder => floatBuilder
-                        .SetHintText(gr1_hint))
-                    .AddFloatingInteger("GR2", gr2_text,0.05f,0.90f, new ProxyRef<float>(() => GR_MaxFoodLoss, o => GR_MaxFoodLoss = o), floatBuilder => floatBuilder
-                        .SetHintText(gr2_hint))
-                    .AddBool("GR3", gr3_text, new ProxyRef<bool>(() => GR_Disable, o => GR_Disable = o), boolBuilder => boolBuilder
-                        .SetHintText(gr3_hint))
-                    )
-                
-                
                 #endregion
                 
-                #region Hot Springs - Builder
-                
-                .CreateGroup(hs_heading, groupBuilder => groupBuilder
-                        .AddInteger("HS1", hs1_text,5,30, new ProxyRef<int>(() => HS_MinMoraleGain, o => HS_MinMoraleGain = o), integerBuilder => integerBuilder
-                            .SetHintText(hs1_hint))
-                        .AddInteger("HS2", hs2_text,5,30, new ProxyRef<int>(() => HS_MaxMoraleGain, o => HS_MaxMoraleGain = o), integerBuilder => integerBuilder
-                            .SetHintText(hs2_hint))
-                        .AddBool("HS3", hs3_text, new ProxyRef<bool>(() => HS_Disable, o => HS_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(hs3_hint))
-                    )
-                
-                
-                #endregion
-                
-                #region Hunting Trip - Builder
-                
-                .CreateGroup(ht_heading, groupBuilder => groupBuilder
-                    .AddInteger("HT1", ht1_text,2,15, new ProxyRef<int>(() => HT_MinSoldiersToGo, o => HT_MinSoldiersToGo = o), integerBuilder => integerBuilder
-                        .SetHintText(ht1_hint))
-                    .AddInteger("HT2", ht2_text,2,15, new ProxyRef<int>(() => HT_MaxSoldiersToGo, o => HT_MaxSoldiersToGo = o), integerBuilder => integerBuilder
-                        .SetHintText(ht2_hint))
-                    .AddInteger("HT3", ht3_text,10,30, new ProxyRef<int>(() => HT_MaxCatch, o => HT_MaxCatch = o), integerBuilder => integerBuilder
-                        .SetHintText(ht3_hint))
-                    .AddInteger("HT4", ht4_text,5,30, new ProxyRef<int>(() => HT_MinMoraleGain, o => HT_MinMoraleGain = o), integerBuilder => integerBuilder
-                        .SetHintText(ht4_hint))
-                    .AddInteger("HT5", ht5_text,5,30, new ProxyRef<int>(() => HT_MaxMoraleGain, o => HT_MaxMoraleGain = o), integerBuilder => integerBuilder
-                        .SetHintText(ht5_hint))
-                    .AddInteger("HT6", ht6_text,2,7, new ProxyRef<int>(() => HT_MinYieldMultiplier, o => HT_MinYieldMultiplier = o), integerBuilder => integerBuilder
-                        .SetHintText(ht6_hint))
-                    .AddInteger("HT7", ht7_text,2,7, new ProxyRef<int>(() => HT_MaxYieldMultiplier, o => HT_MaxYieldMultiplier = o), integerBuilder => integerBuilder
-                        .SetHintText(ht7_hint))
-                    .AddBool("HT8", ht8_text, new ProxyRef<bool>(() => HT_Disable, o => HT_Disable = o), boolBuilder => boolBuilder
-                        .SetHintText(ht8_hint))
-                    )
-
-                #endregion
-                
-                #region Lights in the Skies - Builder
-                
-                .CreateGroup(lits_heading, groupBuilder => groupBuilder
-                    .AddBool("LITS", lits1_text, new ProxyRef<bool>(() => LitS_Disable, o => LitS_Disable = o), boolBuilder => boolBuilder
-                        .SetHintText(lits1_hint))
-                )
-
-                #endregion
-                
-                #region Logging Site - Builder
-                
-                .CreateGroup(ls_heading, groupBuilder => groupBuilder
-                        .AddInteger("LS1", ls1_text,5,25, new ProxyRef<int>(() => LS_MinSoldiersToGo, o => LS_MinSoldiersToGo = o), integerBuilder => integerBuilder
-                            .SetHintText(ls1_hint))
-                        .AddInteger("LS2", ls2_text,5,25, new ProxyRef<int>(() => LS_MaxSoldiersToGo, o => LS_MaxSoldiersToGo = o), integerBuilder => integerBuilder
-                            .SetHintText(ls2_hint))
-                        .AddInteger("LS3", ls3_text,5,15, new ProxyRef<int>(() => LS_MinYield, o => LS_MinYield = o), integerBuilder => integerBuilder
-                            .SetHintText(ls3_hint))
-                        .AddInteger("LS4", ls4_text,5,15, new ProxyRef<int>(() => LS_MaxYield, o => LS_MaxYield = o), integerBuilder => integerBuilder
-                            .SetHintText(ls4_hint))
-                        .AddInteger("LS5", ls5_text,5,15, new ProxyRef<int>(() => LS_MinYieldMultiplier, o => LS_MinYieldMultiplier = o), integerBuilder => integerBuilder
-                            .SetHintText(ls5_hint))
-                        .AddInteger("LS6", ls6_text,5,15, new ProxyRef<int>(() => LS_MaxYieldMultiplier, o => LS_MaxYieldMultiplier = o), integerBuilder => integerBuilder
-                            .SetHintText(ls6_hint))
-                        .AddBool("LS7", ls7_text, new ProxyRef<bool>(() => LS_Disable, o => LS_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(ls7_hint))
-                    )
-
-                #endregion
-                
-                #region Look Up - Builder
-                
-                .CreateGroup(lu_heading, groupBuilder => groupBuilder
-                        .AddFloatingInteger("LU1", lu1_text,0.1f,0.75f, new ProxyRef<float>(() => LU_TreeShakeChance, o => LU_TreeShakeChance = o), floatBuilder => floatBuilder
-                            .SetHintText(lu1_hint))
-                        .AddFloatingInteger("LU2", lu2_text,0.1f,0.5f, new ProxyRef<float>(() => LU_BaseRangeChance, o => LU_BaseRangeChance = o), floatBuilder => floatBuilder
-                            .SetHintText(lu2_hint))
-                        .AddInteger("LU3", lu3_text,5,75, new ProxyRef<int>(() => LU_MinRangeLevel, o => LU_MinRangeLevel = o), integerBuilder => integerBuilder
-                            .SetHintText(lu3_hint))
-                        .AddInteger("LU4", lu4_text,5,75, new ProxyRef<int>(() => LU_MaxRangeLevel, o => LU_MaxRangeLevel = o), integerBuilder => integerBuilder
-                            .SetHintText(lu4_hint))
-                        .AddInteger("LU5", lu5_text,250,5000, new ProxyRef<int>(() => LU_MinGold, o => LU_MinGold = o), integerBuilder => integerBuilder
-                            .SetHintText(lu5_hint))
-                        .AddInteger("LU6", lu6_text,250,5000, new ProxyRef<int>(() => LU_MaxGold, o => LU_MaxGold = o), integerBuilder => integerBuilder
-                            .SetHintText(lu6_hint))
-                        .AddBool("LU7", lu7_text, new ProxyRef<bool>(() => LU_Disable, o => LU_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(lu7_hint))
-                    )
-
-                    #endregion
-                    
-                #region Mass Grave - Builder
-                
-                .CreateGroup(mg_heading, groupBuilder => groupBuilder
-                    .AddInteger("MG1", mg1_text,2,10, new ProxyRef<int>(() => MG_MinSoldiers, o => MG_MinSoldiers = o), integerBuilder => integerBuilder
-                        .SetHintText(mg1_hint))
-                    .AddInteger("MG2", mg2_text,2,10, new ProxyRef<int>(() => MG_MaxSoldiers, o => MG_MaxSoldiers = o), integerBuilder => integerBuilder
-                        .SetHintText(mg2_hint))
-                    .AddInteger("MG3", mg3_text,10,60, new ProxyRef<int>(() => MG_MinBodies, o => MG_MinBodies = o), integerBuilder => integerBuilder
-                        .SetHintText(mg3_hint))
-                    .AddInteger("MG4", mg4_text,10,60, new ProxyRef<int>(() => MG_MaxBodies, o => MG_MaxBodies = o), integerBuilder => integerBuilder
-                        .SetHintText(mg4_hint))
-                    .AddInteger("MG5", mg5_text,10,30, new ProxyRef<int>(() => MG_MinBaseMoraleLoss, o => MG_MinBaseMoraleLoss = o), integerBuilder => integerBuilder
-                        .SetHintText(mg5_hint))
-                    .AddInteger("MG6", mg6_text,10,30, new ProxyRef<int>(() => MG_MaxBaseMoraleLoss, o => MG_MaxBaseMoraleLoss = o), integerBuilder => integerBuilder
-                        .SetHintText(mg6_hint))
-                    .AddBool("MG7", mg7_text, new ProxyRef<bool>(() => MG_Disable, o => MG_Disable = o), boolBuilder => boolBuilder
-                        .SetHintText(mg7_hint))
-                    )
-
-                #endregion
-                
-                #region Momentum - Builder
-                
-                .CreateGroup(mo_heading, groupBuilder => groupBuilder
-                        .AddBool("MO1", mo1_text, new ProxyRef<bool>(() => MO_Disable, o => MO_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(mo1_hint))
-
-                    #endregion
-
                 #endregion
                 );
 
@@ -1323,6 +1064,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.AFE_maxWomanAge = 45;
             Instance.AFE_minRelationshipIncrease = 15.0f;
             Instance.AFE_maxRelationshipIncrease = 50.0f;
+            Instance.AFE_charmSkillLevel = 100;
 
             #endregion
 
@@ -1332,6 +1074,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.AG_CohesionGain = 30f;
             Instance.AG_minMoraleGain = 10;
             Instance.AG_maxMoraleGain = 30;
+
+            #endregion
+
+            #region Army Invite
+
+            Instance.AI_Disable = false;
 
             #endregion
 
@@ -1369,10 +1117,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             
             #region Beggar Begging
             
-            Instance.BB_MinGoldToBeggar = 25;
-            Instance.BB_MaxGoldToBeggar = 75;
-            Instance.BB_MinRenownGain = 10;
-            Instance.BB_MaxRenownGain = 20;
+            Instance.BB_minStewardLevel = 50;
+            Instance.BB_minRogueryLevel = 125;
             Instance.BB_Disable = false;
 
             #endregion
@@ -1400,6 +1146,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.BP_MaxRenownGain = 30;
             Instance.BP_MinGoldLooted = 500;
             Instance.BP_MaxGoldLooted = 1500;
+            Instance.BP_MinRogueryLevel = 125;
 
             #endregion
 
@@ -1462,6 +1209,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.DS_minvictim = 3;
             Instance.DS_maxvictim = 6;
             #endregion
+            
+            #region Duel
+            Instance.DU_Disable = false;
+            Instance.DU_minRogueryLevel = 125;
+            Instance.DU_minTwoHandedLevel = 100;
+            #endregion
 
             #region Dysentery
             Instance.DS_Disable = false;
@@ -1494,6 +1247,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.FSF_MaxFamilyCompensation = 1750;
             Instance.FSF_MinGoldLooted = 750;
             Instance.FSF_MaxGoldLooted = 1500;
+            Instance.FSF_MinRogueryLevel = 125;
 
             #endregion
             
@@ -1504,9 +1258,15 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.FF_MaxRenownGain = 75;
 
             #endregion
-            
+
+            #region Feast
+
+            Instance.FE_Disable = false;
+
+            #endregion
+
             #region Fishing Spot
-            
+
             Instance.FS_Disable = false;
             Instance.FS_MinSoldiersToGo = 3;
             Instance.FS_MaxSoldiersToGo = 12;
@@ -1523,77 +1283,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.FoF_MaxFoodLoss = 30;
             Instance.FoF_MinMoraleLoss = 5;
             Instance.FoF_MaxMoraleLoss = 20;
-
-            #endregion
-
-            #region Granary Rats
-
-            Instance.GR_Disable = false;
-            Instance.GR_MinFoodLoss = 0.10f;
-            Instance.GR_MaxFoodLoss = 0.25f;
-
-            #endregion
-            
-            #region Hot Springs
-
-            Instance.HS_Disable = false;
-            Instance.HS_MinMoraleGain = 10;
-            Instance.HS_MaxMoraleGain = 25;
-
-            #endregion
-            
-            #region Hunting Trip
-            
-            Instance.HT_Disable = false;
-            Instance.HT_MinSoldiersToGo = 3;
-            Instance.HT_MaxSoldiersToGo = 12;
-            Instance.HT_MaxCatch = 20;
-            Instance.HT_MinMoraleGain = 7;
-            Instance.HT_MaxMoraleGain = 20;
-            Instance.HT_MinYieldMultiplier = 3;
-            Instance.HT_MaxYieldMultiplier = 6;
-
-            #endregion
-            
-            #region Logging Site
-            
-            Instance.LS_Disable = false;
-            Instance.LS_MinSoldiersToGo = 10;
-            Instance.LS_MaxSoldiersToGo = 20;
-            Instance.LS_MinYield = 5;
-            Instance.LS_MaxYield = 15;
-            Instance.LS_MinYieldMultiplier = 10;
-            Instance.LS_MaxYieldMultiplier = 15;
-
-            #endregion
-            
-            #region Look Up
-            
-            Instance.LU_Disable = false;
-            Instance.LU_TreeShakeChance = 0.25f;
-            Instance.LU_BaseRangeChance = 0.1f;
-            Instance.LU_MinRangeLevel = 10;
-            Instance.LU_MaxRangeLevel = 60;
-            Instance.LU_MinGold = 500;
-            Instance.LU_MaxGold = 2500;
-
-            #endregion
-            
-            #region Mass Grave
-            
-            Instance.MG_Disable = false;
-            Instance.MG_MinSoldiers = 3;
-            Instance.MG_MaxSoldiers = 8;
-            Instance.MG_MinBodies = 20;
-            Instance.MG_MaxBodies = 40;
-            Instance.MG_MinBaseMoraleLoss = 15;
-            Instance.MG_MaxBaseMoraleLoss = 25;
-
-            #endregion
-            
-            #region Momentum
-            
-            Instance.MO_Disable = false;
 
             #endregion
             

@@ -21,11 +21,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public FishingSpot() : base(ModSettings.RandomEvents.FishingSpotData)
         {
-            minSoldiersToGo = MCM_MenuConfig_A_M.Instance.FS_MinSoldiersToGo;
-            maxSoldiersToGo = MCM_MenuConfig_A_M.Instance.FS_MaxSoldiersToGo;
-            maxFishCatch = MCM_MenuConfig_A_M.Instance.FS_MaxFishCatch;
-            minMoraleGain = MCM_MenuConfig_A_M.Instance.FS_MinMoraleGain;
-            maxMoraleGain = MCM_MenuConfig_A_M.Instance.FS_MaxMoraleGain;
+            minSoldiersToGo = MCM_MenuConfig_A_F.Instance.FS_MinSoldiersToGo;
+            maxSoldiersToGo = MCM_MenuConfig_A_F.Instance.FS_MaxSoldiersToGo;
+            maxFishCatch = MCM_MenuConfig_A_F.Instance.FS_MaxFishCatch;
+            minMoraleGain = MCM_MenuConfig_A_F.Instance.FS_MinMoraleGain;
+            maxMoraleGain = MCM_MenuConfig_A_F.Instance.FS_MaxMoraleGain;
         }
 
         public override void CancelEvent()
@@ -34,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_A_M.Instance.FS_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= 50 && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_A_F.Instance.FS_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
@@ -54,7 +54,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var fish = MBObjectManager.Instance.GetObject<ItemObject>("fish");
             
             var eventDescription = new TextObject(
-                    "{=FishingSpot_Event_Desc}While camping, {soldiersGoneFishing} of your men decide they want to go to the lake just outside the camp to try and catch some fish.\n " +
+                    "{=FishingSpot_Event_Desc}While camping, {soldiersGoneFishing} of your men decide they want to go to the lake just outside the camp to try and catch some fish.\n" +
                     "You could always use the additional resources and it would be a great morale booster for the party if they catch some. You tell them to be back before nightfall.")
                 .SetTextVariable("soldiersGoneFishing", soldiersGoneFishing)
                 .ToString();
@@ -112,7 +112,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += MathF.Floor(moraleGained * 0.02f);
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_MED_Outcome));
             }
             else if (fishCaught > 0 && fishCaught <= 5)
             {
@@ -121,7 +121,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += MathF.Floor(moraleGained * 0.04f);
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_POS_Outcome));
             }
             else if (fishCaught > 5 && fishCaught <= 15)
             {
@@ -130,7 +130,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += MathF.Floor(moraleGained * 0.08f);
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_POS_Outcome));
             }
             else if (fishCaught > 15 && fishCaught <= maxFishCatch)
             {
@@ -139,7 +139,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MobileParty.MainParty.RecentEventsMorale += moraleGained;
                 MobileParty.MainParty.MoraleExplained.Add(moraleGained);
                 
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_POS_Outcome));
             }
             
 

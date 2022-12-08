@@ -9,9 +9,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
         {
             get
             {
-                var Hour = CampaignTime.Now.ToHours;
-                var num = MathF.Floor(Hour);
-
+                var num = CampaignTime.Now.GetHourOfDay;
                 return num < 6;
             }
         }
@@ -21,9 +19,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
         {
             get
             {
-                var Hour = CampaignTime.Now.ToHours;
-                var num = MathF.Floor(Hour);
-
+                var num = CampaignTime.Now.GetHourOfDay;
                 return num >= 6 && num < 12;
             }
         }
@@ -32,9 +28,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
         {
             get
             {
-                var Hour = CampaignTime.Now.ToHours;
-                var num = MathF.Floor(Hour);
-
+                var num = CampaignTime.Now.GetHourOfDay;
                 return num >= 12 && num < 18;
             }
         }
@@ -43,9 +37,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
         {
             get
             {
-                var Hour = CampaignTime.Now.ToHours;
-                var num = MathF.Floor(Hour);
-
+                var num = CampaignTime.Now.GetHourOfDay;
                 return num >= 18;
             }
         }

@@ -23,12 +23,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public LoggingSite() : base(ModSettings.RandomEvents.LoggingSiteData)
         {
-            minSoldiersToGo = MCM_MenuConfig_A_M.Instance.LS_MinSoldiersToGo;
-            maxSoldiersToGo = MCM_MenuConfig_A_M.Instance.LS_MaxSoldiersToGo;
-            minYield = MCM_MenuConfig_A_M.Instance.LS_MinYield;
-            maxYield = MCM_MenuConfig_A_M.Instance.LS_MaxYield;
-            minYieldMultiplier = MCM_MenuConfig_A_M.Instance.LS_MinYieldMultiplier;
-            maxYieldMultiplier = MCM_MenuConfig_A_M.Instance.LS_MaxYieldMultiplier;
+            minSoldiersToGo = MCM_MenuConfig_G_O.Instance.LS_MinSoldiersToGo;
+            maxSoldiersToGo = MCM_MenuConfig_G_O.Instance.LS_MaxSoldiersToGo;
+            minYield = MCM_MenuConfig_G_O.Instance.LS_MinYield;
+            maxYield = MCM_MenuConfig_G_O.Instance.LS_MaxYield;
+            minYieldMultiplier = MCM_MenuConfig_G_O.Instance.LS_MinYieldMultiplier;
+            maxYieldMultiplier = MCM_MenuConfig_G_O.Instance.LS_MaxYieldMultiplier;
         }
 
         public override void CancelEvent()
@@ -38,7 +38,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
             
-            return MCM_MenuConfig_A_M.Instance.LS_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= 50;
+            return MCM_MenuConfig_G_O.Instance.LS_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo;
         }
 
         public override void StartEvent()
@@ -117,17 +117,17 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             if (yieldHardwood > 25 && yieldHardwood <= 35)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
             }
             else if (yieldHardwood > 35 && yieldHardwood <= 50)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_POS_Outcome));
             }
             else if (yieldHardwood > 50)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome3, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_POS_Outcome));
             }
             
 

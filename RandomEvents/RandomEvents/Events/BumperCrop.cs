@@ -16,7 +16,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public BumperCrop() : base(ModSettings.RandomEvents.BumperCropData)
 		{
-			cropGainPercent = MCM_MenuConfig_A_M.Instance.BC_CropGainPercent;
+			cropGainPercent = MCM_MenuConfig_A_F.Instance.BC_CropGainPercent;
 		}
 
 		public override void StartEvent()
@@ -74,7 +74,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_M.Instance.BC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
+			return MCM_MenuConfig_A_F.Instance.BC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
 		}
 	}
 

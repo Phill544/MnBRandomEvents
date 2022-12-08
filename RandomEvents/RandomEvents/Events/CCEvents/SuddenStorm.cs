@@ -5,7 +5,6 @@ using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Inventory;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
@@ -29,14 +28,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public SuddenStorm() : base(ModSettings.RandomEvents.SuddenStormData)
         {
             
-            minHorsesLost = MCM_MenuConfig_N_Z.Instance.SuS_MinHorsesLost;
-            maxHorsesLost = MCM_MenuConfig_N_Z.Instance.SuS_MaxHorsesLost;
-            minMenDied = MCM_MenuConfig_N_Z.Instance.SuS_MinMenDied;
-            maxMenDied = MCM_MenuConfig_N_Z.Instance.SuS_MaxMenDied;
-            minMenWounded = MCM_MenuConfig_N_Z.Instance.SuS_MinMenWounded;
-            maxMenWounded = MCM_MenuConfig_N_Z.Instance.SuS_MaxMenWounded;
-            minMeatFromHorse = MCM_MenuConfig_N_Z.Instance.SuS_MinMeatFromHorse;
-            maxMeatFromHorse = MCM_MenuConfig_N_Z.Instance.SuS_MaxMeatFromHorse;
+            minHorsesLost = MCM_MenuConfig_P_Z.Instance.SuS_MinHorsesLost;
+            maxHorsesLost = MCM_MenuConfig_P_Z.Instance.SuS_MaxHorsesLost;
+            minMenDied = MCM_MenuConfig_P_Z.Instance.SuS_MinMenDied;
+            maxMenDied = MCM_MenuConfig_P_Z.Instance.SuS_MaxMenDied;
+            minMenWounded = MCM_MenuConfig_P_Z.Instance.SuS_MinMenWounded;
+            maxMenWounded = MCM_MenuConfig_P_Z.Instance.SuS_MaxMenWounded;
+            minMeatFromHorse = MCM_MenuConfig_P_Z.Instance.SuS_MinMeatFromHorse;
+            maxMeatFromHorse = MCM_MenuConfig_P_Z.Instance.SuS_MaxMeatFromHorse;
             
         }
 
@@ -46,7 +45,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_N_Z.Instance.SuS_Disable == false && Settlement.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxMenDied;
+            return MCM_MenuConfig_P_Z.Instance.SuS_Disable == false && Settlement.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxMenDied;
 
         }
 
@@ -222,7 +221,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menDied, false);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                                 break;
                             case "b":
                                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
@@ -231,7 +230,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menDied, false);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                                 break;
                             case "c":
                                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null, null), true);
@@ -239,7 +238,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 MobileParty.MainParty.ItemRoster.AddToCounts(meat, meatFromHorse);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                                 
                                 break;
                             case "d":
@@ -249,7 +248,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menDied, false);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
+                                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                                 
                                 break;
                             default:

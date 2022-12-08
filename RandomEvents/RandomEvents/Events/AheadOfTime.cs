@@ -27,7 +27,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		public override bool CanExecuteEvent()
 		{
 
-			if (MCM_MenuConfig_A_M.Instance.AoT_Disable == false)
+			if (MCM_MenuConfig_A_F.Instance.AoT_Disable == false)
 			{
 				if (!Hero.MainHero.Clan.Settlements.Any()) return false;
 				eligibleSettlements = new List<Settlement>();

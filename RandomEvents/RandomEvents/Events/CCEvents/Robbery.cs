@@ -21,10 +21,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public Robbery() : base(ModSettings.RandomEvents.RobberyData)
         {
-            minGoldLost = MCM_MenuConfig_N_Z.Instance.RO_MinGoldLost;
-            maxGoldLost = MCM_MenuConfig_N_Z.Instance.RO_MaxGoldLost;
-            minRenownLost = MCM_MenuConfig_N_Z.Instance.RO_MinRenownLost;
-            maxRenownLost = MCM_MenuConfig_N_Z.Instance.RO_MaxRenownLost;
+            minGoldLost = MCM_MenuConfig_P_Z.Instance.RO_MinGoldLost;
+            maxGoldLost = MCM_MenuConfig_P_Z.Instance.RO_MaxGoldLost;
+            minRenownLost = MCM_MenuConfig_P_Z.Instance.RO_MinRenownLost;
+            maxRenownLost = MCM_MenuConfig_P_Z.Instance.RO_MaxRenownLost;
         }
 
         public override void CancelEvent()
@@ -39,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var notables = Settlement.CurrentSettlement.Notables.ToList();
             var gangLeaders = notables.Where(character => character.IsGangLeader).ToList();
 
-            return MCM_MenuConfig_N_Z.Instance.RO_Disable == false && gangLeaders.Count != 0 && CampaignTime.Now.IsNightTime;
+            return MCM_MenuConfig_P_Z.Instance.RO_Disable == false && gangLeaders.Count != 0 && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()
@@ -224,23 +224,23 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 
                 Clan.PlayerClan.Renown = clanRenown - renownLost;
                 Hero.MainHero.ChangeHeroGold(-goldLost);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
             }
             else if (convincedThugs)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText_Convinced_Outcome, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_MED_Outcome));
             }
             else if (charmedThugs)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText_Charmed_Outcome, true, false, eventButtonText, null, null, null), true);
                 Hero.MainHero.ChangeHeroGold(-100);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_MED_Outcome));
             }
             else if (intimidatedThugs)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText_Intimidated_Outcome, true, false, eventButtonText, null, null, null), true);
-                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
+                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_MED_Outcome));
             }
             else if (gangLeaderGoodRelation)
             {

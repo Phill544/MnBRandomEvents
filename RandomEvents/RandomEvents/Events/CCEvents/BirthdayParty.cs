@@ -28,23 +28,25 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int maxRenownGain;
         private readonly int minGoldLooted;
         private readonly int maxGoldLooted;
+        private readonly int minRogueryLevel;
 
         public BirthdayParty() : base(ModSettings.RandomEvents.BirthdayPartyData)
         {
-            minAttending = MCM_MenuConfig_A_M.Instance.BP_MinAttending;
-            maxAttending = MCM_MenuConfig_A_M.Instance.BP_MaxAttending;
-            minYourMenAttending = MCM_MenuConfig_A_M.Instance.BP_MinYourMenAttending;
-            maxYourMenAttending = MCM_MenuConfig_A_M.Instance.BP_MaxYourMenAttending;
-            minAge = MCM_MenuConfig_A_M.Instance.BP_MinAge;
-            maxAge = MCM_MenuConfig_A_M.Instance.BP_MaxAge;
-            minBandits = MCM_MenuConfig_A_M.Instance.BP_MinBandits;
-            maxBandits = MCM_MenuConfig_A_M.Instance.BP_MaxBandits;
-            minGoldGiven = MCM_MenuConfig_A_M.Instance.BP_MinGoldGiven;
-            maxGoldGiven = MCM_MenuConfig_A_M.Instance.BP_MaxGoldGiven;
-            minRenownGain = MCM_MenuConfig_A_M.Instance.BP_MinRenownGain;
-            maxRenownGain = MCM_MenuConfig_A_M.Instance.BP_MaxRenownGain;
-            minGoldLooted = MCM_MenuConfig_A_M.Instance.BP_MinGoldLooted;
-            maxGoldLooted = MCM_MenuConfig_A_M.Instance.BP_MaxGoldLooted;
+            minAttending = MCM_MenuConfig_A_F.Instance.BP_MinAttending;
+            maxAttending = MCM_MenuConfig_A_F.Instance.BP_MaxAttending;
+            minYourMenAttending = MCM_MenuConfig_A_F.Instance.BP_MinYourMenAttending;
+            maxYourMenAttending = MCM_MenuConfig_A_F.Instance.BP_MaxYourMenAttending;
+            minAge = MCM_MenuConfig_A_F.Instance.BP_MinAge;
+            maxAge = MCM_MenuConfig_A_F.Instance.BP_MaxAge;
+            minBandits = MCM_MenuConfig_A_F.Instance.BP_MinBandits;
+            maxBandits = MCM_MenuConfig_A_F.Instance.BP_MaxBandits;
+            minGoldGiven = MCM_MenuConfig_A_F.Instance.BP_MinGoldGiven;
+            maxGoldGiven = MCM_MenuConfig_A_F.Instance.BP_MaxGoldGiven;
+            minRenownGain = MCM_MenuConfig_A_F.Instance.BP_MinRenownGain;
+            maxRenownGain = MCM_MenuConfig_A_F.Instance.BP_MaxRenownGain;
+            minGoldLooted = MCM_MenuConfig_A_F.Instance.BP_MinGoldLooted;
+            maxGoldLooted = MCM_MenuConfig_A_F.Instance.BP_MaxGoldLooted;
+            minRogueryLevel = MCM_MenuConfig_A_F.Instance.BP_MinRogueryLevel;
         }
 
         public override void CancelEvent()
@@ -53,7 +55,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_A_M.Instance.BP_Disable == false;
+            return MCM_MenuConfig_A_F.Instance.BP_Disable == false;
         }
 
         public override void StartEvent()
@@ -72,14 +74,40 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var goldGiven = MBRandom.RandomInt(minGoldGiven, maxGoldGiven);
             var renownGain = MBRandom.RandomInt(minRenownGain, maxRenownGain);
             var goldLooted = MBRandom.RandomInt(minGoldLooted, maxGoldLooted);
+            
+            var rogueryLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Roguery);
 
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
             
+            var canRaidWedding = false;
+
+            var rogueryAppendedText = "";
+
+            if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
+            {
+                
+                canRaidWedding = true;
+                rogueryAppendedText = new TextObject("{=BirthdayParty_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
+
+            }
+            else
+            {
+                if (rogueryLevel >= minRogueryLevel)
+                {
+                    canRaidWedding = true;
+                    
+                    rogueryAppendedText = new TextObject("{=BirthdayParty_Roguery_Appended_Text}[Roguery - lvl {minRogueryLevel}]")
+                        .SetTextVariable("minRogueryLevel", minRogueryLevel)
+                        .ToString();
+                }
+            }
+
+
             var eventTitle = new TextObject("{=BirthdayParty_Title}The Birthday Party!").ToString();
 
             var eventDescription = new TextObject(
                 "{=BirthdayParty_Event_Desc}As you and your party are traveling in the vicinity of {closestSettlement}, you come across {peopleAttending} " +
-                "people in what seems to be a birthday party for a young girl. A couple of the guests invite you to join them in celebrating the girls {birthdayAge} " +
+                "people in what seems to be a birthday party for a young girl. A couple of the guests invite you to join them in celebrating the girl's {birthdayAge}th " +
                 "birthday! What should you do?")
                 .SetTextVariable("closestSettlement", closestSettlement)
                 .SetTextVariable("peopleAttending", peopleAttending)
@@ -90,28 +118,32 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var eventOption2 = new TextObject("{=BirthdayParty_Event_Option_2}Give the girls some gold").ToString();
             var eventOption2Hover = new TextObject("{=BirthdayParty_Event_Option_2_Hover}You don't have time to stay but you can still be nice, right?").ToString();
-            
+
             var eventOption3 = new TextObject("{=BirthdayParty_Event_Option_3}Leave").ToString();
             var eventOption3Hover = new TextObject("{=BirthdayParty_Event_Option_3_Hover}Don't have time").ToString();
             
-            var eventOption4 = new TextObject("{=BirthdayParty_Event_Option_4}Raid the party").ToString();
-            var eventOption4Hover = new TextObject("{=BirthdayParty_Event_Option_4_Hover}Have some fun").ToString();
+            var eventOption4 = new TextObject("{=BirthdayParty_Event_Option_4}[Roguery] Raid the party").ToString();
+            var eventOption4Hover = new TextObject("{=BirthdayParty_Event_Option_4_Hover}Have some fun.\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
 
             var eventButtonText = new TextObject("{=BirthdayParty_Event_Button_Text}Okay").ToString();
             
-            var inquiryElements = new List<InquiryElement>
+            var inquiryElements = new List<InquiryElement>();
+            
+            inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover));
+            inquiryElements.Add(new InquiryElement("b", eventOption2, null, true, eventOption2Hover));
+            inquiryElements.Add(new InquiryElement("c", eventOption3, null, true, eventOption3Hover));
+            
+            if (canRaidWedding)
             {
-                new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
-                new InquiryElement("b", eventOption2, null, true, eventOption2Hover),
-                new InquiryElement("c", eventOption3, null, true, eventOption3Hover),
-                new InquiryElement("d", eventOption4, null, true, eventOption4Hover)
-            };
+                inquiryElements.Add(new InquiryElement("d", eventOption4, null, true, eventOption4Hover));
+            }
+            
 
             var eventOptionAText = new TextObject(
                 "{=BirthdayParty_Event_Choice_1}You and {yourMenAttending} of your men decide to stay for the party " +
                 "while the rest makes their way to {closestSettlement}. You approach the girl and give her {goldGiven} " +
                 "gold as a gift. She gives you a hug and says thank you. You get yourself some beer and sit down to enjoy " +
-                "the moment.\n \n Some time later, {bandits} bandits decide to crash the party. They go around from person" +
+                "the moment.\n\nSome time later, {bandits} bandits decide to crash the party. They go around from person" +
                 " to person and takes everything of value. You order your men to stand down as you don't want to start" +
                 " a fight with innocent people caught in the middle. After they have taken everything of value they" +
                 " also try to take the young girl with them. This you will not stand for so you signal your men to" +
@@ -127,7 +159,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOptionBText = new TextObject(
                     "{=BirthdayParty_Event_Choice_2}You really don't have time to stay but you don't want to be rude" +
                     " either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. She " +
-                    "seems grateful. \n You say your goodbyes to the partygoers and leave in the direction of {closestSettlement}.")
+                    "seems grateful.\nYou say your goodbyes to the partygoers and leave in the direction of {closestSettlement}.")
                 .SetTextVariable("closestSettlement", closestSettlement)
                 .SetTextVariable("goldGiven", goldGiven)
                 .ToString();
@@ -177,13 +209,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldGiven);
                             Clan.PlayerClan.AddRenown(renownGain);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                             break;
                         
                         case "b":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldGiven);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                             break;
                         
                         case "c":
@@ -192,7 +224,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "d":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionDText, true, false, eventButtonText, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(+goldGiven);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_EVIL_Outcome));
                             break;
                         
                         default:

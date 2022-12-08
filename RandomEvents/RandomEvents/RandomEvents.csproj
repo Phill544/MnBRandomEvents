@@ -36,9 +36,6 @@
 COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -67,6 +64,8 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\BaseEvent.cs" />
     <Compile Include="Events\BeeKind.cs" />
     <Compile Include="Events\BetMoney.cs" />
+    <Compile Include="Events\BicEvents\ArmyInvite.cs" />
+    <Compile Include="Events\BicEvents\Feast.cs" />
     <Compile Include="Events\BicEvents\CompanionAdmire.cs" />
     <Compile Include="Events\BicEvents\BirdSongs.cs" />
     <Compile Include="Events\BicEvents\BottomsUp.cs" />
@@ -81,6 +80,7 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\CCEvents\AFlirtatiousEncounter.cs" />
     <Compile Include="Events\CCEvents\BeggarBegging.cs" />
     <Compile Include="Events\CCEvents\BirthdayParty.cs" />
+    <Compile Include="Events\CCEvents\Duel.cs" />
     <Compile Include="Events\CCEvents\FallenSoldierFamily.cs" />
     <Compile Include="Events\CCEvents\FishingSpot.cs" />
     <Compile Include="Events\CCEvents\LightsInTheSkies.cs" />
@@ -96,6 +96,7 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\CCEvents\RedMoon.cs" />
     <Compile Include="Events\CCEvents\RunawaySon.cs" />
     <Compile Include="Events\CCEvents\SupernaturalEncounter.cs" />
+    <Compile Include="Events\CCEvents\Travellers.cs" />
     <Compile Include="Events\CCEvents\UnexpectedWedding.cs" />
     <Compile Include="Events\CCEvents\ViolatedGirl.cs" />
     <Compile Include="Events\ChattingCommanders.cs" />
@@ -124,11 +125,11 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Helpers\PlayerStatus.cs" />
     <Compile Include="Helpers\RandomSelection.cs" />
     <Compile Include="RandomEventBehavior.cs" />
-    <Compile Include="Settings\GeneralSettings.cs" />
-    <Compile Include="Settings\MCM\MCM_MenuConfig_A_M.cs" />
+    <Compile Include="Settings\MCM\MCM_MenuConfig_A_F.cs" />
     <Compile Include="Settings\MCM\MCM_MenuConfig_Chances.cs" />
     <Compile Include="Settings\MCM\MCM_MenuConfig_General.cs" />
-    <Compile Include="Settings\MCM\MCM_MenuConfig_N_Z.cs" />
+    <Compile Include="Settings\MCM\MCM_MenuConfig_G_O.cs" />
+    <Compile Include="Settings\MCM\MCM_MenuConfig_P_Z.cs" />
     <Compile Include="Settings\RandomEventSettings.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="RandomEventGenerator.cs" />
@@ -136,7 +137,7 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Bannerlord.MCM" Version="5.3.2" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.MCM" Version="5.4.5" IncludeAssets="compile" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

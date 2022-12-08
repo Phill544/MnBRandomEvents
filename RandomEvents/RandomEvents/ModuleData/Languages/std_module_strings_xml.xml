@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+<base type="string">
   <tags>
     <tag language="English" />
   </tags>
@@ -13,10 +13,14 @@
     <string id="AFlirtatiousEncounter_Event_Option_1_Hover" text="Have a nice chat with her" />
     <string id="AFlirtatiousEncounter_Event_Option_2" text="Buy her a drink" />
     <string id="AFlirtatiousEncounter_Event_Option_2_Hover" text="Always a gentleman." />
-    <string id="AFlirtatiousEncounter_Event_Option_3" text="Hit on her" />
-    <string id="AFlirtatiousEncounter_Event_Option_3_Hover" text="She's cute!" />
+    <string id="AFlirtatiousEncounter_Event_Option_3" text="[Charm] Hit on her" />
+    <string id="AFlirtatiousEncounter_Event_Option_3_Hover" text="She's cute!\n{charmAppendedText}" />
     <string id="AFlirtatiousEncounter_Event_Option_4" text="Be an ass" />
     <string id="AFlirtatiousEncounter_Event_Option_4_Hover" text="Seriously?" />
+
+    <!--AFlirtatiousEncounter - Skill Check-->
+    <string id="AFlirtatiousEncounter_Charm_Appended_Text" text="[Charm - lvl {minCharmLevel}]" />
+    <string id="AFlirtatiousEncounter_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
 
     <!--AFlirtatiousEncounter - Event Buttons-->
     <string id="AFlirtatiousEncounter_Event_Button_Text_1" text="Choose" />
@@ -29,18 +33,18 @@
     <string id="AFlirtatiousEncounter_Event_Choice_4" text="You cannot help but be a little annoyed as you'd rather drink in peace. When she gets over to you she introduces herself as {name}. It does not take long for you to have insulted her enough that she leaves you alone. You may have hurt her feelings but at least  you are able to enjoy the night alone. A few hours later as you are about to leave you come across {name} again. You tell her that you're sorry for what you said and you didn't mean it as you just wanted to be left alone. She somehow manages to politely and kindly tell you to F**k off." />
 
     <!--AFlirttiousEncounter - Log Messages-->
-    <string id="AFlirtatiousEncounter_Event_Msg_1" text="Relationship between {name} and {heroName}is now {newRelationship}." />
-    <string id="AFlirtatiousEncounter_Event_Msg_2" text="Relationship between {name} and {heroName}is now {newRelationship}." />
-    <string id="AFlirtatiousEncounter_Event_Msg_3" text="Relationship between {name} and {heroName}is now {newRelationship}." />
-    <string id="AFlirtatiousEncounter_Event_Msg_4" text="Relationship between {name} and {heroName}is now {newRelationship}." />
+    <string id="AFlirtatiousEncounter_Event_Msg_1" text="{heroName} had a casual conversation with {name}." />
+    <string id="AFlirtatiousEncounter_Event_Msg_2" text="{heroName} got a lot closer to {name}." />
+    <string id="AFlirtatiousEncounter_Event_Msg_3" text="{heroName} got lucky with {name}!" />
+    <string id="AFlirtatiousEncounter_Event_Msg_4" text="{heroName} deeply insulted {name}!" />
 
-	
-	
-	    <!--ArmyGames Event-->
+
+
+    <!--ArmyGames Event-->
     <string id="ArmyGames_Title" text="Army Games" />
     <string id="ArmyGames_Event_Desc" text="What started as a small competition has evolved itself into a full blown tournament. {leader} has gathered all of the parties in this army for competitions to see who is the ultimate champion team. The men haven't had this much fun in quite a long time, this will surely boost morale and cohesion." />
     <string id="ArmyGames_Event_Button_Text_1" text="Done" />
-	
+
 
 
     <!--BirthdayParty Event-->
@@ -52,10 +56,14 @@
     <string id="BirthdayParty_Event_Option_1_Hover" text="Not everyday you turn {birthdayAge} years old!" />
     <string id="BirthdayParty_Event_Option_2" text="Give the girls some gold" />
     <string id="BirthdayParty_Event_Option_2_Hover" text="You don't have time to stay but you can still be nice, right?" />
-    <string id="BirthdayParty_Event_Option_3" text="Leave" />
-    <string id="BirthdayParty_Event_Option_3_Hover" text="Don't have time" />
-    <string id="BirthdayParty_Event_Option_4" text="Raid the party" />
-    <string id="BirthdayParty_Event_Option_4_Hover" text="Have some fun" />
+    <string id="BirthdayParty_Event_Option_3" text="[Roguery] Raid the party" />
+    <string id="BirthdayParty_Event_Option_3_Hover" text="Have some fun.\n{rogueryAppendedText}" />
+    <string id="BirthdayParty_Event_Option_4" text="Leave" />
+    <string id="BirthdayParty_Event_Option_4_Hover" text="Don't have time" />
+    
+    <!--Skill Check-->
+    <string id="BirthdayParty_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="BirthdayParty_Roguery_Appended_Text" text="[Roguery - lvl {minRogueryLevel}]" />
 
     <!--BirthdayParty - Event Button-->
     <string id="BirthdayParty_Event_Button_Text" text="Okay" />
@@ -70,26 +78,54 @@
     <string id="BirthdayParty_Event_Msg_1" text="{heroName} gave away {goldGiven} to the girl and gained {renownGain} renown for slaying the bandits." />
     <string id="BirthdayParty_Event_Msg_2" text="{heroName} gave away {goldGiven} to the girl." />
     <string id="BirthdayParty_Event_Msg_3" text="{heroName} looted {goldLooted} from the birthday party." />
-	
+
 
 
     <!--BeggarBegging Event-->
-    <string id="BeggarBegging_Title" text="Spare a coin" />
-    <string id="BeggarBegging_Event_Desc" text="AWhile you are relaxing in {currentSettlement} you are approached by a beggar who asks if you can spare any gold. You check your pockets to see if you have anything to spare." />
+    <string id="BeggarBegging_Title" text="Beggar" />
+    <string id="BeggarBegging_Event_Desc" text="While you are relaxing in {currentSettlement} you are approached by a {beggarAge} {beggarGender} beggar who asks if you can spare any gold. You wonder what you should do." />
 
-    <!--BeggarBegging - Event Outcomes-->
-    <string id="BeggarBegging_Outcome_1" text="You inform the beggar that you currently don't have any gold on you. The beggar thanks you for your time and leaves." />
-    <string id="BeggarBegging_Outcome_2" text="You hand over {goldToGive} gold to the beggar. He thanks you and move on." />
-    <string id="BeggarBegging_Outcome_3" text="You hand over {goldToGive} gold to the beggar. He shakes your hand and kisses it. He is truly thankful." />
-    <string id="BeggarBegging_Outcome_4" text="You hand over {goldToGive} gold to the beggar. He drops to his knees and kisses your shoes. You tell him to get himself some food." />
+    <!--BeggarBegging - Event Choices-->
+    <string id="BeggarBegging_Event_Option_1" text="Give {genderAssignmentObjective} nothing" />
+    <string id="BeggarBegging_Event_Option_1_Hover" text="Filthy beggar!" />
+    <string id="BeggarBegging_Event_Option_2" text="Give {genderAssignmentObjective} 5 gold" />
+    <string id="BeggarBegging_Event_Option_2_Hover" text="It's something." />
+    <string id="BeggarBegging_Event_Option_3" text="[Steward] Give {genderAssignmentObjective} 100 gold" />
+    <string id="BeggarBegging_Event_Option_3_Hover" text="You can spare it.\n{stewardAppendedText}" />
+    <string id="BeggarBegging_Event_Option_4" text="[Steward] Give {genderAssignmentObjective} a warm meal" />
+    <string id="BeggarBegging_Event_Option_4_Hover" text="Take them to the tavern.\n{stewardAppendedText}" />
+    <string id="BeggarBegging_Event_Option_5" text="[Roguery] Kill {genderAssignmentObjective}" />
+    <string id="BeggarBegging_Event_Option_5_Hover" text="You really hate beggars!\n{rogueryAppendedText}" />
+    
+    <!--BeggarBegging - Dynamic Content -->
+    <string id="BeggarBegging_Beggar_Gender_Male" text="male" />
+    <string id="BeggarBegging_Beggar_Gender_Female" text="female" />
+    <string id="BeggarBegging_Beggar_Age_Young" text="a young" />
+    <string id="BeggarBegging_Beggar_Age_Middle" text="a middle-aged" />
+    <string id="BeggarBegging_Beggar_Age_Old" text="an old" />
+
+    <!--BeggarBegging - Skill Check-->
+    <string id="BeggarBegging_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="BeggarBegging_Steward_Appended_Text" text="[Steward - lvl {minStewardLevel}]" />
+    <string id="BeggarBegging_Roguery_Appended_Text" text="[Roguery - lvl {minRogueryLevel}]" />
 
     <!--BeggarBegging - Event Button-->
-    <string id="BeggarBegging_Event_Button_Text" text="Continue" />
+    <string id="BeggarBegging_Event_Button_Text_1" text="Choose" />
+    <string id="BeggarBegging_Event_Button_Text_2" text="Done" />
 
+    <!--BeggarBegging - Events-->
+    <string id="BeggarBegging_Event_Choice_1" text="You tell {genderAssignmentObjective} to f**ck off and that you don't have any gold to spare. {genderAssignmentSubjectiveCap} apologises for troubling you and wishes you a good day. You watch as {genderAssignmentSubjective} disappears into the crowd in search of gold." />
+    <string id="BeggarBegging_Event_Choice_2" text="You hand {genderAssignmentObjective} 5 gold from your pocket. {genderAssignmentSubjectiveCap} shakes you hand and thanks you for this humble gift and wishes you a blessed day. You watch as {genderAssignmentSubjective} disappears into the crowd in search of more gold." />
+    <string id="BeggarBegging_Event_Choice_3" text="You are feeling generous today so you hand {genderAssignmentObjective} 100 gold. {genderAssignmentSubjectiveCap} says {genderAssignmentSubjective} can't accept this, but you assure {genderAssignmentObjective} that it's okay and that you have more than enough for yourself. {genderAssignmentSubjectiveCap} begins to cry as you wrap {genderAssignmentObjective} in a hug and comforts {genderAssignmentObjective}. {genderAssignmentSubjectiveCap} tells you that {genderAssignmentSubjective} now has enough for a warm meal and a bed for a couple of days. Something {genderAssignmentSubjective} has not had for many days. {genderAssignmentSubjectiveCap} thanks you yet again before disappearing towards the tavern to get som warm food." />
+    <string id="BeggarBegging_Event_Choice_4" text="You are feeling generous today so you tell {genderAssignmentObjective} that if {genderAssignmentSubjective} wants to you will take {genderAssignmentObjective} to the tavern and buy {genderAssignmentObjective} some food and something to drink instead of giving gold. {genderAssignmentSubjectiveCap} accepts you proposal and the two of you make your way towards the tavern.\n\nOnce there you are immediately told by the owner that beggars aren't welcome. You then proceed to tell the owner that {genderAssignmentSubjective} is with you. The owner nods in agreement. Once seated you order som hot food and a large drink for yourself and the beggar. As you sit there the two of you naturally begin to chat about various subjects. You learn {genderAssignmentSubjective} story and why {genderAssignmentSubjective} is in the situation {genderAssignmentSubjective}'s currently in. After a few minutes you must depart as you have other matters to attend to. The two of you say your goodbyes and you tell the owner that the beggar is to be allowed to finish {genderAssignmentObjective} meal and you will pay so {genderAssignmentSubjective} will have one night to sleep. The owner agrees and you leave." />
+    <string id="BeggarBegging_Event_Choice_5" text="You tell {genderAssignmentObjective} that if {genderAssignmentSubjective} follows you, you will give {genderAssignmentObjective} 150 gold. {genderAssignmentSubjectiveCap} looks at you suspiciously but ultimately goes with you. You guide {genderAssignmentObjective} into a alley where you make sure that there is no one around. You then proceed to knock the beggar down with one punch. {genderAssignmentSubjectiveCap} falls to the ground and cover {genderAssignmentObjective} head. You punch, kick, drag and push {genderAssignmentObjective} around the alley for a few minutes. When you finally stop {genderAssignmentSubjective} is finally dead.\n\nYou turn to leave but 5 guards approaches you and ask what is going on. You tell the guards the truth. That you don't want filthy beggars in your town and you then order your guards to dispose of the body. The guards reluctantly agrees and lifts the body over the shoulder. You emerge from the alley feeling the rush of just killing an innocent person." />
+    
     <!--BeggarBegging - Log Messages-->
-    <string id="BeggarBegging_Event_Msg_1" text="{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown." />
-    <string id="BeggarBegging_Event_Msg_2" text="{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown." />
-    <string id="BeggarBegging_Event_Msg_3" text="{heroName} gave away {goldToGive} to the beggar and gained {renownGain} renown." />
+    <string id="BeggarBegging_Event_Msg_1" text="{heroName} told a beggar to f**k off." />
+    <string id="BeggarBegging_Event_Msg_2" text="{heroName} gave the beggar 5 gold." />
+    <string id="BeggarBegging_Event_Msg_3" text="{heroName} gave the beggar 100 gold." />
+    <string id="BeggarBegging_Event_Msg_4" text="{heroName} took the beggar to get some food." />
+    <string id="BeggarBegging_Event_Msg_5" text="{heroName} killed an innocent beggar." />
 
 
 
@@ -97,6 +133,10 @@
     <string id="FallenSoldier_Title" text="Family of a fallen soldier" />
     <string id="FallenSoldier_Event_Desc" text="As you are having a drink at the local tavern in {currentSettlement}, you are approached by 3 individuals. It's a woman and two young boys. They ask if they can talk to you. They explain that they are the family of a soldier who died under your command. They are here requesting compensation for his death as they are in desperate need of gold to be able to keep their farm. What do you do?" />
 
+    <!--FallenSoldier - Skill Check-->
+    <string id="FallenSoldier_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="FallenSoldier_Roguery_Appended_Text" text="[Roguery - lvl {minRogueryLevel}]" />
+    
     <!--FallenSoldier - Event Choices-->
     <string id="FallenSoldier_Event_Option_1" text="Offer them compensation" />
     <string id="FallenSoldier_Event_Option_1_Hover" text="They should be compensated" />
@@ -104,8 +144,8 @@
     <string id="FallenSoldier_Event_Option_2_Hover" text="Not my problem!" />
     <string id="FallenSoldier_Event_Option_3" text="Leave" />
     <string id="FallenSoldier_Event_Option_3_Hover" text="You have a headache so you leave" />
-    <string id="FallenSoldier_Event_Option_4" text="Plot something malicious" />
-    <string id="FallenSoldier_Event_Option_4_Hover" text="The audacity!" />
+    <string id="FallenSoldier_Event_Option_4" text="Trick them" />
+    <string id="FallenSoldier_Event_Option_4_Hover" text="{rogueryAppendedText}" />
 
     <!--FallenSoldier - Event Button-->
     <string id="FallenSoldier_Event_Button_Text_1" text="Okay" />
@@ -118,8 +158,9 @@
     <string id="FallenSoldier_Event_Choice_4" text="You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. The soldier in question was executed by your hands as it was discovered he was a traitor.\n You ask them where their farm is and you tell them you will be there tomorrow. You then excuse yourself and leave. \n \n The following day you and your men arrive at the farm but you have no intention to pay them. Instead you order your men to burn the farm to the ground and kill the owners.\n  You watch as your men execute your orders. You see them dragging the family outside with their hands bound behind their backs. You see you men exit the farmhouse with some valuables. You watch as the farmhouse burns and you witness your men executing all of the family.\n Once they are done you order your men back and you ride back to your main party. \n \nBack at camp your men told you they looted {goldLooted} gold from the house." />
 
     <!--FallenSoldier - Log Messages-->
-    <string id="FallenSoldier_Event_Msg_1" text="{heroName} gives the family {familyCompensation} gold in compensation." />
-    <string id="FallenSoldier_Event_Msg_2" text="{heroName}'s party looted {goldLooted} gold from the farmhouse." />
+    <string id="FallenSoldier_Event_Msg_1" text="{heroName} gave the family {familyCompensation} gold in compensation." />
+    <string id="FallenSoldier_Event_Msg_2" text="{heroName} denied the family compensation." />
+    <string id="FallenSoldier_Event_Msg_3" text="{heroName}'s party looted {goldLooted} gold from the farmhouse." />
 
 
 
@@ -262,11 +303,11 @@
     <string id="PrisonerTransfer_Event_Msg_1" text="{heroName} bought {prisonerForTransfer} prisoners for {totalGold} gold." />
     <string id="PrisonerTransfer_Event_Msg_2" text="{heroName} is thinking about buying some prisoners." />
     <string id="PrisonerTransfer_Event_Msg_3" text="{heroName} did not buy any prisoners." />
-    
-    
-    
+
+
+
     <!--RedMoon Event-->
-    <string id="RedMoon_Title" text="A Coming Apocalypse?" />
+    <string id="RedMoon_Title" text="The Red Moon" />
     <string id="RedMoon_Event_Desc" text="You are in your tent late one night when you are awoken by your men starting a commotion. Annoyed, you go out and tell them to quiet down but as soon as you step foot outside your tent you see what the commotion is about. The moon has become blood red. Your men are panicking and running around in all directions and proclaiming this to be the end of days. The only question you can ask yourself is what are you going to do about this?" />
 
     <!--RedMoon Event Choices-->
@@ -308,8 +349,12 @@
     <string id="RunawaySon_Event_Option_2_Hover" text="You really don't have time to babysit him" />
     <string id="RunawaySon_Event_Option_3" text="Go away" />
     <string id="RunawaySon_Event_Option_3_Hover" text="He needs to leave" />
-    <string id="RunawaySon_Event_Option_4" text="Kill him" />
-    <string id="RunawaySon_Event_Option_4_Hover" text="It's a cruel world" />
+    <string id="RunawaySon_Event_Option_4" text="[Roguery] Kill him" />
+    <string id="RunawaySon_Event_Option_4_Hover" text="It's a cruel world.\n{rogueryAppendedText}" />
+
+    <!--Skill Check-->
+    <string id="RunawaySon_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="RunawaySon_Roguery_Appended_Text" text="[Roguery - lvl {minRogueryLevel}]" />
 
     <!--RunawaySon - Event Buttons-->
     <string id="RunawaySon_Event_Button_Text_1" text="Okay" />
@@ -322,8 +367,10 @@
     <string id="RunawaySon_Event_Choice_4" text="You laugh as you hear his plea and your men soon join in on the laughter. You approach the man and thrust a dagger into his stomach. You watch him fall to the ground in a pool of blood, screaming in pain.\n You kneel down beside him and watch as the light soon leaves his eyes and he dies from his injury. You and some men decide to cut him open and hang his body from a tree as a warning but not before looting his body for {goldLooted} gold." />
 
     <!--RunawaySon - Log Messages-->
-    <string id="RunawaySon_Event_Msg_1" text="Looted {goldLooted} from his corpse." />
+    <string id="RunawaySon_Event_Msg_1" text="{heroName} killed a young man and looted {goldLooted} from his corpse." />
 
+    
+    
     <!--SuddenStorm Event-->
     <string id="SuddenStorm_Title" text="A Sudden Storm" />
     <string id="SuddenStorm_Event_Desc" text="Your party is traveling near {closestSettlement} when you are suddenly caught in a massive storm. The hailstones are massive, the rain is pouring, the wind -- intense, and there is lightning strikes all around. You waste no time telling your men what do to." />
@@ -395,8 +442,12 @@
     <string id="UnexpectedWedding_Event_Option_3_Hover" text="It's beautiful but you really don't want to waste any time" />
     <string id="UnexpectedWedding_Event_Option_4" text="Leave" />
     <string id="UnexpectedWedding_Event_Option_4_Hover" text="Not interested" />
-    <string id="UnexpectedWedding_Event_Option_5" text="Raid the wedding" />
-    <string id="UnexpectedWedding_Event_Option_5_Hover" text="You could do with some gold" />
+    <string id="UnexpectedWedding_Event_Option_5" text="[Roguery] Raid the wedding" />
+    <string id="UnexpectedWedding_Event_Option_5_Hover" text="You could do with some gold\n{rogueryAppendedText}" />
+
+    <!--Skill Check-->
+    <string id="UnexpectedWedding_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="UnexpectedWedding_Roguery_Appended_Text" text="[Roguery - lvl {minRogueryLevel}]" />
 
     <!--UnexpectedWedding - Event Button-->
     <string id="UnexpectedWedding_Event_Button_Text_1" text="Okay" />
@@ -411,10 +462,10 @@
     <string id="UnexpectedWedding_Event_Choice_5" text="You have your men surround the area while you go and talk to the guests. You have all guests empty their pockets and give you anything valuable. Some guests resist but after a few threatening gestures from your men they too fall in line. After you have stolen {raidedGold} gold and anything of value from the wedding, you order your men to trash the entire area. Your men do so without blinking an eye. You see the bride crying while being comforted by some guests. You can see the hate in the groom's eyes. He will undoubtedly remember you.\n \n After you have personally made sure that you have thoroughly ruined this once joyful moment, you order your men to leave." />
 
     <!--UnexpectedWedding - Log Messages-->
-    <string id="UnexpectedWedding_Event_Msg_1" text="You gave the newlyweds {goldToDonate} gold." />
-    <string id="UnexpectedWedding_Event_Msg_2" text="You made the soldier who embarrassed you give the newlyweds {embarrassedSoliderGold} gold." />
-    <string id="UnexpectedWedding_Event_Msg_3" text="You gave the newlyweds {goldToDonate} gold." />
-    <string id="UnexpectedWedding_Event_Msg_4" text="You stole {raidedGold} gold from the wedding." />
+    <string id="UnexpectedWedding_Event_Msg_1" text="{heroName} gave the newlyweds {goldToDonate} gold." />
+    <string id="UnexpectedWedding_Event_Msg_2" text="{heroName} made the soldier who embarrassed you give the newlyweds {embarrassedSoliderGold} gold." />
+    <string id="UnexpectedWedding_Event_Msg_3" text="{heroName} gave the newlyweds {goldToDonate} gold." />
+    <string id="UnexpectedWedding_Event_Msg_4" text="{heroName} stole {raidedGold} gold from the wedding." />
 
 
 
@@ -423,14 +474,22 @@
     <string id="ViolatedGirl_Event_Desc" text="As your party is resting near {closestSettlement}, you are approached by a young girl. She asks to speak to you privately. You invite her into your tent to listen to what she has to say. She claims that while you were in the previous town she was violated by one of your men. What do you do?" />
 
     <!--ViolatedGirl - Event Choices-->
-    <string id="ViolatedGirl_Event_Option_1" text="Find the man" />
+    <string id="ViolatedGirl_Event_Option_1" text="Find the culprit" />
     <string id="ViolatedGirl_Event_Option_1_Hover" text="This is unacceptable behaviour!" />
     <string id="ViolatedGirl_Event_Option_2" text="Ask how much to keep this quiet?" />
-    <string id="ViolatedGirl_Event_Option_2_Hover" text="Everyone has a price" />
+    <string id="ViolatedGirl_Event_Option_2_Hover" text="Everyone has a price." />
     <string id="ViolatedGirl_Event_Option_3" text="Tell her to leave" />
-    <string id="ViolatedGirl_Event_Option_3_Hover" text="ILeave NOW" />
-    <string id="ViolatedGirl_Event_Option_4" text="Kill her" />
-    <string id="ViolatedGirl_Event_Option_4_Hover" text="She is too dangerous to be left alive" />
+    <string id="ViolatedGirl_Event_Option_3_Hover" text="Leave... NOW!" />
+    <string id="ViolatedGirl_Event_Option_4" text="[Roguery] Kill her" />
+    <string id="ViolatedGirl_Event_Option_4_Hover" text="She is too dangerous to be left alive.\n{rogueryAppendedText}" />
+    <string id="ViolatedGirl_Event_Option_5" text="[Roguery] Violate her yourself" />
+    <string id="ViolatedGirl_Event_Option_5_Hover" text="Teach her to be quiet next time.\n{rogueryAppendedText}" />
+
+    <!--ViolatedGirl - Skill Checks-->
+    <string id="ViolatedGirl_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="ViolatedGirl_Roguery_Appended_Text_1" text="[Roguery - lvl {minRogueryLevel}]" />
+    <string id="ViolatedGirl_Roguery_Appended_Text_2" text="[Roguery - lvl 225]" />
+    
 
     <!--ViolatedGirl - Event Button-->
     <string id="ViolatedGirl_Event_Button_Text_1" text="Okay" />
@@ -441,11 +500,14 @@
     <string id="ViolatedGirl_Event_Choice_2" text="You listen to the girl's story. You do believe her but you cannot risk this news damaging the morale of the men. You ask her how much gold it would take to keep this quiet.\n The girl says she doesn't have a lot of gold as she is tending to her sick father at home. She says a sum of {goldToCompensate} gold would be enough to help her father and forget about this incident.\n You agree to pay her the requested amount plus 300 additional gold as a sign of goodwill. The girl then promptly leaves your camp. \n \nAll in all this event has cost you {totalCompensation} gold." />
     <string id="ViolatedGirl_Event_Choice_3" text="You tell her you don't buy her story and even if you did you can't take her word for it. You have three guards escort her from the camp. The girl leaves but not before she screams a few profanities your way." />
     <string id="ViolatedGirl_Event_Choice_4" text="You know that if this gets out you are in trouble. You offer the girl a glass of wine which she accepts. While she has her back to you, you pull out your dagger and in one swift move you have cut her throat.\n It doesn't take long for her to bleed out. Once she does you call on 5 of your most trusted men to help you with the cleanup. You personally put her body in a sheet of linen and put her on your horse.\n Your ride away from camp for a few minutes until you stop and dig a shallow grave. You bury the girl and return to camp. The men inform you that the cleanup is done. No one will ever know what transpired here today." />
+    <string id="ViolatedGirl_Event_Choice_5" text="You grab her by her hair and pull out you trusty dagger. You start cutting away layers of clothes on the girl until she has nothing on her. You tell her that if she wants to live beyond today she will do as you tell her. She nods in agreement. You guide her to your bed where you push her down and have your way with her.\n\nAfter a few hours you lie in the bed next to her. She has fallen asleep in your bed, probably exhausted from the ordeal. You wake her up and tells her to get out of here but not before warning her about the consequences of telling anyone what happened. You hand her a piece of an old sack that she can use to cover herself and once she has it on, you have  a few of your men throw her out of the camp. She better hope not to cross your path again!" />
 
     <!--ViolatedGirl - Log Messages-->
-    <string id="ViolatedGirl_Event_Msg_1" text="You gave the girl {compensation} gold and had the perpetrator sent to the dungeons of {closestCity}." />
-    <string id="ViolatedGirl_Event_Msg_2" text="You bought the girls silence for {totalCompensation} gold." />
-    <string id="ViolatedGirl_Event_Msg_3" text="There are rumors that {heroName} killed someone to keep a secret." />
+    <string id="ViolatedGirl_Event_Msg_1" text="{heroName} gave the girl {compensation} gold and had the perpetrator sent to the dungeons of {closestCity}." />
+    <string id="ViolatedGirl_Event_Msg_2" text="{heroName} bought the girl's silence for {totalCompensation} gold." />
+    <string id="ViolatedGirl_Event_Msg_3" text="{heroName} didn't buy the girl's story." />
+    <string id="ViolatedGirl_Event_Msg_4" text="There are rumors that {heroName} killed a young girl to keep a secret." />
+    <string id="ViolatedGirl_Event_Msg_5" text="There are rumors that {heroName} has done something unforgivable." />
 
 
 
@@ -476,7 +538,7 @@
     <string id="OldRuins_Event_Choice_3" text="The men want to check the barn so you agree. Once inside you can only see some skeletons from what you can only assume were farm animals. The men scatter and search the barn but they all come up empty handed. You proceed to leave." />
     <string id="OldRuins_Event_Choice_4" text="You all agree to head to the shack. You pry the door open and inside you find a chest with a lock. After fidgeting for a couple of minutes you manage to break the lock. The chest is mostly filled with papers but all the way at the bottom you come across a rather hefty coin purse. You open it and to you amazement it's filled with lots of gold coins. You head back to camp where you split the content of the purse with your men. You found {goldFound} gold and there were {men} men who went with you so {goldFound} / {men} = {goldForYou}." />
     <string id="OldRuins_Event_Choice_5" text="You all agree that you don't want to get wet so you make your way back to camp." />
-    
+
     <!--OldRuins - Log Messages-->
     <string id="OldRuins_Event_Msg_1" text="{heroName} lost {killedMen} men to a collapsing structure." />
     <string id="OldRuins_Event_Msg_2" text="{heroName} received {goldForYou} gold after splitting {goldFound} gold with {men} men." />
@@ -766,7 +828,7 @@
 
     <!--WanderingLivestock - Plural-->
     <string id="WanderingLivestock_Event_Plural_End" text="s" />
-    
+
     <!-- The ending of the plural form of the language your are translating to, eg cow, cows -->
     <string id="WanderingLivestock_Event_Cow_Text" text=", and {cowCount} cow{cowPlural}." />
 
@@ -809,7 +871,7 @@
     <!--LightsInTheSkies - Log Messages-->
     <string id="LightsInTheSkies_Event_Msg_1" text="{heroName} had a strange experience one night near {closestSettlement}." />
 
-    
+
     <!--BirdSong Event-->
     <string id="BirdSongs_Title" text="Bird Songs" />
     <string id="BirdSongs_Event_Text" text="This day has been blessed by the beautiful melodies of birds singing songs. Silence falls over your ranks as the relaxing sounds of nature's choir brings a sense of joy to your men. This will surely boost their morale." />
@@ -839,22 +901,22 @@
     <string id="BottomsUp_Event_Msg_1" text="You won! Earning {gold} gold!" />
 
 
-    
+
     <!--Courier Event-->
     <string id="Courier_Title" text="A Courier Arrives" />
     <string id="Courier_Event_Text" text="A courier has arrived with a handful of letters for {heroName}'s party.  The men seem quite excited, at least those who know how to read." />
     <string id="Courier_Event_Button_Text" text="Accept" />
-    
 
-    
+
+
     <!--Dysentery Event-->
     <string id="Dysentery_Title" text="Dysentery" />
     <string id="Dysentery_Event_Text" text="An illness of the stomach has taken hold of your troops. You inspect the food reserves but there are no signs of rot or spoil, perhaps it has come from a nearby creek? Or rather a divine sign of retribution? Regardless, the vile smell and debilitating condition surely call for worry." />
     <string id="Dysentery_Event_Button_Text" text="Done" />
     <string id="Dysentery_Event_Msg_1" text="{totalvictims} troops have dysentery!" />
 
-    
-    
+
+
     <!--DreadedSweats Event-->
     <string id="DreadedSweats_Title" text="The Dreaded Sweat" />
     <string id="DreadedSweats_Event_Text" text="There has been an outbreak of some sort of illness among the troops. Fever, debilitating aches and pains, a few of the men can barely stand. All the symptoms point towards this being what many call 'the Dreaded Sweats'.  You order your men to wash up in the creak before moving out, hopefully this won't become something too serious." />
@@ -926,32 +988,175 @@
     <string id="Refugees_Event_Msg_2" text="You have recruited refugees." />
     <string id="Refugees_Event_Msg_3" text="You have taken the refugees prisoner." />
     <string id="Refugees_Event_Msg_4" text="You have ignored the refugees." />
-	
-	<!--Companion Admire-->
-	<string id="CompanionAdmire_Title" text="Companion Admiration" />
-	<string id="CompanionAdmire_Event_Text1" text="While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{scout} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can." />
+
+    <!--Companion Admire-->
+    <string id="CompanionAdmire_Title" text="Companion Admiration" />
+    <string id="CompanionAdmire_Event_Text1" text="While travelling near {closestsettlement} your scout, {scout}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{scout} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can." />
     <string id="CompanionAdmire_Event_Text2" text="While travelling near {closestsettlement} your quartermaster, {quartermaster}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{quartermaster} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can." />
     <string id="CompanionAdmire_Event_Text3" text="While travelling near {closestsettlement} your surgeon, {surgeon}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{surgeon} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can. " />
     <string id="CompanionAdmire_Event_Text4" text="While travelling near {closestsettlement} your engineer, {engineer}, approaches you for a chat. Casual conversation soon turns to a more serious matter in regards to the party and its future. \n\n{engineer} wants you to know {gender} admires your leadership and looks forward to celebrating the many future victories along your side. Lastly noting {gender} is determined to bring honor to the {clan} clan in any way {gender} can." />
-	<string id="CompanionAdmire_Event_Msg_1" text="Your relationship with {scout) has improved." />
-	<string id="CompanionAdmire_Event_Msg_2" text="Your relationship with {quartermaster) has improved." />
-	<string id="CompanionAdmire_Event_Msg_3" text="Your relationship with {surgeon) has improved." />
-	<string id="CompanionAdmire_Event_Msg_4" text="Your relationship with {engineer) has improved." />
+    <string id="CompanionAdmire_Event_Button_Text" text="Done" />
+    <string id="CompanionAdmire_Event_Msg_1" text="Your relationship with {scout} has improved." />
+    <string id="CompanionAdmire_Event_Msg_2" text="Your relationship with {quartermaster} has improved." />
+    <string id="CompanionAdmire_Event_Msg_3" text="Your relationship with {surgeon} has improved." />
+    <string id="CompanionAdmire_Event_Msg_4" text="Your relationship with {engineer} has improved." />
+
+    <!--Army Invite-->
+    <string id="ArmyInvite_Title" text="Army Invitation" />
+    <string id="ArmyInvite_Event_Text" text="A messenger from {ArmyLeader} has arrived inviting {player} to join {gender} army located near {settlement}." />
+    <string id="ArmyInvite_Event_Button_Text" text="Done" />
+    
+    
+    <!--Travellers-->
+    <string id="Travellers_Title" text="Travellers" />
+    <string id="Travellers_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="Travellers_Engineering_Appended_Text" text="[Engineering - lvl {minEngineeringLevel}]" />
+    <string id="Travellers_Roguery_Appended_Text" text="[Roguery - lvl {minCharmLevel}]" />
+    <string id="Travellers_Steward_Appended_Text" text="[Steward - lvl {minStewardLevel}]" />
+    <string id="Travellers_Event_Desc" text="Your party is on the move not to far from {closestSettlement} when you come across {familyDemonym} family with a broken waggon. The wheel seems to have come off and rolled down into a small river not to far from you. The family is asking if you can help them by any chance. They explain that they are running from bandits who kept blackmailing them for money and tried to kidnap their two daughters on more than one occasion. They have brought everything they own with them in the hope of starting a new life somewhere. How do you proceed?" />
+    <string id="Travellers_Event_Option_1" text="[Engineering] Offer to repair the waggon" />
+    <string id="Travellers_Event_Option_1_Hover" text="You should be able to fix it. {engineeringAppendedText}" />
+    <string id="Travellers_Event_Option_2" text="[Roguery] Raid them!" />
+    <string id="Travellers_Event_Option_2_Hover" text="Take everything of value {rogueryAppendedText}" />
+    <string id="Travellers_Event_Option_3" text="[Steward] Offer them dinner" />
+    <string id="Travellers_Event_Option_3_Hover" text="While your men load all their belongings into a spare wagon you have {stewardAppendedText}" />
+    <string id="Travellers_Event_Option_4" text="Offer them directions" />
+    <string id="Travellers_Event_Option_4_Hover" text="Give them directions to the nearest settlement" />
+    <string id="Travellers_Event_Option_5" text="Ignore them" />
+    <string id="Travellers_Event_Option_5_Hover" text="This isn't your problem" />
+    <string id="Travellers_Event_Button_Text_1" text="Choose" />
+    <string id="Travellers_Event_Button_Text_2" text="Done" />
+    <string id="Travellers_Event_Choice_1" text="You take a look at the damage to the wagon and you quickly confirm you suspicion that you are able to fix this with relative ease. Your tell you men to fetch some tools from the back of the party and you order one man down into the river to fetch the wheel. You tell the family to sit in the shade beneath a giant oak tree while the men fetches something to drink and some snacks for the two children.\n\nYou waste no time getting to work and with the assistance of a few men you are able to quickly repair the wagon and put it back in working order. You head over to the family to inform them that they may now head towards their destination again. The man doesn't know how to thank you so you inform him that no thank you are necessary. You help the family load up their wagon again and you give them directions to {closestSettlement}, which is the closest place the wagon can get a proper repair. The man says he will tell stories of you when he arrives at his destination. You assure him that it won't be necessary but you don't think he'll listen." />
+    <string id="Travellers_Event_Choice_2" text="You order your men to take them family away from the wagon but not to hurt them in any way as there are young children with them. The father attempts to resist but he is quickly overpowered by a few men who binds his hands. His wife begs him to just comply with what we are saying and he reluctantly agrees.\n\nYour men starts to empty the wagon and look for anything valuable, but you are disappointed when your can't find anything worthwhile. You take the mother aside and tells her to her dismay that if she doesn't give up all the valuables they have, you will kill her husband, sell the children into slavery and keep her for company. Of course you don't mean this, but the important thing is that she thinks you do.\nShe quickly tell you where to find their valuable possessions. After sometime you managed to steal {stolenGold} gold from them. Once you are done with everything you free the woman and tell her that once all your men are out of sight she may release her family. You're not entirely heartless so you give them directions to the nearest settlement where they may find help." />
+    <string id="Travellers_Event_Choice_3" text="You can clearly see that the family is exhausted and probably haven't eaten in a days. You ask them if you can prepare dinner for them. They reluctantly agree as they have only just met you. You order your men to set up a small tent for the family while you personally cook dinner for the family. Your men will take care of the wagon. You and some of your men bring out something to drink for the family and you get to work prepping dinner.\n\nSome time passes and just as the family have finished eating, your men inform you that the wagon is repaired. You help the family load up their wagon and give them directions to the nearest settlement. The mother tells you what an extraordinary man you are." />
+    <string id="Travellers_Event_Choice_4" text="You stop and ask them what happened. You learn that they lost control of their wagon and it ended up in the ditch. You take a look at the wagon to see if you are able to fix it, but it seems to complex for you or any of your men to fix. They ask if they may buy a wagon from your party for 500 gold, but you tell them you will give them one for free as they are in distress and need a hand. You have your men bring fourth a wagon. You, the family and some of your men help to transfer their item to the new wagon\n\nOnce done you give them directions to the nearest settlement. They thank you yet again as you leave." />
+    <string id="Travellers_Event_Choice_5" text="You cannot be bothered by this now so you tell them you cannot help. They try to ask you for directions but you ignore them, but after a few feet you can hear that some of your men have stopped to give them directions to the nearest settlement and some coin." />
+    <string id="Travellers_Event_Msg_1" text="{heroName} was able to fix the stranded family's wagon." />
+    <string id="Travellers_Event_Msg_2" text="{heroName} stole {stolenGold} gold from the stranded family and left them." />
+    <string id="Travellers_Event_Msg_3" text="{heroName} made dinner while the men fixed the wagon." />
+    <string id="Travellers_Event_Msg_4" text="{heroName} gave the stranded family directions to {closestSettlement}." />
+    <string id="Travellers_Event_Msg_5" text="{heroName} ignored the stranded family. At least the men aren't that heartless!" />
 	
+    
+	<!--Feast-->
+    <!--Good Relation-->
+    <string id="Feast_Title" text="Feast Invitation" />
+    <string id="Feast_Event_Description1" text="While in {settlement} you are approached by an envoy from {title} {targetLord} requesting your presence for a feast." />
+    <string id="Feast_Event_Button_Text1" text="Choose" />
+	<string id="Feast_Event_Option_1" text="Accept" />
+	<string id="Feast_Event_Option_1_Hover" text="A feast sounds nice" />
+	<string id="Feast_Event_Option_2" text="Decline" />
+	<string id="Feast_Event_Option_2_Hover" text="No time for this" />
+	<string id="Feast_Event_Description1a" text="[Good Relation] You arrive at your keep in {settlement} where {title} {targetLord} is waiting. Introductions are made and civil norms are met as per tradition before finally taking a seat at the table, the sweet smell from the other room heightens your appetite. {targetLord} compliments your work here in {settlement}, noting the pristine condition of the keep, and gives thanks for allowing {gender} to stay in such a fine area. A few minutes pass and small talk soon turns to laughter as you both discuss recent engagements and share grand stories matched only by that of myths and legends. \n \n As the food finally arrives no time is wasted - both of you dig in to what can only be described as a meal fit for a king." />
+	<string id="Feast_Event_Option_1a" text="Continue Feast" />
+	<string id="Feast_Event_Option_1a_Hover" text="We're having a great time" />
+	<string id="Feast_Event_Option_2a" text="End Feast" />
+	<string id="Feast_Event_Option_2a_Hover" text="This is a good time to stop" />
+	<string id="Feast_Event_Description1b" text="[Good Relation] After such a fantastic meal {targetLord} requests a new bottle of wine for the two of you to wash it all down. You signal a servant to bring a bottle of your finest, as the occasion calls for nothing less. {targetLord} recalls {gender} most recent experience at the arena when {gender} friend drank so much they fell over the wall and straight into the pit. But instead of crawling out, they decided to join in the fight! You both laugh hysterically, sharing nostalgic memories of times not forgotten." />
+	<string id="Feast_Event_Option_2b" text="Finish Feast" />
+	<string id="Feast_Event_Option_2b_Hover" text="Time to finish up" />
+	<string id="Feast_Event_Option_3b" text="[Charm] Compliment" />
+	<string id="Feast_Event_Option_3b_Hover" text="Charm {gender} a little \n[Charm - lvl 120]" />
+	<string id="Feast_Event_Option_4b" text="[Charm] Boast" />
+	<string id="Feast_Event_Option_4b_Hover" text="Boast their ego a bit \n[Charm - lvl 120]" />
+	<string id="Feast_Event_Option_5b" text="[Roguery] Theft" />
+	<string id="Feast_Event_Option_5b_Hover" text="Quite the coin purse.. \n[Roguery - lvl 60]" />
+	<string id="Feast_Event_Description1c" text="[Good Relation] Needless to say, the wine has made its way through the both of you and it seems there is quite a sense of attraction. You notice a beauty in {targetLord} you haven't been aware of before, something about {gender} eyes are pulling you in. As you smile {gender} eyes meet yours and {genderSUB} gives you a little wink. You both know what is happening here.." />
+	<string id="Feast_Event_Option_1c" text="[Charm] Go somewhere private" />
+	<string id="Feast_Event_Option_1c_Hover" text="Show {gender} around.. \n[Charm - lvl 150]" />
+	<string id="Feast_Event_Option_2c" text="End Feast" />
+	<string id="Feast_Event_Option_2c_Hover" text="Let's not get carried away.." />
+	<string id="Feast_Event_Description1d" text="[Good Relation] You stand from your chair and offer your hand to {title} {targetLord}, {genderSUB} accepts and raises as well. The both of you walk into the other room and aren't seen again for a couple hours.." />
+	<string id="Feast_Event_Description1e" text="[Good Relation] Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to go your separate ways, for now.. {title} {targetLord} thanks you for such an exquisite meal and looks forward to staying in {settlement} for a while longer." />
+	<string id="Feast_Event_Description1r" text="[Good Relation] A few more minutes of joyful talk go by and you recall {title} {targetLord}'s recent political feats. Claiming word of such events have made their way all the way here to the halls of {settlement}. {genderSUBCAP} looks at you with a gleeful smile like that of a small child, then erupts once again into wine induced laughter as {genderSUB} proceeds to tell you all about the event in great detail.  Starting from the very beginning, of course.." />	
+	<string id="Feast_Event_Option_1r" text="Continue Feast" />
+	<string id="Feast_Event_Option_1r_Hover" text="I'm having a great time" />
+	<string id="Feast_Event_Option_2r" text="End Feast" />
+	<string id="Feast_Event_Option_2r_Hover" text="This is a good time to stop" />
+	<string id="Feast_Event_Description2r" text="[Good Relation] After finishing yet another round of cheerful story telling, you insist on the two of you continuing this epic feast in a more lively fashion. {targetLord} says a few of {gender} friends are probably at the tavern and would love to meet you. The two of you head to the tavern and aren't seen again for a couple hours.." />
+	<string id="Feast_Event_Description3r" text="[Good Relation] After finishing yet another round of cheerful story telling, {title} {targetLord} offers to make a toast in your honor, to which you accept. \n \n “To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n {targetLord} then thanks you for such an exquisite meal and looks forward to staying in {settlement} for a while longer. And with that, the feast comes to and end.." />
+	<string id="Feast_Event_Description1rr" text="[Good Relation] Amidst the joyful laughter, you signal one of your servants to bring more wine and make a scene. As the wine arrives your servant trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing." />	
+	<string id="Feast_Event_Description3r" text="[Good Relation] As the laughter quiets down, {title} {targetLord} offers to make a toast in your honor, to which you accept. \n \n “To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n {targetLord} then thanks you for such an exquisite meal and looks forward to staying in {settlement} for a while longer. And with that, the feast comes to and end.." />
+	<string id="Feast_Event_DescriptionEndFeast" text="[Good Relation] After finishing your meals {title} {targetLord} offers to make a toast in your honor, to which you accept. \n \n “To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n And with that, the feast comes to an end." />
+    <!--Bad Relation-->
+	<string id="Feast_Event_Description1u" text="[Bad Relation] You arrive at your keep in {settlement} where {title} {targetLord} is waiting. Introductions are made and civil norms are met as per tradition before finally taking a seat at the table. {targetLord} makes a snarky remark regarding your work here in {settlement}, noting the poor condition of the keep, and gives a shallow thanks for allowing {gender} to stay in such a 'fine' area. A few minutes pass and small talk builds tension as {targetLord} begins questioning your support of current political affairs. It is obvious {genderSUB} merely wishes to extort some degree of support from you, which would explain this invitation.." />
+	<string id="Feast_Event_Option_1u_Hover" text="Let's continue.." />
+	<string id="Feast_Event_Description2u" text="[Bad Relation] After an agonizing meal {targetLord} requests a new bottle of wine for the two of you to wash it all down. You signal a servant to bring a bottle, specifying 'nothing fancy'. {targetLord} continues questioning your stance on the current political climate, hoping to reach some sort of agreement on the issues. You keep a neutral tone and blank stare while also nodding in agreeance as though to keep the discussion civil." />
+	<string id="Feast_Event_Description3u" text="[Bad Relation] Despite the fact you both seem to despise one another, it seems there is quite a sense of attraction. Perhaps it's the wine, or perhaps you've had a long day, regardless.. You notice a beauty in {targetLord} you haven't been aware of before, something about {gender} eyes are pulling you in. As you smile {gender} eyes meet yours and {genderSUB} gives you a little wink. You both know what is happening here.." />
+	<string id="Feast_Event_Option_2r_Hover" text="Show {gender} around.. \n[Charm - lvl 300]" />
+	<string id="Feast_Event_Description4u" text="[Bad Relation] You stand from your chair and offer your hand to {title} {targetLord}, {genderSUB} accepts and raises as well. The both of you walk into the other room and aren't seen again for a couple hours.." />
+	<string id="Feast_Event_Description5u" text="[Bad Relation] Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to go your separate ways, for now.. {title} {targetLord} looks quite displeased with the feast, and hopes to leave {settlement} as quickly as possible." />
+	<string id="Feast_Event_Description1ru" text="[Bad Relation] After what seems like an eternity of interrogation, you decide to play along and admit to {targetLord} that you believe {genderADJ} plan is actually quite brilliant. Stating you didn't wish to state this before only because you were quite jealous that you hadn't thought of it first." />
+	<string id="Feast_Event_Description2ru" text="[Bad Relation] A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses that had {genderSUB} known you felt this way perhaps you could be friends. You offer to show {genderOBJ} around {settlement} while discussing further {targetLord}'s political agenda. To which {genderSUB} accepts." />
+	<string id="Feast_Event_Description3ru" text="[Bad Relation] A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses that had {genderSUB} known you felt this way perhaps you could be friends. On that note you declare the feast is finished, giving {targetLord} a formal farewell before leaving the keep." />
+	<string id="Feast_Event_Description1rq" text="[Bad Relation] Amidst the dreadful debate, you signal one of your servants to bring more wine and make a scene. As the wine arrives your servant trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing." />
+	<string id="Feast_Event_Description2rq" text="[Bad Relation] A few minutes of careful word choice leads you to hint at the idea of supporting {targetLord} in {genderADJ} political agenda. Although you think it's foolish, you just wish {genderSUB} would quiet down a bit. The feast continues for another couple hours until all the cheap wine has been drank." />
+	<string id="Feast_Event_Description3rq" text="[Bad Relation] A few minutes of careful word choice leads to {title} {targetLord} feeling quite impressed by your position. Finally, the cheap wine has come to an end and on that note you declare the feast is finished, giving {targetLord} a formal farewell before leaving the keep." />
+	<string id="Feast_Event_Description4rq" text="[Bad Relation] After what feels like an eternity of political discourse, you decide it's time to call this feast to an end. {title} {targetLord} seems quite displeased with your lack of support and hopes to leave {settlement} as quickly as possible." />
+	<string id="Feast_Event_DescriptionEndFeast2" text="[Bad Relation] After finishing your meals you declare this feast come to an end. {title} {targetLord} seems displeased by your lack of support and wishes to leave {settlement} as quickly as possible." />
+	<!-- Neutral Relation -->
+	<string id="Feast_Event_Description1n" text="You arrive at your keep in {settlement} where {title} {targetLord} is waiting. Introductions are made and civil norms are met as per tradition before finally taking a seat at the table. {targetLord} admires your work here in {settlement}, noting the acceptable condition of the keep, and gives thanks for allowing {gender} to stay in such a fine area. A few minutes pass and small talk turns to laughter as you both discuss recent engagements and share stories of your travels. \n \n As the food finally arrives the both of you dig in." />
+	<string id="Feast_Event_Description2n" text="After an enjoyable meal {targetLord} requests a new bottle of wine for the two of you to wash it all down. You signal a servant to bring a bottle from the cellar. {targetLord} begins questioning your stance on the current political climate, you answer vaguely as to not stir up any controversy. Playing off of {targetLord}'s ideals more than your own. Between the civil discourse lay harmless jokes of noble affairs, you both share a laugh and continue drinking wine." />
+	<string id="Feast_Event_Description3n" text="As the feast goes on it seems there is quite a sense of attraction. Perhaps it's the wine, or perhaps you've never looked at {targetLord} this way, regardless.. You notice a beauty in {genderOBJ} you haven't been aware of before, something about {gender} eyes are pulling you in. As you smile {gender} eyes meet yours and {genderSUB} gives you a little wink. You both know what is happening here.." />
+	<string id="Feast_Event_Description4n" text="You stand from your chair and offer your hand to {title} {targetLord}, {genderSUB} accepts and raises as well. The both of you walk into the other room and aren't seen again for a couple hours.." />
+	<string id="Feast_Event_Description5n" text="Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to go your separate ways, for now.. {title} {targetLord} looks quite pleased with the feast, and hopes to stay in {settlement} for a while." />
+	<string id="Feast_Event_Option_2n_Hover" text="Show {gender} around.. \n[Charm - lvl 210]" />
+	<string id="Feast_Event_Description1rn" text="After a few laughs {title} {targetLord} requests another glass of wine, you accept another as well. With the mood set you recall the news of {targetLord}'s recent achievements, noting there has been quite a lot of talk lately in regards. {genderSUBCAP} can't help but blush, trying to play it off as if it's no big deal. Needless to say {genderSUB} finds great pleasure in knowing {genderADJ} name has spread throughout the land." />
+	<string id="Feast_Event_Description2rn" text="A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses that your name has also been making its way around the noble tables. You smile and this civil discourse continues for a few hours until the wine runs dry. You offer to take {targetLord} around {settlement} for a full tour, to which they accept." />
+	<string id="Feast_Event_Description3rn" text="A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses that your name has also been making its way around the noble tables. With that, you declare the feast finished, to which {title} {targetLord} gives a formal farewell before leaving the keep." />	
+	<string id="Feast_Event_Description1rm" text="With the mood set, you signal one of your servants to bring more wine and make a scene. As the wine arrives your servant trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing." />
+	<string id="Feast_Event_Description2rm" text="After cleaning the wine you offer {targetLord} another glass and the two of you continue talking about all sorts of interesting topics ranging from politics, to war, to the arena. You even manage to learn a thing or two in regards to stewardship. With the wine running low you offer to take {title} {targetLord} on a tour of {settlement}, to which {genderSUB} accepts." />
+	<string id="Feast_Event_Description3rm" text="A few minutes of careful word choice leads to {title} {targetLord} feeling quite impressed by your position. Finally, the cheap wine has come to an end and on that note you declare the feast is finished, giving {targetLord} a formal farewell before leaving the keep." />
+	<string id="Feast_Event_Description4rm" text="As the wine comes to an end, you decide it's time to call this feast to a close. {title} {targetLord} seems quite pleased with your excellent meal and hopes to stay in {settlement} for a while." />
+	<string id="Feast_Event_DescriptionEndFeast3" text="After finishing your meals you declare this feast come to an end. {title} {targetLord} seems pleased by your acceptable wine and wishes to stay in {settlement} for a while." />
+	<!-- Not Player Settlement --> 					
+    <!-- Good Relation -->
+	<string id="Feast_Event_Description1v" text="[Good Relation] You arrive at the keep in {settlement} where {title} {targetLord} is waiting. Introductions are made and civil norms are met as per tradition before finally taking a seat at the table, the sweet smell from the other room heightens your appetite. A few minutes pass and small talk soon turns to laughter as you both discuss recent engagements and share grand stories matched only by that of myths and legends. \n \n As the food finally arrives no time is wasted - both of you dig in to what can only be described as a meal fit for a king." />
+	<string id="Feast_Event_Description2v" text="[Good Relation] After such a fantastic meal {targetLord} signals to a servant a new bottle of their finest wine for the two of you to wash it all down, as the occasion calls for nothing less. {targetLord} recalls {gender} most recent experience at the arena when {gender} friend drank so much they fell over the wall and straight into the pit. But instead of crawling out, they decided to join in the fight! You both laugh hysterically, sharing nostalgic memories of times not forgotten." />
+	<string id="Feast_Event_Description3v" text="[Good Relation] Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to go your separate ways, for now.. {title} {targetLord} thanks you for joining them in such an exquisite meal and looks forward to seeing you in {settlement} at a later time." />
+	<string id="Feast_Event_Description4v" text="[Good Relation] A few more minutes of joyful talk go by and you recall {title} {targetLord}'s recent political feats. Claiming word of such events have made their way all the way to the farthest corners of Calradia. {genderSUBCAP} looks at you with a gleeful smile like that of a small child, then erupts once again into wine induced laughter as {genderSUB} proceeds to tell you all about the event in great detail.  Starting from the very beginning, of course.." />
+	<string id="Feast_Event_Description5v" text="[Good Relation] After finishing yet another round of cheerful story telling, {title} {targetLord} offers to make a toast in your honor, to which you accept. \n \n “To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n {targetLord} then thanks you for joining them in such an exquisite meal and looks forward to seeing you in {settlement} at a later time. And with that, the feast comes to and end.." />
+	<string id="Feast_Event_Description6v" text="[Good Relation] Amidst the joyful laughter, you signal one of your men to bring a bottle of your own wine and make a scene. As the wine arrives he trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing." />
+	<string id="Feast_Event_Description7v" text="[Good Relation] After finishing yet another round of cheerful story telling, {title} {targetLord} offers to make a toast in your honor, to which you accept. \n \n “To {Ptitle} {player}, an excellent leader, and an even better friend. May {playerSUB} live forever!”. \n \n {targetLord} then thanks you for joining them in such an exquisite meal and looks forward to seeing you in {settlement} at a later time. And with that, the feast comes to and end.." />
+    <!-- Neutral Relation -->
+	<string id="Feast_Event_Description1i" text="You arrive at your the in {settlement} where {title} {targetLord} is waiting. Introductions are made and civil norms are met as per tradition before finally taking a seat at the table. {targetLord} admires your attire, noting your acceptable presentation, and gives thanks for joining {gender} for such a fine feast. A few minutes pass and small talk turns to laughter as you both discuss recent engagements and share stories of your travels. \n \n As the food finally arrives the both of you dig in." />		
+	<string id="Feast_Event_Description2i" text="After an enjoyable meal {targetLord} requests a new bottle of wine for the two of you to wash it all down. {targetLord} begins questioning your stance on the current political climate, you answer vaguely as to not stir up any controversy. Playing off of {targetLord}'s ideals more than your own. Between the civil discourse lay harmless jokes of noble affairs, you both share a laugh and continue drinking wine." />	
+	<string id="Feast_Event_Description3i" text="Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to go your separate ways, for now.. {title} {targetLord} looks quite pleased with the feast, and hopes to see you again in {settlement} soon." />	
+	<string id="Feast_Event_Description4i" text="A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses that your name has also been making its way around the noble tables. You smile and this civil discourse continues for a few hours until the wine runs dry. {targetLord} offers to take you around {settlement} for a full tour, to which you accept." />	
+	<string id="Feast_Event_Description5i" text="With the mood set, you signal one of your men to bring more wine from your personal supply and make a scene. As the wine arrives he trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing." />	
+	<string id="Feast_Event_Description6i" text="After cleaning the wine you offer {targetLord} another glass and the two of you continue talking about all sorts of interesting topics ranging from politics, to war, to the arena. You even manage to learn a thing or two in regards to stewardship. With the wine running {targetLord} offer to take you on a tour of {settlement}, to which you accept." />	
+	<string id="Feast_Event_Description7i" text="As the wine comes to an end, you decide it's time to call this feast to a close. {title} {targetLord} seems quite pleased with your excellent company and hopes to see you again in {settlement} soon." />	
+	<string id="Feast_Event_DescriptionEndFeast8i" text="After finishing your meals you declare this feast come to an end. {title} {targetLord} seems pleased by your company and wishes to see you again in {settlement} soon." />		
+    <!-- Bad Relation -->
+	<string id="Feast_Event_Description1b" text="[Bad Relation] You arrive at the keep in {settlement} where {title} {targetLord} is waiting. Introductions are made and civil norms are met as per tradition before finally taking a seat at the table. {targetLord} makes a snarky remark regarding your attire, and gives a shallow thanks for joining {gender} for this occasion. A few minutes pass and small talk builds tension as {targetLord} begins questioning your support of current political affairs. It is obvious {genderSUB} merely wishes to extort some degree of support from you, which would explain this invitation.." />
+	<string id="Feast_Event_Description2b" text="[Bad Relation] After an agonizing meal {targetLord} signals a servant to bring a new bottle of wine for the two of you to wash it all down, specifying not to bring anything 'too fancy'. {targetLord} continues questioning your stance on the current political climate, hoping to reach some sort of agreement on the issues. You keep a neutral tone and blank stare while also nodding in agreeance as though to keep the discussion civil." />
+	<string id="Feast_Event_Description3b" text="[Bad Relation] Although the tension is more than enough to write a story of its own - you decide it's best for the two of you to go your separate ways, for now.. {title} {targetLord} looks quite displeased with the feast, and hopes your stay in {settlement} ends with haste." />
+	<string id="Feast_Event_Description4b" text="[Bad Relation] A few minutes of careful boasting leads to {title} {targetLord} feeling quite impressed by your words. {genderSUB} confesses that had {genderSUB} known you felt this way perhaps you could be friends. You ask {targetLord} to show you around {settlement} while discussing further {targetLord}'s political agenda. To which {genderSUB} accepts." />
+	<string id="Feast_Event_Description5b" text="[Bad Relation] Amidst the dreadful debate, you signal one of your men to bring a bottle of wine from your personal supply and make a scene. As the wine arrives your he trips and drops the bottle onto the table, spilling it into {targetLord}'s lap. You react quickly, grabbing a cloth from the table and reaching towards {genderOBJ}, attempting to wipe away the still running wine from {genderADJ} shirt. When the moment is right you swipe {genderADJ} coin purse without {genderOBJ} ever noticing." />
+	<string id="Feast_Event_Description6b" text="[Bad Relation] After what feels like an eternity of political discourse, you decide it's time to call this feast to an end. {title} {targetLord} seems quite displeased with your lack of support and hopes your stay in {settlement} comes to an end as quickly as possible." />
+	<string id="Feast_Event_DescriptionEndFeast7b" text="[Bad Relation] After finishing your meals you declare this feast come to an end. {title} {targetLord} seems displeased by your lack of support and wishes your stay in {settlement} comes to an end as quickly as possible." />
+    
+    <!-- Event Msg -->
+	<string id="Feast_Event_Msg_Charm1" text="You charm {targetLord}." />
+	<string id="Feast_Event_Msg_Charm2" text="You and {targetLord} have a great time." />
+	<string id="Feast_Event_Msg_End" text="The feast has ended." />
+	<string id="Feast_Event_Msg_Rogue" text="You steal the coin purse." />
+    
     <!--Demonyms-->
-    <string id="Demonym_Empire_Noun" text="an imperial" />
-    <string id="Demonym_Vlandia_Noun" text="a vlandian" />
-    <string id="Demonym_Sturgia_Noun" text="a sturgian" />
-    <string id="Demonym_Battania_Noun" text="a battanian" />
-    <string id="Demonym_Aserai_Noun" text="an aserai" />
-    <string id="Demonym_Khuzait_Noun" text="a khuzait" />
-    <string id="Demonym_Empire" text="imperial" />
-    <string id="Demonym_Vlandia" text="vlandian" />
-    <string id="Demonym_Sturgia" text="sturgian" />
-    <string id="Demonym_Battania" text="battanian" />
-    <string id="Demonym_Aserai" text="aserai" />
-    <string id="Demonym_Khuzait" text="khuzait" />
-    <string id="Demonym_Error" text="Error - Could not fetch Demonym" />
+    <string id="Demonym_Empire_Noun" text="an Imperial" />
+    <string id="Demonym_Vlandia_Noun" text="a Vlandian" />
+    <string id="Demonym_Sturgia_Noun" text="a Sturgian" />
+    <string id="Demonym_Battania_Noun" text="a Battanian" />
+    <string id="Demonym_Aserai_Noun" text="an Aserai" />
+    <string id="Demonym_Khuzait_Noun" text="a Khuzait" />
+    <string id="Demonym_Empire" text="Imperial" />
+    <string id="Demonym_Vlandia" text="Vlandian" />
+    <string id="Demonym_Sturgia" text="Sturgian" />
+    <string id="Demonym_Battania" text="Battanian" />
+    <string id="Demonym_Aserai" text="Aserai" />
+    <string id="Demonym_Khuzait" text="Khuzait" />
+    <string id="Demonym_Default_Noun" text="an Imperial" />
+    <string id="Demonym_Default" text="Imperial" />
 
 
 
@@ -964,6 +1169,8 @@
     <string id="gender_male_adjective" text="his" />
     <string id="gender_male_pronoun_cap" text="His" />
     <string id="gender_male_pronoun" text="his" />
+    <string id="gender_male_title_cap" text="Lord" />
+    <string id="gender_male_title" text="lord" />
     <string id="gender_female_subjective_cap" text="She" />
     <string id="gender_female_subjective" text="she" />
     <string id="gender_female_objective_cap" text="Her" />
@@ -972,9 +1179,11 @@
     <string id="gender_female_adjective" text="her" />
     <string id="gender_female_pronoun_cap" text="Hers" />
     <string id="gender_female_pronoun" text="hers" />
-    
-    
-    
+    <string id="gender_female_title_cap" text="Lady" />
+    <string id="gender_female_title" text="lady" />
+
+
+
     <!--MCM STUFF-->
     <string id="mcm_adv_heading" text="Encounter Chance Settings" />
     <string id="mcm_adv1_hint" text="The chance to see this event will increase the higher the number. Please note that if all events are equal, they will all have the same chance." />
@@ -1030,9 +1239,12 @@
     <string id="mcm_adv49_text" text="Refugees" />
     <string id="mcm_adv50_text" text="Bottoms Up" />
     <string id="mcm_adv51_text" text="Dreaded Sweats" />
-	<string id="mcm_adv52_text" text="Travelling Merchant" />
-	<string id="mcm_adv53_text" text="Army Games" />
-	<string id="mcm_adv54_text" text="Companion Admire" />
+    <string id="mcm_adv52_text" text="Travelling Merchant" />
+    <string id="mcm_adv53_text" text="Army Games" />
+    <string id="mcm_adv54_text" text="Companion Admire" />
+    <string id="mcm_adv55_text" text="Army Invite" />
+    <string id="mcm_adv56_text" text="Feast" />
+    <string id="mcm_adv57_text" text="Travellers" />
 
     <string id="mcm_gs_heading" text="1. General Settings" />
     <string id="mcm_gs1_text" text="1. Initial Setup" />
@@ -1046,7 +1258,12 @@
     <string id="mcm_gs5_text" text="5. Max minutes between events" />
     <string id="mcm_gs5_hint" text="Maximum amount of minutes in between events." />
     <string id="mcm_gs6_text" text="6. General Level XP Multiplier " />
-    <string id="mcm_gs6_hint" text="The number used to define the XP multiplier. Higher number means higher XP." />   
+    <string id="mcm_gs6_hint" text="The number used to define the XP multiplier. Higher number means higher XP." />
+    <string id="mcm_gs7_text" text="7. Disable Supernatural Events" />
+    <string id="mcm_gs7_hint" text="Check this if you want to disable all supernatural events. This is mostly to keep the game as canon as possible." />
+    <string id="mcm_gs8_text" text="8. Disable Skill Checks" />
+    <string id="mcm_gs8_hint" text="Some events have skill checks that open up new options. This disables that and makes all options available." />
+
     <string id="mcm_afe_heading" text="A Flirtatious Encounter" />
     <string id="mcm_afe1_text" text="1. Min Age" />
     <string id="mcm_afe1_hint" text="The minimum age the target must be." />
@@ -1056,17 +1273,22 @@
     <string id="mcm_afe3_hint" text="The minimum amount of relationship increase." />
     <string id="mcm_afe4_text" text="4. Max Relationship Gain" />
     <string id="mcm_afe4_hint" text="The maximum amount of relationship increase." />
-    <string id="mcm_afe5_text" text="5. Deactivate event" />
-    <string id="mcm_afe5_hint" text="If you dont want this event to show up you can deactivate it." />
-	<string id="mcm_ag_heading" text="Army Games" />
-	<string id="mcm_ag1_text" text="1. Crop % gain" />
-	<string id="mcm_ag1_hint" text="The amount of % the cohesion is increased." />
-	<string id="mcm_ag2_text" text="2. Min amount of morale gain" />
-	<string id="mcm_ag2_hint" text="The minimum amount of morale the party gains." />
-	<string id="mcm_ag3_text" text="3. Max amount of morale gain" />
-	<string id="mcm_ag3_hint" text="The maximum amount of morale the party gains." />
-	<string id="mcm_ag4_text" text="4. Deactivate event" />
-	<string id="mcm_ag4_hint" text="If you dont want this event to show up you can deactivate it." />	
+    <string id="mcm_afe5_text" text="5. Min Charm Level" />
+    <string id="mcm_afe5_hint" text="Lowest level to unlock the charm option." />
+    <string id="mcm_afe6_text" text="6. Deactivate event" />
+    <string id="mcm_afe6_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ag_heading" text="Army Games" />
+    <string id="mcm_ag1_text" text="1. Crop % gain" />
+    <string id="mcm_ag1_hint" text="The amount of % the cohesion is increased." />
+    <string id="mcm_ag1_text" text="2. Min amount of morale gain" />
+    <string id="mcm_ag1_hint" text="The minimum amount of morale the party gains." />
+    <string id="mcm_ag2_text" text="3. Max amount of morale gain" />
+    <string id="mcm_ag2_hint" text="The maximum amount of morale the party gains." />
+    <string id="mcm_ag3_text" text="4. Deactivate event" />
+    <string id="mcm_ag3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ai_heading" text="Army Invite" />
+    <string id="mcm_ai1_text" text="1. Deactivate event" />
+    <string id="mcm_ai1_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_aot_heading" text="Ahead of Time" />
     <string id="mcm_aot1_text" text="1. Deactivate event" />
     <string id="mcm_aot1_hint" text="If you dont want this event to show up you can deactivate it." />
@@ -1142,25 +1364,27 @@
     <string id="mcm_bp13_hint" text="Minimum amount of gold you can loot from the party." />
     <string id="mcm_bp14_text" text="14. Max gold to loot" />
     <string id="mcm_bp14_hint" text="Minimum amount of gold you can loot from the party." />
-    <string id="mcm_bp15_text" text="15. Deactivate event" />
-    <string id="mcm_bp15_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bp15_text" text="15. Min Roguery Level" />
+    <string id="mcm_bp15_hint" text="Lowest level to unlock the roguery option." />
+    <string id="mcm_bp16_text" text="16. Deactivate event" />
+    <string id="mcm_bp16_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_bu_heading" text="Bottoms Up" />
-    <string id="mcm_bu_text" text="1.Min Morale Gain" />
-    <string id="mcm_bu_text" text="The minimum morale gain." />
-    <string id="mcm_bu_text" text="2.Max Morale Gain" />
-    <string id="mcm_bu_text" text="The maximum morale gain." />
-    <string id="mcm_bu_text" text="3.Min gold" />
-    <string id="mcm_bu_text" text="The minimum gold reward." />
-    <string id="mcm_bu_text" text="4.Max gold" />
-    <string id="mcm_bu_text" text="The maximum gold reward." />
-    <string id="mcm_bu_text" text="3. Deactivate event" />
-    <string id="mcm_bu_text" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bu1_text" text="1.Min Morale Gain" />
+    <string id="mcm_bu1_hint" text="The minimum morale gain." />
+    <string id="mcm_bu2_text" text="2.Max Morale Gain" />
+    <string id="mcm_bu2_hint" text="The maximum morale gain." />
+    <string id="mcm_bu3_text" text="3.Min gold" />
+    <string id="mcm_bu3_hint" text="The minimum gold reward." />
+    <string id="mcm_bu4_text" text="4.Max gold" />
+    <string id="mcm_bu4_hint" text="The maximum gold reward." />
+    <string id="mcm_bu5_text" text="5. Deactivate event" />
+    <string id="mcm_bu5_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_bc_heading" text="Bumper Crop" />
     <string id="mcm_bc1_text" text="1. Crop % gain" />
     <string id="mcm_bc1_hint" text="The amount of % the crop yield is increased." />
     <string id="mcm_bc2_text" text="2. Deactivate event" />
     <string id="mcm_bc2_hint" text="If you dont want this event to show up you can deactivate it." />
-    <string id="mcm_bop_heading" text="Bumper Crop" />
+    <string id="mcm_bop_heading" text="Bunch of Prisoners" />
     <string id="mcm_bop1_text" text="1. Min amount of prisoners" />
     <string id="mcm_bop1_hint" text="The minimum amount of prisoners the settlement gains." />
     <string id="mcm_bop2_text" text="2. Max amount of prisoners" />
@@ -1172,18 +1396,23 @@
     <string id="mcm_cc1_hint" text="The amount of % the cohesion is increased." />
     <string id="mcm_cc2_text" text="2. Deactivate event" />
     <string id="mcm_cc2_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ca_heading" text="Companion Admire" />
+    <string id="mcm_ca1_text" text="1. Deactivate event" />
+    <string id="mcm_ca1_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_cr_heading" text="Courier" />
-    <string id="mcm_bu_text" text="1.Min Morale Gain" />
-    <string id="mcm_bu_text" text="The minimum morale gain." />
-    <string id="mcm_bu_text" text="2.Max Morale Gain" />
-    <string id="mcm_bu_text" text="The maximum morale gain." />
-    <string id="mcm_bu_text" text="3. Deactivate event" />
-    <string id="mcm_bu_text" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_cr1_text" text="1.Min Morale Gain" />
+    <string id="mcm_cr1_hint" text="The minimum morale gain." />
+    <string id="mcm_cr2_text" text="2.Max Morale Gain" />
+    <string id="mcm_cr2_hint" text="The maximum morale gain." />
+    <string id="mcm_cr3_text" text="3. Deactivate event" />
+    <string id="mcm_cr3_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_dc_heading" text="Diseased City" />
     <string id="mcm_dc1_text" text="1. Base Success Chance" />
     <string id="mcm_dc1_hint" text="The base success chance that this event will have a positive outcome." />
     <string id="mcm_dc2_text" text="2. High Medicine Chance" />
+    <string id="mcm_dc2_hint" text="The chance of success if the surgeon meets the level requirement" />
     <string id="mcm_dc3_text" text="3. High Medicine Level" />
+    <string id="mcm_dc3_hint" text="The level requirement of the surgeon" />
     <string id="mcm_dc4_text" text="4. Percentage Lost" />
     <string id="mcm_dc4_hint" text="The amount of men lost at the stricken settlement." />
     <string id="mcm_dc5_text" text="5. Deactivate event" />
@@ -1233,8 +1462,10 @@
     <string id="mcm_fsf3_hint" text="Minimum amount of gold looted." />
     <string id="mcm_fsf4_text" text="4. Max Loot" />
     <string id="mcm_fsf4_hint" text="Maximum amount of gold looted." />
-    <string id="mcm_fsf5_text" text="5. Deactivate event" />
-    <string id="mcm_fsf5_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_fsf5_text" text="5. Min Roguery Level" />
+    <string id="mcm_fsf5_hint" text="Lowest level to unlock the roguery option." />
+    <string id="mcm_fsf6_text" text="6. Deactivate event" />
+    <string id="mcm_fsf6_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_ff_heading" text="Fantastic Fighters" />
     <string id="mcm_ff1_text" text="1. Min Renown Gained" />
     <string id="mcm_ff1_hint" text="Minimum amount of renown gained." />
@@ -1242,13 +1473,16 @@
     <string id="mcm_ff2_hint" text="Maximum amount of renown gained." />
     <string id="mcm_ff3_text" text="3. Deactivate event" />
     <string id="mcm_ff3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_fe_heading" text="Feast" />
+    <string id="mcm_fe3_text" text="1. Deactivate event" />
+    <string id="mcm_fe3_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_fs_heading" text="Fishing Spot" />
     <string id="mcm_fs1_text" text="1. Min Soldiers" />
     <string id="mcm_fs1_hint" text="Minimum soldiers to go fishing." />
     <string id="mcm_fs2_text" text="2. Max Soldiers" />
     <string id="mcm_fs2_hint" text="Maximum soldiers to go fishing." />
     <string id="mcm_fs3_text" text="3. Max Fish Catch" />
-    <string id="mcm_fs3_hint" text="Minimum amount of fish to catch." />
+    <string id="mcm_fs3_hint" text="Maximum amount of fish to catch." />
     <string id="mcm_fs4_text" text="4. Min Morale Gained" />
     <string id="mcm_fs4_hint" text="Minimum amount of morale gained." />
     <string id="mcm_fs5_text" text="5. Max Morale Gained" />
@@ -1256,17 +1490,17 @@
     <string id="mcm_fs6_text" text="6. Deactivate event" />
     <string id="mcm_fs6_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_fof_heading" text="Food Fight" />
-    <string id="mcm_fof1_text" text="1. Min Soldiers" />
-    <string id="mcm_fof1_hint" text="Minimum soldiers to go fishing." />
-    <string id="mcm_fof2_text" text="2. Max Soldiers" />
-    <string id="mcm_fof2_hint" text="Maximum soldiers to go fishing." />
-    <string id="mcm_fof3_text" text="3. Max Fish Catch" />
-    <string id="mcm_fof3_hint" text="Minimum amount of fish to catch." />
-    <string id="mcm_fof4_text" text="4. Min Morale Gained" />
-    <string id="mcm_fof4_hint" text="Minimum amount of morale gained." />
+    <string id="mcm_fof1_text" text="1. Min Food Loss" />
+    <string id="mcm_fof1_hint" text="Minimum amount of food loss" />
+    <string id="mcm_fof2_text" text="2. Max Food Loss" />
+    <string id="mcm_fof2_hint" text="Maximum amount of food loss." />
+    <string id="mcm_fof3_text" text="3. Min Morale Loss" />
+    <string id="mcm_fof3_hint" text="Minimum amount of morale lost." />
+    <string id="mcm_fof4_text" text="4. Max Morale Loss" />
+    <string id="mcm_fof4_hint" text="Maximum amount of morale lost." />
     <string id="mcm_fof5_text" text="5. Deactivate event" />
     <string id="mcm_fof5_hint" text="If you dont want this event to show up you can deactivate it." />
-    <string id="mcm_gr_heading" text="Bee Kind" />
+    <string id="mcm_gr_heading" text="Granary Rats" />
     <string id="mcm_gr1_text" text="1. Min Food loss percent" />
     <string id="mcm_gr1_hint" text="Minimum amount of food lost during this event." />
     <string id="mcm_gr2_text" text="2. Max Food loss percent" />
@@ -1286,7 +1520,7 @@
     <string id="mcm_ht2_text" text="2. Max Soldiers" />
     <string id="mcm_ht2_hint" text="Maximum soldiers to go hunting." />
     <string id="mcm_ht3_text" text="3. Max Catch" />
-    <string id="mcm_ht3_hint" text="Minimum amount of prey to catch." />
+    <string id="mcm_ht3_hint" text="Maximum amount of prey to catch." />
     <string id="mcm_ht4_text" text="4. Min Morale Gained" />
     <string id="mcm_ht4_hint" text="Minimum amount of morale gained." />
     <string id="mcm_ht5_text" text="5. Max Morale Gained" />
@@ -1360,8 +1594,8 @@
     <string id="mcm_or1_hint" text="The minimum amount of men who come with you." />
     <string id="mcm_or2_text" text="2. Max Soldiers" />
     <string id="mcm_or2_hint" text="The maximum amount of men who come with you." />
-    <string id="mcm_or3_text" text="3. Men Who Will Die" />
-    <string id="mcm_or3_hint" text="The % of men who will die in this event if the circumstances align." />
+    <string id="mcm_or3_text" text="3. Max Men Who Will Die" />
+    <string id="mcm_or3_hint" text="The maximum amount of men who will die in this event if the circumstances align." />
     <string id="mcm_or4_text" text="4. Min Gold Found" />
     <string id="mcm_or4_hint" text="The minimum amount of gold to be found." />
     <string id="mcm_or5_text" text="5. Max Gold Found" />
@@ -1386,7 +1620,7 @@
     <string id="mcm_pt_heading" text="Prisoner Transfer" />
     <string id="mcm_pt1_text" text="1. Min Prisoners" />
     <string id="mcm_pt1_hint" text="Minimum amount of prisoners to transfer." />
-    <string id="mcm_pt2_text" text="2. Min Prisoners" />
+    <string id="mcm_pt2_text" text="2. Max Prisoners" />
     <string id="mcm_pt2_hint" text="Maximum amount of prisoners to transfer." />
     <string id="mcm_pt3_text" text="3. Min Price for each prisoner" />
     <string id="mcm_pt3_hint" text="Minimum price for each prisoner." />
@@ -1394,7 +1628,7 @@
     <string id="mcm_pt4_hint" text="Maximum price for each prisoner." />
     <string id="mcm_pt5_text" text="5. Deactivate event" />
     <string id="mcm_pt5_hint" text="If you dont want this event to show up you can deactivate it." />
-    <string id="mcm_rm_heading" text="Prisoner Rebellion" />
+    <string id="mcm_rm_heading" text="Red Moon" />
     <string id="mcm_rm1_text" text="1. Min Gold Lost" />
     <string id="mcm_rm1_hint" text="Minimum amount of gold that can be lost during this event." />
     <string id="mcm_rm2_text" text="2. Max Gold Lost" />
@@ -1406,20 +1640,20 @@
     <string id="mcm_rm5_text" text="5. Deactivate event" />
     <string id="mcm_rm5_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_rf_heading" text="Refugees" />
-    <string id="mcm_rf_text" text="1.Min Soldiers" />
-    <string id="mcm_rf_text" text="The minimum amount of recruits." />
-    <string id="mcm_rf_text" text="2.Max Soldiers" />
-    <string id="mcm_rf_text" text="The maximum amount of recruits." />
-    <string id="mcm_rf_text" text="3.Min Food" />
-    <string id="mcm_rf_text" text="The minimum amount of Food." />
-    <string id="mcm_rf_text" text="4.Max Food" />
-    <string id="mcm_rf_text" text="The maximum amount of Food." />
-    <string id="mcm_rf_text" text="5.Min Captives" />
-    <string id="mcm_rf_text" text="The minimum amount of Captives." />
-    <string id="mcm_rf_text" text="6.Max Captives" />
-    <string id="mcm_rf_text" text="The maximum amount of Captives." />
-    <string id="mcm_rf_text" text="7. Deactivate event" />
-    <string id="mcm_rf_text" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_rf1_text" text="1.Min Soldiers" />
+    <string id="mcm_rf1_hint" text="The minimum amount of recruits." />
+    <string id="mcm_rf2_text" text="2.Max Soldiers" />
+    <string id="mcm_rf2_hint" text="The maximum amount of recruits." />
+    <string id="mcm_rf3_text" text="3.Min Food" />
+    <string id="mcm_rf3_hint" text="The minimum amount of Food." />
+    <string id="mcm_rf4_text" text="4.Max Food" />
+    <string id="mcm_rf4_hint" text="The maximum amount of Food." />
+    <string id="mcm_rf5_text" text="5.Min Captives" />
+    <string id="mcm_rf5_hint" text="The minimum amount of Captives." />
+    <string id="mcm_rf6_text" text="6.Max Captives" />
+    <string id="mcm_rf6_hint" text="The maximum amount of Captives." />
+    <string id="mcm_rf7_text" text="7. Deactivate event" />
+    <string id="mcm_rf7_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_ro_heading" text="Robbery" />
     <string id="mcm_ro1_text" text="1. Min Gold Lost" />
     <string id="mcm_ro1_hint" text="Minimum amount of gold that can be lost during this event." />
@@ -1436,8 +1670,10 @@
     <string id="mcm_rs1_hint" text="Minimum amount of gold that can gained during this event." />
     <string id="mcm_rs2_text" text="2. Max Gold Gain" />
     <string id="mcm_rs2_hint" text="Maximum amount of gold that can gained during this event." />
-    <string id="mcm_rs3_text" text="3. Deactivate event" />
-    <string id="mcm_rs3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_rs3_text" text="3. Min Roguery Level" />
+    <string id="mcm_rs3_hint" text="Lowest level to unlock the roguery option." />
+    <string id="mcm_rs4_text" text="4. Deactivate event" />
+    <string id="mcm_rs4_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_ss_heading" text="Secret Singer" />
     <string id="mcm_ss1_text" text="1. Min Morale Gained" />
     <string id="mcm_ss1_hint" text="Minimum amount of morale that can gained during this event." />
@@ -1483,7 +1719,9 @@
     <string id="mcm_se1_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_tp_heading" text="Target Practice" />
     <string id="mcm_tp1_text" text="1. Min Soldiers" />
+    <string id="mcm_tp1_hint" text="The minimum number of looters to spawn, regardless of player's party size" />
     <string id="mcm_tp2_text" text="2. % Difference Of Current Troop" />
+    <string id="mcm_tp2_hint" text="The percentage of looters that can be spawned vs the player's party size" />
     <string id="mcm_tp3_text" text="3. Deactivate event" />
     <string id="mcm_tp3_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_tm_heading" text="Travelling Merchant" />
@@ -1493,6 +1731,19 @@
     <string id="mcm_tm2_hint" text="Maximum Amount of Loot" />
     <string id="mcm_tm3_text" text="3. Deactivate event" />
     <string id="mcm_tm3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_tr_heading" text="Travellers" />
+    <string id="mcm_tr1_text" text="1. Min Gold" />
+    <string id="mcm_tr1_hint" text="Minimum amount of gold you can get out of this event." />
+    <string id="mcm_tr2_text" text="2. Max Gold" />
+    <string id="mcm_tr2_hint" text="Maximum amount of gold you can get out of this event." />
+    <string id="mcm_tr3_text" text="3. Min Engineering Level" />
+    <string id="mcm_tr3_hint" text="Lowest level to unlock the engineering option." />
+    <string id="mcm_tr4_text" text="4. Min Roguery Level" />
+    <string id="mcm_tr4_hint" text="Lowest level to unlock the roguery option." />
+    <string id="mcm_tr5_text" text="5. Min Steward Level" />
+    <string id="mcm_tr5_hint" text="Lowest level to unlock the steward option." />
+    <string id="mcm_tr6_text" text="6. Deactivate event" />
+    <string id="mcm_tr6_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_uw_heading" text="Unexpected Wedding" />
     <string id="mcm_uw1_text" text="1. Min Gold To Give" />
     <string id="mcm_uw1_hint" text="Minimum amount of gold you give as a gift." />
@@ -1508,8 +1759,10 @@
     <string id="mcm_uw6_hint" text="Minimum amount of of gold that can be raided during this event." />
     <string id="mcm_uw7_text" text="7. Max Gold To Raid" />
     <string id="mcm_uw7_hint" text="Maximum amount of gold that can be raided during this event." />
-    <string id="mcm_uw8_text" text="8. Deactivate event" />
-    <string id="mcm_uw8_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_uw8_text" text="8. Min Roguery Level" />
+    <string id="mcm_uw8_hint" text="Lowest level to unlock the roguery option." />
+    <string id="mcm_uw9_text" text="9. Deactivate event" />
+    <string id="mcm_uw9_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_uc_heading" text="Undercooked" />
     <string id="mcm_uc1_text" text="1. Min Soldiers To Injure" />
     <string id="mcm_uc1_hint" text="The minimum amount of soldiers to get injured during this event." />
@@ -1522,8 +1775,10 @@
     <string id="mcm_vg1_hint" text="The minimum amount of compensation the girl gets during this event." />
     <string id="mcm_vg2_text" text="2. Max Gold Compensation" />
     <string id="mcm_vg2_hint" text="The maximum amount of compensation the girl gets during this event." />
-    <string id="mcm_vg3_text" text="3. Deactivate event" />
-    <string id="mcm_vg3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_vg3_text" text="3.Min Roguery Level" />
+    <string id="mcm_vg3_hint" text="Lowest level to unlock the roguery option." />
+    <string id="mcm_vg4_text" text="4. Deactivate event" />
+    <string id="mcm_vg4_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_wl_heading" text="Wandering Livestock" />
     <string id="mcm_wl1_text" text="1. Min Food" />
     <string id="mcm_wl1_hint" text="The minimum amount of food to get during this event." />

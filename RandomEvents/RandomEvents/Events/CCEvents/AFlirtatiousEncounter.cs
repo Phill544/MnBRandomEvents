@@ -19,13 +19,15 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int maxWomanAge;
         private readonly float minRelationshipIncrease;
         private readonly float maxRelationshipIncrease;
+        private readonly int minCharmLevel;
 
         public AFlirtatiousEncounter() : base(ModSettings.RandomEvents.AFlirtatiousEncounterData)
         {
-            minWomanAge = MCM_MenuConfig_A_M.Instance.AFE_minWomanAge;
-            maxWomanAge = MCM_MenuConfig_A_M.Instance.AFE_maxWomanAge;
-            minRelationshipIncrease = MCM_MenuConfig_A_M.Instance.AFE_minRelationshipIncrease;
-            maxRelationshipIncrease = MCM_MenuConfig_A_M.Instance.AFE_maxRelationshipIncrease;
+            minWomanAge = MCM_MenuConfig_A_F.Instance.AFE_minWomanAge;
+            maxWomanAge = MCM_MenuConfig_A_F.Instance.AFE_maxWomanAge;
+            minRelationshipIncrease = MCM_MenuConfig_A_F.Instance.AFE_minRelationshipIncrease;
+            maxRelationshipIncrease = MCM_MenuConfig_A_F.Instance.AFE_maxRelationshipIncrease;
+            minCharmLevel = MCM_MenuConfig_A_F.Instance.AFE_charmSkillLevel;
         }
 
         public override void CancelEvent()
@@ -34,10 +36,16 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_A_M.Instance.AFE_Disable == false && 
-                   Hero.MainHero.IsFemale == false && 
-                   Settlement.CurrentSettlement != null && 
-                   (Settlement.CurrentSettlement.IsTown || Settlement.CurrentSettlement.IsVillage);
+            
+            var randomHero = Campaign.Current.AliveHeroes.Where(
+                h => h.CurrentSettlement == Settlement.CurrentSettlement && 
+                     h.IsLord && 
+                     h != Hero.MainHero.Spouse && 
+                     h.Clan != Clan.PlayerClan && 
+                     h.IsFemale && h.Age >= minWomanAge && h.Age <= maxWomanAge
+            ).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
+
+            return randomHero != null && MCM_MenuConfig_A_F.Instance.AFE_Disable == false && CampaignTime.Now.IsNightTime;
         }
 
         public override void StartEvent()
@@ -51,19 +59,19 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var eventTitle = new TextObject("{=AFlirtatiousEncounter_Title}A Flirtatious Encounter").ToString();
 
-            var notables = Settlement.CurrentSettlement.Notables;
-            var heroes = Settlement.CurrentSettlement.HeroesWithoutParty;
-
-            var characters = notables.Concat(heroes).Distinct().ToList();
-
-            var femaleList = characters.Where(character => character.IsFemale).Where(character => character.Age >= minWomanAge && character.Age <= maxWomanAge).ToList();
-
-            if (femaleList.Count != 0)
+            var randomHero = Campaign.Current.AliveHeroes.Where(
+                h => h.CurrentSettlement == Settlement.CurrentSettlement && 
+                     h.IsLord && 
+                     h != Hero.MainHero.Spouse && 
+                     h.Clan != Clan.PlayerClan && 
+                     h.IsFemale && h.Age >= minWomanAge && h.Age <= maxWomanAge
+                     ).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
+            
+            
+            if (randomHero != null)
             {
-                var random = new Random();
-                var index = random.Next(femaleList.Count);
 
-                var target = femaleList[index];
+                var target = randomHero;
 
                 var currentRelationship = target.GetRelation(Hero.MainHero);
 
@@ -76,6 +84,31 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 var currentSettlement = Settlement.CurrentSettlement.Name.ToString();
 
                 var theDemonym = Demonym.GetTheDemonym(targetCulture, true);
+                
+                var charmLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Charm);
+
+                var canCharmTarget = false;
+
+                var charmAppendedText = "";
+                
+                if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
+                {
+                
+                    canCharmTarget = true;
+                    charmAppendedText = new TextObject("{=AFlirtatiousEncounter_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
+
+                }
+                else
+                {
+                    if (charmLevel >= minCharmLevel)
+                    {
+                        canCharmTarget = true;
+                    
+                        charmAppendedText = new TextObject("{=AFlirtatiousEncounter_Charm_Appended_Text}[Charm - lvl {minCharmLevel}]")
+                            .SetTextVariable("minCharmLevel", minCharmLevel)
+                            .ToString();
+                    }
+                }
 
                 var eventDescription = new TextObject(
                         "{=AFlirtatiousEncounter_Event_Desc}This evening you are enjoying a drink in the tavern at " +
@@ -93,22 +126,26 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 var eventOption2 = new TextObject("{=AFlirtatiousEncounter_Event_Option_2}Buy her a drink").ToString();
                 var eventOption2Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_2_Hover}Always a gentleman.").ToString();
 
-                var eventOption3 = new TextObject("{=AFlirtatiousEncounter_Event_Option_3}Hit on her").ToString();
-                var eventOption3Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_3_Hover}She's cute!").ToString();
+                var eventOption3 = new TextObject("{=AFlirtatiousEncounter_Event_Option_3}[Charm] Hit on her").ToString();
+                var eventOption3Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_3_Hover}She's cute!\n{charmAppendedText}").SetTextVariable("charmAppendedText", charmAppendedText).ToString();
 
                 var eventOption4 = new TextObject("{=AFlirtatiousEncounter_Event_Option_4}Be an ass").ToString();
                 var eventOption4Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_4_Hover}Seriously?").ToString();
 
                 var eventButtonText1 = new TextObject("{=AFlirtatiousEncounter_Event_Button_Text_1}Choose").ToString();
                 var eventButtonText2 = new TextObject("{=AFlirtatiousEncounter_Event_Button_Text_2}Done").ToString();
-
-                var inquiryElements = new List<InquiryElement>
+                
+                var inquiryElements = new List<InquiryElement>();
+            
+                inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover));
+                inquiryElements.Add(new InquiryElement("b", eventOption2, null, true, eventOption2Hover));
+            
+                if (canCharmTarget)
                 {
-                    new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
-                    new InquiryElement("b", eventOption2, null, true, eventOption2Hover),
-                    new InquiryElement("c", eventOption3, null, true, eventOption3Hover),
-                    new InquiryElement("d", eventOption4, null, true, eventOption4Hover),
-                };
+                    inquiryElements.Add(new InquiryElement("c", eventOption3, null, true, eventOption3Hover));
+                }
+            
+                inquiryElements.Add(new InquiryElement("d", eventOption4, null, true, eventOption4Hover));
 
 
                 var eventOptionAText = new TextObject(
@@ -121,7 +158,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     .ToString();
 
                 var eventOptionBText = new TextObject(
-                        "{=AFlirtatiousEncounter_Event_Choice_2}When she gets over to you the two of you starts talking. " +
+                        "{=AFlirtatiousEncounter_Event_Choice_2}When she gets over to you the two of you start talking. " +
                         "You offer to buy her a drink which she accepts. As the evening progresses the two of you get " +
                         "more and more drunk. You manage to learn that her name is {name} and she's {age} years old. " +
                         "Eventually you are both so drunk that you are thrown out of the bar.\n\nBoth of you giggle as " +
@@ -130,25 +167,25 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         "before you go your separate ways. After a few seconds you hear your name being called. " +
                         "“{heroName} wait!” You turn around and see {name} running back to you. She stops just a few " +
                         "inches from you face and gives you a deep and tender kiss on the lips. “That was for a lovely " +
-                        "evening” she said. You kiss her back before saying you final goodbye for the night.")
+                        "evening” she said. You kiss her back before saying your final goodbye for the night.")
                     .SetTextVariable("name", target.FirstName)
                     .SetTextVariable("age", (int)Math.Round(target.Age))
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
 
                 var eventOptionCText = new TextObject(
-                        "{=AFlirtatiousEncounter_Event_Choice_3}When she gets over to you the two of you starts talking. " +
+                        "{=AFlirtatiousEncounter_Event_Choice_3}When she gets over to you the two of you start talking. " +
                         "You tell her that you don't often get noticed by such beautiful women. She says it's not often " +
-                        "she find such handsome men in town. With the tone being set for the event the two of you " +
-                        "continue to talk (and naturally to hit on each other as well...) She tells you that her name " +
+                        "she finds such handsome men in town. With the tone being set for the evening the two of you " +
+                        "continue to talk (and naturally hit on each other as well...) She tells you that her name " +
                         "is {name} and she's {age} years old. After a few minutes the two of you move away from the bar " +
                         "and go somewhere a bit more comfortable. There you both continue your flirtatious behaviour. It " +
                         "does not take long before the two of you start kissing each other.\n\n You kiss her on the neck, " +
                         "on the cheeks, on the lips and so on. She whispers to you “I know a more private place...” with " +
-                        "fire in her eyes. Wanna head there she asks. You tell her to lead the way. She takes your hand " +
+                        "fire in her eyes. “Wanna head there?” she asks. You tell her to lead the way. She takes your hand " +
                         "and leads you out into the street. After a few minutes of walking you arrive at what is clearly " +
-                        "{name}'s home in {currentSettlement}. As you enter her house she turns to you and start kissing " +
-                        "you passionately again with more lust that you can ever remember. After just a few seconds all " +
+                        "{name}'s home in {currentSettlement}. As you enter her house she turns to you and starts kissing " +
+                        "you passionately again with more lust than you can ever remember. After just a few seconds all " +
                         "your clothes have been removed and you make your way towards {name}'s bed. \n\nThe rest of the " +
                         "night fades out in ecstasy.")
                     .SetTextVariable("name", target.FirstName)
@@ -160,39 +197,35 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         "{=AFlirtatiousEncounter_Event_Choice_4}You cannot help but be a little annoyed as you'd rather " +
                         "drink in peace. When she gets over to you she introduces herself as {name}. It does not take " +
                         "long for you to have insulted her enough that she leaves you alone. You may have hurt her " +
-                        "feelings but at least  you are able to enjoy the night alone. A few hours later as you are " +
+                        "feelings but at least you are able to enjoy the night alone. A few hours later as you are " +
                         "about to leave you come across {name} again. You tell her that you're sorry for what you said " +
                         "and you didn't mean it as you just wanted to be left alone. She somehow manages to politely " +
-                        "and kindly tell you to F**k off.")
+                        "and kindly tell you to f**k off.")
                     .SetTextVariable("name", target.FirstName)
                     .SetTextVariable("age", (int)Math.Round(target.Age))
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
                 
                 var eventMsg1 =new TextObject(
-                        "{=AFlirtatiousEncounter_Event_Msg_1}Relationship between {name} and {heroName}is now {newRelationship}.")
-                    .SetTextVariable("newRelationship", newRelationship - 5)
+                        "{=AFlirtatiousEncounter_Event_Msg_1}{heroName} had a casual conversation with {name}.")
                     .SetTextVariable("name", target.FirstName.ToString())
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
                 
                 var eventMsg2 =new TextObject(
-                        "{=AFlirtatiousEncounter_Event_Msg_1}Relationship between {name} and {heroName}is now {newRelationship}.")
-                    .SetTextVariable("newRelationship", newRelationship - 3)
+                        "{=AFlirtatiousEncounter_Event_Msg_2}{heroName} got a lot closer to {name}.")
                     .SetTextVariable("name", target.FirstName.ToString())
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
                 
                 var eventMsg3 =new TextObject(
-                        "{=AFlirtatiousEncounter_Event_Msg_1}Relationship between {name} and {heroName}is now {newRelationship}.")
-                    .SetTextVariable("newRelationship", newRelationship)
+                        "{=AFlirtatiousEncounter_Event_Msg_3}{heroName} got lucky with {name}!")
                     .SetTextVariable("name", target.FirstName.ToString())
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
                 
                 var eventMsg4 =new TextObject(
-                        "{=AFlirtatiousEncounter_Event_Msg_1}Relationship between {name} and {heroName}is now {newRelationship}.")
-                    .SetTextVariable("newRelationship", newRelationship - 30)
+                        "{=AFlirtatiousEncounter_Event_Msg_4}{heroName} deeply insulted {name}!")
                     .SetTextVariable("name", target.FirstName.ToString())
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
@@ -208,7 +241,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                     new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null,
                                         null, null), true);
                                 CharacterRelationManager.SetHeroRelation(target,Hero.MainHero, newRelationship - 5);
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                                 break;
                             case "b":
                                 InformationManager.ShowInquiry(
@@ -216,7 +249,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                         null, null), true);
                                 
                                 CharacterRelationManager.SetHeroRelation(target,Hero.MainHero, newRelationship - 3);
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                                 break;
                             case "c":
                                 InformationManager.ShowInquiry(
@@ -224,7 +257,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                         null, null), true);
                                 
                                 CharacterRelationManager.SetHeroRelation(target,Hero.MainHero, newRelationship);
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                                 
                                 break;
                             case "d":
@@ -233,7 +266,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                         null, null), true);
                                 
                                 CharacterRelationManager.SetHeroRelation(target,Hero.MainHero, newRelationship - 30);
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
+                                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                                 
                                 break;
                             default:

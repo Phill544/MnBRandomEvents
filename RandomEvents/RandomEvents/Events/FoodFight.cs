@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
@@ -22,10 +21,10 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public FoodFight() : base(ModSettings.RandomEvents.FoodFightData)
 		{
-			minFoodLoss = MCM_MenuConfig_A_M.Instance.FoF_MinFoodLoss;
-			maxFoodLoss = MCM_MenuConfig_A_M.Instance.FoF_MaxFoodLoss;
-			minMoraleLoss = MCM_MenuConfig_A_M.Instance.FoF_MinMoraleLoss;
-			maxMoraleLoss = MCM_MenuConfig_A_M.Instance.FoF_MaxMoraleLoss;
+			minFoodLoss = MCM_MenuConfig_A_F.Instance.FoF_MinFoodLoss;
+			maxFoodLoss = MCM_MenuConfig_A_F.Instance.FoF_MaxFoodLoss;
+			minMoraleLoss = MCM_MenuConfig_A_F.Instance.FoF_MinMoraleLoss;
+			maxMoraleLoss = MCM_MenuConfig_A_F.Instance.FoF_MaxMoraleLoss;
 		}
 
 		public override void CancelEvent()
@@ -34,7 +33,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return  MCM_MenuConfig_A_M.Instance.FoF_Disable == false && MobileParty.MainParty.MemberRoster.TotalManCount > 1 && (MobileParty.MainParty.ItemRoster.Any(item => item.EquipmentElement.Item.IsFood));
+			return  MCM_MenuConfig_A_F.Instance.FoF_Disable == false && MobileParty.MainParty.MemberRoster.TotalManCount > 1 && (MobileParty.MainParty.ItemRoster.Any(item => item.EquipmentElement.Item.IsFood));
 		}
 
 		public override void StartEvent()

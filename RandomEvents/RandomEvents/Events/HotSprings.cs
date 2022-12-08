@@ -3,7 +3,6 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -17,8 +16,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public HotSprings() : base(ModSettings.RandomEvents.HotSpringsData)
 		{
-			minMoraleGain = MCM_MenuConfig_A_M.Instance.HS_MinMoraleGain;
-			maxMoraleGain = MCM_MenuConfig_A_M.Instance.HS_MaxMoraleGain;
+			minMoraleGain = MCM_MenuConfig_G_O.Instance.HS_MinMoraleGain;
+			maxMoraleGain = MCM_MenuConfig_G_O.Instance.HS_MaxMoraleGain;
 		}
 
 		public override void CancelEvent()
@@ -27,7 +26,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_M.Instance.HS_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_G_O.Instance.HS_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

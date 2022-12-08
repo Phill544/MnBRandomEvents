@@ -11,7 +11,9 @@ namespace CryingBuffalo.RandomEvents
 {
     public class RandomEventsSubmodule : MBSubModuleBase
     {
-        public static readonly Color Ini_Color = Color.FromUint(7194750);
+        //Mod Loaded Color
+        private static readonly Color Ini_Color = Color.FromUint(7194750);
+        
         public static readonly Color Dbg_Color = Color.FromUint(16005134);
         public static readonly Color Msg_Color = Color.FromUint(11846692);
         
@@ -21,8 +23,11 @@ namespace CryingBuffalo.RandomEvents
         //Yellow
         public static readonly Color Msg_Color_MED_Outcome = Color.FromUint(13937677);
         
-        //Red
-        public static readonly Color Msg_Color_NEG_Outcome = Color.FromUint(11549230);
+        //Orange
+        public static readonly Color Msg_Color_NEG_Outcome = Color.FromUint(15092249);
+        
+        //Evil
+        public static readonly Color Msg_Color_EVIL_Outcome = Color.FromUint(13840175);
         
         //MCM Base Settings
         public const string FolderName = "RandomEvents";
@@ -30,12 +35,12 @@ namespace CryingBuffalo.RandomEvents
 
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
-            MCM_MenuConfig_A_M.Instance.Settings();
-            MCM_MenuConfig_N_Z.Instance.Settings();
+            MCM_MenuConfig_A_F.Instance.Settings();
+            MCM_MenuConfig_G_O.Instance.Settings();
+            MCM_MenuConfig_P_Z.Instance.Settings();
             MCM_MenuConfig_Chances.Instance.Settings();
             MCM_ConfigMenu_General.Instance.Settings();
-
-            ModSettings.LoadGeneralSettings();
+            
             ModSettings.LoadRandomEventSettings();
             
             //Many mods use this. Nice way to tell if a mod is loaded correctly
