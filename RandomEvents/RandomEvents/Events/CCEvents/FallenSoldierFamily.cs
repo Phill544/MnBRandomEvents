@@ -17,13 +17,15 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int maxFamilyCompensation;
         private readonly int minGoldLooted;
         private readonly int maxGoldLooted;
+        private readonly int minRogueryLevel;
 
         public FallenSoldierFamily() : base(ModSettings.RandomEvents.FallenSoldierFamilyData)
         {
-            minFamilyCompensation = MCM_MenuConfig_A_M.Instance.FSF_MinFamilyCompensation;
-            maxFamilyCompensation = MCM_MenuConfig_A_M.Instance.FSF_MaxFamilyCompensation;
-            minGoldLooted = MCM_MenuConfig_A_M.Instance.FSF_MinGoldLooted;
-            maxGoldLooted = MCM_MenuConfig_A_M.Instance.FSF_MaxGoldLooted;
+            minFamilyCompensation = MCM_MenuConfig_A_F.Instance.FSF_MinFamilyCompensation;
+            maxFamilyCompensation = MCM_MenuConfig_A_F.Instance.FSF_MaxFamilyCompensation;
+            minGoldLooted = MCM_MenuConfig_A_F.Instance.FSF_MinGoldLooted;
+            maxGoldLooted = MCM_MenuConfig_A_F.Instance.FSF_MaxGoldLooted;
+            minRogueryLevel = MCM_MenuConfig_A_F.Instance.FSF_MinRogueryLevel;
         }
 
         public override void CancelEvent()
@@ -32,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_A_M.Instance.FSF_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
+            return MCM_MenuConfig_A_F.Instance.FSF_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
         }
 
         public override void StartEvent()
@@ -45,6 +47,32 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var heroName = Hero.MainHero.FirstName;
             
             var currentSettlement = MobileParty.MainParty.CurrentSettlement.Name;
+            
+            var roguerySkill = Hero.MainHero.GetSkillValue(DefaultSkills.Roguery);
+            
+            var plotEvil = false;
+            
+            var rogueryAppendedText = "";
+            
+            if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
+            {
+                
+                plotEvil = true;
+                rogueryAppendedText = new TextObject("{=FallenSoldier_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
+
+            }
+            else
+            {
+                if (roguerySkill >= minRogueryLevel)
+                {
+                    plotEvil = true;
+                    
+                    rogueryAppendedText = new TextObject("{=FallenSoldier_Roguery_Appended_Text}[Roguery - lvl {minRogueryLevel}]")
+                        .SetTextVariable("minRogueryLevel", minRogueryLevel)
+                        .ToString();
+                }
+            }
+            
             
             var familyCompensation = MBRandom.RandomInt(minFamilyCompensation, maxFamilyCompensation);
             var goldLooted = MBRandom.RandomInt(minGoldLooted, maxGoldLooted);
@@ -67,26 +95,29 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption3 = new TextObject("{=FallenSoldier_Event_Option_3}Leave").ToString();
             var eventOption3Hover = new TextObject("{=FallenSoldier_Event_Option_3_Hover}You have a headache so you leave").ToString();
             
-            var eventOption4 = new TextObject("{=FallenSoldier_Event_Option_4}Plot something malicious").ToString();
-            var eventOption4Hover = new TextObject("{=FallenSoldier_Event_Option_4_Hover}The audacity!").ToString();
+            var eventOption4 = new TextObject("{=FallenSoldier_Event_Option_4}[Roguery] Trick them").ToString();
+            var eventOption4Hover = new TextObject("{=FallenSoldier_Event_Option_4_Hover}{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
             
             var eventButtonText1 = new TextObject("{=FallenSoldier_Event_Button_Text_1}Okay").ToString();
             var eventButtonText2 = new TextObject("{=FallenSoldier_Event_Button_Text_2}Done").ToString();
 
-            var inquiryElements = new List<InquiryElement>
+            var inquiryElements = new List<InquiryElement>();
+            
+            inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover));
+            inquiryElements.Add(new InquiryElement("b", eventOption2, null, true, eventOption2Hover));
+            inquiryElements.Add(new InquiryElement("c", eventOption3, null, true, eventOption3Hover));
+            if (plotEvil)
             {
-                new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
-                new InquiryElement("b", eventOption2, null, true, eventOption2Hover),
-                new InquiryElement("c", eventOption3, null, true, eventOption3Hover),
-                new InquiryElement("d", eventOption4, null, true, eventOption4Hover)
-            };
+                inquiryElements.Add(new InquiryElement("d", eventOption4, null, true, eventOption4Hover));
+            }
+            
             
             var eventOptionAText = new TextObject(
                     "{=FallenSoldier_Event_Choice_1}You ask for the name and rank of the man who died. When she tells you his name you do remember him and how he died. " +
-                    "The soldier in question was executed by your hands as it was discovered he was a traitor. \n The question you ask yourself now is if his entire family should suffer from his mistake. " +
+                    "The soldier in question was executed by your hands as it was discovered he was a traitor.\nThe question you ask yourself now is if his entire family should suffer from his mistake. " +
                     "They have spoken so warmly about him that you don't want to tell them the truth about how he died so you make up a heroic story.\n" +
-                    "Even though the family have no right for compensation, you agree to pay them {familyCompensation} gold in compensation so they can keep their family farm.\n \n" +
-                    "After you have handed over they gold to them and they have left, you cannot help but wonder if you did the right thing keeping the mother in the dark about her son's true nature.\n \n" +
+                    "Even though the family have no right for compensation, you agree to pay them {familyCompensation} gold in compensation so they can keep their family farm.\n\n" +
+                    "After you have handed over they gold to them and they have left, you cannot help but wonder if you did the right thing keeping the mother in the dark about her son's true nature.\n\n" +
                     "You end up drinking the night away.")
                 .SetTextVariable("familyCompensation", familyCompensation)
                 .ToString();
@@ -105,25 +136,30 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOptionDText = new TextObject(
                     "{=FallenSoldier_Event_Choice_4}You ask for the name and rank of the man who died. When she tells " +
                     "you his name you do remember him and how he died. The soldier in question was executed by your hands " +
-                    "as it was discovered he was a traitor.\n You ask them where their farm is and you tell them you will " +
-                    "be there tomorrow. You then excuse yourself and leave. \n \n The following day you and your men arrive " +
+                    "as it was discovered he was a traitor.\nYou ask them where their farm is and you tell them you will " +
+                    "be there tomorrow. You then excuse yourself and leave.\n\nThe following day you and your men arrive " +
                     "at the farm but you have no intention to pay them. Instead you order your men to burn the farm to the " +
-                    "ground and kill the owners.\n  You watch as your men execute your orders. You see them dragging the " +
+                    "ground and kill the owners.\nYou watch as your men execute your orders. You see them dragging the " +
                     "family outside with their hands bound behind their backs. You see you men exit the farmhouse with some " +
-                    "valuables. You watch as the farmhouse burns and you witness your men executing all of the family.\n Once " +
-                    "they are done you order your men back and you ride back to your main party. \n \nBack at camp your men " +
+                    "valuables. You watch as the farmhouse burns and you witness your men executing all of the family.\nOnce " +
+                    "they are done you order your men back and you ride back to your main party.\n\nBack at camp your men " +
                     "told you they looted {goldLooted} gold from the house.")
                 .SetTextVariable("goldLooted", goldLooted)
                 .ToString();
             
             var eventMsg1 =new TextObject(
-                    "{=FallenSoldier_Event_Msg_1}{heroName} gives the family {familyCompensation} gold in compensation.")
+                    "{=FallenSoldier_Event_Msg_1}{heroName} gave the family {familyCompensation} gold in compensation.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("familyCompensation", familyCompensation)
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=FallenSoldier_Event_Msg_2}{heroName}'s party looted {goldLooted} gold from the farmhouse.")
+                    "{=FallenSoldier_Event_Msg_2}{heroName} denied the family compensation.")
+                .SetTextVariable("heroName", heroName)
+                .ToString();
+            
+            var eventMsg3 =new TextObject(
+                    "{=FallenSoldier_Event_Msg_3}{heroName}'s party looted {goldLooted} gold from the farmhouse.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldLooted", goldLooted)
                 .ToString();
@@ -138,12 +174,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(
                                 new InquiryData(eventTitle,eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-familyCompensation);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                             break;
                         case "b":
                         {
                             InformationManager.ShowInquiry(
                                 new InquiryData(eventTitle,eventOptionBText, true, false, eventButtonText2, null, null, null), true);
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             break;
                         }
                         case "c":
@@ -153,7 +190,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "d":
                             InformationManager.ShowInquiry(
                                 new InquiryData(eventTitle,eventOptionDText, true, false, eventButtonText2, null, null, null), true);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_EVIL_Outcome));
                             break;
                         default:
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");

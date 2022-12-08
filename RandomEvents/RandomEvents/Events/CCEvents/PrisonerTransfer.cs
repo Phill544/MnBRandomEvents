@@ -24,10 +24,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public PrisonerTransfer() : base(ModSettings.RandomEvents.PrisonerTransferData)
         {
-            minPrisoners = MCM_MenuConfig_N_Z.Instance.PT_MinPrisoners; 
-            maxPrisoners = MCM_MenuConfig_N_Z.Instance.PT_MaxPrisoners; 
-            minPricePrPrisoner = MCM_MenuConfig_N_Z.Instance.PT_MinPricePrPrisoner; 
-            maxPricePrPrisoner = MCM_MenuConfig_N_Z.Instance.PT_MaxPricePrPrisoner; 
+            minPrisoners = MCM_MenuConfig_P_Z.Instance.PT_MinPrisoners; 
+            maxPrisoners = MCM_MenuConfig_P_Z.Instance.PT_MaxPrisoners; 
+            minPricePrPrisoner = MCM_MenuConfig_P_Z.Instance.PT_MinPricePrPrisoner; 
+            maxPricePrPrisoner = MCM_MenuConfig_P_Z.Instance.PT_MaxPricePrPrisoner; 
         }
 
         public override void CancelEvent()
@@ -36,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_N_Z.Instance.PT_Disable == false;
+            return MCM_MenuConfig_P_Z.Instance.PT_Disable == false;
         }
 
         public override void StartEvent()
@@ -152,11 +152,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     switch ((string)elements[0].Identifier)
                     {
                         case "a":
+                            Hero.MainHero.AddSkillXp(DefaultSkills.Trade, 40);
                             InformationManager.ShowInquiry(
                                 new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null,
                                     null), true);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1,
-                                RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                             break;
 
                         case "b":
@@ -188,16 +188,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2,
                                 new TextObject("Prisoners").SetTextVariable("cultureclass", randomCulture), 20);
 
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2,
-                                RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                             break;
 
                         case "c":
                             InformationManager.ShowInquiry(
                                 new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null,
                                     null), true);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3,
-                                RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                             break;
 
                         default:

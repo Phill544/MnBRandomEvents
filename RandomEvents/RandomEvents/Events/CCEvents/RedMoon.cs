@@ -21,10 +21,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public RedMoon() : base(ModSettings.RandomEvents.RedMoonData)
 		{
-			minGoldLost = MCM_MenuConfig_N_Z.Instance.RM_MinGoldLost;
-			maxGoldLost = MCM_MenuConfig_N_Z.Instance.RM_MaxGoldLost;
-			minMenLost = MCM_MenuConfig_N_Z.Instance.RM_MinMenLost;
-			maxMenLost = MCM_MenuConfig_N_Z.Instance.RM_MaxMenLost;
+			minGoldLost = MCM_MenuConfig_P_Z.Instance.RM_MinGoldLost;
+			maxGoldLost = MCM_MenuConfig_P_Z.Instance.RM_MaxGoldLost;
+			minMenLost = MCM_MenuConfig_P_Z.Instance.RM_MinMenLost;
+			maxMenLost = MCM_MenuConfig_P_Z.Instance.RM_MaxMenLost;
 		}
 
 		public override void CancelEvent()
@@ -33,7 +33,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_N_Z.Instance.RM_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CampaignTime.Now.IsNightTime;
+			return MCM_MenuConfig_P_Z.Instance.RM_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
 		}
 
 		public override void StartEvent()
@@ -43,7 +43,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 			
-			var eventTitle = new TextObject("{=RedMoon_Title}A Coming Apocalypse?").ToString();
+			var eventTitle = new TextObject("{=RedMoon_Title}The Red Moon").ToString();
 
 			var heroName = Hero.MainHero.FirstName;
 
@@ -84,7 +84,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 			};
 			
 			var eventOptionAText = new TextObject(
-                    "{=RedMoon_Event_Choice_1}You fall to your knees and start praying to the gods. Several of your men join you in prayer. \n \n" +
+                    "{=RedMoon_Event_Choice_1}You fall to your knees and start praying to the gods. Several of your men join you in prayer.\n\n" +
                     "After praying for almost 10 minutes you realize that this won't help. You order your men to give you {goldLostToReligion} gold that you will rush to the " +
                     "nearest chapel. Hopefully the priests can help you. You mount your steed and ride of. You ride like a madman towards {closestSettlement} as you know the " +
                     "settlement has a place of worship. As your steed jumps over a fence you fall off and black out.\n" +
@@ -97,7 +97,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "{=RedMoon_Event_Choice_2}You call your men to you. Many are panicking and you see genuine fear in " +
                     "their faces. You tell them to stop and calm down but to no avail. They start running around like " +
                     "headless chickens again. You decide not to waste your time and let the fanatics do what they want. " +
-                    "You decide to retire to your tent.\n \nWhen you wake up the following morning you learn that " +
+                    "You decide to retire to your tent.\n\nWhen you wake up the following morning you learn that " +
                     "{menLostToReligion} of your men left your party in the direction of {closestSettlement}. They also " +
                     "inform you they took {goldLostToReligion} gold from the treasury as an offering to the church. At " +
                     "least the fanatics are gone!")
@@ -116,8 +116,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventOptionDText = new TextObject(
-                    "{=RedMoon_Event_Choice_4}Nope...\n \nYou turn around and go back into your tent, straight to " +
-                    "sleep.\n \nWhen you wake up the following morning you learn that {menLostToReligion} of your men " +
+                    "{=RedMoon_Event_Choice_4}Nope...\n\nYou turn around and go back into your tent, straight to " +
+                    "sleep.\n\nWhen you wake up the following morning you learn that {menLostToReligion} of your men " +
                     "left your party in the direction of {closestSettlement}. They also inform you they took " +
                     "{goldLostToReligion} gold from the treasury as an offering to the church. At least the fanatics " +
                     "are gone!")
@@ -161,7 +161,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             
                             Hero.MainHero.ChangeHeroGold(-goldLostToReligion);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             break;
                         case "b":
@@ -170,7 +170,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             Hero.MainHero.ChangeHeroGold(-goldLostToReligion);
                             MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menLostToReligion, false);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             break;
                         case "c":
@@ -178,7 +178,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             
                             MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menLostToReligion, false);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                             
                             break;
                         case "d":
@@ -187,7 +187,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             Hero.MainHero.ChangeHeroGold(-goldLostToReligion);
                             MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menLostToReligion, false);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                             
                             break;
                         default:

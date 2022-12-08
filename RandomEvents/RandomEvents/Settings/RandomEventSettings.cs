@@ -7,9 +7,8 @@ namespace CryingBuffalo.RandomEvents.Settings
 {
     internal class RandomEventSettings
     {
-        #region EventData Declarations
-        
-        
+        #region Phill Events
+
         public BetMoneyData BetMoneyData { get; } = new BetMoneyData("BetMoney", MCM_MenuConfig_Chances.Instance.Bet_Money_Chance);
         
         
@@ -80,8 +79,12 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         
         public HotSpringsData HotSpringsData { get; } = new HotSpringsData("HotSprings", MCM_MenuConfig_Chances.Instance.Hot_Springs_Chance);
+
+        #endregion
         
-        
+
+        #region CC Events
+
         public SupernaturalEncounterData SupernaturalEncounterData { get; } = new SupernaturalEncounterData("SupernaturalEncounter", MCM_MenuConfig_Chances.Instance.Supernatural_Encounter_Chance);
         
         
@@ -141,6 +144,16 @@ namespace CryingBuffalo.RandomEvents.Settings
 
         public RobberyData RobberyData { get; } = new RobberyData("Robbery", MCM_MenuConfig_Chances.Instance.Robbery_Chance);
         
+        
+        public TravellersData TravellersData { get; } = new TravellersData("Travellers", MCM_MenuConfig_Chances.Instance.Travellers_Chance);
+        
+        
+        public DuelData DuelData { get; } = new DuelData("Duel", MCM_MenuConfig_Chances.Instance.Duel_Chance);
+
+        #endregion
+        
+
+        #region Bickley Events
 
         public BirdSongsData BirdSongsData { get; } = new BirdSongsData("BirdSongs", MCM_MenuConfig_Chances.Instance.Bird_Songs_Chance);
         
@@ -161,11 +174,20 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         
         public DreadedSweatsData DreadedSweatsData { get; } = new DreadedSweatsData("DreadedSweats", MCM_MenuConfig_Chances.Instance.Dreaded_Sweats_Chance);
+        
 
         public ArmyGamesData ArmyGamesData { get; } = new ArmyGamesData("ArmyGames", MCM_MenuConfig_Chances.Instance.Army_Games_Chance);
 
-        public CompanionAdmireData CompanionAdmireData { get; } = new CompanionAdmireData("CompanionAdmire", MCM_MenuConfig_Chances.Instance.Companion_Admire_Chance);
+        
+        public CompanionAdmireData CompanionAdmireData { get; } = new CompanionAdmireData("CompanionAdmire", MCM_MenuConfig_Chances.Instance.Companion_Admire_Chance); 
+        
+
+        public ArmyInviteData ArmyInviteData { get; } = new ArmyInviteData("ArmyInvite", MCM_MenuConfig_Chances.Instance.ArmyInvite_Chance);
+        
+
+        public FeastData FeastData { get; } = new FeastData("Feast", MCM_MenuConfig_Chances.Instance.Feast_Chance);
 
         #endregion
+        
     }
 }

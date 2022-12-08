@@ -16,10 +16,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         
         public bool GS_FirstRunDone { get; set; }
         public bool GS_DebugMode { get; private set; }
+        public bool GS_Disable_Supernatural { get; private set; }
         public int GS_MinimumInGameHours { get; private set; }
         private int GS_MinimumRealMinutes { get; set; }
         public int GS_MaximumRealMinutes { get; private set; }
         public int GS_GeneralLevelXpMultiplier { get; private set; }
+        public bool GS_DisableSkillChecks { get; private set; }
 
         #endregion
 
@@ -48,12 +50,17 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var gs5_hint = new TextObject("{=mcm_gs5_hint}Maximum amount of minutes in between events.").ToString();
             var gs6_text = new TextObject("{=mcm_gs6_text}6. General Level XP Multiplier ").ToString();
             var gs6_hint = new TextObject("{=mcm_gs6_hint}The number used to define the XP multiplier. Higher number means higher XP.").ToString();
+            var gs7_text = new TextObject("{=mcm_gs7_text}7. Disable Supernatural Events").ToString();
+            var gs7_hint = new TextObject("{=mcm_gs7_hint}Check this if you want to disable all supernatural events. This is mostly to keep the game as canon as possible.").ToString();
+            var gs8_text = new TextObject("{=mcm_gs8_text}8. Disable Skill Checks").ToString();
+            var gs8_hint = new TextObject("{=mcm_gs8_hint}Some events have skill checks that open up new options. This disables that and makes all options available.").ToString();
+
 
             #endregion
             
             
             
-            var builder = BaseSettingsBuilder.Create("RandomEvents3","3. Random Events - Settings")!
+            var builder = BaseSettingsBuilder.Create("RandomEvents4","4. Random Events - Settings")!
                 .SetFormat("xml")
                 .SetFolderName(RandomEventsSubmodule.FolderName)
                 .SetSubFolder(RandomEventsSubmodule.ModName)
@@ -75,6 +82,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                         .SetHintText(gs5_hint))
                     .AddInteger("GS6", gs6_text,10,70, new ProxyRef<int>(() => GS_GeneralLevelXpMultiplier, o => GS_GeneralLevelXpMultiplier = o), integerBuilder => integerBuilder
                         .SetHintText(gs6_hint))
+                    .AddBool("GS7", gs7_text, new ProxyRef<bool>(() => GS_Disable_Supernatural, o => GS_Disable_Supernatural = o), boolBuilder => boolBuilder
+                        .SetHintText(gs7_hint))
+                    .AddBool("GS8", gs8_text, new ProxyRef<bool>(() => GS_DisableSkillChecks, o => GS_DisableSkillChecks = o), boolBuilder => boolBuilder
+                        .SetHintText(gs8_hint))
                     
                 #endregion
                 );
@@ -102,9 +113,11 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.GS_MinimumRealMinutes = 5;
             Instance.GS_MaximumRealMinutes = 30;
             Instance.GS_GeneralLevelXpMultiplier = 40;
-            
+            Instance.GS_Disable_Supernatural = false;
+            Instance.GS_DisableSkillChecks = false;
+
             #endregion
-            
+
             #endregion
         }
         

@@ -16,8 +16,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
         public SecretSinger() : base(ModSettings.RandomEvents.SecretSingerData)
         {
-            minMoraleGain = MCM_MenuConfig_N_Z.Instance.SS_MinMoraleGained;
-            maxMoraleGain = MCM_MenuConfig_N_Z.Instance.SS_MaxMoraleGained;
+            minMoraleGain = MCM_MenuConfig_P_Z.Instance.SS_MinMoraleGained;
+            maxMoraleGain = MCM_MenuConfig_P_Z.Instance.SS_MaxMoraleGained;
         }
 
         public override void CancelEvent()
@@ -26,7 +26,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_N_Z.Instance.SS_Disable == false;
+            return MCM_MenuConfig_P_Z.Instance.SS_Disable == false;
         }
 
         public override void StartEvent()

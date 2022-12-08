@@ -16,17 +16,17 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
     {
         private readonly int minMen;
         private readonly int maxMen;
-        private readonly float menToKill;
+        private readonly int maxMenToKill;
         private readonly int minGoldFound;
         private readonly int maxGoldFound;
 
         public OldRuins() : base(ModSettings.RandomEvents.OldRuinsData)
         {
-            minMen = MCM_MenuConfig_N_Z.Instance.OR_MinSoldiers;
-            maxMen = MCM_MenuConfig_N_Z.Instance.OR_MaxSoldiers;
-            menToKill = MCM_MenuConfig_N_Z.Instance.OR_MenToKill;
-            minGoldFound = MCM_MenuConfig_N_Z.Instance.OR_MinGoldFound;
-            maxGoldFound = MCM_MenuConfig_N_Z.Instance.OR_MaxGoldFound;
+            minMen = MCM_MenuConfig_G_O.Instance.OR_MinSoldiers;
+            maxMen = MCM_MenuConfig_G_O.Instance.OR_MaxSoldiers;
+            maxMenToKill = MCM_MenuConfig_G_O.Instance.OR_MaxMenToKill;
+            minGoldFound = MCM_MenuConfig_G_O.Instance.OR_MinGoldFound;
+            maxGoldFound = MCM_MenuConfig_G_O.Instance.OR_MaxGoldFound;
         }
 
         public override void CancelEvent()
@@ -35,7 +35,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_N_Z.Instance.OR_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_G_O.Instance.OR_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
@@ -51,7 +51,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var manCount  = MBRandom.RandomInt(minMen, maxMen);
 
-            var killedMen = (int)Math.Floor(manCount * menToKill);
+            var killedMen = MBRandom.RandomInt(1, maxMenToKill);
 
             var goldFound = MBRandom.RandomInt(minGoldFound, maxGoldFound);
 
@@ -101,7 +101,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     " and have your men scatter to search for anything interesting. You decide to check the living room." +
                     " Nothing special here except bugs and spiders. You head back out to make sure your horses are" +
                     " still there. As you head out of the building you hear the deafening sound of the entire building" +
-                    " collapsing behind you. \n\nConfused you start to call out the names of your men but no one" +
+                    " collapsing behind you.\n\nConfused you start to call out the names of your men but no one" +
                     " responds. You return to the main party and gathers some additional soldiers to help retrieve" +
                     " them men trapped. Sadly only 2 of them survived and the {killedMen} others perished from being crushed.")
                 .SetTextVariable("killedMen", killedMen)
@@ -150,7 +150,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     {
                         case "a":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(killedMen, false);
                             break;
@@ -166,7 +166,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "d":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(+goldForYou);
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                             break;
                         case "e":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionEText, true, false, eventButtonText2, null, null, null), true);

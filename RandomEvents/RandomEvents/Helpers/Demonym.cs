@@ -3,6 +3,7 @@
 namespace CryingBuffalo.RandomEvents.Helpers
 {
     //In English, demonyms are always capitalized.
+    //Defaults to Imperial if error
     public static class Demonym
     {
         public static string GetTheDemonym(string culture, bool noun)
@@ -15,7 +16,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
                     "Battania" => new TextObject("{=Demonym_Battania_Noun}a Battanian").ToString(),
                     "Aserai" => new TextObject("{=Demonym_Aserai_Noun}an Aserai").ToString(),
                     "Khuzait" => new TextObject("{=Demonym_Khuzait_Noun}a Khuzait").ToString(),
-                    _ => new TextObject("{=Demonym_Error}Error - Could not fetch Demonym").ToString()
+                    _ => new TextObject("{=Demonym_Default_Noun}an Imperial").ToString()
                 }
                 : culture switch
                 {
@@ -25,7 +26,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
                     "Battania" => new TextObject("{=Demonym_Battania}Battanian").ToString(),
                     "Aserai" => new TextObject("{=Demonym_Aserai}Aserai").ToString(),
                     "Khuzait" => new TextObject("{=Demonym_Khuzait}Khuzait").ToString(),
-                    _ => new TextObject("{=Demonym_Error}Error - Could not fetch Demonym").ToString()
+                    _ => new TextObject("{=Demonym_Default}Imperial").ToString()
                 };
 
             return citizenName;

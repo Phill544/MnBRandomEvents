@@ -23,12 +23,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public MassGrave() : base(ModSettings.RandomEvents.MassGraveData)
         {
-            minSoldiers = MCM_MenuConfig_A_M.Instance.MG_MinSoldiers;
-            maxSoldiers = MCM_MenuConfig_A_M.Instance.MG_MaxSoldiers;
-            minBodies = MCM_MenuConfig_A_M.Instance.MG_MinBodies;
-            maxBodies = MCM_MenuConfig_A_M.Instance.MG_MaxBodies;
-            minBaseMoraleLoss = MCM_MenuConfig_A_M.Instance.MG_MinBaseMoraleLoss;
-            maxBaseMoraleLoss = MCM_MenuConfig_A_M.Instance.MG_MaxBaseMoraleLoss;
+            minSoldiers = MCM_MenuConfig_G_O.Instance.MG_MinSoldiers;
+            maxSoldiers = MCM_MenuConfig_G_O.Instance.MG_MaxSoldiers;
+            minBodies = MCM_MenuConfig_G_O.Instance.MG_MinBodies;
+            maxBodies = MCM_MenuConfig_G_O.Instance.MG_MaxBodies;
+            minBaseMoraleLoss = MCM_MenuConfig_G_O.Instance.MG_MinBaseMoraleLoss;
+            maxBaseMoraleLoss = MCM_MenuConfig_G_O.Instance.MG_MaxBaseMoraleLoss;
         }
 
         public override void CancelEvent()
@@ -38,7 +38,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
 
-            return MCM_MenuConfig_A_M.Instance.MG_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_G_O.Instance.MG_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
@@ -91,7 +91,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOptionAText = new TextObject(
                     "{=MassGrave_Event_Choice_1}You order two of your men to go back to camp and fetch shovels, linen and more men while you and the others start to remove the bodies from the grave. " +
                     "You lay the bodies next to each other in neat lines. Whenever there is a child brought up from the grave you feel a great sadness and you cannot help hold back a few tears. Several of your " +
-                    "men weep as well and you feel the mood is very dark. \nYour men return with the requested supplies and additional men. Some start to dig graves while others wrap bodies in linen. " +
+                    "men weep as well and you feel the mood is very dark.\nYour men return with the requested supplies and additional men. Some start to dig graves while others wrap bodies in linen. " +
                     "In total you pull {bodiesInGrave} bodies from the mass grave. After spending several hours digging and burying you are finally done just before nightfall. " +
                     "You and your men return to camp and decided to sit around the campfire discussing your feelings after the today's events.")
                 .SetTextVariable("bodiesInGrave", bodiesInGrave)
@@ -144,7 +144,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MobileParty.MainParty.RecentEventsMorale -= baseMoraleLoss - 2;
                             MobileParty.MainParty.MoraleExplained.Add(-baseMoraleLoss - 2);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             break;
                         case "b":
@@ -153,7 +153,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MobileParty.MainParty.RecentEventsMorale -= baseMoraleLoss - 3;
                             MobileParty.MainParty.MoraleExplained.Add(-baseMoraleLoss - 3);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             break;
                         case "c":
@@ -162,7 +162,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MobileParty.MainParty.RecentEventsMorale -= baseMoraleLoss - 4;
                             MobileParty.MainParty.MoraleExplained.Add(-baseMoraleLoss - 4);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             break;
                         case "d":
@@ -171,7 +171,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MobileParty.MainParty.RecentEventsMorale -= baseMoraleLoss - 5;
                             MobileParty.MainParty.MoraleExplained.Add(-baseMoraleLoss - 5);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
                             break;
                         default:

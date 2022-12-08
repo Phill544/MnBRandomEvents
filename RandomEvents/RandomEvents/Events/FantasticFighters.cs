@@ -16,8 +16,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public FantasticFighters() : base(ModSettings.RandomEvents.FantasticFightersData)
 		{
-			minRenownGain = MCM_MenuConfig_A_M.Instance.FF_MinRenownGain;
-			maxRenownGain = MCM_MenuConfig_A_M.Instance.FF_MaxRenownGain;
+			minRenownGain = MCM_MenuConfig_A_F.Instance.FF_MinRenownGain;
+			maxRenownGain = MCM_MenuConfig_A_F.Instance.FF_MaxRenownGain;
 		}
 
 		public override void CancelEvent()
@@ -26,7 +26,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_M.Instance.FF_Disable == false && Hero.MainHero.Clan != null;
+			return MCM_MenuConfig_A_F.Instance.FF_Disable == false && Hero.MainHero.Clan != null;
 		}
 
 		public override void StartEvent()

@@ -14,13 +14,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class TravellingMerchant : BaseEvent
 	{
-		private readonly int minloot;
-		private readonly int maxloot;
+		private readonly int minLoot;
+		private readonly int maxLoot;
 
 		public TravellingMerchant() : base(Settings.ModSettings.RandomEvents.TravellingMerchantData)
 		{
-			minloot = MCM_MenuConfig_N_Z.Instance.TM_minloot;
-			maxloot = MCM_MenuConfig_N_Z.Instance.TM_maxloot;
+			minLoot = MCM_MenuConfig_P_Z.Instance.TM_minLoot;
+			maxLoot = MCM_MenuConfig_P_Z.Instance.TM_maxLoot;
 
 		}
 		public override void CancelEvent()
@@ -28,7 +28,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		}
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_N_Z.Instance.TM_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 5 && Clan.PlayerClan.Renown >= 500;
+			return MCM_MenuConfig_P_Z.Instance.TM_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 5 && Clan.PlayerClan.Renown >= 500;
 		}
 		public override void StartEvent()
 		{
@@ -37,11 +37,11 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
 			
-			var loot = MBRandom.RandomInt(minloot, maxloot);
+			var loot = MBRandom.RandomInt(minLoot, maxLoot);
 			
 			var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty);
 
-			var cultureclass = closestSettlement.Culture.ToString();
+			var cultureClass = closestSettlement.Culture.ToString();
 
 			var eventTitle = new TextObject("{=TravellingMerchant_Title}Travelling Merchant").ToString();
 			
@@ -172,7 +172,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 														  
 														  foreach (var characterObject in CharacterObject.All)
 														  {
-															  if (characterObject.StringId.Contains("caravan_master") && !characterObject.StringId.Contains("conspiracy") && characterObject.Culture.ToString() == cultureclass)
+															  if (characterObject.StringId.Contains("caravan_master") && !characterObject.StringId.Contains("conspiracy") && characterObject.Culture.ToString() == cultureClass)
 															  {
 																  troopRoster2.AddToCounts(characterObject, 1);
 															  }
@@ -180,7 +180,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 														  
 														  var emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
 														  
-														  PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Merchant").SetTextVariable("cultureclass", cultureclass), 20);
+														  PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Merchant").SetTextVariable("cultureclass", cultureClass), 20);
 														  
 														  var eventMsg2 = new TextObject("{=TravellingMerchant_Event_Msg_2}You subdued the merchant")
 														  .SetTextVariable("Loot", loot)
@@ -207,7 +207,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											
 											foreach (var characterObject in CharacterObject.All)
 											{
-												if (characterObject.StringId.Contains("caravan_master") && !characterObject.StringId.Contains("conspiracy") && characterObject.Culture.ToString() == cultureclass)
+												if (characterObject.StringId.Contains("caravan_master") && !characterObject.StringId.Contains("conspiracy") && characterObject.Culture.ToString() == cultureClass)
 												{
 													troopRoster2.AddToCounts(characterObject, 1);
 												}
@@ -215,7 +215,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											
 											var emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
 											
-											PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Merchant").SetTextVariable("cultureclass", cultureclass), 20);
+											PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Merchant").SetTextVariable("cultureclass", cultureClass), 20);
 											
 											var eventMsg2 = new TextObject("{=TravellingMerchant_Event_Msg_3}You subdued the merchant")
 											.SetTextVariable("Loot", loot)
@@ -269,7 +269,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 									
 									foreach (var characterObject in CharacterObject.All)
 									{
-										if (characterObject.StringId.Contains("caravan_master") && !characterObject.StringId.Contains("conspiracy") && characterObject.Culture.ToString() == cultureclass)
+										if (characterObject.StringId.Contains("caravan_master") && !characterObject.StringId.Contains("conspiracy") && characterObject.Culture.ToString() == cultureClass)
 										{
 											troopRoster2.AddToCounts(characterObject, 1);
 										}
@@ -277,7 +277,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 									
 									var emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
 									
-									PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Merchant").SetTextVariable("cultureclass", cultureclass), 20);
+									PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2, new TextObject("{cultureclass} Merchant").SetTextVariable("cultureclass", cultureClass), 20);
 									
 									var eventMsg3 = new TextObject("{=TravellingMerchant_Event_Msg_4}You subdued the merchant")
 										.SetTextVariable("Loot", loot)

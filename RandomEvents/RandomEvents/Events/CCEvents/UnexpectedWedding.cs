@@ -21,16 +21,18 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int embarrassedSoliderMaxGold;
         private readonly int minGoldRaided;
         private readonly int maxGoldRaided;
+        private readonly int minRogueryLevel;
 
         public UnexpectedWedding() : base(ModSettings.RandomEvents.UnexpectedWeddingData)
         {
-            minGoldToDonate = MCM_MenuConfig_N_Z.Instance.UW_MinGoldToDonate;
-            maxGoldToDonate = MCM_MenuConfig_N_Z.Instance.UW_MaxGoldToDonate;
-            minPeopleInWedding = MCM_MenuConfig_N_Z.Instance.UW_MinPeopleInWedding;
-            maxPeopleInWedding = MCM_MenuConfig_N_Z.Instance.UW_MaxPeopleInWedding;
-            embarrassedSoliderMaxGold = MCM_MenuConfig_N_Z.Instance.UW_EmbarrassedSoliderMaxGold;
-            minGoldRaided = MCM_MenuConfig_N_Z.Instance.UW_MinGoldRaided;
-            maxGoldRaided = MCM_MenuConfig_N_Z.Instance.UW_MaxGoldRaided;
+            minGoldToDonate = MCM_MenuConfig_P_Z.Instance.UW_MinGoldToDonate;
+            maxGoldToDonate = MCM_MenuConfig_P_Z.Instance.UW_MaxGoldToDonate;
+            minPeopleInWedding = MCM_MenuConfig_P_Z.Instance.UW_MinPeopleInWedding;
+            maxPeopleInWedding = MCM_MenuConfig_P_Z.Instance.UW_MaxPeopleInWedding;
+            embarrassedSoliderMaxGold = MCM_MenuConfig_P_Z.Instance.UW_EmbarrassedSoliderMaxGold;
+            minGoldRaided = MCM_MenuConfig_P_Z.Instance.UW_MinGoldRaided;
+            maxGoldRaided = MCM_MenuConfig_P_Z.Instance.UW_MaxGoldRaided;
+            minRogueryLevel = MCM_MenuConfig_P_Z.Instance.UW_MinRogueryLevel;
         }
 
         public override void CancelEvent()
@@ -39,7 +41,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_N_Z.Instance.UW_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_P_Z.Instance.UW_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
@@ -53,6 +55,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var goldToDonate = MBRandom.RandomInt(minGoldToDonate, maxGoldToDonate);
             
+            var heroName = Hero.MainHero.FirstName;
+            
             var peopleInWedding = MBRandom.RandomInt(minPeopleInWedding, maxPeopleInWedding);
             
             var partyFood = MobileParty.MainParty.TotalFoodAtInventory;
@@ -63,6 +67,29 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
             
+            var rogueryLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Roguery);
+
+            var canRaidWedding = false;
+            var rogueryAppendedText = "";
+
+            if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
+            {
+                canRaidWedding = true;
+                rogueryAppendedText = new TextObject("{=UnexpectedWedding_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
+                
+            }
+            else
+            {
+                if (rogueryLevel >= minRogueryLevel)
+                {
+                    canRaidWedding = true;
+                    rogueryAppendedText = new TextObject("{=UnexpectedWedding_Roguery_Appended_Text}[Roguery - lvl {minRogueryLevel}]")
+                        .SetTextVariable("minRogueryLevel", minRogueryLevel)
+                        .ToString();
+                }
+                
+            }
+
             var eventDescription = new TextObject(
                     "{=UnexpectedWedding_Event_Desc}You and your party are traveling in the vicinity of {closestSettlement} when you stumble across {peopleInWedding} people in a wedding taking place. " +
                     "The guests invite you over to celebrate this momentous event with them.")
@@ -82,21 +109,22 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption4 = new TextObject("{=UnexpectedWedding_Event_Option_4}Leave").ToString();
             var eventOption4Hover = new TextObject("{=UnexpectedWedding_Event_Option_4_Hover}Not interested").ToString();
             
-            var eventOption5 = new TextObject("{=UnexpectedWedding_Event_Option_5}Raid the wedding").ToString();
-            var eventOption5Hover = new TextObject("{=UnexpectedWedding_Event_Option_5_Hover}You could do with some gold").ToString();
+            var eventOption5 = new TextObject("{=UnexpectedWedding_Event_Option_5}[Roguery] Raid the wedding").ToString();
+            var eventOption5Hover = new TextObject("{=UnexpectedWedding_Event_Option_5_Hover}You could do with some gold\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
             
             var eventButtonText1 = new TextObject("{=UnexpectedWedding_Event_Button_Text_1}Okay").ToString();
             var eventButtonText2 = new TextObject("{=UnexpectedWedding_Event_Button_Text_2}Done").ToString();
-            
-            var inquiryElements = new List<InquiryElement>
+
+            var inquiryElements = new List<InquiryElement>();
+            inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover));
+            inquiryElements.Add(new InquiryElement("b", eventOption2, null, true, eventOption2Hover));
+            inquiryElements.Add(new InquiryElement("c", eventOption3, null, true, eventOption3Hover));
+            inquiryElements.Add(new InquiryElement("d", eventOption4, null, true, eventOption4Hover));
+            if (canRaidWedding)
             {
-                new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
-                new InquiryElement("b", eventOption2, null, true, eventOption2Hover),
-                new InquiryElement("c", eventOption3, null, true, eventOption3Hover),
-                new InquiryElement("d", eventOption4, null, true, eventOption4Hover),
-                new InquiryElement("e", eventOption5, null, true, eventOption5Hover)
-            };
-            
+                inquiryElements.Add(new InquiryElement("e", eventOption5, null, true, eventOption5Hover));
+            }
+
             var eventOptionAText = new TextObject(
                     "{=UnexpectedWedding_Event_Choice_1}You congratulate the couple and you and your men scrape together {goldToDonate} gold and give it as a gift. Your party then spends the evening having fun!")
                 .SetTextVariable("goldToDonate", goldToDonate)
@@ -126,27 +154,31 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "{=UnexpectedWedding_Event_Choice_5}You have your men surround the area while you go and talk to the guests. You have all guests empty their pockets and give you anything valuable. " + 
                     "Some guests resist but after a few threatening gestures from your men they too fall in line. After you have stolen {raidedGold} gold and anything of value from the wedding, " +
                     "you order your men to trash the entire area. Your men do so without blinking an eye. You see the bride crying while being comforted by some guests. You can see the " +
-                    "hate in the groom's eyes. He will undoubtedly remember you.\n \n After you have personally made sure that you have thoroughly ruined this once joyful moment, you order your men to leave.")
+                    "hate in the groom's eyes. He will undoubtedly remember you.\n\nAfter you have personally made sure that you have thoroughly ruined this once joyful moment, you order your men to leave.")
                 .SetTextVariable("raidedGold", raidedGold)
                 .ToString();
             
             var eventMsg1 =new TextObject(
-                    "{=UnexpectedWedding_Event_Msg_1}You gave the newlyweds {goldToDonate} gold.")
+                    "{=UnexpectedWedding_Event_Msg_1}{heroName} gave the newlyweds {goldToDonate} gold.")
+                .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldToDonate", goldToDonate)
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=UnexpectedWedding_Event_Msg_2}You made the soldier who embarrassed you give the newlyweds {embarrassedSoliderGold} gold.")
+                    "{=UnexpectedWedding_Event_Msg_2}{heroName} made the soldier who embarrassed you give the newlyweds {embarrassedSoliderGold} gold.")
+                .SetTextVariable("heroName", heroName)
                 .SetTextVariable("embarrassedSoliderGold", embarrassedSoliderGold)
                 .ToString();
             
             var eventMsg3 =new TextObject(
-                    "{=UnexpectedWedding_Event_Msg_3}You gave the newlyweds {goldToDonate} gold.")
+                    "{=UnexpectedWedding_Event_Msg_3}{heroName} gave the newlyweds {goldToDonate} gold.")
+                .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldToDonate", goldToDonate)
                 .ToString();
             
             var eventMsg4 =new TextObject(
-                    "{=UnexpectedWedding_Event_Msg_4}You stole {raidedGold} gold from the wedding.")
+                    "{=UnexpectedWedding_Event_Msg_4}{heroName} stole {raidedGold} gold from the wedding.")
+                .SetTextVariable("heroName", heroName)
                 .SetTextVariable("raidedGold", raidedGold)
                 .ToString();
 
@@ -159,7 +191,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldToDonate);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
 
                             break;
                         case "b" when partyFood >= 5:
@@ -170,7 +202,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionB2Text, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-embarrassedSoliderGold);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                             
                             break;
                         }
@@ -178,7 +210,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldToDonate);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                             
                             break;
                         case "d":
@@ -188,7 +220,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionEText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(+raidedGold);
                             
-                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color));
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_EVIL_Outcome));
                             
                             break;
                         default:
