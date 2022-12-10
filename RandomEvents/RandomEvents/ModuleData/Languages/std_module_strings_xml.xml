@@ -1184,7 +1184,7 @@
 
 
 
-    <!--MCM STUFF-->
+    <!--MCM-->
     <string id="mcm_adv_heading" text="Encounter Chance Settings" />
     <string id="mcm_adv1_hint" text="The chance to see this event will increase the higher the number. Please note that if all events are equal, they will all have the same chance." />
     <string id="mcm_adv1_text" text="A Flirtatious Encounter" />

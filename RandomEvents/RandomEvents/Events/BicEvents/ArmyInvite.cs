@@ -12,7 +12,6 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
-	/*
 	public sealed class ArmyInvite : BaseEvent
 	{
 
@@ -30,10 +29,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			var Lords = Clan.PlayerClan.Kingdom.Lords.ToList();
-			var Generals = Lords.Where(lord => lord == lord.PartyBelongedTo?.Army?.ArmyOwner).ToList();
-			if (Generals.Count == 0)
-				return false;
+			if (Clan.PlayerClan.Kingdom != null)
+			{
+				var Lords = Clan.PlayerClan.Kingdom.Lords.ToList();
+				var Generals = Lords.Where(lord => lord == lord.PartyBelongedTo?.Army?.ArmyOwner).ToList();
+				if (Generals.Count == 0)
+					return false;
+			}
 			
 			return MCM_MenuConfig_A_F.Instance.AI_Disable == false && Clan.PlayerClan.Kingdom != null && MobileParty.MainParty.Army == null && Clan.PlayerClan.Kingdom.Armies != null;
 		}
@@ -104,5 +106,4 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			return new ArmyInvite();
 		}
 	}
-	*/
 }

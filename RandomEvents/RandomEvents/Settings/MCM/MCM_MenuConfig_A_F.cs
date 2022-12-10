@@ -36,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
         #region Army Invite - Variables
 
-        //public bool AI_Disable { get; private set; }
+        public bool AI_Disable { get; private set; }
 
         #endregion
 
@@ -299,11 +299,9 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             #endregion
 
             #region Army Invite - Strings
-            /*
             var ai_heading = new TextObject("{=mcm_ai_heading}Army Invite").ToString();
             var ai1_text = new TextObject("{=mcm_ai1_text}1. Deactivate event").ToString();
             var ai1_hint = new TextObject("{=mcm_ai1_hint}If you dont want this event to show up you can deactivate it.").ToString();
-            */
             #endregion 
 
             #region Ahead of Time - Strings
@@ -684,13 +682,11 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                 #endregion
 
                 #region Army invite - Builder
-
-                /*
+                
                .CreateGroup(ai_heading, groupBuilder => groupBuilder
                .AddBool("AI1", ai1_text, new ProxyRef<bool>(() => AI_Disable, o => AI_Disable = o), boolBuilder => boolBuilder
                         .SetHintText(ai1_hint))
                )
-               */
                #endregion
 
                 #region Ahead of Time - Builder
@@ -1083,7 +1079,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
 
             #region Army Invite
 
-            //Instance.AI_Disable = false;
+            Instance.AI_Disable = false;
 
             #endregion
 
