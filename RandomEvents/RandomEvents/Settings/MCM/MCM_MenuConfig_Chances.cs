@@ -15,7 +15,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public float A_Flirtatious_Encounter_Chance{ get; private set; }
         public float Ahead_Of_Time_Chance{ get; private set; }
         public float Army_Games_Chance { get; private set; }
-        public float ArmyInvite_Chance { get; private set; }
+        //public float ArmyInvite_Chance { get; private set; }
         public float Bandit_Ambush_Chance{ get; private set; }
         public float Bee_Kind_Chance{ get; private set; }
         public float Bet_Money_Chance{ get; private set; }
@@ -267,8 +267,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV54", adv54_text,5, 100, new ProxyRef<float>(() => Companion_Admire_Chance, o => Companion_Admire_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
-                        .AddFloatingInteger ("ADV55", adv55_text, 5, 100, new ProxyRef<float>(() => ArmyInvite_Chance, o => ArmyInvite_Chance = o), floatBuilder => floatBuilder
-                            .SetHintText(adv_hint))
+                        //.AddFloatingInteger ("ADV55", adv55_text, 5, 100, new ProxyRef<float>(() => ArmyInvite_Chance, o => ArmyInvite_Chance = o), floatBuilder => floatBuilder
+                            //.SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV56", adv56_text, 5, 100, new ProxyRef<float>(() => Feast_Chance, o => Feast_Chance = o), floatBuilder => floatBuilder
                            .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV57", adv57_text, 5, 100, new ProxyRef<float>(() => Travellers_Chance, o => Travellers_Chance = o), floatBuilder => floatBuilder
@@ -298,7 +298,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.A_Flirtatious_Encounter_Chance = 60.0f;
             Instance.Ahead_Of_Time_Chance = 50.0f;
             Instance.Army_Games_Chance = 60.0f;
-            Instance.ArmyInvite_Chance = 60.0f;
+            //Instance.ArmyInvite_Chance = 60.0f;
             Instance.Bandit_Ambush_Chance = 50.0f;
             Instance.Bee_Kind_Chance = 50.0f;
             Instance.Bet_Money_Chance = 50.0f;

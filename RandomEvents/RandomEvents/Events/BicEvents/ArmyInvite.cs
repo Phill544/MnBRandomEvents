@@ -12,6 +12,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
+	/*
 	public sealed class ArmyInvite : BaseEvent
 	{
 
@@ -103,4 +104,5 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			return new ArmyInvite();
 		}
 	}
+	*/
 }
