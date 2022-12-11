@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int minTwoHandedLevel;
         private readonly int minRogueryLevel;
 
-        public Duel() : base(ModSettings.RandomEvents.BeggarBeggingData)
+        public Duel() : base(ModSettings.RandomEvents.DuelData)
         {
             minTwoHandedLevel = MCM_MenuConfig_A_F.Instance.DU_minTwoHandedLevel;
             minRogueryLevel = MCM_MenuConfig_A_F.Instance.DU_minRogueryLevel;
