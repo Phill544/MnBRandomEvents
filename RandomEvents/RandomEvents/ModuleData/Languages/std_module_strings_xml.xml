@@ -75,7 +75,7 @@
     <string id="BirthdayParty_Event_Choice_4" text="You decide that this is the perfect moment to let loose your somewhat evil side. You order your men you surround the party and you tell every guest to hand over everything of value. They refuse at the beginning but you have one of your men kill a random person. They all fall in line after that and hand over everything. Once you have everything you and your men leave but not before tossing over 1 gold coin to the birthday girl who is clearly very upset. You are left with {goldLooted} gold." />
 
     <!--BirthdayParty - Log Messages-->
-    <string id="BirthdayParty_Event_Msg_1" text="{heroName} gave away {goldGiven} to the girl and gained {renownGain} renown for slaying the bandits." />
+    <string id="BirthdayParty_Event_Msg_1" text="{heroName} gave away {goldGiven} to the girl and gained {influenceGain} influence for slaying the bandits." />
     <string id="BirthdayParty_Event_Msg_2" text="{heroName} gave away {goldGiven} to the girl." />
     <string id="BirthdayParty_Event_Msg_3" text="{heroName} looted {goldLooted} from the birthday party." />
 
@@ -1336,38 +1336,10 @@
     <string id="mcm_bs3_text" text="3. Deactivate event" />
     <string id="mcm_bs3_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_bp_heading" text="Birthday Party" />
-    <string id="mcm_bp1_text" text="1. Min Attending" />
-    <string id="mcm_bp1_hint" text="Minimum amount of guests attending." />
-    <string id="mcm_bp2_text" text="2. Max Attending" />
-    <string id="mcm_bp2_hint" text="Maximum amount of guests attending." />
-    <string id="mcm_bp3_text" text="3. Min your men" />
-    <string id="mcm_bp3_hint" text="Minimum amount of your men attending." />
-    <string id="mcm_bp4_text" text="4. Max your men." />
-    <string id="mcm_bp4_hint" text="Maximum amount of your men attending." />
-    <string id="mcm_bp5_text" text="5. Min Age" />
-    <string id="mcm_bp5_hint" text="The girls minimum age." />
-    <string id="mcm_bp6_text" text="6. Max Age" />
-    <string id="mcm_bp6_hint" text="The girls maximum age." />
-    <string id="mcm_bp7_text" text="7. Min Bandits" />
-    <string id="mcm_bp7_hint" text="Minimum amount of bandits that can appear." />
-    <string id="mcm_bp8_text" text="8. Max Bandits" />
-    <string id="mcm_bp8_hint" text="Maximum amount of bandits that can appear." />
-    <string id="mcm_bp9_text" text="9. Min gold given" />
-    <string id="mcm_bp9_hint" text="Minimum amount of gold given to the girl." />
-    <string id="mcm_bp10_text" text="10. Max gold given" />
-    <string id="mcm_bp10_hint" text="Maximum amount of gold given to the girl." />
-    <string id="mcm_bp11_text" text="11. Min renown gain" />
-    <string id="mcm_bp11_hint" text="Minimum amount of renown you can gain." />
-    <string id="mcm_bp12_text" text="12. Max renown gain" />
-    <string id="mcm_bp12_hint" text="Maximum amount of renown you can gain." />
-    <string id="mcm_bp13_text" text="13. Min gold to loot" />
-    <string id="mcm_bp13_hint" text="Minimum amount of gold you can loot from the party." />
-    <string id="mcm_bp14_text" text="14. Max gold to loot" />
-    <string id="mcm_bp14_hint" text="Minimum amount of gold you can loot from the party." />
-    <string id="mcm_bp15_text" text="15. Min Roguery Level" />
-    <string id="mcm_bp15_hint" text="Lowest level to unlock the roguery option." />
-    <string id="mcm_bp16_text" text="16. Deactivate event" />
-    <string id="mcm_bp16_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_bp1_text" text="1. Min Roguery Level" />
+    <string id="mcm_bp1_hint" text="Lowest level to unlock the roguery option." />
+    <string id="mcm_bp2_text" text="2. Deactivate event" />
+    <string id="mcm_bp2_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_bu_heading" text="Bottoms Up" />
     <string id="mcm_bu1_text" text="1.Min Morale Gain" />
     <string id="mcm_bu1_hint" text="The minimum morale gain." />

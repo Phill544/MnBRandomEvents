@@ -25,13 +25,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public UnexpectedWedding() : base(ModSettings.RandomEvents.UnexpectedWeddingData)
         {
-            minGoldToDonate = MCM_MenuConfig_P_Z.Instance.UW_MinGoldToDonate;
-            maxGoldToDonate = MCM_MenuConfig_P_Z.Instance.UW_MaxGoldToDonate;
-            minPeopleInWedding = MCM_MenuConfig_P_Z.Instance.UW_MinPeopleInWedding;
-            maxPeopleInWedding = MCM_MenuConfig_P_Z.Instance.UW_MaxPeopleInWedding;
-            embarrassedSoliderMaxGold = MCM_MenuConfig_P_Z.Instance.UW_EmbarrassedSoliderMaxGold;
-            minGoldRaided = MCM_MenuConfig_P_Z.Instance.UW_MinGoldRaided;
-            maxGoldRaided = MCM_MenuConfig_P_Z.Instance.UW_MaxGoldRaided;
+            minGoldToDonate = 100;
+            maxGoldToDonate = 750;
+            minPeopleInWedding = 10;
+            maxPeopleInWedding = 60;
+            embarrassedSoliderMaxGold = 100;
+            minGoldRaided = 250;
+            maxGoldRaided = 1500;
+            
             minRogueryLevel = MCM_MenuConfig_P_Z.Instance.UW_MinRogueryLevel;
         }
 
@@ -61,7 +62,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             
             var partyFood = MobileParty.MainParty.TotalFoodAtInventory;
 
-            var raidedGold = MBRandom.RandomInt(minGoldRaided, maxGoldRaided);
+            var goldBase = MBRandom.RandomInt(minGoldRaided, maxGoldRaided);
+
+            var raidedGold = goldBase * peopleInWedding;
             
             var embarrassedSoliderGold = MBRandom.RandomInt(10, embarrassedSoliderMaxGold);
             

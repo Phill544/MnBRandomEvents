@@ -160,13 +160,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         #region Unexcpected Wedding - Variables
         
         public bool UW_Disable { get; private set; }
-        public int UW_MinGoldToDonate { get; private set; }
-        public int UW_MaxGoldToDonate { get; private set; }
-        public int UW_MinPeopleInWedding { get; private set; }
-        public int UW_MaxPeopleInWedding { get; private set; }
-        public int UW_EmbarrassedSoliderMaxGold { get; private set; }
-        public int UW_MinGoldRaided { get; private set; }
-        public int UW_MaxGoldRaided { get; private set; }
         public int UW_MinRogueryLevel { get; private set; }
         
         #endregion
@@ -435,24 +428,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             #region Unexpected Wedding - Strings
             
             var uw_heading = new TextObject("{=mcm_uw_heading}Unexpected Wedding").ToString();
-            var uw1_text = new TextObject("{=mcm_uw1_text}1. Min Gold To Give").ToString();
-            var uw1_hint = new TextObject("{=mcm_uw1_hint}Minimum amount of gold you give as a gift.").ToString();
-            var uw2_text = new TextObject("{=mcm_uw2_text}2. Max Gold To Give").ToString();
-            var uw2_hint = new TextObject("{=mcm_uw2_hint}Maximum amount of gold you give as a gift.").ToString();
-            var uw3_text = new TextObject("{=mcm_uw3_text}3. Min People In Wedding").ToString();
-            var uw3_hint = new TextObject("{=mcm_uw3_hint}Minimum amount of people in the wedding.").ToString();
-            var uw4_text = new TextObject("{=mcm_uw4_text}4. Max People In Wedding").ToString();
-            var uw4_hint = new TextObject("{=mcm_uw4_hint}Maximum amount of people in the wedding.").ToString();
-            var uw5_text = new TextObject("{=mcm_uw5_text}5. Max Gold Soldier Must Give").ToString();
-            var uw5_hint = new TextObject("{=mcm_uw5_hint}Maximum amount of gold a solider is forced to give if the event requires it.").ToString();
-            var uw6_text = new TextObject("{=mcm_uw6_text}6. Min Gold To Raid").ToString();
-            var uw6_hint = new TextObject("{=mcm_uw6_hint}Minimum amount of of gold that can be raided during this event.").ToString();
-            var uw7_text = new TextObject("{=mcm_uw7_text}7. Max Gold To Raid").ToString();
-            var uw7_hint = new TextObject("{=mcm_uw7_hint}Maximum amount of gold that can be raided during this event.").ToString();
-            var uw8_text = new TextObject("{=mcm_uw8_text}8. Min Roguery Level").ToString();
-            var uw8_hint = new TextObject("{=mcm_uw8_hint}Lowest level to unlock the roguery option.").ToString();
-            var uw9_text = new TextObject("{=mcm_uw9_text}9. Deactivate event").ToString();
-            var uw9_hint = new TextObject("{=mcm_uw9_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var uw1_text = new TextObject("{=mcm_uw1_text}1. Min Roguery Level").ToString();
+            var uw1_hint = new TextObject("{=mcm_uw1_hint}Lowest level to unlock the roguery option.").ToString();
+            var uw2_text = new TextObject("{=mcm_uw2_text}2. Deactivate event").ToString();
+            var uw2_hint = new TextObject("{=mcm_uw2_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -747,24 +726,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                 #region Unexpected Wedding - Builder
                 
                 .CreateGroup(uw_heading, groupBuilder => groupBuilder
-                        .AddInteger("UW1", uw1_text,20,500, new ProxyRef<int>(() => UW_MinGoldToDonate, o => UW_MinGoldToDonate = o), integerBuilder => integerBuilder
+                        .AddInteger("UW1", uw1_text,25,275, new ProxyRef<int>(() => UW_MinRogueryLevel, o => UW_MinRogueryLevel = o), integerBuilder => integerBuilder
                             .SetHintText(uw1_hint))
-                        .AddInteger("UW2", uw2_text,20,500, new ProxyRef<int>(() => UW_MaxGoldToDonate, o => UW_MaxGoldToDonate = o), integerBuilder => integerBuilder
+                        .AddBool("UW2", uw2_text, new ProxyRef<bool>(() => UW_Disable, o => UW_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(uw2_hint))
-                        .AddInteger("UW3", uw3_text,15,75, new ProxyRef<int>(() => UW_MinPeopleInWedding, o => UW_MinPeopleInWedding = o), integerBuilder => integerBuilder
-                            .SetHintText(uw3_hint))
-                        .AddInteger("UW4", uw4_text,15,75, new ProxyRef<int>(() => UW_MaxPeopleInWedding, o => UW_MaxPeopleInWedding = o), integerBuilder => integerBuilder
-                            .SetHintText(uw4_hint))
-                        .AddInteger("UW5", uw5_text,50,200, new ProxyRef<int>(() => UW_EmbarrassedSoliderMaxGold, o => UW_EmbarrassedSoliderMaxGold = o), integerBuilder => integerBuilder
-                            .SetHintText(uw5_hint))
-                        .AddInteger("UW6", uw6_text,250,1500, new ProxyRef<int>(() => UW_MinGoldRaided, o => UW_MinGoldRaided = o), integerBuilder => integerBuilder
-                            .SetHintText(uw6_hint))
-                        .AddInteger("UW7", uw7_text,250,1500, new ProxyRef<int>(() => UW_MaxGoldRaided, o => UW_MaxGoldRaided = o), integerBuilder => integerBuilder
-                            .SetHintText(uw7_hint))
-                        .AddInteger("UW8", uw8_text,25,275, new ProxyRef<int>(() => UW_MinRogueryLevel, o => UW_MinRogueryLevel = o), integerBuilder => integerBuilder
-                            .SetHintText(uw8_hint))
-                        .AddBool("UW9", uw9_text, new ProxyRef<bool>(() => UW_Disable, o => UW_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(uw9_hint))
                     )
                             
                 #endregion
@@ -976,13 +941,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             #region Unexpected Wedding
 
             Instance.UW_Disable = false;
-            Instance.UW_MinGoldToDonate = 200;
-            Instance.UW_MaxGoldToDonate = 750;
-            Instance.UW_MinPeopleInWedding = 20;
-            Instance.UW_MaxPeopleInWedding = 50;
-            Instance.UW_EmbarrassedSoliderMaxGold = 150;
-            Instance.UW_MinGoldRaided = 500;
-            Instance.UW_MaxGoldRaided = 1250;
             Instance.UW_MinRogueryLevel = 125;
 
             #endregion

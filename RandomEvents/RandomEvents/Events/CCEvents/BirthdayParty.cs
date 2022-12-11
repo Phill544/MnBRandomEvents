@@ -24,28 +24,29 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         private readonly int maxBandits;
         private readonly int minGoldGiven;
         private readonly int maxGoldGiven;
-        private readonly int minRenownGain;
-        private readonly int maxRenownGain;
+        private readonly int minInfluenceGain;
+        private readonly int maxInfluenceGain;
         private readonly int minGoldLooted;
         private readonly int maxGoldLooted;
         private readonly int minRogueryLevel;
 
         public BirthdayParty() : base(ModSettings.RandomEvents.BirthdayPartyData)
         {
-            minAttending = MCM_MenuConfig_A_F.Instance.BP_MinAttending;
-            maxAttending = MCM_MenuConfig_A_F.Instance.BP_MaxAttending;
-            minYourMenAttending = MCM_MenuConfig_A_F.Instance.BP_MinYourMenAttending;
-            maxYourMenAttending = MCM_MenuConfig_A_F.Instance.BP_MaxYourMenAttending;
-            minAge = MCM_MenuConfig_A_F.Instance.BP_MinAge;
-            maxAge = MCM_MenuConfig_A_F.Instance.BP_MaxAge;
-            minBandits = MCM_MenuConfig_A_F.Instance.BP_MinBandits;
-            maxBandits = MCM_MenuConfig_A_F.Instance.BP_MaxBandits;
-            minGoldGiven = MCM_MenuConfig_A_F.Instance.BP_MinGoldGiven;
-            maxGoldGiven = MCM_MenuConfig_A_F.Instance.BP_MaxGoldGiven;
-            minRenownGain = MCM_MenuConfig_A_F.Instance.BP_MinRenownGain;
-            maxRenownGain = MCM_MenuConfig_A_F.Instance.BP_MaxRenownGain;
-            minGoldLooted = MCM_MenuConfig_A_F.Instance.BP_MinGoldLooted;
-            maxGoldLooted = MCM_MenuConfig_A_F.Instance.BP_MaxGoldLooted;
+            minAttending = 15;
+            maxAttending = 60;
+            minYourMenAttending = 5;
+            maxYourMenAttending = 15;
+            minAge = 15;
+            maxAge = 24;
+            minBandits = 5;
+            maxBandits = 15;
+            minGoldGiven = 100;
+            maxGoldGiven = 500;
+            minInfluenceGain = 20;
+            maxInfluenceGain = 75;
+            minGoldLooted = 25;
+            maxGoldLooted = 125;
+            
             minRogueryLevel = MCM_MenuConfig_A_F.Instance.BP_MinRogueryLevel;
         }
 
@@ -55,7 +56,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_A_F.Instance.BP_Disable == false;
+            return MCM_MenuConfig_A_F.Instance.BP_Disable == false && Hero.MainHero.Clan.Kingdom != null;
         }
 
         public override void StartEvent()
@@ -72,8 +73,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var peopleAttending = MBRandom.RandomInt(minAttending, maxAttending);
             var bandits = MBRandom.RandomInt(minBandits, maxBandits);
             var goldGiven = MBRandom.RandomInt(minGoldGiven, maxGoldGiven);
-            var renownGain = MBRandom.RandomInt(minRenownGain, maxRenownGain);
-            var goldLooted = MBRandom.RandomInt(minGoldLooted, maxGoldLooted);
+            var influenceGain = MBRandom.RandomInt(minInfluenceGain, maxInfluenceGain);
+            var goldBase = MBRandom.RandomInt(minGoldLooted, maxGoldLooted);
+            var goldLooted = goldBase * peopleAttending;
             
             var rogueryLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Roguery);
 
@@ -180,10 +182,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg1 =new TextObject(
-                    "{=BirthdayParty_Event_Msg_1}{heroName} gave away {goldGiven} to the girl and gained {renownGain} renown for slaying the bandits.")
+                    "{=BirthdayParty_Event_Msg_1}{heroName} gave away {goldGiven} to the girl and gained {influenceGain} influence for slaying the bandits.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldGiven", goldGiven)
-                .SetTextVariable("renownGain", renownGain)
+                .SetTextVariable("influenceGain", influenceGain)
                 .ToString();
             
             var eventMsg2 =new TextObject(
@@ -208,7 +210,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "a":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-goldGiven);
-                            Clan.PlayerClan.AddRenown(renownGain);
+                            Hero.MainHero.AddInfluenceWithKingdom(influenceGain);
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                             break;
                         

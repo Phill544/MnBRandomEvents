@@ -91,20 +91,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         #region Birthday Party - Variables
         
         public bool BP_Disable { get; private set; }
-        public int BP_MinAttending{ get; private set; }
-        public int BP_MaxAttending{ get; private set; }
-        public int BP_MinYourMenAttending{ get; private set; }
-        public int BP_MaxYourMenAttending{ get; private set; }
-        public int BP_MinAge{ get; private set; }
-        public int BP_MaxAge{ get; private set; }
-        public int BP_MinBandits{ get; private set; }
-        public int BP_MaxBandits{ get; private set; }
-        public int BP_MinGoldGiven{ get; private set; }
-        public int BP_MaxGoldGiven{ get; private set; }
-        public int BP_MinRenownGain{ get; private set; }
-        public int BP_MaxRenownGain{ get; private set; }
-        public int BP_MinGoldLooted{ get; private set; }
-        public int BP_MaxGoldLooted{ get; private set; }
         public int BP_MinRogueryLevel{ get; private set; }
         
         #endregion
@@ -379,38 +365,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             #region Birthday Party - Strings
             
             var bp_heading = new TextObject("{=mcm_bp_heading}Birthday Party").ToString();
-            var bp1_text = new TextObject("{=mcm_bp1_text}1. Min Attending").ToString();
-            var bp1_hint = new TextObject("{=mcm_bp1_hint}Minimum amount of guests attending.").ToString();
-            var bp2_text = new TextObject("{=mcm_bp2_text}2. Max Attending").ToString();
-            var bp2_hint = new TextObject("{=mcm_bp2_hint}Maximum amount of guests attending.").ToString();
-            var bp3_text = new TextObject("{=mcm_bp3_text}3. Min your men").ToString();
-            var bp3_hint = new TextObject("{=mcm_bp3_hint}Minimum amount of your men attending.").ToString();
-            var bp4_text = new TextObject("{=mcm_bp4_text}4. Max your men.").ToString();
-            var bp4_hint = new TextObject("{=mcm_bp4_hint}Maximum amount of your men attending.").ToString();
-            var bp5_text = new TextObject("{=mcm_bp5_text}5. Min Age").ToString();
-            var bp5_hint = new TextObject("{=mcm_bp5_hint}The girls minimum age.").ToString();
-            var bp6_text = new TextObject("{=mcm_bp6_text}6. Max Age").ToString();
-            var bp6_hint = new TextObject("{=mcm_bp6_hint}The girls maximum age.").ToString();
-            var bp7_text = new TextObject("{=mcm_bp7_text}7. Min Bandits").ToString();
-            var bp7_hint = new TextObject("{=mcm_bp7_hint}Minimum amount of bandits that can appear.").ToString();
-            var bp8_text = new TextObject("{=mcm_bp8_text}8. Max Bandits").ToString();
-            var bp8_hint = new TextObject("{=mcm_bp8_hint}Maximum amount of bandits that can appear.").ToString();
-            var bp9_text = new TextObject("{=mcm_bp9_text}9. Min gold given").ToString();
-            var bp9_hint = new TextObject("{=mcm_bp9_hint}Minimum amount of gold given to the girl.").ToString();
-            var bp10_text = new TextObject("{=mcm_bp10_text}10. Max gold given").ToString();
-            var bp10_hint = new TextObject("{=mcm_bp10_hint}Maximum amount of gold given to the girl.").ToString();
-            var bp11_text = new TextObject("{=mcm_bp11_text}11. Min renown gain").ToString();
-            var bp11_hint = new TextObject("{=mcm_bp11_hint}Minimum amount of renown you can gain.").ToString();
-            var bp12_text = new TextObject("{=mcm_bp12_text}12. Max renown gain").ToString();
-            var bp12_hint = new TextObject("{=mcm_bp12_hint}Maximum amount of renown you can gain.").ToString();
-            var bp13_text = new TextObject("{=mcm_bp13_text}13. Min gold to loot").ToString();
-            var bp13_hint = new TextObject("{=mcm_bp13_hint}Minimum amount of gold you can loot from the party.").ToString();
-            var bp14_text = new TextObject("{=mcm_bp14_text}14. Max gold to loot").ToString();
-            var bp14_hint = new TextObject("{=mcm_bp14_hint}Minimum amount of gold you can loot from the party.").ToString();
-            var bp15_text = new TextObject("{=mcm_bp15_text}15. Min Roguery Level").ToString();
-            var bp15_hint = new TextObject("{=mcm_bp15_hint}Lowest level to unlock the roguery option.").ToString();
-            var bp16_text = new TextObject("{=mcm_bp16_text}16. Deactivate event").ToString();
-            var bp16_hint = new TextObject("{=mcm_bp16_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var bp1_text = new TextObject("{=mcm_bp1_text}1. Min Roguery Level").ToString();
+            var bp1_hint = new TextObject("{=mcm_bp1_hint}Lowest level to unlock the roguery option.").ToString();
+            var bp2_text = new TextObject("{=mcm_bp2_text}2. Deactivate event").ToString();
+            var bp2_hint = new TextObject("{=mcm_bp2_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -769,38 +727,10 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                 
                 #region Birthday Party - Builder
                 .CreateGroup(bp_heading, groupBuilder => groupBuilder
-                .AddInteger("BP1", bp1_text,10,25, new ProxyRef<int>(() => BP_MinAttending, o => BP_MinAttending = o), integerBuilder => integerBuilder
+                    .AddInteger("BP1", bp1_text,25,275, new ProxyRef<int>(() => BP_MinRogueryLevel, o => BP_MinRogueryLevel = o), integerBuilder => integerBuilder
                     .SetHintText(bp1_hint))
-                .AddInteger("BP2", bp2_text,10,25, new ProxyRef<int>(() => BP_MaxAttending, o => BP_MaxAttending = o), integerBuilder => integerBuilder
+                .AddBool("BP2", bp2_text, new ProxyRef<bool>(() => BP_Disable, o => BP_Disable = o), boolBuilder => boolBuilder
                     .SetHintText(bp2_hint))
-                .AddInteger("BP3", bp3_text,2,20, new ProxyRef<int>(() => BP_MinYourMenAttending, o => BP_MinYourMenAttending = o), integerBuilder => integerBuilder
-                    .SetHintText(bp3_hint))
-                .AddInteger("BP4", bp4_text,2,20, new ProxyRef<int>(() => BP_MaxYourMenAttending, o => BP_MaxYourMenAttending = o), integerBuilder => integerBuilder
-                    .SetHintText(bp4_hint))
-                .AddInteger("BP5", bp5_text,14,25, new ProxyRef<int>(() => BP_MinAge, o => BP_MinAge = o), integerBuilder => integerBuilder
-                    .SetHintText(bp5_hint))
-                .AddInteger("BP6", bp6_text,14,25, new ProxyRef<int>(() => BP_MaxAge, o => BP_MaxAge = o), integerBuilder => integerBuilder
-                    .SetHintText(bp6_hint))
-                .AddInteger("BP7", bp7_text,3,20, new ProxyRef<int>(() => BP_MinBandits, o => BP_MinBandits = o), integerBuilder => integerBuilder
-                    .SetHintText(bp7_hint))
-                .AddInteger("BP8", bp8_text,3,20, new ProxyRef<int>(() => BP_MaxBandits, o => BP_MaxBandits = o), integerBuilder => integerBuilder
-                    .SetHintText(bp8_hint))
-                .AddInteger("BP9", bp9_text,50,200, new ProxyRef<int>(() => BP_MinGoldGiven, o => BP_MinGoldGiven = o), integerBuilder => integerBuilder
-                    .SetHintText(bp9_hint))
-                .AddInteger("BP10", bp10_text,50,200, new ProxyRef<int>(() => BP_MaxGoldGiven, o => BP_MaxGoldGiven = o), integerBuilder => integerBuilder
-                    .SetHintText(bp10_hint))
-                .AddInteger("BP11", bp11_text,10,30, new ProxyRef<int>(() => BP_MinRenownGain, o => BP_MinRenownGain = o), integerBuilder => integerBuilder
-                    .SetHintText(bp11_hint))
-                .AddInteger("BP12", bp12_text,10,30, new ProxyRef<int>(() => BP_MaxRenownGain, o => BP_MaxRenownGain = o), integerBuilder => integerBuilder
-                    .SetHintText(bp12_hint))
-                .AddInteger("BP13", bp13_text,250,6500, new ProxyRef<int>(() => BP_MinGoldLooted, o => BP_MinGoldLooted = o), integerBuilder => integerBuilder
-                    .SetHintText(bp13_hint))
-                .AddInteger("BP14", bp14_text,250,6500, new ProxyRef<int>(() => BP_MaxGoldLooted, o => BP_MaxGoldLooted = o), integerBuilder => integerBuilder
-                    .SetHintText(bp14_hint))
-                .AddInteger("BP15", bp15_text,25,275, new ProxyRef<int>(() => BP_MinRogueryLevel, o => BP_MinRogueryLevel = o), integerBuilder => integerBuilder
-                    .SetHintText(bp15_hint))
-                .AddBool("BP16", bp16_text, new ProxyRef<bool>(() => BP_Disable, o => BP_Disable = o), boolBuilder => boolBuilder
-                    .SetHintText(bp16_hint))
                 )
                 #endregion
                 
@@ -1132,20 +1062,6 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             #region Birthday Party
 
             Instance.BP_Disable = false;
-            Instance.BP_MinAttending = 20;
-            Instance.BP_MaxAttending = 60;
-            Instance.BP_MinYourMenAttending = 3;
-            Instance.BP_MaxYourMenAttending = 12;
-            Instance.BP_MinAge = 14;
-            Instance.BP_MaxAge = 22;
-            Instance.BP_MinBandits = 5;
-            Instance.BP_MaxBandits = 10;
-            Instance.BP_MinGoldGiven = 50;
-            Instance.BP_MaxGoldGiven = 200;
-            Instance.BP_MinRenownGain = 15;
-            Instance.BP_MaxRenownGain = 30;
-            Instance.BP_MinGoldLooted = 500;
-            Instance.BP_MaxGoldLooted = 1500;
             Instance.BP_MinRogueryLevel = 125;
 
             #endregion
