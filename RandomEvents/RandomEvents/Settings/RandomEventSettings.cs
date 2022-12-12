@@ -1,6 +1,7 @@
 ﻿using CryingBuffalo.RandomEvents.Events;
 using CryingBuffalo.RandomEvents.Events.BicEvents;
 using CryingBuffalo.RandomEvents.Events.CCEvents;
+using CryingBuffalo.RandomEvents.Events.CommunityEvents;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 
 namespace CryingBuffalo.RandomEvents.Settings
@@ -132,6 +133,13 @@ namespace CryingBuffalo.RandomEvents.Settings
         public RefugeesData RefugeesData { get; } = new RefugeesData("Refugees", MCM_MenuConfig_Chances.Instance.Refugees_Chance);
         
         public TravellingmerchantData TravellingMerchantData { get; } = new TravellingmerchantData("TravellingMerchant", MCM_MenuConfig_Chances.Instance.Travelling_Merchant_Chance);
+        
+        #endregion
+
+        
+        #region Community Suggested Events
+
+        public SecretsOfSteelData SecretsOfSteelData { get; } = new SecretsOfSteelData("SecretsOfSteel", 1024);
         
         #endregion
         

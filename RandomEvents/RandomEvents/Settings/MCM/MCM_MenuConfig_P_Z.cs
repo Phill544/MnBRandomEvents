@@ -86,6 +86,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         
         #endregion
         
+        #region Secrets Of Steel - Variables
+        
+        public bool SOS_Disable { get; private set; }
+
+        #endregion
+        
         #region Secret Singer - Variables
         
         public bool SS_Disable { get; private set; }
@@ -312,6 +318,14 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var rs3_hint = new TextObject("{=mcm_rs3_hint}Lowest level to unlock the roguery option.").ToString();
             var rs4_text = new TextObject("{=mcm_rs4_text}4. Deactivate event").ToString();
             var rs4_hint = new TextObject("{=mcm_rs4_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            
+            #endregion
+            
+            #region Secrets Of Steel - Strings
+            
+            var sos_heading = new TextObject("{=mcm_sos_heading}Secret of Steel").ToString();
+            var sos1_text = new TextObject("{=mcm_sos1_text}1. Deactivate event").ToString();
+            var sos1_hint = new TextObject("{=mcm_sos1_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -605,18 +619,27 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                     
                 #endregion
                 
+                #region Secret Of Steel - Builder
+                
+                .CreateGroup(sos_heading, groupBuilder => groupBuilder
+                    .AddBool("SOS1", sos1_text, new ProxyRef<bool>(() => SOS_Disable, o => SOS_Disable = o), boolBuilder => boolBuilder
+                            .SetHintText(sos1_hint))
+                    )
+                    
+                #endregion
+                
                 #region Secret Singer - Builder
                 
                 .CreateGroup(ss_heading, groupBuilder => groupBuilder
-                        .AddInteger("SS1", ss1_text,5,100, new ProxyRef<int>(() => SS_MinMoraleGained, o => SS_MinMoraleGained = o), integerBuilder => integerBuilder
-                            .SetHintText(ss1_hint))
-                        .AddInteger("SS2", ss2_text,5,100, new ProxyRef<int>(() => SS_MaxMoraleGained, o => SS_MaxMoraleGained = o), integerBuilder => integerBuilder
-                            .SetHintText(ss2_hint))
-                        .AddBool("SS3", ss3_text, new ProxyRef<bool>(() => SS_Disable, o => SS_Disable = o), boolBuilder => boolBuilder
-                            .SetHintText(ss3_hint))
-                    )
+                    .AddInteger("SS1", ss1_text,5,100, new ProxyRef<int>(() => SS_MinMoraleGained, o => SS_MinMoraleGained = o), integerBuilder => integerBuilder
+                        .SetHintText(ss1_hint))
+                    .AddInteger("SS2", ss2_text,5,100, new ProxyRef<int>(() => SS_MaxMoraleGained, o => SS_MaxMoraleGained = o), integerBuilder => integerBuilder
+                        .SetHintText(ss2_hint))
+                    .AddBool("SS3", ss3_text, new ProxyRef<bool>(() => SS_Disable, o => SS_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(ss3_hint))
+                )
                     
-                    #endregion
+                #endregion
                     
                 #region Speedy Recovery - Builder
                 
@@ -864,6 +887,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.RS_MinGoldGained = 50;
             Instance.RS_MaxGoldGained = 150;
             Instance.RS_minRogueryLevel = 125;
+
+            #endregion
+            
+            #region Secret Of Steel
+
+            Instance.SOS_Disable = false;
 
             #endregion
             

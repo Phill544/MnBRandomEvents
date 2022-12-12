@@ -1141,6 +1141,41 @@
 	<string id="Feast_Event_Msg_Charm2" text="You and {targetLord} have a great time." />
 	<string id="Feast_Event_Msg_End" text="The feast has ended." />
 	<string id="Feast_Event_Msg_Rogue" text="You steal the coin purse." />
+
+
+
+    <!--Secrets of Steel - Event-->
+    <string id="SecretsOfSteel_Title" text="Secrets Of Steel" />
+    <string id="SecretsOfSteel_Event_Desc" text="While you party is travelling near {closestSettlement}, you come across a secluded forge with an old blacksmith in it. You hear him calling out to you so you decide to check what he wants. He explains to you that he once was one of the greatest blacksmiths in all of Calradia, but now he has become way to old to work alone. He explains to you that he had an apprentice, but he left a few days ago and said he would never come back. He also explains that he has an order to fill, but he cannot do it without help. He looks you straight in the eyes and asks if you could consider helping an old man on his final order. He also explains that you will be well rewarded. What do you do ?" />
+    
+    <!--Secrets of Steel - Options-->
+    <string id="SecretsOfSteel_Event_Option_1" text="Decline" />
+    <string id="SecretsOfSteel_Event_Option_1_Hover" text="You cannot assist him.{option1AppendedText}" />
+    <string id="SecretsOfSteel_Event_Option_2" text="[Smithing] Accept" />
+    <string id="SecretsOfSteel_Event_Option_2_Hover" text="Agree to help him.{smithingAppendedText}" />
+
+    <!--Secrets of Steel - Appended Texts-->
+    <string id="SecretsOfSteel_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
+    <string id="SecretsOfSteel_Smithing_Appended_Text" text="[Smithing - lvl 100]" />
+    <string id="SecretsOfSteel_Option1_Appended_Text" text="Maybe if you were better in Smithing you could." />
+
+    <!--Secrets of Steel - Outcomes-->
+    <string id="SecretsOfSteel_Event_Choice_1" text="You tell him that you are unable to help him. He looks back to you and smiles and says that he understands. He then gets up, enters the house and closes the door. You and your men proceed to leave." />
+    <string id="SecretsOfSteel_Event_Choice_2_Outcome_1" text="You agree to help him. You send your men to {closestSettlement} and tells them to wait for you there. You and the blacksmith gets to work. The hours pass but after some time you are ready to start tempering your blades. You heat the first one and lower it into the oil. You hear the metal clinging and making a lot of noise under the oil. You pull it up only to realize the entire blade is cracked and useless. You try again, but same result. And again, but same result again and before you know it you've ruined all of your blades. You walk over to the blacksmith and apologize for you bad work. To your surprise he just smiles at you and says that he appreciated the help nonetheless. He informs you to take some charcoal with you as a payment as he does not have any gold. You pick up {randomCharcoal} pieces of charcoal and stuff them in your satchel. You and the blacksmith then part ways." />
+    <string id="SecretsOfSteel_Event_Choice_2_Outcome_2" text="You agree to help him. You send your men to {closestSettlement} and tells them to wait for you there. You and the blacksmith gets to work. The hours pass but after some time you have all your blades tempered and you are halfway through the sharpening of the blades. The blacksmith comes over to you and pick up one of the sharpened blades. He thoroughly inspects the blade. Suddenly he tell you to stop. He informs you that something is wrong with the sharpening of the blades. He informs you that he will take over the finishing of the blades as you have done all the hard work. He also informs you to take some pieces of steel with you as a payment as he does not have any gold. You pick up {randomSteel} pieces of steel and stuff them in your satchel. You and the blacksmith then part ways." />
+    <string id="SecretsOfSteel_Event_Choice_2_Outcome_3" text="You agree to help him. You send your men to {closestSettlement} and tells them to wait for you there. You and the blacksmith gets to work. The hours pass but after some time you have all your blades tempered and you are halfway through the sharpening of the blades. The blacksmith comes over to you and pick up one of the sharpened blades. He thoroughly inspects the blade. He informs you that your work is excellent. He puts the blade back down and help you finish. After a few more hours you are finally done. The blacksmith tells you that he does not know how he can ever repay your kindness. You tell him you were glad to help him. He informs you to take some pieces of Fine Steel and some pieces of Thamaskene Steel with you as a payment as he does not have any gold. You pick up {randomFineSteel} pieces of Fine Steel and {randomThamaskeneSteel} pieces of Thamaskene Steel and stuff them in your satchel. You and the blacksmith then part ways." />
+    
+    <!--Secrets of Steel - Event Buttons-->
+    <string id="SecretsOfSteel_Event_Button_Text_1" text="Choose" />
+    <string id="SecretsOfSteel_Event_Button_Text_2" text="Done" />
+
+    <!--Secrets of Steel - Log Messages-->
+    <string id="SecretsOfSteel_Event_Msg_1" text="{heroName} declined to help the old blacksmith." />
+    <string id="SecretsOfSteel_Event_Msg_2" text="{heroName} agreed to help the blacksmith, but destroyed all the blades during the tempering process." />
+    <string id="SecretsOfSteel_Event_Msg_3" text="{heroName} agreed to help the blacksmith, but made mistakes during the sharpening." />
+    <string id="SecretsOfSteel_Event_Msg_4" text="{heroName} agreed to help the blacksmith and they successfully made all the blades." />
+    
+    
     
     <!--Demonyms-->
     <string id="Demonym_Empire_Noun" text="an Imperial" />
