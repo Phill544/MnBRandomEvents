@@ -1157,7 +1157,7 @@
     <!--Secrets of Steel - Appended Texts-->
     <string id="SecretsOfSteel_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
     <string id="SecretsOfSteel_Smithing_Appended_Text" text="[Smithing - lvl 100]" />
-    <string id="SecretsOfSteel_Option1_Appended_Text" text="Maybe if you were better in Smithing you could." />
+    <string id="SecretsOfSteel_Option1_Appended_Text" text=" Maybe if you were better in Smithing you could." />
 
     <!--Secrets of Steel - Outcomes-->
     <string id="SecretsOfSteel_Event_Choice_1" text="You tell him that you are unable to help him. He looks back to you and smiles and says that he understands. He then gets up, enters the house and closes the door. You and your men proceed to leave." />

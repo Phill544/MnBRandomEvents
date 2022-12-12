@@ -73,7 +73,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
                         .ToString();
                 }
 
-                option1AppendedText = new TextObject("{=SecretsOfSteel_Option1_Appended_Text}Maybe if you were better in Smithing you could.").ToString();
+                option1AppendedText = new TextObject("{=SecretsOfSteel_Option1_Appended_Text} Maybe if you were better in Smithing you could.").ToString();
             }
 
             var eventDescription = new TextObject(

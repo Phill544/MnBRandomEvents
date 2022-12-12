@@ -57,6 +57,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public float Refugees_Chance { get; private set; }
         public float Robbery_Chance { get; private set; }
         public float Runaway_Son_Chance{ get; private set; }
+        public float Secrets_Of_Steel{ get; private set; }
         public float Secret_Singer_Chance{ get; private set; }
         public float Speedy_Recovery_Chance{ get; private set; }
         public float Successful_Deeds_Chance{ get; private set; }
@@ -145,6 +146,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var adv56_text = new TextObject("{=mcm_adv56_text}Feast").ToString();
             var adv57_text = new TextObject("{=mcm_adv57_text}Travellers").ToString();
             var adv58_text = new TextObject("{=mcm_adv58_text}Duel").ToString();
+            var adv59_text = new TextObject("{=mcm_adv59_text}Secrets of Steel").ToString();
 
             #endregion
 
@@ -275,6 +277,8 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(adv_hint))
                         .AddFloatingInteger ("ADV58", adv58_text, 5, 100, new ProxyRef<float>(() => Duel_Chance, o => Duel_Chance = o), floatBuilder => floatBuilder
                             .SetHintText(adv_hint))
+                        .AddFloatingInteger ("ADV59", adv59_text, 5, 100, new ProxyRef<float>(() => Secrets_Of_Steel, o => Secrets_Of_Steel = o), floatBuilder => floatBuilder
+                            .SetHintText(adv_hint))
 
                 #endregion
 
@@ -340,6 +344,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.Refugees_Chance = 30.0f;
             Instance.Robbery_Chance = 60.0f;
             Instance.Runaway_Son_Chance = 50.0f;
+            Instance.Secrets_Of_Steel = 35.0f;
             Instance.Secret_Singer_Chance = 50.0f;
             Instance.Speedy_Recovery_Chance = 50.0f;
             Instance.Successful_Deeds_Chance = 50.0f;

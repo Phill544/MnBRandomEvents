@@ -139,7 +139,7 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         #region Community Suggested Events
 
-        public SecretsOfSteelData SecretsOfSteelData { get; } = new SecretsOfSteelData("SecretsOfSteel", 1024);
+        public SecretsOfSteelData SecretsOfSteelData { get; } = new SecretsOfSteelData("SecretsOfSteel", MCM_MenuConfig_Chances.Instance.Secrets_Of_Steel);
         
         #endregion
         
