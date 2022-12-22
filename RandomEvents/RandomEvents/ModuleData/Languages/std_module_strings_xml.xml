@@ -1315,12 +1315,12 @@
     <string id="mcm_ag_heading" text="Army Games" />
     <string id="mcm_ag1_text" text="1. Crop % gain" />
     <string id="mcm_ag1_hint" text="The amount of % the cohesion is increased." />
-    <string id="mcm_ag1_text" text="2. Min amount of morale gain" />
-    <string id="mcm_ag1_hint" text="The minimum amount of morale the party gains." />
-    <string id="mcm_ag2_text" text="3. Max amount of morale gain" />
-    <string id="mcm_ag2_hint" text="The maximum amount of morale the party gains." />
-    <string id="mcm_ag3_text" text="4. Deactivate event" />
-    <string id="mcm_ag3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ag2_text" text="2. Min amount of morale gain" />
+    <string id="mcm_ag2_hint" text="The minimum amount of morale the party gains." />
+    <string id="mcm_ag3_text" text="3. Max amount of morale gain" />
+    <string id="mcm_ag3_hint" text="The maximum amount of morale the party gains." />
+    <string id="mcm_ag4_text" text="4. Deactivate event" />
+    <string id="mcm_ag4_hint" text="If you dont want this event to show up you can deactivate it." />
     <string id="mcm_ai_heading" text="Army Invite" />
     <string id="mcm_ai1_text" text="1. Deactivate event" />
     <string id="mcm_ai1_hint" text="If you dont want this event to show up you can deactivate it." />

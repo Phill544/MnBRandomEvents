@@ -275,12 +275,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var ag_heading = new TextObject("{=mcm_ag_heading}Army Games").ToString();
             var ag1_text = new TextObject("{=mcm_ag1_text}1. Crop % gain").ToString();
             var ag1_hint = new TextObject("{=mcm_ag1_hint}The amount of % the cohesion is increased.").ToString();
-            var ag2_text = new TextObject("{=mcm_ag1_text}2. Min amount of morale gain").ToString();
-            var ag2_hint = new TextObject("{=mcm_ag1_hint}The minimum amount of morale the party gains.").ToString();
-            var ag3_text = new TextObject("{=mcm_ag2_text}3. Max amount of morale gain").ToString();
-            var ag3_hint = new TextObject("{=mcm_ag2_hint}The maximum amount of morale the party gains.").ToString();
-            var ag4_text = new TextObject("{=mcm_ag3_text}4. Deactivate event").ToString();
-            var ag4_hint = new TextObject("{=mcm_ag3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            var ag2_text = new TextObject("{=mcm_ag2_text}2. Min amount of morale gain").ToString();
+            var ag2_hint = new TextObject("{=mcm_ag2_hint}The minimum amount of morale the party gains.").ToString();
+            var ag3_text = new TextObject("{=mcm_ag3_text}3. Max amount of morale gain").ToString();
+            var ag3_hint = new TextObject("{=mcm_ag3_hint}The maximum amount of morale the party gains.").ToString();
+            var ag4_text = new TextObject("{=mcm_ag4_text}4. Deactivate event").ToString();
+            var ag4_hint = new TextObject("{=mcm_ag4_hint}If you dont want this event to show up you can deactivate it.").ToString();
 
             #endregion
 
