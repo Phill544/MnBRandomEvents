@@ -45,7 +45,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                      h.IsFemale && h.Age >= minWomanAge && h.Age <= maxWomanAge
             ).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
 
-            return randomHero != null && MCM_MenuConfig_A_F.Instance.AFE_Disable == false && CampaignTime.Now.IsNightTime;
+            return randomHero != null && MCM_MenuConfig_A_F.Instance.AFE_Disable == false && CampaignTime.Now.IsNightTime && Settlement.CurrentSettlement != null;
         }
 
         public override void StartEvent()
