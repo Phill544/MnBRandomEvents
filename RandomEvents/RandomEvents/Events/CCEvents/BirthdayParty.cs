@@ -118,7 +118,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventOption1 = new TextObject("{=BirthdayParty_Event_Option_1}Join them in celebration!").ToString();
             var eventOption1Hover = new TextObject("{=BirthdayParty_Event_Option_1_Hover}Not everyday you turn {birthdayAge} years old!").SetTextVariable("birthdayAge", birthdayAge).ToString();
             
-            var eventOption2 = new TextObject("{=BirthdayParty_Event_Option_2}Give the girls some gold").ToString();
+            var eventOption2 = new TextObject("{=BirthdayParty_Event_Option_2}Give the girl some gold").ToString();
             var eventOption2Hover = new TextObject("{=BirthdayParty_Event_Option_2_Hover}You don't have time to stay but you can still be nice, right?").ToString();
 
             var eventOption3 = new TextObject("{=BirthdayParty_Event_Option_3}Leave").ToString();

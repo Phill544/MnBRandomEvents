@@ -54,7 +54,7 @@
     <!--BirthdayParty - Event Choices-->
     <string id="BirthdayParty_Event_Option_1" text="Join them in celebration!" />
     <string id="BirthdayParty_Event_Option_1_Hover" text="Not everyday you turn {birthdayAge} years old!" />
-    <string id="BirthdayParty_Event_Option_2" text="Give the girls some gold" />
+    <string id="BirthdayParty_Event_Option_2" text="Give the girl some gold" />
     <string id="BirthdayParty_Event_Option_2_Hover" text="You don't have time to stay but you can still be nice, right?" />
     <string id="BirthdayParty_Event_Option_3" text="[Roguery] Raid the party" />
     <string id="BirthdayParty_Event_Option_3_Hover" text="Have some fun.\n{rogueryAppendedText}" />
