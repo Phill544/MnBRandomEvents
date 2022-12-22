@@ -6,6 +6,7 @@ using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -45,7 +46,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                      h.IsFemale && h.Age >= minWomanAge && h.Age <= maxWomanAge
             ).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
 
-            return randomHero != null && MCM_MenuConfig_A_F.Instance.AFE_Disable == false && CampaignTime.Now.IsNightTime && Settlement.CurrentSettlement != null;
+            return randomHero != null && MCM_MenuConfig_A_F.Instance.AFE_Disable == false && CampaignTime.Now.IsNightTime && MobileParty.MainParty.CurrentSettlement != null;
         }
 
         public override void StartEvent()
