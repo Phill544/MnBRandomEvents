@@ -190,6 +190,11 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         public bool ED_Disable { get; private set; }
         public int ED_MinPrice{ get; private set; }
         public int ED_MaxPrice{ get; private set; }
+        public float ED_SuccessChance { get; private set; }
+        public int ED_MinXp{ get; private set; }
+        public int ED_MaxXp{ get; private set; }
+        
+        
 
         #endregion
 
@@ -521,7 +526,13 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var ed2_hint = new TextObject("{=mcm_ed2_hint}Maximum price for the drink.").ToString();
             var ed3_text = new TextObject("{=mcm_ed3_text}3. Deactivate event").ToString();
             var ed3_hint = new TextObject("{=mcm_ed3_hint}If you dont want this event to show up you can deactivate it.").ToString();
-
+            var ed4_text = new TextObject("{=mcm_ed4_text}4. Success chance").ToString();
+            var ed4_hint = new TextObject("{=mcm_ed4_hint}The percent chance that the drink will work.").ToString();
+            var ed5_text = new TextObject("{=mcm_ed5_text}5. Minimum XP").ToString();
+            var ed5_hint = new TextObject("{=mcm_ed5_hint}The minimum amount of XP that the player will receive.").ToString();
+            var ed6_text = new TextObject("{=mcm_ed6_text}6. Maximum XP").ToString();
+            var ed6_hint = new TextObject("{=mcm_ed6_hint}The maximum amount of XP that the player will receive.").ToString();
+            
             #endregion
             
             #region Fallen Soldier Family - Strings
@@ -890,6 +901,12 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                             .SetHintText(ed2_hint))
                         .AddBool("ED3", ed3_text, new ProxyRef<bool>(() => ED_Disable, o => ED_Disable = o), boolBuilder => boolBuilder
                             .SetHintText(ed3_hint))
+                        .AddFloatingInteger("ED4", ed4_text,0.01f,1f, new ProxyRef<float>(() => ED_SuccessChance, o => ED_SuccessChance = o), floatBuilder => floatBuilder
+                            .SetHintText(ed4_hint))
+                        .AddInteger("ED5", ed5_text,1,10000, new ProxyRef<int>(() => ED_MinXp, o => ED_MinXp = o), integerBuilder => integerBuilder
+                            .SetHintText(ed5_hint))
+                        .AddInteger("ED6", ed6_text,1,10000, new ProxyRef<int>(() => ED_MaxXp, o => ED_MaxXp = o), integerBuilder => integerBuilder
+                            .SetHintText(ed6_hint))
                     )
 
                 #endregion
@@ -1153,6 +1170,9 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.ED_Disable = false;
             Instance.ED_MinPrice = 3000;
             Instance.ED_MaxPrice = 6000;
+            Instance.ED_SuccessChance = 0.75f;
+            Instance.ED_MinXp = 250;
+            Instance.ED_MaxXp = 1000;
 
             #endregion
             

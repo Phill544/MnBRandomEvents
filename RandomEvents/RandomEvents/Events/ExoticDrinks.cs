@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
@@ -14,11 +16,17 @@ namespace CryingBuffalo.RandomEvents.Events
 	{
 		private readonly int minPrice;
 		private readonly int maxPrice;
+		private readonly float successChance;
+		private readonly int minXp;
+		private readonly int maxXp;
 
 		public ExoticDrinks() : base(ModSettings.RandomEvents.ExoticDrinksData)
 		{
 			minPrice = MCM_MenuConfig_A_F.Instance.ED_MinPrice;
 			maxPrice = MCM_MenuConfig_A_F.Instance.ED_MaxPrice;
+			successChance = MCM_MenuConfig_A_F.Instance.ED_SuccessChance;
+			minXp = MCM_MenuConfig_A_F.Instance.ED_MinXp;
+			maxXp = MCM_MenuConfig_A_F.Instance.ED_MaxXp;
 		}
 
 		public override void CancelEvent()
@@ -75,10 +83,18 @@ namespace CryingBuffalo.RandomEvents.Events
 					switch ((string)elements[0].Identifier)
 					{
 						case "a":
+							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1, true, false, eventButtonText2, null, null, null), true);
+							
 							Hero.MainHero.ChangeHeroGold(-price);
 
-							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome1, true, false, eventButtonText2, null, null, null), true);
-							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventNothingHappens, true, false, eventButtonText2, null, null, null), true);
+							float randFloat = MBRandom.RandomFloatRanged(0f, 1f);
+							bool success = randFloat <= successChance;
+
+							if (success)
+								LiquidChanges();
+							else
+								InformationManager.ShowInquiry(new InquiryData(eventTitle, eventNothingHappens, true, false, eventButtonText2, null, null, null), true);
+							
 							break;
 						case "b":
 							InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOutcome2, true, false, eventButtonText2, null, null, null), true);
@@ -89,7 +105,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					}
 				},
 				null);
-
+			
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
 			StopEvent();
@@ -105,6 +121,20 @@ namespace CryingBuffalo.RandomEvents.Events
 			{
 				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
+		}
+		
+		void LiquidChanges()
+		{
+			int xpReceived = MBRandom.RandomInt(minXp, maxXp);
+
+			var attributes = AttributeHelper.GetAllAttributes();
+
+			var index = MBRandom.RandomInt(0, attributes.Count -1);
+
+			//Set skill xp
+			var skillIndex = MBRandom.RandomInt(0, attributes[index].Skills.Count - 1);
+			Hero.MainHero.HeroDeveloper.AddSkillXp(attributes[index].Skills[skillIndex], xpReceived);
+			InformationManager.DisplayMessage(new InformationMessage($"{attributes[index].Skills[skillIndex].Name} received {xpReceived.ToString()}xp!", RandomEventsSubmodule.Msg_Color_POS_Outcome));
 		}
 	}
 

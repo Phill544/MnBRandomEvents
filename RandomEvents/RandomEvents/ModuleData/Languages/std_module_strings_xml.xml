@@ -1460,6 +1460,12 @@
     <string id="mcm_ed2_hint" text="Maximum price for the drink." />
     <string id="mcm_ed3_text" text="3. Deactivate event" />
     <string id="mcm_ed3_hint" text="If you dont want this event to show up you can deactivate it." />
+    <string id="mcm_ed4_text" text="4. Success chance" />
+    <string id="mcm_ed4_hint" text="The percent chance that the drink will work" />
+    <string id="mcm_ed5_text" text="5. Minimum XP" />
+    <string id="mcm_ed5_hint" text="The minimum amount of XP that the player will receive" />
+    <string id="mcm_ed6_text" text="6. Maximum XP" />
+    <string id="mcm_ed6_hint" text="The maximum amount of XP that the player will receive" />
     <string id="mcm_fsf_heading" text="Fallen Soldier Family" />
     <string id="mcm_fsf1_text" text="1. Min Compensation" />
     <string id="mcm_fsf1_hint" text="Minimum amount compensation to the family." />
