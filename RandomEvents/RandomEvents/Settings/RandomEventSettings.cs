@@ -139,7 +139,9 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         #region Community Suggested Events
 
-        public SecretsOfSteelData SecretsOfSteelData { get; } = new SecretsOfSteelData("SecretsOfSteel", MCM_MenuConfig_Chances.Instance.Secrets_Of_Steel);
+        public SecretsOfSteelData SecretsOfSteelData { get; } = new SecretsOfSteelData("SecretsOfSteel", MCM_MenuConfig_Chances.Instance.Secrets_Of_Steel_Chance);
+        
+        public PoisonedWineData PoisonedWineData { get; } = new PoisonedWineData("PoisonedWine", MCM_MenuConfig_Chances.Instance.Poisoned_Wine_Chance);
         
         #endregion
         

@@ -28,6 +28,16 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         
         #endregion
         
+        #region Poisoned Wine - Variables
+        
+        public bool PoWi_Disable { get; private set; }
+        public int PoWi_MinSoldiersToDie { get; private set; }
+        public int PoWi_MaxSoldiersToDie { get; private set; }
+        public int PoWi_MinSoldiersToHurt { get; private set; }
+        public int PoWi_MaxSoldiersToHurt { get; private set; }
+        
+        #endregion
+        
         #region Prisoner Rebellion - Variables
         
         public bool PR_Disable { get; private set; }
@@ -226,6 +236,22 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             var pw2_hint = new TextObject("{=mcm_pw2_hint}Maximum amount morale gained lost during this event.").ToString();
             var pw3_text = new TextObject("{=mcm_pw3_text}3. Deactivate event").ToString();
             var pw3_hint = new TextObject("{=mcm_pw3_hint}If you dont want this event to show up you can deactivate it.").ToString();
+            
+            #endregion
+            
+            #region Poisoned Wine - Strings
+            
+            var powi_heading = new TextObject("{=mcm_powi_heading}Prisoner Rebellion").ToString();
+            var powi1_text = new TextObject("{=mcm_powi1_text}1. Min Soldiers to die").ToString();
+            var powi1_hint = new TextObject("{=mcm_powi1_hint}Minimum amount of soldiers who can die in this event.").ToString();
+            var powi2_text = new TextObject("{=mcm_powi2_text}2. Max Soldiers to die").ToString();
+            var powi2_hint = new TextObject("{=mcm_powi2_hint}Maximum amount of soldiers who can die in this event.").ToString();
+            var powi3_text = new TextObject("{=mcm_powi3_text}3. Min Soldiers to hurt").ToString();
+            var powi3_hint = new TextObject("{=mcm_powi3_hint}Minimum amount of soldiers who can get hurt in this event.").ToString();
+            var powi4_text = new TextObject("{=mcm_powi4_text}4. Max Soldiers to hurt").ToString();
+            var powi4_hint = new TextObject("{=mcm_powi4_hint}Maximum amount of soldiers who can get hurt in this event.").ToString();
+            var powi5_text = new TextObject("{=mcm_powi5_text}5. Deactivate event").ToString();
+            var powi5_hint = new TextObject("{=mcm_powi5_hint}If you dont want this event to show up you can deactivate it.").ToString();
             
             #endregion
             
@@ -520,6 +546,23 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
                     )
 
 
+                #endregion
+                
+                #region Poisoned Wine - Builder
+                
+                .CreateGroup(powi_heading, groupBuilder => groupBuilder
+                    .AddInteger("PoWi1", powi1_text,5,100, new ProxyRef<int>(() => PoWi_MinSoldiersToDie, o => PoWi_MinSoldiersToDie = o), integerBuilder => integerBuilder
+                        .SetHintText(powi1_hint))
+                    .AddInteger("PoWi2", powi2_text,5,100, new ProxyRef<int>(() => PoWi_MaxSoldiersToDie, o => PoWi_MaxSoldiersToDie = o), integerBuilder => integerBuilder
+                        .SetHintText(powi2_hint))
+                    .AddInteger("PoWi3", powi3_text,5,100, new ProxyRef<int>(() => PoWi_MinSoldiersToHurt, o => PoWi_MinSoldiersToHurt = o), integerBuilder => integerBuilder
+                        .SetHintText(powi3_hint))
+                    .AddInteger("PoWi4", powi4_text,5,100, new ProxyRef<int>(() => PoWi_MaxSoldiersToHurt, o => PoWi_MaxSoldiersToHurt = o), integerBuilder => integerBuilder
+                        .SetHintText(powi4_hint))
+                    .AddBool("PoWi5", powi5_text, new ProxyRef<bool>(() => PoWi_Disable, o => PoWi_Disable = o), boolBuilder => boolBuilder
+                        .SetHintText(powi5_hint))
+                )
+                
                 #endregion
                 
                 #region Prisoner Rebellion - Builder
@@ -829,6 +872,16 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
             Instance.PW_Disable = false;
             Instance.PW_MinMoraleGain = 10;
             Instance.PW_MaxMoraleGain = 25;
+
+            #endregion
+            
+            #region Posioned Wine
+
+            Instance.PoWi_Disable = false;
+            Instance.PoWi_MinSoldiersToDie = 10;
+            Instance.PoWi_MaxSoldiersToDie = 50;
+            Instance.PoWi_MinSoldiersToHurt = 10;
+            Instance.PoWi_MaxSoldiersToHurt = 50;
 
             #endregion
             

@@ -100,6 +100,7 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\CCEvents\UnexpectedWedding.cs" />
     <Compile Include="Events\CCEvents\ViolatedGirl.cs" />
     <Compile Include="Events\ChattingCommanders.cs" />
+    <Compile Include="Events\CommunityEvents\PoisonedWine.cs" />
     <Compile Include="Events\CommunityEvents\SecretsOfSteel.cs" />
     <Compile Include="Events\DiseasedCity.cs" />
     <Compile Include="Events\EagerTroops.cs" />
@@ -139,7 +140,7 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Bannerlord.MCM" Version="5.4.5" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.MCM" Version="5.5.4" IncludeAssets="compile" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -229,7 +229,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     "looks at you suspiciously but ultimately goes with you. You guide {genderAssignmentObjective} into a alley where you make sure that there is no one around. You then proceed to knock the beggar down with " +
                     "one punch. {genderAssignmentSubjectiveCap} falls to the ground and cover {genderAssignmentObjective} head. You punch, kick, drag and push {genderAssignmentObjective} around the alley for a few minutes. " +
                     "When you finally stop {genderAssignmentSubjective} is finally dead.\n\nYou turn to leave but 5 guards approaches you and ask what is going on. You tell the guards the truth. That you don't want filthy " +
-                    "beggars in your town and you then order your guards to dispose of the body. The guards reluctantly agrees and lifts the body over the shoulder. You emerge from the alley feeling the rush of just " +
+                    "beggars in your town and you then order your guards to dispose of the body. The guards reluctantly agrees and one of the guards lifts the body over the shoulder. You emerge from the alley feeling the rush of just " +
                     "killing an innocent person.")
                 .SetTextVariable("genderAssignmentObjective", genderAssignmentObjective)
                 .SetTextVariable("genderAssignmentSubjectiveCap", genderAssignmentSubjectiveCap)
