@@ -20,14 +20,15 @@ namespace CryingBuffalo.RandomEvents.Helpers
 
 			try
 			{
-				var hideouts = Settlement.FindAll((s) => s.IsHideout).ToList();
-				var closestHideout = hideouts.MinBy((s) => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+				var hideouts = Settlement.FindAll(s => s.IsHideout).ToList();
+				var closestHideout = hideouts.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 
 				var banditCultureObject = MBObjectManager.Instance.GetObject<CultureObject>("looters");
 
 				partyName ??= $"{banditCultureObject.Name} (Random Event)";
 				
-				PartyTemplateObject partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
+				var partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
+				
 				banditParty = BanditPartyComponent.CreateLooterParty(
 					$"randomevent_{banditCultureObject.StringId}_{MBRandom.RandomInt(int.MaxValue)}",
 					closestHideout.OwnerClan,
@@ -53,14 +54,15 @@ namespace CryingBuffalo.RandomEvents.Helpers
 
 			try
 			{
-				var hideouts = Settlement.FindAll((s) => s.IsHideout).ToList();
-				var closestHideout = hideouts.MinBy((s) => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+				var hideouts = Settlement.FindAll(s => s.IsHideout).ToList();
+				var closestHideout = hideouts.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 
 				var banditCultureObject = cultureObjectId != null ? MBObjectManager.Instance.GetObject<CultureObject>(cultureObjectId) : closestHideout.Culture;
 
 				partyName ??= $"{banditCultureObject.Name} (Random Event)";
 
-				PartyTemplateObject partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
+				var partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
+				
 				banditParty = BanditPartyComponent.CreateBanditParty(
 					$"randomevent_{banditCultureObject.StringId}_{MBRandom.RandomInt(int.MaxValue)}",
 					Clan.BanditFactions.First(clan => clan.DefaultPartyTemplate == partyTemplate),
@@ -89,26 +91,26 @@ namespace CryingBuffalo.RandomEvents.Helpers
 			var characterObjectList = partyCultureObject.IsBandit ? GetBanditCharacters(partyCultureObject) : GetMainCultureCharacters(partyCultureObject);
 
 			// Split spawn based on number to add
-			int[] spawnNumbers = new int[characterObjectList.Count];
-			int currentSpawned = 0;
+			var spawnNumbers = new int[characterObjectList.Count];
+			var currentSpawned = 0;
 
 			while (currentSpawned < numberToAdd)
 			{
-				int randomInt = MBRandom.RandomInt(0, spawnNumbers.Length);
+				var randomInt = MBRandom.RandomInt(0, spawnNumbers.Length);
 				spawnNumbers[randomInt]++;
 				currentSpawned++;
 			}
 
-			for (int i = 0; i < characterObjectList.Count; i++)
+			for (var i = 0; i < characterObjectList.Count; i++)
 			{
-				CharacterObject characterObject = characterObjectList[i];
+				var characterObject = characterObjectList[i];
 				party.AddElementToMemberRoster(characterObject, spawnNumbers[i]);
 			}
 		}
 
 		private static List<CharacterObject> GetBanditCharacters(CultureObject partyCultureObject)
 		{
-			List<CharacterObject> characterObjectList = new List<CharacterObject>();
+			var characterObjectList = new List<CharacterObject>();
 
 			if (partyCultureObject.StringId == "looters")
 			{
@@ -127,7 +129,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
 
 		private static List<CharacterObject> GetMainCultureCharacters(CultureObject partyCultureObject)
 		{
-			List<CharacterObject> characterObjectList = new List<CharacterObject>();
+			var characterObjectList = new List<CharacterObject>();
 
 			// Add basic troop
 			if (partyCultureObject.BasicTroop != null)
@@ -147,7 +149,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
 			return characterObjectList;
 		}
 
-		private static void CollectFromTroopTree(CharacterObject co, List<CharacterObject> characterObjectList)
+		private static void CollectFromTroopTree(CharacterObject co, ICollection<CharacterObject> characterObjectList)
 		{
 			if (co.UpgradeTargets == null || co.UpgradeTargets.Length == 0)
 				return;

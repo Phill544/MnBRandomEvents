@@ -303,6 +303,7 @@ namespace CryingBuffalo.RandomEvents.Settings.MCM
         {
             
             Instance.CHANCES_FirstRunDone = true;
+            
             Instance.A_Flirtatious_Encounter_Chance = 60.0f;
             Instance.Ahead_Of_Time_Chance = 50.0f;
             Instance.Army_Games_Chance = 60.0f;

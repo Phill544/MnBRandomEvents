@@ -17,6 +17,8 @@ namespace CryingBuffalo.RandomEvents.Helpers
             //using reflection lets us get attributes added by mods (bannerkings for example)
             var allAttrs = Campaign.Current.GetType()
                 .GetProperty("AllCharacterAttributes", BindingFlags.Instance | BindingFlags.NonPublic);
+            
+            // ReSharper disable once PossibleNullReferenceException
             return (MBReadOnlyList<CharacterAttribute>)allAttrs.GetValue(Campaign.Current);
         }
     }
