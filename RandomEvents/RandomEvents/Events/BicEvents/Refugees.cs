@@ -30,12 +30,12 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
         public Refugees() : base(Settings.ModSettings.RandomEvents.RefugeesData)
         {
-            minSoldiers = MCM_MenuConfig_P_Z.Instance.RF_minSoldiers;
-            maxSoldiers = MCM_MenuConfig_P_Z.Instance.RF_maxSoldiers;
-            minFood = MCM_MenuConfig_P_Z.Instance.RF_minFood;
-            maxFood = MCM_MenuConfig_P_Z.Instance.RF_maxFood;
-            minCaptive = MCM_MenuConfig_P_Z.Instance.RF_minCaptive;
-            maxCaptive = MCM_MenuConfig_P_Z.Instance.RF_maxCaptive;
+            minSoldiers = 8;
+            maxSoldiers = 15;
+            minFood = 3;
+            maxFood = 5;
+            minCaptive = 8;
+            maxCaptive = 15;
         }
 
         public override void CancelEvent()
@@ -44,7 +44,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
         public override bool CanExecuteEvent()
         {
-            return MobileParty.MainParty.CurrentSettlement == null && MCM_MenuConfig_P_Z.Instance.RF_Disable == false;
+            return MobileParty.MainParty.CurrentSettlement == null && MCM_MenuConfig_Toggle.Instance.RF_Disable == false;
         }
 
         public override void StartEvent()

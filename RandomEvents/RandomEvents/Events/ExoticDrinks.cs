@@ -22,11 +22,11 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public ExoticDrinks() : base(ModSettings.RandomEvents.ExoticDrinksData)
 		{
-			minPrice = MCM_MenuConfig_A_F.Instance.ED_MinPrice;
-			maxPrice = MCM_MenuConfig_A_F.Instance.ED_MaxPrice;
-			successChance = MCM_MenuConfig_A_F.Instance.ED_SuccessChance;
-			minXp = MCM_MenuConfig_A_F.Instance.ED_MinXp;
-			maxXp = MCM_MenuConfig_A_F.Instance.ED_MaxXp;
+			minPrice = 3000;
+			maxPrice = 6000;
+			successChance = 75.0f;
+			minXp = 250;
+			maxXp = 1000;
 		}
 
 		public override void CancelEvent()
@@ -35,7 +35,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.ED_Disable == false && Hero.MainHero.Gold >= maxPrice;
+			return MCM_MenuConfig_Toggle.Instance.ED_Disable == false && Hero.MainHero.Gold >= maxPrice;
 		}
 
 		public override void StartEvent()

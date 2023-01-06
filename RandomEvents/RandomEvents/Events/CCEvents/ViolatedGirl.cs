@@ -20,9 +20,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public ViolatedGirl() : base(ModSettings.RandomEvents.ViolatedGirlData)
         {
-            minGoldCompensation = MCM_MenuConfig_P_Z.Instance.VG_MinCompensation;
-            maxGoldCompensation = MCM_MenuConfig_P_Z.Instance.VG_MaxCompensation;
-            minRogueryLevel = MCM_MenuConfig_P_Z.Instance.VG_MinRogueryLevel;
+            minGoldCompensation = 2000;
+            maxGoldCompensation = 5000;
+            minRogueryLevel = 125;
         }
 
         public override void CancelEvent()
@@ -31,7 +31,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_P_Z.Instance.VG_Disable == false && MobileParty.MainParty.CurrentSettlement == null && Hero.MainHero.Gold >= maxGoldCompensation;
+            return MCM_MenuConfig_Toggle.Instance.VG_Disable == false && MobileParty.MainParty.CurrentSettlement == null && Hero.MainHero.Gold >= maxGoldCompensation;
         }
 
         public override void StartEvent()

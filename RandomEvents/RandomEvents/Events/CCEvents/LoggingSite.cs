@@ -23,12 +23,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public LoggingSite() : base(ModSettings.RandomEvents.LoggingSiteData)
         {
-            minSoldiersToGo = MCM_MenuConfig_G_O.Instance.LS_MinSoldiersToGo;
-            maxSoldiersToGo = MCM_MenuConfig_G_O.Instance.LS_MaxSoldiersToGo;
-            minYield = MCM_MenuConfig_G_O.Instance.LS_MinYield;
-            maxYield = MCM_MenuConfig_G_O.Instance.LS_MaxYield;
-            minYieldMultiplier = MCM_MenuConfig_G_O.Instance.LS_MinYieldMultiplier;
-            maxYieldMultiplier = MCM_MenuConfig_G_O.Instance.LS_MaxYieldMultiplier;
+            minSoldiersToGo = 10;
+            maxSoldiersToGo = 20;
+            minYield = 5;
+            maxYield = 15;
+            minYieldMultiplier = 10;
+            maxYieldMultiplier = 15;
         }
 
         public override void CancelEvent()
@@ -38,7 +38,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
             
-            return MCM_MenuConfig_G_O.Instance.LS_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo;
+            return MCM_MenuConfig_Toggle.Instance.LS_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo;
         }
 
         public override void StartEvent()

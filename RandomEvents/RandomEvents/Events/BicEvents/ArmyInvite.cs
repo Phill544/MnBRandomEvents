@@ -37,7 +37,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					return false;
 			}
 			
-			return MCM_MenuConfig_A_F.Instance.AI_Disable == false && Clan.PlayerClan.Kingdom != null && MobileParty.MainParty.Army == null && Clan.PlayerClan.Kingdom.Armies != null;
+			return MCM_MenuConfig_Toggle.Instance.AI_Disable == false && Clan.PlayerClan.Kingdom != null && MobileParty.MainParty.Army == null && Clan.PlayerClan.Kingdom.Armies != null;
 		}
 
 		public override void StartEvent()

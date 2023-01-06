@@ -23,11 +23,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public Travellers() : base(ModSettings.RandomEvents.TravellersData)
         {
-            minGoldStolen = MCM_MenuConfig_P_Z.Instance.TR_minGoldStolen;
-            maxGoldStolen = MCM_MenuConfig_P_Z.Instance.TR_maxGoldStolen;
-            minEngineeringLevel = MCM_MenuConfig_P_Z.Instance.TR_engineeringLevel;
-            minRogueryLevel = MCM_MenuConfig_P_Z.Instance.TR_rogueryLevel;
-            minStewardLevel = MCM_MenuConfig_P_Z.Instance.TR_stewardLevel;
+            minGoldStolen = 2500;
+            maxGoldStolen = 10000;
+            minEngineeringLevel = 75;
+            minRogueryLevel = 125;
+            minStewardLevel = 100;
         }
 
         public override void CancelEvent()
@@ -36,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_P_Z.Instance.TR_Disable == false && (CurrentTimeOfDay.IsEvening || CurrentTimeOfDay.IsMidday || CurrentTimeOfDay.IsMorning);
+            return MCM_MenuConfig_Toggle.Instance.TR_Disable == false && (CurrentTimeOfDay.IsEvening || CurrentTimeOfDay.IsMidday || CurrentTimeOfDay.IsMorning);
         }
 
         public override void StartEvent()

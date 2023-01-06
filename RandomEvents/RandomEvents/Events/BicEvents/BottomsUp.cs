@@ -21,10 +21,10 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		public BottomsUp() : base(Settings.ModSettings.RandomEvents.BottomsUpData)
 		{
 
-			minMoraleGain = MCM_MenuConfig_A_F.Instance.BU_minMoraleGain;
-			maxMoraleGain = MCM_MenuConfig_A_F.Instance.BU_maxMoraleGain;
-			minGold = MCM_MenuConfig_A_F.Instance.BU_minGold;
-			maxGold = MCM_MenuConfig_A_F.Instance.BU_maxGold;
+			minMoraleGain = 10;
+			maxMoraleGain = 25;
+			minGold = 50;
+			maxGold = 300;
 		}
 
 		public override void CancelEvent()
@@ -34,8 +34,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.BU_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown && CampaignTime.Now.IsNightTime && Clan.PlayerClan.Renown >= 500||
-				 MCM_MenuConfig_A_F.Instance.BU_Disable == false && MobileParty.MainParty.CurrentSettlement != null && MobileParty.MainParty.CurrentSettlement.IsVillage) && CampaignTime.Now.IsNightTime && Clan.PlayerClan.Renown >= 500;
+			return MCM_MenuConfig_Toggle.Instance.BU_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown && CampaignTime.Now.IsNightTime && Clan.PlayerClan.Renown >= 500||
+				 MCM_MenuConfig_Toggle.Instance.BU_Disable == false && MobileParty.MainParty.CurrentSettlement != null && MobileParty.MainParty.CurrentSettlement.IsVillage) && CampaignTime.Now.IsNightTime && Clan.PlayerClan.Renown >= 500;
 		}
 
 		public override void StartEvent()

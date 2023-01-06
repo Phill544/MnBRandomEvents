@@ -23,13 +23,13 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public HuntingTrip() : base(ModSettings.RandomEvents.HuntingTripData)
         {
-            minSoldiersToGo = MCM_MenuConfig_G_O.Instance.HT_MinSoldiersToGo;
-            maxSoldiersToGo = MCM_MenuConfig_G_O.Instance.HT_MaxSoldiersToGo;
-            maxCatch = MCM_MenuConfig_G_O.Instance.HT_MaxCatch;
-            minMoraleGain = MCM_MenuConfig_G_O.Instance.HT_MinMoraleGain;
-            maxMoraleGain = MCM_MenuConfig_G_O.Instance.HT_MaxMoraleGain;
-            minYieldMultiplier = MCM_MenuConfig_G_O.Instance.HT_MinYieldMultiplier;
-            maxYieldMultiplier = MCM_MenuConfig_G_O.Instance.HT_MaxYieldMultiplier;
+            minSoldiersToGo = 3;
+            maxSoldiersToGo = 12;
+            maxCatch = 20;
+            minMoraleGain = 7;
+            maxMoraleGain = 20;
+            minYieldMultiplier = 3;
+            maxYieldMultiplier = 6;
         }
 
         public override void CancelEvent()
@@ -39,7 +39,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
             
-            return MCM_MenuConfig_G_O.Instance.HT_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo;
+            return MCM_MenuConfig_Toggle.Instance.HT_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo;
         }
 
         public override void StartEvent()

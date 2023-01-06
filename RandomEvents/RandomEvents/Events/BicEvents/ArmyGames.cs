@@ -12,16 +12,18 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class ArmyGames : BaseEvent
 	{
-		private readonly float cohesionIncrease;
+		private readonly float minCohesionIncrease;
+		private readonly float maxCohesionIncrease;
 		private readonly int minMoraleGain;
 		private readonly int maxMoraleGain;
 
 
 		public ArmyGames() : base(ModSettings.RandomEvents.ArmyGamesData)
 		{
-			cohesionIncrease = MCM_MenuConfig_A_F.Instance.AG_CohesionGain;
-			minMoraleGain = MCM_MenuConfig_A_F.Instance.AG_minMoraleGain;
-			maxMoraleGain = MCM_MenuConfig_A_F.Instance.AG_maxMoraleGain;
+			minCohesionIncrease = 10.0f;
+			maxCohesionIncrease = 40.0f;
+			minMoraleGain = 10;
+			maxMoraleGain = 30;
 		}
 
 		public override void CancelEvent()
@@ -30,7 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.AG_Disable == false && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 2; 
+			return MCM_MenuConfig_Toggle.Instance.AG_Disable == false && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 2; 
 		}
 
 		public override void StartEvent()
@@ -43,6 +45,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			try
 			{
 				var ArmyLeader = MobileParty.MainParty.Army.ArmyOwner;
+
+				var cohesionIncrease = MBRandom.RandomFloatRanged(minCohesionIncrease, maxCohesionIncrease);
 				
 				MobileParty.MainParty.Army.Cohesion += cohesionIncrease;
 				

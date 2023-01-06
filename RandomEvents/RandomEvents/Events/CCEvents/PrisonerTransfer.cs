@@ -24,10 +24,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public PrisonerTransfer() : base(ModSettings.RandomEvents.PrisonerTransferData)
         {
-            minPrisoners = MCM_MenuConfig_P_Z.Instance.PT_MinPrisoners; 
-            maxPrisoners = MCM_MenuConfig_P_Z.Instance.PT_MaxPrisoners; 
-            minPricePrPrisoner = MCM_MenuConfig_P_Z.Instance.PT_MinPricePrPrisoner; 
-            maxPricePrPrisoner = MCM_MenuConfig_P_Z.Instance.PT_MaxPricePrPrisoner; 
+            minPrisoners = 10; 
+            maxPrisoners = 50; 
+            minPricePrPrisoner = 50; 
+            maxPricePrPrisoner = 400; 
         }
 
         public override void CancelEvent()
@@ -36,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_P_Z.Instance.PT_Disable == false;
+            return MCM_MenuConfig_Toggle.Instance.PT_Disable == false;
         }
 
         public override void StartEvent()

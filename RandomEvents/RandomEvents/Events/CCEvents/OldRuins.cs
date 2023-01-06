@@ -22,11 +22,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public OldRuins() : base(ModSettings.RandomEvents.OldRuinsData)
         {
-            minMen = MCM_MenuConfig_G_O.Instance.OR_MinSoldiers;
-            maxMen = MCM_MenuConfig_G_O.Instance.OR_MaxSoldiers;
-            maxMenToKill = MCM_MenuConfig_G_O.Instance.OR_MaxMenToKill;
-            minGoldFound = MCM_MenuConfig_G_O.Instance.OR_MinGoldFound;
-            maxGoldFound = MCM_MenuConfig_G_O.Instance.OR_MaxGoldFound;
+            minMen = 6;
+            maxMen = 12;
+            maxMenToKill = 10;
+            minGoldFound = 250;
+            maxGoldFound = 5000;
         }
 
         public override void CancelEvent()
@@ -35,7 +35,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_G_O.Instance.OR_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_Toggle.Instance.OR_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

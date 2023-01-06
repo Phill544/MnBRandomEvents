@@ -32,8 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             embarrassedSoliderMaxGold = 100;
             minGoldRaided = 250;
             maxGoldRaided = 1500;
-            
-            minRogueryLevel = MCM_MenuConfig_P_Z.Instance.UW_MinRogueryLevel;
+            minRogueryLevel = 125;
         }
 
         public override void CancelEvent()
@@ -42,7 +41,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_P_Z.Instance.UW_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_Toggle.Instance.UW_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

@@ -20,8 +20,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         
         public BeggarBegging() : base(ModSettings.RandomEvents.BeggarBeggingData)
         {
-            minStewardLevel = MCM_MenuConfig_A_F.Instance.BB_minStewardLevel;
-            minRogueryLevel = MCM_MenuConfig_A_F.Instance.BB_minRogueryLevel;
+            minStewardLevel = 50;
+            minRogueryLevel = 125;
         }
 
         public override void CancelEvent()
@@ -31,7 +31,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
 
-            return MCM_MenuConfig_A_F.Instance.BB_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
+            return MCM_MenuConfig_Toggle.Instance.BB_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
         }
 
         public override void StartEvent()

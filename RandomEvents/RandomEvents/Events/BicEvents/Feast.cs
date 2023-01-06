@@ -34,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 				return false;
 			var randomHero = Campaign.Current.AliveHeroes.Where(h => h.CurrentSettlement == Settlement.CurrentSettlement && h.IsLord && h != Hero.MainHero.Spouse && h.Clan != Clan.PlayerClan).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
 
-			return MCM_MenuConfig_A_F.Instance.FE_Disable == false && randomHero != null && Clan.PlayerClan.Renown >= 500;
+			return MCM_MenuConfig_Toggle.Instance.FE_Disable == false && randomHero != null && Clan.PlayerClan.Renown >= 500;
 		}
 
 		public override void StartEvent()

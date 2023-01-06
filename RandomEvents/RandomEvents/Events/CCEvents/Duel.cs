@@ -20,8 +20,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public Duel() : base(ModSettings.RandomEvents.DuelData)
         {
-            minTwoHandedLevel = MCM_MenuConfig_A_F.Instance.DU_minTwoHandedLevel;
-            minRogueryLevel = MCM_MenuConfig_A_F.Instance.DU_minRogueryLevel;
+            minTwoHandedLevel = 125;
+            minRogueryLevel = 100;
         }
 
         public override void CancelEvent()
@@ -31,7 +31,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
 
-            return MCM_MenuConfig_A_F.Instance.DU_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_Toggle.Instance.DU_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

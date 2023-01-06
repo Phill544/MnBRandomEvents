@@ -28,14 +28,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public SuddenStorm() : base(ModSettings.RandomEvents.SuddenStormData)
         {
             
-            minHorsesLost = MCM_MenuConfig_P_Z.Instance.SuS_MinHorsesLost;
-            maxHorsesLost = MCM_MenuConfig_P_Z.Instance.SuS_MaxHorsesLost;
-            minMenDied = MCM_MenuConfig_P_Z.Instance.SuS_MinMenDied;
-            maxMenDied = MCM_MenuConfig_P_Z.Instance.SuS_MaxMenDied;
-            minMenWounded = MCM_MenuConfig_P_Z.Instance.SuS_MinMenWounded;
-            maxMenWounded = MCM_MenuConfig_P_Z.Instance.SuS_MaxMenWounded;
-            minMeatFromHorse = MCM_MenuConfig_P_Z.Instance.SuS_MinMeatFromHorse;
-            maxMeatFromHorse = MCM_MenuConfig_P_Z.Instance.SuS_MaxMeatFromHorse;
+            minHorsesLost = 5;
+            maxHorsesLost = 12;
+            minMenDied = 10;
+            maxMenDied = 20;
+            minMenWounded = 10;
+            maxMenWounded = 02;
+            minMeatFromHorse = 4;
+            maxMeatFromHorse = 9;
             
         }
 
@@ -45,7 +45,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_P_Z.Instance.SuS_Disable == false && Settlement.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxMenDied;
+            return MCM_MenuConfig_Toggle.Instance.SuS_Disable == false && Settlement.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxMenDied;
 
         }
 

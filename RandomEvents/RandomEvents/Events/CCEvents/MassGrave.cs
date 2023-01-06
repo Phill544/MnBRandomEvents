@@ -23,12 +23,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public MassGrave() : base(ModSettings.RandomEvents.MassGraveData)
         {
-            minSoldiers = MCM_MenuConfig_G_O.Instance.MG_MinSoldiers;
-            maxSoldiers = MCM_MenuConfig_G_O.Instance.MG_MaxSoldiers;
-            minBodies = MCM_MenuConfig_G_O.Instance.MG_MinBodies;
-            maxBodies = MCM_MenuConfig_G_O.Instance.MG_MaxBodies;
-            minBaseMoraleLoss = MCM_MenuConfig_G_O.Instance.MG_MinBaseMoraleLoss;
-            maxBaseMoraleLoss = MCM_MenuConfig_G_O.Instance.MG_MaxBaseMoraleLoss;
+            minSoldiers = 3;
+            maxSoldiers = 8;
+            minBodies = 20;
+            maxBodies = 40;
+            minBaseMoraleLoss = 15;
+            maxBaseMoraleLoss = 25;
         }
 
         public override void CancelEvent()
@@ -38,7 +38,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
 
-            return MCM_MenuConfig_G_O.Instance.MG_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_Toggle.Instance.MG_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

@@ -18,8 +18,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public BirdSongs() : base(Settings.ModSettings.RandomEvents.BirdSongsData)
 		{
-			minMoraleGain = MCM_MenuConfig_A_F.Instance.BS_minMoraleGain;
-			maxMoraleGain = MCM_MenuConfig_A_F.Instance.BS_maxMoraleGain;
+			minMoraleGain = 15;
+			maxMoraleGain = 30;
 
 		}
 
@@ -30,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.BS_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsMorning;
+			return MCM_MenuConfig_Toggle.Instance.BS_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsMorning;
 		}
 
 		public override void StartEvent()

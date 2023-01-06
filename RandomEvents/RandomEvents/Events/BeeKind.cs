@@ -18,9 +18,9 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public BeeKind() : base(ModSettings.RandomEvents.BeeKindData)
 		{
-			damage = MCM_MenuConfig_A_F.Instance.BK_damage;
-			reactionChance = MCM_MenuConfig_A_F.Instance.BK_Reaction_Chance;
-			reactionDamage = MCM_MenuConfig_A_F.Instance.BK_Add_Damage;
+			damage = 10;
+			reactionChance = 0.15f;
+			reactionDamage = 15;
 		}
 
 		public override void CancelEvent()
@@ -29,7 +29,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.BK_Disable == false;
+			return MCM_MenuConfig_Toggle.Instance.BK_Disable == false;
 		}
 
 		public override void StartEvent()

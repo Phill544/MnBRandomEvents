@@ -46,8 +46,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             maxInfluenceGain = 75;
             minGoldLooted = 25;
             maxGoldLooted = 125;
-            
-            minRogueryLevel = MCM_MenuConfig_A_F.Instance.BP_MinRogueryLevel;
+            minRogueryLevel = 125;
         }
 
         public override void CancelEvent()
@@ -56,7 +55,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_A_F.Instance.BP_Disable == false && Hero.MainHero.Clan.Kingdom != null;
+            return MCM_MenuConfig_Toggle.Instance.BP_Disable == false && Hero.MainHero.Clan.Kingdom != null;
         }
 
         public override void StartEvent()

@@ -16,7 +16,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public ChattingCommanders() : base(ModSettings.RandomEvents.ChattingCommandersData)
 		{
-			cohesionIncrease = MCM_MenuConfig_A_F.Instance.CC_CohesionGain;
+			cohesionIncrease = 30.0f;
 		}
 
 		public override void CancelEvent()
@@ -25,7 +25,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.CC_Disable == false && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.ArmyOwner == Hero.MainHero && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 1;
+			return MCM_MenuConfig_Toggle.Instance.CC_Disable == false && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.ArmyOwner == Hero.MainHero && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 1;
 		}
 
 		public override void StartEvent()

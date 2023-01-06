@@ -22,10 +22,10 @@ namespace CryingBuffalo.RandomEvents.Events
 		
 		public BanditAmbush() : base(ModSettings.RandomEvents.BanditAmbushData)
 		{
-			moneyMinPercent = MCM_MenuConfig_A_F.Instance.BA_MoneyMinPercent;
-			moneyMaxPercent = MCM_MenuConfig_A_F.Instance.BA_MoneyMaxPercent;
-			troopScareCount = MCM_MenuConfig_A_F.Instance.BA_TroopScareCount;
-			banditCap = MCM_MenuConfig_A_F.Instance.BA_BanditCap;
+			moneyMinPercent = 0.05f;
+			moneyMaxPercent = 0.15f;
+			troopScareCount = 50;
+			banditCap = 50;
 		}
 
 		public override void CancelEvent()
@@ -34,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.BA_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_Toggle.Instance.BA_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

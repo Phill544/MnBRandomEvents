@@ -20,10 +20,10 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public Dysentery() : base(Settings.ModSettings.RandomEvents.DysenteryData)
 		{
-			minMoraleLoss = MCM_MenuConfig_A_F.Instance.DY_minMoraleLoss;
-			maxMoraleLoss = MCM_MenuConfig_A_F.Instance.DY_maxMoraleLoss;
-			minVictim = MCM_MenuConfig_A_F.Instance.DY_minVictim;
-			maxVictim = MCM_MenuConfig_A_F.Instance.DY_maxVictim;
+			minMoraleLoss = 10;
+			maxMoraleLoss = 25;
+			minVictim = 3;
+			maxVictim = 6;
 		}
 
 		public override void CancelEvent()
@@ -32,7 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.DY_Disable == false && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10 && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_Toggle.Instance.DY_Disable == false && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10 && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

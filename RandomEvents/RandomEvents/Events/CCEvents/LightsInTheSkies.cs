@@ -22,7 +22,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_G_O.Instance.LitS_Disable == false && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural == false && CurrentTimeOfDay.IsNight;
+            return MCM_MenuConfig_Toggle.Instance.LitS_Disable == false && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural == false && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()

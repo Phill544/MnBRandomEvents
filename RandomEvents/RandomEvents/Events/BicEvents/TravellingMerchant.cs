@@ -19,8 +19,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public TravellingMerchant() : base(Settings.ModSettings.RandomEvents.TravellingMerchantData)
 		{
-			minLoot = MCM_MenuConfig_P_Z.Instance.TM_minLoot;
-			maxLoot = MCM_MenuConfig_P_Z.Instance.TM_maxLoot;
+			minLoot = 2500;
+			maxLoot = 10000;
 
 		}
 		public override void CancelEvent()
@@ -28,7 +28,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		}
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_P_Z.Instance.TM_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 5 && Clan.PlayerClan.Renown >= 500;
+			return MCM_MenuConfig_Toggle.Instance.TM_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 5 && Clan.PlayerClan.Renown >= 500;
 		}
 		public override void StartEvent()
 		{

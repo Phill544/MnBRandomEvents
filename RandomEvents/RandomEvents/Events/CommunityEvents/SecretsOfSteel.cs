@@ -28,7 +28,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
         public override bool CanExecuteEvent()
         {
 
-            return MCM_MenuConfig_P_Z.Instance.SOS_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_Toggle.Instance.SOS_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

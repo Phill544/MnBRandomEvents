@@ -17,8 +17,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public SuccessfulDeeds() : base(ModSettings.RandomEvents.SuccessfulDeedsData)
 		{
-			minInfluenceGain = MCM_MenuConfig_P_Z.Instance.SD_MinInfluenceGained;
-			maxInfluenceGain = MCM_MenuConfig_P_Z.Instance.SD_MaxInfluenceGained;
+			minInfluenceGain = 20;
+			maxInfluenceGain = 100;
 		}
 
 		public override void CancelEvent()
@@ -27,7 +27,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_P_Z.Instance.SD_Disable == false && Hero.MainHero.Clan.Kingdom != null;
+			return MCM_MenuConfig_Toggle.Instance.SD_Disable == false && Hero.MainHero.Clan.Kingdom != null;
 		}
 
 		public override void StartEvent()

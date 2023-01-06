@@ -18,8 +18,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public WanderingLivestock() : base(ModSettings.RandomEvents.WanderingLivestockData)
 		{
-			minFood = MCM_MenuConfig_P_Z.Instance.WL_MinFood;
-			maxFood = MCM_MenuConfig_P_Z.Instance.WL_MaxFood;
+			minFood = 10;
+			maxFood = 20;
 		}
 
 		public override void CancelEvent()
@@ -28,7 +28,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_P_Z.Instance.WL_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_Toggle.Instance.WL_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

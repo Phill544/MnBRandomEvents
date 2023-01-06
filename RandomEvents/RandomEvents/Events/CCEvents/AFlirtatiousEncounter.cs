@@ -24,11 +24,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public AFlirtatiousEncounter() : base(ModSettings.RandomEvents.AFlirtatiousEncounterData)
         {
-            minWomanAge = MCM_MenuConfig_A_F.Instance.AFE_minWomanAge;
-            maxWomanAge = MCM_MenuConfig_A_F.Instance.AFE_maxWomanAge;
-            minRelationshipIncrease = MCM_MenuConfig_A_F.Instance.AFE_minRelationshipIncrease;
-            maxRelationshipIncrease = MCM_MenuConfig_A_F.Instance.AFE_maxRelationshipIncrease;
-            minCharmLevel = MCM_MenuConfig_A_F.Instance.AFE_charmSkillLevel;
+            minWomanAge = 18;
+            maxWomanAge = 50;
+            minRelationshipIncrease = 15.0f;
+            maxRelationshipIncrease = 40.0f;
+            minCharmLevel = 100;
         }
 
         public override void CancelEvent()
@@ -46,7 +46,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                      h.IsFemale && h.Age >= minWomanAge && h.Age <= maxWomanAge
             ).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
 
-            return randomHero != null && MCM_MenuConfig_A_F.Instance.AFE_Disable == false && CampaignTime.Now.IsNightTime && MobileParty.MainParty.CurrentSettlement != null;
+            return randomHero != null && MCM_MenuConfig_Toggle.Instance.AFE_Disable == false && CampaignTime.Now.IsNightTime && MobileParty.MainParty.CurrentSettlement != null;
         }
 
         public override void StartEvent()

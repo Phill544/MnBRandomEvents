@@ -17,7 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public BetMoney() : base(ModSettings.RandomEvents.BetMoneyData)
 		{
-			moneyBetPercent = MCM_MenuConfig_A_F.Instance.BM_Money_Percent;
+			moneyBetPercent = 0.10f;
 		}
 
 		public override void StartEvent()
@@ -118,7 +118,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.BM_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars > 0;
+			return MCM_MenuConfig_Toggle.Instance.BM_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars > 0;
 		}
 	}
 

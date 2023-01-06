@@ -24,13 +24,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveScout != Hero.MainHero
+			return MCM_MenuConfig_Toggle.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveScout != Hero.MainHero
 				&& MobileParty.MainParty.IsDisorganized == false && Clan.PlayerClan.Renown >= 500 ||
-				   MCM_MenuConfig_A_F.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveQuartermaster != Hero.MainHero
+				MCM_MenuConfig_Toggle.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveQuartermaster != Hero.MainHero
 				&& MobileParty.MainParty.IsDisorganized == false && Clan.PlayerClan.Renown >= 500 ||
-				   MCM_MenuConfig_A_F.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveSurgeon != Hero.MainHero
+				MCM_MenuConfig_Toggle.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveSurgeon != Hero.MainHero
 				&& MobileParty.MainParty.IsDisorganized == false && Clan.PlayerClan.Renown >= 500 ||
-				   MCM_MenuConfig_A_F.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveEngineer != Hero.MainHero
+				MCM_MenuConfig_Toggle.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveEngineer != Hero.MainHero
 				&& MobileParty.MainParty.IsDisorganized == false && Clan.PlayerClan.Renown >= 500;
 		}
 

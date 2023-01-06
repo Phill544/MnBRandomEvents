@@ -18,8 +18,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public NotOfThisWorld() : base(ModSettings.RandomEvents.NotOfThisWorldData)
         {
-            minSoldiersToDisappear = MCM_MenuConfig_G_O.Instance.NotW_MinSoldiersGone;
-            maxSoldiersToDisappear = MCM_MenuConfig_G_O.Instance.NotW_MaxSoldiersGone;
+            minSoldiersToDisappear = 3;
+            maxSoldiersToDisappear = 8;
         }
 
         public override void CancelEvent()
@@ -29,7 +29,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
 
-            return MCM_MenuConfig_G_O.Instance.NotW_Disable == false && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToDisappear && CurrentTimeOfDay.IsNight;
+            return MCM_MenuConfig_Toggle.Instance.NotW_Disable == false && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToDisappear && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()

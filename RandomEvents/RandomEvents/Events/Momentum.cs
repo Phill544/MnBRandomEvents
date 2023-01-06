@@ -22,7 +22,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_G_O.Instance.MO_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return MCM_MenuConfig_Toggle.Instance.MO_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

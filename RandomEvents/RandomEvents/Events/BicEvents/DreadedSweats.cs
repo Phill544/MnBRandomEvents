@@ -13,16 +13,16 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 	{
 		private readonly int minMoraleLoss;
 		private readonly int maxMoraleLoss;
-		private readonly int minvictim;
-        private readonly int maxvictim;
+		private readonly int minVictim;
+        private readonly int maxVictim;
         
 
 		public DreadedSweats() : base(Settings.ModSettings.RandomEvents.DreadedSweatsData)
 		{
-			minMoraleLoss = MCM_MenuConfig_A_F.Instance.DS_minMoraleLoss;
-			maxMoraleLoss = MCM_MenuConfig_A_F.Instance.DS_maxMoraleLoss;
-			minvictim = MCM_MenuConfig_A_F.Instance.DS_minvictim;
-			maxvictim = MCM_MenuConfig_A_F.Instance.DS_maxvictim;
+			minMoraleLoss = 10;
+			maxMoraleLoss = 25;
+			minVictim = 3;
+			maxVictim = 6;
 
 		}
 
@@ -32,7 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.DS_Disable == false && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10;
+			return MCM_MenuConfig_Toggle.Instance.DS_Disable == false && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10;
 		}
 
 		public override void StartEvent()
@@ -42,7 +42,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
             
 			var moraleLoss = MBRandom.RandomInt(minMoraleLoss, maxMoraleLoss);
 			
-			var victims = MBRandom.RandomInt(minvictim, maxvictim);
+			var victims = MBRandom.RandomInt(minVictim, maxVictim);
 			
 			var totalVictims = partySize / 10 + victims;
 			

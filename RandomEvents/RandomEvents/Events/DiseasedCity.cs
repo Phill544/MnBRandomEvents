@@ -21,10 +21,10 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public DiseasedCity() : base(ModSettings.RandomEvents.DiseasedCityData)
 		{
-			baseSuccessChance = MCM_MenuConfig_A_F.Instance.DC_BaseSuccessChance;
-			highMedicineChance = MCM_MenuConfig_A_F.Instance.DC_HighMedicineChance;
-			highMedicineLevel = MCM_MenuConfig_A_F.Instance.DC_HighMedicineLevel;
-			percentLoss = MCM_MenuConfig_A_F.Instance.DC_PercentLoss;
+			baseSuccessChance = 50.0f;
+			highMedicineChance = 25.0f;
+			highMedicineLevel = 75;
+			percentLoss = 20.0f;
 		}
 
 		public override void CancelEvent()
@@ -33,7 +33,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.DC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
+			return MCM_MenuConfig_Toggle.Instance.DC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()

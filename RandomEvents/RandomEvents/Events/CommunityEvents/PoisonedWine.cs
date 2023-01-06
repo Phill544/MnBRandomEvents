@@ -20,10 +20,10 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
 
         public PoisonedWine() : base(ModSettings.RandomEvents.PoisonedWineData)
         {
-            minSoldiersToDie = MCM_MenuConfig_P_Z.Instance.PoWi_MinSoldiersToDie;
-            maxSoldiersToDie = MCM_MenuConfig_P_Z.Instance.PoWi_MaxSoldiersToDie;
-            minSoldiersToHurt = MCM_MenuConfig_P_Z.Instance.PoWi_MinSoldiersToHurt;
-            maxSoldiersToHurt = MCM_MenuConfig_P_Z.Instance.PoWi_MaxSoldiersToHurt;
+            minSoldiersToDie = 10;
+            maxSoldiersToDie = 50;
+            minSoldiersToHurt = 10;
+            maxSoldiersToHurt = 50;
         }
 
         public override void CancelEvent()
@@ -32,7 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_P_Z.Instance.PoWi_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToDie && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_Toggle.Instance.PoWi_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToDie && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

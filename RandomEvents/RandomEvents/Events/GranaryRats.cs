@@ -17,8 +17,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public GranaryRats() : base(ModSettings.RandomEvents.GranaryRatsData)
 		{
-			MinFoodLossPercent = MCM_MenuConfig_G_O.Instance.GR_MinFoodLoss;
-			MaxFoodLossPercent = MCM_MenuConfig_G_O.Instance.GR_MaxFoodLoss;
+			MinFoodLossPercent = 10.0f;
+			MaxFoodLossPercent = 25.0f;
 		}
 
 		public override void CancelEvent()
@@ -27,7 +27,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_G_O.Instance.GR_Disable == false && Hero.MainHero.Clan.Settlements.Any();
+			return MCM_MenuConfig_Toggle.Instance.GR_Disable == false && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()

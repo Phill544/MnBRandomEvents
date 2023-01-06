@@ -16,8 +16,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public Courier() : base(Settings.ModSettings.RandomEvents.CourierData)
 		{
-			minMoraleGain = MCM_MenuConfig_A_F.Instance.CR_minMoraleGain;
-			maxMoraleGain = MCM_MenuConfig_A_F.Instance.CR_maxMoraleGain;
+			minMoraleGain = 15;
+			maxMoraleGain = 30;
 		}
 
 		public override void CancelEvent()
@@ -26,7 +26,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_A_F.Instance.CR_Disable == false;
+			return MCM_MenuConfig_Toggle.Instance.CR_Disable == false;
 		}
 
 		public override void StartEvent()

@@ -21,11 +21,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public FishingSpot() : base(ModSettings.RandomEvents.FishingSpotData)
         {
-            minSoldiersToGo = MCM_MenuConfig_A_F.Instance.FS_MinSoldiersToGo;
-            maxSoldiersToGo = MCM_MenuConfig_A_F.Instance.FS_MaxSoldiersToGo;
-            maxFishCatch = MCM_MenuConfig_A_F.Instance.FS_MaxFishCatch;
-            minMoraleGain = MCM_MenuConfig_A_F.Instance.FS_MinMoraleGain;
-            maxMoraleGain = MCM_MenuConfig_A_F.Instance.FS_MaxMoraleGain;
+            minSoldiersToGo = 3;
+            maxSoldiersToGo = 12;
+            maxFishCatch = 20;
+            minMoraleGain = 5;
+            maxMoraleGain = 25;
         }
 
         public override void CancelEvent()
@@ -34,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_A_F.Instance.FS_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo && MobileParty.MainParty.CurrentSettlement == null;
+            return MCM_MenuConfig_Toggle.Instance.FS_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
