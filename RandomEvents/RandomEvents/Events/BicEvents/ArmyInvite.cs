@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -14,17 +15,23 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class ArmyInvite : BaseEvent
 	{
-
+		private readonly bool eventDisabled;
 
 		public ArmyInvite() : base(Settings.ModSettings.RandomEvents.ArmyInviteData)
 		{
-
-
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("ArmyInvite", "EventDisabled");
+			
 		}
 
 		public override void CancelEvent()
 		{
-        
+		}
+		
+		private bool EventCanRun()
+		{
+			return eventDisabled == false;
 		}
 
 		public override bool CanExecuteEvent()
@@ -37,7 +44,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					return false;
 			}
 			
-			return MCM_MenuConfig_Toggle.Instance.AI_Disable == false && Clan.PlayerClan.Kingdom != null && MobileParty.MainParty.Army == null && Clan.PlayerClan.Kingdom.Armies != null;
+			return EventCanRun() && Clan.PlayerClan.Kingdom != null && MobileParty.MainParty.Army == null && Clan.PlayerClan.Kingdom.Armies != null;
 		}
 
 		public override void StartEvent()

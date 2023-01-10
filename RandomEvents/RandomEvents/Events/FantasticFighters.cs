@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -11,22 +13,39 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class FantasticFighters : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minRenownGain;
 		private readonly int maxRenownGain;
 
 		public FantasticFighters() : base(ModSettings.RandomEvents.FantasticFightersData)
 		{
-			minRenownGain = 25;
-			maxRenownGain = 75;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("FantasticFighters", "EventDisabled");
+			minRenownGain = ConfigFile.ReadInteger("FantasticFighters", "MinRenownGain");
+			maxRenownGain = ConfigFile.ReadInteger("FantasticFighters", "MaxRenownGain");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minRenownGain != 0 || maxRenownGain != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.FF_Disable == false && Hero.MainHero.Clan != null;
+			return EventCanRun() && Hero.MainHero.Clan != null;
 		}
 
 		public override void StartEvent()

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -11,28 +13,44 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class Dysentery : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minMoraleLoss;
 		private readonly int maxMoraleLoss;
-		private readonly int minVictim;
-        private readonly int maxVictim;
+		private readonly int minVictims;
+        private readonly int maxVictims;
 
         
 
 		public Dysentery() : base(Settings.ModSettings.RandomEvents.DysenteryData)
 		{
-			minMoraleLoss = 10;
-			maxMoraleLoss = 25;
-			minVictim = 3;
-			maxVictim = 6;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			
+			eventDisabled = ConfigFile.ReadBoolean("Dysentery", "EventDisabled");
+			minMoraleLoss = ConfigFile.ReadInteger("Dysentery", "MinMoraleLoss");
+			maxMoraleLoss = ConfigFile.ReadInteger("Dysentery", "MaxMoraleLoss");
+			minVictims = ConfigFile.ReadInteger("Dysentery", "MinVictims");
+			maxVictims = ConfigFile.ReadInteger("Dysentery", "MaxVictims");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minMoraleLoss != 0 || maxMoraleLoss != 0 || minVictims != 0 || maxVictims != 0)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.DY_Disable == false && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10 && MobileParty.MainParty.CurrentSettlement == null;
+			return EventCanRun() &&  MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10 && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
@@ -46,7 +64,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			
 			var moraleLoss = MBRandom.RandomInt(minMoraleLoss, maxMoraleLoss);
 			
-			var victims = MBRandom.RandomInt(minVictim, maxVictim);
+			var victims = MBRandom.RandomInt(minVictims, maxVictims);
 			
 			var totalvictims = partySize / 10 + victims;
 			

@@ -11,11 +11,13 @@ using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using Ini.Net;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class AFlirtatiousEncounter : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minWomanAge;
         private readonly int maxWomanAge;
         private readonly float minRelationshipIncrease;
@@ -24,29 +26,51 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public AFlirtatiousEncounter() : base(ModSettings.RandomEvents.AFlirtatiousEncounterData)
         {
-            minWomanAge = 18;
-            maxWomanAge = 50;
-            minRelationshipIncrease = 15.0f;
-            maxRelationshipIncrease = 40.0f;
-            minCharmLevel = 100;
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("AFlirtatiousEncounter", "EventDisabled");
+            minWomanAge = ConfigFile.ReadInteger("AFlirtatiousEncounter", "MinWomanAge");
+            maxWomanAge = ConfigFile.ReadInteger("AFlirtatiousEncounter", "MaxWomanAge");
+            minRelationshipIncrease = ConfigFile.ReadFloat("AFlirtatiousEncounter", "MinRelationshipIncrease");
+            maxRelationshipIncrease = ConfigFile.ReadFloat("AFlirtatiousEncounter", "MaxRelationshipIncrease");
+            minCharmLevel = ConfigFile.ReadInteger("AFlirtatiousEncounter", "MinCharmLevel");
+            
+            //Overrides the input
+            if (minWomanAge < 16)
+            {
+                minWomanAge = 16;
+            }
         }
 
         public override void CancelEvent()
         {
         }
 
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minWomanAge != 0 || maxWomanAge != 0 || minRelationshipIncrease != 0 || maxRelationshipIncrease != 0 || minCharmLevel != 0)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
         public override bool CanExecuteEvent()
         {
             
             var randomHero = Campaign.Current.AliveHeroes.Where(
-                h => h.CurrentSettlement == Settlement.CurrentSettlement && 
-                     h.IsLord && 
-                     h != Hero.MainHero.Spouse && 
-                     h.Clan != Clan.PlayerClan && 
+                h => h.CurrentSettlement == Settlement.CurrentSettlement &&
+                     h.IsLord &&
+                     h != Hero.MainHero.Spouse &&
+                     h.Clan != Clan.PlayerClan &&
                      h.IsFemale && h.Age >= minWomanAge && h.Age <= maxWomanAge
             ).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
 
-            return randomHero != null && MCM_MenuConfig_Toggle.Instance.AFE_Disable == false && CampaignTime.Now.IsNightTime && MobileParty.MainParty.CurrentSettlement != null;
+            return randomHero != null && EventCanRun() && CurrentTimeOfDay.IsEvening && CurrentTimeOfDay.IsNight && MobileParty.MainParty.CurrentSettlement != null;
         }
 
         public override void StartEvent()
@@ -57,26 +81,25 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     RandomEventsSubmodule.Dbg_Color));
             }
 
-
             var eventTitle = new TextObject("{=AFlirtatiousEncounter_Title}A Flirtatious Encounter").ToString();
 
             var randomHero = Campaign.Current.AliveHeroes.Where(
-                h => h.CurrentSettlement == Settlement.CurrentSettlement && 
-                     h.IsLord && 
-                     h != Hero.MainHero.Spouse && 
-                     h.Clan != Clan.PlayerClan && 
+                h => h.CurrentSettlement == Settlement.CurrentSettlement &&
+                     h.IsLord &&
+                     h != Hero.MainHero.Spouse &&
+                     h.Clan != Clan.PlayerClan &&
                      h.IsFemale && h.Age >= minWomanAge && h.Age <= maxWomanAge
-                     ).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
-            
-            
+            ).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
+
+
             if (randomHero != null)
             {
-
                 var target = randomHero;
 
                 var currentRelationship = target.GetRelation(Hero.MainHero);
 
-                var relationshipGainPercent = MBRandom.RandomFloatRanged(minRelationshipIncrease, maxRelationshipIncrease);
+                var relationshipGainPercent =
+                    MBRandom.RandomFloatRanged(minRelationshipIncrease, maxRelationshipIncrease);
 
                 var newRelationship = (int)Math.Round(Math.Floor(currentRelationship * relationshipGainPercent));
 
@@ -85,29 +108,31 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 var currentSettlement = Settlement.CurrentSettlement.Name.ToString();
 
                 var theDemonym = Demonym.GetTheDemonym(targetCulture, true);
-                
+
                 var charmLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Charm);
 
                 var canCharmTarget = false;
 
                 var charmAppendedText = "";
-                
+
                 if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
                 {
-                
                     canCharmTarget = true;
-                    charmAppendedText = new TextObject("{=AFlirtatiousEncounter_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
-
+                    charmAppendedText =
+                        new TextObject(
+                                "{=AFlirtatiousEncounter_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**")
+                            .ToString();
                 }
                 else
                 {
                     if (charmLevel >= minCharmLevel)
                     {
                         canCharmTarget = true;
-                    
-                        charmAppendedText = new TextObject("{=AFlirtatiousEncounter_Charm_Appended_Text}[Charm - lvl {minCharmLevel}]")
-                            .SetTextVariable("minCharmLevel", minCharmLevel)
-                            .ToString();
+
+                        charmAppendedText =
+                            new TextObject("{=AFlirtatiousEncounter_Charm_Appended_Text}[Charm - lvl {minCharmLevel}]")
+                                .SetTextVariable("minCharmLevel", minCharmLevel)
+                                .ToString();
                     }
                 }
 
@@ -121,31 +146,38 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     .SetTextVariable("Demonym", theDemonym)
                     .ToString();
 
-                var eventOption1 = new TextObject("{=AFlirtatiousEncounter_Event_Option_1}Strike up a conversation").ToString();
-                var eventOption1Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_1_Hover}Have a nice chat with her").ToString();
+                var eventOption1 = new TextObject("{=AFlirtatiousEncounter_Event_Option_1}Strike up a conversation")
+                    .ToString();
+                var eventOption1Hover =
+                    new TextObject("{=AFlirtatiousEncounter_Event_Option_1_Hover}Have a nice chat with her").ToString();
 
                 var eventOption2 = new TextObject("{=AFlirtatiousEncounter_Event_Option_2}Buy her a drink").ToString();
-                var eventOption2Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_2_Hover}Always a gentleman.").ToString();
+                var eventOption2Hover =
+                    new TextObject("{=AFlirtatiousEncounter_Event_Option_2_Hover}Always a gentleman.").ToString();
 
-                var eventOption3 = new TextObject("{=AFlirtatiousEncounter_Event_Option_3}[Charm] Hit on her").ToString();
-                var eventOption3Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_3_Hover}She's cute!\n{charmAppendedText}").SetTextVariable("charmAppendedText", charmAppendedText).ToString();
+                var eventOption3 =
+                    new TextObject("{=AFlirtatiousEncounter_Event_Option_3}[Charm] Hit on her").ToString();
+                var eventOption3Hover =
+                    new TextObject("{=AFlirtatiousEncounter_Event_Option_3_Hover}She's cute!\n{charmAppendedText}")
+                        .SetTextVariable("charmAppendedText", charmAppendedText).ToString();
 
                 var eventOption4 = new TextObject("{=AFlirtatiousEncounter_Event_Option_4}Be an ass").ToString();
-                var eventOption4Hover = new TextObject("{=AFlirtatiousEncounter_Event_Option_4_Hover}Seriously?").ToString();
+                var eventOption4Hover =
+                    new TextObject("{=AFlirtatiousEncounter_Event_Option_4_Hover}Seriously?").ToString();
 
                 var eventButtonText1 = new TextObject("{=AFlirtatiousEncounter_Event_Button_Text_1}Choose").ToString();
                 var eventButtonText2 = new TextObject("{=AFlirtatiousEncounter_Event_Button_Text_2}Done").ToString();
-                
+
                 var inquiryElements = new List<InquiryElement>();
-            
+
                 inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover));
                 inquiryElements.Add(new InquiryElement("b", eventOption2, null, true, eventOption2Hover));
-            
+
                 if (canCharmTarget)
                 {
                     inquiryElements.Add(new InquiryElement("c", eventOption3, null, true, eventOption3Hover));
                 }
-            
+
                 inquiryElements.Add(new InquiryElement("d", eventOption4, null, true, eventOption4Hover));
 
 
@@ -206,26 +238,26 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     .SetTextVariable("age", (int)Math.Round(target.Age))
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
-                
-                var eventMsg1 =new TextObject(
+
+                var eventMsg1 = new TextObject(
                         "{=AFlirtatiousEncounter_Event_Msg_1}{heroName} had a casual conversation with {name}.")
                     .SetTextVariable("name", target.FirstName.ToString())
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
-                
-                var eventMsg2 =new TextObject(
+
+                var eventMsg2 = new TextObject(
                         "{=AFlirtatiousEncounter_Event_Msg_2}{heroName} got a lot closer to {name}.")
                     .SetTextVariable("name", target.FirstName.ToString())
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
-                
-                var eventMsg3 =new TextObject(
+
+                var eventMsg3 = new TextObject(
                         "{=AFlirtatiousEncounter_Event_Msg_3}{heroName} got lucky with {name}!")
                     .SetTextVariable("name", target.FirstName.ToString())
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
-                
-                var eventMsg4 =new TextObject(
+
+                var eventMsg4 = new TextObject(
                         "{=AFlirtatiousEncounter_Event_Msg_4}{heroName} deeply insulted {name}!")
                     .SetTextVariable("name", target.FirstName.ToString())
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
@@ -238,37 +270,30 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         switch ((string)elements[0].Identifier)
                         {
                             case "a":
-                                InformationManager.ShowInquiry(
-                                    new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null,
-                                        null, null), true);
-                                CharacterRelationManager.SetHeroRelation(target,Hero.MainHero, newRelationship - 5);
+                                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
+                                
+                                CharacterRelationManager.SetHeroRelation(target, Hero.MainHero, newRelationship - 5);
                                 InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                                 break;
                             case "b":
-                                InformationManager.ShowInquiry(
-                                    new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null,
-                                        null, null), true);
-                                
-                                CharacterRelationManager.SetHeroRelation(target,Hero.MainHero, newRelationship - 3);
+                                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
+
+                                CharacterRelationManager.SetHeroRelation(target, Hero.MainHero, newRelationship - 3);
                                 InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_MED_Outcome));
                                 break;
                             case "c":
-                                InformationManager.ShowInquiry(
-                                    new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null,
-                                        null, null), true);
-                                
-                                CharacterRelationManager.SetHeroRelation(target,Hero.MainHero, newRelationship);
+                                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null, null), true);
+
+                                CharacterRelationManager.SetHeroRelation(target, Hero.MainHero, newRelationship);
                                 InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_POS_Outcome));
-                                
+
                                 break;
                             case "d":
-                                InformationManager.ShowInquiry(
-                                    new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null,
-                                        null, null), true);
-                                
-                                CharacterRelationManager.SetHeroRelation(target,Hero.MainHero, newRelationship - 30);
+                                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
+
+                                CharacterRelationManager.SetHeroRelation(target, Hero.MainHero, newRelationship - 30);
                                 InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
-                                
+
                                 break;
                             default:
                                 MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
@@ -278,9 +303,10 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     null);
 
                 MBInformationManager.ShowMultiSelectionInquiry(msid, true);
-                
+
                 StopEvent();
             }
+
             StopEvent();
         }
 

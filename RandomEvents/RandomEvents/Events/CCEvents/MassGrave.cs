@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -13,6 +14,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class MassGrave : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minSoldiers;
         private readonly int maxSoldiers;
         private readonly int minBodies;
@@ -23,22 +25,38 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public MassGrave() : base(ModSettings.RandomEvents.MassGraveData)
         {
-            minSoldiers = 3;
-            maxSoldiers = 8;
-            minBodies = 20;
-            maxBodies = 40;
-            minBaseMoraleLoss = 15;
-            maxBaseMoraleLoss = 25;
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("MassGrave", "EventDisabled");
+            minSoldiers = ConfigFile.ReadInteger("MassGrave", "MinSoldiers");
+            maxSoldiers = ConfigFile.ReadInteger("MassGrave", "MaxSoldiers");
+            minBodies = ConfigFile.ReadInteger("MassGrave", "MinBodies");
+            maxBodies = ConfigFile.ReadInteger("MassGrave", "MaxBodies");
+            minBaseMoraleLoss = ConfigFile.ReadInteger("MassGrave", "MinBaseMoraleLoss");
+            maxBaseMoraleLoss = ConfigFile.ReadInteger("MassGrave", "MaxBaseMoraleLoss");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minSoldiers != 0 || maxSoldiers != 0 || minBodies != 0 || maxBodies != 0 ||  minBaseMoraleLoss != 0 || maxBaseMoraleLoss != 0)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
 
-            return MCM_MenuConfig_Toggle.Instance.MG_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
@@ -204,8 +222,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class MassGraveData : RandomEventData
     {
-        public MassGraveData(string eventType, float chanceWeight) : base(eventType,
-            chanceWeight)
+        public MassGraveData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
         {
         }
 

@@ -29,6 +29,7 @@ namespace CryingBuffalo.RandomEvents
         //Evil
         public static readonly Color Msg_Color_EVIL_Outcome = Color.FromUint(13840175);
         
+        
         //MCM Base Settings
         public const string FolderName = "RandomEvents";
         public const string ModName = "RandomEvents";
@@ -36,8 +37,7 @@ namespace CryingBuffalo.RandomEvents
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
             MCM_ConfigMenu_General.Instance.Settings();
-            MCM_MenuConfig_Toggle.Instance.Settings();
-            
+
             ModSettings.LoadRandomEventSettings();
             
             //Many mods use this. Nice way to tell if a mod is loaded correctly
@@ -49,7 +49,9 @@ namespace CryingBuffalo.RandomEvents
             base.OnGameStart(game, gameStarterObject);
 
             if (!(game.GameType is Campaign)) return;
+            
             CampaignGameStarter gameInitializer = (CampaignGameStarter)gameStarterObject;
+            
             try
             {
                 gameInitializer.AddBehavior(new RandomEventBehavior());

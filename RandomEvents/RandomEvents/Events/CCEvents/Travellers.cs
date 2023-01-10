@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -15,6 +16,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class Travellers : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minGoldStolen;
         private readonly int maxGoldStolen;
         private readonly int minEngineeringLevel;
@@ -23,20 +25,35 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public Travellers() : base(ModSettings.RandomEvents.TravellersData)
         {
-            minGoldStolen = 2500;
-            maxGoldStolen = 10000;
-            minEngineeringLevel = 75;
-            minRogueryLevel = 125;
-            minStewardLevel = 100;
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+
+            eventDisabled = ConfigFile.ReadBoolean("Travellers", "EventDisabled");
+            minGoldStolen = ConfigFile.ReadInteger("Travellers", "MinGoldStolen");
+            maxGoldStolen = ConfigFile.ReadInteger("Travellers", "MaxGoldStolen");
+            minEngineeringLevel = ConfigFile.ReadInteger("Travellers", "MinEngineeringLevel");
+            minRogueryLevel = ConfigFile.ReadInteger("Travellers", "MinRogueryLevel");
+            minStewardLevel = ConfigFile.ReadInteger("Travellers", "MinStewardLevel");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minGoldStolen != 0 || maxGoldStolen != 0 || minEngineeringLevel != 0 || minRogueryLevel != 0 || minStewardLevel != 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.TR_Disable == false && (CurrentTimeOfDay.IsEvening || CurrentTimeOfDay.IsMidday || CurrentTimeOfDay.IsMorning);
+            return EventCanRun() && (CurrentTimeOfDay.IsEvening || CurrentTimeOfDay.IsMidday || CurrentTimeOfDay.IsMorning);
         }
 
         public override void StartEvent()

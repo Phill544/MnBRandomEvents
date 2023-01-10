@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -12,6 +14,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
 {
     public class PoisonedWine : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minSoldiersToDie;
         private readonly int maxSoldiersToDie;
         private readonly int minSoldiersToHurt;
@@ -20,19 +23,35 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
 
         public PoisonedWine() : base(ModSettings.RandomEvents.PoisonedWineData)
         {
-            minSoldiersToDie = 10;
-            maxSoldiersToDie = 50;
-            minSoldiersToHurt = 10;
-            maxSoldiersToHurt = 50;
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			
+            eventDisabled = ConfigFile.ReadBoolean("PoisonedWine", "EventDisabled");
+            minSoldiersToDie = ConfigFile.ReadInteger("PoisonedWine", "MinSoldiersToDie");
+            maxSoldiersToDie = ConfigFile.ReadInteger("PoisonedWine", "MaxSoldiersToDie");
+            minSoldiersToHurt = ConfigFile.ReadInteger("PoisonedWine", "MinSoldiersToHurt");
+            maxSoldiersToHurt = ConfigFile.ReadInteger("PoisonedWine", "MaxSoldiersToHurt");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minSoldiersToDie != 0 || maxSoldiersToDie != 0 || minSoldiersToHurt != 0 || maxSoldiersToHurt != 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.PoWi_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToDie && MobileParty.MainParty.CurrentSettlement == null;
+            return EventCanRun() &&  MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToDie && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

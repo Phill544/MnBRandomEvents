@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -12,22 +14,39 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class GranaryRats : BaseEvent
 	{ 
+		private readonly bool eventDisabled;
 		private readonly float MinFoodLossPercent;
 		private readonly float MaxFoodLossPercent;
 
 		public GranaryRats() : base(ModSettings.RandomEvents.GranaryRatsData)
 		{
-			MinFoodLossPercent = 10.0f;
-			MaxFoodLossPercent = 25.0f;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("GranaryRats", "EventDisabled");
+			MinFoodLossPercent = ConfigFile.ReadFloat("GranaryRats", "MinFoodLossPercent");
+			MaxFoodLossPercent = ConfigFile.ReadFloat("GranaryRats", "MaxFoodLossPercent");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (MinFoodLossPercent != 0 || MaxFoodLossPercent != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.GR_Disable == false && Hero.MainHero.Clan.Settlements.Any();
+			return EventCanRun() && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()

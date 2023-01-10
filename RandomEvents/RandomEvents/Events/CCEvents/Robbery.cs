@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
@@ -14,21 +15,46 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class Robbery : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minGoldLost;
         private readonly int maxGoldLost;
         private readonly int minRenownLost;
         private readonly int maxRenownLost;
+        private readonly int minRoguerySkill;
+        private readonly int minCharmSkill;
+        private readonly int minOneHandedSkill;
+        private readonly int minTwoHandedSkill;
+            
 
         public Robbery() : base(ModSettings.RandomEvents.RobberyData)
         {
-            minGoldLost = 500;
-            maxGoldLost = 5000;
-            minRenownLost = 10;
-            maxRenownLost = 150;
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("Robbery", "EventDisabled");
+            minGoldLost = ConfigFile.ReadInteger("Robbery", "minGoldLost");
+            maxGoldLost = ConfigFile.ReadInteger("Robbery", "MaxGoldLost");
+            minRenownLost = ConfigFile.ReadInteger("Robbery", "MinRenownLost");
+            maxRenownLost = ConfigFile.ReadInteger("Robbery", "MaxRenownLost");
+            minRoguerySkill = ConfigFile.ReadInteger("Robbery", "MinRoguerySkill");
+            minCharmSkill = ConfigFile.ReadInteger("Robbery", "MinCharmSkill");
+            minOneHandedSkill = ConfigFile.ReadInteger("Robbery", "MinOneHandedSkill");
+            minTwoHandedSkill = ConfigFile.ReadInteger("Robbery", "MinTwoHandedSkill");
         }
 
         public override void CancelEvent()
         {
+        }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minGoldLost != 0 || maxGoldLost != 0 || minRenownLost != 0 || maxRenownLost != 0 || minRoguerySkill != 0 || minCharmSkill != 0 || minOneHandedSkill != 0 || minTwoHandedSkill != 0)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public override bool CanExecuteEvent()
@@ -39,7 +65,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var notables = Settlement.CurrentSettlement.Notables.ToList();
             var gangLeaders = notables.Where(character => character.IsGangLeader).ToList();
 
-            return MCM_MenuConfig_Toggle.Instance.RO_Disable == false && gangLeaders.Count != 0 && CurrentTimeOfDay.IsNight;
+            return EventCanRun() && gangLeaders.Count != 0 && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()
@@ -70,15 +96,15 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var convincedThugs = false;
             var gangLeaderGoodRelation = false;
 
-            if (roguerySkill >= 150)
+            if (roguerySkill >= minRoguerySkill)
             {
                 convincedThugs = true;
             }
-            else if (charmSkill >= 200)
+            else if (charmSkill >= minCharmSkill)
             {
                 charmedThugs = true;
             }
-            else if (oneHandedSkill >= 150 && twoHandedSkill >= 200)
+            else if (oneHandedSkill >= minOneHandedSkill && twoHandedSkill >= minTwoHandedSkill)
             {
                 intimidatedThugs = true;
             }

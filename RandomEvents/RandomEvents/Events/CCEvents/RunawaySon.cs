@@ -5,6 +5,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -16,24 +17,41 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class RunawaySon : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minGold;
         private readonly int maxGold;
         private readonly int minRogueryLevel;
 
         public RunawaySon() : base(ModSettings.RandomEvents.RunawaySonData)
         {
-            minGold = 50;
-            maxGold = 150;
-            minRogueryLevel = 125;
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("RunawaySon", "EventDisabled");
+            minGold = ConfigFile.ReadInteger("RunawaySon", "MinGold");
+            maxGold = ConfigFile.ReadInteger("RunawaySon", "MaxGold");
+            minRogueryLevel = ConfigFile.ReadInteger("RunawaySon", "MinRogueryLevel");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minGold != 0 || maxGold != 0 || minRogueryLevel != 0)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.RS_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

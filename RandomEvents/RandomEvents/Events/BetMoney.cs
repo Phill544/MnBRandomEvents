@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -13,11 +15,38 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	internal sealed class BetMoney : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly float moneyBetPercent;
 
 		public BetMoney() : base(ModSettings.RandomEvents.BetMoneyData)
+		{			
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("BetMoney", "EventDisabled");
+			moneyBetPercent = ConfigFile.ReadFloat("BetMoney", "MoneyBetPercent");
+		}
+		
+		private bool EventCanRun()
 		{
-			moneyBetPercent = 0.10f;
+			if (eventDisabled == false)
+			{
+				if (moneyBetPercent != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
+		
+
+		public override void CancelEvent()
+		{
+		}
+		
+		public override bool CanExecuteEvent()
+		{
+			return EventCanRun() && MobileParty.MainParty.MemberRoster.TotalRegulars > 0;
 		}
 
 		public override void StartEvent()
@@ -76,6 +105,18 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			StopEvent();
 		}
+		
+		private void StopEvent()
+		{
+			try
+			{
+				onEventCompleted.Invoke();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
+			}
+		}
 
 		private static string DoBet(int goldToBet)
 		{
@@ -99,27 +140,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			return outcomeText;
 		}
-
-		private void StopEvent()
-		{
-			try
-			{
-				onEventCompleted.Invoke();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
-			}
-		}
-
-		public override void CancelEvent()
-		{
-		}
-
-		public override bool CanExecuteEvent()
-		{
-			return MCM_MenuConfig_Toggle.Instance.BM_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars > 0;
-		}
+		
 	}
 
 	public class BetMoneyData : RandomEventData

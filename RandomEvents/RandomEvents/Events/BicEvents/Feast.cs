@@ -9,23 +9,30 @@ using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem.Settlements;
 using System.Linq;
 using System.Collections.Generic;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Actions;
 
 namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class Feast : BaseEvent
 	{
-
-        
+		private readonly bool eventDisabled;
 
 		public Feast() : base(Settings.ModSettings.RandomEvents.FeastData)
 		{
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("Feast", "EventDisabled");
 
 		}
 
 		public override void CancelEvent()
 		{
-        
+		}
+		
+		private bool EventCanRun()
+		{
+			return eventDisabled == false;
 		}
 
 		public override bool CanExecuteEvent()
@@ -34,7 +41,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 				return false;
 			var randomHero = Campaign.Current.AliveHeroes.Where(h => h.CurrentSettlement == Settlement.CurrentSettlement && h.IsLord && h != Hero.MainHero.Spouse && h.Clan != Clan.PlayerClan).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
 
-			return MCM_MenuConfig_Toggle.Instance.FE_Disable == false && randomHero != null && Clan.PlayerClan.Renown >= 500;
+			return EventCanRun() && randomHero != null && Clan.PlayerClan.Renown >= 500;
 		}
 
 		public override void StartEvent()

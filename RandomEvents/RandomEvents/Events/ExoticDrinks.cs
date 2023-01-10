@@ -5,6 +5,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -14,6 +15,7 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class ExoticDrinks : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minPrice;
 		private readonly int maxPrice;
 		private readonly float successChance;
@@ -22,20 +24,36 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public ExoticDrinks() : base(ModSettings.RandomEvents.ExoticDrinksData)
 		{
-			minPrice = 3000;
-			maxPrice = 6000;
-			successChance = 75.0f;
-			minXp = 250;
-			maxXp = 1000;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("ExoticDrinks", "EventDisabled");
+			minPrice = ConfigFile.ReadInteger("ExoticDrinks", "MinPrice");
+			maxPrice = ConfigFile.ReadInteger("ExoticDrinks", "MaxPrice");
+			successChance = ConfigFile.ReadFloat("ExoticDrinks", "SuccessChance");
+			minXp = ConfigFile.ReadInteger("ExoticDrinks", "MinXp");
+			maxXp = ConfigFile.ReadInteger("ExoticDrinks", "MaxXp");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minPrice != 0 || maxPrice != 0|| successChance != 0|| minXp != 0|| maxXp != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.ED_Disable == false && Hero.MainHero.Gold >= maxPrice;
+			return EventCanRun() && Hero.MainHero.Gold >= maxPrice;
 		}
 
 		public override void StartEvent()

@@ -3,6 +3,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -13,6 +14,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class LoggingSite : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minSoldiersToGo;
         private readonly int maxSoldiersToGo;
         private readonly int minYield;
@@ -23,22 +25,39 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public LoggingSite() : base(ModSettings.RandomEvents.LoggingSiteData)
         {
-            minSoldiersToGo = 10;
-            maxSoldiersToGo = 20;
-            minYield = 5;
-            maxYield = 15;
-            minYieldMultiplier = 10;
-            maxYieldMultiplier = 15;
+            
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("LoggingSite", "EventDisabled");
+            minSoldiersToGo = ConfigFile.ReadInteger("LoggingSite", "MinSoldiersToGo");
+            maxSoldiersToGo = ConfigFile.ReadInteger("LoggingSite", "MaxSoldiersToGo");
+            minYield = ConfigFile.ReadInteger("LoggingSite", "MinYield");
+            maxYield = ConfigFile.ReadInteger("LoggingSite", "MaxYield");
+            minYieldMultiplier = ConfigFile.ReadInteger("LoggingSite", "MinYieldMultiplier");
+            maxYieldMultiplier = ConfigFile.ReadInteger("LoggingSite", "MaxYieldMultiplier");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minSoldiersToGo != 0 || maxSoldiersToGo != 0 || minYield != 0 || maxYield != 0 ||  minYieldMultiplier != 0 || maxYieldMultiplier != 0)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            
-            return MCM_MenuConfig_Toggle.Instance.LS_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo;
+
+            return EventCanRun() && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo;
         }
 
         public override void StartEvent()
@@ -152,8 +171,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
     public class LoggingSiteData : RandomEventData
     {
 
-        public LoggingSiteData(string eventType, float chanceWeight) : base(eventType,
-            chanceWeight)
+        public LoggingSiteData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
         {
         }
 

@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -15,42 +16,61 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class BeggarBegging : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minStewardLevel;
         private readonly int minRogueryLevel;
-        
+
         public BeggarBegging() : base(ModSettings.RandomEvents.BeggarBeggingData)
         {
-            minStewardLevel = 50;
-            minRogueryLevel = 125;
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+
+            eventDisabled = ConfigFile.ReadBoolean("BeggarBegging", "EventDisabled");
+            minStewardLevel = ConfigFile.ReadInteger("BeggarBegging", "MinStewardLevel");
+            minRogueryLevel = ConfigFile.ReadInteger("BeggarBegging", "MaxStewardLevel");
+            
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minStewardLevel != 0 || minRogueryLevel != 0 )
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-
-            return MCM_MenuConfig_Toggle.Instance.BB_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
+           
+            return EventCanRun() && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
         }
 
         public override void StartEvent()
         {
             if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
+                    RandomEventsSubmodule.Dbg_Color));
             }
-            
+
             var mainHero = Hero.MainHero;
 
             var heroName = mainHero.FirstName;
-            
+
             var eventTitle = new TextObject("{=BeggarBegging_Title}Beggar").ToString();
 
             var currentSettlement = MobileParty.MainParty.CurrentSettlement.Name;
 
             var currentSettlementOwner = Settlement.CurrentSettlement.Owner;
-            
+
             var rogueryLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Roguery);
             var stewardLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Steward);
 
@@ -59,34 +79,39 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             {
                 ownedSettlement = true;
             }
+
             var canGiveMoreGold = false;
             var canOfferFood = false;
             var canKillBeggar = false;
-            
+
             var stewardAppendedText = "";
             var rogueryAppendedText = "";
 
             if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
             {
-                
                 canGiveMoreGold = true;
                 canKillBeggar = true;
                 canOfferFood = true;
-                
-                stewardAppendedText = new TextObject("{=BeggarBegging_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
-                rogueryAppendedText = new TextObject("{=BeggarBegging_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**").ToString();
 
+                stewardAppendedText =
+                    new TextObject("{=BeggarBegging_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**")
+                        .ToString();
+                rogueryAppendedText =
+                    new TextObject("{=BeggarBegging_Skill_Check_Disable_Appended_Text}**Skill checks are disabled**")
+                        .ToString();
             }
             else
             {
                 if (stewardLevel >= minStewardLevel)
                 {
                     canGiveMoreGold = true;
-                    
-                    stewardAppendedText = new TextObject("{=BeggarBegging_Steward_Appended_Text}[Steward - lvl {minStewardLevel}]")
-                        .SetTextVariable("minStewardLevel", minStewardLevel)
-                        .ToString();
+
+                    stewardAppendedText =
+                        new TextObject("{=BeggarBegging_Steward_Appended_Text}[Steward - lvl {minStewardLevel}]")
+                            .SetTextVariable("minStewardLevel", minStewardLevel)
+                            .ToString();
                 }
+
                 if (stewardLevel >= minStewardLevel + 50)
                 {
                     canOfferFood = true;
@@ -96,39 +121,41 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             .SetTextVariable("minStewardLevel", minStewardLevel + 50)
                             .ToString();
                 }
+
                 if (rogueryLevel >= minRogueryLevel && ownedSettlement)
                 {
                     canKillBeggar = true;
-                    
-                    rogueryAppendedText = new TextObject("{=BeggarBegging_Roguery_Appended_Text}[Roguery - lvl {minRogueryLevel}]")
-                        .SetTextVariable("minRogueryLevel", minRogueryLevel)
-                        .ToString();
+
+                    rogueryAppendedText =
+                        new TextObject("{=BeggarBegging_Roguery_Appended_Text}[Roguery - lvl {minRogueryLevel}]")
+                            .SetTextVariable("minRogueryLevel", minRogueryLevel)
+                            .ToString();
                 }
             }
 
             var gender = new List<string>();
             var age = new List<string>();
-            
+
             string[] genders =
             {
-                new TextObject("{=BeggarBegging_Beggar_Gender_Male}male").ToString(), 
+                new TextObject("{=BeggarBegging_Beggar_Gender_Male}male").ToString(),
                 new TextObject("{=BeggarBegging_Beggar_Gender_Female}female").ToString()
             };
-            
+
             string[] ages =
             {
-                new TextObject("{=BeggarBegging_Beggar_Age_Young}a young").ToString(), 
-                new TextObject("{=BeggarBegging_Beggar_Age_Middle-Aged}a middle-aged").ToString(), 
+                new TextObject("{=BeggarBegging_Beggar_Age_Young}a young").ToString(),
+                new TextObject("{=BeggarBegging_Beggar_Age_Middle-Aged}a middle-aged").ToString(),
                 new TextObject("{=BeggarBegging_Beggar_Age_Old}an old").ToString()
             };
-            
+
             gender.AddRange(genders);
             age.AddRange(ages);
-            
+
             var randomGender = new Random();
             var indexGender = randomGender.Next(gender.Count);
             var beggarGender = gender[indexGender];
-            
+
             var randomAge = new Random();
             var indexAge = randomAge.Next(age.Count);
             var beggarAge = age[indexAge];
@@ -136,37 +163,52 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var genderAssignmentObjective = GenderAssignment.GetTheGenderAssignment(beggarGender, false, "objective");
             var genderAssignmentAdjective = GenderAssignment.GetTheGenderAssignment(beggarGender, false, "adjective");
             var genderAssignmentSubjective = GenderAssignment.GetTheGenderAssignment(beggarGender, false, "subjective");
-            var genderAssignmentSubjectiveCap = GenderAssignment.GetTheGenderAssignment(beggarGender, true, "subjective");
+            var genderAssignmentSubjectiveCap =
+                GenderAssignment.GetTheGenderAssignment(beggarGender, true, "subjective");
 
             var eventDescription = new TextObject(
                     "{=BeggarBegging_Event_Desc}While you are relaxing in {currentSettlement} you are approached by {beggarAge} {beggarGender} beggar who asks if you can spare any gold. " +
                     "You wonder what you should do.")
-                    .SetTextVariable("currentSettlement", currentSettlement)
-                    .SetTextVariable("beggarAge", beggarAge)
-                    .SetTextVariable("beggarGender", beggarGender)
-                    .ToString();
-            
-            var eventOption1 = new TextObject("{=BeggarBegging_Event_Option_1}Give {genderAssignmentObjective} nothing").SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
+                .SetTextVariable("currentSettlement", currentSettlement)
+                .SetTextVariable("beggarAge", beggarAge)
+                .SetTextVariable("beggarGender", beggarGender)
+                .ToString();
+
+            var eventOption1 = new TextObject("{=BeggarBegging_Event_Option_1}Give {genderAssignmentObjective} nothing")
+                .SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
             var eventOption1Hover = new TextObject("{=BeggarBegging_Event_Option_1_Hover}Filthy beggar!").ToString();
-            
-            var eventOption2 = new TextObject("{=BeggarBegging_Event_Option_2}Give {genderAssignmentObjective} 5 gold").SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
+
+            var eventOption2 = new TextObject("{=BeggarBegging_Event_Option_2}Give {genderAssignmentObjective} 5 gold")
+                .SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
             var eventOption2Hover = new TextObject("{=BeggarBegging_Event_Option_2_Hover}It's something.").ToString();
 
-            var eventOption3 = new TextObject("{=BeggarBegging_Event_Option_3}[Steward] Give {genderAssignmentObjective} 100 gold").SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
-            var eventOption3Hover = new TextObject("{=BeggarBegging_Event_Option_3_Hover}You can spare it.\n{stewardAppendedText}").SetTextVariable("stewardAppendedText", stewardAppendedText).ToString();
-            
-            var eventOption4 = new TextObject("{=BeggarBegging_Event_Option_4}[Steward] Give {genderAssignmentObjective} a warm meal").SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
-            var eventOption4Hover = new TextObject("{=BeggarBegging_Event_Option_4_Hover}Take them to the tavern.\n{stewardAppendedText}").SetTextVariable("stewardAppendedText", stewardAppendedText).ToString();
-            
-            var eventOption5 = new TextObject("{=BeggarBegging_Event_Option_5}[Roguery] Kill {genderAssignmentObjective}").SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
-            var eventOption5Hover = new TextObject("{=BeggarBegging_Event_Option_5_Hover}You really hate beggars!\n{rogueryAppendedText}").SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
+            var eventOption3 =
+                new TextObject("{=BeggarBegging_Event_Option_3}[Steward] Give {genderAssignmentObjective} 100 gold")
+                    .SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
+            var eventOption3Hover =
+                new TextObject("{=BeggarBegging_Event_Option_3_Hover}You can spare it.\n{stewardAppendedText}")
+                    .SetTextVariable("stewardAppendedText", stewardAppendedText).ToString();
+
+            var eventOption4 =
+                new TextObject("{=BeggarBegging_Event_Option_4}[Steward] Give {genderAssignmentObjective} a warm meal")
+                    .SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
+            var eventOption4Hover =
+                new TextObject("{=BeggarBegging_Event_Option_4_Hover}Take them to the tavern.\n{stewardAppendedText}")
+                    .SetTextVariable("stewardAppendedText", stewardAppendedText).ToString();
+
+            var eventOption5 =
+                new TextObject("{=BeggarBegging_Event_Option_5}[Roguery] Kill {genderAssignmentObjective}")
+                    .SetTextVariable("genderAssignmentObjective", genderAssignmentObjective).ToString();
+            var eventOption5Hover =
+                new TextObject("{=BeggarBegging_Event_Option_5_Hover}You really hate beggars!\n{rogueryAppendedText}")
+                    .SetTextVariable("rogueryAppendedText", rogueryAppendedText).ToString();
 
 
             var eventButtonText1 = new TextObject("{=BeggarBegging_Event_Button_Text_1}Choose").ToString();
             var eventButtonText2 = new TextObject("{=BeggarBegging_Event_Button_Text_2}Done").ToString();
-            
+
             var inquiryElements = new List<InquiryElement>();
-            
+
             inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover));
             inquiryElements.Add(new InquiryElement("b", eventOption2, null, true, eventOption2Hover));
             if (canGiveMoreGold)
@@ -183,7 +225,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             {
                 inquiryElements.Add(new InquiryElement("e", eventOption5, null, true, eventOption5Hover));
             }
-            
+
             var eventOptionAText = new TextObject(
                     "{=BeggarBegging_Event_Choice_1}You tell {genderAssignmentObjective} to f**ck off and that you don't have any gold to spare. {genderAssignmentSubjectiveCap} apologises for troubling you and wishes " +
                     "you a good day. You watch as {genderAssignmentSubjective} disappears into the crowd in search of gold.")
@@ -191,7 +233,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("genderAssignmentSubjectiveCap", genderAssignmentSubjectiveCap)
                 .SetTextVariable("genderAssignmentSubjective", genderAssignmentSubjective)
                 .ToString();
-            
+
             var eventOptionBText = new TextObject(
                     "{=BeggarBegging_Event_Choice_2}You hand {genderAssignmentObjective} 5 gold from your pocket. {genderAssignmentSubjectiveCap} shakes you hand and thanks you for this humble gift and wishes you a blessed " +
                     "day. You watch as {genderAssignmentSubjective} disappears into the crowd in search of more gold.")
@@ -199,7 +241,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("genderAssignmentSubjectiveCap", genderAssignmentSubjectiveCap)
                 .SetTextVariable("genderAssignmentSubjective", genderAssignmentSubjective)
                 .ToString();
-            
+
             var eventOptionCText = new TextObject(
                     "{=BeggarBegging_Event_Choice_3}You are feeling generous today so you hand {genderAssignmentObjective} 100 gold. {genderAssignmentSubjectiveCap} says {genderAssignmentSubjective} can't accept this, but you " +
                     "assure {genderAssignmentObjective} that it's okay and that you have more than enough for yourself. {genderAssignmentSubjectiveCap} begins to cry as you wrap {genderAssignmentObjective} in a hug and " +
@@ -209,7 +251,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("genderAssignmentSubjectiveCap", genderAssignmentSubjectiveCap)
                 .SetTextVariable("genderAssignmentSubjective", genderAssignmentSubjective)
                 .ToString();
-            
+
             var eventOptionDText = new TextObject(
                     "{=BeggarBegging_Event_Choice_4}You are feeling generous today so you tell {genderAssignmentObjective} that if {genderAssignmentSubjective} wants to you will take {genderAssignmentObjective} to the " +
                     "tavern and buy {genderAssignmentObjective} some food and something to drink instead of giving gold. {genderAssignmentSubjectiveCap} accepts you proposal and the two of you make your way towards the " +
@@ -223,7 +265,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("genderAssignmentSubjectiveCap", genderAssignmentSubjectiveCap)
                 .SetTextVariable("genderAssignmentSubjective", genderAssignmentSubjective)
                 .ToString();
-            
+
             var eventOptionEText = new TextObject(
                     "{=BeggarBegging_Event_Choice_5}You tell {genderAssignmentObjective} that if {genderAssignmentSubjective} follows you, you will give {genderAssignmentObjective} 150 gold. {genderAssignmentSubjectiveCap} " +
                     "looks at you suspiciously but ultimately goes with you. You guide {genderAssignmentObjective} into a alley where you make sure that there is no one around. You then proceed to knock the beggar down with " +
@@ -235,77 +277,92 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("genderAssignmentSubjectiveCap", genderAssignmentSubjectiveCap)
                 .SetTextVariable("genderAssignmentSubjective", genderAssignmentSubjective)
                 .ToString();
-            
-            var eventMsg1 =new TextObject(
+
+            var eventMsg1 = new TextObject(
                     "{=BeggarBegging_Event_Msg_1}{heroName} told a beggar to f**k off.")
                 .SetTextVariable("heroName", heroName)
                 .ToString();
-            
-            var eventMsg2 =new TextObject(
+
+            var eventMsg2 = new TextObject(
                     "{=BeggarBegging_Event_Msg_2}{heroName} gave the beggar 5 gold.")
                 .SetTextVariable("heroName", heroName)
                 .ToString();
-            
-            var eventMsg3 =new TextObject(
+
+            var eventMsg3 = new TextObject(
                     "{=BeggarBegging_Event_Msg_3}{heroName} gave the beggar 100 gold.")
                 .SetTextVariable("heroName", heroName)
                 .ToString();
-            
-            var eventMsg4 =new TextObject(
+
+            var eventMsg4 = new TextObject(
                     "{=BeggarBegging_Event_Msg_4}{heroName} took the beggar to get some food.")
                 .SetTextVariable("heroName", heroName)
                 .ToString();
-            
-            var eventMsg5 =new TextObject(
+
+            var eventMsg5 = new TextObject(
                     "{=BeggarBegging_Event_Msg_5}{heroName} killed an innocent beggar.")
                 .SetTextVariable("heroName", heroName)
                 .ToString();
-            
-            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1,
-                    eventButtonText1, null,
-                    elements =>
-                    {
-                        switch ((string)elements[0].Identifier)
-                        {
-                            case "a":
-                                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
-                                
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
-                                break;
-                            case "b":
-                                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
-                                
-                                Hero.MainHero.ChangeHeroGold(-5);
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_MED_Outcome));
-                                break;
-                            case "c":
-                                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null, null), true);
-                                
-                                Hero.MainHero.ChangeHeroGold(-100);
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_POS_Outcome));
-                                
-                                break;
-                            case "d":
-                                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
-                                
-                                Hero.MainHero.ChangeHeroGold(-100);
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_POS_Outcome));
-                                
-                                break;
-                            case "e":
-                                InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionEText, true, false, eventButtonText2, null, null, null), true);
-                                
-                                InformationManager.DisplayMessage(new InformationMessage(eventMsg5, RandomEventsSubmodule.Msg_Color_EVIL_Outcome));
-                                
-                                break;
-                            default:
-                                MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
-                                break;
-                        }
-                    },
-                    null);
 
-                MBInformationManager.ShowMultiSelectionInquiry(msid, true);
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1,
+                eventButtonText1, null,
+                elements =>
+                {
+                    switch ((string)elements[0].Identifier)
+                    {
+                        case "a":
+                            InformationManager.ShowInquiry(
+                                new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null,
+                                    null), true);
+
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg1,
+                                RandomEventsSubmodule.Msg_Color_NEG_Outcome));
+                            break;
+                        case "b":
+                            InformationManager.ShowInquiry(
+                                new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null,
+                                    null), true);
+
+                            Hero.MainHero.ChangeHeroGold(-5);
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg2,
+                                RandomEventsSubmodule.Msg_Color_MED_Outcome));
+                            break;
+                        case "c":
+                            InformationManager.ShowInquiry(
+                                new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null,
+                                    null), true);
+
+                            Hero.MainHero.ChangeHeroGold(-100);
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg3,
+                                RandomEventsSubmodule.Msg_Color_POS_Outcome));
+
+                            break;
+                        case "d":
+                            InformationManager.ShowInquiry(
+                                new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null,
+                                    null), true);
+
+                            Hero.MainHero.ChangeHeroGold(-100);
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg4,
+                                RandomEventsSubmodule.Msg_Color_POS_Outcome));
+
+                            break;
+                        case "e":
+                            InformationManager.ShowInquiry(
+                                new InquiryData(eventTitle, eventOptionEText, true, false, eventButtonText2, null, null,
+                                    null), true);
+
+                            InformationManager.DisplayMessage(new InformationMessage(eventMsg5,
+                                RandomEventsSubmodule.Msg_Color_EVIL_Outcome));
+
+                            break;
+                        default:
+                            MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
+                            break;
+                    }
+                },
+                null);
+
+            MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
             StopEvent();
         }

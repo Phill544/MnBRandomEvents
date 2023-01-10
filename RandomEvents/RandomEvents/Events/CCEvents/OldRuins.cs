@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -14,6 +15,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class OldRuins : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minMen;
         private readonly int maxMen;
         private readonly int maxMenToKill;
@@ -22,20 +24,37 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public OldRuins() : base(ModSettings.RandomEvents.OldRuinsData)
         {
-            minMen = 6;
-            maxMen = 12;
-            maxMenToKill = 10;
-            minGoldFound = 250;
-            maxGoldFound = 5000;
+            
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("OldRuins", "EventDisabled");
+            minMen = ConfigFile.ReadInteger("OldRuins", "MinMen");
+            maxMen = ConfigFile.ReadInteger("OldRuins", "MaxMen");
+            maxMenToKill = ConfigFile.ReadInteger("OldRuins", "MaxMenToKill");
+            minGoldFound = ConfigFile.ReadInteger("OldRuins", "MinGoldFound");
+            maxGoldFound = ConfigFile.ReadInteger("OldRuins", "MaxGoldFound");
         }
 
         public override void CancelEvent()
         {
         }
 
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minMen != 0 || maxMen != 0 || maxMenToKill != 0 || minGoldFound != 0 || maxGoldFound != 0)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.OR_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

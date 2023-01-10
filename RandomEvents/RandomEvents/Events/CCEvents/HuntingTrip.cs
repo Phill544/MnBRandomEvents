@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -12,6 +14,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class HuntingTrip : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minSoldiersToGo;
         private readonly int maxSoldiersToGo;
         private readonly int maxCatch;
@@ -23,23 +26,39 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public HuntingTrip() : base(ModSettings.RandomEvents.HuntingTripData)
         {
-            minSoldiersToGo = 3;
-            maxSoldiersToGo = 12;
-            maxCatch = 20;
-            minMoraleGain = 7;
-            maxMoraleGain = 20;
-            minYieldMultiplier = 3;
-            maxYieldMultiplier = 6;
+            
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("HuntingTrip", "EventDisabled");
+            minSoldiersToGo = ConfigFile.ReadInteger("HuntingTrip", "MinSoldiersToGo");
+            maxSoldiersToGo = ConfigFile.ReadInteger("HuntingTrip", "MaxSoldiersToGo");
+            maxCatch = ConfigFile.ReadInteger("HuntingTrip", "MaxCatch");
+            minMoraleGain = ConfigFile.ReadInteger("HuntingTrip", "MinMoraleGain");
+            maxMoraleGain = ConfigFile.ReadInteger("HuntingTrip", "MaxMoraleGain");
+            minYieldMultiplier = ConfigFile.ReadInteger("HuntingTrip", "MinYieldMultiplier");
+            maxYieldMultiplier = ConfigFile.ReadInteger("HuntingTrip", "MaxYieldMultiplier");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minSoldiersToGo != 0 || maxSoldiersToGo != 0 || maxCatch != 0 || minMoraleGain != 0 || maxMoraleGain != 0 || minYieldMultiplier != 0 || maxYieldMultiplier != 0)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            
-            return MCM_MenuConfig_Toggle.Instance.HT_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo;
+            return EventCanRun() && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo;
         }
 
         public override void StartEvent()
@@ -188,8 +207,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
     public class HuntingTripData : RandomEventData
     {
 
-        public HuntingTripData(string eventType, float chanceWeight) : base(eventType,
-            chanceWeight)
+        public HuntingTripData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
         {
         }
 

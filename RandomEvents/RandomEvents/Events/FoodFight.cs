@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -14,6 +16,7 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class FoodFight : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minFoodLoss;
 		private readonly int maxFoodLoss;
 		private readonly int minMoraleLoss;
@@ -21,19 +24,35 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public FoodFight() : base(ModSettings.RandomEvents.FoodFightData)
 		{
-			minFoodLoss = 5;
-			maxFoodLoss = 30;
-			minMoraleLoss = 5;
-			maxMoraleLoss = 20;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("FoodFight", "EventDisabled");
+			minFoodLoss = ConfigFile.ReadInteger("FoodFight", "MinFoodLoss");
+			maxFoodLoss = ConfigFile.ReadInteger("FoodFight", "MaxFoodLoss");
+			minMoraleLoss = ConfigFile.ReadInteger("FoodFight", "MinMoraleLoss");
+			maxMoraleLoss = ConfigFile.ReadInteger("FoodFight", "MaxMoraleLoss");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minFoodLoss != 0 || maxFoodLoss != 0 || minMoraleLoss != 0 || maxMoraleLoss != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return  MCM_MenuConfig_Toggle.Instance.FoF_Disable == false && MobileParty.MainParty.MemberRoster.TotalManCount > 1 && (MobileParty.MainParty.ItemRoster.Any(item => item.EquipmentElement.Item.IsFood));
+			return EventCanRun() && MobileParty.MainParty.MemberRoster.TotalManCount > 1 && (MobileParty.MainParty.ItemRoster.Any(item => item.EquipmentElement.Item.IsFood));
 		}
 
 		public override void StartEvent()

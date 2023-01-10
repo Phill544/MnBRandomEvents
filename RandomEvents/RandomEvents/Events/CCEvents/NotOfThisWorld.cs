@@ -3,6 +3,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -13,23 +14,40 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class NotOfThisWorld : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minSoldiersToDisappear;
         private readonly int maxSoldiersToDisappear;
 
         public NotOfThisWorld() : base(ModSettings.RandomEvents.NotOfThisWorldData)
         {
-            minSoldiersToDisappear = 3;
-            maxSoldiersToDisappear = 8;
+            
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("NotOfThisWorld", "EventDisabled");
+            minSoldiersToDisappear = ConfigFile.ReadInteger("NotOfThisWorld", "MinSoldiersToDisappear");
+            maxSoldiersToDisappear = ConfigFile.ReadInteger("NotOfThisWorld", "MaxSoldiersToDisappear");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minSoldiersToDisappear != 0 || maxSoldiersToDisappear != 0)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-
-            return MCM_MenuConfig_Toggle.Instance.NotW_Disable == false && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToDisappear && CurrentTimeOfDay.IsNight;
+            return EventCanRun() && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToDisappear && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()

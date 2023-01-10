@@ -3,6 +3,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
@@ -12,17 +13,27 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class LightsInTheSkies : BaseEvent
     {
+        private readonly bool eventDisabled;
+
         public LightsInTheSkies() : base(ModSettings.RandomEvents.LightsInTheSkiesData)
         {
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("LightsInTheSkies", "EventDisabled");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            return eventDisabled == false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.LitS_Disable == false && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural == false && CurrentTimeOfDay.IsNight;
+            return EventCanRun() && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural == false && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()
@@ -37,7 +48,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
 
-            var  unknownText = 
+            var unknownText = 
                 "eNq9VVEOwyAIvRIgTvpt6v2PNLs0g66E0aQpX0Tg+XhgBLjDxm5r2kNcKg0RhsYvWqXXbvF66QjbGRUQJkQb1bNZ22rf8hTPoIgI" +
                 "fVAaM00rq4keGQyQRVwG6sUMXJSQgSLHUa83PStE+KtftjdXtVD7OBrfqxXqZdVVU63U8zQwd3ynEOfFmmZV8zgfOtp18VAsZ55G" +
                 "CH84Z/EUxeOXnbm3p9fnYSvOb9/TIM57QoN4s+95jbqnWe1j5Kcmc+ro8m8QeXl7A9dWb9o=";

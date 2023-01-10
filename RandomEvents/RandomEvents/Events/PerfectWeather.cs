@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -11,22 +13,39 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class PerfectWeather : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minMoraleGain;
 		private readonly int maxMoraleGain;
 
 		public PerfectWeather() : base(ModSettings.RandomEvents.PerfectWeatherData)
 		{
-			minMoraleGain = 10;
-			maxMoraleGain = 25;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("PerfectWeather", "EventDisabled");
+			minMoraleGain = ConfigFile.ReadInteger("PerfectWeather", "MinMoraleGain");
+			maxMoraleGain = ConfigFile.ReadInteger("PerfectWeather", "MaxMoraleGain");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minMoraleGain != 0 || maxMoraleGain != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.PW_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

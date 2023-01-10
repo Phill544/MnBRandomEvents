@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -15,6 +16,7 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class LookUp : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly float treeShakeChance;
 		private readonly float baseRangeChance;
 		private readonly int minRangeLevel;
@@ -24,21 +26,37 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public LookUp() : base(ModSettings.RandomEvents.LookUpData)
 		{
-			treeShakeChance = 25.0f;
-			baseRangeChance = 10.0f;
-			minRangeLevel = 10;
-			maxRangeLevel = 60;
-			minGold = 500;
-			maxGold = 2500;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("LookUp", "EventDisabled");
+			treeShakeChance = ConfigFile.ReadFloat("LookUp", "TreeShakeChance");
+			baseRangeChance = ConfigFile.ReadFloat("LookUp", "BaseRangeChance");
+			minRangeLevel = ConfigFile.ReadInteger("LookUp", "MinRangeLevel");
+			maxRangeLevel = ConfigFile.ReadInteger("LookUp", "MaxRangeLevel");
+			minGold = ConfigFile.ReadInteger("LookUp", "MinGold");
+			maxGold = ConfigFile.ReadInteger("LookUp", "MaxGold");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (treeShakeChance != 0 || baseRangeChance != 0 || minRangeLevel != 0 || maxRangeLevel != 0 || minGold != 0 || maxGold != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.LU_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

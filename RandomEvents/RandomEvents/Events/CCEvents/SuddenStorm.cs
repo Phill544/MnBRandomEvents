@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -16,6 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class SuddenStorm : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minHorsesLost;
         private readonly int maxHorsesLost;
         private readonly int minMenDied;
@@ -27,25 +29,39 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public SuddenStorm() : base(ModSettings.RandomEvents.SuddenStormData)
         {
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
             
-            minHorsesLost = 5;
-            maxHorsesLost = 12;
-            minMenDied = 10;
-            maxMenDied = 20;
-            minMenWounded = 10;
-            maxMenWounded = 02;
-            minMeatFromHorse = 4;
-            maxMeatFromHorse = 9;
+            eventDisabled = ConfigFile.ReadBoolean("SuddenStorm", "EventDisabled");
+            minHorsesLost = ConfigFile.ReadInteger("SuddenStorm", "MinHorsesLost");
+            maxHorsesLost = ConfigFile.ReadInteger("SuddenStorm", "MaxHorsesLost");
+            minMenDied = ConfigFile.ReadInteger("SuddenStorm", "MinMenDied");
+            maxMenDied = ConfigFile.ReadInteger("SuddenStorm", "MaxMenDied");
+            minMenWounded = ConfigFile.ReadInteger("SuddenStorm", "MinMenWounded");
+            maxMenWounded = ConfigFile.ReadInteger("SuddenStorm", "MaxMenWounded");
+            minMeatFromHorse = ConfigFile.ReadInteger("SuddenStorm", "MinMeatFromHorse");
+            maxMeatFromHorse = ConfigFile.ReadInteger("SuddenStorm", "MaxMeatFromHorse");
             
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minHorsesLost != 0 || maxHorsesLost != 0 || minMenDied != 0 || maxMenDied != 0 || minMenWounded != 0 || maxMenWounded != 0 || minMeatFromHorse != 0 || maxMeatFromHorse != 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.SuS_Disable == false && Settlement.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxMenDied;
+            return EventCanRun() && Settlement.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxMenDied;
 
         }
 

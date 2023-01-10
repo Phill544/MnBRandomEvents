@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
@@ -15,19 +17,28 @@ namespace CryingBuffalo.RandomEvents.Events
 	public sealed class AheadOfTime : BaseEvent
 	{
 		private List<Settlement> eligibleSettlements;
+		private readonly bool eventDisabled;
 
 		public AheadOfTime() : base(ModSettings.RandomEvents.AheadOfTimeData)
 		{
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("AheadOfTime", "EventDisabled");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			return eventDisabled == false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
 
-			if (MCM_MenuConfig_Toggle.Instance.AoT_Disable == false)
+			if (EventCanRun())
 			{
 				if (!Hero.MainHero.Clan.Settlements.Any()) return false;
 				eligibleSettlements = new List<Settlement>();

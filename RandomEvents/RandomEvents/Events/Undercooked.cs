@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -11,22 +13,39 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class Undercooked : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minTroopsToInjure;
 		private readonly int maxTroopsToInjure;
 
 		public Undercooked() : base(ModSettings.RandomEvents.UndercookedData)
 		{
-			minTroopsToInjure = 8;
-			maxTroopsToInjure = 30;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("Undercooked", "EventDisabled");
+			minTroopsToInjure = ConfigFile.ReadInteger("Undercooked", "MinTroopsToInjure");
+			maxTroopsToInjure = ConfigFile.ReadInteger("Undercooked", "MaxTroopsToInjure");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minTroopsToInjure != 0 || maxTroopsToInjure != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.UC_Disable == false && (MobileParty.MainParty.MemberRoster.TotalRegulars - MobileParty.MainParty.MemberRoster.TotalWoundedRegulars) >= minTroopsToInjure;
+			return EventCanRun() && (MobileParty.MainParty.MemberRoster.TotalRegulars - MobileParty.MainParty.MemberRoster.TotalWoundedRegulars) >= minTroopsToInjure;
 		}
 
 		public override void StartEvent()

@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -14,6 +15,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
 	public sealed class RedMoon : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minGoldLost;
 		private readonly int maxGoldLost;
 		private readonly int minMenLost;
@@ -21,19 +23,35 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public RedMoon() : base(ModSettings.RandomEvents.RedMoonData)
 		{
-			minGoldLost = 700;
-			maxGoldLost = 4000;
-			minMenLost = 15;
-			maxMenLost = 50;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			
+			eventDisabled = ConfigFile.ReadBoolean("RedMoon", "EventDisabled");
+			minGoldLost = ConfigFile.ReadInteger("RedMoon", "MinGoldLost");
+			maxGoldLost = ConfigFile.ReadInteger("RedMoon", "MaxGoldLost");
+			minMenLost = ConfigFile.ReadInteger("RedMoon", "MinMenLost");
+			maxMenLost = ConfigFile.ReadInteger("RedMoon", "MaxMenLost");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minGoldLost != 0 || maxGoldLost != 0 || minMenLost != 0 || maxMenLost != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.RM_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxMenLost && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
+			return EventCanRun() && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxMenLost && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
 		}
 
 		public override void StartEvent()

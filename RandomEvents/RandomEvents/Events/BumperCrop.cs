@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -12,11 +14,37 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	internal sealed class BumperCrop : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly float cropGainPercent;
 
 		public BumperCrop() : base(ModSettings.RandomEvents.BumperCropData)
 		{
-			cropGainPercent = 0.66f;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("BumperCrop", "EventDisabled");
+			cropGainPercent = ConfigFile.ReadFloat("BumperCrop", "CropGainPercent");
+		}
+		
+		public override void CancelEvent()
+		{
+		}
+
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (cropGainPercent != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
+		
+		public override bool CanExecuteEvent()
+		{
+			return EventCanRun() && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()
@@ -66,15 +94,6 @@ namespace CryingBuffalo.RandomEvents.Events
 			{
 				MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
-		}
-
-		public override void CancelEvent()
-		{
-		}
-
-		public override bool CanExecuteEvent()
-		{
-			return MCM_MenuConfig_Toggle.Instance.BC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
 		}
 	}
 

@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -14,6 +15,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class UnexpectedWedding : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minGoldToDonate;
         private readonly int maxGoldToDonate;
         private readonly int minPeopleInWedding;
@@ -25,23 +27,38 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public UnexpectedWedding() : base(ModSettings.RandomEvents.UnexpectedWeddingData)
         {
-            minGoldToDonate = 100;
-            maxGoldToDonate = 750;
-            minPeopleInWedding = 10;
-            maxPeopleInWedding = 60;
-            embarrassedSoliderMaxGold = 100;
-            minGoldRaided = 250;
-            maxGoldRaided = 1500;
-            minRogueryLevel = 125;
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+
+            eventDisabled = ConfigFile.ReadBoolean("UnexpectedWedding", "EventDisabled");
+            minGoldToDonate = ConfigFile.ReadInteger("UnexpectedWedding", "MinGoldToDonate");
+            maxGoldToDonate = ConfigFile.ReadInteger("UnexpectedWedding", "MaxGoldToDonate");
+            minPeopleInWedding = ConfigFile.ReadInteger("UnexpectedWedding", "MinPeopleInWedding");
+            maxPeopleInWedding = ConfigFile.ReadInteger("UnexpectedWedding", "MaxPeopleInWedding");
+            embarrassedSoliderMaxGold = ConfigFile.ReadInteger("UnexpectedWedding", "EmbarrassedSoliderMaxGold");
+            minGoldRaided = ConfigFile.ReadInteger("UnexpectedWedding", "MinGoldRaided");
+            maxGoldRaided = ConfigFile.ReadInteger("UnexpectedWedding", "MaxGoldRaided");
+            minRogueryLevel = ConfigFile.ReadInteger("UnexpectedWedding", "MinRogueryLevel");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minGoldToDonate != 0 || maxGoldToDonate != 0 || minPeopleInWedding != 0 || maxPeopleInWedding != 0 || embarrassedSoliderMaxGold != 0 || minGoldRaided != 0 || maxGoldRaided != 0 || minRogueryLevel != 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.UW_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

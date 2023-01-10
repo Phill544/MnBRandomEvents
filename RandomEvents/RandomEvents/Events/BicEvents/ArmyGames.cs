@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -12,6 +14,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class ArmyGames : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly float minCohesionIncrease;
 		private readonly float maxCohesionIncrease;
 		private readonly int minMoraleGain;
@@ -20,19 +23,34 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public ArmyGames() : base(ModSettings.RandomEvents.ArmyGamesData)
 		{
-			minCohesionIncrease = 10.0f;
-			maxCohesionIncrease = 40.0f;
-			minMoraleGain = 10;
-			maxMoraleGain = 30;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("ArmyGames", "EventDisabled");
+			minCohesionIncrease = ConfigFile.ReadFloat("ArmyGames", "MinCohesionIncrease");
+			maxCohesionIncrease = ConfigFile.ReadFloat("ArmyGames", "MaxCohesionIncrease");
+			minMoraleGain = ConfigFile.ReadInteger("ArmyGames", "MinMoraleGain");
+			maxMoraleGain = ConfigFile.ReadInteger("ArmyGames", "MaxMoraleGain");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minCohesionIncrease != 0 || maxCohesionIncrease != 0 || minMoraleGain != 0 || maxMoraleGain != 0)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.AG_Disable == false && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 2; 
+			return EventCanRun() && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 2; 
 		}
 
 		public override void StartEvent()

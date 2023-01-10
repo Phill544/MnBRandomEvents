@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -11,22 +13,39 @@ namespace CryingBuffalo.RandomEvents.Events
 {
     public sealed class SecretSinger : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minMoraleGain;
         private readonly int maxMoraleGain;
 
         public SecretSinger() : base(ModSettings.RandomEvents.SecretSingerData)
         {
-            minMoraleGain = 10;
-            maxMoraleGain = 75;
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("SecretSinger", "EventDisabled");
+            minMoraleGain = ConfigFile.ReadInteger("SecretSinger", "MinMoraleGain");
+            maxMoraleGain = ConfigFile.ReadInteger("SecretSinger", "MaxMoraleGain");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minMoraleGain != 0 || maxMoraleGain != 0)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.SS_Disable == false;
+            return EventCanRun();
         }
 
         public override void StartEvent()

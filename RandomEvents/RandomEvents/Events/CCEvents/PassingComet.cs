@@ -3,6 +3,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -11,18 +12,27 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
 	public sealed class PassingComet : BaseEvent
 	{
+		private readonly bool eventDisabled;
+		
 		public PassingComet() : base(ModSettings.RandomEvents.PassingCometData)
 		{
-			
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("PassingComet", "EventDisabled");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			return eventDisabled == false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.PC_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
+			return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
 		}
 
 		public override void StartEvent()

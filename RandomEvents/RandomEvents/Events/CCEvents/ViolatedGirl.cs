@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -14,24 +15,40 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class ViolatedGirl : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minGoldCompensation;
         private readonly int maxGoldCompensation;
         private readonly int minRogueryLevel;
 
         public ViolatedGirl() : base(ModSettings.RandomEvents.ViolatedGirlData)
         {
-            minGoldCompensation = 2000;
-            maxGoldCompensation = 5000;
-            minRogueryLevel = 125;
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("ViolatedGirl", "EventDisabled");
+            minGoldCompensation = ConfigFile.ReadInteger("ViolatedGirl", "MinGoldCompensation");
+            maxGoldCompensation = ConfigFile.ReadInteger("ViolatedGirl", "MaxGoldCompensation");
+            minRogueryLevel = ConfigFile.ReadInteger("ViolatedGirl", "MinRogueryLevel");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minGoldCompensation != 0 || maxGoldCompensation != 0 || minRogueryLevel != 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.VG_Disable == false && MobileParty.MainParty.CurrentSettlement == null && Hero.MainHero.Gold >= maxGoldCompensation;
+            return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null && Hero.MainHero.Gold >= maxGoldCompensation;
         }
 
         public override void StartEvent()

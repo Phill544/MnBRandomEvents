@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -14,6 +15,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class BirthdayParty : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minAttending;
         private readonly int maxAttending;
         private readonly int minYourMenAttending;
@@ -32,30 +34,56 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public BirthdayParty() : base(ModSettings.RandomEvents.BirthdayPartyData)
         {
-            minAttending = 15;
-            maxAttending = 60;
-            minYourMenAttending = 5;
-            maxYourMenAttending = 15;
-            minAge = 15;
-            maxAge = 24;
-            minBandits = 5;
-            maxBandits = 15;
-            minGoldGiven = 100;
-            maxGoldGiven = 500;
-            minInfluenceGain = 20;
-            maxInfluenceGain = 75;
-            minGoldLooted = 25;
-            maxGoldLooted = 125;
-            minRogueryLevel = 125;
+            
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("BirthdayParty", "EventDisabled");
+            minAttending = ConfigFile.ReadInteger("BirthdayParty", "MinAttending");
+            maxAttending = ConfigFile.ReadInteger("BirthdayParty", "MaxAttending");
+            minYourMenAttending = ConfigFile.ReadInteger("BirthdayParty", "MinYourMenAttending");
+            maxYourMenAttending = ConfigFile.ReadInteger("BirthdayParty", "MaxYourMenAttending");
+            minAge = ConfigFile.ReadInteger("BirthdayParty", "MinAge");
+            maxAge = ConfigFile.ReadInteger("BirthdayParty", "MaxAge");
+            minBandits = ConfigFile.ReadInteger("BirthdayParty", "MinBandits");
+            maxBandits = ConfigFile.ReadInteger("BirthdayParty", "MaxBandits");
+            minGoldGiven = ConfigFile.ReadInteger("BirthdayParty", "MinGoldGiven");
+            maxGoldGiven = ConfigFile.ReadInteger("BirthdayParty", "MaxGoldGiven");
+            minInfluenceGain = ConfigFile.ReadInteger("BirthdayParty", "MinInfluenceGain");
+            maxInfluenceGain = ConfigFile.ReadInteger("BirthdayParty", "MaxInfluenceGain");
+            minGoldLooted = ConfigFile.ReadInteger("BirthdayParty", "MinGoldLooted");
+            maxGoldLooted = ConfigFile.ReadInteger("BirthdayParty", "MaxGoldLooted");
+            minRogueryLevel = ConfigFile.ReadInteger("BirthdayParty", "MinRogueryLevel");
+
+            //Overrides the input
+            if (minAge < 16)
+            {
+                minAge = 16;
+            }
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minAttending != 0 || maxAttending != 0 || minYourMenAttending != 0 || maxYourMenAttending != 0 ||
+                    minAge != 0 || maxAge != 0 || minBandits != 0 || maxBandits != 0 || minGoldGiven != 0 ||
+                    maxGoldGiven != 0 || minInfluenceGain != 0 || maxInfluenceGain != 0 || minGoldLooted != 0 ||
+                    maxGoldLooted != 0 || minRogueryLevel != 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.BP_Disable == false && Hero.MainHero.Clan.Kingdom != null;
+            return EventCanRun() && Hero.MainHero.Clan.Kingdom != null;
         }
 
         public override void StartEvent()

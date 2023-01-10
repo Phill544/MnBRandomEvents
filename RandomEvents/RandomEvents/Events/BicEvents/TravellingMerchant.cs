@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
@@ -14,21 +15,38 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class TravellingMerchant : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minLoot;
 		private readonly int maxLoot;
 
 		public TravellingMerchant() : base(Settings.ModSettings.RandomEvents.TravellingMerchantData)
 		{
-			minLoot = 2500;
-			maxLoot = 10000;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("TravellingMerchant", "EventDisabled");
+			minLoot = ConfigFile.ReadInteger("TravellingMerchant", "MinLoot");
+			maxLoot = ConfigFile.ReadInteger("TravellingMerchant", "MaxLoot");
 
 		}
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minLoot != 0 || maxLoot != 0)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.TM_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 5 && Clan.PlayerClan.Renown >= 500;
+			return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 5 && Clan.PlayerClan.Renown >= 500;
 		}
 		public override void StartEvent()
 		{

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -11,22 +13,39 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class SpeedyRecovery : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minTroopsToHeal;
 		private readonly int maxTroopsToHeal;
 
 		public SpeedyRecovery() : base(ModSettings.RandomEvents.SpeedyRecoveryData)
 		{
-			minTroopsToHeal = 5;
-			maxTroopsToHeal = 25;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("SpeedyRecovery", "EventDisabled");
+			minTroopsToHeal = ConfigFile.ReadInteger("SpeedyRecovery", "MinTroopsToHeal");
+			maxTroopsToHeal = ConfigFile.ReadInteger("SpeedyRecovery", "MaxTroopsToHeal");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minTroopsToHeal != 0 || maxTroopsToHeal != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.SR_Disable == false && MobileParty.MainParty.MemberRoster.TotalWoundedRegulars >= minTroopsToHeal;
+			return  EventCanRun() && MobileParty.MainParty.MemberRoster.TotalWoundedRegulars >= minTroopsToHeal;
 		}
 
 		public override void StartEvent()

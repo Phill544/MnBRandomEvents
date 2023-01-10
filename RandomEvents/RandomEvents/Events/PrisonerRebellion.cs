@@ -3,6 +3,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -11,22 +12,39 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class PrisonerRebellion : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minimumPrisoners;
 
 		private bool heroInPrisonerRoster;
 
 		public PrisonerRebellion() : base(ModSettings.RandomEvents.PrisonerRebellionData)
 		{
-			minimumPrisoners = 30;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("PrisonerRebellion", "EventDisabled");
+			minimumPrisoners = ConfigFile.ReadInteger("PrisonerRebellion", "MinimumPrisoners");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minimumPrisoners != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.PR_Disable == false && MobileParty.MainParty.PrisonRoster.TotalHealthyCount > minimumPrisoners && MobileParty.MainParty.CurrentSettlement == null;
+			return EventCanRun() && MobileParty.MainParty.PrisonRoster.TotalHealthyCount > minimumPrisoners && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

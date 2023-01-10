@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -11,6 +13,7 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class BeeKind : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int damage;
 		private readonly float reactionChance;
 		private readonly int reactionDamage;
@@ -18,18 +21,34 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public BeeKind() : base(ModSettings.RandomEvents.BeeKindData)
 		{
-			damage = 10;
-			reactionChance = 0.15f;
-			reactionDamage = 15;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("BeeKind", "EventDisabled");
+			damage = ConfigFile.ReadInteger("BeeKind", "Damage");
+			reactionChance = ConfigFile.ReadFloat("BeeKind", "reactionChance");
+			reactionDamage = ConfigFile.ReadInteger("BeeKind", "reactionDamage");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (damage != 0 || reactionChance != 0 || reactionDamage != 0 )
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.BK_Disable == false;
+			return EventCanRun();
 		}
 
 		public override void StartEvent()

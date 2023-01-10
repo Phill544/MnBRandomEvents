@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -13,17 +14,27 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public sealed class SupernaturalEncounter : BaseEvent
     {
+        private readonly bool eventDisabled;
+
         public SupernaturalEncounter() : base(ModSettings.RandomEvents.SupernaturalEncounterData)
         {
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("SupernaturalEncounter", "EventDisabled");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            return eventDisabled == false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.SE_Disable == false && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
+            return EventCanRun() && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()
@@ -120,8 +131,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n {ex.StackTrace}");
+                MessageBox.Show($"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n {ex.StackTrace}");
             }
         }
     }

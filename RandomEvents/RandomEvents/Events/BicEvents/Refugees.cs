@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
@@ -16,11 +17,12 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
     public class Refugees : BaseEvent
     {
         // The letters correspond to the inquiry element ids
-        private readonly int moraleGainA = 5;
-        private readonly int moraleGainB = 5;
-        private readonly int moraleLossC = 0;
-        private readonly int moraleLossD = 0;
-        // min max values
+        private const int moraleGainA = 5;
+        private const int moraleGainB = 5;
+        private const int moraleLossC = 0;
+        private const int moraleLossD = 0;
+        
+        private readonly bool eventDisabled;
         private readonly int minSoldiers;
         private readonly int maxSoldiers;
         private readonly int minFood;
@@ -30,21 +32,36 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
         public Refugees() : base(Settings.ModSettings.RandomEvents.RefugeesData)
         {
-            minSoldiers = 8;
-            maxSoldiers = 15;
-            minFood = 3;
-            maxFood = 5;
-            minCaptive = 8;
-            maxCaptive = 15;
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			
+            eventDisabled = ConfigFile.ReadBoolean("Refugees", "EventDisabled");
+            minSoldiers = ConfigFile.ReadInteger("Refugees", "MinSoldiers");
+            maxSoldiers = ConfigFile.ReadInteger("Refugees", "MaxSoldiers");
+            minFood = ConfigFile.ReadInteger("Refugees", "MinFood");
+            maxFood = ConfigFile.ReadInteger("Refugees", "MaxFood");
+            minCaptive = ConfigFile.ReadInteger("Refugees", "MinCaptive");
+            maxCaptive = ConfigFile.ReadInteger("Refugees", "MaxCaptive");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minSoldiers != 0 || maxSoldiers != 0 || minFood != 0 || maxFood != 0 || minCaptive != 0 || maxCaptive != 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MobileParty.MainParty.CurrentSettlement == null && MCM_MenuConfig_Toggle.Instance.RF_Disable == false;
+            return MobileParty.MainParty.CurrentSettlement == null && EventCanRun();
         }
 
         public override void StartEvent()

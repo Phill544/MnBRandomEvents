@@ -5,6 +5,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
@@ -15,22 +16,39 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class EagerTroops : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minTroopGain;
 		private readonly int maxTroopGain;
 
 		public EagerTroops() : base(ModSettings.RandomEvents.EagerTroopsData)
 		{
-			minTroopGain = 10;
-			maxTroopGain = 35;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("EagerTroops", "EventDisabled");
+			minTroopGain = ConfigFile.ReadInteger("EagerTroops", "MinTroopGain");
+			maxTroopGain = ConfigFile.ReadInteger("EagerTroops", "MaxTroopGain");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minTroopGain != 0 || maxTroopGain != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.ET_Disable == false && MobileParty.MainParty.Party.PartySizeLimit >= MobileParty.MainParty.MemberRoster.TotalHealthyCount + minTroopGain;
+			return EventCanRun() && MobileParty.MainParty.Party.PartySizeLimit >= MobileParty.MainParty.MemberRoster.TotalHealthyCount + minTroopGain;
 		}
 
 		public override void StartEvent()

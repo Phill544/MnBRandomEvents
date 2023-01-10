@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -12,6 +14,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class BottomsUp : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minMoraleGain;
 		private readonly int maxMoraleGain;
 		private readonly int minGold;
@@ -20,26 +23,43 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public BottomsUp() : base(Settings.ModSettings.RandomEvents.BottomsUpData)
 		{
-
-			minMoraleGain = 10;
-			maxMoraleGain = 25;
-			minGold = 50;
-			maxGold = 300;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("BottomsUp", "EventDisabled");
+			minMoraleGain = ConfigFile.ReadInteger("BottomsUp", "MinMoraleGain");
+			maxMoraleGain = ConfigFile.ReadInteger("BottomsUp", "MaxMoraleGain");
+			minGold = ConfigFile.ReadInteger("BottomsUp", "MinGold");
+			maxGold = ConfigFile.ReadInteger("BottomsUp", "MaxGold");
 		}
 
 		public override void CancelEvent()
 		{
-        
+		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minMoraleGain != 0 || maxMoraleGain != 0 || minGold != 0 || maxGold != 0)
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.BU_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown && CampaignTime.Now.IsNightTime && Clan.PlayerClan.Renown >= 500||
-				 MCM_MenuConfig_Toggle.Instance.BU_Disable == false && MobileParty.MainParty.CurrentSettlement != null && MobileParty.MainParty.CurrentSettlement.IsVillage) && CampaignTime.Now.IsNightTime && Clan.PlayerClan.Renown >= 500;
+			return EventCanRun() && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown && CurrentTimeOfDay.IsNight && Clan.PlayerClan.Renown >= 500||
+				 EventCanRun() && MobileParty.MainParty.CurrentSettlement != null && MobileParty.MainParty.CurrentSettlement.IsVillage) && CurrentTimeOfDay.IsNight && Clan.PlayerClan.Renown >= 500;
 		}
 
 		public override void StartEvent()
 		{
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
 
 			var goldGain = MBRandom.RandomInt(minGold, maxGold);
 			var moraleGain = MBRandom.RandomInt(minMoraleGain, maxMoraleGain);

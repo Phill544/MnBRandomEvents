@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -13,22 +14,39 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class TargetPractice : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minimumSoldiers;
 		private readonly float percentageDifferenceOfCurrentTroop;
 
 		public TargetPractice() : base(ModSettings.RandomEvents.TargetPracticeData)
 		{
-			minimumSoldiers = 50;
-			percentageDifferenceOfCurrentTroop = 50.0f;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("TargetPractice", "EventDisabled");
+			minimumSoldiers = ConfigFile.ReadInteger("TargetPractice", "MinimumSoldiers");
+			percentageDifferenceOfCurrentTroop = ConfigFile.ReadFloat("TargetPractice", "PercentageDifferenceOfCurrentTroop");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minimumSoldiers != 0 || percentageDifferenceOfCurrentTroop != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.TP_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

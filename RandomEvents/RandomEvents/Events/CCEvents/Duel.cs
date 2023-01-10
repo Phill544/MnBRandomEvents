@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -14,24 +15,40 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class Duel : BaseEvent
     {
-
+        private readonly bool eventDisabled;
         private readonly int minTwoHandedLevel;
         private readonly int minRogueryLevel;
 
         public Duel() : base(ModSettings.RandomEvents.DuelData)
         {
-            minTwoHandedLevel = 125;
-            minRogueryLevel = 100;
+            
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("Duel", "EventDisabled");
+            minTwoHandedLevel = ConfigFile.ReadInteger("Duel", "MinTwoHandedLevel");;
+            minRogueryLevel = ConfigFile.ReadInteger("Duel", "MinRogueryLevel");;
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minTwoHandedLevel != 0 || minRogueryLevel != 0 )
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-
-            return MCM_MenuConfig_Toggle.Instance.DU_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

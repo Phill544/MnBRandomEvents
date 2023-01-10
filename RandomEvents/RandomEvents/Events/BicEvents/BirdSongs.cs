@@ -2,6 +2,7 @@
 using System.Windows;
 using CryingBuffalo.RandomEvents.Settings.MCM;
 using CryingBuffalo.RandomEvents.Helpers;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -11,26 +12,39 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class BirdSongs : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minMoraleGain;
 		private readonly int maxMoraleGain;
 
-        
-
 		public BirdSongs() : base(Settings.ModSettings.RandomEvents.BirdSongsData)
 		{
-			minMoraleGain = 15;
-			maxMoraleGain = 30;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("BirdSongs", "EventDisabled");
+			minMoraleGain = ConfigFile.ReadInteger("BirdSongs", "MinMoraleGain");
+			maxMoraleGain = ConfigFile.ReadInteger("BirdSongs", "MaxMoraleGain");
 
 		}
 
 		public override void CancelEvent()
 		{
-        
+		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minMoraleGain != 0 || maxMoraleGain != 0 )
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.BS_Disable == false && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsMorning;
+			return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsMorning;
 		}
 
 		public override void StartEvent()

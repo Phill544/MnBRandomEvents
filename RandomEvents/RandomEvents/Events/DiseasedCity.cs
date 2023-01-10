@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -14,6 +16,7 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class DiseasedCity : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly float baseSuccessChance;
 		private readonly float highMedicineChance;
 		private readonly int highMedicineLevel;
@@ -21,19 +24,35 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public DiseasedCity() : base(ModSettings.RandomEvents.DiseasedCityData)
 		{
-			baseSuccessChance = 50.0f;
-			highMedicineChance = 25.0f;
-			highMedicineLevel = 75;
-			percentLoss = 20.0f;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("DiseasedCity", "EventDisabled");
+			baseSuccessChance = ConfigFile.ReadFloat("DiseasedCity", "BaseSuccessChance");
+			highMedicineChance = ConfigFile.ReadFloat("DiseasedCity", "HighMedicineChance");
+			highMedicineLevel = ConfigFile.ReadInteger("DiseasedCity", "HighMedicineLevel");
+			percentLoss = ConfigFile.ReadFloat("DiseasedCity", "PercentLoss");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (baseSuccessChance != 0 || highMedicineChance != 0|| highMedicineLevel != 0|| percentLoss != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.DC_Disable == false && Hero.MainHero.Clan.Settlements.Any();
+			return EventCanRun() && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()

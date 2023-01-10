@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -15,22 +16,39 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class BunchOfPrisoners : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minPrisonerGain;
 		private readonly int maxPrisonerGain;
 
 		public BunchOfPrisoners() : base(ModSettings.RandomEvents.BunchOfPrisonersData)
 		{
-			minPrisonerGain = 15;
-			maxPrisonerGain = 50;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("BunchOfPrisoners", "EventDisabled");
+			minPrisonerGain = ConfigFile.ReadInteger("BunchOfPrisoners", "MinPrisonerGain");
+			maxPrisonerGain = ConfigFile.ReadInteger("BunchOfPrisoners", "MaxPrisonerGain");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minPrisonerGain != 0 || maxPrisonerGain != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.BoP_Disable == false && Hero.MainHero.Clan.Settlements.Any();
+			return EventCanRun() && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()

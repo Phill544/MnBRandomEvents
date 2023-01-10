@@ -127,9 +127,9 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Helpers\AttributeHelper.cs" />
     <Compile Include="Helpers\PlayerStatus.cs" />
     <Compile Include="Helpers\RandomSelection.cs" />
+    <Compile Include="Helpers\ParseIniFile.cs" />
     <Compile Include="RandomEventBehavior.cs" />
     <Compile Include="Settings\MCM\MCM_MenuConfig_General.cs" />
-    <Compile Include="Settings\MCM\MCM_Menu_Config_Toggle.cs" />
     <Compile Include="Settings\RandomEventSettings.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="RandomEventGenerator.cs" />
@@ -138,12 +138,14 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bannerlord.MCM" Version="5.5.4" IncludeAssets="compile" />
+    <PackageReference Include="ini.net" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ModuleData\Languages\std_module_strings_xml.xml" />
+    <Content Include="ModuleData\RandomEvents_EventConfiguration.ini" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

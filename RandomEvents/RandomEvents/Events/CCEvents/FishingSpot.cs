@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -12,6 +14,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class FishingSpot : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minSoldiersToGo;
         private readonly int maxSoldiersToGo;
         private readonly int maxFishCatch;
@@ -21,20 +24,37 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public FishingSpot() : base(ModSettings.RandomEvents.FishingSpotData)
         {
-            minSoldiersToGo = 3;
-            maxSoldiersToGo = 12;
-            maxFishCatch = 20;
-            minMoraleGain = 5;
-            maxMoraleGain = 25;
+            
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("FishingSpot", "EventDisabled");
+            minSoldiersToGo = ConfigFile.ReadInteger("FishingSpot", "MinSoldiersToGo");
+            maxSoldiersToGo = ConfigFile.ReadInteger("FishingSpot", "MaxSoldiersToGo");
+            maxFishCatch = ConfigFile.ReadInteger("FishingSpot", "MaxFishCatch");
+            minMoraleGain = ConfigFile.ReadInteger("FishingSpot", "MinMoraleGain");
+            maxMoraleGain = ConfigFile.ReadInteger("FishingSpot", "MaxMoraleGain");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minSoldiersToGo != 0 || maxSoldiersToGo != 0 || maxFishCatch != 0 || minMoraleGain != 0 || maxMoraleGain != 0)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.FS_Disable == false && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo && MobileParty.MainParty.CurrentSettlement == null;
+            return EventCanRun() && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()
@@ -164,8 +184,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
     public class FishingSpotData : RandomEventData
     {
 
-        public FishingSpotData(string eventType, float chanceWeight) : base(eventType,
-            chanceWeight)
+        public FishingSpotData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
         {
         }
 

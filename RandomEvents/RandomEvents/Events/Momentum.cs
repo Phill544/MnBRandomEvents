@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -12,17 +14,27 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class Momentum : BaseEvent
 	{
+		private readonly bool eventDisabled;
+		
 		public Momentum() : base(ModSettings.RandomEvents.MomentumData)
 		{
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("Momentum", "EventDisabled");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			return eventDisabled == false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.MO_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

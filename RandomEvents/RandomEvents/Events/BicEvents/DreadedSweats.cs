@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -11,38 +13,59 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class DreadedSweats : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minMoraleLoss;
 		private readonly int maxMoraleLoss;
-		private readonly int minVictim;
-        private readonly int maxVictim;
+		private readonly int minVictims;
+        private readonly int maxVictims;
         
 
 		public DreadedSweats() : base(Settings.ModSettings.RandomEvents.DreadedSweatsData)
 		{
-			minMoraleLoss = 10;
-			maxMoraleLoss = 25;
-			minVictim = 3;
-			maxVictim = 6;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			
+			eventDisabled = ConfigFile.ReadBoolean("DreadedSweats", "EventDisabled");
+			minMoraleLoss = ConfigFile.ReadInteger("DreadedSweats", "MinMoraleLoss");
+			maxMoraleLoss = ConfigFile.ReadInteger("DreadedSweats", "MaxMoraleLoss");
+			minVictims = ConfigFile.ReadInteger("DreadedSweats", "MinVictims");
+			maxVictims = ConfigFile.ReadInteger("DreadedSweats", "MaxVictims");
 
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minMoraleLoss != 0 || maxMoraleLoss != 0 || minVictims != 0 || maxVictims != 0)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.DS_Disable == false && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10;
+			return EventCanRun() && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10;
 		}
 
 		public override void StartEvent()
 		{
+			
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
 
       		var partySize = MobileParty.MainParty.MemberRoster.TotalHealthyCount;
             
 			var moraleLoss = MBRandom.RandomInt(minMoraleLoss, maxMoraleLoss);
 			
-			var victims = MBRandom.RandomInt(minVictim, maxVictim);
+			var victims = MBRandom.RandomInt(minVictims, maxVictims);
 			
 			var totalVictims = partySize / 10 + victims;
 			

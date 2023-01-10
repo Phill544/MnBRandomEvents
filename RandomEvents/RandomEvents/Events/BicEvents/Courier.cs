@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -11,26 +13,47 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class Courier : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly int minMoraleGain;
 		private readonly int maxMoraleGain;
 
 		public Courier() : base(Settings.ModSettings.RandomEvents.CourierData)
 		{
-			minMoraleGain = 15;
-			maxMoraleGain = 30;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("BirdSongs", "EventDisabled");
+			minMoraleGain = ConfigFile.ReadInteger("BirdSongs", "MinMoraleGain");
+			maxMoraleGain = ConfigFile.ReadInteger("BirdSongs", "MaxMoraleGain");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minMoraleGain != 0 || maxMoraleGain != 0 )
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.CR_Disable == false;
+			return EventCanRun();
 		}
 
 		public override void StartEvent()
 		{
+			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			{
+				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+			}
+			
 			var heroName = Hero.MainHero.FirstName;
 
 			var moraleGain = MBRandom.RandomInt(minMoraleGain, maxMoraleGain);

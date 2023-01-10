@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -14,7 +15,7 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class BanditAmbush : BaseEvent
 	{
-
+		private readonly bool eventDisabled;
 		private readonly float moneyMinPercent;
 		private readonly float moneyMaxPercent;
 		private readonly int troopScareCount;
@@ -22,19 +23,35 @@ namespace CryingBuffalo.RandomEvents.Events
 		
 		public BanditAmbush() : base(ModSettings.RandomEvents.BanditAmbushData)
 		{
-			moneyMinPercent = 0.05f;
-			moneyMaxPercent = 0.15f;
-			troopScareCount = 50;
-			banditCap = 50;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("BanditAmbush", "EventDisabled");
+			moneyMinPercent = ConfigFile.ReadFloat("BanditAmbush", "MoneyMinPercent");
+			moneyMaxPercent = ConfigFile.ReadFloat("BanditAmbush", "MoneyMaxPercent");
+			troopScareCount = ConfigFile.ReadInteger("BanditAmbush", "TroopScareCount");
+			banditCap = ConfigFile.ReadInteger("BanditAmbush", "BanditCap");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (moneyMinPercent != 0 || moneyMaxPercent != 0 || troopScareCount != 0 || banditCap != 0 )
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.BA_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+			return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

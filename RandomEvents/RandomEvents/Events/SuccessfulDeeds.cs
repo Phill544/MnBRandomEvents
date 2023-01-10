@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -11,23 +13,39 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class SuccessfulDeeds : BaseEvent
 	{
-
+		private readonly bool eventDisabled;
 		private readonly int minInfluenceGain;
 		private readonly int maxInfluenceGain;
 
 		public SuccessfulDeeds() : base(ModSettings.RandomEvents.SuccessfulDeedsData)
 		{
-			minInfluenceGain = 20;
-			maxInfluenceGain = 100;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("SuccessfulDeeds", "EventDisabled");
+			minInfluenceGain = ConfigFile.ReadInteger("SuccessfulDeeds", "MinInfluenceGain");
+			maxInfluenceGain = ConfigFile.ReadInteger("SuccessfulDeeds", "MaxInfluenceGain");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (minInfluenceGain != 0 || maxInfluenceGain != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.SD_Disable == false && Hero.MainHero.Clan.Kingdom != null;
+			return EventCanRun() && Hero.MainHero.Clan.Kingdom != null;
 		}
 
 		public override void StartEvent()

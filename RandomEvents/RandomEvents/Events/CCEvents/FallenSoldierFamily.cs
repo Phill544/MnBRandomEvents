@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -13,6 +15,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class FallenSoldierFamily : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minFamilyCompensation;
         private readonly int maxFamilyCompensation;
         private readonly int minGoldLooted;
@@ -21,20 +24,37 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public FallenSoldierFamily() : base(ModSettings.RandomEvents.FallenSoldierFamilyData)
         {
-            minFamilyCompensation = 750;
-            maxFamilyCompensation = 1750;
-            minGoldLooted = 1000;
-            maxGoldLooted = 2000;
-            minRogueryLevel = 125;
+            
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("FallenSoldierFamily", "EventDisabled");
+            minFamilyCompensation = ConfigFile.ReadInteger("FallenSoldierFamily", "MinFamilyCompensation");
+            maxFamilyCompensation = ConfigFile.ReadInteger("FallenSoldierFamily", "MaxFamilyCompensation");
+            minGoldLooted = ConfigFile.ReadInteger("FallenSoldierFamily", "MinGoldLooted");
+            maxGoldLooted = ConfigFile.ReadInteger("FallenSoldierFamily", "MaxGoldLooted");
+            minRogueryLevel = ConfigFile.ReadInteger("FallenSoldierFamily", "MinRogueryLevel");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minFamilyCompensation != 0 || maxFamilyCompensation != 0 || minGoldLooted != 0 || maxGoldLooted != 0 || minRogueryLevel != 0)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.FSF_Disable == false && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
+            return EventCanRun() && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown || MobileParty.MainParty.CurrentSettlement.IsVillage);
         }
 
         public override void StartEvent()
@@ -222,8 +242,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
     public class FallenSoldierFamilyData : RandomEventData
     {
 
-        public FallenSoldierFamilyData(string eventType, float chanceWeight) : base(eventType,
-            chanceWeight)
+        public FallenSoldierFamilyData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
         {
         }
 

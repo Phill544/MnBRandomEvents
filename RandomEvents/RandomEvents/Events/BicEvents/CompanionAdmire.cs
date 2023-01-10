@@ -2,6 +2,7 @@
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -12,25 +13,34 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
 	public sealed class CompanionAdmire : BaseEvent
 	{
+		private readonly bool eventDisabled;
+		
 		public CompanionAdmire() : base(Settings.ModSettings.RandomEvents.CompanionAdmireData)
         {
+	        var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+	        eventDisabled = ConfigFile.ReadBoolean("CompanionAdmire", "EventDisabled");
 	        
 		}
 
 		public override void CancelEvent()
 		{
-        
+		}
+		
+		private bool EventCanRun()
+		{
+			return eventDisabled == false;
 		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveScout != Hero.MainHero
+			return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveScout != Hero.MainHero
 				&& MobileParty.MainParty.IsDisorganized == false && Clan.PlayerClan.Renown >= 500 ||
-				MCM_MenuConfig_Toggle.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveQuartermaster != Hero.MainHero
+				EventCanRun() && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveQuartermaster != Hero.MainHero
 				&& MobileParty.MainParty.IsDisorganized == false && Clan.PlayerClan.Renown >= 500 ||
-				MCM_MenuConfig_Toggle.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveSurgeon != Hero.MainHero
+				EventCanRun() && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveSurgeon != Hero.MainHero
 				&& MobileParty.MainParty.IsDisorganized == false && Clan.PlayerClan.Renown >= 500 ||
-				MCM_MenuConfig_Toggle.Instance.CA_Disable == false && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveEngineer != Hero.MainHero
+				EventCanRun() && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.EffectiveEngineer != Hero.MainHero
 				&& MobileParty.MainParty.IsDisorganized == false && Clan.PlayerClan.Renown >= 500;
 		}
 

@@ -4,6 +4,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -15,20 +16,28 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
 {
     public class SecretsOfSteel : BaseEvent
     {
-        
+        private readonly bool eventDisabled;
 
         public SecretsOfSteel() : base(ModSettings.RandomEvents.SecretsOfSteelData)
         {
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			
+            eventDisabled = ConfigFile.ReadBoolean("SecretsOfSteel", "EventDisabled");
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            return eventDisabled == false;
+        }
 
         public override bool CanExecuteEvent()
         {
 
-            return MCM_MenuConfig_Toggle.Instance.SOS_Disable == false && MobileParty.MainParty.CurrentSettlement == null;
+            return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

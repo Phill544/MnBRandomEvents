@@ -5,6 +5,7 @@ using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
@@ -17,6 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
     public class PrisonerTransfer : BaseEvent
     {
+        private readonly bool eventDisabled;
         private readonly int minPrisoners;
         private readonly int maxPrisoners;
         private readonly int minPricePrPrisoner;
@@ -24,19 +26,35 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public PrisonerTransfer() : base(ModSettings.RandomEvents.PrisonerTransferData)
         {
-            minPrisoners = 10; 
-            maxPrisoners = 50; 
-            minPricePrPrisoner = 50; 
-            maxPricePrPrisoner = 400; 
+            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+            eventDisabled = ConfigFile.ReadBoolean("PrisonerTransfer", "EventDisabled");
+            minPrisoners = ConfigFile.ReadInteger("PrisonerTransfer", "MinPrisoners"); 
+            maxPrisoners = ConfigFile.ReadInteger("PrisonerTransfer", "MaxPrisoners"); 
+            minPricePrPrisoner = ConfigFile.ReadInteger("PrisonerTransfer", "MinPricePrPrisoner"); 
+            maxPricePrPrisoner = ConfigFile.ReadInteger("PrisonerTransfer", "MaxPricePrPrisoner"); 
         }
 
         public override void CancelEvent()
         {
         }
+        
+        private bool EventCanRun()
+        {
+            if (eventDisabled == false)
+            {
+                if (minPrisoners != 0 || maxPrisoners != 0 || minPricePrPrisoner != 0 || maxPricePrPrisoner != 0)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
 
         public override bool CanExecuteEvent()
         {
-            return MCM_MenuConfig_Toggle.Instance.PT_Disable == false;
+            return EventCanRun();
         }
 
         public override void StartEvent()

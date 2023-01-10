@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using CryingBuffalo.RandomEvents.Settings.MCM;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
@@ -12,20 +14,37 @@ namespace CryingBuffalo.RandomEvents.Events
 {
 	public sealed class ChattingCommanders : BaseEvent
 	{
+		private readonly bool eventDisabled;
 		private readonly float cohesionIncrease;
 
 		public ChattingCommanders() : base(ModSettings.RandomEvents.ChattingCommandersData)
 		{
-			cohesionIncrease = 30.0f;
+			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            
+			eventDisabled = ConfigFile.ReadBoolean("ChattingCommanders", "EventDisabled");
+			cohesionIncrease = ConfigFile.ReadFloat("ChattingCommanders", "CohesionIncrease");
 		}
 
 		public override void CancelEvent()
 		{
 		}
+		
+		private bool EventCanRun()
+		{
+			if (eventDisabled == false)
+			{
+				if (cohesionIncrease != 0)
+				{
+					return true;
+				}
+			}
+            
+			return false;
+		}
 
 		public override bool CanExecuteEvent()
 		{
-			return MCM_MenuConfig_Toggle.Instance.CC_Disable == false && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.ArmyOwner == Hero.MainHero && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 1;
+			return EventCanRun() && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.ArmyOwner == Hero.MainHero && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 1;
 		}
 
 		public override void StartEvent()
