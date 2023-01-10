@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
-using CryingBuffalo.RandomEvents.Settings.MCM;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -58,7 +57,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+            if (GeneralSettings.DebugMode.IsActive())
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
@@ -87,7 +86,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var rogueryAppendedText = "";
             var stewardAppendedText = "";
 
-            if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
+            if (GeneralSettings.SkillChecks.IsDisabled())
             {
                 
                 canRepairWagon = true;

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
-using CryingBuffalo.RandomEvents.Settings.MCM;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -57,7 +56,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			if (GeneralSettings.DebugMode.IsActive())
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -185,7 +184,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					plaguedSettlement.Town.Loyalty *= 1 - percentLoss;
 
 					// Give the hero half xp for trying
-					var xpToGive = MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) * 0.5f;
+					var xpToGive = GeneralSettings.Basic.GetLevelXpMultiplier() * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine) * 0.5f;
 
 					highestMedicineHero.AddSkillXp(DefaultSkills.Medicine, xpToGive);
 
@@ -211,7 +210,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				if (highestMedicineHero != null)
 				{
 					// Give the hero xp for saving the settlement
-					var xpToGive = MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine);
+					var xpToGive = GeneralSettings.Basic.GetLevelXpMultiplier() * highestMedicineHero.GetSkillValue(DefaultSkills.Medicine);
 
 					highestMedicineHero.AddSkillXp(DefaultSkills.Medicine, xpToGive);
 

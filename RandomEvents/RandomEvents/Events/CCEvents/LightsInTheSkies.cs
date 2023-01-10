@@ -2,7 +2,6 @@
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
-using CryingBuffalo.RandomEvents.Settings.MCM;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -33,15 +32,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return EventCanRun() && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural == false && CurrentTimeOfDay.IsNight;
+            return EventCanRun() && GeneralSettings.SupernaturalEvents.IsDisabled() == false && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()
         {
-            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+            if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
-                    RandomEventsSubmodule.Dbg_Color));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
             
             var eventTitle = new TextObject("{=LightsInTheSkies_Title}Lights In The Skies").ToString();

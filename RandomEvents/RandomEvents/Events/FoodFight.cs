@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
-using CryingBuffalo.RandomEvents.Settings.MCM;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -57,7 +56,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			if (GeneralSettings.DebugMode.IsActive())
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
@@ -103,7 +102,7 @@ namespace CryingBuffalo.RandomEvents.Events
 						{
 							var extraDialogue = "";
 
-							var xpToGive = MCM_ConfigMenu_General.Instance.GS_GeneralLevelXpMultiplier * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
+							var xpToGive = GeneralSettings.Basic.GetLevelXpMultiplier() * Hero.MainHero.GetSkillValue(DefaultSkills.Throwing) * 0.5f;
 							Hero.MainHero.AddSkillXp(DefaultSkills.Throwing, xpToGive);
 
 							var foodToRemove = MBRandom.RandomInt(minFoodLoss, maxFoodLoss);

@@ -2,7 +2,6 @@
 using CryingBuffalo.RandomEvents.Events.BicEvents;
 using CryingBuffalo.RandomEvents.Events.CCEvents;
 using CryingBuffalo.RandomEvents.Events.CommunityEvents;
-using CryingBuffalo.RandomEvents.Settings.MCM;
 
 namespace CryingBuffalo.RandomEvents.Settings
 {

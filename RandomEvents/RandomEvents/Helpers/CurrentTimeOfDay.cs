@@ -1,5 +1,4 @@
 ﻿using TaleWorlds.CampaignSystem;
-using TaleWorlds.Library;
 
 namespace CryingBuffalo.RandomEvents.Helpers
 {

@@ -2,7 +2,6 @@
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
-using CryingBuffalo.RandomEvents.Settings.MCM;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
@@ -53,7 +52,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			if (GeneralSettings.DebugMode.IsActive())
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

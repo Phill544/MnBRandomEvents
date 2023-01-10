@@ -3,7 +3,6 @@ using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
-using CryingBuffalo.RandomEvents.Settings.MCM;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -70,10 +69,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+            if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
-                    RandomEventsSubmodule.Dbg_Color));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
 
             var currentSettlement = Settlement.CurrentSettlement.Name.ToString();
@@ -96,19 +94,28 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var convincedThugs = false;
             var gangLeaderGoodRelation = false;
 
-            if (roguerySkill >= minRoguerySkill)
+            if (GeneralSettings.SkillChecks.IsDisabled())
             {
                 convincedThugs = true;
-            }
-            else if (charmSkill >= minCharmSkill)
-            {
                 charmedThugs = true;
-            }
-            else if (oneHandedSkill >= minOneHandedSkill && twoHandedSkill >= minTwoHandedSkill)
-            {
                 intimidatedThugs = true;
             }
-            
+            else
+            {
+                if (roguerySkill >= minRoguerySkill)
+                {
+                    convincedThugs = true;
+                }
+                else if (charmSkill >= minCharmSkill)
+                {
+                    charmedThugs = true;
+                }
+                else if (oneHandedSkill >= minOneHandedSkill && twoHandedSkill >= minTwoHandedSkill)
+                {
+                    intimidatedThugs = true;
+                }
+            }
+
             var notables = Settlement.CurrentSettlement.Notables.ToList();
             
             var gangLeaders = notables.Where(character => character.IsGangLeader).ToList();

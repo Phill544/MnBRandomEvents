@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
-using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -75,10 +74,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+            if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}",
-                    RandomEventsSubmodule.Dbg_Color));
+                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }
 
             var eventTitle = new TextObject("{=AFlirtatiousEncounter_Title}A Flirtatious Encounter").ToString();
@@ -98,8 +96,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
                 var currentRelationship = target.GetRelation(Hero.MainHero);
 
-                var relationshipGainPercent =
-                    MBRandom.RandomFloatRanged(minRelationshipIncrease, maxRelationshipIncrease);
+                var relationshipGainPercent = MBRandom.RandomFloatRanged(minRelationshipIncrease, maxRelationshipIncrease);
 
                 var newRelationship = (int)Math.Round(Math.Floor(currentRelationship * relationshipGainPercent));
 
@@ -115,7 +112,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
                 var charmAppendedText = "";
 
-                if (MCM_ConfigMenu_General.Instance.GS_DisableSkillChecks)
+                if (GeneralSettings.SkillChecks.IsDisabled())
                 {
                     canCharmTarget = true;
                     charmAppendedText =

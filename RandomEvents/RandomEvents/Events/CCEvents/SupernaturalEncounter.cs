@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
-using CryingBuffalo.RandomEvents.Settings.MCM;
 using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -34,12 +33,12 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return EventCanRun() && MCM_ConfigMenu_General.Instance.GS_Disable_Supernatural && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
+            return EventCanRun() && GeneralSettings.SupernaturalEvents.IsDisabled() == false && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()
         {
-            if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+            if (GeneralSettings.DebugMode.IsActive())
             {
                 InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
             }

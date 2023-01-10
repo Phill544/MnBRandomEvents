@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Settings.MCM;
 using CryingBuffalo.RandomEvents.Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
@@ -9,6 +8,7 @@ using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem.Settlements;
 using System.Linq;
 using System.Collections.Generic;
+using CryingBuffalo.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem.Actions;
 
@@ -46,7 +46,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override void StartEvent()
 		{
-			if (MCM_ConfigMenu_General.Instance.GS_DebugMode)
+			if (GeneralSettings.DebugMode.IsActive())
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Settings;
-using CryingBuffalo.RandomEvents.Settings.MCM;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -29,14 +28,8 @@ namespace CryingBuffalo.RandomEvents
         //Evil
         public static readonly Color Msg_Color_EVIL_Outcome = Color.FromUint(13840175);
         
-        
-        //MCM Base Settings
-        public const string FolderName = "RandomEvents";
-        public const string ModName = "RandomEvents";
-
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
-            MCM_ConfigMenu_General.Instance.Settings();
 
             ModSettings.LoadRandomEventSettings();
             
