@@ -17,7 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public SupernaturalEncounter() : base(ModSettings.RandomEvents.SupernaturalEncounterData)
         {
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("SupernaturalEncounter", "EventDisabled");
         }
@@ -40,7 +40,15 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}”. This event has no configurable settings.\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
             }
             
             var eventTitle = new TextObject("{=SupernaturalEncounter_Title}A Supernatural Encounter").ToString();

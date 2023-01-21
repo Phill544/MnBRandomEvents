@@ -16,7 +16,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public LightsInTheSkies() : base(ModSettings.RandomEvents.LightsInTheSkiesData)
         {
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("LightsInTheSkies", "EventDisabled");
         }
@@ -39,17 +39,25 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}”. This event has no configurable settings.\n\n" +
+                        "However the string of characters you'll see in this event can be decrypted by following these steps:\n\n1: Decompress the string\n2:USCII Decrypt\n3: ASCII to text\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
             }
             
             var eventTitle = new TextObject("{=LightsInTheSkies_Title}Lights In The Skies").ToString();
 
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
 
-            var unknownText = 
-                "eNq9VVEOwyAIvRIgTvpt6v2PNLs0g66E0aQpX0Tg+XhgBLjDxm5r2kNcKg0RhsYvWqXXbvF66QjbGRUQJkQb1bNZ22rf8hTPoIgI" +
-                "fVAaM00rq4keGQyQRVwG6sUMXJSQgSLHUa83PStE+KtftjdXtVD7OBrfqxXqZdVVU63U8zQwd3ynEOfFmmZV8zgfOtp18VAsZ55G" +
-                "CH84Z/EUxeOXnbm3p9fnYSvOb9/TIM57QoN4s+95jbqnWe1j5Kcmc+ro8m8QeXl7A9dWb9o=";
+            const string unknownText = "eNqtVFEOQyEIuxIgTt630fsfab5lSd1GCEvki1CppRiJTsR8x0hnzFeVaabU9CHDeu07Xy+d6a5JIVNh3lHUVm+r/" +
+                                       "T4Hvo3FzOTF0lRlRRkb+qlgkl3mKkAWK3BZQgVgjlFvNtSKCH/7l53NdS30Pkbje9GBzHM361qsHpvxFEzTFcLk+odzQ" +
+                                       "D2+rFfeHHj3QHf/fjvOqIp3dOZdYYNZN2Lm2Cvc9v8/FGX5eALTyCCh";
 
             var eventText1 =new TextObject(
                     "{=LightsInTheSkies_Event_Text_1}Late one night, you are taking a walk in the woods near " +
@@ -133,9 +141,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventTextUnknown, true, false, eventButtonText1, null, null, null), true);
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText5, true, false, eventButtonText2, null, null, null), true);
 
-            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
+            InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_MED_Outcome));
 
-            MobileParty.MainParty.SetIsDisorganized(true);
+            MobileParty.MainParty.SetDisorganized(true);
 
             StopEvent();
         }

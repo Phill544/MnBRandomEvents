@@ -25,7 +25,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public LookUp() : base(ModSettings.RandomEvents.LookUpData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("LookUp", "EventDisabled");
 			treeShakeChance = ConfigFile.ReadFloat("LookUp", "TreeShakeChance");

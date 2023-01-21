@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
         public SecretSinger() : base(ModSettings.RandomEvents.SecretSingerData)
         {
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("SecretSinger", "EventDisabled");
             minMoraleGain = ConfigFile.ReadInteger("SecretSinger", "MinMoraleGain");

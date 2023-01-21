@@ -20,7 +20,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public WanderingLivestock() : base(ModSettings.RandomEvents.WanderingLivestockData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("WanderingLivestock", "EventDisabled");
 			minFood = ConfigFile.ReadInteger("WanderingLivestock", "MinFood");

@@ -21,7 +21,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public ViolatedGirl() : base(ModSettings.RandomEvents.ViolatedGirlData)
         {
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("ViolatedGirl", "EventDisabled");
             minGoldCompensation = ConfigFile.ReadInteger("ViolatedGirl", "MinGoldCompensation");
@@ -54,7 +54,21 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}” with the current values:\n\n" +
+                        "Min Gold Compensation : {minGoldCompensation}\n" +
+                        "Max Gold Compensation : {maxGoldCompensation}\n" +
+                        "Min Roguery Level : {minRogueryLevel}\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("minGoldCompensation", minGoldCompensation)
+                    .SetTextVariable("maxGoldCompensation", maxGoldCompensation)
+                    .SetTextVariable("minRogueryLevel", minRogueryLevel)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
             }
 
             var heroName = Hero.MainHero.FirstName;
@@ -273,8 +287,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
     public class ViolatedGirlData : RandomEventData
     {
 
-        public ViolatedGirlData(string eventType, float chanceWeight) : base(eventType,
-            chanceWeight)
+        public ViolatedGirlData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
         {
         }
 

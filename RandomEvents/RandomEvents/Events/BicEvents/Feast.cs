@@ -20,7 +20,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public Feast() : base(Settings.ModSettings.RandomEvents.FeastData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("Feast", "EventDisabled");
 

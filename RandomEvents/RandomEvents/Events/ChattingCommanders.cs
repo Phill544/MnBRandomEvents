@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public ChattingCommanders() : base(ModSettings.RandomEvents.ChattingCommandersData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("ChattingCommanders", "EventDisabled");
 			cohesionIncrease = ConfigFile.ReadFloat("ChattingCommanders", "CohesionIncrease");
@@ -43,7 +43,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return EventCanRun() && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.ArmyOwner == Hero.MainHero && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 1;
+			return EventCanRun() && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.ArmyOwner == Hero.MainHero && MobileParty.MainParty.Army.LeaderPartyAndAttachedPartiesCount > 1;
 		}
 
 		public override void StartEvent()

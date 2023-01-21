@@ -19,7 +19,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public ArmyInvite() : base(Settings.ModSettings.RandomEvents.ArmyInviteData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("ArmyInvite", "EventDisabled");
 			

@@ -32,7 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
         public Refugees() : base(Settings.ModSettings.RandomEvents.RefugeesData)
         {
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
 			
             eventDisabled = ConfigFile.ReadBoolean("Refugees", "EventDisabled");
             minSoldiers = ConfigFile.ReadInteger("Refugees", "MinSoldiers");

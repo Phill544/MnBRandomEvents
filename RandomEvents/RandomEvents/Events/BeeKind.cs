@@ -20,7 +20,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public BeeKind() : base(ModSettings.RandomEvents.BeeKindData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("BeeKind", "EventDisabled");
 			damage = ConfigFile.ReadInteger("BeeKind", "Damage");

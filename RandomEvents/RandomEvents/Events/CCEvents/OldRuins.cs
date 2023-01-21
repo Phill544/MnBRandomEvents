@@ -24,7 +24,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public OldRuins() : base(ModSettings.RandomEvents.OldRuinsData)
         {
             
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("OldRuins", "EventDisabled");
             minMen = ConfigFile.ReadInteger("OldRuins", "MinMen");
@@ -60,7 +60,26 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}” with the current values:\n\n" +
+                        "Min Men To Take With You : {minMen}\n" +
+                        "Max Men To Take With You : {maxMen}\n" +
+                        "Max Men To Kill : {maxMenToKill}\n" +
+                        "Min Gold Found : {minGoldFound}\n" +
+                        "Max Gold Found : {maxGoldFound}\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("minMen", minMen)
+                    .SetTextVariable("maxMen", maxMen)
+                    .SetTextVariable("maxMenToKill", maxMenToKill)
+                    .SetTextVariable("minGoldFound", minGoldFound)
+                    .SetTextVariable("maxGoldFound", maxGoldFound)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
+                
             }
 
             var heroName = Hero.MainHero.FirstName;

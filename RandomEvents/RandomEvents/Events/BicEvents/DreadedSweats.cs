@@ -22,7 +22,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public DreadedSweats() : base(Settings.ModSettings.RandomEvents.DreadedSweatsData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
 			
 			eventDisabled = ConfigFile.ReadBoolean("DreadedSweats", "EventDisabled");
 			minMoraleLoss = ConfigFile.ReadInteger("DreadedSweats", "MinMoraleLoss");
@@ -71,7 +71,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			
 			Hero.MainHero.AddSkillXp(DefaultSkills.Medicine, 5);
 			
-			MobileParty.MainParty.SetIsDisorganized(true);
+			MobileParty.MainParty.SetDisorganized(true);
 			
 			MobileParty.MainParty.RecentEventsMorale -= moraleLoss;
 			MobileParty.MainParty.MoraleExplained.Add(-moraleLoss);

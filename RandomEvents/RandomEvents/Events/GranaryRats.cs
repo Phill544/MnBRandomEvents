@@ -19,7 +19,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public GranaryRats() : base(ModSettings.RandomEvents.GranaryRatsData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("GranaryRats", "EventDisabled");
 			MinFoodLossPercent = ConfigFile.ReadFloat("GranaryRats", "MinFoodLossPercent");

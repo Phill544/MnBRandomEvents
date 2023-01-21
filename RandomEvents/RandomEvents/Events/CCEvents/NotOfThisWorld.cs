@@ -19,7 +19,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public NotOfThisWorld() : base(ModSettings.RandomEvents.NotOfThisWorldData)
         {
             
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("NotOfThisWorld", "EventDisabled");
             minSoldiersToDisappear = ConfigFile.ReadInteger("NotOfThisWorld", "MinSoldiersToDisappear");
@@ -52,7 +52,20 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}” with the current values:\n\n" +
+                        "Min Soldiers To Disappear : {minSoldiersToDisappear}\n" +
+                        "Max Soldiers To Disappear : {maxSoldiersToDisappear}\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("minSoldiersToDisappear", minSoldiersToDisappear)
+                    .SetTextVariable("maxSoldiersToDisappear", maxSoldiersToDisappear)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
+                
             }
             
             var eventTitle = new TextObject("{=NotOfThisWorld_Title}Not of this world").ToString();

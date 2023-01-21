@@ -26,7 +26,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public UnexpectedWedding() : base(ModSettings.RandomEvents.UnexpectedWeddingData)
         {
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
 
             eventDisabled = ConfigFile.ReadBoolean("UnexpectedWedding", "EventDisabled");
             minGoldToDonate = ConfigFile.ReadInteger("UnexpectedWedding", "MinGoldToDonate");
@@ -64,7 +64,31 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}” with the current values:\n\n" +
+                        "Min Gold Gift : {minGoldToDonate}\n" +
+                        "Max Gold Gift : {maxGoldToDonate}\n" +
+                        "Min People In Wedding : {minPeopleInWedding}\n" +
+                        "Max People In Wedding : {maxPeopleInWedding}\n" +
+                        "Max Gold From Soldier : {embarrassedSoliderMaxGold}\n" +
+                        "Min Gold Raided : {minGoldRaided}\n" +
+                        "Max Gold Raided : {maxGoldRaided}\n" +
+                        "Min Roguery Level : {minRogueryLevel}\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("minGoldToDonate", minGoldToDonate)
+                    .SetTextVariable("maxGoldToDonate", maxGoldToDonate)
+                    .SetTextVariable("minPeopleInWedding", minPeopleInWedding)
+                    .SetTextVariable("maxPeopleInWedding", maxPeopleInWedding)
+                    .SetTextVariable("minAge", embarrassedSoliderMaxGold)
+                    .SetTextVariable("minGoldRaided", minGoldRaided)
+                    .SetTextVariable("maxGoldRaided", maxGoldRaided)
+                    .SetTextVariable("minRogueryLevel", minRogueryLevel)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
             }
             
             var eventTitle = new TextObject("{=UnexpectedWedding_Title}An Unexpected Wedding").ToString();
@@ -144,7 +168,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             }
 
             var eventOptionAText = new TextObject(
-                    "{=UnexpectedWedding_Event_Choice_1}You congratulate the couple and you and your men scrape together {goldToDonate} gold and give it as a gift. Your party then spends the evening having fun!")
+                    "{=UnexpectedWedding_Event_Choice_1}You congratulate the couple and you and your men scrape together {goldToDonate} gold and give it as a gift. Your party then spend the evening having fun!")
                 .SetTextVariable("goldToDonate", goldToDonate)
                 .ToString();
             
@@ -270,8 +294,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
     public class UnexpectedWeddingData : RandomEventData
     {
-        public UnexpectedWeddingData(string eventType, float chanceWeight) : base(eventType,
-            chanceWeight)
+        public UnexpectedWeddingData(string eventType, float chanceWeight) : base(eventType, chanceWeight)
         {
         }
 

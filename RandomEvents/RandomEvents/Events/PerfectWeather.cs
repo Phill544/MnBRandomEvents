@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public PerfectWeather() : base(ModSettings.RandomEvents.PerfectWeatherData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("PerfectWeather", "EventDisabled");
 			minMoraleGain = ConfigFile.ReadInteger("PerfectWeather", "MinMoraleGain");

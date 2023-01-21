@@ -23,7 +23,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public FoodFight() : base(ModSettings.RandomEvents.FoodFightData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("FoodFight", "EventDisabled");
 			minFoodLoss = ConfigFile.ReadInteger("FoodFight", "MinFoodLoss");

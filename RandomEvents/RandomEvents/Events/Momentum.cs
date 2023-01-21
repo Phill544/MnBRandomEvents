@@ -17,7 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		
 		public Momentum() : base(ModSettings.RandomEvents.MomentumData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("Momentum", "EventDisabled");
 		}

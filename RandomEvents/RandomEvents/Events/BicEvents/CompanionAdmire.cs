@@ -17,7 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		
 		public CompanionAdmire() : base(Settings.ModSettings.RandomEvents.CompanionAdmireData)
         {
-	        var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+	        var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 	        eventDisabled = ConfigFile.ReadBoolean("CompanionAdmire", "EventDisabled");
 	        

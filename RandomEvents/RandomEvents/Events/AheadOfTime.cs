@@ -20,7 +20,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public AheadOfTime() : base(ModSettings.RandomEvents.AheadOfTimeData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("AheadOfTime", "EventDisabled");
 		}

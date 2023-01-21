@@ -21,7 +21,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public BunchOfPrisoners() : base(ModSettings.RandomEvents.BunchOfPrisonersData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("BunchOfPrisoners", "EventDisabled");
 			minPrisonerGain = ConfigFile.ReadInteger("BunchOfPrisoners", "MinPrisonerGain");

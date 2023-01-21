@@ -23,7 +23,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public DiseasedCity() : base(ModSettings.RandomEvents.DiseasedCityData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("DiseasedCity", "EventDisabled");
 			baseSuccessChance = ConfigFile.ReadFloat("DiseasedCity", "BaseSuccessChance");

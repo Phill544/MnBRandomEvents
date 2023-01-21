@@ -23,7 +23,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public BottomsUp() : base(Settings.ModSettings.RandomEvents.BottomsUpData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("BottomsUp", "EventDisabled");
 			minMoraleGain = ConfigFile.ReadInteger("BottomsUp", "MinMoraleGain");

@@ -21,7 +21,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public EagerTroops() : base(ModSettings.RandomEvents.EagerTroopsData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("EagerTroops", "EventDisabled");
 			minTroopGain = ConfigFile.ReadInteger("EagerTroops", "MinTroopGain");

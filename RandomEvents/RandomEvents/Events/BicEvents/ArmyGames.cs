@@ -22,7 +22,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public ArmyGames() : base(ModSettings.RandomEvents.ArmyGamesData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("ArmyGames", "EventDisabled");
 			minCohesionIncrease = ConfigFile.ReadFloat("ArmyGames", "MinCohesionIncrease");
@@ -49,7 +49,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return EventCanRun() && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 2; 
+			return EventCanRun() && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.LeaderPartyAndAttachedPartiesCount > 2; 
 		}
 
 		public override void StartEvent()

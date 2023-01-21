@@ -19,7 +19,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public TargetPractice() : base(ModSettings.RandomEvents.TargetPracticeData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("TargetPractice", "EventDisabled");
 			minimumSoldiers = ConfigFile.ReadInteger("TargetPractice", "MinimumSoldiers");
@@ -144,7 +144,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			{
 				sizeDescription = eventSizeDesc3;
 			}
-			
+
 			var eventDescription = new TextObject(
 					"{=TargetPractice_Event_Desc}You stumble upon a {sizeDescription} amount of looters! Your soldiers seem very eager to show you what they've learned.")
 				.SetTextVariable("sizeDescription", sizeDescription)
@@ -163,7 +163,9 @@ namespace CryingBuffalo.RandomEvents.Events
 			looterParty.MemberRoster.Clear();
 
 			looterParty.Aggressiveness = 10f;
-			looterParty.SetMoveEngageParty(MobileParty.MainParty);
+			looterParty.Ai.SetMoveEngageParty(MobileParty.MainParty);
+			
+			
 			PartySetup.AddRandomCultureUnits(looterParty, spawnCount);
 		}
 	}

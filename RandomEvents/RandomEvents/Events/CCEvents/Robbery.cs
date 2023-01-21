@@ -27,7 +27,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public Robbery() : base(ModSettings.RandomEvents.RobberyData)
         {
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("Robbery", "EventDisabled");
             minGoldLost = ConfigFile.ReadInteger("Robbery", "minGoldLost");
@@ -71,7 +71,31 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}” with the current values:\n\n" +
+                        "Min Gold Lost : {minGoldLost}\n" +
+                        "Max Gold Lst : {maxGoldLost}\n" +
+                        "Min Renown Lost : {minRenownLost}\n" +
+                        "Max Renown Lost : {maxRenownLost}\n" +
+                        "Min Roguery Skill : {minRoguerySkill}\n" +
+                        "Min Charm Skill : {minCharmSkill}\n" +
+                        "Min One Handed Skill : {minOneHandedSkill}\n" +
+                        "Min Two Handed Skill : {minTwoHandedSkill}\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("minGoldLost", minGoldLost)
+                    .SetTextVariable("maxGoldLost", maxGoldLost)
+                    .SetTextVariable("minRenownLost", minRenownLost)
+                    .SetTextVariable("maxRenownLost", maxRenownLost)
+                    .SetTextVariable("minRoguerySkill", minRoguerySkill)
+                    .SetTextVariable("minCharmSkill", minCharmSkill)
+                    .SetTextVariable("minOneHandedSkill", minOneHandedSkill)
+                    .SetTextVariable("minTwoHandedSkill", minTwoHandedSkill)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
             }
 
             var currentSettlement = Settlement.CurrentSettlement.Name.ToString();

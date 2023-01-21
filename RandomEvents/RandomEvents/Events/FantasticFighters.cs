@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public FantasticFighters() : base(ModSettings.RandomEvents.FantasticFightersData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("FantasticFighters", "EventDisabled");
 			minRenownGain = ConfigFile.ReadInteger("FantasticFighters", "MinRenownGain");

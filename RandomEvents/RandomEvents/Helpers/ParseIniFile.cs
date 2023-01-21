@@ -4,7 +4,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
 {
     public abstract class ParseIniFile
     {
-        public static string GetTheFile()
+        public static string GetTheConfigFile()
         {
             var strExeFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
             var strWorkPath = Path.GetDirectoryName(strExeFilePath);

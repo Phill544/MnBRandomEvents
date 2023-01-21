@@ -19,7 +19,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public BetMoney() : base(ModSettings.RandomEvents.BetMoneyData)
 		{			
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("BetMoney", "EventDisabled");
 			moneyBetPercent = ConfigFile.ReadFloat("BetMoney", "MoneyBetPercent");

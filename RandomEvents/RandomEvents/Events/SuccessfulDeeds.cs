@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public SuccessfulDeeds() : base(ModSettings.RandomEvents.SuccessfulDeedsData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("SuccessfulDeeds", "EventDisabled");
 			minInfluenceGain = ConfigFile.ReadInteger("SuccessfulDeeds", "MinInfluenceGain");

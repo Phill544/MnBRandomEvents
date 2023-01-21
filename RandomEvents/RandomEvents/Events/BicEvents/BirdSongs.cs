@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public BirdSongs() : base(Settings.ModSettings.RandomEvents.BirdSongsData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("BirdSongs", "EventDisabled");
 			minMoraleGain = ConfigFile.ReadInteger("BirdSongs", "MinMoraleGain");

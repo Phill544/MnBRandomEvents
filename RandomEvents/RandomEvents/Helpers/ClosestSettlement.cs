@@ -16,8 +16,9 @@ namespace CryingBuffalo.RandomEvents.Helpers
             
             try
             {
-                var settlements = Settlement.FindAll(s => s.IsTown || s.IsCastle || s.IsVillage).ToList();
-                closestSettlement = settlements.MinBy(s => heroParty.GetPosition().DistanceSquared(s.GetPosition()));
+                var settlements = Settlement.FindAll(settlement => settlement.IsTown || settlement.IsCastle || settlement.IsVillage).ToList();
+                
+                closestSettlement = settlements.MinBy(settlement => heroParty.GetPosition().DistanceSquared(settlement.GetPosition()));
             }
             catch (Exception ex)
             {
@@ -33,8 +34,9 @@ namespace CryingBuffalo.RandomEvents.Helpers
             
             try
             {
-                var settlements = Settlement.FindAll(s => s.IsTown).ToList();
-                closestSettlement = settlements.MinBy(s => heroParty.GetPosition().DistanceSquared(s.GetPosition()));
+                var settlements = Settlement.FindAll(settlement => settlement.IsTown).ToList();
+                
+                closestSettlement = settlements.MinBy(settlement => heroParty.GetPosition().DistanceSquared(settlement.GetPosition()));
             }
             catch (Exception ex)
             {
@@ -50,8 +52,9 @@ namespace CryingBuffalo.RandomEvents.Helpers
             
             try
             {
-                var settlements = Settlement.FindAll(s => s.IsCastle).ToList();
-                closestSettlement = settlements.MinBy(s => heroParty.GetPosition().DistanceSquared(s.GetPosition()));
+                var settlements = Settlement.FindAll(settlement => settlement.IsCastle).ToList();
+                
+                closestSettlement = settlements.MinBy(settlement => heroParty.GetPosition().DistanceSquared(settlement.GetPosition()));
             }
             catch (Exception ex)
             {
@@ -67,8 +70,9 @@ namespace CryingBuffalo.RandomEvents.Helpers
             
             try
             {
-                var settlements = Settlement.FindAll(s => s.IsVillage).ToList();
-                closestSettlement = settlements.MinBy(s => heroParty.GetPosition().DistanceSquared(s.GetPosition()));
+                var settlements = Settlement.FindAll(settlement => settlement.IsVillage).ToList();
+                
+                closestSettlement = settlements.MinBy(settlement => heroParty.GetPosition().DistanceSquared(settlement.GetPosition()));
             }
             catch (Exception ex)
             {
@@ -84,8 +88,9 @@ namespace CryingBuffalo.RandomEvents.Helpers
             
             try
             {
-                var settlements = Settlement.FindAll(s => s.IsTown || s.IsVillage).ToList();
-                closestSettlement = settlements.MinBy(s => heroParty.GetPosition().DistanceSquared(s.GetPosition()));
+                var settlements = Settlement.FindAll(settlement => settlement.IsTown || settlement.IsVillage).ToList();
+                
+                closestSettlement = settlements.MinBy(settlement => heroParty.GetPosition().DistanceSquared(settlement.GetPosition()));
             }
             catch (Exception ex)
             {

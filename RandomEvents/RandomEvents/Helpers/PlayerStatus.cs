@@ -6,11 +6,7 @@ namespace CryingBuffalo.RandomEvents.Helpers
 {
 	public static class PlayerStatus
 	{
-		public static bool HasSettlement()
-		{
-			return Hero.MainHero.Clan.Settlements.Any();
-		}
-
+        
         public static bool HasRangedWeaponEquipped()
         {
             var playerEquipment = Hero.MainHero.BattleEquipment;

@@ -22,7 +22,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
 
         public PoisonedWine() : base(ModSettings.RandomEvents.PoisonedWineData)
         {
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
 			
             eventDisabled = ConfigFile.ReadBoolean("PoisonedWine", "EventDisabled");
             minSoldiersToDie = ConfigFile.ReadInteger("PoisonedWine", "MinSoldiersToDie");
@@ -57,7 +57,23 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}” with the current values:\n\n" +
+                        "Min Soldiers To Die : {minSoldiersToDie}\n" +
+                        "Max Soldiers To Die : {maxSoldiersToDie}\n" +
+                        "Min Soldiers To Hurt : {minSoldiersToHurt}\n" +
+                        "Max Soldiers To Hurt : {maxSoldiersToHurt}\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("minSoldiersToDie", minSoldiersToDie)
+                    .SetTextVariable("maxSoldiersToDie", maxSoldiersToDie)
+                    .SetTextVariable("minSoldiersToHurt", minSoldiersToHurt)
+                    .SetTextVariable("maxSoldiersToHurt", maxSoldiersToHurt)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
             }
 
             var heroName = Hero.MainHero.FirstName.ToString();

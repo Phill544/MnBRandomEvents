@@ -22,7 +22,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		
 		public BanditAmbush() : base(ModSettings.RandomEvents.BanditAmbushData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("BanditAmbush", "EventDisabled");
 			moneyMinPercent = ConfigFile.ReadFloat("BanditAmbush", "MoneyMinPercent");
@@ -172,7 +172,8 @@ namespace CryingBuffalo.RandomEvents.Events
 				else
 				{
 					banditParty.Aggressiveness = 10f;
-					banditParty.SetMoveEngageParty(MobileParty.MainParty);
+					
+					banditParty.Ai.SetMoveEngageParty(MobileParty.MainParty);
 				}
 
 				int numberToSpawn = Math.Min((int)(MobileParty.MainParty.MemberRoster.TotalManCount * 0.50f), banditCap);

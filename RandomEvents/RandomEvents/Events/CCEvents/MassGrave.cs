@@ -24,7 +24,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public MassGrave() : base(ModSettings.RandomEvents.MassGraveData)
         {
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("MassGrave", "EventDisabled");
             minSoldiers = ConfigFile.ReadInteger("MassGrave", "MinSoldiers");
@@ -62,7 +62,28 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}” with the current values:\n\n" +
+                        "Min Men : {minSoldiers}\n" +
+                        "Max Men : {maxSoldiers}\n" +
+                        "Min Bodies : {minBodies}\n" +
+                        "Max Bodies : {maxBodies}\n" +
+                        "Min Morale Loss : {minBaseMoraleLoss}\n" +
+                        "Max Morale Loss : {maxBaseMoraleLoss}\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("minSoldiers", minSoldiers)
+                    .SetTextVariable("maxSoldiers", maxSoldiers)
+                    .SetTextVariable("minBodies", minBodies)
+                    .SetTextVariable("maxBodies", maxBodies)
+                    .SetTextVariable("minBaseMoraleLoss", minBaseMoraleLoss)
+                    .SetTextVariable("maxBaseMoraleLoss", maxBaseMoraleLoss)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);            
+                
             }
             
             var eventTitle = new TextObject("{=MassGrave_Title}The Mass Grave").ToString();

@@ -28,7 +28,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public SuddenStorm() : base(ModSettings.RandomEvents.SuddenStormData)
         {
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("SuddenStorm", "EventDisabled");
             minHorsesLost = ConfigFile.ReadInteger("SuddenStorm", "MinHorsesLost");
@@ -68,7 +68,31 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}” with the current values:\n\n" +
+                        "Min Horses Lost : {minHorsesLost}\n" +
+                        "Max Horses Lost : {maxHorsesLost}\n" +
+                        "Min Men Killed : {minMenDied}\n" +
+                        "Max Men Killed : {maxMenDied}\n" +
+                        "Min Men Wounded : {minMenWounded}\n" +
+                        "Max Men Wounded : {maxMenWounded}\n" +
+                        "Min Meat From Dead Horses : {minMeatFromHorse}\n" +
+                        "Max Meat From Dead Horses : {maxMeatFromHorse}\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("minHorsesLost", minHorsesLost)
+                    .SetTextVariable("maxHorsesLost", maxHorsesLost)
+                    .SetTextVariable("minMenDied", minMenDied)
+                    .SetTextVariable("maxMenDied", maxMenDied)
+                    .SetTextVariable("minMenWounded", minMenWounded)
+                    .SetTextVariable("maxMenWounded", maxMenWounded)
+                    .SetTextVariable("minMeatFromHorse", minMeatFromHorse)
+                    .SetTextVariable("maxMeatFromHorse", maxMeatFromHorse)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
             }
 
             var eventTitle = new TextObject("{=SuddenStorm_Title}A Sudden Storm").ToString();

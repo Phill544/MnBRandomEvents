@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public PrisonerRebellion() : base(ModSettings.RandomEvents.PrisonerRebellionData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("PrisonerRebellion", "EventDisabled");
 			minimumPrisoners = ConfigFile.ReadInteger("PrisonerRebellion", "MinimumPrisoners");
@@ -70,7 +70,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				DoPrisonerTransfer(prisonerParty);
 
 				prisonerParty.Aggressiveness = 10;
-				prisonerParty.SetMoveEngageParty(MobileParty.MainParty);
+				prisonerParty.Ai.SetMoveEngageParty(MobileParty.MainParty);
 
 				var heroDialogue = "";
 				if (heroInPrisonerRoster)

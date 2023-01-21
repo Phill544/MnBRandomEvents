@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public BumperCrop() : base(ModSettings.RandomEvents.BumperCropData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("BumperCrop", "EventDisabled");
 			cropGainPercent = ConfigFile.ReadFloat("BumperCrop", "CropGainPercent");

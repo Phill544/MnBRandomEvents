@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public SpeedyRecovery() : base(ModSettings.RandomEvents.SpeedyRecoveryData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("SpeedyRecovery", "EventDisabled");
 			minTroopsToHeal = ConfigFile.ReadInteger("SpeedyRecovery", "MinTroopsToHeal");

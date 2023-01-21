@@ -24,7 +24,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public Travellers() : base(ModSettings.RandomEvents.TravellersData)
         {
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
 
             eventDisabled = ConfigFile.ReadBoolean("Travellers", "EventDisabled");
             minGoldStolen = ConfigFile.ReadInteger("Travellers", "MinGoldStolen");
@@ -59,7 +59,25 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}” with the current values:\n\n" +
+                        "Min Gold Stolen : {minGoldStolen}\n" +
+                        "Max Gold Stolen : {maxGoldStolen}\n" +
+                        "Min Engineering Level : {minEngineeringLevel}\n" +
+                        "Min Roguery Level : {minRogueryLevel}\n" +
+                        "Min Steward Level: {minStewardLevel}\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("minGoldStolen", minGoldStolen)
+                    .SetTextVariable("maxGoldStolen", maxGoldStolen)
+                    .SetTextVariable("minEngineeringLevel", minEngineeringLevel)
+                    .SetTextVariable("minRogueryLevel", minRogueryLevel)
+                    .SetTextVariable("minStewardLevel", minStewardLevel)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
             }
             
             var eventTitle = new TextObject("{=Travellers_Title}Travellers").ToString();

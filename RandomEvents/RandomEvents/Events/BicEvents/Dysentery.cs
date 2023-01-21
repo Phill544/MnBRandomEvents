@@ -23,7 +23,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public Dysentery() : base(Settings.ModSettings.RandomEvents.DysenteryData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
 			
 			eventDisabled = ConfigFile.ReadBoolean("Dysentery", "EventDisabled");
 			minMoraleLoss = ConfigFile.ReadInteger("Dysentery", "MinMoraleLoss");

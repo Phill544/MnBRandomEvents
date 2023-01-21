@@ -21,7 +21,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public TravellingMerchant() : base(Settings.ModSettings.RandomEvents.TravellingMerchantData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("TravellingMerchant", "EventDisabled");
 			minLoot = ConfigFile.ReadInteger("TravellingMerchant", "MinLoot");

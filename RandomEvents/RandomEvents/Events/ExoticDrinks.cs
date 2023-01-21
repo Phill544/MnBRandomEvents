@@ -22,7 +22,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public ExoticDrinks() : base(ModSettings.RandomEvents.ExoticDrinksData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("ExoticDrinks", "EventDisabled");
 			minPrice = ConfigFile.ReadInteger("ExoticDrinks", "MinPrice");

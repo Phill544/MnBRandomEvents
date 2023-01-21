@@ -24,7 +24,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public FallenSoldierFamily() : base(ModSettings.RandomEvents.FallenSoldierFamilyData)
         {
             
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("FallenSoldierFamily", "EventDisabled");
             minFamilyCompensation = ConfigFile.ReadInteger("FallenSoldierFamily", "MinFamilyCompensation");
@@ -60,7 +60,25 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}” with the current values:\n\n" +
+                        "Min Family Compensation : {minFamilyCompensation}\n" +
+                        "Max Family Compensation : {maxFamilyCompensation}\n" +
+                        "Min Gold Looted : {minGoldLooted}\n" +
+                        "Max Gold Looted : {maxGoldLooted}\n" +
+                        "Min Roguery Level : {minRogueryLevel}\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("minFamilyCompensation", minFamilyCompensation)
+                    .SetTextVariable("maxFamilyCompensation", maxFamilyCompensation)
+                    .SetTextVariable("minGoldLooted", minGoldLooted)
+                    .SetTextVariable("maxGoldLooted", maxGoldLooted)
+                    .SetTextVariable("minRogueryLevel", minRogueryLevel)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
             }
 
             var heroName = Hero.MainHero.FirstName;
@@ -190,25 +208,21 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     switch ((string)elements[0].Identifier)
                     {
                         case "a":
-                            InformationManager.ShowInquiry(
-                                new InquiryData(eventTitle,eventOptionAText, true, false, eventButtonText2, null, null, null), true);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(-familyCompensation);
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                             break;
                         case "b":
                         {
-                            InformationManager.ShowInquiry(
-                                new InquiryData(eventTitle,eventOptionBText, true, false, eventButtonText2, null, null, null), true);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionBText, true, false, eventButtonText2, null, null, null), true);
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             break;
                         }
                         case "c":
-                            InformationManager.ShowInquiry(
-                                new InquiryData(eventTitle,eventOptionCText, true, false, eventButtonText2, null, null, null), true);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionCText, true, false, eventButtonText2, null, null, null), true);
                             break;
                         case "d":
-                            InformationManager.ShowInquiry(
-                                new InquiryData(eventTitle,eventOptionDText, true, false, eventButtonText2, null, null, null), true);
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_EVIL_Outcome));
                             break;
                         default:

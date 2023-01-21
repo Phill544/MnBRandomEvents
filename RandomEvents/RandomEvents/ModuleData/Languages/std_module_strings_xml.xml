@@ -1223,26 +1223,5 @@
     <string id="gender_female_pronoun" text="hers" />
     <string id="gender_female_title_cap" text="Lady" />
     <string id="gender_female_title" text="lady" />
-
-
-
-    <!--MCM-->
-    <string id="mcm_gs_heading" text="1. General Settings" />
-    <string id="mcm_gs1_text" text="1. Initial Setup" />
-    <string id="mcm_gs1_hint" text="Uncheck this to re-run the Initial Setup and set all values back to the original." />
-    <string id="mcm_gs2_text" text="2. Enable Debug mode" />
-    <string id="mcm_gs2_hint" text="Displays more info in the logs." />
-    <string id="mcm_gs3_text" text="3. In-game hours before events" />
-    <string id="mcm_gs3_hint" text="Minimum amount of in-game hours that must pass before the random events begin to occur." />
-    <string id="mcm_gs4_text" text="4. Min minutes between events" />
-    <string id="mcm_gs4_hint" text="Minimum amount of minutes in between events." />
-    <string id="mcm_gs5_text" text="5. Max minutes between events" />
-    <string id="mcm_gs5_hint" text="Maximum amount of minutes in between events." />
-    <string id="mcm_gs6_text" text="6. General Level XP Multiplier " />
-    <string id="mcm_gs6_hint" text="The number used to define the XP multiplier. Higher number means higher XP." />
-    <string id="mcm_gs7_text" text="7. Disable Supernatural Events" />
-    <string id="mcm_gs7_hint" text="Check this if you want to disable all supernatural events. This is mostly to keep the game as canon as possible." />
-    <string id="mcm_gs8_text" text="8. Disable Skill Checks" />
-    <string id="mcm_gs8_hint" text="Some events have skill checks that open up new options. This disables that and makes all options available." />
   </strings>
 </base>

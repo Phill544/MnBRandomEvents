@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public HotSprings() : base(ModSettings.RandomEvents.HotSpringsData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("HotSprings", "EventDisabled");
 			minMoraleGain = ConfigFile.ReadInteger("HotSprings", "MinMoraleGain");

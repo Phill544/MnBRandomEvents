@@ -24,7 +24,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public FishingSpot() : base(ModSettings.RandomEvents.FishingSpotData)
         {
             
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("FishingSpot", "EventDisabled");
             minSoldiersToGo = ConfigFile.ReadInteger("FishingSpot", "MinSoldiersToGo");
@@ -60,7 +60,25 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}” with the current values:\n\n" +
+                        "Min Soldiers Fishing : {minSoldiersToGo}\n" +
+                        "Max Soldiers Fishing : {maxSoldiersToGo}\n" +
+                        "Max Catch : {maxFishCatch}\n" +
+                        "Min Morale Gain : {minMoraleGain}\n" +
+                        "Max Morale Gain : {maxMoraleGain}\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("minSoldiersToGo", minSoldiersToGo)
+                    .SetTextVariable("maxSoldiersToGo", maxSoldiersToGo)
+                    .SetTextVariable("maxFishCatch", maxFishCatch)
+                    .SetTextVariable("minMoraleGain", minMoraleGain)
+                    .SetTextVariable("maxMoraleGain", maxMoraleGain)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
             }
             
             var eventTitle = new TextObject("{=FishingSpot_Title}A Great Fishing Spot").ToString();

@@ -34,7 +34,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public BirthdayParty() : base(ModSettings.RandomEvents.BirthdayPartyData)
         {
             
-            var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("BirthdayParty", "EventDisabled");
             minAttending = ConfigFile.ReadInteger("BirthdayParty", "MinAttending");
@@ -89,7 +89,45 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
             if (GeneralSettings.DebugMode.IsActive())
             {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+                var debugMsg = new TextObject(
+                        "Starting “{randomEvent}” with the current values:\n\n" +
+                        "Min Attending : {minAttending}\n" +
+                        "Max Attending : {maxAttending}\n" +
+                        "Min Your Men Attending : {minYourMenAttending}\n" +
+                        "Max Your Men Attending : {maxYourMenAttending}\n" +
+                        "Min Age : {minAge}\n" +
+                        "Max Age : {maxAge}\n" +
+                        "Min Bandits : {minBandits}\n" +
+                        "Max Bandits : {maxBandits}\n" +
+                        "Min Gold Given : {minGoldGiven}\n" +
+                        "Max Gold Given : {maxGoldGiven}\n" +
+                        "Min Influence Gain : {minInfluenceGain}\n" +
+                        "Max Influence Gain : {maxInfluenceGain}\n" +
+                        "Min Gold Looted : {minGoldLooted}\n" +
+                        "Max Gold Looted : {maxGoldLooted}\n" +
+                        "Min Roguery Level : {minRogueryLevel}\n\n" +
+                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
+                    )
+                    .SetTextVariable("randomEvent", randomEventData.eventType)
+                    .SetTextVariable("minAttending", minAttending)
+                    .SetTextVariable("maxAttending", maxAttending)
+                    .SetTextVariable("minYourMenAttending", minYourMenAttending)
+                    .SetTextVariable("maxYourMenAttending", maxYourMenAttending)
+                    .SetTextVariable("minAge", minAge)
+                    .SetTextVariable("maxAge", maxAge)
+                    .SetTextVariable("minBandits", minBandits)
+                    .SetTextVariable("maxBandits", maxBandits)
+                    .SetTextVariable("minGoldGiven", minGoldGiven)
+                    .SetTextVariable("maxGoldGiven", maxGoldGiven)
+                    .SetTextVariable("minInfluenceGain", minInfluenceGain)
+                    .SetTextVariable("maxInfluenceGain", maxInfluenceGain)
+                    .SetTextVariable("minGoldLooted", minGoldLooted)
+                    .SetTextVariable("maxGoldLooted", maxGoldLooted)
+                    .SetTextVariable("minRogueryLevel", minRogueryLevel)
+                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
+                    .ToString();
+                
+                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
             }
 
             var heroName = Hero.MainHero.FirstName;

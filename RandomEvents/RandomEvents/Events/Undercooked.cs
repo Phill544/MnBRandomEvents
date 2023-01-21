@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public Undercooked() : base(ModSettings.RandomEvents.UndercookedData)
 		{
-			var ConfigFile = new IniFile(ParseIniFile.GetTheFile());
+			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
 			eventDisabled = ConfigFile.ReadBoolean("Undercooked", "EventDisabled");
 			minTroopsToInjure = ConfigFile.ReadInteger("Undercooked", "MinTroopsToInjure");
