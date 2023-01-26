@@ -44,7 +44,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
         }
         
-        private bool EventCanRun()
+        protected virtual bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -64,7 +64,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var notables = Settlement.CurrentSettlement.Notables.ToList();
             var gangLeaders = notables.Where(character => character.IsGangLeader).ToList();
 
-            return EventCanRun() && gangLeaders.Count != 0 && CurrentTimeOfDay.IsNight;
+            return HasValidEventData() && gangLeaders.Count != 0 && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()

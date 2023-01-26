@@ -36,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		{
 		}
 		
-		private bool EventCanRun()
+		private bool HasValidEventData()
 		{
 			if (eventDisabled == false)
 			{
@@ -50,7 +50,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return EventCanRun() && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10;
+			return HasValidEventData() && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 10;
 		}
 
 		public override void StartEvent()
@@ -71,7 +71,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			
 			Hero.MainHero.AddSkillXp(DefaultSkills.Medicine, 5);
 			
-			MobileParty.MainParty.SetDisorganized(true);
+			MobileParty.MainParty.SetIsDisorganized(true);
 			
 			MobileParty.MainParty.RecentEventsMorale -= moraleLoss;
 			MobileParty.MainParty.MoraleExplained.Add(-moraleLoss);

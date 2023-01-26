@@ -28,7 +28,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 		}
 		
-		private bool EventCanRun()
+		private bool HasValidEventData()
 		{
 			if (eventDisabled == false)
 			{
@@ -43,7 +43,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return EventCanRun() && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.ArmyOwner == Hero.MainHero && MobileParty.MainParty.Army.LeaderPartyAndAttachedPartiesCount > 1;
+			return HasValidEventData() && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.ArmyOwner == Hero.MainHero && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 1;
 		}
 
 		public override void StartEvent()

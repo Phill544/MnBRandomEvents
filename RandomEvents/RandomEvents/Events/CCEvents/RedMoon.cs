@@ -35,7 +35,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 		{
 		}
 		
-		private bool EventCanRun()
+		private bool HasValidEventData()
 		{
 			if (eventDisabled == false)
 			{
@@ -50,7 +50,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return EventCanRun() && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxMenLost && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
+			return HasValidEventData() && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxMenLost && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
 		}
 
 		public override void StartEvent()

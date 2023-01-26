@@ -32,7 +32,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		{
 		}
 		
-		private bool EventCanRun()
+		private bool HasValidEventData()
 		{
 			if (eventDisabled == false)
 			{
@@ -46,7 +46,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 5 && Clan.PlayerClan.Renown >= 500;
+			return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalHealthyCount >= 5 && Clan.PlayerClan.Renown >= 500;
 		}
 		public override void StartEvent()
 		{

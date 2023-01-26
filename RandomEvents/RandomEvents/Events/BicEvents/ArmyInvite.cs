@@ -29,7 +29,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		{
 		}
 		
-		private bool EventCanRun()
+		private bool HasValidEventData()
 		{
 			return eventDisabled == false;
 		}
@@ -44,7 +44,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					return false;
 			}
 			
-			return EventCanRun() && Clan.PlayerClan.Kingdom != null && MobileParty.MainParty.Army == null && Clan.PlayerClan.Kingdom.Armies != null;
+			return HasValidEventData() && Clan.PlayerClan.Kingdom != null && MobileParty.MainParty.Army == null && Clan.PlayerClan.Kingdom.Armies != null;
 		}
 
 		public override void StartEvent()

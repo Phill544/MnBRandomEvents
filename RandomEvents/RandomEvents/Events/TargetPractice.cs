@@ -30,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 		}
 		
-		private bool EventCanRun()
+		private bool HasValidEventData()
 		{
 			if (eventDisabled == false)
 			{
@@ -45,7 +45,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
+			return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
@@ -57,8 +57,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			var percentOffset = MBRandom.RandomFloatRanged(-percentageDifferenceOfCurrentTroop, percentageDifferenceOfCurrentTroop);
 
-			var spawnCount = (int)(MobileParty.MainParty.MemberRoster.Count * ( 1 + percentOffset));
-			
+			var spawnCount = (int)(MobileParty.MainParty.MemberRoster.TotalManCount * ( 1 + percentOffset));
+
 			if (spawnCount < minimumSoldiers)
 				spawnCount = minimumSoldiers;
 			
@@ -163,7 +163,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			looterParty.MemberRoster.Clear();
 
 			looterParty.Aggressiveness = 10f;
-			looterParty.Ai.SetMoveEngageParty(MobileParty.MainParty);
+			looterParty.SetMoveEngageParty(MobileParty.MainParty);
 			
 			
 			PartySetup.AddRandomCultureUnits(looterParty, spawnCount);

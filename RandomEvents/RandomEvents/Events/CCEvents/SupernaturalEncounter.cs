@@ -26,14 +26,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
         }
         
-        private bool EventCanRun()
+        private bool HasValidEventData()
         {
             return eventDisabled == false;
         }
 
         public override bool CanExecuteEvent()
         {
-            return EventCanRun() && GeneralSettings.SupernaturalEvents.IsDisabled() == false && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
+            return HasValidEventData() && GeneralSettings.SupernaturalEvents.IsDisabled() == false && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()

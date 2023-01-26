@@ -29,7 +29,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 		}
 		
-		private bool EventCanRun()
+		private bool HasValidEventData()
 		{
 			return eventDisabled == false;
 		}
@@ -37,7 +37,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		public override bool CanExecuteEvent()
 		{
 
-			if (EventCanRun())
+			if (HasValidEventData())
 			{
 				if (!Hero.MainHero.Clan.Settlements.Any()) return false;
 				eligibleSettlements = new List<Settlement>();

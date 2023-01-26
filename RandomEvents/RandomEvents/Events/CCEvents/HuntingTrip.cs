@@ -42,7 +42,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
         }
         
-        private bool EventCanRun()
+        protected virtual bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -57,7 +57,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return EventCanRun() && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo;
+            return HasValidEventData() && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiersToGo;
         }
 
         public override void StartEvent()

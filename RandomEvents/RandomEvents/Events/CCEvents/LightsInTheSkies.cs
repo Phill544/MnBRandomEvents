@@ -25,14 +25,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
         }
         
-        private bool EventCanRun()
+        protected virtual bool HasValidEventData()
         {
             return eventDisabled == false;
         }
 
         public override bool CanExecuteEvent()
         {
-            return EventCanRun() && GeneralSettings.SupernaturalEvents.IsDisabled() == false && CurrentTimeOfDay.IsNight;
+            return HasValidEventData() && GeneralSettings.SupernaturalEvents.IsDisabled() == false && CurrentTimeOfDay.IsNight;
         }
 
         public override void StartEvent()
@@ -143,7 +143,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_MED_Outcome));
 
-            MobileParty.MainParty.SetDisorganized(true);
+            MobileParty.MainParty.SetIsDisorganized(true);
 
             StopEvent();
         }

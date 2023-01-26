@@ -47,7 +47,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
         {
         }
         
-        private bool EventCanRun()
+        protected virtual bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -61,7 +61,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
         public override bool CanExecuteEvent()
         {
-            return MobileParty.MainParty.CurrentSettlement == null && EventCanRun();
+            return MobileParty.MainParty.CurrentSettlement == null && HasValidEventData();
         }
 
         public override void StartEvent()

@@ -26,14 +26,14 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 		}
 		
-		private bool EventCanRun()
+		private bool HasValidEventData()
 		{
 			return eventDisabled == false;
 		}
 
 		public override bool CanExecuteEvent()
 		{
-			return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
+			return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()

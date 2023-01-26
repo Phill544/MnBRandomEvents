@@ -64,7 +64,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
         }
         
-        private bool EventCanRun()
+        protected virtual bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -82,7 +82,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return EventCanRun() && Hero.MainHero.Clan.Kingdom != null;
+            return HasValidEventData() && Hero.MainHero.Clan.Kingdom != null;
         }
 
         public override void StartEvent()

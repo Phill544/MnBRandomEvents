@@ -30,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		{
 		}
 		
-		private bool EventCanRun()
+		private bool HasValidEventData()
 		{
 			return eventDisabled == false;
 		}
@@ -41,7 +41,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 				return false;
 			var randomHero = Campaign.Current.AliveHeroes.Where(h => h.CurrentSettlement == Settlement.CurrentSettlement && h.IsLord && h != Hero.MainHero.Spouse && h.Clan != Clan.PlayerClan).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
 
-			return EventCanRun() && randomHero != null && Clan.PlayerClan.Renown >= 500;
+			return HasValidEventData() && randomHero != null && Clan.PlayerClan.Renown >= 500;
 		}
 
 		public override void StartEvent()

@@ -35,8 +35,8 @@ namespace CryingBuffalo.RandomEvents.Events
 		public override void CancelEvent()
 		{
 		}
-		
-		private bool EventCanRun()
+
+		private bool HasValidEventData()
 		{
 			if (eventDisabled == false)
 			{
@@ -51,7 +51,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return EventCanRun() && Hero.MainHero.Gold >= maxPrice;
+			return HasValidEventData() && Hero.MainHero.Gold >= maxPrice;
 		}
 
 		public override void StartEvent()

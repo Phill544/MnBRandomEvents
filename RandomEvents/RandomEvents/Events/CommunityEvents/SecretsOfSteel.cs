@@ -28,7 +28,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
         {
         }
         
-        private bool EventCanRun()
+        protected virtual bool HasValidEventData()
         {
             return eventDisabled == false;
         }
@@ -36,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
         public override bool CanExecuteEvent()
         {
 
-            return EventCanRun() && MobileParty.MainParty.CurrentSettlement == null;
+            return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null;
         }
 
         public override void StartEvent()

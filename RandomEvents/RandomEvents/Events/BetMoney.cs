@@ -25,7 +25,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			moneyBetPercent = ConfigFile.ReadFloat("BetMoney", "MoneyBetPercent");
 		}
 		
-		private bool EventCanRun()
+		private bool HasValidEventData()
 		{
 			if (eventDisabled == false)
 			{
@@ -45,7 +45,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		
 		public override bool CanExecuteEvent()
 		{
-			return EventCanRun() && MobileParty.MainParty.MemberRoster.TotalRegulars > 0;
+			return HasValidEventData() && MobileParty.MainParty.MemberRoster.TotalRegulars > 0;
 		}
 
 		public override void StartEvent()

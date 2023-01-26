@@ -45,7 +45,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
         }
 
-        private bool EventCanRun()
+        protected virtual bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -69,7 +69,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                      h.IsFemale && h.Age >= minWomanAge && h.Age <= maxWomanAge
             ).OrderByDescending(h => MBRandom.RandomFloat).FirstOrDefault();
 
-            return randomHero != null && EventCanRun() && CurrentTimeOfDay.IsEvening && CurrentTimeOfDay.IsNight && MobileParty.MainParty.CurrentSettlement != null;
+            return randomHero != null && HasValidEventData() && CurrentTimeOfDay.IsEvening && CurrentTimeOfDay.IsNight && MobileParty.MainParty.CurrentSettlement != null;
         }
 
         public override void StartEvent()

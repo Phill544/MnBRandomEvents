@@ -30,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 		}
 		
-		private bool EventCanRun()
+		private bool HasValidEventData()
 		{
 			if (eventDisabled == false)
 			{
@@ -45,7 +45,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return EventCanRun() && Hero.MainHero.Clan.Settlements.Any();
+			return HasValidEventData() && Hero.MainHero.Clan.Settlements.Any();
 		}
 
 		public override void StartEvent()

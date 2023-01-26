@@ -36,7 +36,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		{
 		}
 		
-		private bool EventCanRun()
+		private bool HasValidEventData()
 		{
 			if (eventDisabled == false)
 			{
@@ -50,8 +50,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return EventCanRun() && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown && CurrentTimeOfDay.IsNight && Clan.PlayerClan.Renown >= 500||
-				 EventCanRun() && MobileParty.MainParty.CurrentSettlement != null && MobileParty.MainParty.CurrentSettlement.IsVillage) && CurrentTimeOfDay.IsNight && Clan.PlayerClan.Renown >= 500;
+			return HasValidEventData() && MobileParty.MainParty.CurrentSettlement != null && (MobileParty.MainParty.CurrentSettlement.IsTown && CurrentTimeOfDay.IsNight && Clan.PlayerClan.Renown >= 500||
+				 HasValidEventData() && MobileParty.MainParty.CurrentSettlement != null && MobileParty.MainParty.CurrentSettlement.IsVillage) && CurrentTimeOfDay.IsNight && Clan.PlayerClan.Renown >= 500;
 		}
 
 		public override void StartEvent()
