@@ -39,7 +39,7 @@ namespace CryingBuffalo.RandomEvents
 
         public RandomEventData GetEvent(string id)
         {
-            return weightedEvents.FirstOrDefault((x) => x.randomEventData.eventType.ToLower() == id.ToLower()).randomEventData;
+            return weightedEvents.FirstOrDefault(x => x.randomEventData.eventType.ToLower() == id.ToLower()).randomEventData;
         }
         
         

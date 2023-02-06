@@ -4,17 +4,17 @@ using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using Ini.Net;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class AFlirtatiousEncounter : BaseEvent
+    public sealed class AFlirtatiousEncounter : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minWomanAge;
@@ -45,7 +45,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
         }
 
-        protected virtual bool HasValidEventData()
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {

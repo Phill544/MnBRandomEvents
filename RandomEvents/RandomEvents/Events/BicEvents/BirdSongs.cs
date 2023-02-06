@@ -16,7 +16,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		private readonly int minMoraleGain;
 		private readonly int maxMoraleGain;
 
-		public BirdSongs() : base(Settings.ModSettings.RandomEvents.BirdSongsData)
+		public BirdSongs() : base(ModSettings.RandomEvents.BirdSongsData)
 		{
 			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             

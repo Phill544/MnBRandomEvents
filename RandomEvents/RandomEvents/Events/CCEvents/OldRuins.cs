@@ -12,7 +12,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class OldRuins : BaseEvent
+    public sealed class OldRuins : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minMen;
@@ -38,7 +38,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         {
         }
 
-        protected virtual bool HasValidEventData()
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -53,7 +53,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null;
+            return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null  && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxMen;
         }
 
         public override void StartEvent()

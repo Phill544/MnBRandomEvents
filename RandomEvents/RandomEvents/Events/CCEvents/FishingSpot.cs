@@ -11,7 +11,7 @@ using TaleWorlds.ObjectSystem;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class FishingSpot : BaseEvent
+    public sealed class FishingSpot : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minSoldiersToGo;
@@ -37,8 +37,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {

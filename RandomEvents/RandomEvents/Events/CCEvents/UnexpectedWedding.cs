@@ -12,7 +12,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class UnexpectedWedding : BaseEvent
+    public sealed class UnexpectedWedding : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minGoldToDonate;
@@ -42,8 +42,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -57,7 +57,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null;
+            return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null  && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxPeopleInWedding;
         }
 
         public override void StartEvent()

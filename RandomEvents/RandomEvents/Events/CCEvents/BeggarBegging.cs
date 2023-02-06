@@ -13,7 +13,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class BeggarBegging : BaseEvent
+    public sealed class BeggarBegging : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minStewardLevel;
@@ -32,8 +32,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {

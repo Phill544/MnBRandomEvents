@@ -62,7 +62,7 @@ namespace CryingBuffalo.RandomEvents
         [CommandLineFunctionality.CommandLineArgumentFunction("next", "randomevent")]
         public static string RunNextEvent(List<string> args)
         {
-            if (RandomEventBehavior.Instance.currentEvent != null)
+            if (Instance.currentEvent != null)
             {
                 return $"Currently running event: {Instance.currentEvent.randomEventData.eventType}. To start another first cancel this one.";
             }
@@ -181,7 +181,7 @@ namespace CryingBuffalo.RandomEvents
         {
             var properties = ModSettings.RandomEvents.GetType().GetProperties();
 
-            return properties.Select(propertyInfo => (RandomEventData)propertyInfo.GetValue(Settings.ModSettings.RandomEvents, null)).ToList();
+            return properties.Select(propertyInfo => (RandomEventData)propertyInfo.GetValue(ModSettings.RandomEvents, null)).ToList();
         }
     }
 }

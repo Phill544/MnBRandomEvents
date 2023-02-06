@@ -10,7 +10,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class NotOfThisWorld : BaseEvent
+    public sealed class NotOfThisWorld : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minSoldiersToDisappear;
@@ -29,8 +29,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {

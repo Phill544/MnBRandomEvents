@@ -17,7 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		private readonly int minMoraleGain;
 		private readonly int maxMoraleGain;
 
-		public Courier() : base(Settings.ModSettings.RandomEvents.CourierData)
+		public Courier() : base(ModSettings.RandomEvents.CourierData)
 		{
 			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             

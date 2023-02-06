@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
+using CryingBuffalo.RandomEvents.Settings;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Actions;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using TaleWorlds.CampaignSystem.Settlements;
-using System.Linq;
-using System.Collections.Generic;
-using CryingBuffalo.RandomEvents.Settings;
-using Ini.Net;
-using TaleWorlds.CampaignSystem.Actions;
 
 namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
@@ -18,7 +18,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 	{
 		private readonly bool eventDisabled;
 
-		public Feast() : base(Settings.ModSettings.RandomEvents.FeastData)
+		public Feast() : base(ModSettings.RandomEvents.FeastData)
 		{
 			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             

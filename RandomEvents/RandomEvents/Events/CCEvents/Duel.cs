@@ -12,7 +12,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class Duel : BaseEvent
+    public sealed class Duel : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minTwoHandedLevel;
@@ -24,15 +24,15 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("Duel", "EventDisabled");
-            minTwoHandedLevel = ConfigFile.ReadInteger("Duel", "MinTwoHandedLevel");;
-            minRogueryLevel = ConfigFile.ReadInteger("Duel", "MinRogueryLevel");;
+            minTwoHandedLevel = ConfigFile.ReadInteger("Duel", "MinTwoHandedLevel");
+            minRogueryLevel = ConfigFile.ReadInteger("Duel", "MinRogueryLevel");
         }
 
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -47,7 +47,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null;
+            return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null  && Clan.PlayerClan.Renown >= 750;
         }
 
         public override void StartEvent()

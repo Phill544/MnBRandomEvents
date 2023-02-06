@@ -19,7 +19,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		private readonly int minLoot;
 		private readonly int maxLoot;
 
-		public TravellingMerchant() : base(Settings.ModSettings.RandomEvents.TravellingMerchantData)
+		public TravellingMerchant() : base(ModSettings.RandomEvents.TravellingMerchantData)
 		{
 			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             

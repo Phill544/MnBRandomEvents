@@ -13,7 +13,7 @@ using TaleWorlds.ObjectSystem;
 
 namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
 {
-    public class SecretsOfSteel : BaseEvent
+    public sealed class SecretsOfSteel : BaseEvent
     {
         private readonly bool eventDisabled;
 
@@ -27,10 +27,10 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
-            return eventDisabled == false;
+            return eventDisabled == false && Hero.MainHero.GetSkillValue(DefaultSkills.Crafting) >= 120 && MobileParty.MainParty.MemberRoster.TotalRegulars >= 50;
         }
 
         public override bool CanExecuteEvent()

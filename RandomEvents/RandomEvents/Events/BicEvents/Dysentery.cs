@@ -21,7 +21,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
         
 
-		public Dysentery() : base(Settings.ModSettings.RandomEvents.DysenteryData)
+		public Dysentery() : base(ModSettings.RandomEvents.DysenteryData)
 		{
 			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
 			

@@ -14,7 +14,7 @@ using TaleWorlds.ObjectSystem;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class SuddenStorm : BaseEvent
+    public sealed class SuddenStorm : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minHorsesLost;
@@ -45,8 +45,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {

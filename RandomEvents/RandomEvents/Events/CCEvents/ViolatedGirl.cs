@@ -12,7 +12,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class ViolatedGirl : BaseEvent
+    public sealed class ViolatedGirl : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minGoldCompensation;
@@ -32,8 +32,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -47,7 +47,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null && Hero.MainHero.Gold >= maxGoldCompensation;
+            return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null && Hero.MainHero.Gold >= maxGoldCompensation && MobileParty.MainParty.MemberRoster.TotalRegulars >= 100;
         }
 
         public override void StartEvent()

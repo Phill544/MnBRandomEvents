@@ -12,7 +12,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class BirthdayParty : BaseEvent
+    public sealed class BirthdayParty : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minAttending;
@@ -63,8 +63,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -82,7 +82,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return HasValidEventData() && Hero.MainHero.Clan.Kingdom != null;
+            return HasValidEventData() && Hero.MainHero.Clan.Kingdom != null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxYourMenAttending;
         }
 
         public override void StartEvent()

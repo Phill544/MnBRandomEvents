@@ -17,7 +17,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 	{
 		private readonly bool eventDisabled;
 
-		public ArmyInvite() : base(Settings.ModSettings.RandomEvents.ArmyInviteData)
+		public ArmyInvite() : base(ModSettings.RandomEvents.ArmyInviteData)
 		{
 			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             

@@ -13,7 +13,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class Travellers : BaseEvent
+    public sealed class Travellers : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minGoldStolen;
@@ -37,8 +37,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -52,7 +52,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override bool CanExecuteEvent()
         {
-            return HasValidEventData() && (CurrentTimeOfDay.IsEvening || CurrentTimeOfDay.IsMidday || CurrentTimeOfDay.IsMorning);
+            return HasValidEventData() && (CurrentTimeOfDay.IsEvening || CurrentTimeOfDay.IsMidday || CurrentTimeOfDay.IsMorning)  && MobileParty.MainParty.MemberRoster.TotalRegulars >= 100;
         }
 
         public override void StartEvent()

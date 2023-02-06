@@ -12,7 +12,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class Robbery : BaseEvent
+    public sealed class Robbery : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minGoldLost;
@@ -43,8 +43,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -299,6 +299,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText_Intimidated_Outcome, true, false, eventButtonText, null, null, null), true);
                 InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_MED_Outcome));
             }
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             else if (gangLeaderGoodRelation)
             {
                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText_Good_Relation_Outcome, true, false, eventButtonText, null, null, null), true);

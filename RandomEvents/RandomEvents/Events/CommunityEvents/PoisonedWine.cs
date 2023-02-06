@@ -11,7 +11,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
 {
-    public class PoisonedWine : BaseEvent
+    public sealed class PoisonedWine : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minSoldiersToDie;
@@ -34,8 +34,8 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {

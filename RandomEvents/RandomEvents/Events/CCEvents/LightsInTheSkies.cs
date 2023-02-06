@@ -10,7 +10,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class LightsInTheSkies : BaseEvent
+    public sealed class LightsInTheSkies : BaseEvent
     {
         private readonly bool eventDisabled;
 
@@ -24,8 +24,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             return eventDisabled == false;
         }

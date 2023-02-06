@@ -14,7 +14,7 @@ using TaleWorlds.ObjectSystem;
 
 namespace CryingBuffalo.RandomEvents.Events.BicEvents
 {
-    public class Refugees : BaseEvent
+    public sealed class Refugees : BaseEvent
     {
         // The letters correspond to the inquiry element ids
         private const int moraleGainA = 5;
@@ -30,7 +30,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
         private readonly int minCaptive;
         private readonly int maxCaptive;
 
-        public Refugees() : base(Settings.ModSettings.RandomEvents.RefugeesData)
+        public Refugees() : base(ModSettings.RandomEvents.RefugeesData)
         {
             var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
 			
@@ -46,8 +46,8 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {

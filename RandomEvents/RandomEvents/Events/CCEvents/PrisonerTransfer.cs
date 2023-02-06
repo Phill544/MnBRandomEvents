@@ -15,7 +15,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class PrisonerTransfer : BaseEvent
+    public sealed class PrisonerTransfer : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minPrisoners;
@@ -37,8 +37,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -197,7 +197,9 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null,
                                     null), true);
 
-                            var troopRoster2 = TroopRoster.CreateDummyTroopRoster();
+                            var troopRoster = TroopRoster.CreateDummyTroopRoster();
+
+                            var cultureClass = ClosestSettlements.GetClosestAny(MobileParty.MainParty).Culture.ToString();
 
                             foreach (var characterObject in CharacterObject.All)
                             {
@@ -212,14 +214,11 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                      && characterObject.StringId.Contains("battanian") &&
                                      characterObject.Culture.ToString() == randomCulture))
                                 {
-                                    troopRoster2.AddToCounts(characterObject, prisonerForTransfer);
+                                    troopRoster.AddToCounts(characterObject, prisonerForTransfer);
                                 }
                             }
 
-                            var emptyTroopRoster = TroopRoster.CreateDummyTroopRoster();
-
-                            PartyScreenManager.OpenScreenAsLoot(emptyTroopRoster, troopRoster2,
-                                new TextObject("Prisoners").SetTextVariable("cultureclass", randomCulture), 20);
+                            PartyScreenManager.OpenScreenAsReceiveTroops(troopRoster, leftPartyName: new TextObject("{cultureclass} Prisoners").SetTextVariable("cultureclass", cultureClass));
 
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_POS_Outcome));
                             break;

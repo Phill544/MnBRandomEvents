@@ -31,7 +31,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight;
+			return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null && CurrentTimeOfDay.IsNight  && MobileParty.MainParty.MemberRoster.TotalRegulars >= 25;
 		}
 
 		public override void StartEvent()

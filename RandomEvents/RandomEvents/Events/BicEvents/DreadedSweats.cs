@@ -20,7 +20,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
         private readonly int maxVictims;
         
 
-		public DreadedSweats() : base(Settings.ModSettings.RandomEvents.DreadedSweatsData)
+		public DreadedSweats() : base(ModSettings.RandomEvents.DreadedSweatsData)
 		{
 			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
 			

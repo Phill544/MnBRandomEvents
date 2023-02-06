@@ -11,7 +11,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class MassGrave : BaseEvent
+    public sealed class MassGrave : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minSoldiers;
@@ -38,8 +38,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -55,7 +55,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override bool CanExecuteEvent()
         {
 
-            return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null;
+            return HasValidEventData() && MobileParty.MainParty.CurrentSettlement == null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxSoldiers + minSoldiers;
         }
 
         public override void StartEvent()

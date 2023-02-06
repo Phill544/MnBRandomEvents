@@ -21,7 +21,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		private readonly int maxGold;
 
 
-		public BottomsUp() : base(Settings.ModSettings.RandomEvents.BottomsUpData)
+		public BottomsUp() : base(ModSettings.RandomEvents.BottomsUpData)
 		{
 			var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             

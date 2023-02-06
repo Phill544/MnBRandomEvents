@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using CryingBuffalo.RandomEvents.Helpers;
 using CryingBuffalo.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Settlements;
+using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public class RunawaySon : BaseEvent
+    public sealed class RunawaySon : BaseEvent
     {
         private readonly bool eventDisabled;
         private readonly int minGold;
@@ -34,8 +33,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
         public override void CancelEvent()
         {
         }
-        
-        protected virtual bool HasValidEventData()
+
+        private bool HasValidEventData()
         {
             if (eventDisabled == false)
             {
@@ -173,17 +172,21 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                         case "a":
                             Hero.MainHero.AddSkillXp(DefaultSkills.Leadership, 30);
                             Hero.MainHero.AddSkillXp(DefaultSkills.Steward, 20);
+                            
+                            GiveOneRandomRecruitFromClosestCulture();
+                            
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
 
-                            GainOneRecruit();
                             break;
                         
                         case "b":
                             Hero.MainHero.AddSkillXp(DefaultSkills.Leadership, 20);
                             Hero.MainHero.AddSkillXp(DefaultSkills.Steward, 30);
-                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
                             
-                            GainOneRecruit();
+                            GiveOneRandomRecruitFromClosestCulture();
+                            
+                            InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
+
                             break;
                         
                         case "c":
@@ -210,6 +213,34 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             StopEvent();
         }
 
+        private static void GiveOneRandomRecruitFromClosestCulture()
+        {
+            var closestSettlementCulture = ClosestSettlements.GetClosestAny(MobileParty.MainParty).Culture.ToString();
+
+            var CultureDemonym = Demonym.GetTheDemonym(closestSettlementCulture, false);
+            
+            var troopRoster = TroopRoster.CreateDummyTroopRoster();
+
+            // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
+            foreach (var characterObject in CharacterObject.All)
+            {
+                if (characterObject.StringId.Contains("recruit") &&
+                    !characterObject.StringId.Contains("vigla")
+                    && characterObject.Culture.ToString() == closestSettlementCulture ||
+                    (characterObject.StringId.Contains("footman") &&
+                     !characterObject.StringId.Contains("vlandia")
+                     && !characterObject.StringId.Contains("aserai") &&
+                     characterObject.Culture.ToString() == closestSettlementCulture) ||
+                    (characterObject.StringId.Contains("volunteer")
+                     && characterObject.StringId.Contains("battanian") &&
+                     characterObject.Culture.ToString() == closestSettlementCulture))
+                {
+                    troopRoster.AddToCounts(characterObject, 1);
+                }
+            }
+            PartyScreenManager.OpenScreenAsReceiveTroops(troopRoster, leftPartyName: new TextObject("{CultureDemonym} Volunteer").SetTextVariable("CultureDemonym", CultureDemonym));
+        }
+
         private void StopEvent()
         {
             try
@@ -221,21 +252,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 MessageBox.Show(
                     $"Error while stopping \"{randomEventData.eventType}\" event :\n\n {ex.Message} \n\n {ex.StackTrace}");
             }
-        }
-
-        private static void GainOneRecruit()
-        {
-            var settlements = Settlement.FindAll(s => !s.IsHideout).ToList();
-            var closestSettlement = settlements.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
-
-            //Currently it gives just a random solider from the current culture.
-            //PHILL
-            
-            var bandits = PartySetup.CreateBanditParty();
-            bandits.MemberRoster.Clear();
-            PartySetup.AddRandomCultureUnits(bandits, 1, closestSettlement.Culture);
-            MobileParty.MainParty.MemberRoster.Add(bandits.MemberRoster);
-            bandits.RemoveParty();
         }
     }
 
