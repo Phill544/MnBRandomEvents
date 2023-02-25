@@ -98,7 +98,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
                 .ToString();
             
             var eventMsg =new TextObject(
-                    "{=PoisonedWine_Event_Msg}{heroName]lost {menKilled} men and {menHurt} men got sick after drinking poisoned wine.")
+                    "{=PoisonedWine_Event_Msg}{heroName} lost {menKilled} men and {menHurt} men got sick after drinking poisoned wine.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("menKilled", menKilled)
                 .SetTextVariable("menHurt", menHurt)
