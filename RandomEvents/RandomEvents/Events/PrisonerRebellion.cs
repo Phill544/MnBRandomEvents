@@ -43,7 +43,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return HasValidEventData() && MobileParty.MainParty.PrisonRoster.TotalHealthyCount < minimumPrisoners && MobileParty.MainParty.CurrentSettlement == null;
+			return HasValidEventData() && MobileParty.MainParty.PrisonRoster.TotalHealthyCount > minimumPrisoners && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
