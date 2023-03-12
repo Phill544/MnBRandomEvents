@@ -10,7 +10,7 @@ using TaleWorlds.Localization;
 
 namespace CryingBuffalo.RandomEvents.Events.CCEvents
 {
-    public sealed class LightsInTheSkies : BaseEvent
+    public class LightsInTheSkies : BaseEvent
     {
         private readonly bool eventDisabled;
 
@@ -143,7 +143,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
             InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_MED_Outcome));
 
-            MobileParty.MainParty.SetIsDisorganized(true);
+            MobileParty.MainParty.SetDisorganized(true);
 
             StopEvent();
         }

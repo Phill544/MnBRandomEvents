@@ -173,7 +173,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				{
 					banditParty.Aggressiveness = 10f;
 					
-					banditParty.SetMoveEngageParty(MobileParty.MainParty);
+					banditParty.Ai.SetMoveEngageParty(MobileParty.MainParty);
 				}
 
 				int numberToSpawn = Math.Min((int)(MobileParty.MainParty.MemberRoster.TotalManCount * 0.50f), banditCap);

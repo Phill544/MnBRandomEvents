@@ -43,7 +43,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override bool CanExecuteEvent()
 		{
-			return HasValidEventData() && MobileParty.MainParty.PrisonRoster.TotalHealthyCount > minimumPrisoners && MobileParty.MainParty.CurrentSettlement == null;
+			return HasValidEventData() && MobileParty.MainParty.PrisonRoster.TotalHealthyCount < minimumPrisoners && MobileParty.MainParty.CurrentSettlement == null;
 		}
 
 		public override void StartEvent()
@@ -70,7 +70,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				DoPrisonerTransfer(prisonerParty);
 
 				prisonerParty.Aggressiveness = 10;
-				prisonerParty.SetMoveEngageParty(MobileParty.MainParty);
+				prisonerParty.Ai.SetMoveEngageParty(MobileParty.MainParty);
 
 				var heroDialogue = "";
 				if (heroInPrisonerRoster)

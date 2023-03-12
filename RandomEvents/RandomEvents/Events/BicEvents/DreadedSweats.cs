@@ -71,7 +71,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			
 			Hero.MainHero.AddSkillXp(DefaultSkills.Medicine, 5);
 			
-			MobileParty.MainParty.SetIsDisorganized(true);
+			MobileParty.MainParty.SetDisorganized(true);
 			
 			MobileParty.MainParty.RecentEventsMorale -= moraleLoss;
 			MobileParty.MainParty.MoraleExplained.Add(-moraleLoss);

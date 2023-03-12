@@ -49,7 +49,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override bool CanExecuteEvent()
 		{
-			return HasValidEventData() && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.LeaderPartyAndAttachedParties.Count() > 2; 
+			return HasValidEventData() && MobileParty.MainParty.Army != null && MobileParty.MainParty.Army.LeaderPartyAndAttachedPartiesCount > 2; 
 		}
 
 		public override void StartEvent()

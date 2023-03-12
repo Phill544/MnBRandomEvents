@@ -57,8 +57,8 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			var percentOffset = MBRandom.RandomFloatRanged(-percentageDifferenceOfCurrentTroop, percentageDifferenceOfCurrentTroop);
 
-			var spawnCount = (int)(MobileParty.MainParty.MemberRoster.TotalManCount * ( 1 + percentOffset));
-
+			var spawnCount = (int)(MobileParty.MainParty.MemberRoster.Count * ( 1 + percentOffset));
+			
 			if (spawnCount < minimumSoldiers)
 				spawnCount = minimumSoldiers;
 			
@@ -163,7 +163,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			looterParty.MemberRoster.Clear();
 
 			looterParty.Aggressiveness = 10f;
-			looterParty.SetMoveEngageParty(MobileParty.MainParty);
+			looterParty.Ai.SetMoveEngageParty(MobileParty.MainParty);
 			
 			
 			PartySetup.AddRandomCultureUnits(looterParty, spawnCount);
