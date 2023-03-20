@@ -68,7 +68,7 @@ namespace CryingBuffalo.RandomEvents.Settings
         
         public BirthdayPartyData BirthdayPartyData { get; } = new BirthdayPartyData("BirthdayParty", 0.5f);
         
-        public DuelData DuelData { get; } = new DuelData("Duel", 30.35f);
+        public DuelData DuelData { get; } = new DuelData("Duel", 0.35f);
         
         public FallenSoldierFamilyData FallenSoldierFamilyData { get; } = new FallenSoldierFamilyData("FallenSoldierFamily", 0.4f);
         
