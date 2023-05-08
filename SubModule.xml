@@ -1,16 +1,16 @@
 <Module>
     <Name value="Random Events"/>
     <Id value="RandomEvents"/>
-    <Version value="v1.1.2"/>
+    <Version value="v1.1.3"/>
     <SingleplayerModule value="true"/>
     <MultiplayerModule value="false"/>
     <Official value="false"/>
     <DependedModules>
-        <DependedModule Id="Native" DependentVersion="v1.1.2"/>
-        <DependedModule Id="SandBoxCore" DependentVersion="v1.1.2"/>
-        <DependedModule Id="Sandbox" DependentVersion="v1.1.2"/>
-        <DependedModule Id="CustomBattle" DependentVersion="v1.1.2"/>
-        <DependedModule Id="StoryMode" DependentVersion="v1.1.2"/>
+        <DependedModule Id="Native" DependentVersion="v1.1.3"/>
+        <DependedModule Id="SandBoxCore" DependentVersion="v1.1.3"/>
+        <DependedModule Id="Sandbox" DependentVersion="v1.1.3"/>
+        <DependedModule Id="CustomBattle" DependentVersion="v1.1.3"/>
+        <DependedModule Id="StoryMode" DependentVersion="v1.1.3"/>
     </DependedModules>
     <SubModules>
         <SubModule>

@@ -84,27 +84,35 @@ namespace CryingBuffalo.RandomEvents.Helpers
 
 		public static void AddRandomCultureUnits(MobileParty party, int numberToAdd, CultureObject overrideCulture = null)
 		{
-			// Get culture
-			var partyCultureObject = overrideCulture ?? party.Party.Culture;
-
-			// Get possible units to create
-			var characterObjectList = partyCultureObject.IsBandit ? GetBanditCharacters(partyCultureObject) : GetMainCultureCharacters(partyCultureObject);
-
-			// Split spawn based on number to add
-			var spawnNumbers = new int[characterObjectList.Count];
-			var currentSpawned = 0;
-
-			while (currentSpawned < numberToAdd)
+			try
 			{
-				var randomInt = MBRandom.RandomInt(0, spawnNumbers.Length);
-				spawnNumbers[randomInt]++;
-				currentSpawned++;
+				// Get culture
+				var partyCultureObject = overrideCulture ?? party.Party.Culture;
+
+				// Get possible units to create
+				var characterObjectList = partyCultureObject.IsBandit ? GetBanditCharacters(partyCultureObject) : GetMainCultureCharacters(partyCultureObject);
+
+				// Split spawn based on number to add
+				var spawnNumbers = new int[characterObjectList.Count];
+				var currentSpawned = 0;
+
+				while (currentSpawned < numberToAdd)
+				{
+					var randomInt = MBRandom.RandomInt(0, spawnNumbers.Length);
+					spawnNumbers[randomInt]++;
+					currentSpawned++;
+				}
+
+				for (var i = 0; i < characterObjectList.Count; i++)
+				{
+					var characterObject = characterObjectList[i];
+					if (characterObject != null)
+						party.AddElementToMemberRoster(characterObject, spawnNumbers[i]);
+				}
 			}
-
-			for (var i = 0; i < characterObjectList.Count; i++)
+			catch (Exception e)
 			{
-				var characterObject = characterObjectList[i];
-				party.AddElementToMemberRoster(characterObject, spawnNumbers[i]);
+				return;
 			}
 		}
 
