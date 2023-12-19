@@ -9,7 +9,6 @@ A mod for Bannerlord that adds random events to the single player campaign. The 
 ## Brief Overview
 No one wants to waffle on forever, so there is a brief summary of the main classes of the project in order to give you an idea.
 
-
 ### RandomEventSubmodule
 This class is required by Bannerlord for the mod to function. It has two functions.
 - Loads both the general settings, as well as the random event settings (Discussed later)
