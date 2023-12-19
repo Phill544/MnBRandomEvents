@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -11,7 +11,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace Bannerlord.RandomEvents.Events
 {
 	public sealed class DiseasedCity : BaseEvent
 	{
@@ -175,10 +175,10 @@ namespace CryingBuffalo.RandomEvents.Events
                     // Hero tried their best
 
                     // Kill some of their Garrison
-                    plaguedSettlement.Town.GarrisonParty?.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.Town.GarrisonParty.MemberRoster.TotalManCount * percentLoss), false);
+                    plaguedSettlement.Town.GarrisonParty?.MemberRoster.KillNumberOfNonHeroTroopsRandomly((int)(plaguedSettlement.Town.GarrisonParty.MemberRoster.TotalManCount * percentLoss));
 
                     // Kill some of their Militia
-					plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.TotalManCount * percentLoss), false);
+					plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.KillNumberOfNonHeroTroopsRandomly((int)(plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.TotalManCount * percentLoss));
 
 					// Drop some loyalty
 					plaguedSettlement.Town.Loyalty *= 1 - percentLoss;
@@ -193,10 +193,10 @@ namespace CryingBuffalo.RandomEvents.Events
 				else
 				{
                     // Kill some of their Garrison
-                    plaguedSettlement.Town.GarrisonParty?.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.Town.GarrisonParty.MemberRoster.TotalManCount * percentLoss), false);
+                    plaguedSettlement.Town.GarrisonParty?.MemberRoster.KillNumberOfNonHeroTroopsRandomly((int)(plaguedSettlement.Town.GarrisonParty.MemberRoster.TotalManCount * percentLoss));
 
                     // Kill some of their Militia
-					plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.KillNumberOfMenRandomly((int)(plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.TotalManCount * percentLoss), false);
+					plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.KillNumberOfNonHeroTroopsRandomly((int)(plaguedSettlement.MilitiaPartyComponent.Party.MemberRoster.TotalManCount * percentLoss));
 
 					// Drop some loyalty
 					plaguedSettlement.Town.Loyalty *= 1 - percentLoss;

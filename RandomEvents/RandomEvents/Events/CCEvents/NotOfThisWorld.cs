@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.CCEvents
+namespace Bannerlord.RandomEvents.Events.CCEvents
 {
     public sealed class NotOfThisWorld : BaseEvent
     {
@@ -73,8 +73,8 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
             
             var soldiersInvestigating = MBRandom.RandomInt(minSoldiersToDisappear, maxSoldiersToDisappear);
-
-            MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(soldiersInvestigating, false);
+            
+            MobileParty.MainParty.MemberRoster.KillNumberOfNonHeroTroopsRandomly(soldiersInvestigating);
             
             var eventPt1 =new TextObject(
                     "{=NotOfThisWorld_Part_1}Your party is currently resting in the vicinity of {closestSettlement} when you observe a strange object descending from the sky and into the nearby forest. " +

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.CCEvents
+namespace Bannerlord.RandomEvents.Events.CCEvents
 {
     public class LightsInTheSkies : BaseEvent
     {
@@ -133,7 +133,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
             var eventButtonText1 = new TextObject("{=LightsInTheSkies_Event_Button_Text_1}Read More").ToString();
             var eventButtonText2 = new TextObject("{=LightsInTheSkies_Event_Button_Text_2}Done").ToString();
             
-
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText1, true, false, eventButtonText1, null, null, null), true);
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText2, true, false, eventButtonText1, null, null, null), true);
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText3, true, false, eventButtonText1, null, null, null), true);

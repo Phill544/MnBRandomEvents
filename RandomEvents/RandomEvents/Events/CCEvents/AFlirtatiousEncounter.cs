@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -12,7 +12,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.CCEvents
+namespace Bannerlord.RandomEvents.Events.CCEvents
 {
     public sealed class AFlirtatiousEncounter : BaseEvent
     {
@@ -278,7 +278,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                     .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
                     .ToString();
 
-                var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1,
+                var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1,
                     eventButtonText1, null,
                     elements =>
                     {
@@ -315,7 +315,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 break;
                         }
                     },
-                    null);
+                    null, null);
 
                 MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

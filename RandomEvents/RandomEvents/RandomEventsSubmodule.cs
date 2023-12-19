@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 
-namespace CryingBuffalo.RandomEvents
+namespace Bannerlord.RandomEvents
 {
     public class RandomEventsSubmodule : MBSubModuleBase
     {

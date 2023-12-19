@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -11,7 +11,7 @@ using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
-namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
+namespace Bannerlord.RandomEvents.Events.CommunityEvents
 {
     public sealed class SecretsOfSteel : BaseEvent
     {
@@ -189,7 +189,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
                 .ToString();
 
 
-            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1,
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1,
                     eventButtonText1, null,
                     elements =>
                     {
@@ -233,8 +233,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
                                 MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
                                 break;
                         }
-                    },
-                    null);
+                    }, null, null);
 
                 MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

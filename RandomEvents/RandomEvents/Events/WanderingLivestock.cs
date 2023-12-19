@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -10,7 +10,7 @@ using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace Bannerlord.RandomEvents.Events
 {
 	public sealed class WanderingLivestock : BaseEvent
 	{
@@ -74,7 +74,7 @@ namespace CryingBuffalo.RandomEvents.Events
 			var eventButtonText2 = new TextObject("{=WanderingLivestock_Event_Button_Text_2}Yum").ToString();
 			var eventButtonText3 = new TextObject("{=WanderingLivestock_Event_Button_Text_3}Done").ToString();
 
-			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null, 
+			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1, eventButtonText1, null, 
 				elements => 
 				{
 					switch ((string)elements[0].Identifier)
@@ -134,8 +134,7 @@ namespace CryingBuffalo.RandomEvents.Events
 							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
 							break;
 					}
-				},
-				null);
+				}, null, null);
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

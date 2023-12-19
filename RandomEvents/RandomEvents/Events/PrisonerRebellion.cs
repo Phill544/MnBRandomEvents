@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace Bannerlord.RandomEvents.Events
 {
 	public sealed class PrisonerRebellion : BaseEvent
 	{
@@ -55,7 +55,6 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			try
 			{
-				
 				var eventTitle = new TextObject("{=PrisonerRebellion_Title}Prisoner Rebellion!").ToString();
 
 				var eventPartyLabel= new TextObject("{=PrisonerRebellion_Event_Party_Label}Escaped prisoners (Random Event)").ToString();

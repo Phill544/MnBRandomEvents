@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace Bannerlord.RandomEvents.Events
 {
 	public sealed class TargetPractice : BaseEvent
 	{
@@ -87,7 +87,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					"{=TargetPractice_Event_Choice_2}The looters, seeing that you aren't about to attack, quickly scatter to the wind. Your soldiers grumble.")
 				.ToString();
 
-			var msid = new MultiSelectionInquiryData(eventTitle, CalculateDescription(spawnCount), inquiryElements, false, 1, eventButtonText1, null, 
+			var msid = new MultiSelectionInquiryData(eventTitle, CalculateDescription(spawnCount), inquiryElements, false, 1, 1, eventButtonText1, null, 
 				elements => 
 				{
 					switch ((string)elements[0].Identifier)
@@ -103,8 +103,7 @@ namespace CryingBuffalo.RandomEvents.Events
 							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
 							break;
 					}
-				},
-				null); 
+				}, null, null); 
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

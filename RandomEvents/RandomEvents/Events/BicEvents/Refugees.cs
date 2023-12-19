@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -12,7 +12,7 @@ using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
-namespace CryingBuffalo.RandomEvents.Events.BicEvents
+namespace Bannerlord.RandomEvents.Events.BicEvents
 {
     public sealed class Refugees : BaseEvent
     {
@@ -84,7 +84,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
             var soldiers = MBRandom.RandomInt(minSoldiers, maxSoldiers);
             var food = MBRandom.RandomInt(minFood, maxFood);
             var captives = MBRandom.RandomInt(minCaptive, maxCaptive);
-        //________________________________________________________________    
+            //________________________________________________________________    
 
 
 
@@ -176,7 +176,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                 .ToString();
             //________________________________________________________________
 
-            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null,
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1, eventButtonText1, null,
                 elements =>
                 {
                 switch ((string)elements[0].Identifier)
@@ -371,7 +371,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                             //___________________________________________________________________________________
                     }
                 },
-                null);
+                null, null);
             
             MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

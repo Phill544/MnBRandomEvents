@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CryingBuffalo.RandomEvents.Events;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Events;
+using Bannerlord.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
-namespace CryingBuffalo.RandomEvents
+namespace Bannerlord.RandomEvents
 {
 	public class RandomEventBehavior : CampaignBehaviorBase
 	{
@@ -79,11 +79,7 @@ namespace CryingBuffalo.RandomEvents
         [CommandLineFunctionality.CommandLineArgumentFunction("cancelevent", "randomevent")]
         public static string CancelEvent(List<string> args)
         {
-            if (Instance.CancelEvent())
-            {
-                return "Current random event canceled!";
-            }
-            return "No random event running.";
+            return Instance.CancelEvent() ? "Current random event canceled!" : "No random event running.";
         }
 
 

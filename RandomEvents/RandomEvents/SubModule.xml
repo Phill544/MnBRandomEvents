@@ -1,0 +1,27 @@
+<Module>
+    <Name value="Random Events"/>
+    <Id value="RandomEvents"/>
+    <Version value="v1.2.7"/>
+    <SingleplayerModule value="true"/>
+    <MultiplayerModule value="false"/>
+    <Official value="false"/>
+    <DependedModules>
+        <DependedModule Id="Native" DependentVersion="v1.2.7"/>
+        <DependedModule Id="SandBoxCore" DependentVersion="v1.2.7"/>
+        <DependedModule Id="Sandbox" DependentVersion="v1.2.7"/>
+        <DependedModule Id="CustomBattle" DependentVersion="v1.2.7"/>
+        <DependedModule Id="StoryMode" DependentVersion="v1.2.7"/>
+    </DependedModules>
+    <SubModules>
+        <SubModule>
+            <Name value="RandomEvents"/>
+            <DLLName value="RandomEvents.dll"/>
+            <SubModuleClassType value="Bannerlord.RandomEvents.RandomEventsSubmodule"/>
+            <Tags>
+                <Tag key="DedicatedServerType" value="none" />
+                <Tag key="IsNoRenderModeElement" value="false" />
+            </Tags>
+        </SubModule>
+    </SubModules>
+    <Xmls/>
+</Module>

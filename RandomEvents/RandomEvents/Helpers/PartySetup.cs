@@ -10,7 +10,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
-namespace CryingBuffalo.RandomEvents.Helpers
+namespace Bannerlord.RandomEvents.Helpers
 {
 	public static class PartySetup
 	{
@@ -110,9 +110,9 @@ namespace CryingBuffalo.RandomEvents.Helpers
 						party.AddElementToMemberRoster(characterObject, spawnNumbers[i]);
 				}
 			}
-			catch (Exception e)
+			catch (Exception ex)
 			{
-				return;
+				MessageBox.Show($"Error while trying to add random culture units :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 

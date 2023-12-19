@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -9,7 +9,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
+namespace Bannerlord.RandomEvents.Events.CommunityEvents
 {
     public sealed class PoisonedWine : BaseEvent
     {
@@ -108,7 +108,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
 
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText, true, false, eventButtonText, null, null, null), true);
              
-            MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menKilled, false);
+            MobileParty.MainParty.MemberRoster.KillNumberOfNonHeroTroopsRandomly(menKilled);
             MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menHurt);
             
             InformationManager.DisplayMessage(new InformationMessage(eventMsg, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
