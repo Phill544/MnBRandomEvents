@@ -59,10 +59,22 @@ namespace Bannerlord.RandomEvents.Events
 			{
 				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
 			}
+
+			var heroGold = Hero.MainHero.Gold;
+
+			if (heroGold < 1)
+			{
+				//Emulate some gold
+				Hero.MainHero.ChangeHeroGold(+400);
+				heroGold += 400;
+			}
+			
+			var percentMoneyLost = MBRandom.RandomFloatRanged(moneyMinPercent, moneyMaxPercent);
+			var goldLost = MathF.Floor(heroGold * percentMoneyLost);
 			
 			var eventTitle = new TextObject("{=BanditAmbush_Title}Ambushed by bandits!").ToString();
 			
-			var eventOption1 = new TextObject("{=BanditAmbush_Event_Option_1}Pay gold to have them leave").ToString();
+			var eventOption1 = new TextObject("{=BanditAmbush_Event_Option_1}Pay {goldLost} gold to have them leave").SetTextVariable("goldLost", goldLost).ToString();
 			var eventOption1Hover = new TextObject("{=BanditAmbush_Event_Option_1_Hover}What is gold good for, if not to dissuade people from killing you?").ToString();
             
 			var eventOption2 = new TextObject("{=BanditAmbush_Event_Option_2}Attack").ToString();
@@ -72,20 +84,20 @@ namespace Bannerlord.RandomEvents.Events
 			var eventButtonText1 = new TextObject("{=BanditAmbush_Event_Button_Text_1}Okay").ToString();
 			var eventButtonText2 = new TextObject("{=BanditAmbush_Event_Button_Text_2}Done").ToString();
 
-			var inquiryElements = new List<InquiryElement>
+			var inquiryElements = new List<InquiryElement>();
+
+			if (heroGold > goldLost)
 			{
-				new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
-				new InquiryElement("b", eventOption2, null)
-			};
+				inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover)); 
+			}
+
+			inquiryElements.Add(new InquiryElement("b", eventOption2, null)); 
 
 			if (Hero.MainHero.PartyBelongedTo.MemberRoster.TotalHealthyCount > troopScareCount)
 			{
 				inquiryElements.Add(new InquiryElement("c", eventOption3, null)); 
 			}
 			
-			var percentMoneyLost = MBRandom.RandomFloatRanged(moneyMinPercent, moneyMaxPercent);
-			
-			var goldLost = MathF.Floor(Hero.MainHero.Gold * percentMoneyLost);
 			
 			var eventOptionAText = new TextObject(
 					"{=BanditAmbush_Event_Choice_1}You give the bandits {goldLost} coins and they quickly flee. At least you and your soldiers live to fight another day.")
@@ -144,7 +156,6 @@ namespace Bannerlord.RandomEvents.Events
 
 		private string CalculateDescription()
 		{
-			
 			var eventDescription1 = new TextObject(
 					"{=BanditAmbush_Event_Desc_1}You are traveling with your forward party when you get surrounded by a group of bandits!")
 				.ToString();
@@ -160,7 +171,7 @@ namespace Bannerlord.RandomEvents.Events
 		{
 			try
 			{
-				MobileParty banditParty = PartySetup.CreateBanditParty();
+				var banditParty = PartySetup.CreateBanditParty();
 
 				banditParty.MemberRoster.Clear();
 
@@ -175,7 +186,7 @@ namespace Bannerlord.RandomEvents.Events
 					banditParty.Ai.SetMoveEngageParty(MobileParty.MainParty);
 				}
 
-				int numberToSpawn = Math.Min((int)(MobileParty.MainParty.MemberRoster.TotalManCount * 0.50f), banditCap);
+				var numberToSpawn = Math.Min((int)(MobileParty.MainParty.MemberRoster.TotalManCount * 0.50f), banditCap);
 
 				PartySetup.AddRandomCultureUnits(banditParty, 10 + numberToSpawn);
 			}

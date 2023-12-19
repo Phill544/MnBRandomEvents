@@ -66,8 +66,7 @@ namespace Bannerlord.RandomEvents.Helpers
 				banditParty = BanditPartyComponent.CreateBanditParty(
 					$"randomevent_{banditCultureObject.StringId}_{MBRandom.RandomInt(int.MaxValue)}",
 					Clan.BanditFactions.First(clan => clan.DefaultPartyTemplate == partyTemplate),
-					closestHideout.Hideout,
-					false);
+					closestHideout.Hideout, false);
 				
 				var partyNameTextObject = new TextObject(partyName);
 				
