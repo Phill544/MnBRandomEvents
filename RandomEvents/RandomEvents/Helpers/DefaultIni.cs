@@ -6,14 +6,15 @@ namespace Bannerlord.RandomEvents.Helpers
     {
         public static string Content()
         {
-            var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            var timestamp = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+            var year = DateTime.Now.ToString("yyyy");
 
             return @$"
 ; WARNING - REMOVAL OF THIS FILE WILL RESULT IN A DEFAULT INI FILE BEING CREATED AND IT WILL CONTAIN DEFAULT VALUES
 ;
-; This INI was created on {{timestamp}}
+; This INI was generated on {timestamp}
 ;
-; © Random Events - 2023
+; © Random Events - {year}
 ;
 ; Do not set any value to 0 as that will result in the event being unable to run.
 ;
@@ -126,7 +127,7 @@ MinAttending = 15
 MaxAttending = 60
 MinYourMenAttending = 5
 MaxYourMenAttending = 15
-MinAge = 17
+MinAge = 17 ; Putting below 16 will not work, game will revert to 16
 MaxAge = 23
 MinBandits = 5
 MaxBandits = 15

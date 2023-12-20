@@ -53,11 +53,8 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
             maxGoldLooted = ConfigFile.ReadInteger("BirthdayParty", "MaxGoldLooted");
             minRogueryLevel = ConfigFile.ReadInteger("BirthdayParty", "MinRogueryLevel");
 
-            //Overrides the input
-            if (minAge < 16)
-            {
-                minAge = 16;
-            }
+            //Overrides the min age.
+            minAge = Math.Max(minAge, 16);
         }
 
         public override void CancelEvent()
@@ -66,23 +63,18 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
 
         private bool HasValidEventData()
         {
-            if (eventDisabled == false)
-            {
-                if (minAttending != 0 || maxAttending != 0 || minYourMenAttending != 0 || maxYourMenAttending != 0 ||
-                    minAge != 0 || maxAge != 0 || minBandits != 0 || maxBandits != 0 || minGoldGiven != 0 ||
-                    maxGoldGiven != 0 || minInfluenceGain != 0 || maxInfluenceGain != 0 || minGoldLooted != 0 ||
-                    maxGoldLooted != 0 || minRogueryLevel != 0)
-                {
-                    return true;
-                }
-            }
+            if (eventDisabled) return false;
 
-            return false;
+            return minAttending != 0 || maxAttending != 0 || minYourMenAttending != 0 || maxYourMenAttending != 0 ||
+                   minAge != 0 || maxAge != 0 || minBandits != 0 || maxBandits != 0 || minGoldGiven != 0 ||
+                   maxGoldGiven != 0 || minInfluenceGain != 0 || maxInfluenceGain != 0 || minGoldLooted != 0 ||
+                   maxGoldLooted != 0 || minRogueryLevel != 0;
         }
 
         public override bool CanExecuteEvent()
         {
-            return HasValidEventData() && Hero.MainHero.Clan.Kingdom != null && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxYourMenAttending;
+            return HasValidEventData() && MobileParty.MainParty.MemberRoster.TotalRegulars >= maxYourMenAttending &&
+                   Hero.MainHero.Gold > maxGoldGiven;
         }
 
         public override void StartEvent()
@@ -139,6 +131,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
             var goldGiven = MBRandom.RandomInt(minGoldGiven, maxGoldGiven);
             var influenceGain = MBRandom.RandomInt(minInfluenceGain, maxInfluenceGain);
             var goldBase = MBRandom.RandomInt(minGoldLooted, maxGoldLooted);
+            
             var goldLooted = goldBase * peopleAttending;
             
             var rogueryLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Roguery);
@@ -287,6 +280,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                         case "c":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionCText, true, false, eventButtonText, null, null, null), true);
                             break;
+                        
                         case "d":
                             InformationManager.ShowInquiry(new InquiryData(eventTitle,eventOptionDText, true, false, eventButtonText, null, null, null), true);
                             Hero.MainHero.ChangeHeroGold(+goldGiven);
@@ -297,8 +291,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
                             break;
                     }
-                },
-                null, null);
+                }, null, null);
 
             MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
