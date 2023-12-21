@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
+using TaleWorlds.Library;
 
 namespace Bannerlord.RandomEvents.Helpers
 {
@@ -14,6 +15,8 @@ namespace Bannerlord.RandomEvents.Helpers
 
             if (!File.Exists(finalPath))
             {
+                InformationManager.DisplayMessage(new InformationMessage("Random Events ini file not found, Generating a new one.", RandomEventsSubmodule.Ini_Color));
+
                 CreateDefaultIniFile(finalPath);
             }
 
