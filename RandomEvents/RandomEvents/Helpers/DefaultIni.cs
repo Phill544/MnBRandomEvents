@@ -27,7 +27,6 @@ namespace Bannerlord.RandomEvents.Helpers
 ; Recommend not to mess with these unless you know what you are doing.
 
 [GeneralSettings]
-DebugMode = false
 MinimumInGameHours = 24
 MinimumRealMinutes = 5
 MaximumRealMinutes = 30

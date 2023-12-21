@@ -37,20 +37,6 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}”. This event has no configurable settings.\n\n" +
-                        "However the string of characters you'll see in this event can be decrypted by following these steps:\n\n1: Decompress the string\n2:USCII Decrypt\n3: ASCII to text\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-            }
-            
             var eventTitle = new TextObject("{=LightsInTheSkies_Title}Lights In The Skies").ToString();
 
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();

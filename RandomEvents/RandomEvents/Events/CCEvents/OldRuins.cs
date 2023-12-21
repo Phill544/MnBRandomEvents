@@ -58,30 +58,6 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}” with the current values:\n\n" +
-                        "Min Men To Take With You : {minMen}\n" +
-                        "Max Men To Take With You : {maxMen}\n" +
-                        "Max Men To Kill : {maxMenToKill}\n" +
-                        "Min Gold Found : {minGoldFound}\n" +
-                        "Max Gold Found : {maxGoldFound}\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("minMen", minMen)
-                    .SetTextVariable("maxMen", maxMen)
-                    .SetTextVariable("maxMenToKill", maxMenToKill)
-                    .SetTextVariable("minGoldFound", minGoldFound)
-                    .SetTextVariable("maxGoldFound", maxGoldFound)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-                
-            }
-
             var heroName = Hero.MainHero.FirstName;
             
             var eventTitle = new TextObject("{=OldRuins_Title}The old ruins").ToString();

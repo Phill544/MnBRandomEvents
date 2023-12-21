@@ -58,27 +58,6 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}” with the current values:\n\n" +
-                        "Min Prisoners : {minPrisoners}\n" +
-                        "Max Prisoners : {maxPrisoners}\n" +
-                        "Min Price Pr Prisoner : {minPricePrPrisoner}\n" +
-                        "Max Price Pr Prisoner : {maxPricePrPrisoner}\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("minPrisoners", minPrisoners)
-                    .SetTextVariable("maxPrisoners", maxPrisoners)
-                    .SetTextVariable("minPricePrPrisoner", minPricePrPrisoner)
-                    .SetTextVariable("maxPricePrPrisoner", maxPricePrPrisoner)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-            }
-
             var heroName = Hero.MainHero.FirstName.ToString();
             
             var closestSettlement = ClosestSettlements.GetClosestTownOrVillage(MobileParty.MainParty).ToString();

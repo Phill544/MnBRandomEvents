@@ -55,26 +55,6 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
 
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				var debugMsg = new TextObject(
-						"Starting “{randomEvent}” with the current values:\n\n" +
-						"Min Gold Lost : {minGoldLost}\n" +
-						"Max Gold Lost : {maxGoldLost}\n" +
-						"Min Men Lost : {minMenLost}\n" +
-						"Max Men Lost : {maxMenLost}\n\n" +
-						"To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-					)
-					.SetTextVariable("randomEvent", randomEventData.eventType)
-					.SetTextVariable("minGoldLost", minGoldLost)
-					.SetTextVariable("maxGoldLost", maxGoldLost)
-					.SetTextVariable("minMenLost", minMenLost)
-					.SetTextVariable("maxMenLost", maxMenLost)
-					.SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-					.ToString();
-                
-				InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-			}
 			
 			var eventTitle = new TextObject("{=RedMoon_Title}The Red Moon").ToString();
 

@@ -51,11 +51,6 @@ namespace Bannerlord.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
-			}
-			
 			var eventTitle = new TextObject("{=WanderingLivestock_Title}Free Range Meat").ToString();
 
 			var eventOption1 = new TextObject("{=WanderingLivestock_Event_Option_1}Take them in").ToString();

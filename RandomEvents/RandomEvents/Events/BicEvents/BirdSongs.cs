@@ -49,11 +49,6 @@ namespace Bannerlord.RandomEvents.Events.BicEvents
 
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
-			}
-
 			var moraleGain = MBRandom.RandomInt(minMoraleGain, maxMoraleGain);
 
 			MobileParty.MainParty.RecentEventsMorale += moraleGain;

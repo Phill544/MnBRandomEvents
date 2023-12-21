@@ -58,29 +58,6 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}” with the current values:\n\n" +
-                        "Min Family Compensation : {minFamilyCompensation}\n" +
-                        "Max Family Compensation : {maxFamilyCompensation}\n" +
-                        "Min Gold Looted : {minGoldLooted}\n" +
-                        "Max Gold Looted : {maxGoldLooted}\n" +
-                        "Min Roguery Level : {minRogueryLevel}\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("minFamilyCompensation", minFamilyCompensation)
-                    .SetTextVariable("maxFamilyCompensation", maxFamilyCompensation)
-                    .SetTextVariable("minGoldLooted", minGoldLooted)
-                    .SetTextVariable("maxGoldLooted", maxGoldLooted)
-                    .SetTextVariable("minRogueryLevel", minRogueryLevel)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-            }
-
             var heroName = Hero.MainHero.FirstName;
             
             var currentSettlement = MobileParty.MainParty.CurrentSettlement.Name;

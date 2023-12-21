@@ -50,11 +50,6 @@ namespace Bannerlord.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
-			}
-			
 			var eventTitle = new TextObject("{=BetMoney_Title}All or nothing").ToString();
 			
 			var eventOption1 = new TextObject("{=BetMoney_Event_Option_1}Gamble").ToString();

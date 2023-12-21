@@ -66,11 +66,6 @@ namespace Bannerlord.RandomEvents.Events.BicEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
-            }
-            
             //All the Var String ---------------
             var eventTitle = new TextObject("{=Refugees_Title}Refugees").ToString();
 

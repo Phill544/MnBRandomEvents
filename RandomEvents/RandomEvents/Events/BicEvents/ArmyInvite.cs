@@ -49,12 +49,6 @@ namespace Bannerlord.RandomEvents.Events.BicEvents
 
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
-			}
-
-
 			var Lords = Clan.PlayerClan.Kingdom.Lords.ToList();
 			var Generals = Lords.Where(lord => lord == lord.PartyBelongedTo?.Army?.ArmyOwner).ToList();
 			var random = new Random();

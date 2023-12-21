@@ -65,32 +65,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            InformationManager.DisplayMessage(new InformationMessage("Event starting", RandomEventsSubmodule.Msg_Color_POS_Outcome));
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}” with the current values:\n\n" +
-                        "Min Woman Age : {minWomanAge}\n" +
-                        "Max Woman Age : {maxWomanAge}\n" +
-                        "Min Relationship Increase : {minRelationshipIncrease}\n" +
-                        "Max Relationship Increase : {maxRelationshipIncrease}\n" +
-                        "Min Charm Level : {minCharmLevel}\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("minWomanAge", minWomanAge)
-                    .SetTextVariable("maxWomanAge", maxWomanAge)
-                    .SetTextVariable("minRelationshipIncrease", minRelationshipIncrease)
-                    .SetTextVariable("maxRelationshipIncrease", maxRelationshipIncrease)
-                    .SetTextVariable("minCharmLevel", minCharmLevel)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-            }
-            
             var eventTitle = new TextObject(EventTextHandler.GetRandomEventTitle()).ToString();
-
 
             if (GetTargetHero() != null)
             {

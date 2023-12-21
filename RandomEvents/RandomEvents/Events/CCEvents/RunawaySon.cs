@@ -54,25 +54,6 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}” with the current values:\n\n" +
-                        "Min Gold: {minGold}\n" +
-                        "Max Gold: {maxGold}\n" +
-                        "Min Roguery Level : {minRogueryLevel}\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("minGold", minGold)
-                    .SetTextVariable("maxGold", maxGold)
-                    .SetTextVariable("minRogueryLevel", minRogueryLevel)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-            }
-            
             var eventTitle = new TextObject("{=RunawaySon_Title}Runaway Son").ToString();
             
             var heroName = Hero.MainHero.FirstName;
