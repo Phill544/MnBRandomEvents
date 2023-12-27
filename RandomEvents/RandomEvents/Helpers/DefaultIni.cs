@@ -167,7 +167,7 @@ MinAge = 16
 MaxAge = 30
 MinStewardLevel = 100
 MinRogueryLevel = 125
-SuccessChance = 0.625f
+SuccessChance = 65
 
 [HuntingTrip]
 EventDisabled = false

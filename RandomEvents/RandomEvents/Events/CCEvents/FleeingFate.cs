@@ -21,7 +21,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
         private readonly int maxAge;
         private readonly int minStewardLevel;
         private readonly int minRogueryLevel;
-        private readonly float successChance;
+        private readonly int successChance;
 
         public FleeingFate() : base(ModSettings.RandomEvents.FleeingFateData)
         {
@@ -35,7 +35,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
             maxAge = ConfigFile.ReadInteger("FleeingFate", "MaxAge");
             minStewardLevel = ConfigFile.ReadInteger("FleeingFate", "MinStewardLevel");
             minRogueryLevel = ConfigFile.ReadInteger("FleeingFate", "MinRogueryLevel");
-            successChance = ConfigFile.ReadFloat("FleeingFate", "SuccessChance");
+            successChance = ConfigFile.ReadInteger("FleeingFate", "SuccessChance");
 
             //Overrides the min age.
             minAge = Math.Max(minAge, 16);
@@ -64,11 +64,13 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
             var stewardLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Steward);
             var rogueryLevel = Hero.MainHero.GetSkillValue(DefaultSkills.Roguery);
 
-            var currentSettlement = Settlement.CurrentSettlement.Name.ToString();
+            var currentSettlement = Settlement.CurrentSettlement.Name;
 
             var noblewomanName = EventTextHandler.GetRandomNoblewomanNames();
 
             var goldReward = MBRandom.RandomInt(minGoldReward, maxGoldReward);
+
+            var success = MBRandom.RandomInt(0, 100);
             
             var canNegotiate = false;
             var canUseViolence = false;
@@ -199,9 +201,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                 .ToString();
             
 
-            var eventSuccess = SuccessOrFailure(successChance);
-
-            if (eventSuccess)
+            if (success >= successChance)
             {
                 
                 eventOptionAText = new TextObject(EventTextHandler.GetRandomEventChoice1A())
@@ -709,7 +709,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                 "rumbling under the weight of her impending marriage.", 
                 
                 //Event Choice 3BE
-                "{=FleeingFate_Event_Choice_3BA}Your well-meaning advice on self-reliance and inner strength falls on deaf " +
+                "{=FleeingFate_Event_Choice_3BE}Your well-meaning advice on self-reliance and inner strength falls on deaf " +
                 "ears as {noblewomanName} finds herself unable to connect with the optimism and hope you try to instill. " +
                 "She had hoped for a savior, but instead, she finds herself facing a mirror reflecting her own helplessness. " +
                 "The conversation leaves her spiraling further into despair, convinced now more than ever that her situation " +
@@ -1141,13 +1141,6 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                 var index = random.Next(eventMsg6A.Count);
                 return eventMsg6A[index];
             }
-        }
-        
-        private readonly Random _random = new Random();
-
-        private bool SuccessOrFailure(float probability)
-        {
-            return _random.NextDouble() <= probability;
         }
     }
 

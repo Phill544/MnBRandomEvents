@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using Bannerlord.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
@@ -8,7 +9,8 @@ using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.RandomEvents
 {
-    public abstract class RandomEventsSubmodule : MBSubModuleBase
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+    public class RandomEventsSubmodule : MBSubModuleBase
     {
         //Mod Loaded Color
         public static readonly Color Ini_Color = Color.FromUint(7194750);
