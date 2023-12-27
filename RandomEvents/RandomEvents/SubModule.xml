@@ -1,17 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Module>
-    <Name value="Random Events"/>
+    <Name value="RandomEvents"/>
     <Id value="RandomEvents"/>
-    <Version value="v1.2.7"/>
+    <Version value="v1.2.8.31530"/>
     <SingleplayerModule value="true"/>
     <MultiplayerModule value="false"/>
     <Official value="false"/>
     <DependedModules>
-        <DependedModule Id="Native" DependentVersion="v1.2.7"/>
-        <DependedModule Id="SandBoxCore" DependentVersion="v1.2.7"/>
-        <DependedModule Id="Sandbox" DependentVersion="v1.2.7"/>
-        <DependedModule Id="CustomBattle" DependentVersion="v1.2.7"/>
-        <DependedModule Id="StoryMode" DependentVersion="v1.2.7"/>
+        <DependedModule Id="Native" DependentVersion="v1.2.8"/>
+        <DependedModule Id="SandBoxCore" DependentVersion="v1.2.8"/>
+        <DependedModule Id="Sandbox" DependentVersion="v1.2.8"/>
+        <DependedModule Id="StoryMode" DependentVersion="v1.2.8"/>
     </DependedModules>
+
     <SubModules>
         <SubModule>
             <Name value="RandomEvents"/>
@@ -23,5 +24,4 @@
             </Tags>
         </SubModule>
     </SubModules>
-    <Xmls/>
 </Module>

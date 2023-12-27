@@ -4,6 +4,15 @@
     <tag language="English" />
   </tags>
   <strings>
+
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                      A Flirtatious Encounter Event                         *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--AFlirtatiousEncounter Event Titles-->
     <string id="AFlirtatiousEncounter_Title_A" text="Dusk's Desire" />
     <string id="AFlirtatiousEncounter_Title_B" text="Twilight Temptations" />
@@ -94,21 +103,47 @@
     <string id="AFlirtatiousEncounter_Event_Msg_4C" text="A serious affront was made by {heroName} towards {name}." />
     <string id="AFlirtatiousEncounter_Event_Msg_4D" text="{heroName} caused deep upset to {name} with their cutting remarks." />
     <string id="AFlirtatiousEncounter_Event_Msg_4E" text="{heroName} delivered a profound insult to {name}." />
+
+
+
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                             Army Games Event                               *
+    *                                                                            *
+    ******************************************************************************
+    -->
     
-
-
-
     <!--ArmyGames Event-->
     <string id="ArmyGames_Title" text="Army Games" />
     <string id="ArmyGames_Event_Desc" text="What started as a small competition has evolved itself into a full blown tournament. {leader} has gathered all of the parties in this army for competitions to see who is the ultimate champion team. The men haven't had this much fun in quite a long time, this will surely boost morale and cohesion." />
     <string id="ArmyGames_Event_Button_Text_1" text="Done" />
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                          Birthday Party Event                              *
+    *                                                                            *
+    ******************************************************************************
+    -->
 
+    <!--BirthdayParty - Event Titles-->
+    <string id="BirthdayParty_Title_A" text="The Birthday Party" />
+    <string id="BirthdayParty_Title_B" text="Joyous Birthday Revelry" />
+    <string id="BirthdayParty_Title_C" text="The Birthday Bash" />
+    <string id="BirthdayParty_Title_D" text="Birthday Jubilee" />
+    <string id="BirthdayParty_Title_E" text="The Birthday Celebration" />
+    <string id="BirthdayParty_Title_F" text="Birthday Festivities" />
+    <string id="BirthdayParty_Title_G" text="Anniversary of Birth" />
+    <string id="BirthdayParty_Title_H" text="Ceremonial Birthday Gathering" />
 
-    <!--BirthdayParty Event-->
-    <string id="BirthdayParty_Title" text="The Birthday Party!" />
-    <string id="BirthdayParty_Event_Desc" text="As you and your party are traveling in the vicinity of {closestSettlement}, you come across {peopleAttending} people in what seems to be a birthday party for a young girl. A couple of the guests invite you to join them in celebrating the girls {birthdayAge} birthday! What should you do?" />
-
+    <!--BirthdayParty - Event Descriptions-->
+    <string id="BirthdayParty_Event_Desc_A" text="As you and your party are traveling in the vicinity of {closestSettlement}, you come across {peopleAttending} people in what seems to be a birthday party for a young girl. A couple of the guests invite you to join them in celebrating the girl's {birthdayAge}th birthday! What should you do?" />
+    <string id="BirthdayParty_Event_Desc_B" text="While journeying near {closestSettlement} with your group, you stumble upon a birthday celebration. There are {peopleAttending} guests gathered, joyously marking a young girl's special day. Some of the attendees warmly invite you to partake in the festivities for the girl's {birthdayAge}th birthday. Faced with this unexpected invitation, what course of action will you take?" />
+    <string id="BirthdayParty_Event_Desc_C" text="On your travels close to {closestSettlement}, you and your companions encounter a jovial gathering. It appears to be a birthday party for a young girl, attended by {peopleAttending} individuals. A few of the partygoers extend an invitation to join the celebration of the girl's {birthdayAge}th birthday. How will you respond to this cheerful invitation?" />
+    <string id="BirthdayParty_Event_Desc_D" text="In the vicinity of {closestSettlement}, you and your party chance upon {peopleAttending} people engaged in what looks to be a birthday bash for a young girl. Several guests cordially invite you to join the merriment of her {birthdayAge}th birthday. Presented with this unexpected but joyous opportunity, how do you choose to proceed?" />
+    <string id="BirthdayParty_Event_Desc_E" text="As you traverse near {closestSettlement} with your group, you find a birthday party underway, with {peopleAttending} attendees celebrating a young girl's milestone. A couple of the guests hospitably invite you to partake in the young girl's {birthdayAge}th birthday festivities. In this surprising yet pleasant situation, what decision will you make?" />
+    
     <!--BirthdayParty - Event Choices-->
     <string id="BirthdayParty_Event_Option_1" text="Join them in celebration!" />
     <string id="BirthdayParty_Event_Option_1_Hover" text="Not everyday you turn {birthdayAge} years old!" />
@@ -116,8 +151,8 @@
     <string id="BirthdayParty_Event_Option_2_Hover" text="You don't have time to stay but you can still be nice, right?" />
     <string id="BirthdayParty_Event_Option_3" text="[Roguery] Raid the party" />
     <string id="BirthdayParty_Event_Option_3_Hover" text="Have some fun.\n{rogueryAppendedText}" />
-    <string id="BirthdayParty_Event_Option_4" text="Leave" />
-    <string id="BirthdayParty_Event_Option_4_Hover" text="Don't have time" />
+    <string id="BirthdayParty_Event_Option_4" text="Move on" />
+    <string id="BirthdayParty_Event_Option_4_Hover" text="You don't have time" />
     
     <!--Skill Check-->
     <string id="BirthdayParty_Skill_Check_Disable_Appended_Text" text="**Skill checks are disabled**" />
@@ -126,19 +161,73 @@
     <!--BirthdayParty - Event Button-->
     <string id="BirthdayParty_Event_Button_Text" text="Okay" />
 
-    <!--BirthdayParty - Events-->
-    <string id="BirthdayParty_Event_Choice_1" text="You and {yourMenAttending} of your men decide to stay for the party while the rest makes their way to {closestSettlement}. You approach the girl and give her {goldGiven} gold as a gift. She gives you a hug and says thank you. You get yourself some beer and sit down to enjoy the moment.\n \n Some time later, {bandits} bandits decide to crash the party. They go around from person to person and takes everything of value. You order your men to stand down as you don't want to start a fight with innocent people caught in the middle. After they have taken everything of value they also try to take the young girl with them. This you will not stand for so you signal your men to strike. You and your men make quick work in incapacitating the bandits. One of your men rides to {closestSettlement} to fetch someone to throw these scum in the dungeon. The rest of the night you are celebrated as a hero! You even get to dance with the birthday girl!" />
-    <string id="BirthdayParty_Event_Choice_2" text="You really don't have time to stay but you don't want to be rude either. You manage to scrape together {goldGiven} gold and give it to the girl as a gift. She seems grateful. \n You say your goodbyes to the partygoers and leave in the direction of {closestSettlement}." />
-    <string id="BirthdayParty_Event_Choice_3" text="You don't have time for this so you leave for {closestSettlement} but not before casting one last look at the party." />
-    <string id="BirthdayParty_Event_Choice_4" text="You decide that this is the perfect moment to let loose your somewhat evil side. You order your men you surround the party and you tell every guest to hand over everything of value. They refuse at the beginning but you have one of your men kill a random person. They all fall in line after that and hand over everything. Once you have everything you and your men leave but not before tossing over 1 gold coin to the birthday girl who is clearly very upset. You are left with {goldLooted} gold." />
+    <!--BirthdayParty - Event 1-->
+    <string id="BirthdayParty_Event_Choice_1A" text="You and {yourMenAttending} of your men decide to stay for the party while the rest makes their way to {closestSettlement}. You approach the girl and give her {goldGiven} gold as a gift. She gives you a hug and says thank you. You get yourself some beer and sit down to enjoy the moment.\n\nSome time later, {bandits} bandits decide to crash the party. They go around from person to person and takes everything of value. You order your men to stand down as you don't want to start a fight with innocent people caught in the middle. After they have taken everything of value they also try to take the young girl with them. This you will not stand for so you signal your men to strike. You and your men make quick work in incapacitating the bandits. One of your men rides to {closestSettlement} to fetch someone to throw these scum in the dungeon. The rest of the night you are celebrated as a hero! You even get to dance with the birthday girl!" />
+    <string id="BirthdayParty_Event_Choice_1B" text="You and {yourMenAttending} of your men choose to join the birthday celebration, sending the rest to {closestSettlement}. Greeting the birthday girl, you gift her {goldGiven} gold, earning a warm hug and heartfelt thanks. As you relax with a beer, the party is suddenly invaded by {bandits} bandits, who start looting the guests. You command your men to refrain from action, prioritizing the safety of the civilians. Yet, when the bandits try to abduct the birthday girl, you decisively intervene. With a signal, your men engage, efficiently subduing the bandits. One of your men rides off to {closestSettlement} for reinforcements, while the rest of the evening sees you celebrated as a hero, even sharing a dance with the birthday girl in a joyous end to the night." />
+    <string id="BirthdayParty_Event_Choice_1C" text="Deciding to partake in the festivities, you and {yourMenAttending} of your men stay for the party while the others head to {closestSettlement}. Upon meeting the birthday girl, you present her with {goldGiven} gold, receiving a grateful hug and thanks in return. Settling down with a beer, you savor the moment. However, the peace is shattered when {bandits} bandits disrupt the party, ruthlessly taking valuables from each guest. Initially, you instruct your men to hold back to avoid endangering bystanders. But when the bandits attempt to kidnap the young girl, you refuse to stand idly by. Signaling your men, you swiftly overpower the bandits, averting the kidnapping. One man dashes to {closestSettlement} for authorities, while you're hailed as a hero for the remainder of the evening, even sharing a dance with the birthday girl." />
+    <string id="BirthdayParty_Event_Choice_1D" text="You, along with {yourMenAttending} of your men, opt to stay at the party, while the remainder proceed to {closestSettlement}. Approaching the girl, you kindly gift her {goldGiven} gold, and she reciprocates with a hug and thanks. Settling down with a beer, you begin to relax, but the tranquility is soon disrupted by {bandits} bandits. They start plundering the guests, and you order your men to stand down, wary of risking civilian lives. However, when they target the birthday girl, your tolerance ends. You signal your men, and together you quickly disarm the bandits. One of your men hastens to {closestSettlement} to summon the authorities. The night then transforms, with the guests lauding you as a hero, and you even share a celebratory dance with the birthday girl."/>
+    <string id="BirthdayParty_Event_Choice_1E" text="Choosing to stay, you and {yourMenAttending} of your men join the party, while the others head towards {closestSettlement}. Upon meeting the birthday girl, you give her {goldGiven} gold as a gift, and she responds with a hug and gratitude. Settling with a beer, you begin to enjoy the festivities. This calm is soon disrupted by {bandits} bandits raiding the party and looting the guests. You initially order your men not to engage, to avoid civilian casualties. But when the bandits attempt to abduct the birthday girl, you take decisive action. Giving the signal, your men swiftly incapacitate the bandits. One of your men rushes to {closestSettlement} for law enforcement, while you spend the rest of the night as the celebrated hero, culminating in a dance with the birthday girl." />
 
-    <!--BirthdayParty - Log Messages-->
-    <string id="BirthdayParty_Event_Msg_1" text="{heroName} gave away {goldGiven} to the girl and gained {influenceGain} influence for slaying the bandits." />
-    <string id="BirthdayParty_Event_Msg_2" text="{heroName} gave away {goldGiven} to the girl." />
-    <string id="BirthdayParty_Event_Msg_3" text="{heroName} looted {goldLooted} from the birthday party." />
+    <!--BirthdayParty - Event 2-->
+    <string id="BirthdayParty_Event_Choice_2A" text="You really don't have time to linger, but the thought of coming across as impolite weighs on you. So, with a sense of obligation mixed with a touch of goodwill, you quickly gather {goldGiven} gold from your purse. Handing it over to the birthday girl, you notice her eyes light up with gratitude, a gesture that warms your heart a little. You exchange a few pleasantries with the partygoers, their warm smiles and sincere thanks making the moment more meaningful than you anticipated. Despite the urgency of your schedule, this brief interaction leaves a pleasant imprint. Finally, with a polite nod and a few well-wishes, you extricate yourself from the gathering and set off towards {closestSettlement}, the sound of the ongoing celebration fading behind you, leaving you with mixed feelings of haste and a hint of regret for not staying longer." />
+    <string id="BirthdayParty_Event_Choice_2B" text="Despite the pressing nature of your journey, you don't wish to come off as discourteous to the party. Hastily, you assemble {goldGiven} gold and present it to the birthday girl, who responds with a genuine smile of thanks. You take a moment to exchange friendly words with the other guests, their welcoming demeanor making your brief stay more enjoyable than expected. After these short but sweet exchanges, you bid farewell to the group and proceed towards {closestSettlement}, the echoes of the jovial party lingering in your ears as you leave, a subtle sense of warmth accompanying your departure." />
+    <string id="BirthdayParty_Event_Choice_2C" text="Finding yourself short on time yet reluctant to appear uncaring, you hurriedly pool together {goldGiven} gold as a gift for the girl. Her appreciative expression upon receiving it brings a momentary sense of satisfaction. You make a round of quick goodbyes, receiving heartfelt gratitude from the attendees. The brief interaction with the cheerful group leaves a trace of joy in your heart. With a final wave and a promise to remember the warm encounter, you head off in the direction of {closestSettlement}, the festive sounds gradually diminishing in the distance, leaving a bittersweet feeling in their wake." />
+    <string id="BirthdayParty_Event_Choice_2D" text="Time is of the essence, but your desire to avoid seeming unkind prompts you to pause. You gather a modest sum of {goldGiven} gold and offer it to the birthday girl, her thankful look making the gesture worthwhile. Engaging in brief but pleasant conversations with the guests, you find their friendliness mildly infectious. As you say your farewells, their expressions of gratitude add a layer of warmth to the encounter. Reluctantly, you leave the convivial atmosphere behind and start your journey towards {closestSettlement}, the festive ambiance of the party lingering in your thoughts, offering a gentle contrast to the urgency of your travel." />
+    <string id="BirthdayParty_Event_Choice_2E" text="Although constrained by time, your reluctance to seem dismissive leads you to stop briefly at the celebration. You quickly gather {goldGiven} gold and hand it over to the girl, her thankful demeanor subtly uplifting your spirits. Engaging in brief conversations with the guests, their geniality leaves a positive impression. After expressing your goodbyes and receiving their sincere thanks, you depart, heading towards {closestSettlement}. The cheerful sounds of the party gradually fade, but the memory of the brief, heartwarming interaction stays with you, softening the haste of your journey." />
+
+    <!--BirthdayParty - Event 3-->
+    <string id="BirthdayParty_Event_Choice_3A" text="With a tight schedule pressing on your mind, you realize you can't afford to linger at the party. There's a sense of urgency that overshadows the festive atmosphere, pulling you towards your next destination. You begin to walk away towards {closestSettlement}, but not without taking one final glance over your shoulder. In that fleeting moment, you see the joyous faces, hear the laughter, and feel a pang of wistfulness. The sight of the birthday girl, surrounded by her friends and family, celebrating a momentous day, etches a poignant image in your memory. Despite the pressing need to move on, this snapshot of happiness leaves a lingering sense of what could have been a delightful pause in your journey. With a mixture of regret and necessity, you turn your back on the scene and continue on your path, the echoes of celebration softly fading into the distance." />
+    <string id="BirthdayParty_Event_Choice_3B" text="Time constraints weigh heavily on you, making it clear that staying at the party isn't an option. You start heading towards {closestSettlement}, but you can't help but cast a lingering look back at the party. The sight of the gathering – the laughter, the cheerful chatter, and the young girl in the midst of it all – creates a bittersweet moment. This brief, stolen glimpse of celebration stays with you as you walk away, a gentle reminder of life's simple joys amidst your busy agenda." />
+    <string id="BirthdayParty_Event_Choice_3C" text="The demands of your schedule leave no room for delay, compelling you to move on. As you set off for {closestSettlement}, you give the party one final, fleeting glance. The merriment, the sound of laughter, and the sight of the young girl enjoying her special day momentarily capture your attention, instilling a brief sense of longing. It's a poignant reminder of life's fleeting pleasures, etched in your mind as you walk away, the sounds of the party slowly diminishing behind you." />
+    <string id="BirthdayParty_Event_Choice_3D" text="Recognizing the impossibility of a detour, you decide to continue your journey to {closestSettlement}. However, you find yourself pausing momentarily to look back at the birthday party. The scene of joy and celebration, with the birthday girl at the center, offers a stark contrast to your pressing obligations. This final glimpse, filled with warmth and festivity, resonates with you as you turn away, carrying the echoes of happiness as you proceed with your journey." />
+    <string id="BirthdayParty_Event_Choice_3E" text="Your tight itinerary doesn't allow for any diversions, so you make the decision to leave. As you walk towards {closestSettlement}, you take one last look at the birthday party. The image of people celebrating, the air filled with laughter and cheer, and the birthday girl's delighted face create a lasting impression. This brief moment of reflection amidst your haste offers a poignant reminder of life's celebratory moments, gently fading away as you continue on your path." />
+
+    <!--BirthdayParty - Event 4-->
+    <string id="BirthdayParty_Event_Choice_4A" text="You decide this is the moment to assert your dominance. Ordering your men to surround the party, you demand the guests hand over their valuables. Met with initial refusal, you turn to a young woman in the group. Seizing her, you display a ruthless streak, intimidating her to emphasize your seriousness. Your method is harsh, yet non-lethal, designed to instill fear rather than cause grave harm. The guests, witnessing this display, quickly comply, handing over their possessions. Satisfied, you leave, but not before mockingly tossing a gold coin to the distraught birthday girl. Counting your loot, you find yourself {goldLooted} gold richer, having successfully instilled fear and gained material wealth." />
+    <string id="BirthdayParty_Event_Choice_4B" text="You swiftly decide to take control. Commanding your men to encircle the party, you sternly demand that the guests surrender their valuables. Facing initial resistance, you grab a young woman from the crowd, using intimidation to prove your point. Your approach is intimidating yet non-fatal, aiming to terrify rather than injure. Seeing your resolve, the partygoers relent, reluctantly handing over their belongings. Content with your haul, you arrogantly flip a gold coin to the upset birthday girl before leaving. As you count your gains, you find yourself {goldLooted} gold wealthier, having effectively spread fear and secured a substantial profit." />
+    <string id="BirthdayParty_Event_Choice_4C" text="In a moment of calculated ruthlessness, you instruct your men to encircle the partygoers, demanding their valuables. Encountering initial defiance, you forcefully take a young woman from the group, showcasing your willingness to go to extremes. Although your tactics are fierce, they are deliberately non-lethal, meant to scare rather than harm. This show of force quickly persuades the guests to hand over their possessions. With a sense of grim satisfaction, you flippantly throw a coin to the traumatized birthday girl, then depart. Counting your loot, you realize you've acquired {goldLooted} gold, effectively imposing terror and augmenting your wealth."/>
+    <string id="BirthdayParty_Event_Choice_4D" text="Deciding to dominate the situation, you order your men to besiege the party. You then forcefully demand the guests' valuables. When they initially resist, you escalate the situation by threatening a young woman, demonstrating your severity without causing serious harm. Your menacing demeanor quickly persuades the guests to comply, and they hand over their valuables. Leaving triumphantly, you cynically toss a gold coin to the shaken birthday girl. Your loot amounts to {goldLooted} gold, a testament to your ability to instill fear and enrich yourself." />
+    <string id="BirthdayParty_Event_Choice_4E" text="Opting for an aggressive approach, you command your men to blockade the party, demanding valuables from the guests. When they hesitate, you seize a young woman from the group, using her as leverage to underscore your determination. Your method is deliberately menacing yet not deadly, meant to terrorize rather than injure. This forceful tactic swiftly convinces the guests to yield their possessions. Satisfied with your success, you derisively toss a gold coin to the anguished birthday girl as you depart. Counting your gains, you find yourself {goldLooted} gold richer, having effectively spread fear and secured considerable wealth." />
+
+    <!--BirthdayParty - Log Messages - Event 1-->
+    <string id="BirthdayParty_Event_Msg_1A}{heroName} gave {goldGiven} to the girl and gained {influenceGain} influence for defeating bandits." />
+    <string id="BirthdayParty_Event_Msg_1B}{heroName} donated {goldGiven} and earned {influenceGain} influence for bravery against bandits." />
+    <string id="BirthdayParty_Event_Msg_1C}{heroName} bestowed {goldGiven}, gaining {influenceGain} influence for their valor." />
+    <string id="BirthdayParty_Event_Msg_1D}{heroName} presented {goldGiven}, increasing {influenceGain} influence post-bandit victory." />
+    <string id="BirthdayParty_Event_Msg_1E}{heroName} contributed {goldGiven}, earning {influenceGain} influence for overcoming bandits." />
+    
+    <!--BirthdayParty - Log Messages - Event 2-->
+    <string id="BirthdayParty_Event_Msg_2A}{heroName} offered {goldGiven} to the girl." />
+    <string id="BirthdayParty_Event_Msg_2B}{heroName} presented {goldGiven} to the girl." />
+    <string id="BirthdayParty_Event_Msg_2C}{heroName} handed {goldGiven} to the girl." />
+    <string id="BirthdayParty_Event_Msg_2D}{heroName} bestowed {goldGiven} upon the girl." />
+    <string id="BirthdayParty_Event_Msg_2E}{heroName} donated {goldGiven} to the girl." />
+    
+    <!--BirthdayParty - Log Messages - Event 3-->
+    <string id="BirthdayParty_Event_Msg_3A}{heroName}'s party ignored the birthday celebrations." />
+    <string id="BirthdayParty_Event_Msg_3A}{heroName}'s party bypassed the birthday event." />
+    <string id="BirthdayParty_Event_Msg_3B}{heroName}'s group overlooked the birthday festivities." />
+    <string id="BirthdayParty_Event_Msg_3C}{heroName}'s entourage disregarded the birthday party." />
+    <string id="BirthdayParty_Event_Msg_3D}{heroName}'s company skipped the birthday celebrations." />
+    <string id="BirthdayParty_Event_Msg_3E}{heroName}'s team paid no heed to the birthday gathering." />
+    
+    <!--BirthdayParty - Log Messages - Event 4-->
+    <string id="BirthdayParty_Event_Msg_4A}{heroName} plundered the party, gaining {goldLooted} gold." />
+    <string id="BirthdayParty_Event_Msg_4B}{heroName} pillaged the celebration, securing {goldLooted} gold." />
+    <string id="BirthdayParty_Event_Msg_4C}{heroName} looted the party, acquiring {goldLooted} gold." />
+    <string id="BirthdayParty_Event_Msg_4D}{heroName} ransacked the festivity, netting {goldLooted} gold." />
+    <string id="BirthdayParty_Event_Msg_4E}{heroName} commandeered the event, earning {goldLooted} gold." />
 
 
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                          Beggar Begging Event                              *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--BeggarBegging Event-->
     <string id="BeggarBegging_Title" text="Beggar" />
     <string id="BeggarBegging_Event_Desc" text="While you are relaxing in {currentSettlement} you are approached by a {beggarAge} {beggarGender} beggar who asks if you can spare any gold. You wonder what you should do." />
@@ -187,6 +276,14 @@
 
 
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                          Fallen Soldier Event                              *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--FallenSoldier Event-->
     <string id="FallenSoldier_Title" text="Family of a fallen soldier" />
     <string id="FallenSoldier_Event_Desc" text="As you are having a drink at the local tavern in {currentSettlement}, you are approached by 3 individuals. It's a woman and two young boys. They ask if they can talk to you. They explain that they are the family of a soldier who died under your command. They are here requesting compensation for his death as they are in desperate need of gold to be able to keep their farm. What do you do?" />
@@ -222,6 +319,14 @@
 
 
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                           Fishing Spot Event                               *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--FishingSpot Event-->
     <string id="FishingSpot_Title" text="A Great Fishing Spot" />
     <string id="FishingSpot_Event_Desc" text="While camping, {soldiersGoneFishing} of your men decide they want to go to the lake just outside the camp to try and catch some fish.\nYou could always use the additional resources and it would be a great morale booster for the party if they catch some. You tell them to be back before nightfall." />
@@ -242,7 +347,15 @@
     <string id="FishingSpot_Event_Msg_4" text="Your men returned with {fishCaught} and it raised morale by {moraleGained}." />
 
 
-
+    
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                           Hunting Trip Event                               *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--HuntingTrip Event-->
     <string id="HuntingTrip_Title" text="The Great Hunt" />
     <string id="HuntingTrip_Event_Desc" text="While camping, {soldiersGoneHunting} of your men decide they want to go into the forest just west of camp to try hunting.\nYou could use the additional resources and it would be a great morale booster for the party if they catch some. You tell them to be back before nightfall." />
@@ -263,6 +376,14 @@
 
 
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                           Logging Site Event                               *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--LoggingSite Event-->
     <string id="LoggingSite_Title" text="The Hardwood Forest" />
     <string id="LoggingSite_Event_Desc" text="While your party is traveling through the lands near {closestSettlement} you come across a forest rich in hardwood trees. You decide that it's time to stock up on hardwood so you order {soldiersGoneLogging} of your men to get to work. The men agree that this is a good opportunity to get some resources so they do as you say without much complaint.\nYou don't really need much, just enough to start some smithing projects next time you come across a forge. The rest you can easily sell for a nice profit." />
@@ -281,6 +402,14 @@
 
 
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                            Mass Grave Event                                *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--MassGrave Event-->
     <string id="MassGrave_Title" text="The Mass Grave" />
     <string id="MassGrave_Event_Desc" text="Your party has set up camp near {closestSettlement} and you have sent out some men to gather resources and hunt. Out of the blue {soldiersDiscovery} of your men come back and tell you that there is something you need to see. You join your men as they escort you to whatever it is they want to show you.\nWhen you arrive your are shocked to see a fresh mass grave filled with men, women and children. Your men asks you what they think we should do." />
@@ -313,6 +442,14 @@
 
 
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                        Not of This World Event                             *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--NotOfThisWorld Event-->
     <string id="NotOfThisWorld_Title" text="Not of this world" />
     <string id="NotOfThisWorld_Part_1" text="Your party is currently resting in the vicinity of {closestSettlement} when you observe a strange object descending from the sky and into the nearby forest. {soldiersInvestigating} of your men decide to go investigate, but you remain at the camp.\n After a few minutes you see an object leaving the forest and head towards the sky at an unbelievable speed. Eventually only one of your men returns from the forest. He tells you a bizarre story. \n \nWhen your men entered the forest they could see some object amongst the trees. This object was emitting an intense heat. After a few seconds an opening appeared and three small figures in a strange armor got out. One of your men tried to approach the entities, but was hit in the abdomen by a strange glowing arrow that came out of a small weapon the entities had. The man subsequently dropped dead.\n At this point the survivor hid in some bushes, but he witnessed the events that followed. He told you that the entities proceeded to kill the other {killedSoldiers} soldiers who went to investigate." />
@@ -327,43 +464,31 @@
 
 
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                          Passing Comet Event                               *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--PassingComet Event-->
     <string id="PassingComet_Title" text="The Celestial Visitor" />
     <string id="PassingComet_Event_Text" text="You and some of your men are standing in a field at night gazing up at a comet. You all agree that this is the most beautiful sight any of you have ever seen. You cannot help wondering what it really is. You have always been fascinated by the stars and night sky. Most people believe it's the gods looking down on us, but you think otherwise.\n \nYou have often wondered if the stars are nothing more than the same thing as the Sun just much further away or perhaps they're angels of our fallen ancestors watching over us. You have never shared these thoughts with anyone as most would think you to be crazy. At least for now you can be fascinated by the amazing comet passing by. You and a couple of your men end up standing there all night looking up and talking." />
 
     <!--PassingComet - Event Button-->
     <string id="PassingComet_Event_Button_Text" text="Done" />
+    
 
 
-
-    <!--PrisonerTransfer Event-->
-    <string id="PrisonerTransfer_Title" text="A Bunch of Prisoners" />
-    <string id="PrisonerTransfer_Event_Desc" text="You and your men are traveling near {closestSettlement} when you are approached by a band of mercenaries from {randomCulture}. They inform you that they were tasked with capturing a bunch of soldiers who had deserted their duty. They were on their way to {closestCastle} with the prisoners but they have not received payment for their job. They are offering you the chance to buy some or all of the prisoners for a nice sum of {pricePrPrisoner} gold per prisoner. You look at the prisoners and all you see are young recruits who can easily be trained and given a worthy cause to fight for. What do you do?" />
-
-    <!--PrisonerTransfer Event Choices-->
-    <string id="PrisonerTransfer_Event_Option_1" text="Buy all the prisoners" />
-    <string id="PrisonerTransfer_Event_Option_1_Hover" text="You could use every man" />
-    <string id="PrisonerTransfer_Event_Option_2" text="Buy some prisoners" />
-    <string id="PrisonerTransfer_Event_Option_2_Hover" text="You don't need everyone" />
-    <string id="PrisonerTransfer_Event_Option_3" text="Decline" />
-    <string id="PrisonerTransfer_Event_Option_3_Hover" text="You really don't need any more men" />
-
-    <!--PrisonerTransfer Events-->
-    <string id="PrisonerTransfer_Event_Choice_1" text="You tell the mercenary captain that you will take all the prisoners off his hands. You haggle for a few minutes over the price and end up paying {totalGold} gold for them.\n\n{pricePrPrisoner} gold * {prisonerForTransfer} men = {totalGold} gold in total.\n\n Once the negotiations have been concluded and the mercenaries have left you make sure to feed the prisoners. They cannot thank you enough for taking them in and it does not take long for all the prisoners to swear their allegiance to you." />
-    <string id="PrisonerTransfer_Event_Choice_2" text="You tell him you will take some of his men. He agrees and lets you inspect the men." />
-    <string id="PrisonerTransfer_Event_Choice_3" text="You tell him that you don't have room for anyone but you wish him luck on his journeys. You watch on as the mercenaries and the prisoners disappears over a small hill in the distance." />
-
-    <!--PrisonerTransfer Event Buttons-->
-    <string id="PrisonerTransfer_Event_Button_Text_1" text="Choose" />
-    <string id="PrisonerTransfer_Event_Button_Text_2" text="Done" />
-
-    <!--PrisonerTransfer Log Messages-->
-    <string id="PrisonerTransfer_Event_Msg_1" text="{heroName} bought {prisonerForTransfer} prisoners for {totalGold} gold." />
-    <string id="PrisonerTransfer_Event_Msg_2" text="{heroName} is thinking about buying some prisoners." />
-    <string id="PrisonerTransfer_Event_Msg_3" text="{heroName} did not buy any prisoners." />
-
-
-
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                             Red Moon Event                                 *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--RedMoon Event-->
     <string id="RedMoon_Title" text="The Red Moon" />
     <string id="RedMoon_Event_Desc" text="You are in your tent late one night when you are awoken by your men starting a commotion. Annoyed, you go out and tell them to quiet down but as soon as you step foot outside your tent you see what the commotion is about. The moon has become blood red. Your men are panicking and running around in all directions and proclaiming this to be the end of days. The only question you can ask yourself is what are you going to do about this?" />
@@ -396,6 +521,14 @@
 
 
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                            Runaway Son Event                               *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--RunawaySon Event-->
     <string id="RunawaySon_Title" text="Runaway Son" />
     <string id="RunawaySon_Event_Desc" text="As your party moves through the land near {closestSettlement}, you are approached by a young man. He explains that he ran away from the family farm after suffering abuse from his parents for years. He wants to join your party and he tells you he has some skills with weapons." />
@@ -427,7 +560,15 @@
     <!--RunawaySon - Log Messages-->
     <string id="RunawaySon_Event_Msg_1" text="{heroName} killed a young man and looted {goldLooted} from his corpse." />
 
-    
+
+
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                           Sudden Storm Event                               *
+    *                                                                            *
+    ******************************************************************************
+    -->
     
     <!--SuddenStorm Event-->
     <string id="SuddenStorm_Title" text="A Sudden Storm" />
@@ -461,6 +602,14 @@
 
 
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                     Supernatural Encounter Event                           *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--SupernaturalEncounter Event-->
     <string id="SupernaturalEncounter_Title" text="A Supernatural Encounter" />
     <string id="SupernaturalEncounter_Event_Desc" text="You are sleeping peacefully in your tent at night when you are awoken by the apparition of a young woman. She stands there looking at you and then she turns to leave but stops at the exit and turns back to you. You get the feeling she wants you to follow her." />
@@ -487,6 +636,13 @@
 
 
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                        Unexpected Wedding Event                            *
+    *                                                                            *
+    ******************************************************************************
+    -->
     <!--UnexpectedWedding Event-->
     <string id="UnexpectedWedding_Title" text="An Unexpected Wedding" />
     <string id="UnexpectedWedding_Event_Desc" text="You and your party are traveling in the vicinity of {closestSettlement} when you stumble across {peopleInWedding} people in a wedding taking place. The guests invite you over to celebrate this momentous event with them." />
@@ -527,6 +683,14 @@
 
 
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                           Violated Girl Event                              *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--ViolatedGirl Event-->
     <string id="ViolatedGirl_Title" text="A violated girl" />
     <string id="ViolatedGirl_Event_Desc" text="As your party is resting near {closestSettlement}, you are approached by a young girl. She asks to speak to you privately. You invite her into your tent to listen to what she has to say. She claims that while you were in the previous town she was violated by one of your men. What do you do?" />
@@ -570,6 +734,14 @@
 
 
 
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                             Old Ruins Event                                *
+    *                                                                            *
+    ******************************************************************************
+    -->
+    
     <!--OldRuins Event-->
     <string id="OldRuins_Title" text="The old ruins" />
     <string id="OldRuins_Event_Desc" text="You are traveling through the lands near {closestSettlement} when you come across the ruins of a small abandoned settlement. You don't remember there being any settlements out here on any map so you tell your men to set up camp nearby. You and {manCount} of your men decide to investigate it. \n\nWhen you enter the settlement it becomes apparent that it has been abandoned for some time. There is an old farmhouse, well, barn, and a small shack at the settlement. You ask your men where they want to check first but before they can answer a bolt of lightning rips through the clouds followed by a thunderous roar. You decide that you only have time to check one of the locations before you head back. Which will it be?" />
@@ -925,6 +1097,7 @@
     <!--LightsInTheSkies - Event Buttons-->
     <string id="LightsInTheSkies_Event_Button_Text_1" text="Read More" />
     <string id="LightsInTheSkies_Event_Button_Text_2" text="Done" />
+    <string id="LightsInTheSkies_Event_Button_Text_3" text="What?" />
 
     <!--LightsInTheSkies - Log Messages-->
     <string id="LightsInTheSkies_Event_Msg_1" text="{heroName} had a strange experience one night near {closestSettlement}." />
@@ -1239,10 +1412,17 @@
     <string id="PoisonedWine_Event_Text" text="Late in the night your decide to throw a party to raise troop morale. Drinks are overflowing, hunger is satiated, and some troops have started games such as arm wrestling and cards. Everything seems to be going as planned as the hours pass by into the night. Soon however, you wished you hadn't counted your chickens before they hatched.\n\nYour stomach starts churning and you hear a commotion on the other side of camp. Your men have started hurling the content of their stomach across the ground. Some are clutching their stomachs, and even a few are crying as they beg for it to stop. Your face goes pale as you realize, you've been poisoned.\n\nQuestions rush through your head. Who could have done it? When? But whether it was because of all of the questions or the poison, your head begins to spin. Unfortunately, this was a moment you knew you were going to hate. The last thing you see before you join your troops with vomiting, is a handful of men, not moving. You only hope you and the rest of your men are not so unlucky." />
     <string id="PoisonedWine_Event_Button_Text" text="Continue" />
     <string id="PoisonedWine_Event_Msg" text="{heroName} lost {menKilled} men and {menHurt} men got sick after drinking poisoned wine." />
+
+
+
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                                 Demonyms                                   *
+    *                                                                            *
+    ******************************************************************************
+    -->
     
-    
-    
-    <!--Demonyms-->
     <string id="Demonym_Empire_Noun" text="an Imperial" />
     <string id="Demonym_Vlandia_Noun" text="a Vlandian" />
     <string id="Demonym_Sturgia_Noun" text="a Sturgian" />
@@ -1260,7 +1440,13 @@
 
 
 
-    <!--Gender Assignments-->
+    <!--
+    ******************************************************************************
+    *                                                                            *
+    *                            Gender Assignments                              *
+    *                                                                            *
+    ******************************************************************************
+    -->
     <string id="gender_male_subjective_cap" text="He" />
     <string id="gender_male_subjective" text="he" />
     <string id="gender_male_objective_cap" text="Him" />

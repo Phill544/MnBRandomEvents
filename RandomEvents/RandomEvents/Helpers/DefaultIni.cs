@@ -159,6 +159,16 @@ MaxFishCatch = 20
 MinMoraleGain = 5
 MaxMoraleGain = 25
 
+[FleeingFate]
+EventDisabled = false
+MinGoldReward = 950
+MaxGoldReward = 3500
+MinAge = 16
+MaxAge = 30
+MinStewardLevel = 100
+MinRogueryLevel = 125
+SuccessChance = 0.625f
+
 [HuntingTrip]
 EventDisabled = false
 MinSoldiersToGo = 3
@@ -239,14 +249,10 @@ MinRogueryLevel = 125
 
 [SuddenStorm]
 EventDisabled = false
-MinHorsesLost = 1
-MaxHorsesLost = 3
 MinMenDied = 1
 MaxMenDied = 4
 MinMenWounded = 3
 MaxMenWounded = 7
-MinMeatFromHorse = 4
-MaxMeatFromHorse = 9
 
 [SupernaturalEncounter]
 EventDisabled = false

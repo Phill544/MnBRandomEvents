@@ -254,8 +254,15 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
 
         private Hero GetTargetHero()
         {
-            // Getting the current settlement for context
             var currentSettlement = Settlement.CurrentSettlement;
+
+            // Selecting a random hero based on the defined criteria
+            var targetHero = Campaign.Current.AliveHeroes
+                .Where(HeroSelectionCriteria)
+                .OrderByDescending(RandomSortOrder)
+                .FirstOrDefault();
+
+            return targetHero;
 
             // Filtering criteria for the hero selection
             bool HeroSelectionCriteria(Hero hero) 
@@ -271,14 +278,6 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
 
             // Random sorting function
             float RandomSortOrder(Hero hero) => MBRandom.RandomFloat;
-
-            // Selecting a random hero based on the defined criteria
-            var targetHero = Campaign.Current.AliveHeroes
-                .Where(HeroSelectionCriteria)
-                .OrderByDescending(RandomSortOrder)
-                .FirstOrDefault();
-
-            return targetHero;
         }
 
         private static bool IsCorrectTimeOfDay() => CurrentTimeOfDay.IsEvening || CurrentTimeOfDay.IsNight;

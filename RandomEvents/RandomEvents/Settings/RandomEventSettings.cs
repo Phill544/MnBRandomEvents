@@ -74,6 +74,8 @@ namespace Bannerlord.RandomEvents.Settings
         
         public FishingSpotData FishingSpotData { get; } = new FishingSpotData("FishingSpot", 0.5f);
         
+        public FleeingFateData FleeingFateData { get; } = new FleeingFateData("FleeingFate", 0.5f);
+        
         public HuntingTripData HuntingTripData { get; } = new HuntingTripData("HuntingTrip", 0.5f);
         
         public LightsInTheSkiesData LightsInTheSkiesData { get; } = new LightsInTheSkiesData("LightsInTheSkies", 0.05f);
@@ -87,8 +89,6 @@ namespace Bannerlord.RandomEvents.Settings
         public OldRuinsData OldRuinsData { get; } = new OldRuinsData("OldRuins", 0.5f);
         
         public PassingCometData PassingCometData { get; } = new PassingCometData("PassingComet", 0.125f);
-        
-        public PrisonerTransferData PrisonerTransferData { get; } = new PrisonerTransferData("PrisonerTransfer", 0.5f);
         
         public RedMoonData RedMoonData { get; } = new RedMoonData("RedMoon", 0.25f);
         
