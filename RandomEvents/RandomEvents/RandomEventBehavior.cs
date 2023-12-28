@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Bannerlord.RandomEvents.Events;
 using Bannerlord.RandomEvents.Settings;
 using TaleWorlds.CampaignSystem;
@@ -80,6 +81,83 @@ namespace Bannerlord.RandomEvents
         public static string CancelEvent(List<string> args)
         {
             return Instance.CancelEvent() ? "Current random event canceled!" : "No random event running.";
+        }
+        
+        [CommandLineFunctionality.CommandLineArgumentFunction("list", "randomevent")]
+        public static string ListRandomEvents(List<string> args)
+        {
+
+            var randomEvents = new List<string>
+            {
+                "AFlirtatiousEncounter",
+                "AheadOfTime",
+                "ArmyGames",
+                "ArmyInvite",
+                "BanditAmbush",
+                "BeeKind",
+                "BeggarBegging",
+                "BetMoney",
+                "BirdSong",
+                "BirthdayParty",
+                "BottomsUp",
+                "BumperCrops",
+                "BunchOfPrisoners",
+                "ChattingCommanders",
+                "CompanionAdmire",
+                "Courier",
+                "DiseasedCity",
+                "DreadedSweats",
+                "Duel",
+                "Dysentery",
+                "EagerTroops",
+                "ExoticDrinks",
+                "FallenSoldierFamily",
+                "FantasticFighters",
+                "Feast",
+                "FishingSpot",
+                "FleeingFate",
+                "FoodFight",
+                "GranaryRats",
+                "HotSprings",
+                "HuntingTrip",
+                "LightsInTheSky",
+                "LoggingSite",
+                "LookUp",
+                "MassGrave",
+                "Momentum",
+                "NotOfThisWorld",
+                "OldRuins",
+                "PassingComet",
+                "PerfectWeather",
+                "PoisonedWine",
+                "PrisonerRebellion",
+                "RedMoon",
+                "Refugees",
+                "Robbery",
+                "RunawaySon",
+                "SecretSinger",
+                "SecretsOfSteel",
+                "SpeedyRecovery",
+                "SuccessfulDeeds",
+                "SuddenStorm",
+                "SupernaturalEncounter",
+                "TargetPractice",
+                "Travellers",
+                "TravellingMerchant",
+                "Undercooked",
+                "UnexpectedWedding",
+                "ViolatedGirl",
+                "WanderingLivestock"
+            };
+            
+            var stringBuilder = new StringBuilder();
+            
+            foreach (var eventName in randomEvents)
+            {
+                stringBuilder.AppendLine(eventName);
+            }
+
+            return stringBuilder.ToString();
         }
 
 
