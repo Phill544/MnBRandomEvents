@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bannerlord.RandomEvents.Events;
+using Bannerlord.RandomEvents.Helpers;
 using Bannerlord.RandomEvents.Settings;
+using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -198,9 +200,31 @@ namespace Bannerlord.RandomEvents
         /// Selects the event that will be played
         /// </summary>
         /// <returns></returns>
+        
+        // ReSharper disable once FieldCanBeMadeReadOnly.Local
+        private Queue<string> eventHistory = new Queue<string>();
+        
         private BaseEvent SelectEvent()
         {
-            return randomEventGenerator.GetRandom().GetBaseEvent();
+            BaseEvent eventToPlay;
+            
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
+            
+            var DistinctEventCycleLength = ConfigFile.ReadInteger("GeneralSettings", "DistinctEventCycleLength");
+            
+            do
+            {
+                eventToPlay = randomEventGenerator.GetRandom().GetBaseEvent();
+            } while (eventHistory.Contains(eventToPlay.randomEventData.eventType));
+    
+            // Update the history
+            eventHistory.Enqueue(eventToPlay.randomEventData.eventType);
+            if (eventHistory.Count > DistinctEventCycleLength)
+            {
+                eventHistory.Dequeue();
+            }
+
+            return eventToPlay;
         }
 
         /// <summary>

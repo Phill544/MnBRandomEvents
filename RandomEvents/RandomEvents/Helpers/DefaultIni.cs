@@ -33,6 +33,7 @@ MaximumRealMinutes = 30
 LevelXpMultiplier = 40
 DisableSupernatural = false
 DisableSkillChecks = false
+DistinctEventCycleLength = 5
 
 
 
@@ -126,7 +127,7 @@ MinAttending = 15
 MaxAttending = 60
 MinYourMenAttending = 5
 MaxYourMenAttending = 15
-MinAge = 17 ; Putting below 16 will not work, game will revert to 16
+MinAge = 17
 MaxAge = 23
 MinBandits = 5
 MaxBandits = 15
@@ -234,8 +235,6 @@ MaxMenLost = 50
 EventDisabled = false
 MinGoldLost = 500
 MaxGoldLost = 5000
-MinRenownLost = 10
-MaxRenownLost = 150
 MinRoguerySkill = 125
 MinCharmSkill = 175
 MinOneHandedSkill = 150
@@ -249,10 +248,14 @@ MinRogueryLevel = 125
 
 [SuddenStorm]
 EventDisabled = false
+MinHorsesLost = 1
+MaxHorsesLost = 3
 MinMenDied = 1
 MaxMenDied = 4
 MinMenWounded = 3
 MaxMenWounded = 7
+MinMeatFromHorse = 4
+MaxMeatFromHorse = 9
 
 [SupernaturalEncounter]
 EventDisabled = false
