@@ -34,6 +34,8 @@ LevelXpMultiplier = 40
 DisableSupernatural = false
 DisableSkillChecks = false
 DistinctEventCycleLength = 5
+MaxQueueDisplayCount = 5
+MaxEventHistoryCount = 10
 
 
 

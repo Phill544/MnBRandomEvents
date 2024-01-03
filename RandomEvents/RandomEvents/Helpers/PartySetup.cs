@@ -54,7 +54,7 @@ namespace Bannerlord.RandomEvents.Helpers
 
 		    try
 		    {
-		        var hideouts = Settlement.FindAll(s => s.IsHideout).ToList();
+			    var hideouts = Settlement.FindAll(s => s.IsHideout).ToList();
 		        var closestHideout = hideouts.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 
 		        var banditCultureObject = cultureObjectId != null ? MBObjectManager.Instance.GetObject<CultureObject>(cultureObjectId) : closestHideout.Culture;
