@@ -17,21 +17,29 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
     public sealed class SuddenStorm : BaseEvent
     {
         private readonly bool eventDisabled;
+        private readonly int minHorsesLost;
+        private readonly int maxHorsesLost;
         private readonly int minMenDied;
         private readonly int maxMenDied;
         private readonly int minMenWounded;
         private readonly int maxMenWounded;
+        private readonly int minMeatFromHorse;
+        private readonly int maxMeatFromHorse;
 
         public SuddenStorm() : base(ModSettings.RandomEvents.SuddenStormData)
         {
             var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
             
             eventDisabled = ConfigFile.ReadBoolean("SuddenStorm", "EventDisabled");
+            minHorsesLost = ConfigFile.ReadInteger("SuddenStorm", "MinHorsesLost");
+            maxHorsesLost = ConfigFile.ReadInteger("SuddenStorm", "MaxHorsesLost");
             minMenDied = ConfigFile.ReadInteger("SuddenStorm", "MinMenDied");
             maxMenDied = ConfigFile.ReadInteger("SuddenStorm", "MaxMenDied");
             minMenWounded = ConfigFile.ReadInteger("SuddenStorm", "MinMenWounded");
             maxMenWounded = ConfigFile.ReadInteger("SuddenStorm", "MaxMenWounded");
-           
+            minMeatFromHorse = ConfigFile.ReadInteger("SuddenStorm", "MinMeatFromHorse");
+            maxMeatFromHorse = ConfigFile.ReadInteger("SuddenStorm", "MaxMeatFromHorse");
+            
         }
 
         public override void CancelEvent()
@@ -42,7 +50,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
         {
             if (eventDisabled == false)
             {
-                if (minMenDied != 0 || maxMenDied != 0 || minMenWounded != 0 || maxMenWounded != 0)
+                if (minHorsesLost != 0 || maxHorsesLost != 0 || minMenDied != 0 || maxMenDied != 0 || minMenWounded != 0 || maxMenWounded != 0 || minMeatFromHorse != 0 || maxMeatFromHorse != 0)
                 {
                     return true;
                 }
@@ -62,8 +70,15 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
 
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
             
+            var horsesLost = MBRandom.RandomInt(minHorsesLost, maxHorsesLost);
             var menDied = MBRandom.RandomInt(minMenDied, maxMenDied);
             var menWounded = MBRandom.RandomInt(minMenWounded, maxMenWounded);
+
+            var meatFromHorseMultiplier = MBRandom.RandomInt(minMeatFromHorse, maxMeatFromHorse);
+
+            var meatFromHorse = horsesLost * meatFromHorseMultiplier;
+            
+            var meat = MBObjectManager.Instance.GetObject<ItemObject>("meat");
 
             var eventDescription = new TextObject(
                     "{=SuddenStorm_Event_Desc}Your party is traveling near {closestSettlement} when you are suddenly " +
@@ -104,10 +119,12 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                     "start to inspect the damage and help those who are wounded, deciding to take the wounded men to " +
                     "{closestSettlement} to get help there. All in all {horsesLost} horses and {menDied} men died from " +
                     "the storm. {menWounded} men were taken to {closestSettlement} to get help. You bury your deceased " +
-                    "men in a single grave.")
+                    "men in a single grave and manage to salvage {meatFromHorse} meat from the dead horses.")
                 .SetTextVariable("closestSettlement", closestSettlement)
+                .SetTextVariable("horsesLost", horsesLost)
                 .SetTextVariable("menDied", menDied)
                 .SetTextVariable("menWounded", menWounded)
+                .SetTextVariable("meatFromHorse", meatFromHorse)
                 .ToString();
 
             var eventOptionBText = new TextObject(
@@ -120,10 +137,12 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                     "the damage and help those who are wounded in the forest, deciding to take the wounded men to " +
                     "{closestSettlement} to get help there. All in all {horsesLost} horses and {menDied} men died from " +
                     "the storm. {menWounded} men were taken to {closestSettlement} to get help. You bury your deceased " +
-                    "men in a single grave.")
+                    "men in a single grave and you manage to salvage {meatFromHorse} meat from the dead horses.")
                 .SetTextVariable("closestSettlement", closestSettlement)
+                .SetTextVariable("horsesLost", horsesLost)
                 .SetTextVariable("menDied", menDied)
                 .SetTextVariable("menWounded", menWounded)
+                .SetTextVariable("meatFromHorse", meatFromHorse)
                 .ToString();
 
             var eventOptionCText = new TextObject(
@@ -136,10 +155,13 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                     "stay by saying that we will search once the storm has passed.\n\nThe storm passes relatively quickly. " +
                     "You and your men start to inspect the damage to your gear and help those who have been wounded. " +
                     "You decide to take the wounded men to {closestSettlement} to get help there. After a few hours you " +
-                    "find all the surviving horses. All in all {menWounded} men were wounded " +
-                    "and they were taken to {closestSettlement} to get help.")
+                    "find all the surviving horses. All in all {horsesLost} horses died and {menWounded} men were wounded " +
+                    "and they were taken to {closestSettlement} to get help. You manage to salvage {meatFromHorse} meat " +
+                    "from the dead horses.")
                 .SetTextVariable("closestSettlement", closestSettlement)
+                .SetTextVariable("horsesLost", horsesLost)
                 .SetTextVariable("menWounded", menWounded)
+                .SetTextVariable("meatFromHorse", meatFromHorse)
                 .ToString();
 
             var eventOptionDText = new TextObject(
@@ -155,34 +177,44 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                     "those who are wounded. You decide to take the wounded men to {closestSettlement} to get help there. " +
                     "All in all {horsesLost} horses and {menDied} men died from the storm, but you cannot help thinking " +
                     "that number would have been lower if you had stopped sooner. {menWounded} men were taken to " +
-                    "{closestSettlement} to get help. You bury your deceased men in a single grave.")
+                    "{closestSettlement} to get help. You bury your deceased men in a single grave and you manage to " +
+                    "salvage {meatFromHorse} meat from the dead horses.")
                 .SetTextVariable("closestSettlement", closestSettlement)
+                .SetTextVariable("horsesLost", horsesLost)
                 .SetTextVariable("menDied", menDied)
                 .SetTextVariable("menWounded", menWounded)
+                .SetTextVariable("meatFromHorse", meatFromHorse)
                 .ToString();
                 
             var eventMsg1 = new TextObject(
-                    "{=SuddenStorm_Event_Msg_1}{heroName} lost {menDied} men to a sudden storm.")
+                    "{=SuddenStorm_Event_Msg_1}{heroName} lost {horsesLost} horses and {menDied} men to a sudden storm. He also received {meatFromHorse} meat from butchering the dead horses.")
                 .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
+                .SetTextVariable("horsesLost", horsesLost)
                 .SetTextVariable("menDied", menDied)
+                .SetTextVariable("meatFromHorse", meatFromHorse)
                 .ToString();
                 
             var eventMsg2 = new TextObject(
-                    "{=SuddenStorm_Event_Msg_2}{heroName} lost {menDied} men to a sudden storm.")
+                    "{=SuddenStorm_Event_Msg_2}{heroName} lost {horsesLost} horses and {menDied} men to a sudden storm. He also received {meatFromHorse} meat from butchering the dead horses.")
                 .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
+                .SetTextVariable("horsesLost", horsesLost)
                 .SetTextVariable("menDied", menDied)
+                .SetTextVariable("meatFromHorse", meatFromHorse)
                 .ToString();
                 
             var eventMsg3 = new TextObject(
-                    "{=SuddenStorm_Event_Msg_3}{menWounded} of {heroName}'s men were wounded in a sudden storm.")
+                    "{=SuddenStorm_Event_Msg_3}{heroName} lost {horsesLost} horses to a sudden storm. He received {meatFromHorse} meat from butchering the dead horses.")
                 .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
-                .SetTextVariable("menWounded", menWounded)
+                .SetTextVariable("horsesLost", horsesLost)
+                .SetTextVariable("meatFromHorse", meatFromHorse)
                 .ToString();
                 
             var eventMsg4 = new TextObject(
-                    "{=SuddenStorm_Event_Msg_4}In refusing his men shelter from the storm, {heroName} lost {menDied} men to a sudden storm.")
+                    "{=SuddenStorm_Event_Msg_4}In refusing his men shelter from the storm, {heroName} lost {horsesLost} horses and {menDied} men to a sudden storm.")
                 .SetTextVariable("heroName", Hero.MainHero.FirstName.ToString())
+                .SetTextVariable("horsesLost", horsesLost)
                 .SetTextVariable("menDied", menDied)
+                .SetTextVariable("meatFromHorse", meatFromHorse)
                 .ToString();
             
             var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1,
@@ -194,6 +226,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                            case "a":
                                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                                 
+                                MobileParty.MainParty.ItemRoster.AddToCounts(meat, meatFromHorse);
                                 MobileParty.MainParty.MemberRoster.KillNumberOfNonHeroTroopsRandomly(menDied);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
@@ -202,6 +235,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                             case "b":
                                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
                                 
+                                MobileParty.MainParty.ItemRoster.AddToCounts(meat, meatFromHorse);
                                 MobileParty.MainParty.MemberRoster.KillNumberOfNonHeroTroopsRandomly(menDied);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
@@ -210,6 +244,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                             case "c":
                                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionCText, true, false, eventButtonText2, null, null, null), true);
                                 
+                                MobileParty.MainParty.ItemRoster.AddToCounts(meat, meatFromHorse);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
                                 InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_MED_Outcome));
@@ -218,6 +253,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                             case "d":
                                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                                 
+                                MobileParty.MainParty.ItemRoster.AddToCounts(meat, meatFromHorse);
                                 MobileParty.MainParty.MemberRoster.KillNumberOfNonHeroTroopsRandomly(menDied);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 

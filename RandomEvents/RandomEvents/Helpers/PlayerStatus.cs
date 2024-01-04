@@ -4,8 +4,7 @@ using TaleWorlds.Core;
 namespace Bannerlord.RandomEvents.Helpers
 {
 	public static class PlayerStatus
-	{
-        
+	{ 
         public static bool HasRangedWeaponEquipped()
         {
             var playerEquipment = Hero.MainHero.BattleEquipment;

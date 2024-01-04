@@ -149,7 +149,7 @@ namespace Bannerlord.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=OldRuins_Event_Msg_2}{heroName} received  {goldForYou} gold after splitting {goldFound} gold with {manCount} men.")
+                    "{=OldRuins_Event_Msg_2}{heroName} received {goldForYou} gold after splitting {goldFound} gold with {manCount} men.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldForYou", goldForYou)
                 .SetTextVariable("goldFound", goldFound)
