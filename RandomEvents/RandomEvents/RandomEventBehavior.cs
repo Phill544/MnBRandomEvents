@@ -37,13 +37,20 @@ namespace Bannerlord.RandomEvents
 		{
 		}
 
-
         [CommandLineFunctionality.CommandLineArgumentFunction("run", "randomevent")]
         public static string RunRandomEvent(List<string> args)
         {
             if (args.Count < 1)
             {
                 return "You must provide the type of event to run";
+            }
+
+            var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
+            var eventDisabled = ConfigFile.ReadBoolean(args[0], "EventDisabled");
+            
+            if (eventDisabled)
+            {
+                return $"Event {args[0]} is disabled and cannot be run.";
             }
 
             if (Instance.currentEvent != null)
@@ -61,6 +68,7 @@ namespace Bannerlord.RandomEvents
             Instance.ExecuteRandomEvent(evnt);
             return $"Starting {args[0]}";
         }
+
         
         [CommandLineFunctionality.CommandLineArgumentFunction("next", "randomevent")]
         public static string RunNextEvent(List<string> args)
