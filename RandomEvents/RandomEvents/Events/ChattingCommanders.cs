@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace Bannerlord.RandomEvents.Events
 {
 	public sealed class ChattingCommanders : BaseEvent
 	{
@@ -48,11 +47,6 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
-			}
-
 			try
 			{
 				MobileParty.MainParty.Army.Cohesion += cohesionIncrease;

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -10,7 +10,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace Bannerlord.RandomEvents.Events
 {
 	public sealed class BanditAmbush : BaseEvent
 	{
@@ -55,14 +55,21 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
+			var heroGold = Hero.MainHero.Gold;
+
+			if (heroGold < 1)
 			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
+				//Emulate some gold
+				Hero.MainHero.ChangeHeroGold(+400);
+				heroGold += 400;
 			}
+			
+			var percentMoneyLost = MBRandom.RandomFloatRanged(moneyMinPercent, moneyMaxPercent);
+			var goldLost = MathF.Floor(heroGold * percentMoneyLost);
 			
 			var eventTitle = new TextObject("{=BanditAmbush_Title}Ambushed by bandits!").ToString();
 			
-			var eventOption1 = new TextObject("{=BanditAmbush_Event_Option_1}Pay gold to have them leave").ToString();
+			var eventOption1 = new TextObject("{=BanditAmbush_Event_Option_1}Pay {goldLost} gold to have them leave").SetTextVariable("goldLost", goldLost).ToString();
 			var eventOption1Hover = new TextObject("{=BanditAmbush_Event_Option_1_Hover}What is gold good for, if not to dissuade people from killing you?").ToString();
             
 			var eventOption2 = new TextObject("{=BanditAmbush_Event_Option_2}Attack").ToString();
@@ -72,20 +79,20 @@ namespace CryingBuffalo.RandomEvents.Events
 			var eventButtonText1 = new TextObject("{=BanditAmbush_Event_Button_Text_1}Okay").ToString();
 			var eventButtonText2 = new TextObject("{=BanditAmbush_Event_Button_Text_2}Done").ToString();
 
-			var inquiryElements = new List<InquiryElement>
+			var inquiryElements = new List<InquiryElement>();
+
+			if (heroGold > goldLost)
 			{
-				new InquiryElement("a", eventOption1, null, true, eventOption1Hover),
-				new InquiryElement("b", eventOption2, null)
-			};
+				inquiryElements.Add(new InquiryElement("a", eventOption1, null, true, eventOption1Hover)); 
+			}
+
+			inquiryElements.Add(new InquiryElement("b", eventOption2, null)); 
 
 			if (Hero.MainHero.PartyBelongedTo.MemberRoster.TotalHealthyCount > troopScareCount)
 			{
 				inquiryElements.Add(new InquiryElement("c", eventOption3, null)); 
 			}
 			
-			var percentMoneyLost = MBRandom.RandomFloatRanged(moneyMinPercent, moneyMaxPercent);
-			
-			var goldLost = MathF.Floor(Hero.MainHero.Gold * percentMoneyLost);
 			
 			var eventOptionAText = new TextObject(
 					"{=BanditAmbush_Event_Choice_1}You give the bandits {goldLost} coins and they quickly flee. At least you and your soldiers live to fight another day.")
@@ -100,7 +107,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					"{=BanditAmbush_Event_Choice_3}You laugh as you watch the rest of your party emerge over the crest of the hill. The bandits get ready to flee.")
 				.ToString();
 
-			var msid = new MultiSelectionInquiryData(eventTitle, CalculateDescription(), inquiryElements, false, 1, eventButtonText1, null, 
+			var msid = new MultiSelectionInquiryData(eventTitle, CalculateDescription(), inquiryElements, false, 1, 1, eventButtonText1, null, 
 				elements => 
 				{
 					switch ((string)elements[0].Identifier)
@@ -123,8 +130,7 @@ namespace CryingBuffalo.RandomEvents.Events
 							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
 							break;
 					}
-				},
-				null);
+				}, null, null);
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 
@@ -145,7 +151,6 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		private string CalculateDescription()
 		{
-			
 			var eventDescription1 = new TextObject(
 					"{=BanditAmbush_Event_Desc_1}You are traveling with your forward party when you get surrounded by a group of bandits!")
 				.ToString();
@@ -161,7 +166,7 @@ namespace CryingBuffalo.RandomEvents.Events
 		{
 			try
 			{
-				MobileParty banditParty = PartySetup.CreateBanditParty();
+				var banditParty = PartySetup.CreateBanditParty();
 
 				banditParty.MemberRoster.Clear();
 
@@ -176,7 +181,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					banditParty.Ai.SetMoveEngageParty(MobileParty.MainParty);
 				}
 
-				int numberToSpawn = Math.Min((int)(MobileParty.MainParty.MemberRoster.TotalManCount * 0.50f), banditCap);
+				var numberToSpawn = Math.Min((int)(MobileParty.MainParty.MemberRoster.TotalManCount * 0.50f), banditCap);
 
 				PartySetup.AddRandomCultureUnits(banditParty, 10 + numberToSpawn);
 			}

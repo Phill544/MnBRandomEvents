@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -12,7 +12,7 @@ using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
-namespace CryingBuffalo.RandomEvents.Events.CCEvents
+namespace Bannerlord.RandomEvents.Events.CCEvents
 {
     public sealed class SuddenStorm : BaseEvent
     {
@@ -66,35 +66,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}” with the current values:\n\n" +
-                        "Min Horses Lost : {minHorsesLost}\n" +
-                        "Max Horses Lost : {maxHorsesLost}\n" +
-                        "Min Men Killed : {minMenDied}\n" +
-                        "Max Men Killed : {maxMenDied}\n" +
-                        "Min Men Wounded : {minMenWounded}\n" +
-                        "Max Men Wounded : {maxMenWounded}\n" +
-                        "Min Meat From Dead Horses : {minMeatFromHorse}\n" +
-                        "Max Meat From Dead Horses : {maxMeatFromHorse}\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("minHorsesLost", minHorsesLost)
-                    .SetTextVariable("maxHorsesLost", maxHorsesLost)
-                    .SetTextVariable("minMenDied", minMenDied)
-                    .SetTextVariable("maxMenDied", maxMenDied)
-                    .SetTextVariable("minMenWounded", minMenWounded)
-                    .SetTextVariable("maxMenWounded", maxMenWounded)
-                    .SetTextVariable("minMeatFromHorse", minMeatFromHorse)
-                    .SetTextVariable("maxMeatFromHorse", maxMeatFromHorse)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-            }
-
             var eventTitle = new TextObject("{=SuddenStorm_Title}A Sudden Storm").ToString();
 
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
@@ -246,7 +217,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("meatFromHorse", meatFromHorse)
                 .ToString();
             
-            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1,
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1,
                 eventButtonText1, null,
                 elements =>
                    {
@@ -256,7 +227,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                                 
                                 MobileParty.MainParty.ItemRoster.AddToCounts(meat, meatFromHorse);
-                                MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menDied, false);
+                                MobileParty.MainParty.MemberRoster.KillNumberOfNonHeroTroopsRandomly(menDied);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
                                 InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_MED_Outcome));
@@ -265,7 +236,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionBText, true, false, eventButtonText2, null, null, null), true);
                                 
                                 MobileParty.MainParty.ItemRoster.AddToCounts(meat, meatFromHorse);
-                                MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menDied, false);
+                                MobileParty.MainParty.MemberRoster.KillNumberOfNonHeroTroopsRandomly(menDied);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
                                 InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_MED_Outcome));
@@ -283,7 +254,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionDText, true, false, eventButtonText2, null, null, null), true);
                                 
                                 MobileParty.MainParty.ItemRoster.AddToCounts(meat, meatFromHorse);
-                                MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menDied, false);
+                                MobileParty.MainParty.MemberRoster.KillNumberOfNonHeroTroopsRandomly(menDied);
                                 MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menWounded);
                                 
                                 InformationManager.DisplayMessage(new InformationMessage(eventMsg4, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
@@ -293,8 +264,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                                 MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
                                 break;
                         }
-                    },
-                    null);
+                    }, null, null);
 
                 MBInformationManager.ShowMultiSelectionInquiry(msid, true);
                 

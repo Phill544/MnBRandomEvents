@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -9,7 +9,7 @@ using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
-namespace CryingBuffalo.RandomEvents.Events.CCEvents
+namespace Bannerlord.RandomEvents.Events.CCEvents
 {
     public sealed class LoggingSite : BaseEvent
     {
@@ -61,33 +61,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}” with the current values:\n\n" +
-                        "Min Soldiers Hunting : {minSoldiersToGo}\n" +
-                        "Max Soldiers Hunting : {maxSoldiersToGo}\n" +
-                        "Min Yield : {minYield}\n" +
-                        "Max Yield : {maxYield}\n" +
-                        "Min Yield Multiplier : {minYieldMultiplier}\n" +
-                        "Max Yield Multiplier : {maxYieldMultiplier}\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("minSoldiersToGo", minSoldiersToGo)
-                    .SetTextVariable("maxSoldiersToGo", maxSoldiersToGo)
-                    .SetTextVariable("minYield", minYield)
-                    .SetTextVariable("maxYield", maxYield)
-                    .SetTextVariable("minYieldMultiplier", minYieldMultiplier)
-                    .SetTextVariable("maxYieldMultiplier", maxYieldMultiplier)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-                
-                
-            }
-            
             var eventTitle = new TextObject("{=LoggingSite_Title}The Hardwood Forest").ToString();
             
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();

@@ -1,4 +1,20 @@
-; © Random Events - 2024
+﻿using System;
+
+namespace Bannerlord.RandomEvents.Helpers
+{
+    public static class DefaultIni
+    {
+        public static string Content()
+        {
+            var timestamp = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+            var year = DateTime.Now.ToString("yyyy");
+
+            return @$"
+; WARNING - REMOVAL OF THIS FILE WILL RESULT IN A DEFAULT INI FILE BEING CREATED AND IT WILL CONTAIN DEFAULT VALUES
+;
+; This INI was generated on {timestamp}
+;
+; © Random Events - {year}
 ;
 ; Do not set any value to 0 as that will result in the event being unable to run.
 ;
@@ -154,7 +170,7 @@ MinAge = 16
 MaxAge = 30
 MinStewardLevel = 100
 MinRogueryLevel = 125
-SuccessChance = 66
+SuccessChance = 65
 
 [HuntingTrip]
 EventDisabled = false
@@ -418,3 +434,7 @@ MaxTroopsToInjure = 30
 EventDisabled = false
 MinFood = 10
 MaxFood = 20
+";
+        }
+    }
+}

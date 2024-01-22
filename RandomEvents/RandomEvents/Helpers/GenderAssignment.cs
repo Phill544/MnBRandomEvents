@@ -1,6 +1,6 @@
 ﻿using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Helpers
+namespace Bannerlord.RandomEvents.Helpers
 {
     public static class GenderAssignment
     {

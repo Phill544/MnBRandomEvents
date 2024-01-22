@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -10,7 +10,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.BicEvents
+namespace Bannerlord.RandomEvents.Events.BicEvents
 {
 	public sealed class BottomsUp : BaseEvent
 	{
@@ -56,11 +56,6 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
-			}
-
 			var goldGain = MBRandom.RandomInt(minGold, maxGold);
 			var moraleGain = MBRandom.RandomInt(minMoraleGain, maxMoraleGain);
 			var currentSettlement = MobileParty.MainParty.CurrentSettlement.Name;
@@ -118,7 +113,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			var eventButtonText1 = new TextObject("{=BottomsUp_Event_Button_Text_1}Choose").ToString();
 			var eventButtonText2 = new TextObject("{=BottomsUp_Event_Button_Text_2}Done").ToString();
 
-			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null,
+			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1, eventButtonText1, null,
 				elements =>
                 {
 					switch ((string)elements[0].Identifier)
@@ -141,7 +136,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 							break;
 					}
 				},
-				null);
+				null, null);
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

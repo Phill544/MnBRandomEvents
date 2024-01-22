@@ -83,8 +83,8 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\CCEvents\Duel.cs" />
     <Compile Include="Events\CCEvents\FallenSoldierFamily.cs" />
     <Compile Include="Events\CCEvents\FishingSpot.cs" />
+    <Compile Include="Events\CCEvents\FleeingFate.cs" />
     <Compile Include="Events\CCEvents\LightsInTheSkies.cs" />
-    <Compile Include="Events\CCEvents\PrisonerTransfer.cs" />
     <Compile Include="Events\CCEvents\Robbery.cs" />
     <Compile Include="Events\CCEvents\SuddenStorm.cs" />
     <Compile Include="Events\CCEvents\HuntingTrip.cs" />
@@ -121,6 +121,7 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
     <Compile Include="Events\WanderingLivestock.cs" />
     <Compile Include="Helpers\ClosestSettlement.cs" />
     <Compile Include="Helpers\CurrentTimeOfDay.cs" />
+    <Compile Include="Helpers\DefaultIni.cs" />
     <Compile Include="Helpers\Demonym.cs" />
     <Compile Include="Helpers\GenderAssignment.cs" />
     <Compile Include="Helpers\PartySetup.cs" />
@@ -138,9 +139,6 @@ COPY "$(SolutionDir)..\SubModule.xml" "$(TargetDir)..\..\SubModule.xml" /Y</Post
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ini.net" Version="1.1.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ModuleData\Languages\std_module_strings_xml.xml" />

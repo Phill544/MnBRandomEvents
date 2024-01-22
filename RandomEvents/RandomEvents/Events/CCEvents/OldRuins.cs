@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -10,7 +10,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.CCEvents
+namespace Bannerlord.RandomEvents.Events.CCEvents
 {
     public sealed class OldRuins : BaseEvent
     {
@@ -58,30 +58,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}” with the current values:\n\n" +
-                        "Min Men To Take With You : {minMen}\n" +
-                        "Max Men To Take With You : {maxMen}\n" +
-                        "Max Men To Kill : {maxMenToKill}\n" +
-                        "Min Gold Found : {minGoldFound}\n" +
-                        "Max Gold Found : {maxGoldFound}\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("minMen", minMen)
-                    .SetTextVariable("maxMen", maxMen)
-                    .SetTextVariable("maxMenToKill", maxMenToKill)
-                    .SetTextVariable("minGoldFound", minGoldFound)
-                    .SetTextVariable("maxGoldFound", maxGoldFound)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-                
-            }
-
             var heroName = Hero.MainHero.FirstName;
             
             var eventTitle = new TextObject("{=OldRuins_Title}The old ruins").ToString();
@@ -173,14 +149,14 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
             
             var eventMsg2 =new TextObject(
-                    "{=OldRuins_Event_Msg_2}{heroName} received  {goldForYou} gold after splitting {goldFound} gold with {manCount} men.")
+                    "{=OldRuins_Event_Msg_2}{heroName} received {goldForYou} gold after splitting {goldFound} gold with {manCount} men.")
                 .SetTextVariable("heroName", heroName)
                 .SetTextVariable("goldForYou", goldForYou)
                 .SetTextVariable("goldFound", goldFound)
                 .SetTextVariable("manCount", manCount )
                 .ToString();
 
-            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null,
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1, eventButtonText1, null,
                 elements =>
                 {
                     switch ((string)elements[0].Identifier)
@@ -189,7 +165,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventOptionAText, true, false, eventButtonText2, null, null, null), true);
                             InformationManager.DisplayMessage(new InformationMessage(eventMsg1, RandomEventsSubmodule.Msg_Color_NEG_Outcome));
                             
-                            MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(killedMen, false);
+                            MobileParty.MainParty.MemberRoster.KillNumberOfNonHeroTroopsRandomly(killedMen);
                             break;
                         
                         case "b":
@@ -214,7 +190,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             break;
                     }
                 },
-                null);
+                null, null);
 
             MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

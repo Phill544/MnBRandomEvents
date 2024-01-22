@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace Bannerlord.RandomEvents.Events
 {
 
     public abstract class BaseEvent

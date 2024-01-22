@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -9,7 +9,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.BicEvents
+namespace Bannerlord.RandomEvents.Events.BicEvents
 {
 	public sealed class CompanionAdmire : BaseEvent
 	{
@@ -46,14 +46,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
-			}
-
 			var dice = MBRandom.RandomInt(1, 4);
-
-
 
 			//Profession----------
 			var scout = MobileParty.MainParty.EffectiveScout;
