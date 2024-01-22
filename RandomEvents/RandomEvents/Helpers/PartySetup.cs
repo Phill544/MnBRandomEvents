@@ -10,7 +10,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
-namespace CryingBuffalo.RandomEvents.Helpers
+namespace Bannerlord.RandomEvents.Helpers
 {
 	public static class PartySetup
 	{
@@ -49,38 +49,58 @@ namespace CryingBuffalo.RandomEvents.Helpers
 		}
 
 		public static MobileParty CreateBanditParty(string cultureObjectId = null, string partyName = null)
-		{
-			MobileParty banditParty = null;
+{
+		    MobileParty banditParty = null;
 
-			try
-			{
-				var hideouts = Settlement.FindAll(s => s.IsHideout).ToList();
-				var closestHideout = hideouts.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
+		    try
+		    {
+			    var hideouts = Settlement.FindAll(s => s.IsHideout).ToList();
+		        var closestHideout = hideouts.MinBy(s => MobileParty.MainParty.GetPosition().DistanceSquared(s.GetPosition()));
 
-				var banditCultureObject = cultureObjectId != null ? MBObjectManager.Instance.GetObject<CultureObject>(cultureObjectId) : closestHideout.Culture;
+		        var banditCultureObject = cultureObjectId != null ? MBObjectManager.Instance.GetObject<CultureObject>(cultureObjectId) : closestHideout.Culture;
 
-				partyName ??= $"{banditCultureObject.Name} (Random Event)";
+		        partyName ??= $"{banditCultureObject.Name} (Random Event)";
 
-				var partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
-				
-				banditParty = BanditPartyComponent.CreateBanditParty(
-					$"randomevent_{banditCultureObject.StringId}_{MBRandom.RandomInt(int.MaxValue)}",
-					Clan.BanditFactions.First(clan => clan.DefaultPartyTemplate == partyTemplate),
-					closestHideout.Hideout,
-					false);
-				
-				var partyNameTextObject = new TextObject(partyName);
-				
-				banditParty.InitializeMobilePartyAroundPosition(partyTemplate, MobileParty.MainParty.Position2D, 0.2f, 0.1f, 20);
-				banditParty.SetCustomName(partyNameTextObject);
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show($"Error while trying to create a mobile bandit party :\n\n {ex.Message} \n\n { ex.StackTrace}");
-			}
+		        var partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
 
-			return banditParty;
+		        var matchedClan = Clan.BanditFactions.FirstOrDefault(clan => clan.DefaultPartyTemplate == partyTemplate);
+
+		        // If no matching clan is found, select a random culture from the specified list
+		        if (matchedClan == null)
+		        {
+		            var cultures = new List<string> { "Vlandia", "westernEmpire", "easternEmpire", "northernEmpire", "Khuzait", "Aserai", "Sturgia", "Battania" };
+		            
+		            var randomCulture = cultures[MBRandom.RandomInt(cultures.Count)];
+		            
+		            banditCultureObject = MBObjectManager.Instance.GetObject<CultureObject>(randomCulture);
+		            partyTemplate = MBObjectManager.Instance.GetObject<PartyTemplateObject>($"{banditCultureObject.StringId}_template");
+		            matchedClan = Clan.BanditFactions.FirstOrDefault(clan => clan.DefaultPartyTemplate == partyTemplate);
+
+		            if (matchedClan == null)
+		            {
+		                MessageBox.Show($"Error: No matching clan found even with '{randomCulture}' culture.");
+		                return null;
+		            }
+		        }
+
+		        banditParty = BanditPartyComponent.CreateBanditParty(
+		            $"randomevent_{banditCultureObject.StringId}_{MBRandom.RandomInt(int.MaxValue)}",
+		            matchedClan,
+		            closestHideout.Hideout, false);
+
+		        var partyNameTextObject = new TextObject(partyName);
+
+		        banditParty.InitializeMobilePartyAroundPosition(partyTemplate, MobileParty.MainParty.Position2D, 0.2f, 0.1f, 20);
+		        banditParty.SetCustomName(partyNameTextObject);
+		    }
+		    catch (Exception ex)
+		    {
+		        MessageBox.Show($"Error while trying to create a mobile bandit party :\n\n {ex.Message} \n\n { ex.StackTrace}");
+		    }
+
+		    return banditParty;
 		}
+
 
 		public static void AddRandomCultureUnits(MobileParty party, int numberToAdd, CultureObject overrideCulture = null)
 		{
@@ -110,9 +130,9 @@ namespace CryingBuffalo.RandomEvents.Helpers
 						party.AddElementToMemberRoster(characterObject, spawnNumbers[i]);
 				}
 			}
-			catch (Exception e)
+			catch (Exception ex)
 			{
-				return;
+				MessageBox.Show($"Error while trying to add random culture units :\n\n {ex.Message} \n\n { ex.StackTrace}");
 			}
 		}
 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -11,7 +11,7 @@ using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace Bannerlord.RandomEvents.Events
 {
 	public sealed class LookUp : BaseEvent
 	{
@@ -60,11 +60,6 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
-			}
-			
 			var eventTitle = new TextObject("{=LookUp_Title}Look up!").ToString();
 			
 			var eventDescription = new TextObject("{=LookUp_Event_Desc}While walking past some trees you notice something shiny high up in its branches.")
@@ -89,7 +84,7 @@ namespace CryingBuffalo.RandomEvents.Events
 				inquiryElements.Add(new InquiryElement("c", eventOption3, null));
 			}
 
-			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null, 
+			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1, eventButtonText1, null, 
 				elements => 
 				{
 					switch ((string)elements[0].Identifier)
@@ -182,8 +177,7 @@ namespace CryingBuffalo.RandomEvents.Events
 							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
 							break;
 					}
-				},
-				null); 
+				}, null, null); 
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

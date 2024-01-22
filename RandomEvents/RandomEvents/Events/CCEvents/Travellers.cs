@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -11,7 +11,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.CCEvents
+namespace Bannerlord.RandomEvents.Events.CCEvents
 {
     public sealed class Travellers : BaseEvent
     {
@@ -57,29 +57,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}” with the current values:\n\n" +
-                        "Min Gold Stolen : {minGoldStolen}\n" +
-                        "Max Gold Stolen : {maxGoldStolen}\n" +
-                        "Min Engineering Level : {minEngineeringLevel}\n" +
-                        "Min Roguery Level : {minRogueryLevel}\n" +
-                        "Min Steward Level: {minStewardLevel}\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("minGoldStolen", minGoldStolen)
-                    .SetTextVariable("maxGoldStolen", maxGoldStolen)
-                    .SetTextVariable("minEngineeringLevel", minEngineeringLevel)
-                    .SetTextVariable("minRogueryLevel", minRogueryLevel)
-                    .SetTextVariable("minStewardLevel", minStewardLevel)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-            }
-            
             var eventTitle = new TextObject("{=Travellers_Title}Travellers").ToString();
 
             var heroName = Hero.MainHero.Name.ToString();
@@ -266,7 +243,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("heroName", heroName)
                 .ToString();
 
-            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null, elements =>
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1, eventButtonText1, null, elements =>
                 {
                     switch ((string)elements[0].Identifier)
                     {
@@ -300,8 +277,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
                             break;
                     }
-                },
-                null);
+                }, null, null);
 
             MBInformationManager.ShowMultiSelectionInquiry(msid, true);
             

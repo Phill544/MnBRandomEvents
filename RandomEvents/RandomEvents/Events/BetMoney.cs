@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -10,7 +10,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events
+namespace Bannerlord.RandomEvents.Events
 {
 	internal sealed class BetMoney : BaseEvent
 	{
@@ -50,11 +50,6 @@ namespace CryingBuffalo.RandomEvents.Events
 
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
-			}
-			
 			var eventTitle = new TextObject("{=BetMoney_Title}All or nothing").ToString();
 			
 			var eventOption1 = new TextObject("{=BetMoney_Event_Option_1}Gamble").ToString();
@@ -85,7 +80,7 @@ namespace CryingBuffalo.RandomEvents.Events
 
 			var eventNoBet = new TextObject("{=BetMoney_Event_No_Bet}You walk away.").ToString();
 
-			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null, 
+			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1, eventButtonText1, null, 
 				elements => 
 				{
 					if ((string)elements[0].Identifier == "a")
@@ -97,8 +92,7 @@ namespace CryingBuffalo.RandomEvents.Events
 					{
 						InformationManager.ShowInquiry(new InquiryData(eventTitle, eventNoBet, true, false, eventButtonText2, null, null, null), true);
 					}
-				},
-				null);
+				}, null, null);
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

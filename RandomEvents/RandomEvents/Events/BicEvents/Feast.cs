@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
@@ -12,7 +12,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.BicEvents
+namespace Bannerlord.RandomEvents.Events.BicEvents
 {
 	public sealed class Feast : BaseEvent
 	{
@@ -46,11 +46,6 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
-			}
-
 			var currentSettlement = Settlement.CurrentSettlement.Name.ToString();
 
 			#region Skill Checks
@@ -143,7 +138,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 			};
             #endregion
 
-            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription1, inquiryElements1, false, 1, eventButtonText1, null,
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription1, inquiryElements1, false, 1, 1, eventButtonText1, null,
 			elements =>
 			{
 				switch ((string)elements[0].Identifier)
@@ -188,7 +183,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								};
 								#endregion
 
-								var msid1a = new MultiSelectionInquiryData(eventTitle, eventDescription1a, inquiryElements2, false, 1, eventButtonText1, null,
+								var msid1a = new MultiSelectionInquiryData(eventTitle, eventDescription1a, inquiryElements2, false, 1, 1, eventButtonText1, null,
 								elements =>
 								{
 									switch ((string)elements[0].Identifier)
@@ -250,7 +245,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											#endregion
 
-											var msid1b = new MultiSelectionInquiryData(eventTitle, eventDescription1b, inquiryElements3, false, 1, eventButtonText1, null,
+											var msid1b = new MultiSelectionInquiryData(eventTitle, eventDescription1b, inquiryElements3, false, 1, 1, eventButtonText1, null,
 												elements =>
 												{
 														switch ((string)elements[0].Identifier)
@@ -293,7 +288,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															inquiryElements4.Add(new InquiryElement("b", eventOption2c, null, true, eventOption2cHover));
                                                             #endregion
 
-                                                            var msid1c = new MultiSelectionInquiryData(eventTitle, eventDescription1c, inquiryElements4, false, 1, eventButtonText1, null,
+                                                            var msid1c = new MultiSelectionInquiryData(eventTitle, eventDescription1c, inquiryElements4, false, 1, 1, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -349,7 +344,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                                                                             #endregion 
 
                                                                     }
-                                                                }, null);
+                                                                }, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1c, true);
 
@@ -396,7 +391,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															};
 															#endregion
 
-															var msid1d = new MultiSelectionInquiryData(eventTitle, eventDescription1r, inquiryElements5, false, 2, eventButtonText1, null,
+															var msid1d = new MultiSelectionInquiryData(eventTitle, eventDescription1r, inquiryElements5, false, 2, 2, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -457,7 +452,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
                                                                             #endregion
                                                                     }
-                                                                }, null);
+                                                                }, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1d, true);
 
@@ -504,7 +499,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															};
 															#endregion
 
-															var msid1dr = new MultiSelectionInquiryData(eventTitle, eventDescription1rr, inquiryElements5r, false, 2, eventButtonText1, null,
+															var msid1dr = new MultiSelectionInquiryData(eventTitle, eventDescription1rr, inquiryElements5r, false, 2, 2, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -564,7 +559,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
 																			#endregion
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1dr, true);
 
@@ -603,7 +598,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															break;
 															#endregion
 													}
-												}, null);
+												}, null, null);
 
 											MBInformationManager.ShowMultiSelectionInquiry(msid1b, true);
 
@@ -641,7 +636,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											break;
                                         #endregion
                                     }
-                                }, null);
+                                }, null, null);
 
 								MBInformationManager.ShowMultiSelectionInquiry(msid1a, true);
 
@@ -684,7 +679,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								};
 								#endregion
 
-								var msid1a = new MultiSelectionInquiryData(eventTitle, eventDescription1u, inquiryElements2, false, 1, eventButtonText1, null,
+								var msid1a = new MultiSelectionInquiryData(eventTitle, eventDescription1u, inquiryElements2, false, 1, 1, eventButtonText1, null,
 								elements =>
 								{
 									switch ((string)elements[0].Identifier)
@@ -743,7 +738,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											#endregion
 
-											var msid1b = new MultiSelectionInquiryData(eventTitle, eventDescription2u, inquiryElements3, false, 1, eventButtonText1, null,
+											var msid1b = new MultiSelectionInquiryData(eventTitle, eventDescription2u, inquiryElements3, false, 1, 1, eventButtonText1, null,
 												elements =>
 												{
 													switch ((string)elements[0].Identifier)
@@ -785,7 +780,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															inquiryElements4.Add(new InquiryElement("b", eventOption2c, null, true, eventOption2cHover));
 															#endregion
 
-															var msid1c = new MultiSelectionInquiryData(eventTitle, eventDescription3u, inquiryElements4, false, 1, eventButtonText1, null,
+															var msid1c = new MultiSelectionInquiryData(eventTitle, eventDescription3u, inquiryElements4, false, 1, 1, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -841,7 +836,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			#endregion
 
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1c, true);
 
@@ -886,7 +881,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															};
 															#endregion
 
-															var msid1d = new MultiSelectionInquiryData(eventTitle, eventDescription1ru, inquiryElements5, false, 2, eventButtonText1, null,
+															var msid1d = new MultiSelectionInquiryData(eventTitle, eventDescription1ru, inquiryElements5, false, 2, 2, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -948,7 +943,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
 																			#endregion
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1d, true);
 
@@ -990,7 +985,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															};
 															#endregion
 
-															var msid1dr = new MultiSelectionInquiryData(eventTitle, eventDescription1rq, inquiryElements5r, false, 2, eventButtonText1, null,
+															var msid1dr = new MultiSelectionInquiryData(eventTitle, eventDescription1rq, inquiryElements5r, false, 2, 2, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -1044,7 +1039,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
 																			#endregion
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1dr, true);
 
@@ -1078,7 +1073,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															break;
 															#endregion
 													}
-												}, null);
+												}, null, null);
 
 											MBInformationManager.ShowMultiSelectionInquiry(msid1b, true);
 
@@ -1113,7 +1108,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											break;
 											#endregion
 									}
-								}, null);
+								}, null, null);
 
 								MBInformationManager.ShowMultiSelectionInquiry(msid1a, true);
 
@@ -1155,7 +1150,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								};
 								#endregion
 
-								var msid1a = new MultiSelectionInquiryData(eventTitle, eventDescription1n, inquiryElements2, false, 1, eventButtonText1, null,
+								var msid1a = new MultiSelectionInquiryData(eventTitle, eventDescription1n, inquiryElements2, false, 1, 1, eventButtonText1, null,
 								elements =>
 								{
 									switch ((string)elements[0].Identifier)
@@ -1214,7 +1209,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											#endregion
 
-											var msid1b = new MultiSelectionInquiryData(eventTitle, eventDescription2n, inquiryElements3, false, 1, eventButtonText1, null,
+											var msid1b = new MultiSelectionInquiryData(eventTitle, eventDescription2n, inquiryElements3, false, 1, 1, eventButtonText1, null,
 												elements =>
 												{
 													switch ((string)elements[0].Identifier)
@@ -1257,7 +1252,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															inquiryElements4.Add(new InquiryElement("b", eventOption2c, null, true, eventOption2cHover));
 															#endregion
 
-															var msid1c = new MultiSelectionInquiryData(eventTitle, eventDescription3n, inquiryElements4, false, 1, eventButtonText1, null,
+															var msid1c = new MultiSelectionInquiryData(eventTitle, eventDescription3n, inquiryElements4, false, 1, 1, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -1313,7 +1308,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			#endregion
 
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1c, true);
 
@@ -1360,7 +1355,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															};
 															#endregion
 
-															var msid1d = new MultiSelectionInquiryData(eventTitle, eventDescription1rn, inquiryElements5, false, 2, eventButtonText1, null,
+															var msid1d = new MultiSelectionInquiryData(eventTitle, eventDescription1rn, inquiryElements5, false, 2, 2, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -1424,7 +1419,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
 																			#endregion
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1d, true);
 
@@ -1466,7 +1461,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															};
 															#endregion
 
-															var msid1dr = new MultiSelectionInquiryData(eventTitle, eventDescription1rm, inquiryElements5r, false, 2, eventButtonText1, null,
+															var msid1dr = new MultiSelectionInquiryData(eventTitle, eventDescription1rm, inquiryElements5r, false, 2, 2, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -1521,7 +1516,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
 																			#endregion
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1dr, true);
 
@@ -1556,7 +1551,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															break;
 															#endregion
 													}
-												}, null);
+												}, null, null);
 
 											MBInformationManager.ShowMultiSelectionInquiry(msid1b, true);
 
@@ -1590,7 +1585,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											break;
 											#endregion
 									}
-								}, null);
+								}, null, null);
 
 								MBInformationManager.ShowMultiSelectionInquiry(msid1a, true);
 
@@ -1638,7 +1633,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								};
 								#endregion
 
-								var msid1a = new MultiSelectionInquiryData(eventTitle, eventDescription1v, inquiryElements2, false, 1, eventButtonText1, null,
+								var msid1a = new MultiSelectionInquiryData(eventTitle, eventDescription1v, inquiryElements2, false, 1, 1, eventButtonText1, null,
 								elements =>
 								{
 									switch ((string)elements[0].Identifier)
@@ -1697,7 +1692,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											#endregion
 
-											var msid1b = new MultiSelectionInquiryData(eventTitle, eventDescription2v, inquiryElements3, false, 1, eventButtonText1, null,
+											var msid1b = new MultiSelectionInquiryData(eventTitle, eventDescription2v, inquiryElements3, false, 1, 1, eventButtonText1, null,
 												elements =>
 												{
 													switch ((string)elements[0].Identifier)
@@ -1739,7 +1734,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															inquiryElements4.Add(new InquiryElement("b", eventOption2c, null, true, eventOption2cHover));
 															#endregion
 
-															var msid1c = new MultiSelectionInquiryData(eventTitle, eventDescription1c, inquiryElements4, false, 1, eventButtonText1, null,
+															var msid1c = new MultiSelectionInquiryData(eventTitle, eventDescription1c, inquiryElements4, false, 1, 1, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -1795,7 +1790,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
                                                                             #endregion
                                                                     }
-                                                                }, null);
+                                                                }, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1c, true);
 
@@ -1843,7 +1838,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															};
 															#endregion
 
-															var msid1d = new MultiSelectionInquiryData(eventTitle, eventDescription4v, inquiryElements5, false, 2, eventButtonText1, null,
+															var msid1d = new MultiSelectionInquiryData(eventTitle, eventDescription4v, inquiryElements5, false, 2 ,2 , eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -1903,7 +1898,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
 																			#endregion
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1d, true);
 
@@ -1950,7 +1945,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															};
 															#endregion
 
-															var msid1dr = new MultiSelectionInquiryData(eventTitle, eventDescription6v, inquiryElements5r, false, 2, eventButtonText1, null,
+															var msid1dr = new MultiSelectionInquiryData(eventTitle, eventDescription6v, inquiryElements5r, false, 2, 2, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -2011,7 +2006,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
 																			#endregion
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1dr, true);
 
@@ -2050,7 +2045,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															break;
 															#endregion
 													}
-												}, null);
+												}, null, null);
 
 											MBInformationManager.ShowMultiSelectionInquiry(msid1b, true);
 
@@ -2088,7 +2083,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											break;
 											#endregion
 									}
-								}, null);
+								}, null, null);
 
 								MBInformationManager.ShowMultiSelectionInquiry(msid1a, true);
 
@@ -2134,7 +2129,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								};
 								#endregion
 
-								var msid1a = new MultiSelectionInquiryData(eventTitle, eventDescription1b, inquiryElements2, false, 1, eventButtonText1, null,
+								var msid1a = new MultiSelectionInquiryData(eventTitle, eventDescription1b, inquiryElements2, false, 1, 1, eventButtonText1, null,
 								elements =>
 								{
 									switch ((string)elements[0].Identifier)
@@ -2192,7 +2187,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											#endregion
 
-											var msid1b = new MultiSelectionInquiryData(eventTitle, eventDescription2b, inquiryElements3, false, 1, eventButtonText1, null,
+											var msid1b = new MultiSelectionInquiryData(eventTitle, eventDescription2b, inquiryElements3, false, 1, 1, eventButtonText1, null,
 												elements =>
 												{
 													switch ((string)elements[0].Identifier)
@@ -2234,7 +2229,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															inquiryElements4.Add(new InquiryElement("b", eventOption2c, null, true, eventOption2cHover));
 															#endregion
 
-															var msid1c = new MultiSelectionInquiryData(eventTitle, eventDescription3u, inquiryElements4, false, 1, eventButtonText1, null,
+															var msid1c = new MultiSelectionInquiryData(eventTitle, eventDescription3u, inquiryElements4, false, 1, 1, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -2277,7 +2272,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                                                                             #endregion
 
                                                                     }
-                                                                }, null);
+                                                                }, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1c, true);
 
@@ -2322,7 +2317,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															};
 															#endregion
 
-															var msid1d = new MultiSelectionInquiryData(eventTitle, eventDescription1ru, inquiryElements5, false, 2, eventButtonText1, null,
+															var msid1d = new MultiSelectionInquiryData(eventTitle, eventDescription1ru, inquiryElements5, false, 2, 2, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -2370,7 +2365,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
 																			#endregion
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1d, true);
 
@@ -2412,7 +2407,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															};
 															#endregion
 
-															var msid1dr = new MultiSelectionInquiryData(eventTitle, eventDescription5b, inquiryElements5r, false, 2, eventButtonText1, null,
+															var msid1dr = new MultiSelectionInquiryData(eventTitle, eventDescription5b, inquiryElements5r, false, 2, 2, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -2454,7 +2449,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
 																			#endregion
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1dr, true);
 
@@ -2483,7 +2478,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															break;
 															#endregion
 													}
-												}, null);
+												}, null, null);
 
 											MBInformationManager.ShowMultiSelectionInquiry(msid1b, true);
 
@@ -2517,7 +2512,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											break;
 											#endregion
 									}
-								}, null);
+								}, null, null);
 
 								MBInformationManager.ShowMultiSelectionInquiry(msid1a, true);
 
@@ -2562,7 +2557,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								};
 								#endregion
 
-								var msid1a = new MultiSelectionInquiryData(eventTitle, eventDescription1i, inquiryElements2, false, 1, eventButtonText1, null,
+								var msid1a = new MultiSelectionInquiryData(eventTitle, eventDescription1i, inquiryElements2, false, 1, 1, eventButtonText1, null,
 								elements =>
 								{
 									switch ((string)elements[0].Identifier)
@@ -2621,7 +2616,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											#endregion
 
-											var msid1b = new MultiSelectionInquiryData(eventTitle, eventDescription2i, inquiryElements3, false, 1, eventButtonText1, null,
+											var msid1b = new MultiSelectionInquiryData(eventTitle, eventDescription2i, inquiryElements3, false, 1, 1, eventButtonText1, null,
 												elements =>
 												{
 													switch ((string)elements[0].Identifier)
@@ -2664,7 +2659,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															inquiryElements4.Add(new InquiryElement("b", eventOption2c, null, true, eventOption2cHover));
 															#endregion
 
-															var msid1c = new MultiSelectionInquiryData(eventTitle, eventDescription3n, inquiryElements4, false, 1, eventButtonText1, null,
+															var msid1c = new MultiSelectionInquiryData(eventTitle, eventDescription3n, inquiryElements4, false, 1, 1, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -2720,7 +2715,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
                                                                             #endregion
 
                                                                     }
-                                                                }, null);
+                                                                }, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1c, true);
 
@@ -2768,7 +2763,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															};
 															#endregion
 
-															var msid1d = new MultiSelectionInquiryData(eventTitle, eventDescription1rn, inquiryElements5, false, 2, eventButtonText1, null,
+															var msid1d = new MultiSelectionInquiryData(eventTitle, eventDescription1rn, inquiryElements5, false, 2, 2, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -2829,7 +2824,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
 																			#endregion
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1d, true);
 
@@ -2871,7 +2866,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															};
 															#endregion
 
-															var msid1dr = new MultiSelectionInquiryData(eventTitle, eventDescription5i, inquiryElements5r, false, 2, eventButtonText1, null,
+															var msid1dr = new MultiSelectionInquiryData(eventTitle, eventDescription5i, inquiryElements5r, false, 2, 2, eventButtonText1, null,
 																elements =>
 																{
 																	switch ((string)elements[0].Identifier)
@@ -2926,7 +2921,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 																			break;
 																			#endregion
 																	}
-																}, null);
+																}, null, null);
 
 															MBInformationManager.ShowMultiSelectionInquiry(msid1dr, true);
 
@@ -2961,7 +2956,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 															break;
 															#endregion
 													}
-												}, null);
+												}, null, null);
 
 											MBInformationManager.ShowMultiSelectionInquiry(msid1b, true);
 
@@ -2995,7 +2990,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											break;
 											#endregion
 									}
-								}, null);
+								}, null, null);
 
 								MBInformationManager.ShowMultiSelectionInquiry(msid1a, true);
 
@@ -3015,7 +3010,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 					break;
 					  
 				}
-			}, null);
+			}, null, null);
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

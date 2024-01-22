@@ -1,11 +1,10 @@
 ﻿using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 
-namespace CryingBuffalo.RandomEvents.Helpers
+namespace Bannerlord.RandomEvents.Helpers
 {
 	public static class PlayerStatus
-	{
-        
+	{ 
         public static bool HasRangedWeaponEquipped()
         {
             var playerEquipment = Hero.MainHero.BattleEquipment;

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.CCEvents
+namespace Bannerlord.RandomEvents.Events.CCEvents
 {
     public sealed class MassGrave : BaseEvent
     {
@@ -60,32 +60,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}” with the current values:\n\n" +
-                        "Min Men : {minSoldiers}\n" +
-                        "Max Men : {maxSoldiers}\n" +
-                        "Min Bodies : {minBodies}\n" +
-                        "Max Bodies : {maxBodies}\n" +
-                        "Min Morale Loss : {minBaseMoraleLoss}\n" +
-                        "Max Morale Loss : {maxBaseMoraleLoss}\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("minSoldiers", minSoldiers)
-                    .SetTextVariable("maxSoldiers", maxSoldiers)
-                    .SetTextVariable("minBodies", minBodies)
-                    .SetTextVariable("maxBodies", maxBodies)
-                    .SetTextVariable("minBaseMoraleLoss", minBaseMoraleLoss)
-                    .SetTextVariable("maxBaseMoraleLoss", maxBaseMoraleLoss)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);            
-                
-            }
-            
             var eventTitle = new TextObject("{=MassGrave_Title}The Mass Grave").ToString();
             
             var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty).ToString();
@@ -171,7 +145,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .ToString();
 
 
-            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null,
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1, eventButtonText1, null,
                 elements =>
                 {
                     switch ((string)elements[0].Identifier)
@@ -217,7 +191,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             break;
                     }
                 },
-                null);
+                null, null);
             
             MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

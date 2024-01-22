@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -11,7 +11,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.CCEvents
+namespace Bannerlord.RandomEvents.Events.CCEvents
 {
     public sealed class RunawaySon : BaseEvent
     {
@@ -54,25 +54,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}” with the current values:\n\n" +
-                        "Min Gold: {minGold}\n" +
-                        "Max Gold: {maxGold}\n" +
-                        "Min Roguery Level : {minRogueryLevel}\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("minGold", minGold)
-                    .SetTextVariable("maxGold", maxGold)
-                    .SetTextVariable("minRogueryLevel", minRogueryLevel)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-            }
-            
             var eventTitle = new TextObject("{=RunawaySon_Title}Runaway Son").ToString();
             
             var heroName = Hero.MainHero.FirstName;
@@ -164,7 +145,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                 .SetTextVariable("goldLooted", goldLooted)
                 .ToString();
 
-            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null,
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1, eventButtonText1, null,
                 elements =>
                 {
                     switch ((string)elements[0].Identifier)
@@ -206,7 +187,7 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
                             break;
                     }
                 },
-                null);
+                null, null);
 
             MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

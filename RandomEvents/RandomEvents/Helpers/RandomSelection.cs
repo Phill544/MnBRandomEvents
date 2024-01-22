@@ -2,7 +2,7 @@
 using System.Linq;
 using TaleWorlds.Core;
 
-namespace CryingBuffalo.RandomEvents.Helpers
+namespace Bannerlord.RandomEvents.Helpers
 {
     public static class RandomSelection<T>
     {

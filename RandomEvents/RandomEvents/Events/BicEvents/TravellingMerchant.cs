@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -11,7 +11,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.BicEvents
+namespace Bannerlord.RandomEvents.Events.BicEvents
 {
 	public sealed class TravellingMerchant : BaseEvent
 	{
@@ -50,11 +50,6 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 		}
 		public override void StartEvent()
 		{
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				InformationManager.DisplayMessage(new InformationMessage($"Starting {randomEventData.eventType}", RandomEventsSubmodule.Dbg_Color));
-			}
-			
 			var loot = MBRandom.RandomInt(minLoot, maxLoot);
 			
 			var closestSettlement = ClosestSettlements.GetClosestAny(MobileParty.MainParty);
@@ -106,7 +101,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 				new InquiryElement("c", eventOption3, null, true, eventOption3Hover)
 			};
 
-			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, eventButtonText1, null,
+			var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1, eventButtonText1, null,
 				elements => 
 				{
 					switch ((string)elements[0].Identifier)
@@ -116,11 +111,11 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								Hero.MainHero.AddSkillXp(DefaultSkills.Charm, 25);
 								
 								var eventOption1a = new TextObject("{=TravellingMerchant_Event_Option_1a}Let him go").ToString();
-								var eventOption1Hovera = new TextObject("{=TravellingMerchant_Event_Option_1a_Hover}He's been through enough.").ToString();
+								var eventOption1HoverA = new TextObject("{=TravellingMerchant_Event_Option_1a_Hover}He's been through enough.").ToString();
 								var eventOption1b = new TextObject("{=TravellingMerchant_Event_Option_1b}Demand the coin purse").ToString();
-								var eventOption1Hoverb = new TextObject("{=TravellingMerchant_Event_Option_1b_Hover}It's a tough life.").ToString();
+								var eventOption1HoverB = new TextObject("{=TravellingMerchant_Event_Option_1b_Hover}It's a tough life.").ToString();
 								var eventOption1c = new TextObject("{=TravellingMerchant_Event_Option_1c}Capture").ToString();
-								var eventOption1Hoverc = new TextObject("{=TravellingMerchant_Event_Option_1c_Hover}He's worth more as labor.").ToString();
+								var eventOption1HoverC = new TextObject("{=TravellingMerchant_Event_Option_1c_Hover}He's worth more as labor.").ToString();
 								
 								var eventOutcome1a = new TextObject("{=TravellingMerchant_Event_Text_5}You leave the merchant in peace, Lord knows he has been through enough today.")
 									.ToString();
@@ -133,13 +128,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 								
 								var inquiryElements1 = new List<InquiryElement>
 								{
-									new InquiryElement("1a", eventOption1a, null, true, eventOption1Hovera),
-									new InquiryElement("1b", eventOption1b, null, true, eventOption1Hoverb),
-									new InquiryElement("1c", eventOption1c, null, true, eventOption1Hoverc)
+									new InquiryElement("1a", eventOption1a, null, true, eventOption1HoverA),
+									new InquiryElement("1b", eventOption1b, null, true, eventOption1HoverB),
+									new InquiryElement("1c", eventOption1c, null, true, eventOption1HoverC)
 									
 								};
 								
-								var msid1 = new MultiSelectionInquiryData(eventTitle, eventOutcome1, inquiryElements1, false, 1, eventButtonText1, null,
+								var msid1 = new MultiSelectionInquiryData(eventTitle, eventOutcome1, inquiryElements1, false, 1, 1, eventButtonText1, null,
 								elements1 =>
 								{
 								switch ((string)elements1[0].Identifier)
@@ -151,9 +146,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											Hero.MainHero.ChangeHeroGold(+loot);
 
 											var eventOption2a = new TextObject("{=TravellingMerchant_Event_Option_4}Let him go").ToString();
-											var eventOption2Hovera = new TextObject("{=TravellingMerchant_Event_Option_4_Hover}He's been through enough.").ToString();
+											var eventOption2HoverA = new TextObject("{=TravellingMerchant_Event_Option_4_Hover}He's been through enough.").ToString();
 											var eventOption2b = new TextObject("{=TravellingMerchant_Event_Option_5}Capture").ToString();
-											var eventOption2Hoverb = new TextObject("{=TravellingMerchant_Event_Option_5_Hover}He's worth more as labor.").ToString();
+											var eventOption2HoverB = new TextObject("{=TravellingMerchant_Event_Option_5_Hover}He's worth more as labor.").ToString();
 
 											var eventOutcome2d = new TextObject("{=TravellingMerchant_Event_Text_8}You order your men to subdue the merchant. His cries for help fall on deaf ears.")
 											.ToString();
@@ -168,11 +163,11 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 
 											var inquiryElements2a = new List<InquiryElement>
 											{
-											new InquiryElement("2a", eventOption2a, null, true, eventOption2Hovera),
-											new InquiryElement("2b", eventOption2b, null, true, eventOption2Hoverb)
+											new InquiryElement("2a", eventOption2a, null, true, eventOption2HoverA),
+											new InquiryElement("2b", eventOption2b, null, true, eventOption2HoverB)
 											};
 
-											var msid2 = new MultiSelectionInquiryData(eventTitle, eventOutcome1c, inquiryElements2a, false, 1, eventButtonText1, null,
+											var msid2 = new MultiSelectionInquiryData(eventTitle, eventOutcome1c, inquiryElements2a, false, 1, 1, eventButtonText1, null,
 											elements2a =>
 											  {
 												  switch ((string)elements2a[0].Identifier)
@@ -242,7 +237,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 											InformationManager.DisplayMessage(new InformationMessage(eventMsg2, RandomEventsSubmodule.Msg_Color_POS_Outcome));
 											break;																										
 									}
-								}, null);
+								}, null, null);
 								
 								MBInformationManager.ShowMultiSelectionInquiry(msid1, true);
 								StopEvent();
@@ -251,9 +246,9 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 						case "b"://Rob Him -------------------------------------------------------
 					{ 
 							var eventOption2a = new TextObject("{=TravellingMerchant_Event_Option_2a}Let him go").ToString();
-							var eventOption2Hovera = new TextObject("{=TravellingMerchant_Event_Option_2a_Hover}He's been through enough.").ToString();
+							var eventOption2HoverA = new TextObject("{=TravellingMerchant_Event_Option_2a_Hover}He's been through enough.").ToString();
 							var eventOption2b = new TextObject("{=TravellingMerchant_Event_Option_2b}Capture").ToString();
-							var eventOption2Hoverb = new TextObject("{=TravellingMerchant_Event_Option_2b_Hover}He's worth more as labor.").ToString();
+							var eventOption2HoverB = new TextObject("{=TravellingMerchant_Event_Option_2b_Hover}He's worth more as labor.").ToString();
 							
 							var eventOutcome2a = new TextObject("{=TravellingMerchant_Event_Text_2a}You leave the merchant in peace, Lord knows he has been through enough today.")
 							.ToString();
@@ -263,13 +258,13 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 							
 							var inquiryElements2 = new List<InquiryElement>
 							{
-								new InquiryElement("1a", eventOption2a, null, true, eventOption2Hovera),
-								new InquiryElement("1b", eventOption2b, null, true, eventOption2Hoverb)
+								new InquiryElement("1a", eventOption2a, null, true, eventOption2HoverA),
+								new InquiryElement("1b", eventOption2b, null, true, eventOption2HoverB)
 							};
 							
 								Hero.MainHero.AddSkillXp(DefaultSkills.Roguery, 150);
 
-						var msid2 = new MultiSelectionInquiryData(eventTitle, eventOutcome2, inquiryElements2, false, 1, eventButtonText1, null,
+						var msid2 = new MultiSelectionInquiryData(eventTitle, eventOutcome2, inquiryElements2, false, 1, 1, eventButtonText1, null,
 							elements2 =>
 							{
 								switch ((string)elements2[0].Identifier)
@@ -304,7 +299,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 										InformationManager.DisplayMessage(new InformationMessage(eventMsg3, RandomEventsSubmodule.Msg_Color_POS_Outcome));
 										break;
 								}
-							}, null);
+							}, null, null);
 						
 						MBInformationManager.ShowMultiSelectionInquiry(msid2, true);
 						StopEvent();
@@ -317,7 +312,7 @@ namespace CryingBuffalo.RandomEvents.Events.BicEvents
 							MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
 							break;
 					}
-				}, null);
+				}, null, null);
 
 			MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

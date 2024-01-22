@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -11,7 +11,7 @@ using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
-namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
+namespace Bannerlord.RandomEvents.Events.CommunityEvents
 {
     public sealed class SecretsOfSteel : BaseEvent
     {
@@ -41,19 +41,6 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}”. This event has no configurable settings.\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-            }
-            
             var mainHero = Hero.MainHero;
 
             var heroName = mainHero.FirstName;
@@ -189,7 +176,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
                 .ToString();
 
 
-            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1,
+            var msid = new MultiSelectionInquiryData(eventTitle, eventDescription, inquiryElements, false, 1, 1,
                     eventButtonText1, null,
                     elements =>
                     {
@@ -233,8 +220,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
                                 MessageBox.Show($"Error while selecting option for \"{randomEventData.eventType}\"");
                                 break;
                         }
-                    },
-                    null);
+                    }, null, null);
 
                 MBInformationManager.ShowMultiSelectionInquiry(msid, true);
 

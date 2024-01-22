@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -9,7 +9,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
+namespace Bannerlord.RandomEvents.Events.CommunityEvents
 {
     public sealed class PoisonedWine : BaseEvent
     {
@@ -55,27 +55,6 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
 
         public override void StartEvent()
         {
-            if (GeneralSettings.DebugMode.IsActive())
-            {
-                var debugMsg = new TextObject(
-                        "Starting “{randomEvent}” with the current values:\n\n" +
-                        "Min Soldiers To Die : {minSoldiersToDie}\n" +
-                        "Max Soldiers To Die : {maxSoldiersToDie}\n" +
-                        "Min Soldiers To Hurt : {minSoldiersToHurt}\n" +
-                        "Max Soldiers To Hurt : {maxSoldiersToHurt}\n\n" +
-                        "To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-                    )
-                    .SetTextVariable("randomEvent", randomEventData.eventType)
-                    .SetTextVariable("minSoldiersToDie", minSoldiersToDie)
-                    .SetTextVariable("maxSoldiersToDie", maxSoldiersToDie)
-                    .SetTextVariable("minSoldiersToHurt", minSoldiersToHurt)
-                    .SetTextVariable("maxSoldiersToHurt", maxSoldiersToHurt)
-                    .SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-                    .ToString();
-                
-                InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-            }
-
             var heroName = Hero.MainHero.FirstName.ToString();
 
             var menKilled = MBRandom.RandomInt(minSoldiersToDie, maxSoldiersToDie);
@@ -108,7 +87,7 @@ namespace CryingBuffalo.RandomEvents.Events.CommunityEvents
 
             InformationManager.ShowInquiry(new InquiryData(eventTitle, eventText, true, false, eventButtonText, null, null, null), true);
              
-            MobileParty.MainParty.MemberRoster.KillNumberOfMenRandomly(menKilled, false);
+            MobileParty.MainParty.MemberRoster.KillNumberOfNonHeroTroopsRandomly(menKilled);
             MobileParty.MainParty.MemberRoster.WoundNumberOfTroopsRandomly(menHurt);
             
             InformationManager.DisplayMessage(new InformationMessage(eventMsg, RandomEventsSubmodule.Msg_Color_NEG_Outcome));

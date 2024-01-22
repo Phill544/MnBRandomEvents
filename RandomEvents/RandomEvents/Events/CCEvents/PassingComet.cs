@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows;
-using CryingBuffalo.RandomEvents.Helpers;
-using CryingBuffalo.RandomEvents.Settings;
+using Bannerlord.RandomEvents.Helpers;
+using Bannerlord.RandomEvents.Settings;
 using Ini.Net;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace CryingBuffalo.RandomEvents.Events.CCEvents
+namespace Bannerlord.RandomEvents.Events.CCEvents
 {
 	public sealed class PassingComet : BaseEvent
 	{
@@ -36,20 +36,6 @@ namespace CryingBuffalo.RandomEvents.Events.CCEvents
 
 		public override void StartEvent()
 		{
-			
-			if (GeneralSettings.DebugMode.IsActive())
-			{
-				var debugMsg = new TextObject(
-						"Starting “{randomEvent}”. This event has no configurable settings.\n\n" +
-						"To disable these messages make sure you set the DebugMode = false in the ini settings\n\nThe ini file is located here : \n{path}"
-					)
-					.SetTextVariable("randomEvent", randomEventData.eventType)
-					.SetTextVariable("path", ParseIniFile.GetTheConfigFile())
-					.ToString();
-                
-				InformationManager.ShowInquiry(new InquiryData("Debug Info", debugMsg, true, false, "Start Event", null, null, null), true);
-			}
-			
 			var eventTitle = new TextObject("{=PassingComet_Title}The Celestial Visitor").ToString();
 			
 			var eventText =new TextObject(

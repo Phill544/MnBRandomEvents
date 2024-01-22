@@ -1,22 +1,10 @@
-﻿using CryingBuffalo.RandomEvents.Helpers;
+﻿using Bannerlord.RandomEvents.Helpers;
 using Ini.Net;
 
-namespace CryingBuffalo.RandomEvents.Settings
+namespace Bannerlord.RandomEvents.Settings
 {
     public abstract class GeneralSettings
     {
-        public abstract class DebugMode
-        {
-            public static bool IsActive()
-            {
-                var ConfigFile = new IniFile(ParseIniFile.GetTheConfigFile());
-
-                var debugMode = ConfigFile.ReadBoolean("GeneralSettings", "DebugMode");
-
-                return debugMode;
-            }
-        }
-        
         public abstract class SkillChecks
         {
             public static bool IsDisabled()
